@@ -1,0 +1,33 @@
+rules_version = '2';
+// Ajukas: Firestore'i turvareeglid.
+// Kopeeri see Firebase konsoolis: Firestore Database → Rules → Publish.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == 'nextonu@kasutaja.ajukas.app';
+    }
+
+    // Soovitused: igaüks võib saata, lugeda ja kustutada saab ainult admin.
+    match /soovitused/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['nimi', 'tekst', 'aeg', 'uid'])
+        && request.resource.data.tekst is string
+        && request.resource.data.tekst.size() > 0
+        && request.resource.data.tekst.size() <= 2000
+        && request.resource.data.nimi is string
+        && request.resource.data.nimi.size() <= 60
+        && request.resource.data.aeg == request.time
+        && request.resource.data.uid is string
+        && (request.resource.data.uid == ''
+            || (request.auth != null && request.resource.data.uid == request.auth.uid));
+      allow read, delete: if isAdmin();
+      allow update: if false;
+    }
+
+    // Iga kasutaja näeb ja muudab ainult enda edusamme.
+    match /kasutajad/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}

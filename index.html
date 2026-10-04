@@ -17,7 +17,7 @@
 *{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--bg);color:var(--text);font-family:var(--ui);font-size:16px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
-.wrap{max-width:900px;margin:0 auto}
+.wrap{max-width:1120px;margin:0 auto}
 header{padding-block:36px 10px;display:flex;flex-direction:column;gap:6px}
 .eyebrow{font-family:var(--mono);font-size:12px;color:var(--muted)}
 .eyebrow::before{content:"// "}
@@ -79,6 +79,7 @@ tbody th{font-weight:600;color:var(--muted)}
 .quizbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 16px}
 .btn{font-family:var(--ui);font-size:13px;border:0;background:var(--accent);color:#fff;padding:6px 14px;border-radius:2px;cursor:pointer}
 .btn:hover{background:#026EC1}
+.btn:disabled{opacity:.45;cursor:not-allowed}
 .btn.sec{background:var(--raised);color:var(--text);border:1px solid var(--line2)}
 .btn.sec:hover{background:#2D2D2D}
 .count{font-family:var(--mono);font-size:13px;color:var(--muted)}
@@ -127,6 +128,37 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .pagetitle{font-size:clamp(30px,6vw,42px);margin:0 0 4px}
 .view .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:8px 0 28px}
 @media (max-width:520px){.appbar .logo{font-size:15px;padding-right:12px}.path{display:none}}
+
+.view main a:not(.back),.side a.inl{color:var(--bright);text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:3px}
+.view main a:not(.back):hover{text-decoration-color:var(--bright)}
+.homecols{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:start}
+@media (max-width:860px){.homecols{grid-template-columns:1fr}}
+.side{display:flex;flex-direction:column;gap:12px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:14px 16px}
+.box h3{margin:0 0 6px;font-size:16px}
+.box p{font-size:14px}
+.muted{color:var(--muted)}
+.box form{display:flex;flex-direction:column;gap:10px}
+.box label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+.box input,.box textarea{font:inherit;font-size:15px;color:var(--bright);background:var(--bg);border:1px solid var(--line2);border-radius:3px;padding:7px 9px;width:100%}
+.box textarea{resize:vertical;min-height:90px}
+.box input:focus,.box textarea:focus{outline:1px solid var(--accent);border-color:var(--accent)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.msg{font-size:13px;margin:0;min-height:1em}
+.msg.err{color:#F48771}
+.msg.ok{color:#89D185}
+.resume{display:block;text-decoration:none;color:var(--bright);font-weight:600}
+.resume small{display:block;font-weight:400;color:var(--muted);font-family:var(--mono);font-size:12px}
+.resume:hover{text-decoration:underline}
+.inbox-item{border-top:1px solid var(--line);padding:10px 0}
+.inbox-item:first-child{border-top:0}
+.inbox-item .meta{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.inbox-item .txt{white-space:pre-wrap;margin:4px 0 0;font-size:14.5px;color:var(--text)}
+.linkbtn{background:none;border:0;color:var(--muted);font:inherit;font-size:12px;cursor:pointer;text-decoration:underline;padding:0}
+.linkbtn:hover{color:#F48771}
+.tabs button.seen::after{content:" ✓";color:#89D185}
+.prog{display:block;margin-top:6px;font-family:var(--mono);font-size:12px;color:#89D185}
+.prog:empty{display:none}
 </style>
 </head>
 <body>
@@ -137,6 +169,8 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <span class="eyebrow">Kordamine kontrolltöödeks</span>
     <h1>Ajukas<span class="dot">.</span></h1>
   </header>
+  <div class="homecols">
+<div class="homemain">
   <p class="tagline">Kõigi ainete konspektid ühes kohas. Vali aine, siis teema.</p>
   <div class="grid">
     <div class="subjcard"><span class="sname">Ajalugu</span><span class="stopic">Materjal tulekul</span></div>
@@ -153,6 +187,49 @@ ol{margin:0 0 12px;padding-left:1.4em}
   </div>
   <p class="disclaimer"><strong>NB!</strong> Selle lehe on tunnimaterjalide ja juhendite põhjal koostanud tehisaru. Vigu tuleb harva ette, aga päris välistada neid ei saa. Kui miski tundub kahtlane, kontrolli slaididelt, õpikust või küsi õpetajalt.</p>
 </div>
+<aside class="side" aria-label="Konto ja soovitused">
+  <section class="box" id="acct">
+    <h3>Konto</h3>
+    <div id="acct-out">
+      <p class="muted">Logi sisse, siis jäävad su edusammud meelde ja saad ka teises arvutis jätkata sealt, kus pooleli jäi.</p>
+      <form id="login-form" novalidate>
+        <label for="lg-user">Kasutajanimi<input id="lg-user" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="20"></label>
+        <label for="lg-pass">Parool<input id="lg-pass" type="password" autocomplete="current-password" maxlength="100"></label>
+        <div class="row"><button class="btn" type="submit" id="lg-in">Logi sisse</button><button class="btn sec" type="button" id="lg-new">Loo konto</button></div>
+        <p class="msg" id="lg-msg" role="status"></p>
+      </form>
+      <p class="muted" style="font-size:12px;margin:8px 0 0">Konto loomiseks pole e-posti vaja. Parooli ei saa taastada, seega jäta see meelde.</p>
+    </div>
+    <div id="acct-in" hidden>
+      <p>Sisse logitud: <b id="acct-who"></b></p>
+      <button class="btn sec" type="button" id="lg-out">Logi välja</button>
+    </div>
+    <p class="muted" id="acct-off" hidden>Kontod lülitatakse peagi sisse. Seni jäävad edusammud meelde ainult selles brauseris.</p>
+  </section>
+
+  <section class="box" id="resume-box" hidden>
+    <h3>Jätka</h3>
+    <a class="resume" id="resume-link" href="#"></a>
+  </section>
+
+  <section class="box" id="sugg">
+    <h3>Soovitused</h3>
+    <p class="muted">Leidsid vea, tahad uut ainet või on mõni idee? Kirjuta siia. Sõnumeid näeb ainult lehe tegija.</p>
+    <form id="sugg-form" novalidate>
+      <label for="sg-name">Nimi (pole kohustuslik)<input id="sg-name" maxlength="60" autocomplete="nickname"></label>
+      <label for="sg-text">Soovitus<textarea id="sg-text" maxlength="2000" rows="4"></textarea></label>
+      <div class="row"><button class="btn" type="submit" id="sg-send">Saada</button></div>
+      <p class="msg" id="sg-msg" role="status"></p>
+    </form>
+  </section>
+
+  <section class="box" id="inbox" hidden>
+    <h3>Saabunud soovitused <span class="muted" id="inbox-n"></span></h3>
+    <div id="inbox-list"></div>
+  </section>
+</aside>
+</div>
+</div>
 
 <div class="view" id="v-muusika" data-title="Muusika" hidden>
   <div class="appbar"><a class="logo" href="#" aria-label="Ajukas avaleht">Ajukas<span class="dot">.</span></a></div>
@@ -162,8 +239,8 @@ ol{margin:0 0 12px;padding-left:1.4em}
   <h2 class="pagetitle">Muusika</h2>
   <p class="tagline">Vali teema.</p>
   <div class="grid">
-    <a class="subjcard ready" href="#jazz"><span class="sname">Varajane jazz</span><span class="stopic">Ragtime, bluus, New Orleans, dixieland, Chicago. Kontrolltöö.</span></a>
-    <a class="subjcard ready" href="#kontsert"><span class="sname">Kontserdi arvustus</span><span class="stopic">Nõuded, analüüsi küsimused ja näpunäited. Rühmaesitlus.</span></a>
+    <a class="subjcard ready" href="#jazz"><span class="sname">Varajane jazz</span><span class="stopic">Ragtime, bluus, New Orleans, dixieland, Chicago. Kontrolltöö.</span><span class="prog" data-topic="jazz"></span></a>
+    <a class="subjcard ready" href="#kontsert"><span class="sname">Kontserdi arvustus</span><span class="stopic">Nõuded, analüüsi küsimused ja näpunäited. Rühmaesitlus.</span><span class="prog" data-topic="kontsert"></span></a>
   </div>
 </div>
 <div class="view" id="v-jazz" data-title="Varajane jazz" data-parent="muusika" data-parent-title="Muusika" hidden>
@@ -550,7 +627,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
   <h2 class="pagetitle">UPT</h2>
   <p class="tagline">Vali teema.</p>
   <div class="grid">
-    <a class="subjcard ready" href="#upt-juhend"><span class="sname">UPT juhend</span><span class="stopic">Tähtajad, ülesehitus, vormistus, viitamine ja tehisaru reeglid.</span></a>
+    <a class="subjcard ready" href="#upt-juhend"><span class="sname">UPT juhend</span><span class="stopic">Tähtajad, ülesehitus, vormistus, viitamine ja tehisaru reeglid.</span><span class="prog" data-topic="upt-juhend"></span></a>
   </div>
 </div>
 <div class="view" id="v-upt-juhend" data-title="UPT juhend" data-parent="upt" data-parent-title="UPT" hidden>
@@ -576,11 +653,12 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <li><span class="when">14. mai</span>Retsensioonid jõuavad õpilasteni</li>
     <li><span class="when">18. mai</span><b>Kaitsmine</b></li>
   </ol>
-  <div class="key"><span class="label">Tähtis</span>UPT info liigub <b>eKoolis</b>. Kui eKoolis öeldakse midagi muud kui juhendis või sellel lehel, kehtib eKooli viimane teade.</div>
+  <div class="key"><span class="label">Tähtis</span>UPT info liigub <b>eKoolis</b>. Kui eKoolis öeldakse midagi muud kui juhendis või sellel lehel, kehtib eKooli viimane teade. Kooli ametlikud juhendid on lehel <a href="https://perg.ee/dokumendid/" target="_blank" rel="noopener">perg.ee/dokumendid</a>.</div>
 </section>
 <section role="tabpanel" id="upt-pohitoed" aria-labelledby="t-upt-pohitoed" hidden>
   <h2>Mis UPT on</h2>
   <p class="lead">Kirjalik töö, mille teed üksi, paaris või grupis koos juhendajaga. Kaitsed selle komisjoni ees.</p>
+  <p>Kõik siin on kokkuvõte kooli <a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf" target="_blank" rel="noopener">UPT juhendist (PDF)</a>.</p>
   <h3>Kolm vormi</h3>
   <ul>
     <li><b>Uurimistöö:</b> uurid probleemi ja leiad vastused uurimisküsimustele.</li>
@@ -632,11 +710,12 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <li>Kasutatud allikad</li><li>Lisad</li>
   </ol>
   <h3>Resümee</h3>
-  <p>Juurde käib <b>resümee eesti ja inglise keeles</b>. Vormid on UPT juhendi lisades 3 ja 4.</p>
+  <p>Juurde käib <b>resümee eesti ja inglise keeles</b>. Vormid on UPT juhendi <a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf#page=41" target="_blank" rel="noopener">lisas 3</a> (eesti keel) ja <a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf#page=42" target="_blank" rel="noopener">lisas 4</a> (inglise keel).</p>
 </section>
 <section role="tabpanel" id="upt-vormistus" aria-labelledby="t-upt-vormistus" hidden>
   <h2>Vormistus</h2>
   <p class="lead">Kõige tähtsam on, et kogu töö oleks ühtne. Seadista laadid kohe alguses, siis tuleb sisukord automaatselt.</p>
+  <p>Allikas: <a href="https://perg.ee/wp-content/uploads/2026/10/PERGi-kirjalike-toode-vormistamise-juhend-2026-2027.pdf" target="_blank" rel="noopener">PERGi kirjalike tööde vormistamise juhend (PDF)</a>.</p>
   <div class="key"><span class="label">Programm</span>Töö tehakse <b>MS Wordis</b> (Microsoft 365 on õpilastele tasuta) ja salvestatakse <b>OneDrive'i</b>, et juhendaja näeks.</div>
   <div class="tablewrap"><table>
     <thead><tr><th>Element</th><th>Nõue</th></tr></thead>
@@ -663,19 +742,21 @@ ol{margin:0 0 12px;padding-left:1.4em}
   <h2>Viitamine</h2>
   <p class="lead">PERGis kasutatakse <b>APA 7</b> süsteemi: tekstis on autori nimi ja aasta, täiskirje on peatükis „Kasutatud allikad".</p>
   <ul>
+    <li>Täpsemad näited on <a href="https://perg.ee/wp-content/uploads/2026/10/PERGi-kirjalike-toode-vormistamise-juhend-2026-2027.pdf#page=13" target="_blank" rel="noopener">vormistusjuhendi viitamise peatükis</a>.</li>
     <li>Viita kõigele, mille mõtteid või andmeid kasutad, ka piltidele ja graafikutele. Ainult üldtuntud faktidele ei pea.</li>
     <li><b>Refereering</b> on peamine viis: võtad mõtte oma sõnadega kokku ja lisad viite, näiteks (Covington, 2000).</li>
     <li><b>Tsitaat</b> on jutumärkides ja lõpeb viitega. Väljajätt märgitakse … või [---].</li>
     <li>Tsitaadi esitamine refereeringuna on <b>plagiaat</b>, isegi kui viide on olemas.</li>
     <li><b>Vikipeediat allikana ei kasutata.</b> Kasuta artikli allosas olevaid originaalallikaid.</li>
     <li>Ajaviiteajakirjad, meelelahutusportaalid ja reklaamlehed ei sobi allikaks (kui need just pole uurimisobjekt).</li>
-    <li>Kasuta <b>Zoterot</b>: see teeb viited ja allikate loetelu automaatselt.</li>
+    <li>Kasuta <b>Zoterot</b> (<a href="https://www.zotero.org/" target="_blank" rel="noopener">zotero.org</a>): see teeb viited ja allikate loetelu automaatselt.</li>
   </ul>
   <div class="key"><span class="label">Näide</span>„Kogutud andmete analüüsimine […] on uurimuses otsustava tähtsusega." (Hirsjärvi jt, 2010, lk 206)</div>
 </section>
 <section role="tabpanel" id="upt-ai" aria-labelledby="t-upt-ai" hidden>
   <h2>Tehisaru kasutamine</h2>
   <p class="lead">Tehisaru tohib kasutada ainult viidatult ja kasutusviisi kirjeldades: mida küsisid, mis vastus tuli ja kuidas seda muutsid.</p>
+  <p>Reeglid on <a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf#page=8" target="_blank" rel="noopener">UPT juhendi lk 8</a>.</p>
   <h3>Üldiselt lubatud</h3>
   <ul>
     <li>Allikate leidmiseks soovituste küsimine</li>
@@ -705,7 +786,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <li><b>Seadista Wordi laadid esimesel päeval.</b> Kui pealkirjad ja põhitekst on kohe õiged, tuleb sisukord ühe klikiga.</li>
     <li><b>Lisa allikad Zoterosse kohe, kui neid loed.</b> Lõpus allikate otsimine on kõige tüütum osa.</li>
     <li><b>Pane iga juhendajaga kohtumise järel kirja</b>, mis kokku lepiti ja mis on järgmine tähtaeg.</li>
-    <li><b>Loe tagasisidejuhendeid</b> (UPT juhendi lisad 9 ja 10). Seal on täpselt kirjas, mille eest seminaril ja kaitsmisel punkte saab.</li>
+    <li><b>Loe tagasisidejuhendeid</b> (UPT juhendi <a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf#page=47" target="_blank" rel="noopener">lisa 9</a> uurimistöö ja <a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf#page=53" target="_blank" rel="noopener">lisa 10</a> praktilise töö kohta). Seal on täpselt kirjas, mille eest seminaril ja kaitsmisel punkte saab.</li>
     <li><b>Sõnasta eesmärk ja uurimisküsimused varakult.</b> Ilma nendeta ei saa juhendaja aidata ja teoreetiline osa läheb laiali.</li>
     <li><b>Praktilise töö puhul pea arenduspäevikut</b>: mida tegid, mis ei töötanud ja miks muutsid. Eneseanalüüsi on siis lihtne kirjutada.</li>
     <li><b>Ära jäta kõike kirjutamislaagrisse.</b> Laagris on hea viimistleda, mitte nullist alustada.</li>
@@ -777,6 +858,48 @@ ol{margin:0 0 12px;padding-left:1.4em}
   render(QA);
 
   var views = Array.prototype.slice.call(document.querySelectorAll('.view'));
+
+  // --- edusammud: nähtud vahekaardid ja viimane koht ---
+  var P = { seen: {}, last: null };
+  try { var raw = localStorage.getItem('ajukas-progress'); if (raw) P = JSON.parse(raw) || P; } catch(e) {}
+  if (!P.seen) P.seen = {};
+  var Ajukas = window.Ajukas = window.Ajukas || {};
+  function saveProgress(){
+    try { localStorage.setItem('ajukas-progress', JSON.stringify(P)); } catch(e) {}
+    if (Ajukas.onProgress) Ajukas.onProgress(P);
+  }
+  function markSeen(view, pid){
+    var tab = document.getElementById('t-' + pid);
+    if (!tab) return;
+    var changed = !P.seen[pid];
+    P.seen[pid] = 1;
+    var last = { hash: pid, label: view.getAttribute('data-title') + ' · ' + tab.textContent.replace(' ✓','') };
+    if (!P.last || P.last.hash !== last.hash) { P.last = last; changed = true; }
+    if (changed) { saveProgress(); paintProgress(); }
+  }
+  function paintProgress(){
+    document.querySelectorAll('[role="tab"]').forEach(function(t){
+      t.classList.toggle('seen', !!P.seen[t.getAttribute('aria-controls')]);
+    });
+    document.querySelectorAll('.prog[data-topic]').forEach(function(el){
+      var v = document.getElementById('v-' + el.getAttribute('data-topic'));
+      var tabs = v ? v.querySelectorAll('[role="tab"]') : [];
+      var n = 0; tabs.forEach(function(t){ if (P.seen[t.getAttribute('aria-controls')]) n++; });
+      el.textContent = n ? n + ' / ' + tabs.length + ' vahekaarti vaadatud' : '';
+    });
+    var box = document.getElementById('resume-box');
+    if (P.last && document.getElementById(P.last.hash)) {
+      var link = document.getElementById('resume-link');
+      link.href = '#' + P.last.hash;
+      link.innerHTML = '';
+      link.appendChild(document.createTextNode('→ ' + P.last.label));
+      var sm = document.createElement('small'); sm.textContent = 'sealt, kus viimati pooleli jäi'; link.appendChild(sm);
+      box.hidden = false;
+    } else box.hidden = true;
+  }
+  Ajukas.getProgress = function(){ return P; };
+  Ajukas.setProgress = function(p){ P = { seen: (p && p.seen) || {}, last: (p && p.last) || null }; try { localStorage.setItem('ajukas-progress', JSON.stringify(P)); } catch(e) {} paintProgress(); };
+
   var homeView = document.getElementById('v-home');
   function store(k,v){ try { localStorage.setItem(k,v); } catch(e) {} }
   function load(k){ try { return localStorage.getItem(k); } catch(e) { return null; } }
@@ -794,6 +917,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
       if (on) { var bar = t.parentNode; bar.scrollLeft = t.offsetLeft - bar.clientWidth/2 + t.clientWidth/2; }
     });
     store('ajukas-tab-' + view.id, pid);
+    markSeen(view, pid);
   }
   function route(){
     var h = decodeURIComponent((location.hash || '').slice(1));
@@ -827,9 +951,157 @@ ol{margin:0 0 12px;padding-left:1.4em}
   try { history.scrollRestoration = 'manual'; } catch(e) {}
   window.addEventListener('hashchange', function(){ route(); top(); requestAnimationFrame(top); });
   route();
+  paintProgress();
   requestAnimationFrame(top);
   window.addEventListener('load', function(){ setTimeout(top, 0); });
 })();
+</script>
+
+<script type="module">
+// Täida see Firebase konsoolist (Project settings → Your apps → Web app → Config).
+// Kuni see on null, töötab leht ilma kontode ja soovitusteta.
+const FIREBASE_CONFIG = null;
+const ADMIN_USER = 'nextonu';      // see kasutaja näeb soovitusi
+const DOMAIN = 'kasutaja.ajukas.app'; // kasutajanimest tehakse sisemine aadress; e-kirju ei saadeta
+
+const $ = (id) => document.getElementById(id);
+const A = window.Ajukas || (window.Ajukas = {});
+
+if (!FIREBASE_CONFIG) {
+  $('acct-out').hidden = true;
+  $('acct-off').hidden = false;
+  $('sg-send').disabled = true;
+  $('sg-msg').textContent = 'Soovituste saatmine lülitatakse peagi sisse.';
+} else {
+  const V = '10.12.2';
+  const [{ initializeApp }, authM, fsM] = await Promise.all([
+    import(`https://www.gstatic.com/firebasejs/${V}/firebase-app.js`),
+    import(`https://www.gstatic.com/firebasejs/${V}/firebase-auth.js`),
+    import(`https://www.gstatic.com/firebasejs/${V}/firebase-firestore.js`),
+  ]);
+  const { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } = authM;
+  const { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, collection, serverTimestamp, getDocs, query, orderBy } = fsM;
+  const app = initializeApp(FIREBASE_CONFIG);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const userOf = (u) => (u && u.email ? u.email.split('@')[0] : '');
+  const msg = (el, text, kind) => { el.textContent = text; el.className = 'msg' + (kind ? ' ' + kind : ''); };
+  const ERR = {
+    'auth/invalid-credential': 'Vale kasutajanimi või parool.',
+    'auth/wrong-password': 'Vale kasutajanimi või parool.',
+    'auth/user-not-found': 'Vale kasutajanimi või parool.',
+    'auth/invalid-email': 'Vale kasutajanimi või parool.',
+    'auth/email-already-in-use': 'See kasutajanimi on juba võetud. Proovi mõnda teist.',
+    'auth/weak-password': 'Parool peab olema vähemalt 6 märki pikk.',
+    'auth/too-many-requests': 'Liiga palju katseid. Oota natuke ja proovi uuesti.',
+    'auth/network-request-failed': 'Internetiühendus puudub. Proovi uuesti.',
+  };
+
+  function readLogin() {
+    const u = $('lg-user').value.trim().toLowerCase();
+    const p = $('lg-pass').value;
+    if (!/^[a-z0-9._-]{3,20}$/.test(u)) {
+      msg($('lg-msg'), 'Kasutajanimi peab olema 3–20 märki: tähed a–z, numbrid, punkt, sidekriips või alakriips.', 'err');
+      return null;
+    }
+    if (p.length < 6) { msg($('lg-msg'), 'Parool peab olema vähemalt 6 märki pikk.', 'err'); return null; }
+    return { email: u + '@' + DOMAIN, pass: p };
+  }
+  $('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const c = readLogin(); if (!c) return;
+    msg($('lg-msg'), 'Login sisse…');
+    try { await signInWithEmailAndPassword(auth, c.email, c.pass); msg($('lg-msg'), ''); }
+    catch (err) { msg($('lg-msg'), ERR[err.code] || 'Sisselogimine ebaõnnestus. Proovi uuesti.', 'err'); }
+  });
+  $('lg-new').addEventListener('click', async () => {
+    const c = readLogin(); if (!c) return;
+    msg($('lg-msg'), 'Loon kontot…');
+    try { await createUserWithEmailAndPassword(auth, c.email, c.pass); msg($('lg-msg'), ''); }
+    catch (err) { msg($('lg-msg'), ERR[err.code] || 'Konto loomine ebaõnnestus. Proovi uuesti.', 'err'); }
+  });
+  $('lg-out').addEventListener('click', () => signOut(auth));
+
+  // edusammude sünkroniseerimine
+  let saveTimer = null;
+  function pushProgress(p) {
+    const u = auth.currentUser; if (!u) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      setDoc(doc(db, 'kasutajad', u.uid), { seen: p.seen || {}, last: p.last || null, muudetud: serverTimestamp() }).catch(() => {});
+    }, 1200);
+  }
+
+  async function loadInbox() {
+    const list = $('inbox-list');
+    list.textContent = 'Laen…';
+    try {
+      const snap = await getDocs(query(collection(db, 'soovitused'), orderBy('aeg', 'desc')));
+      list.textContent = '';
+      $('inbox-n').textContent = '(' + snap.size + ')';
+      if (snap.empty) { list.innerHTML = '<p class="muted">Soovitusi veel pole.</p>'; return; }
+      snap.forEach((d) => {
+        const x = d.data();
+        const item = document.createElement('div'); item.className = 'inbox-item';
+        const meta = document.createElement('div'); meta.className = 'meta';
+        const who = document.createElement('span');
+        const when = x.aeg && x.aeg.toDate ? x.aeg.toDate().toLocaleString('et-EE', { dateStyle: 'short', timeStyle: 'short' }) : '';
+        who.textContent = (x.nimi || 'Anonüümne') + (when ? ' · ' + when : '');
+        const del = document.createElement('button'); del.className = 'linkbtn'; del.type = 'button'; del.textContent = 'Kustuta';
+        del.addEventListener('click', async () => { del.disabled = true; try { await deleteDoc(doc(db, 'soovitused', d.id)); item.remove(); } catch (e) { del.disabled = false; } });
+        meta.append(who, del);
+        const t = document.createElement('p'); t.className = 'txt'; t.textContent = x.tekst || '';
+        item.append(meta, t); list.append(item);
+      });
+    } catch (e) { list.textContent = 'Soovitusi ei õnnestunud laadida.'; }
+  }
+
+  onAuthStateChanged(auth, async (u) => {
+    $('acct-out').hidden = !!u;
+    $('acct-in').hidden = !u;
+    $('inbox').hidden = true;
+    if (!u) {
+      A.onProgress = null;
+      if (A._wasIn) A.setProgress({ seen: {}, last: null }); // jagatud arvutis ei jää eelmise kasutaja andmed näha
+      A._wasIn = false;
+      return;
+    }
+    A._wasIn = true;
+    const name = userOf(u);
+    $('acct-who').textContent = name;
+    if (!$('sg-name').value) $('sg-name').value = name;
+    $('lg-pass').value = '';
+    try {
+      const snap = await getDoc(doc(db, 'kasutajad', u.uid));
+      const local = A.getProgress();
+      const remote = snap.exists() ? snap.data() : {};
+      const merged = { seen: Object.assign({}, remote.seen || {}, local.seen || {}), last: local.last || remote.last || null };
+      A.setProgress(merged);
+      A.onProgress = pushProgress;
+      pushProgress(merged);
+    } catch (e) { A.onProgress = pushProgress; }
+    if (name === ADMIN_USER) { $('inbox').hidden = false; loadInbox(); }
+  });
+
+  $('sugg-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const tekst = $('sg-text').value.trim();
+    const nimi = $('sg-name').value.trim().slice(0, 60);
+    if (!tekst) { msg($('sg-msg'), 'Kirjuta enne saatmist soovitus.', 'err'); return; }
+    $('sg-send').disabled = true;
+    msg($('sg-msg'), 'Saadan…');
+    try {
+      await addDoc(collection(db, 'soovitused'), { nimi, tekst: tekst.slice(0, 2000), aeg: serverTimestamp(), uid: auth.currentUser ? auth.currentUser.uid : '' });
+      $('sg-text').value = '';
+      msg($('sg-msg'), 'Aitäh! Soovitus on saadetud.', 'ok');
+      if (userOf(auth.currentUser) === ADMIN_USER) loadInbox();
+    } catch (err) {
+      msg($('sg-msg'), 'Saatmine ebaõnnestus. Proovi hiljem uuesti.', 'err');
+    }
+    $('sg-send').disabled = false;
+  });
+}
 </script>
 </body>
 </html>
