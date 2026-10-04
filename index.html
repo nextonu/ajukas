@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ajukas</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23EAB308'/%3E%3Cpath fill='%23181818' fill-rule='evenodd' d='M9 24 15.2 8h1.6L23 24h-3.3l-1.4-3.9h-4.6L12.3 24Zm5.3-6.6h3.4L16 12.6Z'/%3E%3Ccircle cx='25' cy='23' r='2' fill='%23181818'/%3E%3C/svg%3E">
 <meta name="description" content="Kontrolltööde kordamismaterjalid aine ja teema kaupa.">
 <style>
 :root{
@@ -159,15 +160,32 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .tabs button.seen::after{content:" ✓";color:#89D185}
 .prog{display:block;margin-top:6px;font-family:var(--mono);font-size:12px;color:#89D185}
 .prog:empty{display:none}
+
+.mark{width:22px;height:22px;flex:0 0 auto;display:block}
+.appbar .logo{gap:8px}
+.brandline{display:flex;align-items:center;gap:14px}
+.brandline .mark{width:clamp(36px,6vw,50px);height:clamp(36px,6vw,50px)}
+.seenfoot{margin-top:32px;padding-top:16px;border-top:1px solid var(--line)}
+.seenbtn{font:inherit;font-size:14px;font-weight:600;cursor:pointer;border-radius:4px;padding:9px 16px;border:1px solid var(--line2);background:var(--raised);color:var(--bright)}
+.seenbtn:hover{border-color:var(--bright)}
+.seenbtn[aria-pressed="true"]{background:transparent;border-color:#89D185;color:#89D185}
+.seenbtn:focus-visible{outline:1px solid var(--key);outline-offset:2px}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo-mark" viewBox="0 0 32 32">
+    <rect width="32" height="32" rx="7" fill="#EAB308"/>
+    <path fill="#181818" fill-rule="evenodd" d="M9 24 15.2 8h1.6L23 24h-3.3l-1.4-3.9h-4.6L12.3 24Zm5.3-6.6h3.4L16 12.6Z"/>
+    <circle cx="25" cy="23" r="2" fill="#181818"/>
+  </symbol>
+</svg>
 <div class="wrap">
 
 <div class="view home" id="v-home" data-title="Ajukas">
   <header>
     <span class="eyebrow">Kordamine kontrolltöödeks</span>
-    <h1>Ajukas<span class="dot">.</span></h1>
+    <h1 class="brandline"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></h1>
   </header>
   <div class="homecols">
 <div class="homemain">
@@ -232,7 +250,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 </div>
 
 <div class="view" id="v-muusika" data-title="Muusika" hidden>
-  <div class="appbar"><a class="logo" href="#" aria-label="Ajukas avaleht">Ajukas<span class="dot">.</span></a></div>
+  <div class="appbar"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
   <div class="pagehead">
     <a class="back" href="#"><span aria-hidden="true">←</span> Kõik ained</a>
   </div>
@@ -244,7 +262,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
   </div>
 </div>
 <div class="view" id="v-jazz" data-title="Varajane jazz" data-parent="muusika" data-parent-title="Muusika" hidden>
-  <nav class="appbar sticky" aria-label="Varajane jazz teemad"><a class="logo" href="#" aria-label="Ajukas avaleht">Ajukas<span class="dot">.</span></a><div class="tabs" role="tablist">
+  <nav class="appbar sticky" aria-label="Varajane jazz teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist">
     <button role="tab" id="t-ajajoon" aria-controls="ajajoon" aria-selected="true">Ajajoon</button>
     <button role="tab" id="t-tunnused" aria-controls="tunnused" aria-selected="false">Jazzi tunnused</button>
     <button role="tab" id="t-varajased" aria-controls="varajased" aria-selected="false">Ragtime ja bluus</button>
@@ -529,7 +547,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 </main>
 </div>
 <div class="view" id="v-kontsert" data-title="Kontserdi arvustus" data-parent="muusika" data-parent-title="Muusika" hidden>
-  <nav class="appbar sticky" aria-label="Kontserdi arvustus teemad"><a class="logo" href="#" aria-label="Ajukas avaleht">Ajukas<span class="dot">.</span></a><div class="tabs" role="tablist"><button role="tab" id="t-kontsert-ulesehitus" aria-controls="kontsert-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-kontsert-kysimused" aria-controls="kontsert-kysimused" aria-selected="false">Analüüsi küsimused</button><button role="tab" id="t-kontsert-nipid" aria-controls="kontsert-nipid" aria-selected="false">Näpunäited</button><button role="tab" id="t-kontsert-kohad" aria-controls="kontsert-kohad" aria-selected="false">Kust kontserti leida</button></div></nav>
+  <nav class="appbar sticky" aria-label="Kontserdi arvustus teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-kontsert-ulesehitus" aria-controls="kontsert-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-kontsert-kysimused" aria-controls="kontsert-kysimused" aria-selected="false">Analüüsi küsimused</button><button role="tab" id="t-kontsert-nipid" aria-controls="kontsert-nipid" aria-selected="false">Näpunäited</button><button role="tab" id="t-kontsert-kohad" aria-controls="kontsert-kohad" aria-selected="false">Kust kontserti leida</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#muusika"><span aria-hidden="true">←</span> Muusika</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#muusika">Muusika</a> / Kontserdi arvustus</span>
@@ -620,7 +638,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 </main>
 </div>
 <div class="view" id="v-upt" data-title="UPT" hidden>
-  <div class="appbar"><a class="logo" href="#" aria-label="Ajukas avaleht">Ajukas<span class="dot">.</span></a></div>
+  <div class="appbar"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
   <div class="pagehead">
     <a class="back" href="#"><span aria-hidden="true">←</span> Kõik ained</a>
   </div>
@@ -631,7 +649,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
   </div>
 </div>
 <div class="view" id="v-upt-juhend" data-title="UPT juhend" data-parent="upt" data-parent-title="UPT" hidden>
-  <nav class="appbar sticky" aria-label="UPT juhend teemad"><a class="logo" href="#" aria-label="Ajukas avaleht">Ajukas<span class="dot">.</span></a><div class="tabs" role="tablist"><button role="tab" id="t-upt-ajakava" aria-controls="upt-ajakava" aria-selected="false">Ajakava</button><button role="tab" id="t-upt-pohitoed" aria-controls="upt-pohitoed" aria-selected="false">Mis UPT on</button><button role="tab" id="t-upt-ulesehitus" aria-controls="upt-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-upt-vormistus" aria-controls="upt-vormistus" aria-selected="false">Vormistus</button><button role="tab" id="t-upt-viitamine" aria-controls="upt-viitamine" aria-selected="false">Viitamine</button><button role="tab" id="t-upt-ai" aria-controls="upt-ai" aria-selected="false">Tehisaru</button><button role="tab" id="t-upt-nipid" aria-controls="upt-nipid" aria-selected="false">Nipid</button></div></nav>
+  <nav class="appbar sticky" aria-label="UPT juhend teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-upt-ajakava" aria-controls="upt-ajakava" aria-selected="false">Ajakava</button><button role="tab" id="t-upt-pohitoed" aria-controls="upt-pohitoed" aria-selected="false">Mis UPT on</button><button role="tab" id="t-upt-ulesehitus" aria-controls="upt-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-upt-vormistus" aria-controls="upt-vormistus" aria-selected="false">Vormistus</button><button role="tab" id="t-upt-viitamine" aria-controls="upt-viitamine" aria-selected="false">Viitamine</button><button role="tab" id="t-upt-ai" aria-controls="upt-ai" aria-selected="false">Tehisaru</button><button role="tab" id="t-upt-nipid" aria-controls="upt-nipid" aria-selected="false">Nipid</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#upt"><span aria-hidden="true">←</span> UPT</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#upt">UPT</a> / UPT juhend</span>
@@ -871,13 +889,13 @@ ol{margin:0 0 12px;padding-left:1.4em}
   function markSeen(view, pid){
     var tab = document.getElementById('t-' + pid);
     if (!tab) return;
-    var changed = !P.seen[pid];
-    P.seen[pid] = 1;
+    var changed = false;
     var last = { hash: pid, label: view.getAttribute('data-title') + ' · ' + tab.textContent.replace(' ✓','') };
     if (!P.last || P.last.hash !== last.hash) { P.last = last; changed = true; }
     if (changed) { saveProgress(); paintProgress(); }
   }
   function paintProgress(){
+    paintSeenButtons();
     document.querySelectorAll('[role="tab"]').forEach(function(t){
       t.classList.toggle('seen', !!P.seen[t.getAttribute('aria-controls')]);
     });
@@ -885,7 +903,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
       var v = document.getElementById('v-' + el.getAttribute('data-topic'));
       var tabs = v ? v.querySelectorAll('[role="tab"]') : [];
       var n = 0; tabs.forEach(function(t){ if (P.seen[t.getAttribute('aria-controls')]) n++; });
-      el.textContent = n ? n + ' / ' + tabs.length + ' vahekaarti vaadatud' : '';
+      el.textContent = n ? n + ' / ' + tabs.length + ' vahekaarti läbitud' : '';
     });
     var box = document.getElementById('resume-box');
     if (P.last && document.getElementById(P.last.hash)) {
@@ -897,6 +915,24 @@ ol{margin:0 0 12px;padding-left:1.4em}
       box.hidden = false;
     } else box.hidden = true;
   }
+  function paintSeenButtons(){
+    document.querySelectorAll('.seenbtn').forEach(function(b){
+      var on = !!P.seen[b.getAttribute('data-pid')];
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.textContent = on ? '✓ Vahekaart vaadatud' : 'Märgi vahekaart vaadatuks';
+      b.title = on ? 'Klõpsa, et märge eemaldada' : '';
+    });
+  }
+  document.querySelectorAll('section[role="tabpanel"]').forEach(function(sec){
+    var foot = document.createElement('div'); foot.className = 'seenfoot';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'seenbtn';
+    b.setAttribute('data-pid', sec.id);
+    b.addEventListener('click', function(){
+      if (P.seen[sec.id]) delete P.seen[sec.id]; else P.seen[sec.id] = 1;
+      saveProgress(); paintProgress();
+    });
+    foot.appendChild(b); sec.appendChild(foot);
+  });
   Ajukas.getProgress = function(){ return P; };
   Ajukas.setProgress = function(p){ P = { seen: (p && p.seen) || {}, last: (p && p.last) || null }; try { localStorage.setItem('ajukas-progress', JSON.stringify(P)); } catch(e) {} paintProgress(); };
 
