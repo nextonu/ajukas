@@ -213,6 +213,16 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .sbtn:disabled{opacity:.5;cursor:wait}
 .sbtn:focus-visible{outline:1px solid var(--key);outline-offset:2px}
 .sempty{color:var(--muted);grid-column:1/-1}
+
+.flist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:4px;font-size:13px}
+.flist li{display:flex;justify-content:space-between;gap:8px;color:var(--text);font-family:var(--mono);font-size:12px}
+.flist li.bad{color:#F48771}
+.box input[type=file]{font-size:13px;padding:6px}
+.sgrid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.att{display:flex;flex-wrap:wrap;gap:6px}
+.att img{width:88px;height:88px;object-fit:cover;border-radius:3px;border:1px solid var(--line2);cursor:zoom-in;display:block}
+.att a.file{font-family:var(--mono);font-size:12px;color:var(--bright);border:1px solid var(--line2);border-radius:3px;padding:4px 8px;text-decoration:none;max-width:100%;overflow-wrap:anywhere}
+.att a.file:hover{border-color:var(--bright)}
 </style>
 </head>
 <body>
@@ -233,6 +243,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
   <div class="homecols">
 <div class="homemain">
   <p class="tagline">Kõigi ainete konspektid ühes kohas. Vali aine, siis teema.</p>
+  <p class="muted" style="font-size:14px;margin-top:-4px">Alustasin seda lehte G2-s oktoobris 2026, seega varasemate kursuste ja tundide materjali siin pole.</p>
   <div class="grid">
     <div class="subjcard"><span class="sname">Ajalugu</span><span class="stopic">Materjal tulekul</span></div>
     <div class="subjcard"><span class="sname">Eesti keel</span><span class="stopic">Materjal tulekul</span></div>
@@ -281,6 +292,9 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <form id="sugg-form" novalidate>
       <label for="sg-name">Nimi (pole kohustuslik)<input id="sg-name" maxlength="60" autocomplete="nickname"></label>
       <label for="sg-text">Soovitus<textarea id="sg-text" maxlength="2000" rows="4"></textarea></label>
+      <label for="sg-files">Pildid või failid (kuni 3, pole kohustuslik)<input id="sg-files" type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.ppt,.pptx,.xls,.xlsx"></label>
+      <p class="muted" style="font-size:12px;margin:-4px 0 0">Pildid tehakse saatmisel väiksemaks. Muud failid võivad olla kokku kuni 600 kB.</p>
+      <ul class="flist" id="sg-flist"></ul>
       <div class="row"><button class="btn" type="submit" id="sg-send">Saada</button></div>
       <p class="msg" id="sg-msg" role="status"></p>
     </form>
@@ -316,7 +330,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <button role="tab" id="t-chicago" aria-controls="chicago" aria-selected="false">Chicago</button>
     <button role="tab" id="t-vordlus" aria-controls="vordlus" aria-selected="false">Võrdlus</button>
     <button role="tab" id="t-test" aria-controls="test" aria-selected="false">Testi ennast</button>
-  </div></nav>
+  <button role="tab" id="t-jazz-viited" aria-controls="jazz-viited" aria-selected="false">Viited</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#muusika"><span aria-hidden="true">←</span> Muusika</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#muusika">Muusika</a> / Varajane jazz</span>
@@ -590,10 +604,29 @@ ol{margin:0 0 12px;padding-left:1.4em}
   </div>
   <div class="cards" id="cards"></div>
 </section>
+<section role="tabpanel" id="jazz-viited" aria-labelledby="t-jazz-viited" hidden>
+  <h2>Viited</h2>
+  <p class="lead">Kust selle teema sisu pärineb.</p>
+  <h3>Tunnislaidid</h3>
+  <p>Kõik selle teema konspektid on tehtud muusikaõpetaja Eva Lisa Markuse tunnislaidide põhjal (Tallinna Pelgulinna Riigigümnaasium, Muusika G2, 2026/2027):</p>
+  <ul>
+    <li><b>Muusika G2: jazzmuusika</b> (sissejuhatus, jazzi tunnusjooned, päritolu)</li>
+    <li><b>Varajased stiilid</b> (ragtime, bluus, Scott Joplin)</li>
+    <li><b>New Orleans jazz</b> (New Orleans, Louis Armstrong, dixieland)</li>
+    <li><b>Chicago jazz</b> (Chicago stiil, saksofon, Henderson, Whiteman, Ellington)</li>
+  </ul>
+  <p class="muted">Slaide endid siia üles ei pane, sest need on õpetaja materjal. Küsi neid õpetajalt või vaata kooli õppekeskkonnast.</p>
+  <h3>Muu</h3>
+  <ul>
+    <li>Kuulamisnäited: iga teema lõpus olev „Kuula slaididelt” (lingid on võetud slaididelt).</li>
+    <li>Tsitaat: Joachim-Ernst Berendt, „Das Jazzbuch”.</li>
+  </ul>
+  <div class="key"><span class="label">Midagi puudu?</span>Siin ei pruugi kõik olla. Kui tead veel mõnda materjali või allikat, <a href="#soovita">kirjuta soovitustesse</a>.</div>
+</section>
 </main>
 </div>
 <div class="view" id="v-kontsert" data-title="Kontserdi arvustus" data-parent="muusika" data-parent-title="Muusika" hidden>
-  <nav class="appbar sticky" aria-label="Kontserdi arvustus teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-kontsert-ulesehitus" aria-controls="kontsert-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-kontsert-kysimused" aria-controls="kontsert-kysimused" aria-selected="false">Analüüsi küsimused</button><button role="tab" id="t-kontsert-nipid" aria-controls="kontsert-nipid" aria-selected="false">Näpunäited</button><button role="tab" id="t-kontsert-kohad" aria-controls="kontsert-kohad" aria-selected="false">Kust kontserti leida</button></div></nav>
+  <nav class="appbar sticky" aria-label="Kontserdi arvustus teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-kontsert-ulesehitus" aria-controls="kontsert-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-kontsert-kysimused" aria-controls="kontsert-kysimused" aria-selected="false">Analüüsi küsimused</button><button role="tab" id="t-kontsert-nipid" aria-controls="kontsert-nipid" aria-selected="false">Näpunäited</button><button role="tab" id="t-kontsert-kohad" aria-controls="kontsert-kohad" aria-selected="false">Kust kontserti leida</button><button role="tab" id="t-kontsert-viited" aria-controls="kontsert-viited" aria-selected="false">Viited</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#muusika"><span aria-hidden="true">←</span> Muusika</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#muusika">Muusika</a> / Kontserdi arvustus</span>
@@ -681,6 +714,22 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <li><a href="https://emtasaalid.ee/kalender/" target="_blank" rel="noopener">EMTA saalide kalender</a><span class="src">emtasaalid.ee</span></li>
   </ul></div>
 </section>
+<section role="tabpanel" id="kontsert-viited" aria-labelledby="t-kontsert-viited" hidden>
+  <h2>Viited</h2>
+  <p class="lead">Kust selle teema sisu pärineb.</p>
+  <h3>Õpetaja juhend</h3>
+  <ul>
+    <li><b>„Kontserdi või muusikalavastuse arvustuse nõuded”</b>: muusikaõpetaja Eva Lisa Markuse juhend (PDF, 2 lk). Sellest on tehtud vahekaardid „Ülesehitus”, „Analüüsi küsimused” ja „Näpunäited”.</li>
+    <li><b>Muusika G2</b> tunnislaid „Kontserdi arvustus” (kontserdi aeg sept–veebr ja kalendrite lingid).</li>
+  </ul>
+  <p class="muted">Juhendit ennast siia üles ei pane, sest see on õpetaja materjal. Küsi seda õpetajalt või vaata kooli õppekeskkonnast.</p>
+  <h3>Kalendrid</h3>
+  <ul>
+    <li><a href="https://muba.edu.ee/sundmused/" target="_blank" rel="noopener">MUBA sündmused</a></li>
+    <li><a href="https://emtasaalid.ee/kalender/" target="_blank" rel="noopener">EMTA saalide kalender</a></li>
+  </ul>
+  <div class="key"><span class="label">Midagi puudu?</span>Siin ei pruugi kõik olla. Kui tead veel mõnda materjali või allikat, <a href="#soovita">kirjuta soovitustesse</a>.</div>
+</section>
 </main>
 </div>
 <div class="view" id="v-upt" data-title="UPT" hidden>
@@ -695,7 +744,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
   </div>
 </div>
 <div class="view" id="v-upt-juhend" data-title="UPT juhend" data-parent="upt" data-parent-title="UPT" hidden>
-  <nav class="appbar sticky" aria-label="UPT juhend teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-upt-ajakava" aria-controls="upt-ajakava" aria-selected="false">Ajakava</button><button role="tab" id="t-upt-pohitoed" aria-controls="upt-pohitoed" aria-selected="false">Mis UPT on</button><button role="tab" id="t-upt-ulesehitus" aria-controls="upt-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-upt-vormistus" aria-controls="upt-vormistus" aria-selected="false">Vormistus</button><button role="tab" id="t-upt-viitamine" aria-controls="upt-viitamine" aria-selected="false">Viitamine</button><button role="tab" id="t-upt-ai" aria-controls="upt-ai" aria-selected="false">Tehisaru</button><button role="tab" id="t-upt-nipid" aria-controls="upt-nipid" aria-selected="false">Nipid</button></div></nav>
+  <nav class="appbar sticky" aria-label="UPT juhend teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-upt-ajakava" aria-controls="upt-ajakava" aria-selected="false">Ajakava</button><button role="tab" id="t-upt-pohitoed" aria-controls="upt-pohitoed" aria-selected="false">Mis UPT on</button><button role="tab" id="t-upt-ulesehitus" aria-controls="upt-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-upt-vormistus" aria-controls="upt-vormistus" aria-selected="false">Vormistus</button><button role="tab" id="t-upt-viitamine" aria-controls="upt-viitamine" aria-selected="false">Viitamine</button><button role="tab" id="t-upt-ai" aria-controls="upt-ai" aria-selected="false">Tehisaru</button><button role="tab" id="t-upt-nipid" aria-controls="upt-nipid" aria-selected="false">Nipid</button><button role="tab" id="t-upt-viited" aria-controls="upt-viited" aria-selected="false">Viited</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#upt"><span aria-hidden="true">←</span> UPT</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#upt">UPT</a> / UPT juhend</span>
@@ -857,6 +906,17 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <li><b>Ära jäta kõike kirjutamislaagrisse.</b> Laagris on hea viimistleda, mitte nullist alustada.</li>
     <li>Harjuta kaitsekõnet kellegi ees ja mõtle läbi, mida komisjon võiks küsida.</li>
   </ul>
+</section>
+<section role="tabpanel" id="upt-viited" aria-labelledby="t-upt-viited" hidden>
+  <h2>Viited</h2>
+  <p class="lead">Kooli ametlikud dokumendid, millest see kokkuvõte on tehtud.</p>
+  <ul>
+    <li><a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf" target="_blank" rel="noopener">Õpilasuurimus ja praktiline töö Tallinna Pelgulinna Riigigümnaasiumis</a>: UPT juhend (PDF, 68 lk)</li>
+    <li><a href="https://perg.ee/wp-content/uploads/2026/10/PERGi-kirjalike-toode-vormistamise-juhend-2026-2027.pdf" target="_blank" rel="noopener">PERGi kirjalike tööde vormistamise juhend 2026/2027</a> (PDF)</li>
+    <li><a href="https://perg.ee/dokumendid/" target="_blank" rel="noopener">perg.ee/dokumendid</a>: kõik kooli dokumendid</li>
+    <li>UPT ajakava 2026/2027 (PDF, kooli kodulehel on praegu veel mullune ajakava)</li>
+  </ul>
+  <div class="key"><span class="label">Midagi puudu?</span>Siin ei pruugi kõik olla. Kui tead veel mõnda materjali või allikat, <a href="#soovita">kirjuta soovitustesse</a>.</div>
 </section>
 </main>
 </div>
@@ -1050,7 +1110,10 @@ ol{margin:0 0 12px;padding-left:1.4em}
       });
     });
   });
-  function top(){ window.scrollTo(0,0); }
+  function top(){
+    if (location.hash === '#soovita') { var b = document.getElementById('sugg'); if (b) { b.scrollIntoView({block:'start'}); var t = document.getElementById('sg-text'); if (t) t.focus({preventScroll:true}); return; } }
+    window.scrollTo(0,0);
+  }
   try { history.scrollRestoration = 'manual'; } catch(e) {}
   window.addEventListener('hashchange', function(){ route(); top(); requestAnimationFrame(top); });
   route();
@@ -1143,6 +1206,75 @@ if (!FIREBASE_CONFIG) {
     }, 1200);
   }
 
+
+  // --- manused: pildid väiksemaks, kõik base64 kujul soovituse sisse (Firestore'i dokument max 1 MB) ---
+  const MAX_FILES = 3, MAX_TOTAL = 800000; // base64 märke kokku
+  let pending = [];
+  function readAsDataURL(f) { return new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = no; r.readAsDataURL(f); }); }
+  async function shrinkImage(f) {
+    const url = await readAsDataURL(f);
+    const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = url; });
+    let max = 1400, q = 0.82, out = url;
+    for (let k = 0; k < 6; k++) {
+      const sc = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement('canvas'); c.width = Math.round(img.width * sc); c.height = Math.round(img.height * sc);
+      const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(img, 0, 0, c.width, c.height);
+      out = c.toDataURL('image/jpeg', q);
+      if (out.length <= 260000) break;
+      max = Math.round(max * 0.8); q = Math.max(0.6, q - 0.06);
+    }
+    return { nimi: f.name.replace(/\.[^.]+$/, '') + '.jpg', tyyp: 'image/jpeg', andmed: out };
+  }
+  function paintFiles() {
+    const ul = $('sg-flist'); ul.textContent = '';
+    let total = 0;
+    pending.forEach((p) => {
+      total += p.andmed ? p.andmed.length : 0;
+      const li = document.createElement('li'); if (p.viga) li.className = 'bad';
+      const n = document.createElement('span'); n.textContent = p.nimi;
+      const z = document.createElement('span'); z.textContent = p.viga || (Math.round(p.andmed.length * 0.75 / 1024) + ' kB');
+      li.append(n, z); ul.append(li);
+    });
+    return total;
+  }
+  $('sg-files').addEventListener('change', async (e) => {
+    const files = Array.from(e.target.files || []).slice(0, MAX_FILES);
+    pending = files.map((f) => ({ nimi: f.name, viga: 'töötlen…' }));
+    paintFiles();
+    pending = await Promise.all(files.map(async (f) => {
+      try {
+        if (f.type.startsWith('image/') && f.type !== 'image/gif' && f.type !== 'image/svg+xml') return await shrinkImage(f);
+        if (f.size > 600 * 1024) return { nimi: f.name, viga: 'liiga suur (üle 600 kB)' };
+        return { nimi: f.name, tyyp: f.type || 'application/octet-stream', andmed: await readAsDataURL(f) };
+      } catch (err) { return { nimi: f.name, viga: 'ei saanud lugeda' }; }
+    }));
+    if (e.target.files.length > MAX_FILES) msg($('sg-msg'), 'Lisada saab kuni 3 faili, ülejäänud jäeti välja.', 'err');
+    const total = paintFiles();
+    if (total > MAX_TOTAL) msg($('sg-msg'), 'Failid on kokku liiga suured. Vali väiksemad või vähem faile.', 'err');
+  });
+  function dataUrlToBlobUrl(d) {
+    const [head, b64] = d.split(',');
+    const mime = (head.match(/data:([^;]+)/) || [])[1] || 'application/octet-stream';
+    const bin = atob(b64); const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    return URL.createObjectURL(new Blob([arr], { type: mime }));
+  }
+  function attachmentsEl(list) {
+    const box = document.createElement('div'); box.className = 'att';
+    (list || []).forEach((f) => {
+      if (!f || typeof f.andmed !== 'string' || !f.andmed.startsWith('data:')) return;
+      const url = dataUrlToBlobUrl(f.andmed);
+      const link = document.createElement('a'); link.href = url; link.target = '_blank'; link.rel = 'noopener';
+      if ((f.tyyp || '').startsWith('image/')) {
+        const im = document.createElement('img'); im.src = url; im.alt = f.nimi || 'pilt'; link.append(im);
+      } else {
+        link.className = 'file'; link.download = f.nimi || 'fail'; link.textContent = '📎 ' + (f.nimi || 'fail');
+      }
+      box.append(link);
+    });
+    return box;
+  }
+
   // --- soovituste haldus (ainult admin) ---
   const DAY = 24 * 60 * 60 * 1000;
   const S = { items: [], filter: 'uus', loaded: false };
@@ -1232,7 +1364,9 @@ if (!FIREBASE_CONFIG) {
       btn('Taasta', () => set({ kustutatud: null }));
       btn('Kustuta jäädavalt', async () => { await deleteDoc(doc(db, 'soovitused', x.id)); S.items = S.items.filter((y) => y !== x); }, true);
     }
-    el.append(meta, t, acts);
+    el.append(meta, t);
+    if (x.failid && x.failid.length) el.append(attachmentsEl(x.failid));
+    el.append(acts);
     return el;
   }
 
@@ -1276,8 +1410,13 @@ if (!FIREBASE_CONFIG) {
     $('sg-send').disabled = true;
     msg($('sg-msg'), 'Saadan…');
     try {
-      await addDoc(collection(db, 'soovitused'), { nimi, tekst: tekst.slice(0, 2000), aeg: serverTimestamp(), uid: auth.currentUser ? auth.currentUser.uid : '' });
-      $('sg-text').value = '';
+      const ok = pending.filter((p) => p.andmed);
+      if (pending.some((p) => p.viga)) { msg($('sg-msg'), 'Mõnda faili ei saa saata. Eemalda see või vali teine.', 'err'); $('sg-send').disabled = false; return; }
+      if (ok.reduce((n, p) => n + p.andmed.length, 0) > MAX_TOTAL) { msg($('sg-msg'), 'Failid on kokku liiga suured. Vali väiksemad või vähem faile.', 'err'); $('sg-send').disabled = false; return; }
+      const data = { nimi, tekst: tekst.slice(0, 2000), aeg: serverTimestamp(), uid: auth.currentUser ? auth.currentUser.uid : '' };
+      if (ok.length) data.failid = ok.map((p) => ({ nimi: p.nimi.slice(0, 100), tyyp: p.tyyp.slice(0, 100), andmed: p.andmed }));
+      await addDoc(collection(db, 'soovitused'), data);
+      $('sg-text').value = ''; $('sg-files').value = ''; pending = []; paintFiles();
       msg($('sg-msg'), 'Aitäh! Soovitus on saadetud.', 'ok');
       if (userOf(auth.currentUser) === ADMIN_USER) loadInbox();
     } catch (err) {

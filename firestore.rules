@@ -11,7 +11,9 @@ service cloud.firestore {
 
     // Soovitused: igaüks võib saata; lugeda, märkida ja kustutada saab ainult admin.
     match /soovitused/{id} {
-      allow create: if request.resource.data.keys().hasOnly(['nimi', 'tekst', 'aeg', 'uid'])
+      allow create: if request.resource.data.keys().hasOnly(['nimi', 'tekst', 'aeg', 'uid', 'failid'])
+        && (!('failid' in request.resource.data)
+            || (request.resource.data.failid is list && request.resource.data.failid.size() <= 3))
         && request.resource.data.tekst is string
         && request.resource.data.tekst.size() > 0
         && request.resource.data.tekst.size() <= 2000
