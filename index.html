@@ -243,7 +243,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
   <div class="homecols">
 <div class="homemain">
   <p class="tagline">Kõigi ainete konspektid ühes kohas. Vali aine, siis teema.</p>
-  <p class="muted" style="font-size:14px;margin-top:-4px">Alustasin seda lehte G2-s oktoobris 2026, seega varasemate kursuste ja tundide materjali siin pole.</p>
+  <p class="muted" style="font-size:14px;margin-top:-4px">Alustasin seda lehte G2-s oktoobris 2026, seega varasemate kursuste ja tundide materjali siin enamasti pole.</p>
   <div class="grid">
     <div class="subjcard"><span class="sname">Ajalugu</span><span class="stopic">Materjal tulekul</span></div>
     <div class="subjcard"><span class="sname">Eesti keel</span><span class="stopic">Materjal tulekul</span></div>
@@ -292,8 +292,9 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <form id="sugg-form" novalidate>
       <label for="sg-name">Nimi (pole kohustuslik)<input id="sg-name" maxlength="60" autocomplete="nickname"></label>
       <label for="sg-text">Soovitus<textarea id="sg-text" maxlength="2000" rows="4"></textarea></label>
-      <label for="sg-files">Pildid või failid (kuni 3, pole kohustuslik)<input id="sg-files" type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.ppt,.pptx,.xls,.xlsx"></label>
-      <p class="muted" style="font-size:12px;margin:-4px 0 0">Pildid tehakse saatmisel väiksemaks. Muud failid võivad olla kokku kuni 600 kB.</p>
+      <label for="sg-files">Lisa pilte või faile, kui tahad (kuni 3)<input id="sg-files" type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.ppt,.pptx,.xls,.xlsx"></label>
+      <p class="muted" style="font-size:12px;margin:-4px 0 0">Vabandust, et saata saab ainult väikeseid faile: suuremate jaoks peaksin failihoidla eest maksma. Pildid tehakse saatmisel ise väiksemaks, muud failid võivad olla kokku kuni 600 kB.</p>
+      <p class="muted" style="font-size:12px;margin:0"><b style="background:none;padding:0;color:var(--text)">Suurem fail?</b> Pane see Google Drive'i või OneDrive'i, vali „Jaga” → „Kõik, kellel on link” ja kleebi link soovituse teksti sisse.</p>
       <ul class="flist" id="sg-flist"></ul>
       <div class="row"><button class="btn" type="submit" id="sg-send">Saada</button></div>
       <p class="msg" id="sg-msg" role="status"></p>
