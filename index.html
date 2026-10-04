@@ -141,7 +141,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .muted{color:var(--muted)}
 .box form{display:flex;flex-direction:column;gap:10px}
 .box label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
-.box input,.box textarea{font:inherit;font-size:15px;color:var(--bright);background:var(--bg);border:1px solid var(--line2);border-radius:3px;padding:7px 9px;width:100%}
+.box input,.box textarea{font:inherit;font-size:16px;color:var(--bright);background:var(--bg);border:1px solid var(--line2);border-radius:3px;padding:7px 9px;width:100%}
 .box textarea{resize:vertical;min-height:90px}
 .box input:focus,.box textarea:focus{outline:1px solid var(--accent);border-color:var(--accent)}
 .row{display:flex;gap:8px;flex-wrap:wrap}
@@ -170,6 +170,24 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .seenbtn:hover{border-color:var(--bright)}
 .seenbtn[aria-pressed="true"]{background:transparent;border-color:#89D185;color:#89D185}
 .seenbtn:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+
+.scrollhint{display:none;font-family:var(--mono);font-size:12px;color:var(--muted);margin:8px 0 -4px}
+@media (max-width:600px){
+  .view .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .subjcard{padding:12px;min-height:0}
+  .subjcard .sname{font-size:15px}
+  .subjcard.ready .sname::after{content:""}
+  .appbar .logo{padding-right:10px}
+  .appbar .logo > span{display:none}
+  .appbar .tabs{scrollbar-width:none}
+  .appbar .tabs::-webkit-scrollbar{display:none}
+  .tabs button{padding:11px 13px}
+  .scrollhint{display:block}
+  .pagehead{margin-bottom:16px}
+  .back{padding:10px 16px}
+  h1{font-size:40px}
+  .homecols{gap:20px}
+}
 </style>
 </head>
 <body>
@@ -233,6 +251,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
   <section class="box" id="sugg">
     <h3>Soovitused</h3>
     <p class="muted">Leidsid vea, tahad uut ainet või on mõni idee? Kirjuta siia. Sõnumeid näeb ainult lehe tegija.</p>
+    <p class="muted" style="font-size:12.5px">Palun saada ainult päris soovitusi. Kui siia hakkab tulema rämpsu, saavad soovitusi saata ainult sisse loginud kasutajad.</p>
     <form id="sugg-form" novalidate>
       <label for="sg-name">Nimi (pole kohustuslik)<input id="sg-name" maxlength="60" autocomplete="nickname"></label>
       <label for="sg-text">Soovitus<textarea id="sg-text" maxlength="2000" rows="4"></textarea></label>
@@ -517,6 +536,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 <section role="tabpanel" id="vordlus" aria-labelledby="t-vordlus" hidden>
   <h2>Kolm stiili kõrvuti</h2>
   <p class="lead">Kontrolltöös küsitakse sageli erinevusi. See tabel on kõige kiirem kordamine.</p>
+  <p class="scrollhint">Tabelit saab külgsuunas kerida →</p>
   <div class="tablewrap">
   <table>
     <thead><tr><th></th><th>New Orleans</th><th>Dixieland</th><th>Chicago</th></tr></thead>
@@ -735,6 +755,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
   <p class="lead">Kõige tähtsam on, et kogu töö oleks ühtne. Seadista laadid kohe alguses, siis tuleb sisukord automaatselt.</p>
   <p>Allikas: <a href="https://perg.ee/wp-content/uploads/2026/10/PERGi-kirjalike-toode-vormistamise-juhend-2026-2027.pdf" target="_blank" rel="noopener">PERGi kirjalike tööde vormistamise juhend (PDF)</a>.</p>
   <div class="key"><span class="label">Programm</span>Töö tehakse <b>MS Wordis</b> (Microsoft 365 on õpilastele tasuta) ja salvestatakse <b>OneDrive'i</b>, et juhendaja näeks.</div>
+  <p class="scrollhint">Tabelit saab külgsuunas kerida →</p>
   <div class="tablewrap"><table>
     <thead><tr><th>Element</th><th>Nõue</th></tr></thead>
     <tbody>
