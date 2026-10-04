@@ -188,6 +188,31 @@ ol{margin:0 0 12px;padding-left:1.4em}
   h1{font-size:40px}
   .homecols{gap:20px}
 }
+
+.inboxlink{display:block;text-decoration:none;color:inherit}
+.inboxlink:hover{border-color:var(--bright)}
+.inboxlink h3{color:var(--bright)}
+.inboxlink .new{color:#EAB308;font-weight:600}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 10px}
+.filter{font:inherit;font-size:14px;cursor:pointer;border:1px solid var(--line2);background:transparent;color:var(--muted);padding:7px 14px;border-radius:999px}
+.filter:hover{color:var(--bright)}
+.filter[aria-pressed="true"]{background:var(--bright);color:#181818;border-color:var(--bright)}
+.filter .n{font-family:var(--mono);font-size:12px;opacity:.8}
+.filter:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;align-items:start}
+.scard{background:var(--panel);border:1px solid var(--line2);border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.scard.is-uus{border-color:#EAB308}
+.scard .meta{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:space-between}
+.scard .chip{font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid currentColor}
+.chip.uus{color:#EAB308}.chip.vaadatud{color:var(--muted)}.chip.tehtud{color:#89D185}.chip.prygi{color:#F48771}
+.scard .txt{white-space:pre-wrap;margin:0;color:var(--bright);font-size:15px;overflow-wrap:anywhere}
+.scard .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.sbtn{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line2);background:var(--raised);color:var(--text);padding:5px 10px;border-radius:3px}
+.sbtn:hover{border-color:var(--bright);color:var(--bright)}
+.sbtn.danger:hover{border-color:#F48771;color:#F48771}
+.sbtn:disabled{opacity:.5;cursor:wait}
+.sbtn:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+.sempty{color:var(--muted);grid-column:1/-1}
 </style>
 </head>
 <body>
@@ -261,10 +286,10 @@ ol{margin:0 0 12px;padding-left:1.4em}
     </form>
   </section>
 
-  <section class="box" id="inbox" hidden>
-    <h3>Saabunud soovitused <span class="muted" id="inbox-n"></span></h3>
-    <div id="inbox-list"></div>
-  </section>
+  <a class="box inboxlink" id="inbox" href="#soovitused" hidden>
+    <h3>Saabunud soovitused →</h3>
+    <p class="muted" id="inbox-sum">Laen…</p>
+  </a>
 </aside>
 </div>
 </div>
@@ -836,6 +861,26 @@ ol{margin:0 0 12px;padding-left:1.4em}
 </main>
 </div>
 
+<div class="view" id="v-soovitused" data-title="Soovitused" hidden>
+  <div class="appbar"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
+  <div class="pagehead">
+    <a class="back" href="#"><span aria-hidden="true">←</span> Avaleht</a>
+  </div>
+  <h2 class="pagetitle">Soovitused</h2>
+  <p class="muted" id="sv-locked">Seda lehte näeb ainult lehe tegija. Logi avalehel sisse.</p>
+  <div id="sv-app" hidden>
+    <div class="filters" aria-label="Soovituste olek">
+      <button type="button" class="filter" data-f="uus" aria-pressed="true">Vaatamata <span class="n" id="n-uus"></span></button>
+      <button type="button" class="filter" data-f="vaadatud" aria-pressed="false">Vaadatud <span class="n" id="n-vaadatud"></span></button>
+      <button type="button" class="filter" data-f="tehtud" aria-pressed="false">Tehtud <span class="n" id="n-tehtud"></span></button>
+      <button type="button" class="filter" data-f="prygi" aria-pressed="false">Prügikast <span class="n" id="n-prygi"></span></button>
+    </div>
+    <p class="muted" id="sv-hint"></p>
+    <p class="msg" id="sv-msg" role="status"></p>
+    <div class="sgrid" id="sv-list"></div>
+  </div>
+</div>
+
 <footer>Koostatud tunnimaterjalide ja kooli juhendite põhjal tehisaru abiga. Võib sisaldada üksikuid vigu.</footer>
 </div>
 <script>
@@ -1045,7 +1090,7 @@ if (!FIREBASE_CONFIG) {
     import(`https://www.gstatic.com/firebasejs/${V}/firebase-firestore.js`),
   ]);
   const { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } = authM;
-  const { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, collection, serverTimestamp, getDocs, query, orderBy } = fsM;
+  const { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, serverTimestamp, getDocs, query, orderBy, Timestamp } = fsM;
   const app = initializeApp(FIREBASE_CONFIG);
   const auth = getAuth(app);
   const db = getFirestore(app);
@@ -1098,34 +1143,108 @@ if (!FIREBASE_CONFIG) {
     }, 1200);
   }
 
+  // --- soovituste haldus (ainult admin) ---
+  const DAY = 24 * 60 * 60 * 1000;
+  const S = { items: [], filter: 'uus', loaded: false };
+  const stateOf = (x) => (x.kustutatud ? 'prygi' : (x.olek || 'uus'));
+  const LABEL = { uus: 'vaatamata', vaadatud: 'vaadatud', tehtud: 'tehtud', prygi: 'prügikastis' };
+  const HINT = {
+    uus: 'Uued soovitused, mida sa pole veel vaadatuks märkinud.',
+    vaadatud: 'Loetud, aga veel tegemata.',
+    tehtud: 'Soovitused, mille oled ära teinud.',
+    prygi: 'Kustutatud soovitused kaovad jäädavalt 24 tunni pärast, kui sa neid enne ei taasta.',
+  };
+
   async function loadInbox() {
-    const list = $('inbox-list');
-    list.textContent = 'Laen…';
     try {
       const snap = await getDocs(query(collection(db, 'soovitused'), orderBy('aeg', 'desc')));
-      list.textContent = '';
-      $('inbox-n').textContent = '(' + snap.size + ')';
-      if (snap.empty) { list.innerHTML = '<p class="muted">Soovitusi veel pole.</p>'; return; }
+      const now = Date.now();
+      const items = [];
+      const purge = [];
       snap.forEach((d) => {
-        const x = d.data();
-        const item = document.createElement('div'); item.className = 'inbox-item';
-        const meta = document.createElement('div'); meta.className = 'meta';
-        const who = document.createElement('span');
-        const when = x.aeg && x.aeg.toDate ? x.aeg.toDate().toLocaleString('et-EE', { dateStyle: 'short', timeStyle: 'short' }) : '';
-        who.textContent = (x.nimi || 'Anonüümne') + (when ? ' · ' + when : '');
-        const del = document.createElement('button'); del.className = 'linkbtn'; del.type = 'button'; del.textContent = 'Kustuta';
-        del.addEventListener('click', async () => { del.disabled = true; try { await deleteDoc(doc(db, 'soovitused', d.id)); item.remove(); } catch (e) { del.disabled = false; } });
-        meta.append(who, del);
-        const t = document.createElement('p'); t.className = 'txt'; t.textContent = x.tekst || '';
-        item.append(meta, t); list.append(item);
+        const x = Object.assign({ id: d.id }, d.data());
+        if (x.kustutatud && x.kustutatud.toMillis && now - x.kustutatud.toMillis() > DAY) purge.push(d.id);
+        else items.push(x);
       });
-    } catch (e) { list.textContent = 'Soovitusi ei õnnestunud laadida.'; }
+      purge.forEach((id) => deleteDoc(doc(db, 'soovitused', id)).catch(() => {}));
+      S.items = items; S.loaded = true;
+      renderInbox();
+    } catch (e) {
+      $('inbox-sum').textContent = 'Soovitusi ei õnnestunud laadida.';
+      msg($('sv-msg'), 'Soovitusi ei õnnestunud laadida. Värskenda lehte.', 'err');
+    }
   }
+
+  function renderInbox() {
+    const count = { uus: 0, vaadatud: 0, tehtud: 0, prygi: 0 };
+    S.items.forEach((x) => count[stateOf(x)]++);
+    Object.keys(count).forEach((k) => { $('n-' + k).textContent = count[k] ? '(' + count[k] + ')' : ''; });
+    const sum = $('inbox-sum');
+    sum.textContent = '';
+    if (count.uus) { const b = document.createElement('span'); b.className = 'new'; b.textContent = count.uus + ' vaatamata'; sum.append(b, ' · '); }
+    sum.append((count.vaadatud + count.tehtud + count.uus) + ' kokku');
+
+    document.querySelectorAll('.filter').forEach((f) => f.setAttribute('aria-pressed', f.dataset.f === S.filter ? 'true' : 'false'));
+    $('sv-hint').textContent = HINT[S.filter];
+    const list = $('sv-list');
+    list.textContent = '';
+    const shown = S.items.filter((x) => stateOf(x) === S.filter);
+    if (!shown.length) {
+      const p = document.createElement('p'); p.className = 'sempty';
+      p.textContent = S.filter === 'prygi' ? 'Prügikast on tühi.' : 'Siin pole praegu ühtegi soovitust.';
+      list.append(p); return;
+    }
+    shown.forEach((x) => list.append(card(x)));
+  }
+
+  function card(x) {
+    const st = stateOf(x);
+    const el = document.createElement('article'); el.className = 'scard is-' + st;
+    const meta = document.createElement('div'); meta.className = 'meta';
+    const who = document.createElement('span');
+    const when = x.aeg && x.aeg.toDate ? x.aeg.toDate().toLocaleString('et-EE', { dateStyle: 'short', timeStyle: 'short' }) : '';
+    who.textContent = (x.nimi || 'Anonüümne') + (when ? ' · ' + when : '');
+    const chip = document.createElement('span'); chip.className = 'chip ' + st; chip.textContent = LABEL[st];
+    meta.append(who, chip);
+    const t = document.createElement('p'); t.className = 'txt'; t.textContent = x.tekst || '';
+    const acts = document.createElement('div'); acts.className = 'acts';
+    const btn = (label, fn, danger) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'sbtn' + (danger ? ' danger' : ''); b.textContent = label;
+      b.addEventListener('click', async () => {
+        acts.querySelectorAll('button').forEach((z) => z.disabled = true);
+        try { await fn(); renderInbox(); }
+        catch (e) { msg($('sv-msg'), 'Muudatus ei läinud läbi. Proovi uuesti.', 'err'); acts.querySelectorAll('button').forEach((z) => z.disabled = false); }
+      });
+      acts.append(b);
+    };
+    const set = async (patch) => { await updateDoc(doc(db, 'soovitused', x.id), patch); Object.assign(x, patch); };
+    if (st === 'uus') btn('Märgi vaadatuks', () => set({ olek: 'vaadatud' }));
+    if (st === 'vaadatud') btn('Märgi vaatamata', () => set({ olek: 'uus' }));
+    if (st === 'uus' || st === 'vaadatud') btn('Tehtud ✓', () => set({ olek: 'tehtud' }));
+    if (st === 'tehtud') btn('Tagasi tegemata', () => set({ olek: 'vaadatud' }));
+    if (st !== 'prygi') btn('Kustuta', async () => { await updateDoc(doc(db, 'soovitused', x.id), { kustutatud: serverTimestamp() }); x.kustutatud = Timestamp.now(); }, true);
+    if (st === 'prygi') {
+      const left = Math.max(0, DAY - (Date.now() - x.kustutatud.toMillis()));
+      const h = Math.ceil(left / 3600000);
+      const info = document.createElement('span'); info.className = 'muted'; info.style.fontSize = '12px';
+      info.textContent = 'Kustub jäädavalt ' + (h <= 1 ? 'tunni jooksul' : h + ' tunni pärast');
+      meta.append(info);
+      btn('Taasta', () => set({ kustutatud: null }));
+      btn('Kustuta jäädavalt', async () => { await deleteDoc(doc(db, 'soovitused', x.id)); S.items = S.items.filter((y) => y !== x); }, true);
+    }
+    el.append(meta, t, acts);
+    return el;
+  }
+
+  document.querySelectorAll('.filter').forEach((f) => f.addEventListener('click', () => { S.filter = f.dataset.f; msg($('sv-msg'), ''); renderInbox(); }));
+  window.addEventListener('hashchange', () => { if (location.hash === '#soovitused' && S.loaded) loadInbox(); });
 
   onAuthStateChanged(auth, async (u) => {
     $('acct-out').hidden = !!u;
     $('acct-in').hidden = !u;
     $('inbox').hidden = true;
+    $('sv-app').hidden = true;
+    $('sv-locked').hidden = false;
     if (!u) {
       A.onProgress = null;
       if (A._wasIn) A.setProgress({ seen: {}, last: null }); // jagatud arvutis ei jää eelmise kasutaja andmed näha
@@ -1146,7 +1265,7 @@ if (!FIREBASE_CONFIG) {
       A.onProgress = pushProgress;
       pushProgress(merged);
     } catch (e) { A.onProgress = pushProgress; }
-    if (name === ADMIN_USER) { $('inbox').hidden = false; loadInbox(); }
+    if (name === ADMIN_USER) { $('inbox').hidden = false; $('sv-app').hidden = false; $('sv-locked').hidden = true; loadInbox(); }
   });
 
   $('sugg-form').addEventListener('submit', async (e) => {
