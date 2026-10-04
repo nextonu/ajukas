@@ -16,6 +16,7 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{margin:0}
 body{background:var(--bg);color:var(--text);font-family:var(--ui);font-size:16px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
 .wrap{max-width:1120px;margin:0 auto}
@@ -223,6 +224,13 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .att img{width:88px;height:88px;object-fit:cover;border-radius:3px;border:1px solid var(--line2);cursor:zoom-in;display:block}
 .att a.file{font-family:var(--mono);font-size:12px;color:var(--bright);border:1px solid var(--line2);border-radius:3px;padding:4px 8px;text-decoration:none;max-width:100%;overflow-wrap:anywhere}
 .att a.file:hover{border-color:var(--bright)}
+
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.filepick{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.filepick .flabel{font-size:13px;color:var(--muted)}
+.box label.pickbtn{display:inline-flex;flex-direction:row;color:var(--text);font-size:13px;cursor:pointer}
+.filepick input:focus-visible + *,.filepick:focus-within .pickbtn{outline:1px solid var(--key);outline-offset:2px}
+.att{align-items:flex-start}
 </style>
 </head>
 <body>
@@ -290,9 +298,9 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <p class="muted">Leidsid vea, tahad uut ainet või on mõni idee? Kirjuta siia. Sõnumeid näeb ainult lehe tegija.</p>
     <p class="muted" style="font-size:12.5px">Palun saada ainult päris soovitusi. Kui siia hakkab tulema rämpsu, saavad soovitusi saata ainult sisse loginud kasutajad.</p>
     <form id="sugg-form" novalidate>
-      <label for="sg-name">Nimi (pole kohustuslik)<input id="sg-name" maxlength="60" autocomplete="nickname"></label>
+      <label for="sg-name">Nimi (võid jätta tühjaks)<input id="sg-name" maxlength="60" autocomplete="nickname"></label>
       <label for="sg-text">Soovitus<textarea id="sg-text" maxlength="2000" rows="4"></textarea></label>
-      <label for="sg-files">Lisa pilte või faile, kui tahad (kuni 3)<input id="sg-files" type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.ppt,.pptx,.xls,.xlsx"></label>
+      <div class="filepick"><span class="flabel">Lisa pilte või faile, kui tahad (kuni 3)</span><label for="sg-files" class="btn sec pickbtn">Vali failid</label><input id="sg-files" class="vh" type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.ppt,.pptx,.xls,.xlsx"></div>
       <p class="muted" style="font-size:12px;margin:-4px 0 0">Vabandust, et saata saab ainult väikeseid faile: suuremate jaoks peaksin failihoidla eest maksma. Pildid tehakse saatmisel ise väiksemaks, muud failid võivad olla kokku kuni 600 kB.</p>
       <p class="muted" style="font-size:12px;margin:0"><b style="background:none;padding:0;color:var(--text)">Suurem fail?</b> Pane see Google Drive'i või OneDrive'i, vali „Jaga” → „Kõik, kellel on link” ja kleebi link soovituse teksti sisse.</p>
       <ul class="flist" id="sg-flist"></ul>
@@ -928,7 +936,6 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <a class="back" href="#"><span aria-hidden="true">←</span> Avaleht</a>
   </div>
   <h2 class="pagetitle">Soovitused</h2>
-  <p class="muted" id="sv-locked">Seda lehte näeb ainult lehe tegija. Logi avalehel sisse.</p>
   <div id="sv-app" hidden>
     <div class="filters" aria-label="Soovituste olek">
       <button type="button" class="filter" data-f="uus" aria-pressed="true">Vaatamata <span class="n" id="n-uus"></span></button>
@@ -1062,6 +1069,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
     foot.appendChild(b); sec.appendChild(foot);
   });
   Ajukas.getProgress = function(){ return P; };
+  Ajukas.route = function(){ route(); };
   Ajukas.setProgress = function(p){ P = { seen: (p && p.seen) || {}, last: (p && p.last) || null }; try { localStorage.setItem('ajukas-progress', JSON.stringify(P)); } catch(e) {} paintProgress(); };
 
   var homeView = document.getElementById('v-home');
@@ -1093,6 +1101,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
         if (el && el.getAttribute('role') === 'tabpanel') { view = el.closest('.view'); pid = h; }
       }
     }
+    if (view && view.id === 'v-soovitused' && !Ajukas.isAdmin) view = null;
     if (!view) view = homeView;
     views.forEach(function(v){ v.hidden = v !== view; });
     showTab(view, pid || load('ajukas-tab-' + view.id));
@@ -1253,9 +1262,11 @@ if (!FIREBASE_CONFIG) {
     const total = paintFiles();
     if (total > MAX_TOTAL) msg($('sg-msg'), 'Failid on kokku liiga suured. Vali väiksemad või vähem faile.', 'err');
   });
-  function dataUrlToBlobUrl(d) {
-    const [head, b64] = d.split(',');
-    const mime = (head.match(/data:([^;]+)/) || [])[1] || 'application/octet-stream';
+  // Turvalisus: pildina näidatakse ainult tavalisi rastervorminguid; kõik muu (ka HTML ja SVG)
+  // antakse ainult allalaadimiseks tüübiga application/octet-stream, et see ei saaks lehe nimel käivituda.
+  const SAFE_IMG = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+  function dataUrlToBlobUrl(d, mime) {
+    const b64 = d.slice(d.indexOf(',') + 1);
     const bin = atob(b64); const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
     return URL.createObjectURL(new Blob([arr], { type: mime }));
@@ -1264,12 +1275,16 @@ if (!FIREBASE_CONFIG) {
     const box = document.createElement('div'); box.className = 'att';
     (list || []).forEach((f) => {
       if (!f || typeof f.andmed !== 'string' || !f.andmed.startsWith('data:')) return;
-      const url = dataUrlToBlobUrl(f.andmed);
-      const link = document.createElement('a'); link.href = url; link.target = '_blank'; link.rel = 'noopener';
-      if ((f.tyyp || '').startsWith('image/')) {
-        const im = document.createElement('img'); im.src = url; im.alt = f.nimi || 'pilt'; link.append(im);
+      const head = f.andmed.slice(5, f.andmed.indexOf(';'));
+      const isImg = SAFE_IMG.includes(head) && SAFE_IMG.includes(f.tyyp);
+      const url = dataUrlToBlobUrl(f.andmed, isImg ? head : 'application/octet-stream');
+      const link = document.createElement('a'); link.href = url;
+      const name = String(f.nimi || 'fail').replace(/[\\/:*?"<>|]/g, '_');
+      if (isImg) {
+        link.target = '_blank'; link.rel = 'noopener';
+        const im = document.createElement('img'); im.src = url; im.alt = name; link.append(im);
       } else {
-        link.className = 'file'; link.download = f.nimi || 'fail'; link.textContent = '📎 ' + (f.nimi || 'fail');
+        link.className = 'file'; link.download = name; link.textContent = '📎 ' + name + ' (laadi alla)';
       }
       box.append(link);
     });
@@ -1379,7 +1394,7 @@ if (!FIREBASE_CONFIG) {
     $('acct-in').hidden = !u;
     $('inbox').hidden = true;
     $('sv-app').hidden = true;
-    $('sv-locked').hidden = false;
+    if (A.isAdmin) { A.isAdmin = false; A.route && A.route(); }
     if (!u) {
       A.onProgress = null;
       if (A._wasIn) A.setProgress({ seen: {}, last: null }); // jagatud arvutis ei jää eelmise kasutaja andmed näha
@@ -1400,7 +1415,7 @@ if (!FIREBASE_CONFIG) {
       A.onProgress = pushProgress;
       pushProgress(merged);
     } catch (e) { A.onProgress = pushProgress; }
-    if (name === ADMIN_USER) { $('inbox').hidden = false; $('sv-app').hidden = false; $('sv-locked').hidden = true; loadInbox(); }
+    if (name === ADMIN_USER) { A.isAdmin = true; $('inbox').hidden = false; $('sv-app').hidden = false; A.route && A.route(); loadInbox(); }
   });
 
   $('sugg-form').addEventListener('submit', async (e) => {
