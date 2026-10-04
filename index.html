@@ -9,7 +9,7 @@
 :root{
   --bg:#181818; --panel:#1F1F1F; --raised:#252526; --line:#2B2B2B; --line2:#3C3C3C;
   --text:#CCCCCC; --bright:#FFFFFF; --muted:#9D9D9D;
-  --key:#4FC1FF; --num:#CE9178; --accent:#0078D4;
+  --key:#4FC1FF; --hl:rgba(234,179,8,.24); --num:#CE9178; --accent:#0078D4;
   --ui:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
   --mono:"Cascadia Code","Cascadia Mono",Consolas,"Courier New",monospace;
   color-scheme:dark;
@@ -22,7 +22,7 @@ header{padding-block:36px 18px;display:flex;flex-direction:column;gap:6px}
 .eyebrow{font-family:var(--mono);font-size:12px;color:var(--muted)}
 .eyebrow::before{content:"// "}
 h1{font-size:clamp(36px,7vw,52px);font-weight:700;line-height:1.05;margin:0;color:var(--bright);letter-spacing:-.02em}
-h1 .dot{color:var(--key)}
+h1 .dot{color:#EAB308}
 .tagline{color:var(--muted);margin:0;max-width:62ch}
 .subjects{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .subj{font-size:14px;font-weight:600;border:1px solid var(--line2);background:var(--raised);color:var(--bright);padding:6px 12px;border-radius:4px}
@@ -42,14 +42,21 @@ p{margin:0 0 12px}
 ul{margin:0 0 12px;padding-left:1.2em}
 li{margin-bottom:4px}
 li::marker{color:var(--muted)}
-b,strong{font-weight:600;color:var(--key)}
+b,strong{font-weight:600;color:var(--bright);background:var(--hl);padding:0 3px;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.listen{margin-top:32px;border-top:1px solid var(--line);padding-top:16px}
+.listen h3{margin-top:0}
+.listen ul{list-style:none;padding:0;display:grid;gap:4px}
+.listen a{color:var(--text);text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:3px}
+.listen a:hover{color:var(--bright);text-decoration-color:var(--bright)}
+.listen .src{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:6px}
+.listen a::after{content:" ↗";color:var(--muted);font-size:.85em}
 .yr{font-family:var(--mono);font-size:.88em;color:var(--num);white-space:nowrap}
 .people{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:12px 0 8px}
 .person{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px}
 .person .name{font-weight:600;color:var(--bright);display:block}
 .person .role{color:var(--muted);font-size:14px;display:block;margin-bottom:6px}
 .person p{font-size:15px;margin:0}
-.quote{border-left:2px solid var(--key);padding:4px 0 4px 16px;margin:20px 0;font-style:italic;font-size:18px;color:var(--bright)}
+.quote{border-left:2px solid #EAB308;padding:4px 0 4px 16px;margin:20px 0;font-style:italic;font-size:18px;color:var(--bright)}
 .quote cite{display:block;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:6px}
 .key{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin:16px 0}
 .key .label{font-family:var(--mono);font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
@@ -57,11 +64,11 @@ b,strong{font-weight:600;color:var(--key)}
 .beat{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--mono);font-size:12px;color:var(--muted)}
 .beat i{display:block;width:16px;height:16px;border-radius:50%;background:var(--line2)}
 .beat.acc i{width:30px;height:30px;background:var(--num)}
-.beat.even i{width:22px;height:22px;background:var(--key)}
+.beat.even i{width:22px;height:22px;background:var(--text)}
 .beatcap{font-size:14px;color:var(--muted);margin-bottom:14px}
 .timeline{list-style:none;padding:0;margin:8px 0;border-left:1px solid var(--line2)}
 .timeline li{position:relative;padding:0 0 18px 20px;margin:0}
-.timeline li::before{content:"";position:absolute;left:-6px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--key)}
+.timeline li::before{content:"";position:absolute;left:-6px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--muted)}
 .timeline .when{font-family:var(--mono);font-size:13px;color:var(--num);display:block}
 .tablewrap{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:4px}
 table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
@@ -82,7 +89,7 @@ tbody th{font-weight:600;color:var(--muted)}
 .card summary .tag{font-family:var(--mono);font-size:12px;color:var(--muted);flex:0 0 auto;min-width:96px}
 .card[open]{border-color:var(--line2)}
 .card[open] summary{border-bottom:1px solid var(--line)}
-.card .ans{padding:10px 14px 12px;color:var(--key)}
+.card .ans{padding:10px 14px 12px;color:var(--text)}
 footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-family:var(--mono)}
 @media (max-width:520px){.card summary{flex-direction:column;gap:2px}.card summary .tag{min-width:0}}
 </style>
@@ -157,6 +164,8 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
     <li><b>Congo Square</b> oli väljak, kus nädalavahetustel mängiti muusikat, tantsiti ja hoiti alles kultuuripärandit.</li>
     <li><b>Matuserongkäikude orkestrid</b> on üks jazzi alustalasid.</li>
   </ul>
+  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://www.youtube.com/watch?v=VSkz3j9b23Y" target="_blank" rel="noopener">Mis teeb jazzist jazzi? (näide 1)</a><span class="src">sissejuhatus</span></li><li><a href="https://www.youtube.com/watch?v=27Pn5mmIjO8" target="_blank" rel="noopener">Mis teeb jazzist jazzi? (näide 2)</a><span class="src">sissejuhatus</span></li><li><a href="https://www.youtube.com/watch?v=IiUyz4HG-Kc" target="_blank" rel="noopener">Bach: „Wachet auf, ruft uns die Stimme"</a><span class="src">kuulamisülesanne</span></li><li><a href="https://www.youtube.com/watch?v=27Pn5mmIjO8" target="_blank" rel="noopener">Bobby McFerrin: „Wachet auf, ruft uns die Stimme"</a><span class="src">kuulamisülesanne</span></li><li><a href="https://www.youtube.com/watch?v=qwf_m0p86KU" target="_blank" rel="noopener">Harmoonia jazzis</a><span class="src">põhijooned</span></li><li><a href="https://www.youtube.com/watch?v=4MwQcm4eH18" target="_blank" rel="noopener">Töölaulud</a><span class="src">sotsiaalne taust</span></li><li><a href="https://www.youtube.com/watch?v=zcJ6Wxdcj-E" target="_blank" rel="noopener">Raske tööelu</a><span class="src">sotsiaalne taust</span></li><li><a href="https://www.youtube.com/watch?v=DOoNEjrVcpo" target="_blank" rel="noopener">Congo Square</a><span class="src">New Orleans</span></li><li><a href="https://www.youtube.com/watch?v=alzPbV61sOM" target="_blank" rel="noopener">Matuserongkäik</a><span class="src">New Orleans</span></li><li><a href="https://www.youtube.com/watch?v=oVOGylzaMiA" target="_blank" rel="noopener">Matuserongkäigu orkestrid</a><span class="src">New Orleans</span></li></ul></div>
+  <div class="listen"><h3>Kontserdi arvustus</h3><p>Käi septembrist veebruarini ühel vabalt valitud kontserdil ja kirjuta sellest arvustus. Kontserdi vali nendelt lehtedelt:</p><ul><li><a href="https://muba.edu.ee/sundmused/" target="_blank" rel="noopener">MUBA sündmused</a><span class="src">muba.edu.ee</span></li><li><a href="https://emtasaalid.ee/kalender/" target="_blank" rel="noopener">EMTA saalide kalender</a><span class="src">emtasaalid.ee</span></li></ul></div>
 </section>
 
 <!-- VARAJASED -->
@@ -190,6 +199,7 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
     <li><b>Jelly Roll Morton</b> oli üks esimesi jazzi heliloojaid ja pianiste.</li>
     <li><b>Louis Armstrong</b> oli 1920. aastate trompetist, kes on seotud svingiga.</li>
   </ul>
+  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://www.youtube.com/watch?v=hy-aYX5kMoM" target="_blank" rel="noopener">Ragtime</a><span class="src">ragtime</span></li><li><a href="https://www.youtube.com/watch?v=bCxLAr_bwpA" target="_blank" rel="noopener">Scott Joplin: „Maple Leaf Rag"</a><span class="src">Joplin</span></li><li><a href="https://www.youtube.com/watch?v=ND2rMET4MVw" target="_blank" rel="noopener">Scott Joplin: „The Entertainer"</a><span class="src">Joplin</span></li><li><a href="https://www.youtube.com/watch?v=5Bo3f_9hLkQ" target="_blank" rel="noopener">Bluus</a><span class="src">bluus</span></li><li><a href="https://www.youtube.com/watch?v=4gXShOJVwaM" target="_blank" rel="noopener">Bessie Smith</a><span class="src">bluus</span></li><li><a href="https://www.youtube.com/watch?v=0EoDHWqPhbU" target="_blank" rel="noopener">Muddy Waters</a><span class="src">bluus</span></li><li><a href="https://www.youtube.com/watch?v=OIW4ARVbhrw" target="_blank" rel="noopener">B.B. King</a><span class="src">bluus</span></li></ul></div>
 </section>
 
 <!-- NEW ORLEANS -->
@@ -246,6 +256,7 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
 
   <h3>Lõpp</h3>
   <p><span class="yr">1917</span> suleti lõbustusasutuste rajoon Storyville ja muusikud suundusid <b>Chicagosse</b>.</p>
+  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://youtu.be/BOY6NFP_KyQ?t=50" target="_blank" rel="noopener">Marsid</a><span class="src">juured</span></li><li><a href="https://www.youtube.com/watch?v=5SS9EnD_-_Y" target="_blank" rel="noopener">Hübriidmuusika</a><span class="src">juured</span></li><li><a href="https://youtu.be/EadpcjMB_2s?t=158" target="_blank" rel="noopener">Kuulmise järgi improviseerimine</a><span class="src">harrastusorkestrid</span></li><li><a href="https://www.youtube.com/watch?v=PwpriGltf9g" target="_blank" rel="noopener">Joe „King" Oliver</a><span class="src">muusikud</span></li><li><a href="https://youtu.be/8CorqfnI2MY?t=22" target="_blank" rel="noopener">Jelly Roll Morton</a><span class="src">muusikud</span></li><li><a href="https://youtu.be/UofL8pD69co?t=65" target="_blank" rel="noopener">Louis Armstrong: jazzist sai solistide muusika</a><span class="src">Armstrong</span></li><li><a href="https://www.youtube.com/watch?v=VqhCQZaH4Vs" target="_blank" rel="noopener">Louis Armstrong: „What a Wonderful World"</a><span class="src">Armstrong</span></li><li><a href="https://www.youtube.com/watch?v=907EnjE8NEI" target="_blank" rel="noopener">Louis Armstrong: „West End Blues"</a><span class="src">Armstrong</span></li></ul></div>
 </section>
 
 <!-- DIXIELAND -->
@@ -288,6 +299,7 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
     <li><span class="yr">1940. a lõpul ja 1950. a algul</span> tuldi dixielandi juurde tagasi.</li>
     <li>Populaarne tänapäevani.</li>
   </ul>
+  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://youtu.be/wyLjbMBpGDA?t=16" target="_blank" rel="noopener">Soolopill dixielandis</a><span class="src">kõlakvaliteet</span></li><li><a href="https://www.youtube.com/watch?v=89fZGnAdago" target="_blank" rel="noopener">Original Dixieland Jazz Band</a><span class="src">salvestamine</span></li></ul></div>
 </section>
 
 <!-- CHICAGO -->
@@ -343,6 +355,7 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
     <li><b>Džunglistiil:</b> trompeti ja trombooni väljendusrikkad helid.</li>
     <li>Palad: „Mood Indigo", „It Don't Mean a Thing".</li>
   </ul>
+  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://youtu.be/hcYBwRjMqjg?t=52" target="_blank" rel="noopener">Fletcher Henderson: tämbriline vastandamine</a><span class="src">pilligruppide kahekõne</span></li><li><a href="https://www.youtube.com/watch?v=psch9N4PmO4" target="_blank" rel="noopener">Poplugude jazziseaded</a><span class="src">tantsuorkestrid</span></li><li><a href="https://www.youtube.com/watch?v=cb2w2m1JmCY" target="_blank" rel="noopener">Duke Ellington: tuntumad palad</a><span class="src">Ellington</span></li><li><a href="https://www.youtube.com/watch?v=O9jHgGDKDkU" target="_blank" rel="noopener">Duke Ellington: „Mood Indigo"</a><span class="src">Ellington</span></li><li><a href="https://www.youtube.com/watch?v=qDQpZT3GhDg" target="_blank" rel="noopener">Duke Ellington: „It Don't Mean a Thing"</a><span class="src">Ellington</span></li></ul></div>
 </section>
 
 <!-- VÕRDLUS -->
