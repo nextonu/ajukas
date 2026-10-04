@@ -5,7 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ajukas</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23EAB308'/%3E%3Cpath fill='%23181818' fill-rule='evenodd' d='M9 24 15.2 8h1.6L23 24h-3.3l-1.4-3.9h-4.6L12.3 24Zm5.3-6.6h3.4L16 12.6Z'/%3E%3Ccircle cx='25' cy='23' r='2' fill='%23181818'/%3E%3C/svg%3E">
-<meta name="description" content="Kontrolltööde kordamismaterjalid aine ja teema kaupa.">
+<meta name="description" content="Kontrolltööde kordamismaterjalid aine ja teema kaupa: konspektid, enesetestid ja viited.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ajukas">
+<meta property="og:locale" content="et_EE">
+<meta property="og:title" content="Ajukas – kordamine kontrolltöödeks">
+<meta property="og:description" content="Kõigi ainete konspektid ühes kohas: vali aine, siis teema, ja testi end lõpus.">
+<meta property="og:url" content="https://nextonu.github.io/ajukas/">
+<meta property="og:image" content="https://nextonu.github.io/ajukas/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ajukas: kordamine kontrolltöödeks">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#181818">
 <style>
 :root{
   --bg:#181818; --panel:#1F1F1F; --raised:#252526; --line:#2B2B2B; --line2:#3C3C3C;
@@ -231,6 +243,22 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .box label.pickbtn{display:inline-flex;flex-direction:row;color:var(--text);font-size:13px;cursor:pointer}
 .filepick input:focus-visible + *,.filepick:focus-within .pickbtn{outline:1px solid var(--key);outline-offset:2px}
 .att{align-items:flex-start}
+
+.search{margin:6px 0 14px;position:relative}
+.search input{width:100%;font:inherit;font-size:16px;color:var(--bright);background:var(--panel);border:1px solid var(--line2);border-radius:4px;padding:10px 12px}
+.search input:focus{outline:1px solid var(--accent);border-color:var(--accent)}
+.search input::placeholder{color:var(--muted)}
+.qres{margin-top:8px;border:1px solid var(--line2);border-radius:4px;background:var(--panel);padding:6px 0;max-height:60vh;overflow:auto}
+.qres .muted,.qres .qcount{padding:4px 14px;margin:0}
+.qcount{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.qhit{display:block;padding:8px 14px;text-decoration:none;color:var(--text);border-top:1px solid var(--line)}
+.qhit:hover,.qhit:focus-visible{background:var(--raised);outline:none}
+.qwhere{display:block;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.qtext{display:block;font-size:14.5px}
+.qhit mark{background:var(--hl);color:var(--bright);border-radius:2px;padding:0 1px}
+.upd{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto}
+.cupd{display:block;margin-top:4px;font-family:var(--mono);font-size:11px;color:var(--muted);opacity:.8}
+@media (max-width:600px){.upd{margin-left:0;width:100%}}
 </style>
 </head>
 <body>
@@ -252,6 +280,11 @@ ol{margin:0 0 12px;padding-left:1.4em}
 <div class="homemain">
   <p class="tagline">Kõigi ainete konspektid ühes kohas. Vali aine, siis teema.</p>
   <p class="muted" style="font-size:14px;margin-top:-4px">Alustasin seda lehte G2-s oktoobris 2026, seega varasemate kursuste ja tundide materjali siin enamasti pole.</p>
+  <div class="search">
+    <label for="q" class="vh">Otsi</label>
+    <input id="q" type="search" placeholder="Otsi kõigist teemadest, nt Armstrong või veerised" autocomplete="off" spellcheck="false">
+    <div id="q-res" class="qres" hidden></div>
+  </div>
   <div class="grid">
     <div class="subjcard"><span class="sname">Ajalugu</span><span class="stopic">Materjal tulekul</span></div>
     <div class="subjcard"><span class="sname">Eesti keel</span><span class="stopic">Materjal tulekul</span></div>
@@ -329,7 +362,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <a class="subjcard ready" href="#kontsert"><span class="sname">Kontserdi arvustus</span><span class="stopic">Nõuded, analüüsi küsimused ja näpunäited. Rühmaesitlus.</span><span class="prog" data-topic="kontsert"></span></a>
   </div>
 </div>
-<div class="view" id="v-jazz" data-title="Varajane jazz" data-parent="muusika" data-parent-title="Muusika" hidden>
+<div class="view" id="v-jazz" data-updated="2026-10-04" data-title="Varajane jazz" data-parent="muusika" data-parent-title="Muusika" hidden>
   <nav class="appbar sticky" aria-label="Varajane jazz teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist">
     <button role="tab" id="t-ajajoon" aria-controls="ajajoon" aria-selected="true">Ajajoon</button>
     <button role="tab" id="t-tunnused" aria-controls="tunnused" aria-selected="false">Jazzi tunnused</button>
@@ -606,12 +639,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 <section role="tabpanel" id="test" aria-labelledby="t-test" hidden>
   <h2>Testi ennast</h2>
   <p class="lead">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
-  <div class="quizbar">
-    <button class="btn" id="shuffle" type="button">Sega küsimused</button>
-    <button class="btn sec" id="closeall" type="button">Peida vastused</button>
-    <span class="count" id="count"></span>
-  </div>
-  <div class="cards" id="cards"></div>
+  <div class="quiz" data-quiz="jazz"></div>
 </section>
 <section role="tabpanel" id="jazz-viited" aria-labelledby="t-jazz-viited" hidden>
   <h2>Viited</h2>
@@ -634,8 +662,8 @@ ol{margin:0 0 12px;padding-left:1.4em}
 </section>
 </main>
 </div>
-<div class="view" id="v-kontsert" data-title="Kontserdi arvustus" data-parent="muusika" data-parent-title="Muusika" hidden>
-  <nav class="appbar sticky" aria-label="Kontserdi arvustus teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-kontsert-ulesehitus" aria-controls="kontsert-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-kontsert-kysimused" aria-controls="kontsert-kysimused" aria-selected="false">Analüüsi küsimused</button><button role="tab" id="t-kontsert-nipid" aria-controls="kontsert-nipid" aria-selected="false">Näpunäited</button><button role="tab" id="t-kontsert-kohad" aria-controls="kontsert-kohad" aria-selected="false">Kust kontserti leida</button><button role="tab" id="t-kontsert-viited" aria-controls="kontsert-viited" aria-selected="false">Viited</button></div></nav>
+<div class="view" id="v-kontsert" data-updated="2026-10-04" data-title="Kontserdi arvustus" data-parent="muusika" data-parent-title="Muusika" hidden>
+  <nav class="appbar sticky" aria-label="Kontserdi arvustus teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-kontsert-ulesehitus" aria-controls="kontsert-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-kontsert-kysimused" aria-controls="kontsert-kysimused" aria-selected="false">Analüüsi küsimused</button><button role="tab" id="t-kontsert-nipid" aria-controls="kontsert-nipid" aria-selected="false">Näpunäited</button><button role="tab" id="t-kontsert-kohad" aria-controls="kontsert-kohad" aria-selected="false">Kust kontserti leida</button><button role="tab" id="t-kontsert-test" aria-controls="kontsert-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-kontsert-viited" aria-controls="kontsert-viited" aria-selected="false">Viited</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#muusika"><span aria-hidden="true">←</span> Muusika</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#muusika">Muusika</a> / Kontserdi arvustus</span>
@@ -723,6 +751,11 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <li><a href="https://emtasaalid.ee/kalender/" target="_blank" rel="noopener">EMTA saalide kalender</a><span class="src">emtasaalid.ee</span></li>
   </ul></div>
 </section>
+<section role="tabpanel" id="kontsert-test" aria-labelledby="t-kontsert-test" hidden>
+  <h2>Testi ennast</h2>
+  <p class="lead">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
+  <div class="quiz" data-quiz="kontsert"></div>
+</section>
 <section role="tabpanel" id="kontsert-viited" aria-labelledby="t-kontsert-viited" hidden>
   <h2>Viited</h2>
   <p class="lead">Kust selle teema sisu pärineb.</p>
@@ -752,8 +785,8 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <a class="subjcard ready" href="#upt-juhend"><span class="sname">UPT juhend</span><span class="stopic">Tähtajad, ülesehitus, vormistus, viitamine ja tehisaru reeglid.</span><span class="prog" data-topic="upt-juhend"></span></a>
   </div>
 </div>
-<div class="view" id="v-upt-juhend" data-title="UPT juhend" data-parent="upt" data-parent-title="UPT" hidden>
-  <nav class="appbar sticky" aria-label="UPT juhend teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-upt-ajakava" aria-controls="upt-ajakava" aria-selected="false">Ajakava</button><button role="tab" id="t-upt-pohitoed" aria-controls="upt-pohitoed" aria-selected="false">Mis UPT on</button><button role="tab" id="t-upt-ulesehitus" aria-controls="upt-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-upt-vormistus" aria-controls="upt-vormistus" aria-selected="false">Vormistus</button><button role="tab" id="t-upt-viitamine" aria-controls="upt-viitamine" aria-selected="false">Viitamine</button><button role="tab" id="t-upt-ai" aria-controls="upt-ai" aria-selected="false">Tehisaru</button><button role="tab" id="t-upt-nipid" aria-controls="upt-nipid" aria-selected="false">Nipid</button><button role="tab" id="t-upt-viited" aria-controls="upt-viited" aria-selected="false">Viited</button></div></nav>
+<div class="view" id="v-upt-juhend" data-updated="2026-10-04" data-title="UPT juhend" data-parent="upt" data-parent-title="UPT" hidden>
+  <nav class="appbar sticky" aria-label="UPT juhend teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-upt-ajakava" aria-controls="upt-ajakava" aria-selected="false">Ajakava</button><button role="tab" id="t-upt-pohitoed" aria-controls="upt-pohitoed" aria-selected="false">Mis UPT on</button><button role="tab" id="t-upt-ulesehitus" aria-controls="upt-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-upt-vormistus" aria-controls="upt-vormistus" aria-selected="false">Vormistus</button><button role="tab" id="t-upt-viitamine" aria-controls="upt-viitamine" aria-selected="false">Viitamine</button><button role="tab" id="t-upt-ai" aria-controls="upt-ai" aria-selected="false">Tehisaru</button><button role="tab" id="t-upt-nipid" aria-controls="upt-nipid" aria-selected="false">Nipid</button><button role="tab" id="t-upt-test" aria-controls="upt-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-upt-viited" aria-controls="upt-viited" aria-selected="false">Viited</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#upt"><span aria-hidden="true">←</span> UPT</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#upt">UPT</a> / UPT juhend</span>
@@ -916,6 +949,11 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <li>Harjuta kaitsekõnet kellegi ees ja mõtle läbi, mida komisjon võiks küsida.</li>
   </ul>
 </section>
+<section role="tabpanel" id="upt-test" aria-labelledby="t-upt-test" hidden>
+  <h2>Testi ennast</h2>
+  <p class="lead">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
+  <div class="quiz" data-quiz="upt"></div>
+</section>
 <section role="tabpanel" id="upt-viited" aria-labelledby="t-upt-viited" hidden>
   <h2>Viited</h2>
   <p class="lead">Kooli ametlikud dokumendid, millest see kokkuvõte on tehtud.</p>
@@ -953,7 +991,8 @@ ol{margin:0 0 12px;padding-left:1.4em}
 </div>
 <script>
 (function(){
-  var QA = [
+  var QUIZ = {};
+  QUIZ.jazz = [
     ["Tunnused","Millal ja kus jazz tekkis?","19. sajandi lõpus ja 20. sajandi alguses USA-s, eelkõige New Orleansis."],
     ["Tunnused","Millal ja kus tekkis sõna „jazz\"?","1915. aastal Chicagos."],
     ["Tunnused","Nimeta jazzi neli põhijoont.","Improvisatsioon, kõlavärv ehk tämber, pillikoosseisud ning rütm, meloodia ja harmoonia."],
@@ -988,27 +1027,103 @@ ol{margin:0 0 12px;padding-left:1.4em}
     ["Chicago","Kes juhtis kõige populaarsemat tantsuorkestrit ja kes seal mängis?","Paul Whiteman. Seal mängisid kornetist Bix Beiderbecke ja kitarrist Eddie Lang."],
     ["Ellington","Kus tegutses Duke Ellington ja mis on džunglistiil?","New Yorgis, Harlemi Cotton Clubis. Džunglistiil tähendab trompeti ja trombooni väljendusrikkaid helisid."]
   ];
+  QUIZ.kontsert = [["Üldine", "Mis ajavahemikus peab kontsert toimuma?", "Septembrist veebruarini."], ["Üldine", "Kas kontsert peab olema MUBA või EMTA kalendrist?", "Ei. Need on ainult soovitused, sobib ka mõni muu kontsert või muusikalavastus."], ["Esitlus", "Kui pikk peab esitlus olema?", "7–10 minutit."], ["Esitlus", "Kes esitlusel räägib?", "Iga rühmaliige räägib oma arvamusest kontserdi kohta (teema arenduse osa)."], ["Ülesehitus", "Millest koosneb arvustus?", "Sissejuhatus, teema arendus ehk arvustus ja kokkuvõte."], ["Ülesehitus", "Mis käib sissejuhatusse?", "Millal ja kus kontsert toimus, kes esinesid, mis teoseid esitati ning paar lauset meeleolust või kava ülesehitusest."], ["Ülesehitus", "Millest võiks teema arendust alustada?", "Esitatud teostest: huvitavad faktid ja tsitaadid heliloojate kohta või info kavalehelt."], ["Ülesehitus", "Mida ei tohi kavalehega teha?", "Seda sõna-sõnalt tsiteerida ega slaididele ümber trükkida. Võta üks mõte või fakt ja ütle selle põhjal oma mõtted."], ["Ülesehitus", "Millest peab olema suurem osa teema arendusest?", "Mõtetest esinejate ja esituste kohta."], ["Ülesehitus", "Mitu lauset on kokkuvõttes ja mis sinna kuulub?", "3–4 lauset: järeldused, kas muusika tekitas mõtteid, vaimustas või igavust (ja miks), võrdlus varasemate kontsertidega, ettepanekud esinejatele või korraldajatele."], ["Analüüs", "Milliseid kolme hinnangut võib esitusele anda?", "Originaalne ja erakordne, veider ja arusaamatu või pettumus. Alati tuleb põhjendada."], ["Analüüs", "Mida arutada lisaks ooperi või balleti puhul?", "Lavastust, dekoratsioone, kostüüme ja tantsuseadeid."], ["Analüüs", "Mida esinejate kohta võib rääkida?", "Kes nad on: konkursivõidud, esinemised kuulsates saalides, koostöö tuntud muusikutega. Ja kas pilli- või lauluoskus oli heal tasemel."], ["Näpunäited", "Mida teha fraasi „see oli hea” asemel?", "Selgitada, miks see oli hea, ja tuua konkreetne näide."], ["Näpunäited", "Kust kontrollida esinejate ja heliloojate nimesid?", "Kavalehelt. Kui seda pole, siis ENE-st, muusikaleksikonist või äärmisel juhul internetist."]];
+  QUIZ.upt = [["Ajakava", "Millal on UPT avalduse tähtaeg?", "2. oktoober."], ["Ajakava", "Millal on I ja II seminar?", "I seminar 2. novembril, II seminar 2. veebruaril."], ["Ajakava", "Millal tuleb töö anda kaasõpilasele retsenseerimiseks ja millal on retsensioon tähtaeg?", "Töö 17. märtsiks, kaasõpilase retsensioon 31. märtsiks."], ["Ajakava", "Millal tuleb esitada lõplik töö?", "22. aprillil."], ["Ajakava", "Millal on eelkaitsmine ja kas see on kohustuslik?", "3. mail. Hinnet ei saa, aga osalemine on kaitsmisele pääsemise tingimus."], ["Ajakava", "Millal on kaitsmine?", "18. mail."], ["Ajakava", "Kus liigub UPT info ja mis kehtib vastuolu korral?", "eKoolis. Vastuolu korral kehtib eKooli viimane teade."], ["Põhitõed", "Millised on UPT kolm vormi?", "Uurimistöö, praktiline töö ja õpilasfirma."], ["Põhitõed", "Nimeta uurimistöö liike.", "Küsitlusel, intervjuul, katsel või vaatlusel, teksti- või videoanalüüsil põhinev uurimus, kodulooline uurimus, karjääriuurimus."], ["Põhitõed", "Mis keeles UPT kirjutatakse?", "Eesti keeles (erand: kui tööga osaletakse konkursil)."], ["Ülesehitus", "Mis osad on praktilisel tööl, mida uurimistööl pole?", "Protsessi ja tulemuse kirjeldus ning tööprotsessi analüüs ja eneseanalüüs."], ["Ülesehitus", "Mis keeltes peab olema resümee?", "Eesti ja inglise keeles."], ["Vormistus", "Millise programmiga töö vormistatakse ja kuhu see salvestatakse?", "MS Wordiga, ja töö hoitakse OneDrive'is, et juhendaja näeks."], ["Vormistus", "Mis on põhiteksti kiri, suurus ja reasamm?", "Times New Roman 12 p, rööpjoondus, reasamm 1,5, lõigu ees ja järel 6 p."], ["Vormistus", "Kui suured on lehe veerised?", "Üleval ja all 2,5 cm, vasakul ja paremal 2 cm."], ["Vormistus", "Kuidas vormistatakse Pealkiri 1?", "TNR 16 p, paks, SUURTÄHED, vahe 0 p enne ja 24 p pärast, algab uuelt lehelt."], ["Vormistus", "Millisel lehel on esimene nähtav leheküljenumber ja mis see on?", "Autorideklaratsiooni lehel, number 2. Tiitellehel numbrit ei näidata."], ["Vormistus", "Kuidas kirjutada tekstis arve?", "Ühekohalised sõnadega (kaks), suuremad numbritega (120). Mõõtühikuga alati numbriga (5 cm)."], ["Viitamine", "Millist viitamissüsteemi PERG kasutab?", "APA 7: tekstis autori nimi ja aasta, täiskirje kasutatud allikate loetelus."], ["Viitamine", "Kas Vikipeediat võib allikana kasutada?", "Ei. Kasuta artikli allosas olevaid originaalallikaid."], ["Viitamine", "Mis vahe on refereeringul ja tsitaadil?", "Refereering on mõte sinu sõnadega koos viitega. Tsitaat on täpne lõik jutumärkides koos viitega."], ["Tehisaru", "Mida tuleb tehisaru kasutamisel kirjeldada?", "Mida küsisid, milline oli vastus ja kuidas seda muutsid. Kasutusele tuleb viidata."], ["Tehisaru", "Nimeta kaks keelatud tehisaru kasutust.", "Näiteks pikkade tekstilõikude genereerimine enda omana, andmete väljamõtlemine, kontrollimata info esitamine või isikuandmete andmine tehisarule."]];
 
-  var cards = document.getElementById('cards');
-  var count = document.getElementById('count');
-  function esc(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
-  function render(list){
-    cards.innerHTML = list.map(function(q){
-      return '<details class="card"><summary><span class="tag">'+esc(q[0])+'</span><span>'+esc(q[1])+'</span></summary><div class="ans">'+esc(q[2])+'</div></details>';
-    }).join('');
-    update();
-  }
-  function update(){ count.textContent = cards.querySelectorAll('details[open]').length + ' / ' + QA.length + ' vastust avatud'; }
-  cards.addEventListener('toggle', update, true);
-  document.getElementById('shuffle').addEventListener('click', function(){
-    var a = QA.slice();
-    for (var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
-    render(a);
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  document.querySelectorAll('.quiz[data-quiz]').forEach(function(box){
+    var QA = QUIZ[box.getAttribute('data-quiz')] || [];
+    box.innerHTML = '<div class="quizbar"><button class="btn" type="button" data-act="shuffle">Sega küsimused</button>' +
+      '<button class="btn sec" type="button" data-act="close">Peida vastused</button><span class="count"></span></div><div class="cards"></div>';
+    var cards = box.querySelector('.cards'), count = box.querySelector('.count');
+    function update(){ count.textContent = cards.querySelectorAll('details[open]').length + ' / ' + QA.length + ' vastust avatud'; }
+    function render(list){
+      cards.innerHTML = list.map(function(q){
+        return '<details class="card"><summary><span class="tag">'+esc(q[0])+'</span><span>'+esc(q[1])+'</span></summary><div class="ans">'+esc(q[2])+'</div></details>';
+      }).join('');
+      update();
+    }
+    cards.addEventListener('toggle', update, true);
+    box.querySelector('[data-act=shuffle]').addEventListener('click', function(){
+      var a = QA.slice();
+      for (var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+      render(a);
+    });
+    box.querySelector('[data-act=close]').addEventListener('click', function(){
+      cards.querySelectorAll('details[open]').forEach(function(d){d.open=false;}); update();
+    });
+    render(QA);
   });
-  document.getElementById('closeall').addEventListener('click', function(){
-    cards.querySelectorAll('details[open]').forEach(function(d){d.open=false;}); update();
-  });
-  render(QA);
+
+
+  // --- otsing ---
+  (function(){
+    var input = document.getElementById('q'), out = document.getElementById('q-res');
+    if (!input) return;
+    function norm(str){ var r = ''; for (var i = 0; i < str.length; i++) { r += str[i].normalize('NFD')[0].toLowerCase(); } return r; }
+    var index = [];
+    document.querySelectorAll('section[role="tabpanel"]').forEach(function(sec){
+      if (sec.querySelector('.quiz')) return;
+      var view = sec.closest('.view'); var tab = document.getElementById('t-' + sec.id);
+      var where = view.getAttribute('data-parent-title') + ' › ' + view.getAttribute('data-title') + ' › ' + (tab ? tab.textContent.replace(' ✓','') : '');
+      sec.querySelectorAll('h2, h3, p, li, td, .person, .when').forEach(function(el){
+        if (el.closest('.seenfoot') || el.closest('.person') && !el.classList.contains('person') || el.querySelector('li')) return;
+        var c = el.cloneNode(true); c.querySelectorAll('.src, .yr + .yr').forEach(function(x){ x.remove(); });
+        var t = c.textContent.replace(/\s+/g, ' ').trim();
+        if (t.length < 3) return;
+        index.push({ pid: sec.id, where: where, text: t, n: norm(t) });
+      });
+    });
+    function snippet(e, terms){
+      var first = e.n.indexOf(terms[0]);
+      var start = Math.max(0, first - 50), end = Math.min(e.text.length, first + 110);
+      var piece = e.text.slice(start, end), np = e.n.slice(start, end);
+      var marks = [];
+      terms.forEach(function(t){ var k = np.indexOf(t); while (k >= 0) { marks.push([k, k + t.length]); k = np.indexOf(t, k + t.length); } });
+      marks.sort(function(a,b){return a[0]-b[0];});
+      var html = '', pos = 0;
+      marks.forEach(function(m){ if (m[0] < pos) return; html += esc(piece.slice(pos, m[0])) + '<mark>' + esc(piece.slice(m[0], m[1])) + '</mark>'; pos = m[1]; });
+      html += esc(piece.slice(pos));
+      return (start > 0 ? '…' : '') + html + (end < e.text.length ? '…' : '');
+    }
+    function run(){
+      var terms = norm(input.value.trim()).split(/\s+/).filter(function(t){ return t.length >= 2; });
+      if (!terms.length) { out.hidden = true; out.innerHTML = ''; return; }
+      var hits = index.filter(function(e){ return terms.every(function(t){ return e.n.indexOf(t) >= 0; }); });
+      var seen = {}, list = [];
+      hits.forEach(function(e){ var k = e.pid + '|' + e.text; if (!seen[k]) { seen[k] = 1; list.push(e); } });
+      out.hidden = false;
+      if (!list.length) { out.innerHTML = '<p class="muted">Midagi ei leitud. Proovi teist sõna.</p>'; return; }
+      out.innerHTML = '<p class="qcount">' + list.length + (list.length === 1 ? ' tulemus' : ' tulemust') + '</p>' +
+        list.slice(0, 15).map(function(e){
+          return '<a class="qhit" href="#' + e.pid + '"><span class="qwhere">' + esc(e.where) + '</span><span class="qtext">' + snippet(e, terms) + '</span></a>';
+        }).join('') + (list.length > 15 ? '<p class="muted" style="font-size:13px">Näitan esimest 15. Täpsusta otsingut.</p>' : '');
+    }
+    var timer; input.addEventListener('input', function(){ clearTimeout(timer); timer = setTimeout(run, 120); });
+    input.addEventListener('keydown', function(e){ if (e.key === 'Escape') { input.value = ''; run(); } });
+  })();
+
+
+  // --- viimati uuendatud ---
+  (function(){
+    function fmt(iso){ var p = iso.split('-'); return (+p[2]) + '.' + (+p[1]) + '.' + p[0]; }
+    var latest = {};
+    document.querySelectorAll('.view[data-updated]').forEach(function(v){
+      var d = v.getAttribute('data-updated'), id = v.id.slice(2);
+      var head = v.querySelector('.pagehead');
+      if (head) { var u = document.createElement('span'); u.className = 'upd'; u.textContent = 'Uuendatud ' + fmt(d); head.appendChild(u); }
+      document.querySelectorAll('a.subjcard[href="#' + id + '"]').forEach(function(c){
+        var u = document.createElement('span'); u.className = 'cupd'; u.textContent = 'uuendatud ' + fmt(d); c.appendChild(u);
+      });
+      var par = v.getAttribute('data-parent');
+      if (par && (!latest[par] || d > latest[par])) latest[par] = d;
+    });
+    Object.keys(latest).forEach(function(par){
+      document.querySelectorAll('a.subjcard[href="#' + par + '"]').forEach(function(c){
+        var u = document.createElement('span'); u.className = 'cupd'; u.textContent = 'uuendatud ' + fmt(latest[par]); c.appendChild(u);
+      });
+    });
+  })();
 
   var views = Array.prototype.slice.call(document.querySelectorAll('.view'));
 
