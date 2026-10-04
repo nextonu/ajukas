@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="et">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ajukas</title>
+<meta name="description" content="Kontrolltööde kordamismaterjalid aine ja teema kaupa.">
+<style>
+:root{
+  --bg:#181818; --panel:#1F1F1F; --raised:#252526; --line:#2B2B2B; --line2:#3C3C3C;
+  --text:#CCCCCC; --bright:#FFFFFF; --muted:#9D9D9D;
+  --key:#4FC1FF; --num:#CE9178; --accent:#0078D4;
+  --ui:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"Cascadia Code","Cascadia Mono",Consolas,"Courier New",monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:var(--ui);font-size:16px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:900px;margin:0 auto}
+header{padding-block:36px 18px;display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.eyebrow::before{content:"// "}
+h1{font-size:clamp(36px,7vw,52px);font-weight:700;line-height:1.05;margin:0;color:var(--bright);letter-spacing:-.02em}
+h1 .dot{color:var(--key)}
+.tagline{color:var(--muted);margin:0;max-width:62ch}
+.subjects{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.subj{font-size:14px;font-weight:600;border:1px solid var(--line2);background:var(--raised);color:var(--bright);padding:6px 12px;border-radius:4px}
+.subj small{font-family:var(--mono);font-weight:400;font-size:12px;color:var(--muted);margin-left:8px}
+.subj.soon{background:transparent;color:var(--muted);border-style:dashed;font-weight:400}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-bottom:28px}
+.tabs{display:flex;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font-family:var(--ui);font-size:14px;border:0;border-top:2px solid transparent;border-right:1px solid var(--line);background:var(--panel);color:var(--muted);padding:9px 16px;cursor:pointer}
+.tabs button:hover{color:var(--text)}
+.tabs button[aria-selected="true"]{background:var(--bg);color:var(--bright);border-top-color:var(--accent)}
+.tabs button:focus-visible,.card summary:focus-visible,.btn:focus-visible{outline:1px solid var(--key);outline-offset:-1px}
+section[role="tabpanel"]{max-width:70ch}
+h2{font-size:clamp(26px,4.5vw,34px);font-weight:700;color:var(--bright);line-height:1.15;margin:0 0 8px;text-wrap:balance}
+h3{font-size:18px;color:var(--bright);margin:28px 0 6px;text-wrap:balance}
+.lead{font-size:18px;color:var(--muted);margin:0 0 18px}
+p{margin:0 0 12px}
+ul{margin:0 0 12px;padding-left:1.2em}
+li{margin-bottom:4px}
+li::marker{color:var(--muted)}
+b,strong{font-weight:600;color:var(--key)}
+.yr{font-family:var(--mono);font-size:.88em;color:var(--num);white-space:nowrap}
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:12px 0 8px}
+.person{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px}
+.person .name{font-weight:600;color:var(--bright);display:block}
+.person .role{color:var(--muted);font-size:14px;display:block;margin-bottom:6px}
+.person p{font-size:15px;margin:0}
+.quote{border-left:2px solid var(--key);padding:4px 0 4px 16px;margin:20px 0;font-style:italic;font-size:18px;color:var(--bright)}
+.quote cite{display:block;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:6px}
+.key{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin:16px 0}
+.key .label{font-family:var(--mono);font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+.beats{display:flex;gap:10px;align-items:flex-end;margin:10px 0 4px}
+.beat{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.beat i{display:block;width:16px;height:16px;border-radius:50%;background:var(--line2)}
+.beat.acc i{width:30px;height:30px;background:var(--num)}
+.beat.even i{width:22px;height:22px;background:var(--key)}
+.beatcap{font-size:14px;color:var(--muted);margin-bottom:14px}
+.timeline{list-style:none;padding:0;margin:8px 0;border-left:1px solid var(--line2)}
+.timeline li{position:relative;padding:0 0 18px 20px;margin:0}
+.timeline li::before{content:"";position:absolute;left:-6px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--key)}
+.timeline .when{font-family:var(--mono);font-size:13px;color:var(--num);display:block}
+.tablewrap{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:4px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+thead th{background:var(--panel);font-size:13px;color:var(--bright);font-weight:600}
+tbody th{font-weight:600;color:var(--muted)}
+.quizbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 16px}
+.btn{font-family:var(--ui);font-size:13px;border:0;background:var(--accent);color:#fff;padding:6px 14px;border-radius:2px;cursor:pointer}
+.btn:hover{background:#026EC1}
+.btn.sec{background:var(--raised);color:var(--text);border:1px solid var(--line2)}
+.btn.sec:hover{background:#2D2D2D}
+.count{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.cards{display:flex;flex-direction:column;gap:6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:4px}
+.card summary{cursor:pointer;padding:11px 14px;list-style:none;display:flex;gap:12px;align-items:baseline;color:var(--bright)}
+.card summary::-webkit-details-marker{display:none}
+.card summary .tag{font-family:var(--mono);font-size:12px;color:var(--muted);flex:0 0 auto;min-width:96px}
+.card[open]{border-color:var(--line2)}
+.card[open] summary{border-bottom:1px solid var(--line)}
+.card .ans{padding:10px 14px 12px;color:var(--key)}
+footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-family:var(--mono)}
+@media (max-width:520px){.card summary{flex-direction:column;gap:2px}.card summary .tag{min-width:0}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">Kordamine kontrolltöödeks</span>
+  <h1>Ajukas<span class="dot">.</span></h1>
+  <p class="tagline">Kõik kontrolltööde konspektid ühes kohas, aine kaupa. Vali aine, siis teema, ja testi end lõpus.</p>
+  <div class="subjects" aria-label="Ained">
+    <span class="subj" aria-current="true">Muusika<small>Varajane jazz</small></span>
+    <span class="subj soon">Uued ained tulekul</span>
+  </div>
+</header>
+
+<nav aria-label="Teemad">
+  <div class="tabs" role="tablist" id="tabs">
+    <button role="tab" id="t-ajajoon" aria-controls="ajajoon" aria-selected="true">Ajajoon</button>
+    <button role="tab" id="t-tunnused" aria-controls="tunnused" aria-selected="false">Jazzi tunnused</button>
+    <button role="tab" id="t-varajased" aria-controls="varajased" aria-selected="false">Ragtime ja bluus</button>
+    <button role="tab" id="t-neworleans" aria-controls="neworleans" aria-selected="false">New Orleans</button>
+    <button role="tab" id="t-dixieland" aria-controls="dixieland" aria-selected="false">Dixieland</button>
+    <button role="tab" id="t-chicago" aria-controls="chicago" aria-selected="false">Chicago</button>
+    <button role="tab" id="t-vordlus" aria-controls="vordlus" aria-selected="false">Võrdlus</button>
+    <button role="tab" id="t-test" aria-controls="test" aria-selected="false">Testi ennast</button>
+  </div>
+</nav>
+
+<main>
+<!-- AJAJOON -->
+<section role="tabpanel" id="ajajoon" aria-labelledby="t-ajajoon">
+  <h2>Ajajoon</h2>
+  <p class="lead">Kogu teema ühe pilguga. Kui need aastad on peas, loksub muu paika.</p>
+  <ol class="timeline">
+    <li><span class="when">1890. aastad</span><b>Ragtime</b> on populaarne. Mustanahalised pianistid, peamiselt klaveril. Scott Joplin.</li>
+    <li><span class="when">19. saj lõpp – 20. saj algus</span>Jazz sünnib USA-s, eelkõige <b>New Orleansis</b>.</li>
+    <li><span class="when">1915</span>Sõna <b>„jazz"</b> ilmub Chicagos.</li>
+    <li><span class="when">1917</span><b>Storyville suletakse</b>, New Orleansi jazzi õitseaeg lõpeb ja muusikud lähevad Chicagosse. Samal aastal teeb <b>Original Dixieland Jazz Band</b> esimese jazzisalvestuse.</li>
+    <li><span class="when">1920. aastad</span><b>Chicago jazzi</b> tippaeg. Solistid ja saksofon tõusevad esile.</li>
+    <li><span class="when">1930. aastate algus</span>Tulevad sving ja bigbändid. Dixielandi hiilgeaeg lõpeb.</li>
+    <li><span class="when">1940. a lõpp – 1950. a algus</span>Dixieland tuleb tagasi ja on populaarne tänapäevani.</li>
+  </ol>
+</section>
+
+<!-- TUNNUSED -->
+<section role="tabpanel" id="tunnused" aria-labelledby="t-tunnused" hidden>
+  <h2>Mis teeb jazzist jazzi?</h2>
+  <p class="lead">Jazz tekkis 19. sajandi lõpus ja 20. sajandi alguses USA-s, eelkõige New Orleansis. Sõna „jazz" tekkis 1915. aastal Chicagos.</p>
+
+  <div class="key"><span class="label">Neli põhijoont</span>Improvisatsioon · kõlavärv ehk tämber · pillikoosseisud · rütm, meloodia ja harmoonia</div>
+
+  <h3>Kultuuride ristumiskoht</h3>
+  <ul>
+    <li><b>Aafrika mõju:</b> kollektiivne muusika loomine, improvisatsioon, ees- ja järellaulja.</li>
+    <li><b>Euroopa mõju:</b> harmoonia ja instrumendid.</li>
+    <li><b>Kariibi mere mõju:</b> rütmipõhine tantsumuusika, eksootilisemad ja keerukamad rütmimustrid.</li>
+  </ul>
+
+  <h3>Sotsiaalne taust ja orjuse pärand</h3>
+  <ul>
+    <li>Sündis <b>Aafrika ameeriklaste kogukondades</b>.</li>
+    <li>Jazz oli eneseväljenduse ja ühiskondlikele piirangutele vastupanu vahend.</li>
+    <li>Orjuse ja rassilise segregatsiooni ajal aitasid <b>töölaulud ja spirituaalid</b> raskest tööelust ja rõhumisest üle saada.</li>
+  </ul>
+
+  <h3>Jazzi häll: New Orleans</h3>
+  <ul>
+    <li>Mitmekultuuriline rahvastik, kus segunesid eri muusikastiilid ja -traditsioonid.</li>
+    <li>Sotsiaalsed ja rassilised piirangud olid seal vabamad.</li>
+    <li><b>Congo Square</b> oli väljak, kus nädalavahetustel mängiti muusikat, tantsiti ja hoiti alles kultuuripärandit.</li>
+    <li><b>Matuserongkäikude orkestrid</b> on üks jazzi alustalasid.</li>
+  </ul>
+</section>
+
+<!-- VARAJASED -->
+<section role="tabpanel" id="varajased" aria-labelledby="t-varajased" hidden>
+  <h2>Ragtime ja bluus</h2>
+  <p class="lead">Kaks stiili, millest jazz kasvas välja.</p>
+
+  <h3>Ragtime</h3>
+  <ul>
+    <li>Üks esimesi stiile, mis mõjutas tugevalt jazzi arengut.</li>
+    <li>Populaarne <span class="yr">1890. aastatel</span>.</li>
+    <li>Mängisid <b>mustanahalised pianistid</b>, peamiselt <b>klaveril</b>.</li>
+    <li>Elav ja tantsuline muusika, mis pani aluse jazzile.</li>
+  </ul>
+  <div class="people">
+    <div class="person"><span class="name">Scott Joplin <span class="yr">1868–1917</span></span><span class="role">USA pianist, ragtime'i looja</span><p>„Maple Leaf Rag", „The Entertainer", „Pleasant Moments". 44 lugu, üks ballett, kaks ooperit. Tema muusika avastati uuesti 1970. aastate alguses.</p></div>
+  </div>
+
+  <h3>Bluus</h3>
+  <ul>
+    <li>Keskne stiil jazzi kujunemisel.</li>
+    <li>Põhines Aafrika ameeriklaste <b>töölauludel ja spirituaalidel</b>.</li>
+    <li><b>12-taktiline struktuur</b>, soololaul, improvisatsioon.</li>
+    <li>Laulis isiklikust valust, kaotusest ja rõõmust.</li>
+    <li>Esindajad: <b>Bessie Smith, Muddy Waters, B.B. King</b>.</li>
+  </ul>
+
+  <h3>Mõisted ja nimed</h3>
+  <ul>
+    <li><b>Kollektiivne improvisatsioon:</b> pillimehed mängivad samal ajal, aga igaüks improviseerib iseseisvalt.</li>
+    <li><b>Jelly Roll Morton</b> oli üks esimesi jazzi heliloojaid ja pianiste.</li>
+    <li><b>Louis Armstrong</b> oli 1920. aastate trompetist, kes on seotud svingiga.</li>
+  </ul>
+</section>
+
+<!-- NEW ORLEANS -->
+<section role="tabpanel" id="neworleans" aria-labelledby="t-neworleans" hidden>
+  <h2>New Orleansi jazz</h2>
+  <p class="lead">Tahumatu, räme, intensiivne ja emotsionaalne. Õitseaeg kestis 1917. aastani.</p>
+
+  <h3>Muusikalised juured</h3>
+  <ul>
+    <li>Aafrika ameeriklaste rütmid ja laulustiilid.</li>
+    <li>Töölaulud, spirituaalid ja bluus.</li>
+    <li>Euroopa marsid ja tantsumuusika, segatuna ragtime'i ja boogie-woogiega. Tulemus oli <b>hübriidmuusika</b>.</li>
+  </ul>
+
+  <h3>Harrastusorkestrid</h3>
+  <ul>
+    <li>Mängisid <b>Storyville'i</b> linnaosa lõbustusasutustes. Orkestreid oli ligi 30.</li>
+    <li>Improviseerisid <b>kuulmise järgi</b>.</li>
+    <li>Meenutasid marsi- ja tsirkuseorkestreid.</li>
+  </ul>
+
+  <h3>Rütm</h3>
+  <div class="beats" aria-label="Neli lööki, rõhk esimesel ja kolmandal">
+    <span class="beat acc"><i></i>1</span><span class="beat"><i></i>2</span><span class="beat acc"><i></i>3</span><span class="beat"><i></i>4</span>
+  </div>
+  <p class="beatcap">Marsilik pulss: rõhk on <b>1. ja 3. löögil</b>. Off-beat ehk 2. ja 4. löögi rõhutamine puudub.</p>
+
+  <h3>Ansambel</h3>
+  <ul>
+    <li>Väikesed ansamblid, rohkem esinemisvõimalusi.</li>
+    <li><b>Meloodiagrupp:</b> kornet või trompet, tromboon, klarnet.</li>
+    <li><b>Rütmigrupp:</b> tuuba, bandžo, trummid.</li>
+    <li>Hiljem asendus tuuba <b>kontrabassiga</b>, bandžo <b>kitarriga</b> ja lisandus <b>klaver</b>.</li>
+    <li>Muusikat ei kirjutatud üles. See sündis kohapeal kindla teema põhjal: marsi- või kirikumeloodia, ragtime'i pala või 12-taktiline bluus.</li>
+  </ul>
+
+  <h3>Tuntumad muusikud</h3>
+  <div class="people">
+    <div class="person"><span class="name">Joe „King" Oliver <span class="yr">1885–1938</span></span><span class="role">Kornetist-trompetist</span><p>Juhtis New Orleansi kõige mõjukamat ansamblit <b>King Oliver's Creole Jazz Band</b>.</p></div>
+    <div class="person"><span class="name">Jelly Roll Morton <span class="yr">1890–1941</span></span><span class="role">Ragtime'i pianist, helilooja, orkestrijuht</span><p>Pani aluse jazzi klassikale ansambli <b>Red Hot Peppers</b> salvestustega.</p></div>
+  </div>
+
+  <h3>Louis Armstrong <span class="yr">1900–1971</span></h3>
+  <ul>
+    <li>New Orleansi jazzi säravaim muusik: kornetist, trompetist, pianist, arranžeerija ja helilooja.</li>
+    <li>Temaga sai jazzist <b>solistide muusika</b>.</li>
+    <li>Eeskuju kõiges: isikupära, leidlikkus, emotsionaalsus ja lihvitud tehnika.</li>
+    <li>Võttis kasutusele akordid ja noodikirja. Lisas mustanahaliste kirikumuusika, New Orleansi ja Aafrika rütmid.</li>
+    <li>Tõi muusikasse <b>blue note'id</b>.</li>
+    <li>Käre hääletämber ja <b>scat-laul</b> (sõnadeta, silpidega improviseeritud laul).</li>
+    <li>Palad: „What a Wonderful World", „West End Blues", „Hotter Than Hot", „I'm in the Mood for Love".</li>
+  </ul>
+  <blockquote class="quote">Ilma Armstrongita poleks jazz'i ja ilma jazz'ita poleks moodsat popmuusikat ega rock'i.<cite>Joachim-Ernst Berendt, „Das Jazzbuch"</cite></blockquote>
+
+  <h3>Lõpp</h3>
+  <p><span class="yr">1917</span> suleti lõbustusasutuste rajoon Storyville ja muusikud suundusid <b>Chicagosse</b>.</p>
+</section>
+
+<!-- DIXIELAND -->
+<section role="tabpanel" id="dixieland" aria-labelledby="t-dixieland" hidden>
+  <h2>Dixieland</h2>
+  <p class="lead">Valgete muusikute New Orleansi stiil. Jazz liidab rasse.</p>
+
+  <div class="people">
+    <div class="person"><span class="name">Papa Jack Laine</span><span class="role">Orkestrijuht ja trummar, dixielandi looja</span><p>Tema orkester võitis sageli orkestrite tänavalahingutes mustanahalisi pillimehi.</p></div>
+    <div class="person"><span class="name">Nick LaRocca</span><span class="role">Original Dixieland Jazz Bandi juht</span><p>Ansambel tegi <span class="yr">1917</span> esimesed jazzisalvestused.</p></div>
+  </div>
+
+  <h3>Muutunud kõlakvaliteet</h3>
+  <ul>
+    <li>Kõlajõud oli väiksem.</li>
+    <li>Valgetel pillimeestel oli parem mängutehnika.</li>
+    <li>Pillikoosseis jäi samaks.</li>
+    <li>Muusika oli kiirem ja meloodia sujuvam.</li>
+    <li>Kõlavärvid olid vähem intensiivsed.</li>
+    <li>Iseloomuliku kõla andis <b>soolopill</b>, trompet või klarnet.</li>
+  </ul>
+
+  <h3>Salvestamine ja levik</h3>
+  <ul>
+    <li><span class="yr">1917</span> <b>Original Dixieland Jazz Band</b> tegi esimesed jazzisalvestused.</li>
+    <li>Jazzipalad said esimest korda kuulsaks ja plaati müüdi üle miljoni eksemplari.</li>
+    <li>Üle kogu Ameerika tekkis jäljendajaid.</li>
+  </ul>
+
+  <h3>Tuntud ansamblid</h3>
+  <ul>
+    <li>Original Dixieland Jazz Band</li>
+    <li>New Orleans Rhythm Kings</li>
+    <li>Louis Armstrong &amp; All Stars Orchestra</li>
+  </ul>
+
+  <h3>Kõrgaeg ja naasmine</h3>
+  <ul>
+    <li>Hiilgeaeg lõppes <span class="yr">1930. aastate algul</span> svingi ja bigbändide tulekuga.</li>
+    <li><span class="yr">1940. a lõpul ja 1950. a algul</span> tuldi dixielandi juurde tagasi.</li>
+    <li>Populaarne tänapäevani.</li>
+  </ul>
+</section>
+
+<!-- CHICAGO -->
+<section role="tabpanel" id="chicago" aria-labelledby="t-chicago" hidden>
+  <h2>Chicago jazz</h2>
+  <p class="lead">Uus jazzikeskus. Kollektiivne improvisatsioon asendus <b>solistlikuga</b>. Chicago jazz on valgete mängitud jazz.</p>
+
+  <h3>Bluus põimub jazziga</h3>
+  <ul>
+    <li>Tippaeg <span class="yr">1920. aastatel</span>.</li>
+    <li>Väljendas <b>rassilisest diskrimineerimisest</b> tulenevaid probleeme.</li>
+    <li>Bluusine jazz tõi mängima valgeid keskkoolinoori.</li>
+    <li>Ansambel <b>Austin High School Gang</b> oli noorte talentide ja uue stiili taimelava.</li>
+  </ul>
+
+  <h3>Nõudlikum kõlapilt</h3>
+  <ul>
+    <li>Valged muusikud lisasid tehnilise viimistluse, harmoonilise keerukuse ja <b>arranžeeringud</b>.</li>
+    <li><b>Soolo</b> tähtsus kasvas ja esile tõusis pillimehe virtuoossus.</li>
+    <li><b>Break:</b> orkester vaikib, kuni solist improviseerib.</li>
+    <li>Kollektiivsed soolod jäid alles pala algusesse ja lõppu.</li>
+    <li>Marsilik rütm asendus sujuvamaga. Bluusi mõju oli tugevam kui ragtime'i oma.</li>
+  </ul>
+  <div class="beats" aria-label="Neli ühtlast lööki">
+    <span class="beat even"><i></i>1</span><span class="beat even"><i></i>2</span><span class="beat even"><i></i>3</span><span class="beat even"><i></i>4</span>
+  </div>
+  <p class="beatcap">Võrdle New Orleansiga: marsilikku 1. ja 3. löögi rõhku enam pole, pulss on ühtlasem ja sujuvam.</p>
+
+  <h3>Saksofoni tulek</h3>
+  <ul>
+    <li>Saksofon tuli kasutusse Chicago stiilist alates ja sai hiljem jazzi sümboliks.</li>
+    <li>Esimene saksofonivirtuoos oli tenorsaksofonist <b>Bud Freeman</b>.</li>
+  </ul>
+
+  <h3>Pilligruppide kahekõne</h3>
+  <div class="people">
+    <div class="person"><span class="name">Fletcher Henderson <span class="yr">1897–1952</span></span><span class="role">Pianist, orkestrijuht</span><p>Jagas orkestri pilligruppideks ja lõi <b>tämbrilise vastandamisega</b> uue orkestristiili. Töötas välja suure koosseisu arranžeerimise põhimõtted.</p></div>
+    <div class="person"><span class="name">Coleman Hawkins <span class="yr">1904–1969</span></span><span class="role">Tenorsaksofonist</span><p>Mängis Hendersoni orkestris.</p></div>
+  </div>
+
+  <h3>Tantsuorkestrite menu</h3>
+  <ul>
+    <li>Repertuaaris olid poplugude jazziseaded.</li>
+    <li>Kõige populaarsem tantsuorkestri juht oli <b>Paul Whiteman</b> <span class="yr">1890–1967</span>.</li>
+    <li>Tema orkestris mängisid kornetist <b>Bix Beiderbecke</b> ja kitarrist <b>Eddie Lang</b>.</li>
+  </ul>
+
+  <h3>Duke Ellington <span class="yr">1899–1974</span></h3>
+  <ul>
+    <li>Helilooja, pianist ja orkestrijuht.</li>
+    <li>Tegutses peamiselt <b>New Yorgis, Harlemi Cotton Clubis</b>.</li>
+    <li>Teosed sündisid orkestriga improviseerides: pala algas klaverisoologa ja teised muusikud ühinesid.</li>
+    <li><b>Džunglistiil:</b> trompeti ja trombooni väljendusrikkad helid.</li>
+    <li>Palad: „Mood Indigo", „It Don't Mean a Thing".</li>
+  </ul>
+</section>
+
+<!-- VÕRDLUS -->
+<section role="tabpanel" id="vordlus" aria-labelledby="t-vordlus" hidden>
+  <h2>Kolm stiili kõrvuti</h2>
+  <p class="lead">Kontrolltöös küsitakse sageli erinevusi. See tabel on kõige kiirem kordamine.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th></th><th>New Orleans</th><th>Dixieland</th><th>Chicago</th></tr></thead>
+    <tbody>
+      <tr><th>Kes mängis</th><td>Mustanahalised muusikud</td><td>Valged muusikud</td><td>Valged muusikud, keskkoolinoored</td></tr>
+      <tr><th>Improvisatsioon</th><td>Kollektiivne</td><td>Kollektiivne, soolopill esile</td><td>Solistlik, breakid</td></tr>
+      <tr><th>Rütm</th><td>Marsilik, rõhk 1. ja 3. löögil</td><td>Kiirem, meloodia sujuvam</td><td>Sujuv, bluusilik</td></tr>
+      <tr><th>Kõla</th><td>Räme, intensiivne, emotsionaalne</td><td>Väiksem kõlajõud, parem tehnika</td><td>Viimistletud, arranžeeritud</td></tr>
+      <tr><th>Uus pill</th><td>Tuuba ja bandžo, hiljem kontrabass, kitarr, klaver</td><td>Koosseis sama</td><td>Saksofon</td></tr>
+      <tr><th>Võtmenimed</th><td>King Oliver, Jelly Roll Morton, Louis Armstrong</td><td>Papa Jack Laine, Nick LaRocca</td><td>Bud Freeman, Fletcher Henderson, Coleman Hawkins, Paul Whiteman, Bix Beiderbecke</td></tr>
+      <tr><th>Aeg</th><td>kuni 1917</td><td>1917 salvestus, lõpp 1930. a algul</td><td>tippaeg 1920. aastad</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- TEST -->
+<section role="tabpanel" id="test" aria-labelledby="t-test" hidden>
+  <h2>Testi ennast</h2>
+  <p class="lead">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
+  <div class="quizbar">
+    <button class="btn" id="shuffle" type="button">Sega küsimused</button>
+    <button class="btn sec" id="closeall" type="button">Peida vastused</button>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="cards" id="cards"></div>
+</section>
+</main>
+
+<footer>Koostatud tunni slaidide põhjal. Slaidil on „I'm in the Mood of Love", õige pealkiri on „I'm in the Mood for Love".</footer>
+</div>
+
+<script>
+(function(){
+  var QA = [
+    ["Tunnused","Millal ja kus jazz tekkis?","19. sajandi lõpus ja 20. sajandi alguses USA-s, eelkõige New Orleansis."],
+    ["Tunnused","Millal ja kus tekkis sõna „jazz\"?","1915. aastal Chicagos."],
+    ["Tunnused","Nimeta jazzi neli põhijoont.","Improvisatsioon, kõlavärv ehk tämber, pillikoosseisud ning rütm, meloodia ja harmoonia."],
+    ["Tunnused","Mida andsid jazzile Aafrika, Euroopa ja Kariibi mere piirkond?","Aafrika: kollektiivne muusika loomine, improvisatsioon, ees- ja järellaulja. Euroopa: harmoonia ja instrumendid. Kariibid: rütmipõhine tantsumuusika ja keerukamad rütmid."],
+    ["Tunnused","Mis oli Congo Square?","New Orleansi väljak, kus nädalavahetustel mängiti muusikat, tantsiti ja hoiti alles kultuuripärandit."],
+    ["Tunnused","Milline orkestritüüp on üks jazzi alustalasid?","Matuserongkäikude orkestrid."],
+    ["Ragtime","Mis pillil ragtime'i peamiselt mängiti ja millal oli see populaarne?","Klaveril, 1890. aastatel."],
+    ["Ragtime","Kes oli ragtime'i looja? Nimeta kaks tema pala.","Scott Joplin (1868–1917). Näiteks „Maple Leaf Rag\" ja „The Entertainer\"."],
+    ["Bluus","Mis on bluusi struktuur ja millest see põhines?","12-taktiline. Põhines töölauludel ja spirituaalidel."],
+    ["Bluus","Nimeta kolm bluusiartisti.","Bessie Smith, Muddy Waters, B.B. King."],
+    ["Mõiste","Mis on kollektiivne improvisatsioon?","Pillimehed mängivad samal ajal, aga igaüks improviseerib iseseisvalt."],
+    ["New Orleans","Kus mängisid New Orleansi harrastusorkestrid?","Storyville'i linnaosa lõbustusasutustes. Orkestreid oli ligi 30."],
+    ["New Orleans","Millistel löökidel on New Orleansi jazzis rõhk?","1. ja 3. löögil (marsilik pulss). Off-beat ehk 2. ja 4. löögi rõhk puudub."],
+    ["New Orleans","Nimeta meloodiagrupi ja rütmigrupi pillid.","Meloodia: kornet või trompet, tromboon, klarnet. Rütm: tuuba, bandžo, trummid."],
+    ["New Orleans","Mis asendas tuuba ja bandžo ning mis lisandus?","Tuuba asendus kontrabassiga, bandžo kitarriga ja lisandus klaver."],
+    ["New Orleans","Mis oli improvisatsiooni aluseks?","Marsi- või kirikumeloodia, ragtime'i pala või 12-taktiline bluus."],
+    ["New Orleans","Kes juhtis King Oliver's Creole Jazz Bandi?","Joe „King\" Oliver, kornetist-trompetist."],
+    ["New Orleans","Millise ansambliga tegi Jelly Roll Morton salvestusi?","Red Hot Peppers."],
+    ["New Orleans","Miks New Orleansi jazzi õitseaeg 1917. aastal lõppes?","Storyville suleti ja muusikud läksid Chicagosse."],
+    ["Armstrong","Mida uut tõi jazzi Louis Armstrong?","Jazzist sai solistide muusika. Ta võttis kasutusele akordid ja noodikirja, tõi sisse blue note'id ja scat-laulu."],
+    ["Armstrong","Mis on scat-laul?","Sõnadeta, silpidega improviseeritud laul."],
+    ["Armstrong","Kelle tsitaat on „Ilma Armstrongita poleks jazz'i…\"?","Joachim-Ernst Berendt, „Das Jazzbuch\"."],
+    ["Dixieland","Kes oli dixielandi looja?","Orkestrijuht ja trummar Papa Jack Laine."],
+    ["Dixieland","Kes tegi esimese jazzisalvestuse ja millal?","Original Dixieland Jazz Band Nick LaRocca juhatusel 1917. aastal. Plaati müüdi üle miljoni."],
+    ["Dixieland","Kuidas erines dixielandi kõla New Orleansi omast?","Väiksem kõlajõud, parem tehnika, kiirem muusika, sujuvam meloodia, vähem intensiivsed kõlavärvid. Iseloomuliku kõla andis soolopill. Koosseis jäi samaks."],
+    ["Dixieland","Mis lõpetas dixielandi hiilgeaja?","Sving ja bigbändid 1930. aastate algul. Dixieland tuli tagasi 1940. aastate lõpus."],
+    ["Chicago","Mis oli Chicago jazzi peamine muutus improvisatsioonis?","Kollektiivne improvisatsioon asendus solistlikuga."],
+    ["Chicago","Mis on break?","Hetk, kui orkester vaikib ja solist improviseerib."],
+    ["Chicago","Mis oli Austin High School Gang?","Valgete keskkoolinoorte ansambel, noorte talentide ja Chicago stiili taimelava."],
+    ["Chicago","Kes oli esimene saksofonivirtuoos?","Tenorsaksofonist Bud Freeman."],
+    ["Chicago","Mida uut tõi Fletcher Henderson?","Jagas orkestri pilligruppideks, lõi tämbrilise vastandamisega uue orkestristiili ja arranžeerimise põhimõtted suurele koosseisule."],
+    ["Chicago","Kes juhtis kõige populaarsemat tantsuorkestrit ja kes seal mängis?","Paul Whiteman. Seal mängisid kornetist Bix Beiderbecke ja kitarrist Eddie Lang."],
+    ["Ellington","Kus tegutses Duke Ellington ja mis on džunglistiil?","New Yorgis, Harlemi Cotton Clubis. Džunglistiil tähendab trompeti ja trombooni väljendusrikkaid helisid."]
+  ];
+
+  var cards = document.getElementById('cards');
+  var count = document.getElementById('count');
+  function esc(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  function render(list){
+    cards.innerHTML = list.map(function(q){
+      return '<details class="card"><summary><span class="tag">'+esc(q[0])+'</span><span>'+esc(q[1])+'</span></summary><div class="ans">'+esc(q[2])+'</div></details>';
+    }).join('');
+    update();
+  }
+  function update(){
+    var open = cards.querySelectorAll('details[open]').length;
+    count.textContent = open + ' / ' + QA.length + ' vastust avatud';
+  }
+  cards.addEventListener('toggle', update, true);
+  document.getElementById('shuffle').addEventListener('click', function(){
+    var a = QA.slice();
+    for (var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+    render(a);
+  });
+  document.getElementById('closeall').addEventListener('click', function(){
+    cards.querySelectorAll('details[open]').forEach(function(d){d.open=false;});
+    update();
+  });
+  render(QA);
+
+  // tabs
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function show(id, focus){
+    var found = false;
+    tabs.forEach(function(t){
+      var on = t.getAttribute('aria-controls') === id;
+      if (on) found = true;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      if (on && focus) t.focus();
+      if (on) { var bar = t.parentNode; bar.scrollLeft = t.offsetLeft - bar.clientWidth/2 + t.clientWidth/2; }
+    });
+    if (!found) return false;
+    try { localStorage.setItem('ajukas-muusika-tab', id); } catch(e) {}
+    return true;
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){
+      show(t.getAttribute('aria-controls'));
+      try { history.replaceState(null, '', '#' + t.getAttribute('aria-controls')); } catch(e) {}
+      window.scrollTo({top:0});
+    });
+    t.addEventListener('keydown', function(e){
+      var n = null;
+      if (e.key === 'ArrowRight') n = tabs[(i+1)%tabs.length];
+      if (e.key === 'ArrowLeft') n = tabs[(i-1+tabs.length)%tabs.length];
+      if (n){ e.preventDefault(); show(n.getAttribute('aria-controls'), true); }
+    });
+  });
+  var start = (location.hash || '').slice(1);
+  if (!start || !show(start)) {
+    var saved = null;
+    try { saved = localStorage.getItem('ajukas-muusika-tab'); } catch(e) {}
+    if (!saved || !show(saved)) show('ajajoon');
+  }
+})();
+</script>
+</body>
+</html>
