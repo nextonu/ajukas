@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Ajukas</title>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23EAB308'/%3E%3Cpath fill='%23181818' fill-rule='evenodd' d='M9 24 15.2 8h1.6L23 24h-3.3l-1.4-3.9h-4.6L12.3 24Zm5.3-6.6h3.4L16 12.6Z'/%3E%3Ccircle cx='25' cy='23' r='2' fill='%23181818'/%3E%3C/svg%3E" rel="icon"/>
+<meta content="Материалы для подготовки к контрольным по предметам и темам: конспекты, самопроверка и источники." name="description"/>
+<meta content="website" property="og:type"/>
+<meta content="Ajukas" property="og:site_name"/>
+<meta content="ru_RU" property="og:locale"/>
+<meta content="Ajukas – подготовка к контрольным" property="og:title"/>
+<meta content="Конспекты по всем предметам в одном месте: выбери предмет, потом тему, а в конце проверь себя." property="og:description"/>
+<meta content="https://nextonu.github.io/ajukas/ru.html" property="og:url"/>
+<meta content="https://nextonu.github.io/ajukas/og.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Ajukas: подготовка к контрольным" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="#181818" name="theme-color"/>
+<script>
+(function(){
+  try {
+    if (localStorage.getItem('ajukas-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    var here = document.documentElement.lang, want = localStorage.getItem('ajukas-lang');
+    var file = { et: './', en: 'en.html', ru: 'ru.html' }[want];
+    if (file && want !== here) location.replace(file + location.hash);
+  } catch (e) {}
+})();
+window.I18N = {"Sega küsimused": "Перемешать вопросы", "Peida vastused": "Скрыть ответы", "{n} / {m} vastust avatud": "Открыто ответов: {n} / {m}", "Midagi ei leitud. Proovi teist sõna.": "Ничего не найдено. Попробуй другое слово.", "Tulemusi: {n}": "Найдено: {n}", "Näitan esimest 15. Täpsusta otsingut.": "Показаны первые 15. Уточни запрос.", "Uuendatud {d}": "Обновлено {d}", "uuendatud {d}": "обновлено {d}", "{n} / {m} vahekaarti läbitud": "Пройдено вкладок: {n} / {m}", "sealt, kus viimati pooleli jäi": "вернуться к последнему открытому месту", "✓ Vahekaart vaadatud": "✓ Вкладка просмотрена", "Märgi vahekaart vaadatuks": "Отметить вкладку как просмотренную", "Klõpsa, et märge eemaldada": "Нажми, чтобы снять отметку", "Soovituste saatmine lülitatakse peagi sisse.": "Отправка предложений скоро заработает.", "Kasutajanimi peab olema 3–20 märki: tähed a–z, numbrid, punkt, sidekriips või alakriips.": "Имя пользователя должно быть длиной 3–20 символов: буквы a–z, цифры, точка, дефис или подчёркивание.", "Parool peab olema vähemalt 6 märki pikk.": "Пароль должен быть не короче 6 символов.", "Login sisse…": "Вход…", "Loon kontot…": "Создаю аккаунт…", "töötlen…": "обработка…", "liiga suur (üle 600 kB)": "слишком большой (больше 600 кБ)", "ei saanud lugeda": "не удалось прочитать", "Lisada saab kuni 3 faili, ülejäänud jäeti välja.": "Можно добавить не больше 3 файлов, остальные не добавлены.", "Failid on kokku liiga suured. Vali väiksemad või vähem faile.": "Файлы вместе слишком большие. Выбери файлы поменьше или меньше файлов.", "laadi alla": "скачать", "vaatamata": "не просмотрено", "vaadatud": "просмотрено", "tehtud": "сделано", "prügikastis": "в корзине", "Uued soovitused, mida sa pole veel vaadatuks märkinud.": "Новые предложения, ещё не отмеченные как просмотренные.", "Loetud, aga veel tegemata.": "Прочитано, но ещё не сделано.", "Soovitused, mille oled ära teinud.": "Предложения, которые уже выполнены.", "Kustutatud soovitused kaovad jäädavalt 24 tunni pärast, kui sa neid enne ei taasta.": "Удалённые предложения исчезнут навсегда через 24 часа, если ты не восстановишь их раньше.", "Soovitusi ei õnnestunud laadida.": "Не удалось загрузить предложения.", "Soovitusi ei õnnestunud laadida. Värskenda lehte.": "Не удалось загрузить предложения. Обнови страницу.", "{n} vaatamata": "Не просмотрено: {n}", "{n} kokku": "Всего: {n}", "Prügikast on tühi.": "Корзина пуста.", "Siin pole praegu ühtegi soovitust.": "Здесь пока нет ни одного предложения.", "Anonüümne": "Аноним", "Muudatus ei läinud läbi. Proovi uuesti.": "Изменение не сохранилось. Попробуй ещё раз.", "Märgi vaadatuks": "Отметить как просмотренное", "Märgi vaatamata": "Отметить как непросмотренное", "Tehtud ✓": "Сделано ✓", "Tagasi tegemata": "Вернуть в несделанные", "Kustuta": "Удалить", "Kustub jäädavalt tunni jooksul": "Удалится навсегда в течение часа", "Kustub jäädavalt {h} tunni pärast": "Удалится навсегда через {h} ч", "Taasta": "Восстановить", "Kustuta jäädavalt": "Удалить навсегда", "Kirjuta enne saatmist soovitus.": "Перед отправкой напиши предложение.", "Saadan…": "Отправка…", "Mõnda faili ei saa saata. Eemalda see või vali teine.": "Какой-то файл нельзя отправить. Удали его или выбери другой.", "Aitäh! Soovitus on saadetud.": "Спасибо! Предложение отправлено.", "Saatmine ebaõnnestus. Proovi hiljem uuesti.": "Не удалось отправить. Попробуй позже.", "Sisselogimine ebaõnnestus. Proovi uuesti.": "Не удалось войти. Попробуй ещё раз.", "Konto loomine ebaõnnestus. Proovi uuesti.": "Не удалось создать аккаунт. Попробуй ещё раз.", "Vale kasutajanimi või parool.": "Неверное имя пользователя или пароль.", "See kasutajanimi on juba võetud. Proovi mõnda teist.": "Это имя пользователя уже занято. Попробуй другое.", "Liiga palju katseid. Oota natuke ja proovi uuesti.": "Слишком много попыток. Подожди немного и попробуй снова.", "Internetiühendus puudub. Proovi uuesti.": "Нет подключения к интернету. Попробуй ещё раз.", "et-EE": "ru-RU"};
+function t(k, p) {
+  var s = (window.I18N && window.I18N[k]) || k;
+  if (p) for (var x in p) s = s.split('{' + x + '}').join(p[x]);
+  return s;
+}
+</script>
+<style>
+:root{
+  --bg:#181818; --panel:#1F1F1F; --raised:#252526; --line:#2B2B2B; --line2:#3C3C3C;
+  --text:#CCCCCC; --bright:#FFFFFF; --muted:#9D9D9D;
+  --key:#4FC1FF; --hl:rgba(234,179,8,.24); --num:#CE9178; --accent:#0078D4;
+  --accent-hover:#026EC1; --hover:#2D2D2D; --brand:#EAB308; --warn:#EAB308; --ok:var(--ok); --err:var(--err);
+  --ui:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"Cascadia Code","Cascadia Mono",Consolas,"Courier New",monospace;
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#F7F7F8; --panel:#FFFFFF; --raised:#F0F0F2; --line:#E3E3E6; --line2:#C9C9CE;
+  --text:#2E2E33; --bright:#111114; --muted:#64646C;
+  --key:#0063B1; --hl:rgba(234,179,8,.38); --num:#A1260D; --accent:#005FB8;
+  --accent-hover:#004E98; --hover:#E6E6EA; --brand:#EAB308; --warn:#946200; --ok:#1A7F37; --err:#C42B1C;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:var(--ui);font-size:16px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:1120px;margin:0 auto}
+header{padding-block:36px 10px;display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.eyebrow::before{content:"// "}
+h1{font-size:clamp(36px,7vw,52px);font-weight:700;line-height:1.05;margin:0;color:var(--bright);letter-spacing:-.02em}
+h1 .dot{color:var(--brand)}
+.tagline{color:var(--muted);margin:0;max-width:62ch}
+.subjects{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.subj{font-size:14px;font-weight:600;border:1px solid var(--line2);background:var(--raised);color:var(--bright);padding:6px 12px;border-radius:4px}
+.subj small{font-family:var(--mono);font-weight:400;font-size:12px;color:var(--muted);margin-left:8px}
+.subj.soon{background:transparent;color:var(--muted);border-style:dashed;font-weight:400}
+
+.tabs{display:flex;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font-family:var(--ui);font-size:14px;border:0;border-top:2px solid transparent;border-right:1px solid var(--line);background:var(--panel);color:var(--muted);padding:9px 16px;cursor:pointer}
+.tabs button:hover{color:var(--text)}
+.tabs button[aria-selected="true"]{background:var(--bg);color:var(--bright);border-top-color:var(--accent)}
+.tabs button:focus-visible,.card summary:focus-visible,.btn:focus-visible{outline:1px solid var(--key);outline-offset:-1px}
+section[role="tabpanel"]{max-width:70ch}
+h2{font-size:clamp(26px,4.5vw,34px);font-weight:700;color:var(--bright);line-height:1.15;margin:0 0 8px;text-wrap:balance}
+h3{font-size:18px;color:var(--bright);margin:28px 0 6px;text-wrap:balance}
+.lead{font-size:18px;color:var(--muted);margin:0 0 18px}
+p{margin:0 0 12px}
+ul{margin:0 0 12px;padding-left:1.2em}
+li{margin-bottom:4px}
+li::marker{color:var(--muted)}
+b,strong{font-weight:600;color:var(--bright);background:var(--hl);padding:0 3px;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.listen{margin-top:32px;border-top:1px solid var(--line);padding-top:16px}
+.listen h3{margin-top:0}
+.listen ul{list-style:none;padding:0;display:grid;gap:4px}
+.listen a{color:var(--text);text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:3px}
+.listen a:hover{color:var(--bright);text-decoration-color:var(--bright)}
+.listen .src{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:6px}
+.listen a::after{content:" ↗";color:var(--muted);font-size:.85em}
+.yr{font-family:var(--mono);font-size:.88em;color:var(--num);white-space:nowrap}
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:12px 0 8px}
+.person{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px}
+.person .name{font-weight:600;color:var(--bright);display:block}
+.person .role{color:var(--muted);font-size:14px;display:block;margin-bottom:6px}
+.person p{font-size:15px;margin:0}
+.quote{border-left:2px solid var(--brand);padding:4px 0 4px 16px;margin:20px 0;font-style:italic;font-size:18px;color:var(--bright)}
+.quote cite{display:block;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:6px}
+.key{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin:16px 0}
+.key .label{font-family:var(--mono);font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+.beats{display:flex;gap:10px;align-items:flex-end;margin:10px 0 4px}
+.beat{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.beat i{display:block;width:16px;height:16px;border-radius:50%;background:var(--line2)}
+.beat.acc i{width:30px;height:30px;background:var(--num)}
+.beat.even i{width:22px;height:22px;background:var(--text)}
+.beatcap{font-size:14px;color:var(--muted);margin-bottom:14px}
+.timeline{list-style:none;padding:0;margin:8px 0;border-left:1px solid var(--line2)}
+.timeline li{position:relative;padding:0 0 18px 20px;margin:0}
+.timeline li::before{content:"";position:absolute;left:-6px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--muted)}
+.timeline .when{font-family:var(--mono);font-size:13px;color:var(--num);display:block}
+.tablewrap{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:4px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+thead th{background:var(--panel);font-size:13px;color:var(--bright);font-weight:600}
+tbody th{font-weight:600;color:var(--muted)}
+.quizbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 16px}
+.btn{font-family:var(--ui);font-size:13px;border:0;background:var(--accent);color:#fff;padding:6px 14px;border-radius:2px;cursor:pointer}
+.btn:hover{background:var(--accent-hover)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sec{background:var(--raised);color:var(--text);border:1px solid var(--line2)}
+.btn.sec:hover{background:var(--hover)}
+.count{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.cards{display:flex;flex-direction:column;gap:6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:4px}
+.card summary{cursor:pointer;padding:11px 14px;list-style:none;display:flex;gap:12px;align-items:baseline;color:var(--bright)}
+.card summary::-webkit-details-marker{display:none}
+.card summary .tag{font-family:var(--mono);font-size:12px;color:var(--muted);flex:0 0 auto;min-width:96px}
+.card[open]{border-color:var(--line2)}
+.card[open] summary{border-bottom:1px solid var(--line)}
+.card .ans{padding:10px 14px 12px;color:var(--text)}
+footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-family:var(--mono)}
+@media (max-width:520px){.card summary{flex-direction:column;gap:2px}.card summary .tag{min-width:0}}
+
+.brand{color:inherit;text-decoration:none}
+.home .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:8px 0 28px}
+.subjcard{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border:1px dashed var(--line2);border-radius:4px;color:var(--muted);text-decoration:none;min-height:76px}
+.subjcard .sname{font-weight:600;font-size:16px}
+.subjcard .stopic{font-family:var(--mono);font-size:12px}
+.subjcard.ready{border:1px solid var(--line2);background:var(--panel);color:var(--bright)}
+.subjcard.ready .stopic{color:var(--muted)}
+.subjcard.ready:hover{border-color:var(--bright)}
+.subjcard.ready .sname::after{content:" →";color:var(--muted)}
+.subjcard:focus-visible{outline:1px solid var(--key);outline-offset:1px}
+.disclaimer{max-width:70ch;border:1px solid var(--line);border-radius:4px;padding:12px 14px;color:var(--muted);font-size:14px;background:var(--panel)}
+.disclaimer strong{background:none;color:var(--text);padding:0}
+.crumb{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:6px 0 14px}
+.crumb a{font-family:var(--mono);font-size:13px;color:var(--muted);text-decoration:none}
+.crumb a:hover{color:var(--bright)}
+.crumb .subjname{font-size:22px;font-weight:700;color:var(--bright)}
+ol{margin:0 0 12px;padding-left:1.4em}
+
+.appbar{display:flex;align-items:stretch;border-bottom:1px solid var(--line);margin-bottom:18px;background:var(--bg)}
+.appbar.sticky{position:sticky;top:0;z-index:5}
+.appbar .logo{flex:0 0 auto;display:flex;align-items:center;padding:8px 16px 8px 0;margin-right:4px;border-right:1px solid var(--line);font-weight:700;font-size:17px;color:var(--bright);text-decoration:none;letter-spacing:-.01em}
+.appbar .logo .dot{color:var(--brand)}
+.appbar .logo:hover{color:var(--bright)}
+.appbar .logo:focus-visible,.back:focus-visible,.path a:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+.appbar .tabs{flex:1 1 auto;min-width:0}
+.pagehead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:4px 0 22px}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--bright);text-decoration:none;background:var(--raised);border:1px solid var(--line2);border-radius:4px;padding:8px 16px}
+.back:hover{border-color:var(--bright);background:var(--hover)}
+.path{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.path a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:3px}
+.path a:hover{color:var(--bright)}
+.pagetitle{font-size:clamp(30px,6vw,42px);margin:0 0 4px}
+.view .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:8px 0 28px}
+@media (max-width:520px){.appbar .logo{font-size:15px;padding-right:12px}.path{display:none}}
+
+.view main a:not(.back),.side a.inl{color:var(--bright);text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:3px}
+.view main a:not(.back):hover{text-decoration-color:var(--bright)}
+.homecols{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:start}
+@media (max-width:860px){.homecols{grid-template-columns:1fr}}
+.side{display:flex;flex-direction:column;gap:12px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:14px 16px}
+.box h3{margin:0 0 6px;font-size:16px}
+.box p{font-size:14px}
+.muted{color:var(--muted)}
+.box form{display:flex;flex-direction:column;gap:10px}
+.box label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+.box input,.box textarea{font:inherit;font-size:16px;color:var(--bright);background:var(--bg);border:1px solid var(--line2);border-radius:3px;padding:7px 9px;width:100%}
+.box textarea{resize:vertical;min-height:90px}
+.box input:focus,.box textarea:focus{outline:1px solid var(--accent);border-color:var(--accent)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.msg{font-size:13px;margin:0;min-height:1em}
+.msg.err{color:var(--err)}
+.msg.ok{color:var(--ok)}
+.resume{display:block;text-decoration:none;color:var(--bright);font-weight:600}
+.resume small{display:block;font-weight:400;color:var(--muted);font-family:var(--mono);font-size:12px}
+.resume:hover{text-decoration:underline}
+.inbox-item{border-top:1px solid var(--line);padding:10px 0}
+.inbox-item:first-child{border-top:0}
+.inbox-item .meta{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.inbox-item .txt{white-space:pre-wrap;margin:4px 0 0;font-size:14.5px;color:var(--text)}
+.linkbtn{background:none;border:0;color:var(--muted);font:inherit;font-size:12px;cursor:pointer;text-decoration:underline;padding:0}
+.linkbtn:hover{color:var(--err)}
+.tabs button.seen::after{content:" ✓";color:var(--ok)}
+.prog{display:block;margin-top:6px;font-family:var(--mono);font-size:12px;color:var(--ok)}
+.prog:empty{display:none}
+
+.mark{width:22px;height:22px;flex:0 0 auto;display:block}
+.appbar .logo{gap:8px}
+.brandline{display:flex;align-items:center;gap:14px}
+.brandline .mark{width:clamp(36px,6vw,50px);height:clamp(36px,6vw,50px)}
+.seenfoot{margin-top:32px;padding-top:16px;border-top:1px solid var(--line)}
+.seenbtn{font:inherit;font-size:14px;font-weight:600;cursor:pointer;border-radius:4px;padding:9px 16px;border:1px solid var(--line2);background:var(--raised);color:var(--bright)}
+.seenbtn:hover{border-color:var(--bright)}
+.seenbtn[aria-pressed="true"]{background:transparent;border-color:var(--ok);color:var(--ok)}
+.seenbtn:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+
+.scrollhint{display:none;font-family:var(--mono);font-size:12px;color:var(--muted);margin:8px 0 -4px}
+@media (max-width:600px){
+  .view .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .subjcard{padding:12px;min-height:0}
+  .subjcard .sname{font-size:15px}
+  .subjcard.ready .sname::after{content:""}
+  .appbar .logo{padding-right:10px}
+  .appbar .logo > span{display:none}
+  .appbar .tabs{scrollbar-width:none}
+  .appbar .tabs::-webkit-scrollbar{display:none}
+  .tabs button{padding:11px 13px}
+  .scrollhint{display:block}
+  .pagehead{margin-bottom:16px}
+  .back{padding:10px 16px}
+  h1{font-size:40px}
+  .homecols{gap:20px}
+}
+
+.inboxlink{display:block;text-decoration:none;color:inherit}
+.inboxlink:hover{border-color:var(--bright)}
+.inboxlink h3{color:var(--bright)}
+.inboxlink .new{color:var(--warn);font-weight:600}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 10px}
+.filter{font:inherit;font-size:14px;cursor:pointer;border:1px solid var(--line2);background:transparent;color:var(--muted);padding:7px 14px;border-radius:999px}
+.filter:hover{color:var(--bright)}
+.filter[aria-pressed="true"]{background:var(--bright);color:var(--bg);border-color:var(--bright)}
+.filter .n{font-family:var(--mono);font-size:12px;opacity:.8}
+.filter:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;align-items:start}
+.scard{background:var(--panel);border:1px solid var(--line2);border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.scard.is-uus{border-color:var(--warn)}
+.scard .meta{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:space-between}
+.scard .chip{font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid currentColor}
+.chip.uus{color:var(--warn)}.chip.vaadatud{color:var(--muted)}.chip.tehtud{color:var(--ok)}.chip.prygi{color:var(--err)}
+.scard .txt{white-space:pre-wrap;margin:0;color:var(--bright);font-size:15px;overflow-wrap:anywhere}
+.scard .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.sbtn{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line2);background:var(--raised);color:var(--text);padding:5px 10px;border-radius:3px}
+.sbtn:hover{border-color:var(--bright);color:var(--bright)}
+.sbtn.danger:hover{border-color:var(--err);color:var(--err)}
+.sbtn:disabled{opacity:.5;cursor:wait}
+.sbtn:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+.sempty{color:var(--muted);grid-column:1/-1}
+
+.flist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:4px;font-size:13px}
+.flist li{display:flex;justify-content:space-between;gap:8px;color:var(--text);font-family:var(--mono);font-size:12px}
+.flist li.bad{color:var(--err)}
+.box input[type=file]{font-size:13px;padding:6px}
+.sgrid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.att{display:flex;flex-wrap:wrap;gap:6px}
+.att img{width:88px;height:88px;object-fit:cover;border-radius:3px;border:1px solid var(--line2);cursor:zoom-in;display:block}
+.att a.file{font-family:var(--mono);font-size:12px;color:var(--bright);border:1px solid var(--line2);border-radius:3px;padding:4px 8px;text-decoration:none;max-width:100%;overflow-wrap:anywhere}
+.att a.file:hover{border-color:var(--bright)}
+
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.filepick{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.filepick .flabel{font-size:13px;color:var(--muted)}
+.box label.pickbtn{display:inline-flex;flex-direction:row;color:var(--text);font-size:13px;cursor:pointer}
+.filepick input:focus-visible + *,.filepick:focus-within .pickbtn{outline:1px solid var(--key);outline-offset:2px}
+.att{align-items:flex-start}
+
+.search{margin:6px 0 14px;position:relative}
+.search input{width:100%;font:inherit;font-size:16px;color:var(--bright);background:var(--panel);border:1px solid var(--line2);border-radius:4px;padding:10px 12px}
+.search input:focus{outline:1px solid var(--accent);border-color:var(--accent)}
+.search input::placeholder{color:var(--muted)}
+.qres{margin-top:8px;border:1px solid var(--line2);border-radius:4px;background:var(--panel);padding:6px 0;max-height:60vh;overflow:auto}
+.qres .muted,.qres .qcount{padding:4px 14px;margin:0}
+.qcount{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.qhit{display:block;padding:8px 14px;text-decoration:none;color:var(--text);border-top:1px solid var(--line)}
+.qhit:hover,.qhit:focus-visible{background:var(--raised);outline:none}
+.qwhere{display:block;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.qtext{display:block;font-size:14.5px}
+.qhit mark{background:var(--hl);color:var(--bright);border-radius:2px;padding:0 1px}
+.upd{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto}
+.cupd{display:block;margin-top:4px;font-family:var(--mono);font-size:11px;color:var(--muted);opacity:.8}
+@media (max-width:600px){.upd{margin-left:0;width:100%}}
+
+.settings{position:fixed;top:calc(env(safe-area-inset-top,0px) + 6px);right:10px;z-index:30}
+.gear{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line2);background:var(--panel);color:var(--muted);cursor:pointer}
+.gear svg{width:20px;height:20px}
+.gear:hover,.gear[aria-expanded="true"]{color:var(--bright);border-color:var(--bright)}
+.gear:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+.pop{position:absolute;right:0;top:46px;width:236px;background:var(--panel);border:1px solid var(--line2);border-radius:6px;padding:12px 14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.plabel{font-family:var(--mono);font-size:12px;color:var(--muted);margin:0 0 6px}
+.plabel + .seg{margin-bottom:12px}
+.seg{display:flex;border:1px solid var(--line2);border-radius:4px;overflow:hidden}
+.seg > *{flex:1;font:inherit;font-size:13px;text-align:center;padding:7px 4px;background:transparent;color:var(--text);border:0;cursor:pointer;text-decoration:none}
+.seg > * + *{border-left:1px solid var(--line2)}
+.seg > *:hover{background:var(--hover)}
+.seg > [aria-pressed="true"],.seg > [aria-current="true"]{background:var(--bright);color:var(--bg)}
+.seg > *:focus-visible{outline:1px solid var(--key);outline-offset:-2px}
+.appbar{padding-right:46px}
+header{padding-right:46px}
+</style>
+</head>
+<body>
+<svg aria-hidden="true" height="0" style="position:absolute" width="0">
+<symbol id="logo-mark" viewbox="0 0 32 32">
+<rect fill="#EAB308" height="32" rx="7" width="32"></rect>
+<path d="M9 24 15.2 8h1.6L23 24h-3.3l-1.4-3.9h-4.6L12.3 24Zm5.3-6.6h3.4L16 12.6Z" fill="#181818" fill-rule="evenodd"></path>
+<circle cx="25" cy="23" fill="#181818" r="2"></circle>
+</symbol>
+</svg>
+<div class="wrap">
+<div class="settings">
+<button aria-controls="settings-pop" aria-expanded="false" aria-label="Настройки" class="gear" id="gear" title="Настройки" type="button">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.3 2.9a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1L11 21h4l.3-2.9a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5ZM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" fill="currentColor" transform="translate(-1 0)"></path></svg>
+</button>
+<div class="pop" hidden="" id="settings-pop">
+<p class="plabel">Тема</p>
+<div aria-label="Тема" class="seg" role="group">
+<button data-theme-set="dark" type="button">Тёмная</button>
+<button data-theme-set="light" type="button">Светлая</button>
+</div>
+<p class="plabel">Язык</p>
+<div aria-label="Язык" class="seg" role="group">
+<a data-lang-set="et" href="./" lang="et" translate="no">Eesti</a>
+<a data-lang-set="en" href="en.html" lang="en" translate="no">English</a>
+<a data-lang-set="ru" href="ru.html" lang="ru" translate="no">Русский</a>
+</div>
+</div>
+</div>
+<div class="view home" data-title="Ajukas" id="v-home">
+<header>
+<span class="eyebrow">Подготовка к контрольным</span>
+<h1 class="brandline" translate="no"><svg aria-hidden="true" class="mark"><use href="#logo-mark"></use></svg><span>Ajukas<span class="dot">.</span></span></h1>
+</header>
+<div class="homecols">
+<div class="homemain">
+<p class="tagline">Конспекты по всем предметам в одном месте. Выбери предмет, потом тему.</p>
+<p class="muted" style="font-size:14px;margin-top:-4px">Сайт появился в G2, в октябре 2026 года, поэтому материалов прошлых курсов и уроков здесь в основном нет.</p>
+<div class="search">
+<label class="vh" for="q">Поиск</label>
+<input autocomplete="off" id="q" placeholder="Ищи по всем темам, напр. Armstrong или поля" spellcheck="false" type="search"/>
+<div class="qres" hidden="" id="q-res"></div>
+</div>
+<div class="grid">
+<div class="subjcard"><span class="sname">История</span><span class="stopic">Материал скоро появится</span></div>
+<div class="subjcard"><span class="sname">Эстонский язык</span><span class="stopic">Материал скоро появится</span></div>
+<div class="subjcard"><span class="sname">Самостоятельный ученик</span><span class="stopic">Материал скоро появится</span></div>
+<div class="subjcard"><span class="sname">Английский язык</span><span class="stopic">Материал скоро появится</span></div>
+<div class="subjcard"><span class="sname">Литература</span><span class="stopic">Материал скоро появится</span></div>
+<div class="subjcard"><span class="sname">Математика (широкий курс)</span><span class="stopic">Материал скоро появится</span></div>
+<div class="subjcard"><span class="sname">Физика</span><span class="stopic">Материал скоро появится</span></div>
+<div class="subjcard"><span class="sname">Химия</span><span class="stopic">Материал скоро появится</span></div>
+<a class="subjcard ready" href="#muusika"><span class="sname">Музыка</span><span class="stopic">Ранний джаз, рецензия на концерт</span></a>
+<div class="subjcard"><span class="sname">Русский язык</span><span class="stopic">Материал скоро появится</span></div>
+<a class="subjcard ready" href="#upt"><span class="sname">UPT</span><span class="stopic">Руководство по UPT</span></a>
+</div>
+<p class="disclaimer"><strong>NB!</strong> Эту страницу по материалам уроков и руководствам составил искусственный интеллект. Ошибки бывают редко, но полностью исключить их нельзя. Если что-то кажется сомнительным, проверь по слайдам, учебнику или спроси учителя.</p>
+</div>
+<aside aria-label="Аккаунт и предложения" class="side">
+<section class="box" id="acct">
+<h3>Аккаунт</h3>
+<div id="acct-out">
+<p class="muted">Войди, и твой прогресс сохранится: сможешь продолжить на другом компьютере с того же места.</p>
+<form id="login-form" novalidate="">
+<label for="lg-user">Имя пользователя<input autocapitalize="none" autocomplete="username" id="lg-user" maxlength="20" spellcheck="false"/></label>
+<label for="lg-pass">Пароль<input autocomplete="current-password" id="lg-pass" maxlength="100" type="password"/></label>
+<div class="row"><button class="btn" id="lg-in" type="submit">Войти</button><button class="btn sec" id="lg-new" type="button">Создать аккаунт</button></div>
+<p class="msg" id="lg-msg" role="status"></p>
+</form>
+<p class="muted" style="font-size:12px;margin:8px 0 0">Автор сайта не видит твой пароль и не может войти в твой аккаунт. Google Firebase хранит пароль только в виде хеша, из которого пароль восстановить невозможно (<a class="inl" href="https://github.com/firebase/scrypt" rel="noopener" target="_blank">объяснение Firebase</a>).</p>
+<p class="muted" style="font-size:12px;margin:8px 0 0">Для создания аккаунта e-mail не нужен. <b style="background:none;padding:0;color:var(--text)">Забыл пароль?</b> Напиши своё имя пользователя в ящик предложений. Старый аккаунт удалят, и ты сможешь создать новый с тем же именем, но отмеченный прогресс пропадёт.</p>
+</div>
+<div hidden="" id="acct-in">
+<p>Вход выполнен: <b id="acct-who"></b></p>
+<button class="btn sec" id="lg-out" type="button">Выйти</button>
+</div>
+<p class="muted" hidden="" id="acct-off">Аккаунты скоро заработают. Пока прогресс сохраняется только в этом браузере.</p>
+</section>
+<section class="box" hidden="" id="resume-box">
+<h3>Продолжить</h3>
+<a class="resume" href="#" id="resume-link"></a>
+</section>
+<section class="box" id="sugg">
+<h3>Предложения</h3>
+<p class="muted">Есть ошибка, идея или хочешь новый предмет? Напиши сюда. Сообщения видит только автор сайта.</p>
+<p class="muted" style="font-size:12.5px">Пожалуйста, присылай только настоящие предложения. Если сюда начнёт приходить спам, отправлять предложения смогут только вошедшие пользователи.</p>
+<form id="sugg-form" novalidate="">
+<label for="sg-name">Имя (можно не указывать)<input autocomplete="nickname" id="sg-name" maxlength="60"/></label>
+<label for="sg-text">Предложение<textarea id="sg-text" maxlength="2000" rows="4"></textarea></label>
+<div class="filepick"><span class="flabel">Если хочешь, добавь картинки или файлы (до 3)</span><label class="btn sec pickbtn" for="sg-files">Выбрать файлы</label><input accept="image/*,.pdf,.txt,.doc,.docx,.ppt,.pptx,.xls,.xlsx" class="vh" id="sg-files" multiple="" type="file"/></div>
+<p class="muted" style="font-size:12px;margin:-4px 0 0">Извини, отправлять можно только небольшие файлы: за хранилище для больших пришлось бы платить. Картинки при отправке автоматически уменьшаются, остальные файлы могут быть в сумме до 600 кБ.</p>
+<p class="muted" style="font-size:12px;margin:0"><b style="background:none;padding:0;color:var(--text)">Файл больше?</b> Загрузи его в Google Drive или OneDrive, выбери «Поделиться» → «Все, у кого есть ссылка» и вставь ссылку в текст предложения.</p>
+<ul class="flist" id="sg-flist"></ul>
+<div class="row"><button class="btn" id="sg-send" type="submit">Отправить</button></div>
+<p class="msg" id="sg-msg" role="status"></p>
+</form>
+</section>
+<a class="box inboxlink" hidden="" href="#soovitused" id="inbox">
+<h3>Полученные предложения →</h3>
+<p class="muted" id="inbox-sum">Загрузка…</p>
+</a>
+</aside>
+</div>
+</div>
+<div class="view" data-title="Музыка" hidden="" id="v-muusika">
+<div class="appbar"><a aria-label="Ajukas avaleht" class="logo" href="#" translate="no"><svg aria-hidden="true" class="mark"><use href="#logo-mark"></use></svg><span>Ajukas<span class="dot">.</span></span></a></div>
+<div class="pagehead">
+<a class="back" href="#"><span aria-hidden="true">←</span> Все предметы</a>
+</div>
+<h2 class="pagetitle">Музыка</h2>
+<p class="tagline">Выбери тему.</p>
+<div class="grid">
+<a class="subjcard ready" href="#jazz"><span class="sname">Ранний джаз</span><span class="stopic">Рэгтайм, блюз, Новый Орлеан, диксиленд, Чикаго. Контрольная работа.</span><span class="prog" data-topic="jazz"></span></a>
+<a class="subjcard ready" href="#kontsert"><span class="sname">Рецензия на концерт</span><span class="stopic">Требования, вопросы для анализа и советы. Групповая презентация.</span><span class="prog" data-topic="kontsert"></span></a>
+</div>
+</div>
+<div class="view" data-parent="muusika" data-parent-title="Музыка" data-title="Ранний джаз" data-updated="2026-10-04" hidden="" id="v-jazz">
+<nav aria-label="Темы раздела «Ранний джаз»" class="appbar sticky"><a aria-label="Ajukas avaleht" class="logo" href="#" translate="no"><svg aria-hidden="true" class="mark"><use href="#logo-mark"></use></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist">
+<button aria-controls="ajajoon" aria-selected="true" id="t-ajajoon" role="tab">Хронология</button>
+<button aria-controls="tunnused" aria-selected="false" id="t-tunnused" role="tab">Признаки джаза</button>
+<button aria-controls="varajased" aria-selected="false" id="t-varajased" role="tab">Рэгтайм и блюз</button>
+<button aria-controls="neworleans" aria-selected="false" id="t-neworleans" role="tab">Новый Орлеан</button>
+<button aria-controls="dixieland" aria-selected="false" id="t-dixieland" role="tab">Диксиленд</button>
+<button aria-controls="chicago" aria-selected="false" id="t-chicago" role="tab">Чикаго</button>
+<button aria-controls="vordlus" aria-selected="false" id="t-vordlus" role="tab">Сравнение</button>
+<button aria-controls="test" aria-selected="false" id="t-test" role="tab">Проверь себя</button>
+<button aria-controls="jazz-viited" aria-selected="false" id="t-jazz-viited" role="tab">Источники</button></div></nav>
+<div class="pagehead">
+<a class="back" href="#muusika"><span aria-hidden="true">←</span> Музыка</a>
+<span class="path"><a href="#">Главная</a> / <a href="#muusika">Музыка</a> / Ранний джаз</span>
+</div>
+<main>
+<!-- AJAJOON -->
+<section aria-labelledby="t-ajajoon" hidden="" id="ajajoon" role="tabpanel">
+<h2>Хронология</h2>
+<p class="lead">Вся тема одним взглядом. Если запомнишь эти годы, остальное встанет на свои места.</p>
+<ol class="timeline">
+<li><span class="when">1890-е годы</span><b>Рэгтайм</b> популярен. Чернокожие пианисты, в основном на фортепиано. Scott Joplin.</li>
+<li><span class="when">конец XIX – начало XX века</span>Джаз зарождается в США, прежде всего в <b>Новом Орлеане</b>.</li>
+<li><span class="when">1915</span>Слово <b>«jazz»</b> появляется в Чикаго.</li>
+<li><span class="when">1917</span><b>Сторивилл закрывают</b>, расцвет новоорлеанского джаза заканчивается, и музыканты уезжают в Чикаго. В том же году <b>Original Dixieland Jazz Band</b> делает первую джазовую запись.</li>
+<li><span class="when">1920-е годы</span>Расцвет <b>чикагского джаза</b>. На первый план выходят солисты и саксофон.</li>
+<li><span class="when">начало 1930-х</span>Приходят свинг и биг-бэнды. Золотой век диксиленда заканчивается.</li>
+<li><span class="when">конец 1940-х – начало 1950-х</span>Диксиленд возвращается и популярен до сих пор.</li>
+</ol>
+</section>
+<!-- TUNNUSED -->
+<section aria-labelledby="t-tunnused" hidden="" id="tunnused" role="tabpanel">
+<h2>Что делает джаз джазом?</h2>
+<p class="lead">Джаз возник в конце XIX – начале XX века в США, прежде всего в Новом Орлеане. Слово «jazz» появилось в 1915 году в Чикаго.</p>
+<div class="key"><span class="label">Четыре главные черты</span>Импровизация · тембр (окраска звука) · составы инструментов · ритм, мелодия и гармония</div>
+<h3>Перекрёсток культур</h3>
+<ul>
+<li><b>Африканское влияние:</b> коллективное музицирование, импровизация, запевала и хор (вопрос-ответ).</li>
+<li><b>Европейское влияние:</b> гармония и инструменты.</li>
+<li><b>Карибское влияние:</b> танцевальная музыка, основанная на ритме, более экзотические и сложные ритмические рисунки.</li>
+</ul>
+<h3>Социальный фон и наследие рабства</h3>
+<ul>
+<li>Родился в <b>афроамериканских общинах</b>.</li>
+<li>Джаз был средством самовыражения и сопротивления общественным ограничениям.</li>
+<li>Во времена рабства и расовой сегрегации <b>рабочие песни и спиричуэлс</b> помогали пережить тяжёлый труд и угнетение.</li>
+</ul>
+<h3>Колыбель джаза: Новый Орлеан</h3>
+<ul>
+<li>Многокультурное население, в котором смешивались разные музыкальные стили и традиции.</li>
+<li>Социальные и расовые ограничения там были мягче.</li>
+<li><b>Congo Square</b> — площадь, где по выходным играли музыку, танцевали и сохраняли культурное наследие.</li>
+<li><b>Оркестры похоронных процессий</b> — одна из основ джаза.</li>
+</ul>
+<div class="listen"><h3>Послушай со слайдов</h3><ul><li><a href="https://www.youtube.com/watch?v=27Pn5mmIjO8" rel="noopener" target="_blank">Что делает джаз джазом? (пример 2)</a><span class="src">введение</span></li><li><a href="https://www.youtube.com/watch?v=IiUyz4HG-Kc" rel="noopener" target="_blank">Bach: «Wachet auf, ruft uns die Stimme»</a><span class="src">задание на слушание</span></li><li><a href="https://www.youtube.com/watch?v=27Pn5mmIjO8" rel="noopener" target="_blank">Bobby McFerrin: «Wachet auf, ruft uns die Stimme»</a><span class="src">задание на слушание</span></li><li><a href="https://www.youtube.com/watch?v=qwf_m0p86KU" rel="noopener" target="_blank">Гармония в джазе</a><span class="src">главные черты</span></li><li><a href="https://www.youtube.com/watch?v=4MwQcm4eH18" rel="noopener" target="_blank">Рабочие песни</a><span class="src">социальный фон</span></li><li><a href="https://www.youtube.com/watch?v=zcJ6Wxdcj-E" rel="noopener" target="_blank">Тяжёлый труд</a><span class="src">социальный фон</span></li><li><a href="https://www.youtube.com/watch?v=DOoNEjrVcpo" rel="noopener" target="_blank">Congo Square</a><span class="src">Новый Орлеан</span></li><li><a href="https://www.youtube.com/watch?v=alzPbV61sOM" rel="noopener" target="_blank">Похоронная процессия</a><span class="src">Новый Орлеан</span></li><li><a href="https://www.youtube.com/watch?v=oVOGylzaMiA" rel="noopener" target="_blank">Оркестры похоронных процессий</a><span class="src">Новый Орлеан</span></li></ul></div>
+</section>
+<!-- VARAJASED -->
+<section aria-labelledby="t-varajased" hidden="" id="varajased" role="tabpanel">
+<h2>Рэгтайм и блюз</h2>
+<p class="lead">Два стиля, из которых вырос джаз.</p>
+<h3>Рэгтайм</h3>
+<ul>
+<li>Один из первых стилей, сильно повлиявших на развитие джаза.</li>
+<li>Популярен <span class="yr">в 1890-е годы</span>.</li>
+<li>Играли <b>чернокожие пианисты</b>, в основном <b>на фортепиано</b>.</li>
+<li>Живая танцевальная музыка, заложившая основу джаза.</li>
+</ul>
+<div class="people">
+<div class="person"><span class="name">Scott Joplin <span class="yr">1868–1917</span></span><span class="role">американский пианист, создатель рэгтайма</span><p>«Maple Leaf Rag», «The Entertainer», «Pleasant Moments». 44 пьесы, один балет, две оперы. Его музыку заново открыли в начале 1970-х.</p></div>
+</div>
+<h3>Блюз</h3>
+<ul>
+<li>Ключевой стиль в становлении джаза.</li>
+<li>Основан на афроамериканских <b>рабочих песнях и спиричуэлс</b>.</li>
+<li><b>12-тактовая структура</b>, сольное пение, импровизация.</li>
+<li>Пел о личной боли, потерях и радости.</li>
+<li>Представители: <b>Bessie Smith, Muddy Waters, B.B. King</b>.</li>
+</ul>
+<h3>Понятия и имена</h3>
+<ul>
+<li><b>Коллективная импровизация:</b> музыканты играют одновременно, но каждый импровизирует самостоятельно.</li>
+<li><b>Jelly Roll Morton</b> — один из первых джазовых композиторов и пианистов.</li>
+<li><b>Louis Armstrong</b> — трубач 1920-х годов, связанный со свингом.</li>
+</ul>
+<div class="listen"><h3>Послушай со слайдов</h3><ul><li><a href="https://www.youtube.com/watch?v=hy-aYX5kMoM" rel="noopener" target="_blank">Рэгтайм</a><span class="src">рэгтайм</span></li><li><a href="https://www.youtube.com/watch?v=bCxLAr_bwpA" rel="noopener" target="_blank">Scott Joplin: «Maple Leaf Rag»</a><span class="src">Joplin</span></li><li><a href="https://www.youtube.com/watch?v=ND2rMET4MVw" rel="noopener" target="_blank">Scott Joplin: «The Entertainer»</a><span class="src">Joplin</span></li><li><a href="https://www.youtube.com/watch?v=5Bo3f_9hLkQ" rel="noopener" target="_blank">Блюз</a><span class="src">блюз</span></li><li><a href="https://www.youtube.com/watch?v=4gXShOJVwaM" rel="noopener" target="_blank">Bessie Smith</a><span class="src">блюз</span></li><li><a href="https://www.youtube.com/results?search_query=Muddy+Waters+Hoochie+Coochie+Man" rel="noopener" target="_blank">Muddy Waters</a><span class="src">поиск на YouTube, ссылка со слайда не работает</span></li><li><a href="https://www.youtube.com/watch?v=OIW4ARVbhrw" rel="noopener" target="_blank">B.B. King</a><span class="src">блюз</span></li></ul></div>
+</section>
+<!-- NEW ORLEANS -->
+<section aria-labelledby="t-neworleans" hidden="" id="neworleans" role="tabpanel">
+<h2>Новоорлеанский джаз</h2>
+<p class="lead">Грубоватый, хриплый, напористый и эмоциональный. Расцвет длился до 1917 года.</p>
+<h3>Музыкальные корни</h3>
+<ul>
+<li>Афроамериканские ритмы и манеры пения.</li>
+<li>Рабочие песни, спиричуэлс и блюз.</li>
+<li>Европейские марши и танцевальная музыка, смешанные с рэгтаймом и буги-вуги. В результате получилась <b>гибридная музыка</b>.</li>
+</ul>
+<h3>Любительские оркестры</h3>
+<ul>
+<li>Играли в увеселительных заведениях квартала <b>Storyville</b>. Оркестров было почти 30.</li>
+<li>Импровизировали <b>на слух</b>.</li>
+<li>Напоминали маршевые и цирковые оркестры.</li>
+</ul>
+<h3>Ритм</h3>
+<div aria-label="Четыре доли, акцент на первой и третьей" class="beats">
+<span class="beat acc"><i></i>1</span><span class="beat"><i></i>2</span><span class="beat acc"><i></i>3</span><span class="beat"><i></i>4</span>
+</div>
+<p class="beatcap">Маршевая пульсация: акцент на <b>1-й и 3-й доле</b>. Офф-бита, то есть акцента на 2-й и 4-й доле, нет.</p>
+<h3>Ансамбль</h3>
+<ul>
+<li>Небольшие ансамбли, больше возможностей выступать.</li>
+<li><b>Мелодическая группа:</b> корнет или труба, тромбон, кларнет.</li>
+<li><b>Ритм-группа:</b> туба, банджо, ударные.</li>
+<li>Позже тубу заменил <b>контрабас</b>, банджо — <b>гитара</b>, и добавилось <b>фортепиано</b>.</li>
+<li>Музыку не записывали нотами. Она рождалась на месте на основе определённой темы: марша или церковной мелодии, пьесы в стиле рэгтайм или 12-тактового блюза.</li>
+</ul>
+<h3>Самые известные музыканты</h3>
+<div class="people">
+<div class="person"><span class="name">Joe «King» Oliver <span class="yr">1885–1938</span></span><span class="role">Корнетист и трубач</span><p>Руководил самым влиятельным ансамблем Нового Орлеана — <b>King Oliver's Creole Jazz Band</b>.</p></div>
+<div class="person"><span class="name">Jelly Roll Morton <span class="yr">1890–1941</span></span><span class="role">Пианист рэгтайма, композитор, руководитель оркестра</span><p>Заложил основы джазовой классики записями ансамбля <b>Red Hot Peppers</b>.</p></div>
+</div>
+<h3>Louis Armstrong <span class="yr">1900–1971</span></h3>
+<ul>
+<li>Самый яркий музыкант новоорлеанского джаза: корнетист, трубач, пианист, аранжировщик и композитор.</li>
+<li>Благодаря ему джаз стал <b>музыкой солистов</b>.</li>
+<li>Образец во всём: индивидуальность, изобретательность, эмоциональность и отточенная техника.</li>
+<li>Начал использовать аккорды и нотную запись. Добавил церковную музыку чернокожих, ритмы Нового Орлеана и Африки.</li>
+<li>Привнёс в музыку <b>блюзовые ноты</b> (blue notes).</li>
+<li>Хриплый тембр голоса и <b>скэт</b> (импровизированное пение слогами, без слов).</li>
+<li>Пьесы: «What a Wonderful World», «West End Blues», «Hotter Than Hot», «I'm in the Mood for Love».</li>
+</ul>
+<blockquote class="quote">Если бы не Armstrong, не было бы джаза, а без джаза не было бы ни современной поп-музыки, ни рока.<cite>Joachim-Ernst Berendt, «Das Jazzbuch»</cite></blockquote>
+<h3>Конец</h3>
+<p><span class="yr">В 1917 году</span> закрыли квартал развлечений Storyville, и музыканты отправились <b>в Чикаго</b>.</p>
+<div class="listen"><h3>Послушай со слайдов</h3><ul><li><a href="https://youtu.be/BOY6NFP_KyQ?t=50" rel="noopener" target="_blank">Марши</a><span class="src">корни</span></li><li><a href="https://www.youtube.com/watch?v=5SS9EnD_-_Y" rel="noopener" target="_blank">Гибридная музыка</a><span class="src">корни</span></li><li><a href="https://youtu.be/EadpcjMB_2s?t=158" rel="noopener" target="_blank">Импровизация на слух</a><span class="src">любительские оркестры</span></li><li><a href="https://www.youtube.com/watch?v=PwpriGltf9g" rel="noopener" target="_blank">Joe «King» Oliver</a><span class="src">музыканты</span></li><li><a href="https://youtu.be/8CorqfnI2MY?t=22" rel="noopener" target="_blank">Jelly Roll Morton</a><span class="src">музыканты</span></li><li><a href="https://youtu.be/UofL8pD69co?t=65" rel="noopener" target="_blank">Louis Armstrong: джаз стал музыкой солистов</a><span class="src">Armstrong</span></li><li><a href="https://www.youtube.com/watch?v=VqhCQZaH4Vs" rel="noopener" target="_blank">Louis Armstrong: «What a Wonderful World»</a><span class="src">Armstrong</span></li><li><a href="https://www.youtube.com/results?search_query=Louis+Armstrong+West+End+Blues+1928" rel="noopener" target="_blank">Louis Armstrong: «West End Blues»</a><span class="src">поиск на YouTube, ссылка со слайда не работает</span></li></ul></div>
+</section>
+<!-- DIXIELAND -->
+<section aria-labelledby="t-dixieland" hidden="" id="dixieland" role="tabpanel">
+<h2>Диксиленд</h2>
+<p class="lead">Новоорлеанский стиль белых музыкантов. Джаз объединяет расы.</p>
+<div class="people">
+<div class="person"><span class="name">Papa Jack Laine</span><span class="role">Руководитель оркестра и барабанщик, создатель диксиленда</span><p>Его оркестр часто побеждал чернокожих музыкантов в уличных «битвах оркестров».</p></div>
+<div class="person"><span class="name">Nick LaRocca</span><span class="role">Руководитель Original Dixieland Jazz Band</span><p>Ансамбль <span class="yr">в 1917 году</span> сделал первые джазовые записи.</p></div>
+</div>
+<h3>Изменившееся звучание</h3>
+<ul>
+<li>Звук был менее мощным.</li>
+<li>У белых музыкантов была лучше техника игры.</li>
+<li>Состав инструментов остался прежним.</li>
+<li>Музыка стала быстрее, а мелодия — плавнее.</li>
+<li>Тембры были менее насыщенными.</li>
+<li>Характерное звучание давал <b>солирующий инструмент</b> — труба или кларнет.</li>
+</ul>
+<h3>Запись и распространение</h3>
+<ul>
+<li><span class="yr">В 1917 году</span> <b>Original Dixieland Jazz Band</b> сделал первые джазовые записи.</li>
+<li>Джазовые пьесы впервые стали знаменитыми, а пластинка разошлась тиражом более миллиона экземпляров.</li>
+<li>По всей Америке появились подражатели.</li>
+</ul>
+<h3>Известные ансамбли</h3>
+<ul>
+<li>Original Dixieland Jazz Band</li>
+<li>New Orleans Rhythm Kings</li>
+<li>Louis Armstrong &amp; All Stars Orchestra</li>
+</ul>
+<h3>Расцвет и возвращение</h3>
+<ul>
+<li>Золотой век закончился <span class="yr">в начале 1930-х</span> с приходом свинга и биг-бэндов.</li>
+<li><span class="yr">В конце 1940-х и начале 1950-х</span> к диксиленду вернулись.</li>
+<li>Популярен до сих пор.</li>
+</ul>
+<div class="listen"><h3>Послушай со слайдов</h3><ul><li><a href="https://youtu.be/wyLjbMBpGDA?t=16" rel="noopener" target="_blank">Солирующий инструмент в диксиленде</a><span class="src">звучание</span></li><li><a href="https://www.youtube.com/watch?v=89fZGnAdago" rel="noopener" target="_blank">Original Dixieland Jazz Band</a><span class="src">запись</span></li></ul></div>
+</section>
+<!-- CHICAGO -->
+<section aria-labelledby="t-chicago" hidden="" id="chicago" role="tabpanel">
+<h2>Чикагский джаз</h2>
+<p class="lead">Новый центр джаза. Коллективную импровизацию сменила <b>сольная</b>. Чикагский джаз — это джаз в исполнении белых музыкантов.</p>
+<h3>Блюз сплетается с джазом</h3>
+<ul>
+<li>Расцвет <span class="yr">в 1920-е годы</span>.</li>
+<li>Выражал проблемы, связанные с <b>расовой дискриминацией</b>.</li>
+<li>Блюзовый джаз увлёк белых старшеклассников.</li>
+<li>Ансамбль <b>Austin High School Gang</b> стал питомником молодых талантов и нового стиля.</li>
+</ul>
+<h3>Более сложное звучание</h3>
+<ul>
+<li>Белые музыканты добавили техническую отточенность, гармоническую сложность и <b>аранжировки</b>.</li>
+<li>Значение <b>соло</b> выросло, на первый план вышла виртуозность исполнителя.</li>
+<li><b>Брейк:</b> оркестр замолкает, пока солист импровизирует.</li>
+<li>Коллективные соло остались только в начале и в конце пьесы.</li>
+<li>Маршевый ритм сменился более плавным. Влияние блюза было сильнее, чем рэгтайма.</li>
+</ul>
+<div aria-label="Четыре ровные доли" class="beats">
+<span class="beat even"><i></i>1</span><span class="beat even"><i></i>2</span><span class="beat even"><i></i>3</span><span class="beat even"><i></i>4</span>
+</div>
+<p class="beatcap">Сравни с Новым Орлеаном: маршевого акцента на 1-й и 3-й доле больше нет, пульсация ровнее и плавнее.</p>
+<h3>Появление саксофона</h3>
+<ul>
+<li>Саксофон вошёл в обиход начиная с чикагского стиля и позже стал символом джаза.</li>
+<li>Первым виртуозом саксофона был тенор-саксофонист <b>Bud Freeman</b>.</li>
+</ul>
+<h3>Диалог групп инструментов</h3>
+<div class="people">
+<div class="person"><span class="name">Fletcher Henderson <span class="yr">1897–1952</span></span><span class="role">Пианист, руководитель оркестра</span><p>Разделил оркестр на группы инструментов и с помощью <b>тембрового противопоставления</b> создал новый оркестровый стиль. Разработал принципы аранжировки для большого состава.</p></div>
+<div class="person"><span class="name">Coleman Hawkins <span class="yr">1904–1969</span></span><span class="role">Тенор-саксофонист</span><p>Играл в оркестре Fletcher Henderson.</p></div>
+</div>
+<h3>Успех танцевальных оркестров</h3>
+<ul>
+<li>В репертуаре были джазовые обработки поп-песен.</li>
+<li>Самым популярным руководителем танцевального оркестра был <b>Paul Whiteman</b> <span class="yr">1890–1967</span>.</li>
+<li>В его оркестре играли корнетист <b>Bix Beiderbecke</b> и гитарист <b>Eddie Lang</b>.</li>
+</ul>
+<h3>Duke Ellington <span class="yr">1899–1974</span></h3>
+<ul>
+<li>Композитор, пианист и руководитель оркестра.</li>
+<li>Работал в основном <b>в Нью-Йорке, в гарлемском Cotton Club</b>.</li>
+<li>Произведения рождались в импровизации с оркестром: пьеса начиналась с фортепианного соло, а остальные музыканты подключались.</li>
+<li><b>Стиль джунглей («джангл»):</b> выразительные звуки трубы и тромбона.</li>
+<li>Пьесы: «Mood Indigo», «It Don't Mean a Thing».</li>
+</ul>
+<div class="listen"><h3>Послушай со слайдов</h3><ul><li><a href="https://youtu.be/hcYBwRjMqjg?t=52" rel="noopener" target="_blank">Fletcher Henderson: тембровое противопоставление</a><span class="src">диалог групп инструментов</span></li><li><a href="https://www.youtube.com/watch?v=psch9N4PmO4" rel="noopener" target="_blank">Джазовые обработки поп-песен</a><span class="src">танцевальные оркестры</span></li><li><a href="https://www.youtube.com/watch?v=cb2w2m1JmCY" rel="noopener" target="_blank">Duke Ellington: самые известные пьесы</a><span class="src">Ellington</span></li><li><a href="https://www.youtube.com/watch?v=O9jHgGDKDkU" rel="noopener" target="_blank">Duke Ellington: «Mood Indigo»</a><span class="src">Ellington</span></li><li><a href="https://www.youtube.com/watch?v=qDQpZT3GhDg" rel="noopener" target="_blank">Duke Ellington: «It Don't Mean a Thing»</a><span class="src">Ellington</span></li></ul></div>
+</section>
+<!-- VÕRDLUS -->
+<section aria-labelledby="t-vordlus" hidden="" id="vordlus" role="tabpanel">
+<h2>Три стиля рядом</h2>
+<p class="lead">На контрольной часто спрашивают различия. Эта таблица — самый быстрый способ повторить.</p>
+<p class="scrollhint">Таблицу можно прокручивать в сторону →</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th></th><th>Новый Орлеан</th><th>Диксиленд</th><th>Чикаго</th></tr></thead>
+<tbody>
+<tr><th>Кто играл</th><td>Чернокожие музыканты</td><td>Белые музыканты</td><td>Белые музыканты, старшеклассники</td></tr>
+<tr><th>Импровизация</th><td>Коллективная</td><td>Коллективная, солирующий инструмент выделяется</td><td>Сольная, брейки</td></tr>
+<tr><th>Ритм</th><td>Маршевый, акцент на 1-й и 3-й доле</td><td>Быстрее, мелодия плавнее</td><td>Плавный, блюзовый</td></tr>
+<tr><th>Звучание</th><td>Хриплое, напористое, эмоциональное</td><td>Менее мощное, техника лучше</td><td>Отточенное, аранжированное</td></tr>
+<tr><th>Новый инструмент</th><td>Туба и банджо, позже контрабас, гитара, фортепиано</td><td>Состав тот же</td><td>Саксофон</td></tr>
+<tr><th>Ключевые имена</th><td>King Oliver, Jelly Roll Morton, Louis Armstrong</td><td>Papa Jack Laine, Nick LaRocca</td><td>Bud Freeman, Fletcher Henderson, Coleman Hawkins, Paul Whiteman, Bix Beiderbecke</td></tr>
+<tr><th>Время</th><td>до 1917</td><td>запись 1917 года, конец в начале 1930-х</td><td>расцвет в 1920-е</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- TEST -->
+<section aria-labelledby="t-test" hidden="" id="test" role="tabpanel">
+<h2>Проверь себя</h2>
+<p class="lead">Сначала продумай ответ, потом нажми на вопрос.</p>
+<div class="quiz" data-quiz="jazz"></div>
+</section>
+<section aria-labelledby="t-jazz-viited" hidden="" id="jazz-viited" role="tabpanel">
+<h2>Источники</h2>
+<p class="lead">Откуда взято содержание этой темы.</p>
+<h3>Слайды уроков</h3>
+<p>Все конспекты по этой теме сделаны на основе слайдов учителя музыки Eva Lisa Markus (Tallinna Pelgulinna Riigigümnaasium, Музыка G2, 2026/2027):</p>
+<ul>
+<li><b>Музыка G2: джазовая музыка</b> (введение, характерные черты джаза, происхождение)</li>
+<li><b>Ранние стили</b> (рэгтайм, блюз, Scott Joplin)</li>
+<li><b>New Orleans jazz</b> (Новый Орлеан, Louis Armstrong, диксиленд)</li>
+<li><b>Чикагский джаз</b> (чикагский стиль, саксофон, Henderson, Whiteman, Ellington)</li>
+</ul>
+<p class="muted">Сами слайды сюда не выкладываю, потому что это материалы учителя. Попроси их у учителя или посмотри в школьной учебной среде.</p>
+<h3>Другое</h3>
+<ul>
+<li>Примеры для прослушивания: «Послушай со слайдов» в конце каждой темы (ссылки взяты со слайдов).</li>
+<li>Цитата: Joachim-Ernst Berendt, «Das Jazzbuch».</li>
+</ul>
+<div class="key"><span class="label">Чего-то не хватает?</span>Здесь может быть не всё. Если знаешь ещё какой-то материал или источник, <a href="#soovita">напиши в предложения</a>.</div>
+</section>
+</main>
+</div>
+<div class="view" data-parent="muusika" data-parent-title="Музыка" data-title="Рецензия на концерт" data-updated="2026-10-04" hidden="" id="v-kontsert">
+<nav aria-label="Темы раздела «Рецензия на концерт»" class="appbar sticky"><a aria-label="Ajukas avaleht" class="logo" href="#" translate="no"><svg aria-hidden="true" class="mark"><use href="#logo-mark"></use></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button aria-controls="kontsert-ulesehitus" aria-selected="false" id="t-kontsert-ulesehitus" role="tab">Структура</button><button aria-controls="kontsert-kysimused" aria-selected="false" id="t-kontsert-kysimused" role="tab">Вопросы для анализа</button><button aria-controls="kontsert-nipid" aria-selected="false" id="t-kontsert-nipid" role="tab">Советы</button><button aria-controls="kontsert-kohad" aria-selected="false" id="t-kontsert-kohad" role="tab">Где найти концерт</button><button aria-controls="kontsert-test" aria-selected="false" id="t-kontsert-test" role="tab">Проверь себя</button><button aria-controls="kontsert-viited" aria-selected="false" id="t-kontsert-viited" role="tab">Источники</button></div></nav>
+<div class="pagehead">
+<a class="back" href="#muusika"><span aria-hidden="true">←</span> Музыка</a>
+<span class="path"><a href="#">Главная</a> / <a href="#muusika">Музыка</a> / Рецензия на концерт</span>
+</div>
+<main><section aria-labelledby="t-kontsert-ulesehitus" hidden="" id="kontsert-ulesehitus" role="tabpanel">
+<h2>Рецензия на концерт</h2>
+<p class="lead">С сентября по февраль ты сходишь на один концерт или музыкальный спектакль и вместе с группой подготовишь по нему устную рецензию.</p>
+<div class="key"><span class="label">Презентация</span>Длительность <b>7–10 минут</b>. Каждый участник группы рассказывает <b>своё мнение</b> о концерте (часть раскрытия темы).</div>
+<h3>1. Введение</h3>
+<ul>
+<li>Когда и где проходил концерт</li>
+<li>Кто выступал</li>
+<li>Какие произведения исполнялись</li>
+<li>Пара обобщающих предложений о настроении концерта или построении программы</li>
+</ul>
+<h3>2. Основная часть, то есть сама рецензия</h3>
+<ul>
+<li>Начни с исполненных произведений. Можешь найти интересные факты и цитаты о композиторах или использовать программку.</li>
+<li>Не цитируй программку слово в слово и не переписывай её на слайды. Возьми одну интересную мысль или факт и на их основе выскажи <b>свои мысли и выводы</b>.</li>
+<li><b>Бо́льшая часть</b> основной части должна быть посвящена мыслям <b>об исполнителях и исполнении</b>. Вопросы, от которых можно оттолкнуться, — на вкладке «Вопросы для анализа».</li>
+</ul>
+<h3>3. Заключение</h3>
+<p>Три-четыре предложения, в которых есть:</p>
+<ul>
+<li>выводы, которые получились в ходе рассуждения;</li>
+<li>вызвала ли музыка в исполнении этого артиста мысли (какие?), восхитила ли (почему?) или показалась скучной (почему?);</li>
+<li>сравнение с твоим прежним опытом посещения концертов;</li>
+<li>предложения исполнителям или организаторам.</li>
+</ul>
+</section>
+<section aria-labelledby="t-kontsert-kysimused" hidden="" id="kontsert-kysimused" role="tabpanel">
+<h2>Вопросы для анализа</h2>
+<p class="lead">Используй эти вопросы, когда думаешь, что сказать об исполнителях и исполнении. К каждому ответу объясни, <b>почему</b> ты так считаешь.</p>
+<h3>Исполнители</h3>
+<ul>
+<li>Кто они? Используй программку или интернет. Если материала много, выбери главное: победы в конкурсах, выступления в известных залах, сотрудничество с известными музыкантами.</li>
+<li>Хорошо ли они владели инструментом или голосом, или было к чему придраться? Почему?</li>
+</ul>
+<h3>Исполнение и твоё впечатление</h3>
+<ul>
+<li>Как исполнитель исполняет произведение?</li>
+<li>Какие эмоции это у тебя вызвало?</li>
+<li>Как произведение повлияло лично на тебя? Вызвало ли оно мысли, чувства или воспоминания?</li>
+</ul>
+<h3>Композитор</h3>
+<ul>
+<li>Раскрыло ли исполнение стиль и мир идей композитора?</li>
+<li>Что ты думаешь о музыке этого композитора и как, по-твоему, её следует исполнять?</li>
+</ul>
+<h3>Оценка</h3>
+<p>Было ли исполнение</p>
+<ul>
+<li>оригинальным и необычным,</li>
+<li>странным и непонятным,</li>
+<li>или разочарованием?</li>
+</ul>
+<p>Обязательно объясни почему.</p>
+<div class="key"><span class="label">Опера или балет</span>Расскажи также о постановке, декорациях, костюмах и хореографии.</div>
+</section>
+<section aria-labelledby="t-kontsert-nipid" hidden="" id="kontsert-nipid" role="tabpanel">
+<h2>Советы</h2>
+<h3>Советы учителя</h3>
+<ul>
+<li>Будь честным, но объективным. Выражай свои чувства, но подкрепляй их конкретными примерами.</li>
+<li>Избегай общих фраз вроде «было хорошо». Объясни, <b>почему</b> было хорошо.</li>
+<li>Говори ясно и логично, чтобы слушателю было понятно.</li>
+<li>Следи за грамотностью, но не бойся образных выражений и своего стиля.</li>
+<li>Проверяй имена исполнителей и композиторов по программке. Если программки нет — по ENE (Эстонской энциклопедии), музыкальному словарю или, в крайнем случае, в интернете.</li>
+</ul>
+<h3>Ещё советую</h3>
+<ul>
+<li>Возьми программку с собой или сфотографируй её. В ней имена, произведения и факты, которые потом понадобятся.</li>
+<li>Сделай заметки сразу после концерта, пока впечатление свежее: что понравилось, что удивило, что запомнилось.</li>
+<li>Заранее договоритесь в группе, кто о чём говорит, чтобы одни и те же мысли не повторялись.</li>
+<li>Не читай со слайдов. На слайдах пусть будут ключевые слова и картинки, а рассказ — своими словами.</li>
+<li>Сделай репетицию и засеки время. 7–10 минут пролетают быстрее, чем кажется.</li>
+</ul>
+</section>
+<section aria-labelledby="t-kontsert-kohad" hidden="" id="kontsert-kohad" role="tabpanel">
+<h2>Где найти концерт</h2>
+<p class="lead">Концерт должен пройти <b>с сентября по февраль</b>, и выбор за тобой.</p>
+<p>Эти два календаря — хорошее место, чтобы начать. Подойдёт и другой концерт или музыкальный спектакль, если он тебе интереснее.</p>
+<div class="listen" style="border-top:0;padding-top:0;margin-top:8px"><ul>
+<li><a href="https://muba.edu.ee/sundmused/" rel="noopener" target="_blank">События MUBA</a><span class="src">muba.edu.ee</span></li>
+<li><a href="https://emtasaalid.ee/kalender/" rel="noopener" target="_blank">Календарь залов EMTA</a><span class="src">emtasaalid.ee</span></li>
+</ul></div>
+</section>
+<section aria-labelledby="t-kontsert-test" hidden="" id="kontsert-test" role="tabpanel">
+<h2>Проверь себя</h2>
+<p class="lead">Сначала продумай ответ, потом нажми на вопрос.</p>
+<div class="quiz" data-quiz="kontsert"></div>
+</section>
+<section aria-labelledby="t-kontsert-viited" hidden="" id="kontsert-viited" role="tabpanel">
+<h2>Источники</h2>
+<p class="lead">Откуда взято содержание этой темы.</p>
+<h3>Руководство учителя</h3>
+<ul>
+<li><b>«Kontserdi või muusikalavastuse arvustuse nõuded»</b> (требования к рецензии на концерт или музыкальный спектакль): руководство учителя музыки Eva Lisa Markus (PDF, 2 стр.). На его основе сделаны вкладки «Структура», «Вопросы для анализа» и «Советы».</li>
+<li>Слайд урока <b>Музыка G2</b> «Kontserdi arvustus» (время концерта сент.–февр. и ссылки на календари).</li>
+</ul>
+<p class="muted">Само руководство сюда не выкладываю, потому что это материал учителя. Попроси его у учителя или посмотри в школьной учебной среде.</p>
+<h3>Календари</h3>
+<ul>
+<li><a href="https://muba.edu.ee/sundmused/" rel="noopener" target="_blank">События MUBA</a></li>
+<li><a href="https://emtasaalid.ee/kalender/" rel="noopener" target="_blank">Календарь залов EMTA</a></li>
+</ul>
+<div class="key"><span class="label">Чего-то не хватает?</span>Здесь может быть не всё. Если знаешь ещё какой-то материал или источник, <a href="#soovita">напиши в предложения</a>.</div>
+</section>
+</main>
+</div>
+<div class="view" data-title="UPT" hidden="" id="v-upt">
+<div class="appbar"><a aria-label="Ajukas avaleht" class="logo" href="#" translate="no"><svg aria-hidden="true" class="mark"><use href="#logo-mark"></use></svg><span>Ajukas<span class="dot">.</span></span></a></div>
+<div class="pagehead">
+<a class="back" href="#"><span aria-hidden="true">←</span> Все предметы</a>
+</div>
+<h2 class="pagetitle">UPT</h2>
+<p class="tagline">Выбери тему.</p>
+<div class="grid">
+<a class="subjcard ready" href="#upt-juhend"><span class="sname">Руководство по UPT</span><span class="stopic">Сроки, структура, оформление, ссылки на источники и правила использования ИИ.</span><span class="prog" data-topic="upt-juhend"></span></a>
+</div>
+</div>
+<div class="view" data-parent="upt" data-parent-title="UPT" data-title="Руководство по UPT" data-updated="2026-10-04" hidden="" id="v-upt-juhend">
+<nav aria-label="Темы раздела «Руководство по UPT»" class="appbar sticky"><a aria-label="Ajukas avaleht" class="logo" href="#" translate="no"><svg aria-hidden="true" class="mark"><use href="#logo-mark"></use></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button aria-controls="upt-ajakava" aria-selected="false" id="t-upt-ajakava" role="tab">График</button><button aria-controls="upt-pohitoed" aria-selected="false" id="t-upt-pohitoed" role="tab">Что такое UPT</button><button aria-controls="upt-ulesehitus" aria-selected="false" id="t-upt-ulesehitus" role="tab">Структура</button><button aria-controls="upt-vormistus" aria-selected="false" id="t-upt-vormistus" role="tab">Оформление</button><button aria-controls="upt-viitamine" aria-selected="false" id="t-upt-viitamine" role="tab">Ссылки на источники</button><button aria-controls="upt-ai" aria-selected="false" id="t-upt-ai" role="tab">ИИ</button><button aria-controls="upt-nipid" aria-selected="false" id="t-upt-nipid" role="tab">Лайфхаки</button><button aria-controls="upt-test" aria-selected="false" id="t-upt-test" role="tab">Проверь себя</button><button aria-controls="upt-viited" aria-selected="false" id="t-upt-viited" role="tab">Источники</button></div></nav>
+<div class="pagehead">
+<a class="back" href="#upt"><span aria-hidden="true">←</span> UPT</a>
+<span class="path"><a href="#">Главная</a> / <a href="#upt">UPT</a> / Руководство по UPT</span>
+</div>
+<main><section aria-labelledby="t-upt-ajakava" hidden="" id="upt-ajakava" role="tabpanel">
+<h2>График UPT 2026/2027</h2>
+<p class="lead">UPT (õpilasuurimus või praktiline töö — ученическое исследование или практическая работа) выполняется в течение года G2. Без неё гимназию не окончить.</p>
+<ol class="timeline">
+<li><span class="when">2 октября</span><b>Подача заявления на UPT.</b> Тема, согласие руководителя и, если работа групповая, все участники в одном заявлении.</li>
+<li><span class="when">2 ноября</span><b>I семинар</b></li>
+<li><span class="when">17 декабря</span>Лагерь письма</li>
+<li><span class="when">2 февраля</span><b>II семинар</b></li>
+<li><span class="when">17 февраля</span>Лагерь письма</li>
+<li><span class="when">17 марта</span>Сдача работы однокласснику на рецензирование</li>
+<li><span class="when">18–31 марта</span>Рецензирование работы одноклассника. Рецензию нужно сдать <span class="yr">до 31 марта</span>.</li>
+<li><span class="when">22 апреля</span><b>Сдача окончательной работы</b></li>
+<li><span class="when">26 апреля – 13 мая</span>Учителя рецензируют работы</li>
+<li><span class="when">3 мая</span><b>Предзащита.</b> Оценку не ставят, но участие — условие допуска к защите.</li>
+<li><span class="when">14 мая</span>Рецензии доходят до учеников</li>
+<li><span class="when">18 мая</span><b>Защита</b></li>
+</ol>
+<div class="key"><span class="label">Важно</span>Информация по UPT приходит через <b>eKool</b>. Если в eKool сказано не то, что в руководстве или на этой странице, действует последнее сообщение в eKool. Официальные руководства школы — на странице <a href="https://perg.ee/dokumendid/" rel="noopener" target="_blank">perg.ee/dokumendid</a>.</div>
+</section>
+<section aria-labelledby="t-upt-pohitoed" hidden="" id="upt-pohitoed" role="tabpanel">
+<h2>Что такое UPT</h2>
+<p class="lead">Письменная работа, которую делают самостоятельно, в паре или в группе вместе с руководителем. Защищаешь её перед комиссией.</p>
+<p>Всё здесь — краткое изложение школьного <a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf" rel="noopener" target="_blank">руководства по UPT (PDF)</a>.</p>
+<h3>Три формы</h3>
+<ul>
+<li><b>Исследовательская работа:</b> ты исследуешь проблему и находишь ответы на исследовательские вопросы.</li>
+<li><b>Практическая работа:</b> ты создаёшь что-то (например, приложение, игру, мероприятие или произведение искусства) и анализируешь свой рабочий процесс.</li>
+<li><b>Ученическая фирма:</b> письменная работа и отчёт о деятельности.</li>
+</ul>
+<h3>Виды исследовательских работ</h3>
+<ul>
+<li>На основе анкетирования</li><li>На основе интервью</li><li>На основе эксперимента или наблюдения</li><li>На основе анализа текста или видео</li><li>Краеведческая</li><li>Исследование карьеры</li>
+</ul>
+<h3>Основные правила</h3>
+<ul>
+<li>Работа пишется <b>на эстонском языке</b> в научном стиле: ясно, точно и нейтрально. Одно предложение — одна мысль, один абзац — одно развитие мысли.</li>
+<li>Работа нескольких авторов объёмнее, и вклад каждого автора должен быть различим. Презентуют все авторы.</li>
+<li>Руководитель — работник школы. Он может отказаться, если у него слишком много подопечных или тема не из его области.</li>
+<li>В помощь — курс в Moodle <b>«Uurimistöö alused»</b> (основы исследовательской работы), руководитель, лагеря письма и семинары.</li>
+</ul>
+<h3>Твои обязанности</h3>
+<ul>
+<li>Договорись с руководителем о регулярных встречах и соблюдай сроки.</li>
+<li>Ты отвечаешь за правильность своих данных.</li>
+<li>У руководителя и координатора UPT должен быть доступ к твоим материалам (OneDrive).</li>
+<li>Работа не должна быть плагиатом и должна быть правильно оформлена.</li>
+</ul>
+<h3>Чувствительные темы</h3>
+<p>Избегай чувствительных данных (здоровье, в т. ч. психическое, этническое происхождение, биометрия и т. д.) и тем, раскалывающих общество (религия, политика). Если всё же хочешь взять такую тему, нужно согласие руководителя, руководства школы и координатора UPT.</p>
+</section>
+<section aria-labelledby="t-upt-ulesehitus" hidden="" id="upt-ulesehitus" role="tabpanel">
+<h2>Структура работы</h2>
+<p class="lead">Части всегда идут в таком порядке. Оглавление, заголовки и номера страниц должны совпадать.</p>
+<h3>Исследовательская работа</h3>
+<ol>
+<li>Титульный лист</li><li>Декларация автора</li><li>Оглавление</li><li>Список использованных сокращений (если нужно)</li>
+<li><b>Введение:</b> тема, проблема, цель и исследовательские вопросы или гипотезы</li>
+<li><b>Теоретическая часть:</b> что говорят источники по теме, объяснение понятий</li>
+<li><b>Методология:</b> как и кого ты исследуешь и почему именно так</li>
+<li><b>Результаты и обсуждение</b></li>
+<li><b>Заключение:</b> ответы на исследовательские вопросы</li>
+<li>Использованные источники</li><li>Приложения</li>
+</ol>
+<h3>Практическая работа</h3>
+<ol>
+<li>Титульный лист</li><li>Декларация автора</li><li>Оглавление</li>
+<li><b>Введение</b></li>
+<li><b>Теоретическая часть</b></li>
+<li><b>Описание процесса и результата:</b> что и как сделано</li>
+<li><b>Анализ рабочего процесса и самоанализ:</b> что получилось, что нет, чему удалось научиться</li>
+<li><b>Заключение</b></li>
+<li>Использованные источники</li><li>Приложения</li>
+</ol>
+<h3>Резюме</h3>
+<p>К работе прилагается <b>резюме на эстонском и английском языках</b>. Формы — в <a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf#page=41" rel="noopener" target="_blank">приложении 3</a> к руководству по UPT (эстонский) и в <a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf#page=42" rel="noopener" target="_blank">приложении 4</a> (английский).</p>
+</section>
+<section aria-labelledby="t-upt-vormistus" hidden="" id="upt-vormistus" role="tabpanel">
+<h2>Оформление</h2>
+<p class="lead">Самое важное — чтобы вся работа была единообразной. Настрой стили в самом начале, тогда оглавление получится автоматически.</p>
+<p>Источник: <a href="https://perg.ee/wp-content/uploads/2026/10/PERGi-kirjalike-toode-vormistamise-juhend-2026-2027.pdf" rel="noopener" target="_blank">PERGi kirjalike tööde vormistamise juhend — руководство PERG по оформлению письменных работ (PDF)</a>.</p>
+<div class="key"><span class="label">Программа</span>Работа делается в <b>MS Word</b> (Microsoft 365 для учеников бесплатен) и сохраняется в <b>OneDrive</b>, чтобы руководитель её видел.</div>
+<p class="scrollhint">Таблицу можно прокручивать в сторону →</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Элемент</th><th>Требование</th></tr></thead>
+<tbody>
+<tr><th>Страница</th><td>A4, поля сверху и снизу <span class="yr">2,5 см</span>, слева и справа <span class="yr">2 см</span></td></tr>
+<tr><th>Основной текст</th><td>Times New Roman <span class="yr">12 пт</span>, чёрный, выравнивание по ширине, межстрочный интервал <span class="yr">1,5</span>, без абзацного отступа. Между абзацами не пустая строка, а <span class="yr">6 пт</span> до и после.</td></tr>
+<tr><th>Заголовок 1</th><td>TNR <span class="yr">16 пт</span>, жирный, ПРОПИСНЫЕ, выравнивание по левому краю, интервал <span class="yr">0 пт</span> до и <span class="yr">24 пт</span> после. Начинается с новой страницы.</td></tr>
+<tr><th>Заголовок 2</th><td>TNR <span class="yr">14 пт</span>, жирный, интервал <span class="yr">24 пт</span> до и <span class="yr">24 пт</span> после</td></tr>
+<tr><th>Заголовок 3</th><td>TNR <span class="yr">14 пт</span>, курсив, интервал <span class="yr">12 пт</span> до и <span class="yr">6 пт</span> после</td></tr>
+<tr><th>Название таблицы, подпись к рисунку</th><td>TNR <span class="yr">12 пт</span>, жирный, межстрочный интервал <span class="yr">1,0</span>, интервал <span class="yr">6 пт</span> до и после</td></tr>
+<tr><th>Номера страниц</th><td>Автоматически, внизу по центру. На титульном листе номер не показывается, но это 1-я страница. Декларация автора — стр. <span class="yr">2</span>.</td></tr>
+</tbody>
+</table></div>
+<h3>Правила написания</h3>
+<ul>
+<li>Однозначные числа словами (kaks punkti — «два пункта»), большие — цифрами (120 ettevõtet — «120 предприятий»). С единицей измерения всегда цифрами (5 cm).</li>
+<li>Годы цифрами, а не «в прошлом году» (eelmisel aastal).</li>
+<li>Выбери одну форму и придерживайся её во всей работе: безличную (uuriti — «исследовалось»), форму «мы» (uurisime — «мы исследовали») или форму «я» (uurisin — «я исследовал(а)»). То же касается времени глагола.</li>
+<li>Иноязычный термин в первый раз — в скобках курсивом: enesetõhusus (<em>self-efficacy</em>).</li>
+<li>Знак препинания ставится вплотную к слову, затем пробел. Скобки и кавычки ставятся вплотную к тексту.</li>
+</ul>
+</section>
+<section aria-labelledby="t-upt-viitamine" hidden="" id="upt-viitamine" role="tabpanel">
+<h2>Ссылки на источники</h2>
+<p class="lead">В PERG используется система <b>APA 7</b>: в тексте указываются фамилия автора и год, полная запись — в главе «Kasutatud allikad» (использованные источники).</p>
+<ul>
+<li>Более подробные примеры — в <a href="https://perg.ee/wp-content/uploads/2026/10/PERGi-kirjalike-toode-vormistamise-juhend-2026-2027.pdf#page=13" rel="noopener" target="_blank">главе руководства по оформлению о ссылках на источники</a>.</li>
+<li>Ссылайся на всё, чьи мысли или данные используешь, в том числе на картинки и графики. Не нужно только для общеизвестных фактов.</li>
+<li><b>Пересказ</b> — основной способ: передаёшь мысль своими словами и добавляешь ссылку, например (Covington, 2000).</li>
+<li><b>Цитата</b> даётся в кавычках и заканчивается ссылкой. Пропуск обозначается … или [---].</li>
+<li>Подача цитаты как пересказа — это <b>плагиат</b>, даже если ссылка есть.</li>
+<li><b>Википедию как источник не используют.</b> Используй первоисточники, указанные внизу статьи.</li>
+<li>Развлекательные журналы, развлекательные порталы и рекламные листовки не годятся в качестве источника (если только они не являются объектом исследования).</li>
+<li>Используй <b>Zotero</b> (<a href="https://www.zotero.org/" rel="noopener" target="_blank">zotero.org</a>): он делает ссылки и список источников автоматически.</li>
+</ul>
+<div class="key"><span class="label">Пример</span>«Kogutud andmete analüüsimine […] on uurimuses otsustava tähtsusega.» (Hirsjärvi jt, 2010, lk 206) — «Анализ собранных данных […] имеет в исследовании решающее значение».</div>
+</section>
+<section aria-labelledby="t-upt-ai" hidden="" id="upt-ai" role="tabpanel">
+<h2>Использование ИИ</h2>
+<p class="lead">ИИ можно использовать только со ссылкой и с описанием того, как он использовался: какой был запрос, какой был ответ и что в нём изменено.</p>
+<p>Правила — на <a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf#page=8" rel="noopener" target="_blank">стр. 8 руководства по UPT</a>.</p>
+<h3>В целом разрешено</h3>
+<ul>
+<li>Просить совета, где найти источники</li>
+<li>Подбирать синонимы для поисковых слов</li>
+<li>Объяснять самому себе сложную теорию</li>
+<li>Делать краткое изложение длинного текста для первого знакомства (но не как свой текст)</li>
+<li>Переводить</li>
+<li>Помощь с интерпретацией статистики, графиков и результатов</li>
+<li>Поиск ошибок в коде</li>
+<li>Редактирование своего текста (сократить, убрать повторы слов)</li>
+<li>Улучшение оформления и структуры</li>
+</ul>
+<h3>Запрещено</h3>
+<ul>
+<li>Генерировать длинные фрагменты текста и выдавать их за свои</li>
+<li>Подавать непроверенную информацию</li>
+<li>Выдумывать или подделывать данные</li>
+<li>Передавать ИИ исследовательские данные с личными данными</li>
+<li>Передавать ИИ неопубликованные работы других людей</li>
+</ul>
+<div class="key"><span class="label">Запомни</span>Выдавать текст ИИ за свои мысли — это <b>академическое мошенничество</b>.</div>
+</section>
+<section aria-labelledby="t-upt-nipid" hidden="" id="upt-nipid" role="tabpanel">
+<h2>Лайфхаки, которые экономят время</h2>
+<p class="lead">Это не требования руководства, а советы, которые упрощают жизнь.</p>
+<ul>
+<li><b>Настрой стили Word в первый же день.</b> Если заголовки и основной текст сразу правильные, оглавление делается в один клик.</li>
+<li><b>Добавляй источники в Zotero сразу, как только их читаешь.</b> Искать источники в конце — самая нудная часть.</li>
+<li><b>После каждой встречи с руководителем записывай</b>, о чём договорились и какой следующий срок.</li>
+<li><b>Прочитай критерии оценивания</b> (<a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf#page=47" rel="noopener" target="_blank">приложение 9</a> к руководству по UPT для исследовательской работы и <a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf#page=53" rel="noopener" target="_blank">приложение 10</a> для практической). Там точно написано, за что дают баллы на семинаре и на защите.</li>
+<li><b>Сформулируй цель и исследовательские вопросы пораньше.</b> Без них руководитель не сможет помочь, а теоретическая часть расползётся.</li>
+<li><b>Если работа практическая, веди дневник разработки</b>: что делал, что не сработало и почему что-то менял. Тогда самоанализ писать легко.</li>
+<li><b>Не оставляй всё на лагерь письма.</b> В лагере хорошо доводить работу до ума, а не начинать с нуля.</li>
+<li>Отрепетируй защитную речь перед кем-нибудь и продумай, что может спросить комиссия.</li>
+</ul>
+</section>
+<section aria-labelledby="t-upt-test" hidden="" id="upt-test" role="tabpanel">
+<h2>Проверь себя</h2>
+<p class="lead">Сначала продумай ответ, потом нажми на вопрос.</p>
+<div class="quiz" data-quiz="upt"></div>
+</section>
+<section aria-labelledby="t-upt-viited" hidden="" id="upt-viited" role="tabpanel">
+<h2>Источники</h2>
+<p class="lead">Официальные документы школы, на основе которых сделано это краткое изложение.</p>
+<ul>
+<li><a href="https://perg.ee/wp-content/uploads/2026/09/Lisa-2.-Opilasuurimus-ja-praktiline-too-Tallinna-Pelgulinna-Riigigumnaasiumis.pdf" rel="noopener" target="_blank">Õpilasuurimus ja praktiline töö Tallinna Pelgulinna Riigigümnaasiumis</a>: руководство по UPT (PDF, 68 стр.)</li>
+<li><a href="https://perg.ee/wp-content/uploads/2026/10/PERGi-kirjalike-toode-vormistamise-juhend-2026-2027.pdf" rel="noopener" target="_blank">PERGi kirjalike tööde vormistamise juhend 2026/2027</a> (руководство по оформлению письменных работ, PDF)</li>
+<li><a href="https://perg.ee/dokumendid/" rel="noopener" target="_blank">perg.ee/dokumendid</a>: все документы школы</li>
+<li>График UPT 2026/2027 (PDF, на сайте школы пока ещё прошлогодний график)</li>
+</ul>
+<div class="key"><span class="label">Чего-то не хватает?</span>Здесь может быть не всё. Если знаешь ещё какой-то материал или источник, <a href="#soovita">напиши в предложения</a>.</div>
+</section>
+</main>
+</div>
+<div class="view" data-title="Предложения" hidden="" id="v-soovitused">
+<div class="appbar"><a aria-label="Ajukas avaleht" class="logo" href="#" translate="no"><svg aria-hidden="true" class="mark"><use href="#logo-mark"></use></svg><span>Ajukas<span class="dot">.</span></span></a></div>
+<div class="pagehead">
+<a class="back" href="#"><span aria-hidden="true">←</span> Главная</a>
+</div>
+<h2 class="pagetitle">Предложения</h2>
+<div hidden="" id="sv-app">
+<div aria-label="Статус предложений" class="filters">
+<button aria-pressed="true" class="filter" data-f="uus" type="button">Не просмотрено <span class="n" id="n-uus"></span></button>
+<button aria-pressed="false" class="filter" data-f="vaadatud" type="button">Просмотрено <span class="n" id="n-vaadatud"></span></button>
+<button aria-pressed="false" class="filter" data-f="tehtud" type="button">Сделано <span class="n" id="n-tehtud"></span></button>
+<button aria-pressed="false" class="filter" data-f="prygi" type="button">Корзина <span class="n" id="n-prygi"></span></button>
+</div>
+<p class="muted" id="sv-hint"></p>
+<p class="msg" id="sv-msg" role="status"></p>
+<div class="sgrid" id="sv-list"></div>
+</div>
+</div>
+<script id="quiz-data" type="application/json">{"jazz": [["Признаки", "Когда и где возник джаз?", "В конце XIX – начале XX века в США, прежде всего в Новом Орлеане."], ["Признаки", "Когда и где появилось слово «jazz»?", "В 1915 году в Чикаго."], ["Признаки", "Назови четыре главные черты джаза.", "Импровизация, тембр (окраска звука), составы инструментов, а также ритм, мелодия и гармония."], ["Признаки", "Что дали джазу Африка, Европа и Карибский регион?", "Африка: коллективное музицирование, импровизация, запевала и хор. Европа: гармония и инструменты. Карибы: танцевальная музыка, основанная на ритме, и более сложные ритмы."], ["Признаки", "Что такое Congo Square?", "Площадь в Новом Орлеане, где по выходным играли музыку, танцевали и сохраняли культурное наследие."], ["Признаки", "Какой тип оркестров — одна из основ джаза?", "Оркестры похоронных процессий."], ["Рэгтайм", "На каком инструменте в основном играли рэгтайм и когда он был популярен?", "На фортепиано, в 1890-е годы."], ["Рэгтайм", "Кто создатель рэгтайма? Назови две его пьесы.", "Scott Joplin (1868–1917). Например, «Maple Leaf Rag» и «The Entertainer»."], ["Блюз", "Какова структура блюза и на чём он основан?", "12-тактовая. Основан на рабочих песнях и спиричуэлс."], ["Блюз", "Назови трёх блюзовых исполнителей.", "Bessie Smith, Muddy Waters, B.B. King."], ["Понятие", "Что такое коллективная импровизация?", "Музыканты играют одновременно, но каждый импровизирует самостоятельно."], ["Новый Орлеан", "Где играли любительские оркестры Нового Орлеана?", "В увеселительных заведениях квартала Storyville. Оркестров было почти 30."], ["Новый Орлеан", "На какие доли приходится акцент в новоорлеанском джазе?", "На 1-ю и 3-ю долю (маршевая пульсация). Офф-бита, то есть акцента на 2-й и 4-й доле, нет."], ["Новый Орлеан", "Назови инструменты мелодической группы и ритм-группы.", "Мелодическая: корнет или труба, тромбон, кларнет. Ритм-группа: туба, банджо, ударные."], ["Новый Орлеан", "Что заменило тубу и банджо и что добавилось?", "Тубу заменил контрабас, банджо — гитара, и добавилось фортепиано."], ["Новый Орлеан", "Что было основой импровизации?", "Марш или церковная мелодия, пьеса в стиле рэгтайм или 12-тактовый блюз."], ["Новый Орлеан", "Кто руководил King Oliver's Creole Jazz Band?", "Joe «King» Oliver, корнетист и трубач."], ["Новый Орлеан", "С каким ансамблем Jelly Roll Morton делал записи?", "Red Hot Peppers."], ["Новый Орлеан", "Почему расцвет новоорлеанского джаза закончился в 1917 году?", "Storyville закрыли, и музыканты уехали в Чикаго."], ["Armstrong", "Что нового привнёс в джаз Louis Armstrong?", "Джаз стал музыкой солистов. Он начал использовать аккорды и нотную запись, ввёл блюзовые ноты и скэт."], ["Armstrong", "Что такое скэт?", "Импровизированное пение слогами, без слов."], ["Armstrong", "Чья это цитата: «Если бы не Armstrong, не было бы джаза…»?", "Joachim-Ernst Berendt, «Das Jazzbuch»."], ["Диксиленд", "Кто создатель диксиленда?", "Руководитель оркестра и барабанщик Papa Jack Laine."], ["Диксиленд", "Кто сделал первую джазовую запись и когда?", "Original Dixieland Jazz Band под руководством Nick LaRocca в 1917 году. Пластинка разошлась тиражом более миллиона."], ["Диксиленд", "Чем звучание диксиленда отличалось от новоорлеанского?", "Звук менее мощный, техника лучше, музыка быстрее, мелодия плавнее, тембры менее насыщенные. Характерное звучание давал солирующий инструмент. Состав остался прежним."], ["Диксиленд", "Что положило конец золотому веку диксиленда?", "Свинг и биг-бэнды в начале 1930-х. Диксиленд вернулся в конце 1940-х."], ["Чикаго", "Какое главное изменение в импровизации произошло в чикагском джазе?", "Коллективную импровизацию сменила сольная."], ["Чикаго", "Что такое брейк?", "Момент, когда оркестр замолкает, а солист импровизирует."], ["Чикаго", "Что такое Austin High School Gang?", "Ансамбль белых старшеклассников, питомник молодых талантов и чикагского стиля."], ["Чикаго", "Кто был первым виртуозом саксофона?", "Тенор-саксофонист Bud Freeman."], ["Чикаго", "Что нового привнёс Fletcher Henderson?", "Разделил оркестр на группы инструментов, с помощью тембрового противопоставления создал новый оркестровый стиль и принципы аранжировки для большого состава."], ["Чикаго", "Кто руководил самым популярным танцевальным оркестром и кто в нём играл?", "Paul Whiteman. В его оркестре играли корнетист Bix Beiderbecke и гитарист Eddie Lang."], ["Ellington", "Где работал Duke Ellington и что такое стиль джунглей?", "В Нью-Йорке, в гарлемском Cotton Club. Стиль джунглей («джангл») — это выразительные звуки трубы и тромбона."]], "kontsert": [["Общее", "В какой период должен пройти концерт?", "С сентября по февраль."], ["Общее", "Должен ли концерт быть из календаря MUBA или EMTA?", "Нет. Это только рекомендации, подойдёт и другой концерт или музыкальный спектакль."], ["Презентация", "Какой длины должна быть презентация?", "7–10 минут."], ["Презентация", "Кто выступает на презентации?", "Каждый участник группы рассказывает своё мнение о концерте (часть раскрытия темы)."], ["Структура", "Из чего состоит рецензия?", "Введение, основная часть (сама рецензия) и заключение."], ["Структура", "Что входит во введение?", "Когда и где проходил концерт, кто выступал, какие произведения исполнялись, а также пара предложений о настроении или построении программы."], ["Структура", "С чего можно начать основную часть?", "С исполненных произведений: интересные факты и цитаты о композиторах или информация из программки."], ["Структура", "Чего нельзя делать с программкой?", "Цитировать её слово в слово и переписывать на слайды. Возьми одну мысль или факт и на их основе выскажи свои мысли."], ["Структура", "Чему должна быть посвящена бо́льшая часть основной части?", "Мыслям об исполнителях и исполнении."], ["Структура", "Сколько предложений в заключении и что в него входит?", "3–4 предложения: выводы; вызвала ли музыка мысли, восхитила или показалась скучной (и почему); сравнение с прежними концертами; предложения исполнителям или организаторам."], ["Анализ", "Какие три оценки можно дать исполнению?", "Оригинальное и необычное, странное и непонятное или разочарование. Всегда нужно объяснять почему."], ["Анализ", "Что ещё обсудить, если это опера или балет?", "Постановку, декорации, костюмы и хореографию."], ["Анализ", "Что можно рассказать об исполнителях?", "Кто они: победы в конкурсах, выступления в известных залах, сотрудничество с известными музыкантами. А также хорошо ли они владели инструментом или голосом."], ["Советы", "Что делать вместо фразы «было хорошо»?", "Объяснить, почему было хорошо, и привести конкретный пример."], ["Советы", "Где проверять имена исполнителей и композиторов?", "В программке. Если её нет — в ENE (Эстонской энциклопедии), музыкальном словаре или, в крайнем случае, в интернете."]], "upt": [["График", "Когда срок подачи заявления на UPT?", "2 октября."], ["График", "Когда I и II семинары?", "I семинар 2 ноября, II семинар 2 февраля."], ["График", "Когда нужно сдать работу однокласснику на рецензирование и когда срок сдачи рецензии?", "Работу — до 17 марта, рецензию на работу одноклассника — до 31 марта."], ["График", "Когда нужно сдать окончательную работу?", "22 апреля."], ["График", "Когда предзащита и обязательна ли она?", "3 мая. Оценку не ставят, но участие — условие допуска к защите."], ["График", "Когда защита?", "18 мая."], ["График", "Где публикуется информация по UPT и что действует, если сведения расходятся?", "В eKool. Если сведения расходятся, действует последнее сообщение в eKool."], ["Основы", "Какие три формы UPT существуют?", "Исследовательская работа, практическая работа и ученическая фирма."], ["Основы", "Назови виды исследовательских работ.", "Исследование на основе анкетирования, интервью, эксперимента или наблюдения, анализа текста или видео, краеведческое исследование, исследование карьеры."], ["Основы", "На каком языке пишется UPT?", "На эстонском (исключение: если работа участвует в конкурсе)."], ["Структура", "Какие части есть у практической работы, которых нет у исследовательской?", "Описание процесса и результата, а также анализ рабочего процесса и самоанализ."], ["Структура", "На каких языках должно быть резюме?", "На эстонском и английском."], ["Оформление", "В какой программе оформляется работа и где она хранится?", "В MS Word, а работа хранится в OneDrive, чтобы руководитель её видел."], ["Оформление", "Какой шрифт, размер и межстрочный интервал у основного текста?", "Times New Roman 12 пт, выравнивание по ширине, межстрочный интервал 1,5, 6 пт до и после абзаца."], ["Оформление", "Какие поля у страницы?", "Сверху и снизу 2,5 см, слева и справа 2 см."], ["Оформление", "Как оформляется Заголовок 1?", "TNR 16 пт, жирный, ПРОПИСНЫЕ, интервал 0 пт до и 24 пт после, начинается с новой страницы."], ["Оформление", "На какой странице первый видимый номер страницы и какой он?", "На странице декларации автора, номер 2. На титульном листе номер не показывается."], ["Оформление", "Как писать числа в тексте?", "Однозначные словами (kaks — «два»), большие цифрами (120). С единицей измерения всегда цифрами (5 cm)."], ["Ссылки на источники", "Какую систему ссылок использует PERG?", "APA 7: в тексте фамилия автора и год, полная запись — в списке использованных источников."], ["Ссылки на источники", "Можно ли использовать Википедию как источник?", "Нет. Используй первоисточники, указанные внизу статьи."], ["Ссылки на источники", "Чем пересказ отличается от цитаты?", "Пересказ — это мысль твоими словами со ссылкой. Цитата — точный фрагмент в кавычках со ссылкой."], ["ИИ", "Что нужно описать при использовании ИИ?", "Какой был запрос, какой был ответ и что в нём изменено. На использование нужно сослаться."], ["ИИ", "Назови два запрещённых способа использования ИИ.", "Например, генерировать длинные фрагменты текста и выдавать их за свои, выдумывать данные, подавать непроверенную информацию или передавать ИИ личные данные."]]}</script>
+<footer>Составлено на основе материалов уроков и руководств школы с помощью ИИ. Может содержать отдельные ошибки.</footer>
+</div>
+<script>
+(function(){
+  var QUIZ = JSON.parse(document.getElementById('quiz-data').textContent);
+
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  document.querySelectorAll('.quiz[data-quiz]').forEach(function(box){
+    var QA = QUIZ[box.getAttribute('data-quiz')] || [];
+    box.innerHTML = '<div class="quizbar"><button class="btn" type="button" data-act="shuffle">' + t('Sega küsimused') + '</button>' +
+      '<button class="btn sec" type="button" data-act="close">' + t('Peida vastused') + '</button><span class="count"></span></div><div class="cards"></div>';
+    var cards = box.querySelector('.cards'), count = box.querySelector('.count');
+    function update(){ count.textContent = t('{n} / {m} vastust avatud', { n: cards.querySelectorAll('details[open]').length, m: QA.length }); }
+    function render(list){
+      cards.innerHTML = list.map(function(q){
+        return '<details class="card"><summary><span class="tag">'+esc(q[0])+'</span><span>'+esc(q[1])+'</span></summary><div class="ans">'+esc(q[2])+'</div></details>';
+      }).join('');
+      update();
+    }
+    cards.addEventListener('toggle', update, true);
+    box.querySelector('[data-act=shuffle]').addEventListener('click', function(){
+      var a = QA.slice();
+      for (var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=a[i];a[i]=a[j];a[j]=tmp;}
+      render(a);
+    });
+    box.querySelector('[data-act=close]').addEventListener('click', function(){
+      cards.querySelectorAll('details[open]').forEach(function(d){d.open=false;}); update();
+    });
+    render(QA);
+  });
+
+
+  // --- otsing ---
+  (function(){
+    var input = document.getElementById('q'), out = document.getElementById('q-res');
+    if (!input) return;
+    function norm(str){ var r = ''; for (var i = 0; i < str.length; i++) { r += str[i].normalize('NFD')[0].toLowerCase(); } return r; }
+    var index = [];
+    document.querySelectorAll('section[role="tabpanel"]').forEach(function(sec){
+      if (sec.querySelector('.quiz')) return;
+      var view = sec.closest('.view'); var tab = document.getElementById('t-' + sec.id);
+      var where = view.getAttribute('data-parent-title') + ' › ' + view.getAttribute('data-title') + ' › ' + (tab ? tab.textContent.replace(' ✓','') : '');
+      sec.querySelectorAll('h2, h3, p, li, td, .person, .when').forEach(function(el){
+        if (el.closest('.seenfoot') || el.closest('.person') && !el.classList.contains('person') || el.querySelector('li')) return;
+        var c = el.cloneNode(true); c.querySelectorAll('.src, .yr + .yr').forEach(function(x){ x.remove(); });
+        var txt = c.textContent.replace(/\s+/g, ' ').trim();
+        if (txt.length < 3) return;
+        index.push({ pid: sec.id, where: where, text: txt, n: norm(txt) });
+      });
+    });
+    function snippet(e, terms){
+      var first = e.n.indexOf(terms[0]);
+      var start = Math.max(0, first - 50), end = Math.min(e.text.length, first + 110);
+      var piece = e.text.slice(start, end), np = e.n.slice(start, end);
+      var marks = [];
+      terms.forEach(function(t){ var k = np.indexOf(t); while (k >= 0) { marks.push([k, k + t.length]); k = np.indexOf(t, k + t.length); } });
+      marks.sort(function(a,b){return a[0]-b[0];});
+      var html = '', pos = 0;
+      marks.forEach(function(m){ if (m[0] < pos) return; html += esc(piece.slice(pos, m[0])) + '<mark>' + esc(piece.slice(m[0], m[1])) + '</mark>'; pos = m[1]; });
+      html += esc(piece.slice(pos));
+      return (start > 0 ? '…' : '') + html + (end < e.text.length ? '…' : '');
+    }
+    function run(){
+      var terms = norm(input.value.trim()).split(/\s+/).filter(function(t){ return t.length >= 2; });
+      if (!terms.length) { out.hidden = true; out.innerHTML = ''; return; }
+      var hits = index.filter(function(e){ return terms.every(function(t){ return e.n.indexOf(t) >= 0; }); });
+      var seen = {}, list = [];
+      hits.forEach(function(e){ var k = e.pid + '|' + e.text; if (!seen[k]) { seen[k] = 1; list.push(e); } });
+      out.hidden = false;
+      if (!list.length) { out.innerHTML = '<p class="muted">' + esc(t('Midagi ei leitud. Proovi teist sõna.')) + '</p>'; return; }
+      out.innerHTML = '<p class="qcount">' + esc(t('Tulemusi: {n}', { n: list.length })) + '</p>' +
+        list.slice(0, 15).map(function(e){
+          return '<a class="qhit" href="#' + e.pid + '"><span class="qwhere">' + esc(e.where) + '</span><span class="qtext">' + snippet(e, terms) + '</span></a>';
+        }).join('') + (list.length > 15 ? '<p class="muted" style="font-size:13px">' + esc(t('Näitan esimest 15. Täpsusta otsingut.')) + '</p>' : '');
+    }
+    var timer; input.addEventListener('input', function(){ clearTimeout(timer); timer = setTimeout(run, 120); });
+    input.addEventListener('keydown', function(e){ if (e.key === 'Escape') { input.value = ''; run(); } });
+  })();
+
+
+  // --- viimati uuendatud ---
+  (function(){
+    function fmt(iso){ var p = iso.split('-'); return (+p[2]) + '.' + (+p[1]) + '.' + p[0]; }
+    var latest = {};
+    document.querySelectorAll('.view[data-updated]').forEach(function(v){
+      var d = v.getAttribute('data-updated'), id = v.id.slice(2);
+      var head = v.querySelector('.pagehead');
+      if (head) { var u = document.createElement('span'); u.className = 'upd'; u.textContent = t('Uuendatud {d}', { d: fmt(d) }); head.appendChild(u); }
+      document.querySelectorAll('a.subjcard[href="#' + id + '"]').forEach(function(c){
+        var u = document.createElement('span'); u.className = 'cupd'; u.textContent = t('uuendatud {d}', { d: fmt(d) }); c.appendChild(u);
+      });
+      var par = v.getAttribute('data-parent');
+      if (par && (!latest[par] || d > latest[par])) latest[par] = d;
+    });
+    Object.keys(latest).forEach(function(par){
+      document.querySelectorAll('a.subjcard[href="#' + par + '"]').forEach(function(c){
+        var u = document.createElement('span'); u.className = 'cupd'; u.textContent = t('uuendatud {d}', { d: fmt(latest[par]) }); c.appendChild(u);
+      });
+    });
+  })();
+
+
+  // --- seaded: teema ja keel ---
+  (function(){
+    var gear = document.getElementById('gear'), pop = document.getElementById('settings-pop');
+    function open(on){ pop.hidden = !on; gear.setAttribute('aria-expanded', on ? 'true' : 'false'); }
+    gear.addEventListener('click', function(e){ e.stopPropagation(); open(pop.hidden); });
+    document.addEventListener('click', function(e){ if (!pop.hidden && !pop.contains(e.target)) open(false); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !pop.hidden) { open(false); gear.focus(); } });
+    var meta = document.querySelector('meta[name="theme-color"]');
+    function paintTheme(){
+      var light = document.documentElement.getAttribute('data-theme') === 'light';
+      pop.querySelectorAll('[data-theme-set]').forEach(function(b){ b.setAttribute('aria-pressed', (b.getAttribute('data-theme-set') === 'light') === light ? 'true' : 'false'); });
+      if (meta) meta.setAttribute('content', light ? '#F7F7F8' : '#181818');
+    }
+    pop.querySelectorAll('[data-theme-set]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var v = b.getAttribute('data-theme-set');
+        if (v === 'light') document.documentElement.setAttribute('data-theme', 'light'); else document.documentElement.removeAttribute('data-theme');
+        try { localStorage.setItem('ajukas-theme', v); } catch (e) {}
+        paintTheme();
+      });
+    });
+    var here = document.documentElement.lang;
+    pop.querySelectorAll('[data-lang-set]').forEach(function(a){
+      if (a.getAttribute('data-lang-set') === here) a.setAttribute('aria-current', 'true');
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        try { localStorage.setItem('ajukas-lang', a.getAttribute('data-lang-set')); } catch (err) {}
+        location.href = a.getAttribute('href') + location.hash;
+      });
+    });
+    paintTheme();
+  })();
+
+  var views = Array.prototype.slice.call(document.querySelectorAll('.view'));
+
+  // --- edusammud: nähtud vahekaardid ja viimane koht ---
+  var P = { seen: {}, last: null };
+  try { var raw = localStorage.getItem('ajukas-progress'); if (raw) P = JSON.parse(raw) || P; } catch(e) {}
+  if (!P.seen) P.seen = {};
+  var Ajukas = window.Ajukas = window.Ajukas || {};
+  function saveProgress(){
+    try { localStorage.setItem('ajukas-progress', JSON.stringify(P)); } catch(e) {}
+    if (Ajukas.onProgress) Ajukas.onProgress(P);
+  }
+  function markSeen(view, pid){
+    var tab = document.getElementById('t-' + pid);
+    if (!tab) return;
+    var changed = false;
+    var last = { hash: pid, label: view.getAttribute('data-title') + ' · ' + tab.textContent.replace(' ✓','') };
+    if (!P.last || P.last.hash !== last.hash) { P.last = last; changed = true; }
+    if (changed) { saveProgress(); paintProgress(); }
+  }
+  function paintProgress(){
+    paintSeenButtons();
+    document.querySelectorAll('[role="tab"]').forEach(function(t){
+      t.classList.toggle('seen', !!P.seen[t.getAttribute('aria-controls')]);
+    });
+    document.querySelectorAll('.prog[data-topic]').forEach(function(el){
+      var v = document.getElementById('v-' + el.getAttribute('data-topic'));
+      var tabs = v ? v.querySelectorAll('[role="tab"]') : [];
+      var n = 0; tabs.forEach(function(t){ if (P.seen[t.getAttribute('aria-controls')]) n++; });
+      el.textContent = n ? t('{n} / {m} vahekaarti läbitud', { n: n, m: tabs.length }) : '';
+    });
+    var box = document.getElementById('resume-box');
+    if (P.last && document.getElementById(P.last.hash)) {
+      var link = document.getElementById('resume-link');
+      link.href = '#' + P.last.hash;
+      link.innerHTML = '';
+      link.appendChild(document.createTextNode('→ ' + P.last.label));
+      var sm = document.createElement('small'); sm.textContent = t('sealt, kus viimati pooleli jäi'); link.appendChild(sm);
+      box.hidden = false;
+    } else box.hidden = true;
+  }
+  function paintSeenButtons(){
+    document.querySelectorAll('.seenbtn').forEach(function(b){
+      var on = !!P.seen[b.getAttribute('data-pid')];
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.textContent = on ? t('✓ Vahekaart vaadatud') : t('Märgi vahekaart vaadatuks');
+      b.title = on ? t('Klõpsa, et märge eemaldada') : '';
+    });
+  }
+  document.querySelectorAll('section[role="tabpanel"]').forEach(function(sec){
+    var foot = document.createElement('div'); foot.className = 'seenfoot';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'seenbtn';
+    b.setAttribute('data-pid', sec.id);
+    b.addEventListener('click', function(){
+      if (P.seen[sec.id]) delete P.seen[sec.id]; else P.seen[sec.id] = 1;
+      saveProgress(); paintProgress();
+    });
+    foot.appendChild(b); sec.appendChild(foot);
+  });
+  Ajukas.getProgress = function(){ return P; };
+  Ajukas.route = function(){ route(); };
+  Ajukas.setProgress = function(p){ P = { seen: (p && p.seen) || {}, last: (p && p.last) || null }; try { localStorage.setItem('ajukas-progress', JSON.stringify(P)); } catch(e) {} paintProgress(); };
+
+  var homeView = document.getElementById('v-home');
+  function store(k,v){ try { localStorage.setItem(k,v); } catch(e) {} }
+  function load(k){ try { return localStorage.getItem(k); } catch(e) { return null; } }
+
+  function showTab(view, pid){
+    var tabs = Array.prototype.slice.call(view.querySelectorAll('[role="tab"]'));
+    if (!tabs.length) return;
+    var ok = tabs.some(function(t){ return t.getAttribute('aria-controls') === pid; });
+    if (!ok) pid = tabs[0].getAttribute('aria-controls');
+    tabs.forEach(function(t){
+      var on = t.getAttribute('aria-controls') === pid;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      if (on) { var bar = t.parentNode; bar.scrollLeft = t.offsetLeft - bar.clientWidth/2 + t.clientWidth/2; }
+    });
+    store('ajukas-tab-' + view.id, pid);
+    markSeen(view, pid);
+  }
+  function route(){
+    var h = decodeURIComponent((location.hash || '').slice(1));
+    var view = null, pid = null;
+    if (h) {
+      view = document.getElementById('v-' + h);
+      if (!view) {
+        var el = document.getElementById(h);
+        if (el && el.getAttribute('role') === 'tabpanel') { view = el.closest('.view'); pid = h; }
+      }
+    }
+    if (view && view.id === 'v-soovitused' && !Ajukas.isAdmin) view = null;
+    if (!view) view = homeView;
+    views.forEach(function(v){ v.hidden = v !== view; });
+    showTab(view, pid || load('ajukas-tab-' + view.id));
+    var title = view.getAttribute('data-title');
+    document.title = view === homeView ? 'Ajukas' : title + ' · Ajukas';
+  }
+  views.forEach(function(view){
+    var tabs = Array.prototype.slice.call(view.querySelectorAll('[role="tab"]'));
+    tabs.forEach(function(t, i){
+      t.addEventListener('click', function(){ location.hash = t.getAttribute('aria-controls'); });
+      t.addEventListener('keydown', function(e){
+        var n = null;
+        if (e.key === 'ArrowRight') n = tabs[(i+1)%tabs.length];
+        if (e.key === 'ArrowLeft') n = tabs[(i-1+tabs.length)%tabs.length];
+        if (n) { e.preventDefault(); location.hash = n.getAttribute('aria-controls'); n.focus(); }
+      });
+    });
+  });
+  function top(){
+    if (location.hash === '#soovita') { var b = document.getElementById('sugg'); if (b) { b.scrollIntoView({block:'start'}); var ta = document.getElementById('sg-text'); if (ta) ta.focus({preventScroll:true}); return; } }
+    window.scrollTo(0,0);
+  }
+  try { history.scrollRestoration = 'manual'; } catch(e) {}
+  window.addEventListener('hashchange', function(){ route(); top(); requestAnimationFrame(top); });
+  route();
+  paintProgress();
+  requestAnimationFrame(top);
+  window.addEventListener('load', function(){ setTimeout(top, 0); });
+})();
+</script>
+<script type="module">
+// Täida see Firebase konsoolist (Project settings → Your apps → Web app → Config).
+// Kuni see on null, töötab leht ilma kontode ja soovitusteta.
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyD4tAFZAiOhCyqvJ9XYNTlRZurorvdLfVw",
+  authDomain: "ajukas-7be66.firebaseapp.com",
+  projectId: "ajukas-7be66",
+  storageBucket: "ajukas-7be66.firebasestorage.app",
+  messagingSenderId: "795161895430",
+  appId: "1:795161895430:web:86250891a7e29cf9bb5987",
+};
+const ADMIN_USER = 'nextonu';      // see kasutaja näeb soovitusi
+const DOMAIN = 'kasutaja.ajukas.app'; // kasutajanimest tehakse sisemine aadress; e-kirju ei saadeta
+
+const $ = (id) => document.getElementById(id);
+const A = window.Ajukas || (window.Ajukas = {});
+
+if (!FIREBASE_CONFIG) {
+  $('acct-out').hidden = true;
+  $('acct-off').hidden = false;
+  $('sg-send').disabled = true;
+  $('sg-msg').textContent = t('Soovituste saatmine lülitatakse peagi sisse.');
+} else {
+  const V = '10.12.2';
+  const [{ initializeApp }, authM, fsM] = await Promise.all([
+    import(`https://www.gstatic.com/firebasejs/${V}/firebase-app.js`),
+    import(`https://www.gstatic.com/firebasejs/${V}/firebase-auth.js`),
+    import(`https://www.gstatic.com/firebasejs/${V}/firebase-firestore.js`),
+  ]);
+  const { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } = authM;
+  const { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, serverTimestamp, getDocs, query, orderBy, Timestamp } = fsM;
+  const app = initializeApp(FIREBASE_CONFIG);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const userOf = (u) => (u && u.email ? u.email.split('@')[0] : '');
+  const msg = (el, text, kind) => { el.textContent = text; el.className = 'msg' + (kind ? ' ' + kind : ''); };
+  const ERR = {
+    'auth/invalid-credential': 'Vale kasutajanimi või parool.',
+    'auth/wrong-password': 'Vale kasutajanimi või parool.',
+    'auth/user-not-found': 'Vale kasutajanimi või parool.',
+    'auth/invalid-email': 'Vale kasutajanimi või parool.',
+    'auth/email-already-in-use': 'See kasutajanimi on juba võetud. Proovi mõnda teist.',
+    'auth/weak-password': 'Parool peab olema vähemalt 6 märki pikk.',
+    'auth/too-many-requests': 'Liiga palju katseid. Oota natuke ja proovi uuesti.',
+    'auth/network-request-failed': 'Internetiühendus puudub. Proovi uuesti.',
+  };
+
+  function readLogin() {
+    const u = $('lg-user').value.trim().toLowerCase();
+    const p = $('lg-pass').value;
+    if (!/^[a-z0-9._-]{3,20}$/.test(u)) {
+      msg($('lg-msg'), t('Kasutajanimi peab olema 3–20 märki: tähed a–z, numbrid, punkt, sidekriips või alakriips.'), 'err');
+      return null;
+    }
+    if (p.length < 6) { msg($('lg-msg'), t('Parool peab olema vähemalt 6 märki pikk.'), 'err'); return null; }
+    return { email: u + '@' + DOMAIN, pass: p };
+  }
+  $('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const c = readLogin(); if (!c) return;
+    msg($('lg-msg'), t('Login sisse…'));
+    try { await signInWithEmailAndPassword(auth, c.email, c.pass); msg($('lg-msg'), ''); }
+    catch (err) { msg($('lg-msg'), t(ERR[err.code] || 'Sisselogimine ebaõnnestus. Proovi uuesti.'), 'err'); }
+  });
+  $('lg-new').addEventListener('click', async () => {
+    const c = readLogin(); if (!c) return;
+    msg($('lg-msg'), t('Loon kontot…'));
+    try { await createUserWithEmailAndPassword(auth, c.email, c.pass); msg($('lg-msg'), ''); }
+    catch (err) { msg($('lg-msg'), t(ERR[err.code] || 'Konto loomine ebaõnnestus. Proovi uuesti.'), 'err'); }
+  });
+  $('lg-out').addEventListener('click', () => signOut(auth));
+
+  // edusammude sünkroniseerimine
+  let saveTimer = null;
+  function pushProgress(p) {
+    const u = auth.currentUser; if (!u) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      setDoc(doc(db, 'kasutajad', u.uid), { seen: p.seen || {}, last: p.last || null, muudetud: serverTimestamp() }).catch(() => {});
+    }, 1200);
+  }
+
+
+  // --- manused: pildid väiksemaks, kõik base64 kujul soovituse sisse (Firestore'i dokument max 1 MB) ---
+  const MAX_FILES = 3, MAX_TOTAL = 800000; // base64 märke kokku
+  let pending = [];
+  function readAsDataURL(f) { return new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = no; r.readAsDataURL(f); }); }
+  async function shrinkImage(f) {
+    const url = await readAsDataURL(f);
+    const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = url; });
+    let max = 1400, q = 0.82, out = url;
+    for (let k = 0; k < 6; k++) {
+      const sc = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement('canvas'); c.width = Math.round(img.width * sc); c.height = Math.round(img.height * sc);
+      const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(img, 0, 0, c.width, c.height);
+      out = c.toDataURL('image/jpeg', q);
+      if (out.length <= 260000) break;
+      max = Math.round(max * 0.8); q = Math.max(0.6, q - 0.06);
+    }
+    return { nimi: f.name.replace(/\.[^.]+$/, '') + '.jpg', tyyp: 'image/jpeg', andmed: out };
+  }
+  function paintFiles() {
+    const ul = $('sg-flist'); ul.textContent = '';
+    let total = 0;
+    pending.forEach((p) => {
+      total += p.andmed ? p.andmed.length : 0;
+      const li = document.createElement('li'); if (p.viga) li.className = 'bad';
+      const n = document.createElement('span'); n.textContent = p.nimi;
+      const z = document.createElement('span'); z.textContent = p.viga || (Math.round(p.andmed.length * 0.75 / 1024) + ' kB');
+      li.append(n, z); ul.append(li);
+    });
+    return total;
+  }
+  $('sg-files').addEventListener('change', async (e) => {
+    const files = Array.from(e.target.files || []).slice(0, MAX_FILES);
+    pending = files.map((f) => ({ nimi: f.name, viga: t('töötlen…') }));
+    paintFiles();
+    pending = await Promise.all(files.map(async (f) => {
+      try {
+        if (f.type.startsWith('image/') && f.type !== 'image/gif' && f.type !== 'image/svg+xml') return await shrinkImage(f);
+        if (f.size > 600 * 1024) return { nimi: f.name, viga: t('liiga suur (üle 600 kB)') };
+        return { nimi: f.name, tyyp: f.type || 'application/octet-stream', andmed: await readAsDataURL(f) };
+      } catch (err) { return { nimi: f.name, viga: t('ei saanud lugeda') }; }
+    }));
+    if (e.target.files.length > MAX_FILES) msg($('sg-msg'), t('Lisada saab kuni 3 faili, ülejäänud jäeti välja.'), 'err');
+    const total = paintFiles();
+    if (total > MAX_TOTAL) msg($('sg-msg'), t('Failid on kokku liiga suured. Vali väiksemad või vähem faile.'), 'err');
+  });
+  // Turvalisus: pildina näidatakse ainult tavalisi rastervorminguid; kõik muu (ka HTML ja SVG)
+  // antakse ainult allalaadimiseks tüübiga application/octet-stream, et see ei saaks lehe nimel käivituda.
+  const SAFE_IMG = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+  function dataUrlToBlobUrl(d, mime) {
+    const b64 = d.slice(d.indexOf(',') + 1);
+    const bin = atob(b64); const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    return URL.createObjectURL(new Blob([arr], { type: mime }));
+  }
+  function attachmentsEl(list) {
+    const box = document.createElement('div'); box.className = 'att';
+    (list || []).forEach((f) => {
+      if (!f || typeof f.andmed !== 'string' || !f.andmed.startsWith('data:')) return;
+      const head = f.andmed.slice(5, f.andmed.indexOf(';'));
+      const isImg = SAFE_IMG.includes(head) && SAFE_IMG.includes(f.tyyp);
+      const url = dataUrlToBlobUrl(f.andmed, isImg ? head : 'application/octet-stream');
+      const link = document.createElement('a'); link.href = url;
+      const name = String(f.nimi || 'fail').replace(/[\\/:*?"<>|]/g, '_');
+      if (isImg) {
+        link.target = '_blank'; link.rel = 'noopener';
+        const im = document.createElement('img'); im.src = url; im.alt = name; link.append(im);
+      } else {
+        link.className = 'file'; link.download = name; link.textContent = '📎 ' + name + ' (' + t('laadi alla') + ')';
+      }
+      box.append(link);
+    });
+    return box;
+  }
+
+  // --- soovituste haldus (ainult admin) ---
+  const DAY = 24 * 60 * 60 * 1000;
+  const S = { items: [], filter: 'uus', loaded: false };
+  const stateOf = (x) => (x.kustutatud ? 'prygi' : (x.olek || 'uus'));
+  const LABEL = { uus: t('vaatamata'), vaadatud: t('vaadatud'), tehtud: t('tehtud'), prygi: t('prügikastis') };
+  const HINT = {
+    uus: t('Uued soovitused, mida sa pole veel vaadatuks märkinud.'),
+    vaadatud: t('Loetud, aga veel tegemata.'),
+    tehtud: t('Soovitused, mille oled ära teinud.'),
+    prygi: t('Kustutatud soovitused kaovad jäädavalt 24 tunni pärast, kui sa neid enne ei taasta.'),
+  };
+
+  async function loadInbox() {
+    try {
+      const snap = await getDocs(query(collection(db, 'soovitused'), orderBy('aeg', 'desc')));
+      const now = Date.now();
+      const items = [];
+      const purge = [];
+      snap.forEach((d) => {
+        const x = Object.assign({ id: d.id }, d.data());
+        if (x.kustutatud && x.kustutatud.toMillis && now - x.kustutatud.toMillis() > DAY) purge.push(d.id);
+        else items.push(x);
+      });
+      purge.forEach((id) => deleteDoc(doc(db, 'soovitused', id)).catch(() => {}));
+      S.items = items; S.loaded = true;
+      renderInbox();
+    } catch (e) {
+      $('inbox-sum').textContent = t('Soovitusi ei õnnestunud laadida.');
+      msg($('sv-msg'), t('Soovitusi ei õnnestunud laadida. Värskenda lehte.'), 'err');
+    }
+  }
+
+  function renderInbox() {
+    const count = { uus: 0, vaadatud: 0, tehtud: 0, prygi: 0 };
+    S.items.forEach((x) => count[stateOf(x)]++);
+    Object.keys(count).forEach((k) => { $('n-' + k).textContent = count[k] ? '(' + count[k] + ')' : ''; });
+    const sum = $('inbox-sum');
+    sum.textContent = '';
+    if (count.uus) { const b = document.createElement('span'); b.className = 'new'; b.textContent = t('{n} vaatamata', { n: count.uus }); sum.append(b, ' · '); }
+    sum.append(t('{n} kokku', { n: count.vaadatud + count.tehtud + count.uus }));
+
+    document.querySelectorAll('.filter').forEach((f) => f.setAttribute('aria-pressed', f.dataset.f === S.filter ? 'true' : 'false'));
+    $('sv-hint').textContent = HINT[S.filter];
+    const list = $('sv-list');
+    list.textContent = '';
+    const shown = S.items.filter((x) => stateOf(x) === S.filter);
+    if (!shown.length) {
+      const p = document.createElement('p'); p.className = 'sempty';
+      p.textContent = S.filter === 'prygi' ? t('Prügikast on tühi.') : t('Siin pole praegu ühtegi soovitust.');
+      list.append(p); return;
+    }
+    shown.forEach((x) => list.append(card(x)));
+  }
+
+  function card(x) {
+    const st = stateOf(x);
+    const el = document.createElement('article'); el.className = 'scard is-' + st;
+    const meta = document.createElement('div'); meta.className = 'meta';
+    const who = document.createElement('span');
+    const when = x.aeg && x.aeg.toDate ? x.aeg.toDate().toLocaleString(t('et-EE'), { dateStyle: 'short', timeStyle: 'short' }) : '';
+    who.textContent = (x.nimi || t('Anonüümne')) + (when ? ' · ' + when : '');
+    const chip = document.createElement('span'); chip.className = 'chip ' + st; chip.textContent = LABEL[st];
+    meta.append(who, chip);
+    const body = document.createElement('p'); body.className = 'txt'; body.textContent = x.tekst || '';
+    const acts = document.createElement('div'); acts.className = 'acts';
+    const btn = (label, fn, danger) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'sbtn' + (danger ? ' danger' : ''); b.textContent = label;
+      b.addEventListener('click', async () => {
+        acts.querySelectorAll('button').forEach((z) => z.disabled = true);
+        try { await fn(); renderInbox(); }
+        catch (e) { msg($('sv-msg'), t('Muudatus ei läinud läbi. Proovi uuesti.'), 'err'); acts.querySelectorAll('button').forEach((z) => z.disabled = false); }
+      });
+      acts.append(b);
+    };
+    const set = async (patch) => { await updateDoc(doc(db, 'soovitused', x.id), patch); Object.assign(x, patch); };
+    if (st === 'uus') btn(t('Märgi vaadatuks'), () => set({ olek: 'vaadatud' }));
+    if (st === 'vaadatud') btn(t('Märgi vaatamata'), () => set({ olek: 'uus' }));
+    if (st === 'uus' || st === 'vaadatud') btn(t('Tehtud ✓'), () => set({ olek: 'tehtud' }));
+    if (st === 'tehtud') btn(t('Tagasi tegemata'), () => set({ olek: 'vaadatud' }));
+    if (st !== 'prygi') btn(t('Kustuta'), async () => { await updateDoc(doc(db, 'soovitused', x.id), { kustutatud: serverTimestamp() }); x.kustutatud = Timestamp.now(); }, true);
+    if (st === 'prygi') {
+      const left = Math.max(0, DAY - (Date.now() - x.kustutatud.toMillis()));
+      const h = Math.ceil(left / 3600000);
+      const info = document.createElement('span'); info.className = 'muted'; info.style.fontSize = '12px';
+      info.textContent = h <= 1 ? t('Kustub jäädavalt tunni jooksul') : t('Kustub jäädavalt {h} tunni pärast', { h: h });
+      meta.append(info);
+      btn(t('Taasta'), () => set({ kustutatud: null }));
+      btn(t('Kustuta jäädavalt'), async () => { await deleteDoc(doc(db, 'soovitused', x.id)); S.items = S.items.filter((y) => y !== x); }, true);
+    }
+    el.append(meta, body);
+    if (x.failid && x.failid.length) el.append(attachmentsEl(x.failid));
+    el.append(acts);
+    return el;
+  }
+
+  document.querySelectorAll('.filter').forEach((f) => f.addEventListener('click', () => { S.filter = f.dataset.f; msg($('sv-msg'), ''); renderInbox(); }));
+  window.addEventListener('hashchange', () => { if (location.hash === '#soovitused' && S.loaded) loadInbox(); });
+
+  onAuthStateChanged(auth, async (u) => {
+    $('acct-out').hidden = !!u;
+    $('acct-in').hidden = !u;
+    $('inbox').hidden = true;
+    $('sv-app').hidden = true;
+    if (A.isAdmin) { A.isAdmin = false; A.route && A.route(); }
+    if (!u) {
+      A.onProgress = null;
+      if (A._wasIn) A.setProgress({ seen: {}, last: null }); // jagatud arvutis ei jää eelmise kasutaja andmed näha
+      A._wasIn = false;
+      return;
+    }
+    A._wasIn = true;
+    const name = userOf(u);
+    $('acct-who').textContent = name;
+    if (!$('sg-name').value) $('sg-name').value = name;
+    $('lg-pass').value = '';
+    try {
+      const snap = await getDoc(doc(db, 'kasutajad', u.uid));
+      const local = A.getProgress();
+      const remote = snap.exists() ? snap.data() : {};
+      const merged = { seen: Object.assign({}, remote.seen || {}, local.seen || {}), last: local.last || remote.last || null };
+      A.setProgress(merged);
+      A.onProgress = pushProgress;
+      pushProgress(merged);
+    } catch (e) { A.onProgress = pushProgress; }
+    if (name === ADMIN_USER) { A.isAdmin = true; $('inbox').hidden = false; $('sv-app').hidden = false; A.route && A.route(); loadInbox(); }
+  });
+
+  $('sugg-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const tekst = $('sg-text').value.trim();
+    const nimi = $('sg-name').value.trim().slice(0, 60);
+    if (!tekst) { msg($('sg-msg'), t('Kirjuta enne saatmist soovitus.'), 'err'); return; }
+    $('sg-send').disabled = true;
+    msg($('sg-msg'), t('Saadan…'));
+    try {
+      const ok = pending.filter((p) => p.andmed);
+      if (pending.some((p) => p.viga)) { msg($('sg-msg'), t('Mõnda faili ei saa saata. Eemalda see või vali teine.'), 'err'); $('sg-send').disabled = false; return; }
+      if (ok.reduce((n, p) => n + p.andmed.length, 0) > MAX_TOTAL) { msg($('sg-msg'), t('Failid on kokku liiga suured. Vali väiksemad või vähem faile.'), 'err'); $('sg-send').disabled = false; return; }
+      const data = { nimi, tekst: tekst.slice(0, 2000), aeg: serverTimestamp(), uid: auth.currentUser ? auth.currentUser.uid : '' };
+      if (ok.length) data.failid = ok.map((p) => ({ nimi: p.nimi.slice(0, 100), tyyp: p.tyyp.slice(0, 100), andmed: p.andmed }));
+      await addDoc(collection(db, 'soovitused'), data);
+      $('sg-text').value = ''; $('sg-files').value = ''; pending = []; paintFiles();
+      msg($('sg-msg'), t('Aitäh! Soovitus on saadetud.'), 'ok');
+      if (userOf(auth.currentUser) === ADMIN_USER) loadInbox();
+    } catch (err) {
+      msg($('sg-msg'), t('Saatmine ebaõnnestus. Proovi hiljem uuesti.'), 'err');
+    }
+    $('sg-send').disabled = false;
+  });
+}
+</script>
+</body>
+</html>

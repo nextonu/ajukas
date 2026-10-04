@@ -18,14 +18,38 @@
 <meta property="og:image:alt" content="Ajukas: kordamine kontrolltöödeks">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#181818">
+<script>
+(function(){
+  try {
+    if (localStorage.getItem('ajukas-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    var here = document.documentElement.lang, want = localStorage.getItem('ajukas-lang');
+    var file = { et: './', en: 'en.html', ru: 'ru.html' }[want];
+    if (file && want !== here) location.replace(file + location.hash);
+  } catch (e) {}
+})();
+window.I18N = {};
+function t(k, p) {
+  var s = (window.I18N && window.I18N[k]) || k;
+  if (p) for (var x in p) s = s.split('{' + x + '}').join(p[x]);
+  return s;
+}
+</script>
 <style>
 :root{
   --bg:#181818; --panel:#1F1F1F; --raised:#252526; --line:#2B2B2B; --line2:#3C3C3C;
   --text:#CCCCCC; --bright:#FFFFFF; --muted:#9D9D9D;
   --key:#4FC1FF; --hl:rgba(234,179,8,.24); --num:#CE9178; --accent:#0078D4;
+  --accent-hover:#026EC1; --hover:#2D2D2D; --brand:#EAB308; --warn:#EAB308; --ok:var(--ok); --err:var(--err);
   --ui:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
   --mono:"Cascadia Code","Cascadia Mono",Consolas,"Courier New",monospace;
   color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#F7F7F8; --panel:#FFFFFF; --raised:#F0F0F2; --line:#E3E3E6; --line2:#C9C9CE;
+  --text:#2E2E33; --bright:#111114; --muted:#64646C;
+  --key:#0063B1; --hl:rgba(234,179,8,.38); --num:#A1260D; --accent:#005FB8;
+  --accent-hover:#004E98; --hover:#E6E6EA; --brand:#EAB308; --warn:#946200; --ok:#1A7F37; --err:#C42B1C;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -36,7 +60,7 @@ header{padding-block:36px 10px;display:flex;flex-direction:column;gap:6px}
 .eyebrow{font-family:var(--mono);font-size:12px;color:var(--muted)}
 .eyebrow::before{content:"// "}
 h1{font-size:clamp(36px,7vw,52px);font-weight:700;line-height:1.05;margin:0;color:var(--bright);letter-spacing:-.02em}
-h1 .dot{color:#EAB308}
+h1 .dot{color:var(--brand)}
 .tagline{color:var(--muted);margin:0;max-width:62ch}
 .subjects{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .subj{font-size:14px;font-weight:600;border:1px solid var(--line2);background:var(--raised);color:var(--bright);padding:6px 12px;border-radius:4px}
@@ -70,7 +94,7 @@ b,strong{font-weight:600;color:var(--bright);background:var(--hl);padding:0 3px;
 .person .name{font-weight:600;color:var(--bright);display:block}
 .person .role{color:var(--muted);font-size:14px;display:block;margin-bottom:6px}
 .person p{font-size:15px;margin:0}
-.quote{border-left:2px solid #EAB308;padding:4px 0 4px 16px;margin:20px 0;font-style:italic;font-size:18px;color:var(--bright)}
+.quote{border-left:2px solid var(--brand);padding:4px 0 4px 16px;margin:20px 0;font-style:italic;font-size:18px;color:var(--bright)}
 .quote cite{display:block;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:6px}
 .key{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin:16px 0}
 .key .label{font-family:var(--mono);font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
@@ -92,10 +116,10 @@ thead th{background:var(--panel);font-size:13px;color:var(--bright);font-weight:
 tbody th{font-weight:600;color:var(--muted)}
 .quizbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 16px}
 .btn{font-family:var(--ui);font-size:13px;border:0;background:var(--accent);color:#fff;padding:6px 14px;border-radius:2px;cursor:pointer}
-.btn:hover{background:#026EC1}
+.btn:hover{background:var(--accent-hover)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .btn.sec{background:var(--raised);color:var(--text);border:1px solid var(--line2)}
-.btn.sec:hover{background:#2D2D2D}
+.btn.sec:hover{background:var(--hover)}
 .count{font-family:var(--mono);font-size:13px;color:var(--muted)}
 .cards{display:flex;flex-direction:column;gap:6px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:4px}
@@ -129,13 +153,13 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .appbar{display:flex;align-items:stretch;border-bottom:1px solid var(--line);margin-bottom:18px;background:var(--bg)}
 .appbar.sticky{position:sticky;top:0;z-index:5}
 .appbar .logo{flex:0 0 auto;display:flex;align-items:center;padding:8px 16px 8px 0;margin-right:4px;border-right:1px solid var(--line);font-weight:700;font-size:17px;color:var(--bright);text-decoration:none;letter-spacing:-.01em}
-.appbar .logo .dot{color:#EAB308}
-.appbar .logo:hover{color:#fff}
+.appbar .logo .dot{color:var(--brand)}
+.appbar .logo:hover{color:var(--bright)}
 .appbar .logo:focus-visible,.back:focus-visible,.path a:focus-visible{outline:1px solid var(--key);outline-offset:2px}
 .appbar .tabs{flex:1 1 auto;min-width:0}
 .pagehead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:4px 0 22px}
 .back{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--bright);text-decoration:none;background:var(--raised);border:1px solid var(--line2);border-radius:4px;padding:8px 16px}
-.back:hover{border-color:var(--bright);background:#2D2D2D}
+.back:hover{border-color:var(--bright);background:var(--hover)}
 .path{font-family:var(--mono);font-size:13px;color:var(--muted)}
 .path a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:3px}
 .path a:hover{color:var(--bright)}
@@ -159,8 +183,8 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .box input:focus,.box textarea:focus{outline:1px solid var(--accent);border-color:var(--accent)}
 .row{display:flex;gap:8px;flex-wrap:wrap}
 .msg{font-size:13px;margin:0;min-height:1em}
-.msg.err{color:#F48771}
-.msg.ok{color:#89D185}
+.msg.err{color:var(--err)}
+.msg.ok{color:var(--ok)}
 .resume{display:block;text-decoration:none;color:var(--bright);font-weight:600}
 .resume small{display:block;font-weight:400;color:var(--muted);font-family:var(--mono);font-size:12px}
 .resume:hover{text-decoration:underline}
@@ -169,9 +193,9 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .inbox-item .meta{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
 .inbox-item .txt{white-space:pre-wrap;margin:4px 0 0;font-size:14.5px;color:var(--text)}
 .linkbtn{background:none;border:0;color:var(--muted);font:inherit;font-size:12px;cursor:pointer;text-decoration:underline;padding:0}
-.linkbtn:hover{color:#F48771}
-.tabs button.seen::after{content:" ✓";color:#89D185}
-.prog{display:block;margin-top:6px;font-family:var(--mono);font-size:12px;color:#89D185}
+.linkbtn:hover{color:var(--err)}
+.tabs button.seen::after{content:" ✓";color:var(--ok)}
+.prog{display:block;margin-top:6px;font-family:var(--mono);font-size:12px;color:var(--ok)}
 .prog:empty{display:none}
 
 .mark{width:22px;height:22px;flex:0 0 auto;display:block}
@@ -181,7 +205,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .seenfoot{margin-top:32px;padding-top:16px;border-top:1px solid var(--line)}
 .seenbtn{font:inherit;font-size:14px;font-weight:600;cursor:pointer;border-radius:4px;padding:9px 16px;border:1px solid var(--line2);background:var(--raised);color:var(--bright)}
 .seenbtn:hover{border-color:var(--bright)}
-.seenbtn[aria-pressed="true"]{background:transparent;border-color:#89D185;color:#89D185}
+.seenbtn[aria-pressed="true"]{background:transparent;border-color:var(--ok);color:var(--ok)}
 .seenbtn:focus-visible{outline:1px solid var(--key);outline-offset:2px}
 
 .scrollhint{display:none;font-family:var(--mono);font-size:12px;color:var(--muted);margin:8px 0 -4px}
@@ -205,31 +229,31 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .inboxlink{display:block;text-decoration:none;color:inherit}
 .inboxlink:hover{border-color:var(--bright)}
 .inboxlink h3{color:var(--bright)}
-.inboxlink .new{color:#EAB308;font-weight:600}
+.inboxlink .new{color:var(--warn);font-weight:600}
 .filters{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 10px}
 .filter{font:inherit;font-size:14px;cursor:pointer;border:1px solid var(--line2);background:transparent;color:var(--muted);padding:7px 14px;border-radius:999px}
 .filter:hover{color:var(--bright)}
-.filter[aria-pressed="true"]{background:var(--bright);color:#181818;border-color:var(--bright)}
+.filter[aria-pressed="true"]{background:var(--bright);color:var(--bg);border-color:var(--bright)}
 .filter .n{font-family:var(--mono);font-size:12px;opacity:.8}
 .filter:focus-visible{outline:1px solid var(--key);outline-offset:2px}
 .sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;align-items:start}
 .scard{background:var(--panel);border:1px solid var(--line2);border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
-.scard.is-uus{border-color:#EAB308}
+.scard.is-uus{border-color:var(--warn)}
 .scard .meta{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:space-between}
 .scard .chip{font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid currentColor}
-.chip.uus{color:#EAB308}.chip.vaadatud{color:var(--muted)}.chip.tehtud{color:#89D185}.chip.prygi{color:#F48771}
+.chip.uus{color:var(--warn)}.chip.vaadatud{color:var(--muted)}.chip.tehtud{color:var(--ok)}.chip.prygi{color:var(--err)}
 .scard .txt{white-space:pre-wrap;margin:0;color:var(--bright);font-size:15px;overflow-wrap:anywhere}
 .scard .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
 .sbtn{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line2);background:var(--raised);color:var(--text);padding:5px 10px;border-radius:3px}
 .sbtn:hover{border-color:var(--bright);color:var(--bright)}
-.sbtn.danger:hover{border-color:#F48771;color:#F48771}
+.sbtn.danger:hover{border-color:var(--err);color:var(--err)}
 .sbtn:disabled{opacity:.5;cursor:wait}
 .sbtn:focus-visible{outline:1px solid var(--key);outline-offset:2px}
 .sempty{color:var(--muted);grid-column:1/-1}
 
 .flist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:4px;font-size:13px}
 .flist li{display:flex;justify-content:space-between;gap:8px;color:var(--text);font-family:var(--mono);font-size:12px}
-.flist li.bad{color:#F48771}
+.flist li.bad{color:var(--err)}
 .box input[type=file]{font-size:13px;padding:6px}
 .sgrid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 .att{display:flex;flex-wrap:wrap;gap:6px}
@@ -259,6 +283,23 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .upd{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto}
 .cupd{display:block;margin-top:4px;font-family:var(--mono);font-size:11px;color:var(--muted);opacity:.8}
 @media (max-width:600px){.upd{margin-left:0;width:100%}}
+
+.settings{position:fixed;top:calc(env(safe-area-inset-top,0px) + 6px);right:10px;z-index:30}
+.gear{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line2);background:var(--panel);color:var(--muted);cursor:pointer}
+.gear svg{width:20px;height:20px}
+.gear:hover,.gear[aria-expanded="true"]{color:var(--bright);border-color:var(--bright)}
+.gear:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+.pop{position:absolute;right:0;top:46px;width:236px;background:var(--panel);border:1px solid var(--line2);border-radius:6px;padding:12px 14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.plabel{font-family:var(--mono);font-size:12px;color:var(--muted);margin:0 0 6px}
+.plabel + .seg{margin-bottom:12px}
+.seg{display:flex;border:1px solid var(--line2);border-radius:4px;overflow:hidden}
+.seg > *{flex:1;font:inherit;font-size:13px;text-align:center;padding:7px 4px;background:transparent;color:var(--text);border:0;cursor:pointer;text-decoration:none}
+.seg > * + *{border-left:1px solid var(--line2)}
+.seg > *:hover{background:var(--hover)}
+.seg > [aria-pressed="true"],.seg > [aria-current="true"]{background:var(--bright);color:var(--bg)}
+.seg > *:focus-visible{outline:1px solid var(--key);outline-offset:-2px}
+.appbar{padding-right:46px}
+header{padding-right:46px}
 </style>
 </head>
 <body>
@@ -270,11 +311,29 @@ ol{margin:0 0 12px;padding-left:1.4em}
   </symbol>
 </svg>
 <div class="wrap">
+<div class="settings">
+  <button type="button" class="gear" id="gear" aria-label="Seaded" title="Seaded" aria-expanded="false" aria-controls="settings-pop">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.3 2.9a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1L11 21h4l.3-2.9a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5ZM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" transform="translate(-1 0)"/></svg>
+  </button>
+  <div class="pop" id="settings-pop" hidden>
+    <p class="plabel">Teema</p>
+    <div class="seg" role="group" aria-label="Teema">
+      <button type="button" data-theme-set="dark">Tume</button>
+      <button type="button" data-theme-set="light">Hele</button>
+    </div>
+    <p class="plabel">Keel</p>
+    <div class="seg" role="group" aria-label="Keel">
+      <a href="./" data-lang-set="et" translate="no" lang="et">Eesti</a>
+      <a href="en.html" data-lang-set="en" translate="no" lang="en">English</a>
+      <a href="ru.html" data-lang-set="ru" translate="no" lang="ru">Русский</a>
+    </div>
+  </div>
+</div>
 
 <div class="view home" id="v-home" data-title="Ajukas">
   <header>
     <span class="eyebrow">Kordamine kontrolltöödeks</span>
-    <h1 class="brandline"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></h1>
+    <h1 class="brandline" translate="no"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></h1>
   </header>
   <div class="homecols">
 <div class="homemain">
@@ -351,7 +410,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 </div>
 
 <div class="view" id="v-muusika" data-title="Muusika" hidden>
-  <div class="appbar"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
+  <div class="appbar"><a class="logo" translate="no" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
   <div class="pagehead">
     <a class="back" href="#"><span aria-hidden="true">←</span> Kõik ained</a>
   </div>
@@ -363,7 +422,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
   </div>
 </div>
 <div class="view" id="v-jazz" data-updated="2026-10-04" data-title="Varajane jazz" data-parent="muusika" data-parent-title="Muusika" hidden>
-  <nav class="appbar sticky" aria-label="Varajane jazz teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist">
+  <nav class="appbar sticky" aria-label="Varajane jazz teemad"><a class="logo" translate="no" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist">
     <button role="tab" id="t-ajajoon" aria-controls="ajajoon" aria-selected="true">Ajajoon</button>
     <button role="tab" id="t-tunnused" aria-controls="tunnused" aria-selected="false">Jazzi tunnused</button>
     <button role="tab" id="t-varajased" aria-controls="varajased" aria-selected="false">Ragtime ja bluus</button>
@@ -663,7 +722,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 </main>
 </div>
 <div class="view" id="v-kontsert" data-updated="2026-10-04" data-title="Kontserdi arvustus" data-parent="muusika" data-parent-title="Muusika" hidden>
-  <nav class="appbar sticky" aria-label="Kontserdi arvustus teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-kontsert-ulesehitus" aria-controls="kontsert-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-kontsert-kysimused" aria-controls="kontsert-kysimused" aria-selected="false">Analüüsi küsimused</button><button role="tab" id="t-kontsert-nipid" aria-controls="kontsert-nipid" aria-selected="false">Näpunäited</button><button role="tab" id="t-kontsert-kohad" aria-controls="kontsert-kohad" aria-selected="false">Kust kontserti leida</button><button role="tab" id="t-kontsert-test" aria-controls="kontsert-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-kontsert-viited" aria-controls="kontsert-viited" aria-selected="false">Viited</button></div></nav>
+  <nav class="appbar sticky" aria-label="Kontserdi arvustus teemad"><a class="logo" translate="no" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-kontsert-ulesehitus" aria-controls="kontsert-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-kontsert-kysimused" aria-controls="kontsert-kysimused" aria-selected="false">Analüüsi küsimused</button><button role="tab" id="t-kontsert-nipid" aria-controls="kontsert-nipid" aria-selected="false">Näpunäited</button><button role="tab" id="t-kontsert-kohad" aria-controls="kontsert-kohad" aria-selected="false">Kust kontserti leida</button><button role="tab" id="t-kontsert-test" aria-controls="kontsert-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-kontsert-viited" aria-controls="kontsert-viited" aria-selected="false">Viited</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#muusika"><span aria-hidden="true">←</span> Muusika</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#muusika">Muusika</a> / Kontserdi arvustus</span>
@@ -775,7 +834,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 </main>
 </div>
 <div class="view" id="v-upt" data-title="UPT" hidden>
-  <div class="appbar"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
+  <div class="appbar"><a class="logo" translate="no" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
   <div class="pagehead">
     <a class="back" href="#"><span aria-hidden="true">←</span> Kõik ained</a>
   </div>
@@ -786,7 +845,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
   </div>
 </div>
 <div class="view" id="v-upt-juhend" data-updated="2026-10-04" data-title="UPT juhend" data-parent="upt" data-parent-title="UPT" hidden>
-  <nav class="appbar sticky" aria-label="UPT juhend teemad"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-upt-ajakava" aria-controls="upt-ajakava" aria-selected="false">Ajakava</button><button role="tab" id="t-upt-pohitoed" aria-controls="upt-pohitoed" aria-selected="false">Mis UPT on</button><button role="tab" id="t-upt-ulesehitus" aria-controls="upt-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-upt-vormistus" aria-controls="upt-vormistus" aria-selected="false">Vormistus</button><button role="tab" id="t-upt-viitamine" aria-controls="upt-viitamine" aria-selected="false">Viitamine</button><button role="tab" id="t-upt-ai" aria-controls="upt-ai" aria-selected="false">Tehisaru</button><button role="tab" id="t-upt-nipid" aria-controls="upt-nipid" aria-selected="false">Nipid</button><button role="tab" id="t-upt-test" aria-controls="upt-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-upt-viited" aria-controls="upt-viited" aria-selected="false">Viited</button></div></nav>
+  <nav class="appbar sticky" aria-label="UPT juhend teemad"><a class="logo" translate="no" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-upt-ajakava" aria-controls="upt-ajakava" aria-selected="false">Ajakava</button><button role="tab" id="t-upt-pohitoed" aria-controls="upt-pohitoed" aria-selected="false">Mis UPT on</button><button role="tab" id="t-upt-ulesehitus" aria-controls="upt-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-upt-vormistus" aria-controls="upt-vormistus" aria-selected="false">Vormistus</button><button role="tab" id="t-upt-viitamine" aria-controls="upt-viitamine" aria-selected="false">Viitamine</button><button role="tab" id="t-upt-ai" aria-controls="upt-ai" aria-selected="false">Tehisaru</button><button role="tab" id="t-upt-nipid" aria-controls="upt-nipid" aria-selected="false">Nipid</button><button role="tab" id="t-upt-test" aria-controls="upt-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-upt-viited" aria-controls="upt-viited" aria-selected="false">Viited</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#upt"><span aria-hidden="true">←</span> UPT</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#upt">UPT</a> / UPT juhend</span>
@@ -969,7 +1028,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 </div>
 
 <div class="view" id="v-soovitused" data-title="Soovitused" hidden>
-  <div class="appbar"><a class="logo" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
+  <div class="appbar"><a class="logo" translate="no" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
   <div class="pagehead">
     <a class="back" href="#"><span aria-hidden="true">←</span> Avaleht</a>
   </div>
@@ -987,56 +1046,20 @@ ol{margin:0 0 12px;padding-left:1.4em}
   </div>
 </div>
 
+<script type="application/json" id="quiz-data">{"jazz": [["Tunnused", "Millal ja kus jazz tekkis?", "19. sajandi lõpus ja 20. sajandi alguses USA-s, eelkõige New Orleansis."], ["Tunnused", "Millal ja kus tekkis sõna „jazz\"?", "1915. aastal Chicagos."], ["Tunnused", "Nimeta jazzi neli põhijoont.", "Improvisatsioon, kõlavärv ehk tämber, pillikoosseisud ning rütm, meloodia ja harmoonia."], ["Tunnused", "Mida andsid jazzile Aafrika, Euroopa ja Kariibi mere piirkond?", "Aafrika: kollektiivne muusika loomine, improvisatsioon, ees- ja järellaulja. Euroopa: harmoonia ja instrumendid. Kariibid: rütmipõhine tantsumuusika ja keerukamad rütmid."], ["Tunnused", "Mis oli Congo Square?", "New Orleansi väljak, kus nädalavahetustel mängiti muusikat, tantsiti ja hoiti alles kultuuripärandit."], ["Tunnused", "Milline orkestritüüp on üks jazzi alustalasid?", "Matuserongkäikude orkestrid."], ["Ragtime", "Mis pillil ragtime'i peamiselt mängiti ja millal oli see populaarne?", "Klaveril, 1890. aastatel."], ["Ragtime", "Kes oli ragtime'i looja? Nimeta kaks tema pala.", "Scott Joplin (1868–1917). Näiteks „Maple Leaf Rag\" ja „The Entertainer\"."], ["Bluus", "Mis on bluusi struktuur ja millest see põhines?", "12-taktiline. Põhines töölauludel ja spirituaalidel."], ["Bluus", "Nimeta kolm bluusiartisti.", "Bessie Smith, Muddy Waters, B.B. King."], ["Mõiste", "Mis on kollektiivne improvisatsioon?", "Pillimehed mängivad samal ajal, aga igaüks improviseerib iseseisvalt."], ["New Orleans", "Kus mängisid New Orleansi harrastusorkestrid?", "Storyville'i linnaosa lõbustusasutustes. Orkestreid oli ligi 30."], ["New Orleans", "Millistel löökidel on New Orleansi jazzis rõhk?", "1. ja 3. löögil (marsilik pulss). Off-beat ehk 2. ja 4. löögi rõhk puudub."], ["New Orleans", "Nimeta meloodiagrupi ja rütmigrupi pillid.", "Meloodia: kornet või trompet, tromboon, klarnet. Rütm: tuuba, bandžo, trummid."], ["New Orleans", "Mis asendas tuuba ja bandžo ning mis lisandus?", "Tuuba asendus kontrabassiga, bandžo kitarriga ja lisandus klaver."], ["New Orleans", "Mis oli improvisatsiooni aluseks?", "Marsi- või kirikumeloodia, ragtime'i pala või 12-taktiline bluus."], ["New Orleans", "Kes juhtis King Oliver's Creole Jazz Bandi?", "Joe „King\" Oliver, kornetist-trompetist."], ["New Orleans", "Millise ansambliga tegi Jelly Roll Morton salvestusi?", "Red Hot Peppers."], ["New Orleans", "Miks New Orleansi jazzi õitseaeg 1917. aastal lõppes?", "Storyville suleti ja muusikud läksid Chicagosse."], ["Armstrong", "Mida uut tõi jazzi Louis Armstrong?", "Jazzist sai solistide muusika. Ta võttis kasutusele akordid ja noodikirja, tõi sisse blue note'id ja scat-laulu."], ["Armstrong", "Mis on scat-laul?", "Sõnadeta, silpidega improviseeritud laul."], ["Armstrong", "Kelle tsitaat on „Ilma Armstrongita poleks jazz'i…\"?", "Joachim-Ernst Berendt, „Das Jazzbuch\"."], ["Dixieland", "Kes oli dixielandi looja?", "Orkestrijuht ja trummar Papa Jack Laine."], ["Dixieland", "Kes tegi esimese jazzisalvestuse ja millal?", "Original Dixieland Jazz Band Nick LaRocca juhatusel 1917. aastal. Plaati müüdi üle miljoni."], ["Dixieland", "Kuidas erines dixielandi kõla New Orleansi omast?", "Väiksem kõlajõud, parem tehnika, kiirem muusika, sujuvam meloodia, vähem intensiivsed kõlavärvid. Iseloomuliku kõla andis soolopill. Koosseis jäi samaks."], ["Dixieland", "Mis lõpetas dixielandi hiilgeaja?", "Sving ja bigbändid 1930. aastate algul. Dixieland tuli tagasi 1940. aastate lõpus."], ["Chicago", "Mis oli Chicago jazzi peamine muutus improvisatsioonis?", "Kollektiivne improvisatsioon asendus solistlikuga."], ["Chicago", "Mis on break?", "Hetk, kui orkester vaikib ja solist improviseerib."], ["Chicago", "Mis oli Austin High School Gang?", "Valgete keskkoolinoorte ansambel, noorte talentide ja Chicago stiili taimelava."], ["Chicago", "Kes oli esimene saksofonivirtuoos?", "Tenorsaksofonist Bud Freeman."], ["Chicago", "Mida uut tõi Fletcher Henderson?", "Jagas orkestri pilligruppideks, lõi tämbrilise vastandamisega uue orkestristiili ja arranžeerimise põhimõtted suurele koosseisule."], ["Chicago", "Kes juhtis kõige populaarsemat tantsuorkestrit ja kes seal mängis?", "Paul Whiteman. Seal mängisid kornetist Bix Beiderbecke ja kitarrist Eddie Lang."], ["Ellington", "Kus tegutses Duke Ellington ja mis on džunglistiil?", "New Yorgis, Harlemi Cotton Clubis. Džunglistiil tähendab trompeti ja trombooni väljendusrikkaid helisid."]], "kontsert": [["Üldine", "Mis ajavahemikus peab kontsert toimuma?", "Septembrist veebruarini."], ["Üldine", "Kas kontsert peab olema MUBA või EMTA kalendrist?", "Ei. Need on ainult soovitused, sobib ka mõni muu kontsert või muusikalavastus."], ["Esitlus", "Kui pikk peab esitlus olema?", "7–10 minutit."], ["Esitlus", "Kes esitlusel räägib?", "Iga rühmaliige räägib oma arvamusest kontserdi kohta (teema arenduse osa)."], ["Ülesehitus", "Millest koosneb arvustus?", "Sissejuhatus, teema arendus ehk arvustus ja kokkuvõte."], ["Ülesehitus", "Mis käib sissejuhatusse?", "Millal ja kus kontsert toimus, kes esinesid, mis teoseid esitati ning paar lauset meeleolust või kava ülesehitusest."], ["Ülesehitus", "Millest võiks teema arendust alustada?", "Esitatud teostest: huvitavad faktid ja tsitaadid heliloojate kohta või info kavalehelt."], ["Ülesehitus", "Mida ei tohi kavalehega teha?", "Seda sõna-sõnalt tsiteerida ega slaididele ümber trükkida. Võta üks mõte või fakt ja ütle selle põhjal oma mõtted."], ["Ülesehitus", "Millest peab olema suurem osa teema arendusest?", "Mõtetest esinejate ja esituste kohta."], ["Ülesehitus", "Mitu lauset on kokkuvõttes ja mis sinna kuulub?", "3–4 lauset: järeldused, kas muusika tekitas mõtteid, vaimustas või igavust (ja miks), võrdlus varasemate kontsertidega, ettepanekud esinejatele või korraldajatele."], ["Analüüs", "Milliseid kolme hinnangut võib esitusele anda?", "Originaalne ja erakordne, veider ja arusaamatu või pettumus. Alati tuleb põhjendada."], ["Analüüs", "Mida arutada lisaks ooperi või balleti puhul?", "Lavastust, dekoratsioone, kostüüme ja tantsuseadeid."], ["Analüüs", "Mida esinejate kohta võib rääkida?", "Kes nad on: konkursivõidud, esinemised kuulsates saalides, koostöö tuntud muusikutega. Ja kas pilli- või lauluoskus oli heal tasemel."], ["Näpunäited", "Mida teha fraasi „see oli hea” asemel?", "Selgitada, miks see oli hea, ja tuua konkreetne näide."], ["Näpunäited", "Kust kontrollida esinejate ja heliloojate nimesid?", "Kavalehelt. Kui seda pole, siis ENE-st, muusikaleksikonist või äärmisel juhul internetist."]], "upt": [["Ajakava", "Millal on UPT avalduse tähtaeg?", "2. oktoober."], ["Ajakava", "Millal on I ja II seminar?", "I seminar 2. novembril, II seminar 2. veebruaril."], ["Ajakava", "Millal tuleb töö anda kaasõpilasele retsenseerimiseks ja millal on retsensioon tähtaeg?", "Töö 17. märtsiks, kaasõpilase retsensioon 31. märtsiks."], ["Ajakava", "Millal tuleb esitada lõplik töö?", "22. aprillil."], ["Ajakava", "Millal on eelkaitsmine ja kas see on kohustuslik?", "3. mail. Hinnet ei saa, aga osalemine on kaitsmisele pääsemise tingimus."], ["Ajakava", "Millal on kaitsmine?", "18. mail."], ["Ajakava", "Kus liigub UPT info ja mis kehtib vastuolu korral?", "eKoolis. Vastuolu korral kehtib eKooli viimane teade."], ["Põhitõed", "Millised on UPT kolm vormi?", "Uurimistöö, praktiline töö ja õpilasfirma."], ["Põhitõed", "Nimeta uurimistöö liike.", "Küsitlusel, intervjuul, katsel või vaatlusel, teksti- või videoanalüüsil põhinev uurimus, kodulooline uurimus, karjääriuurimus."], ["Põhitõed", "Mis keeles UPT kirjutatakse?", "Eesti keeles (erand: kui tööga osaletakse konkursil)."], ["Ülesehitus", "Mis osad on praktilisel tööl, mida uurimistööl pole?", "Protsessi ja tulemuse kirjeldus ning tööprotsessi analüüs ja eneseanalüüs."], ["Ülesehitus", "Mis keeltes peab olema resümee?", "Eesti ja inglise keeles."], ["Vormistus", "Millise programmiga töö vormistatakse ja kuhu see salvestatakse?", "MS Wordiga, ja töö hoitakse OneDrive'is, et juhendaja näeks."], ["Vormistus", "Mis on põhiteksti kiri, suurus ja reasamm?", "Times New Roman 12 p, rööpjoondus, reasamm 1,5, lõigu ees ja järel 6 p."], ["Vormistus", "Kui suured on lehe veerised?", "Üleval ja all 2,5 cm, vasakul ja paremal 2 cm."], ["Vormistus", "Kuidas vormistatakse Pealkiri 1?", "TNR 16 p, paks, SUURTÄHED, vahe 0 p enne ja 24 p pärast, algab uuelt lehelt."], ["Vormistus", "Millisel lehel on esimene nähtav leheküljenumber ja mis see on?", "Autorideklaratsiooni lehel, number 2. Tiitellehel numbrit ei näidata."], ["Vormistus", "Kuidas kirjutada tekstis arve?", "Ühekohalised sõnadega (kaks), suuremad numbritega (120). Mõõtühikuga alati numbriga (5 cm)."], ["Viitamine", "Millist viitamissüsteemi PERG kasutab?", "APA 7: tekstis autori nimi ja aasta, täiskirje kasutatud allikate loetelus."], ["Viitamine", "Kas Vikipeediat võib allikana kasutada?", "Ei. Kasuta artikli allosas olevaid originaalallikaid."], ["Viitamine", "Mis vahe on refereeringul ja tsitaadil?", "Refereering on mõte sinu sõnadega koos viitega. Tsitaat on täpne lõik jutumärkides koos viitega."], ["Tehisaru", "Mida tuleb tehisaru kasutamisel kirjeldada?", "Mida küsisid, milline oli vastus ja kuidas seda muutsid. Kasutusele tuleb viidata."], ["Tehisaru", "Nimeta kaks keelatud tehisaru kasutust.", "Näiteks pikkade tekstilõikude genereerimine enda omana, andmete väljamõtlemine, kontrollimata info esitamine või isikuandmete andmine tehisarule."]]}</script>
 <footer>Koostatud tunnimaterjalide ja kooli juhendite põhjal tehisaru abiga. Võib sisaldada üksikuid vigu.</footer>
 </div>
 <script>
 (function(){
-  var QUIZ = {};
-  QUIZ.jazz = [
-    ["Tunnused","Millal ja kus jazz tekkis?","19. sajandi lõpus ja 20. sajandi alguses USA-s, eelkõige New Orleansis."],
-    ["Tunnused","Millal ja kus tekkis sõna „jazz\"?","1915. aastal Chicagos."],
-    ["Tunnused","Nimeta jazzi neli põhijoont.","Improvisatsioon, kõlavärv ehk tämber, pillikoosseisud ning rütm, meloodia ja harmoonia."],
-    ["Tunnused","Mida andsid jazzile Aafrika, Euroopa ja Kariibi mere piirkond?","Aafrika: kollektiivne muusika loomine, improvisatsioon, ees- ja järellaulja. Euroopa: harmoonia ja instrumendid. Kariibid: rütmipõhine tantsumuusika ja keerukamad rütmid."],
-    ["Tunnused","Mis oli Congo Square?","New Orleansi väljak, kus nädalavahetustel mängiti muusikat, tantsiti ja hoiti alles kultuuripärandit."],
-    ["Tunnused","Milline orkestritüüp on üks jazzi alustalasid?","Matuserongkäikude orkestrid."],
-    ["Ragtime","Mis pillil ragtime'i peamiselt mängiti ja millal oli see populaarne?","Klaveril, 1890. aastatel."],
-    ["Ragtime","Kes oli ragtime'i looja? Nimeta kaks tema pala.","Scott Joplin (1868–1917). Näiteks „Maple Leaf Rag\" ja „The Entertainer\"."],
-    ["Bluus","Mis on bluusi struktuur ja millest see põhines?","12-taktiline. Põhines töölauludel ja spirituaalidel."],
-    ["Bluus","Nimeta kolm bluusiartisti.","Bessie Smith, Muddy Waters, B.B. King."],
-    ["Mõiste","Mis on kollektiivne improvisatsioon?","Pillimehed mängivad samal ajal, aga igaüks improviseerib iseseisvalt."],
-    ["New Orleans","Kus mängisid New Orleansi harrastusorkestrid?","Storyville'i linnaosa lõbustusasutustes. Orkestreid oli ligi 30."],
-    ["New Orleans","Millistel löökidel on New Orleansi jazzis rõhk?","1. ja 3. löögil (marsilik pulss). Off-beat ehk 2. ja 4. löögi rõhk puudub."],
-    ["New Orleans","Nimeta meloodiagrupi ja rütmigrupi pillid.","Meloodia: kornet või trompet, tromboon, klarnet. Rütm: tuuba, bandžo, trummid."],
-    ["New Orleans","Mis asendas tuuba ja bandžo ning mis lisandus?","Tuuba asendus kontrabassiga, bandžo kitarriga ja lisandus klaver."],
-    ["New Orleans","Mis oli improvisatsiooni aluseks?","Marsi- või kirikumeloodia, ragtime'i pala või 12-taktiline bluus."],
-    ["New Orleans","Kes juhtis King Oliver's Creole Jazz Bandi?","Joe „King\" Oliver, kornetist-trompetist."],
-    ["New Orleans","Millise ansambliga tegi Jelly Roll Morton salvestusi?","Red Hot Peppers."],
-    ["New Orleans","Miks New Orleansi jazzi õitseaeg 1917. aastal lõppes?","Storyville suleti ja muusikud läksid Chicagosse."],
-    ["Armstrong","Mida uut tõi jazzi Louis Armstrong?","Jazzist sai solistide muusika. Ta võttis kasutusele akordid ja noodikirja, tõi sisse blue note'id ja scat-laulu."],
-    ["Armstrong","Mis on scat-laul?","Sõnadeta, silpidega improviseeritud laul."],
-    ["Armstrong","Kelle tsitaat on „Ilma Armstrongita poleks jazz'i…\"?","Joachim-Ernst Berendt, „Das Jazzbuch\"."],
-    ["Dixieland","Kes oli dixielandi looja?","Orkestrijuht ja trummar Papa Jack Laine."],
-    ["Dixieland","Kes tegi esimese jazzisalvestuse ja millal?","Original Dixieland Jazz Band Nick LaRocca juhatusel 1917. aastal. Plaati müüdi üle miljoni."],
-    ["Dixieland","Kuidas erines dixielandi kõla New Orleansi omast?","Väiksem kõlajõud, parem tehnika, kiirem muusika, sujuvam meloodia, vähem intensiivsed kõlavärvid. Iseloomuliku kõla andis soolopill. Koosseis jäi samaks."],
-    ["Dixieland","Mis lõpetas dixielandi hiilgeaja?","Sving ja bigbändid 1930. aastate algul. Dixieland tuli tagasi 1940. aastate lõpus."],
-    ["Chicago","Mis oli Chicago jazzi peamine muutus improvisatsioonis?","Kollektiivne improvisatsioon asendus solistlikuga."],
-    ["Chicago","Mis on break?","Hetk, kui orkester vaikib ja solist improviseerib."],
-    ["Chicago","Mis oli Austin High School Gang?","Valgete keskkoolinoorte ansambel, noorte talentide ja Chicago stiili taimelava."],
-    ["Chicago","Kes oli esimene saksofonivirtuoos?","Tenorsaksofonist Bud Freeman."],
-    ["Chicago","Mida uut tõi Fletcher Henderson?","Jagas orkestri pilligruppideks, lõi tämbrilise vastandamisega uue orkestristiili ja arranžeerimise põhimõtted suurele koosseisule."],
-    ["Chicago","Kes juhtis kõige populaarsemat tantsuorkestrit ja kes seal mängis?","Paul Whiteman. Seal mängisid kornetist Bix Beiderbecke ja kitarrist Eddie Lang."],
-    ["Ellington","Kus tegutses Duke Ellington ja mis on džunglistiil?","New Yorgis, Harlemi Cotton Clubis. Džunglistiil tähendab trompeti ja trombooni väljendusrikkaid helisid."]
-  ];
-  QUIZ.kontsert = [["Üldine", "Mis ajavahemikus peab kontsert toimuma?", "Septembrist veebruarini."], ["Üldine", "Kas kontsert peab olema MUBA või EMTA kalendrist?", "Ei. Need on ainult soovitused, sobib ka mõni muu kontsert või muusikalavastus."], ["Esitlus", "Kui pikk peab esitlus olema?", "7–10 minutit."], ["Esitlus", "Kes esitlusel räägib?", "Iga rühmaliige räägib oma arvamusest kontserdi kohta (teema arenduse osa)."], ["Ülesehitus", "Millest koosneb arvustus?", "Sissejuhatus, teema arendus ehk arvustus ja kokkuvõte."], ["Ülesehitus", "Mis käib sissejuhatusse?", "Millal ja kus kontsert toimus, kes esinesid, mis teoseid esitati ning paar lauset meeleolust või kava ülesehitusest."], ["Ülesehitus", "Millest võiks teema arendust alustada?", "Esitatud teostest: huvitavad faktid ja tsitaadid heliloojate kohta või info kavalehelt."], ["Ülesehitus", "Mida ei tohi kavalehega teha?", "Seda sõna-sõnalt tsiteerida ega slaididele ümber trükkida. Võta üks mõte või fakt ja ütle selle põhjal oma mõtted."], ["Ülesehitus", "Millest peab olema suurem osa teema arendusest?", "Mõtetest esinejate ja esituste kohta."], ["Ülesehitus", "Mitu lauset on kokkuvõttes ja mis sinna kuulub?", "3–4 lauset: järeldused, kas muusika tekitas mõtteid, vaimustas või igavust (ja miks), võrdlus varasemate kontsertidega, ettepanekud esinejatele või korraldajatele."], ["Analüüs", "Milliseid kolme hinnangut võib esitusele anda?", "Originaalne ja erakordne, veider ja arusaamatu või pettumus. Alati tuleb põhjendada."], ["Analüüs", "Mida arutada lisaks ooperi või balleti puhul?", "Lavastust, dekoratsioone, kostüüme ja tantsuseadeid."], ["Analüüs", "Mida esinejate kohta võib rääkida?", "Kes nad on: konkursivõidud, esinemised kuulsates saalides, koostöö tuntud muusikutega. Ja kas pilli- või lauluoskus oli heal tasemel."], ["Näpunäited", "Mida teha fraasi „see oli hea” asemel?", "Selgitada, miks see oli hea, ja tuua konkreetne näide."], ["Näpunäited", "Kust kontrollida esinejate ja heliloojate nimesid?", "Kavalehelt. Kui seda pole, siis ENE-st, muusikaleksikonist või äärmisel juhul internetist."]];
-  QUIZ.upt = [["Ajakava", "Millal on UPT avalduse tähtaeg?", "2. oktoober."], ["Ajakava", "Millal on I ja II seminar?", "I seminar 2. novembril, II seminar 2. veebruaril."], ["Ajakava", "Millal tuleb töö anda kaasõpilasele retsenseerimiseks ja millal on retsensioon tähtaeg?", "Töö 17. märtsiks, kaasõpilase retsensioon 31. märtsiks."], ["Ajakava", "Millal tuleb esitada lõplik töö?", "22. aprillil."], ["Ajakava", "Millal on eelkaitsmine ja kas see on kohustuslik?", "3. mail. Hinnet ei saa, aga osalemine on kaitsmisele pääsemise tingimus."], ["Ajakava", "Millal on kaitsmine?", "18. mail."], ["Ajakava", "Kus liigub UPT info ja mis kehtib vastuolu korral?", "eKoolis. Vastuolu korral kehtib eKooli viimane teade."], ["Põhitõed", "Millised on UPT kolm vormi?", "Uurimistöö, praktiline töö ja õpilasfirma."], ["Põhitõed", "Nimeta uurimistöö liike.", "Küsitlusel, intervjuul, katsel või vaatlusel, teksti- või videoanalüüsil põhinev uurimus, kodulooline uurimus, karjääriuurimus."], ["Põhitõed", "Mis keeles UPT kirjutatakse?", "Eesti keeles (erand: kui tööga osaletakse konkursil)."], ["Ülesehitus", "Mis osad on praktilisel tööl, mida uurimistööl pole?", "Protsessi ja tulemuse kirjeldus ning tööprotsessi analüüs ja eneseanalüüs."], ["Ülesehitus", "Mis keeltes peab olema resümee?", "Eesti ja inglise keeles."], ["Vormistus", "Millise programmiga töö vormistatakse ja kuhu see salvestatakse?", "MS Wordiga, ja töö hoitakse OneDrive'is, et juhendaja näeks."], ["Vormistus", "Mis on põhiteksti kiri, suurus ja reasamm?", "Times New Roman 12 p, rööpjoondus, reasamm 1,5, lõigu ees ja järel 6 p."], ["Vormistus", "Kui suured on lehe veerised?", "Üleval ja all 2,5 cm, vasakul ja paremal 2 cm."], ["Vormistus", "Kuidas vormistatakse Pealkiri 1?", "TNR 16 p, paks, SUURTÄHED, vahe 0 p enne ja 24 p pärast, algab uuelt lehelt."], ["Vormistus", "Millisel lehel on esimene nähtav leheküljenumber ja mis see on?", "Autorideklaratsiooni lehel, number 2. Tiitellehel numbrit ei näidata."], ["Vormistus", "Kuidas kirjutada tekstis arve?", "Ühekohalised sõnadega (kaks), suuremad numbritega (120). Mõõtühikuga alati numbriga (5 cm)."], ["Viitamine", "Millist viitamissüsteemi PERG kasutab?", "APA 7: tekstis autori nimi ja aasta, täiskirje kasutatud allikate loetelus."], ["Viitamine", "Kas Vikipeediat võib allikana kasutada?", "Ei. Kasuta artikli allosas olevaid originaalallikaid."], ["Viitamine", "Mis vahe on refereeringul ja tsitaadil?", "Refereering on mõte sinu sõnadega koos viitega. Tsitaat on täpne lõik jutumärkides koos viitega."], ["Tehisaru", "Mida tuleb tehisaru kasutamisel kirjeldada?", "Mida küsisid, milline oli vastus ja kuidas seda muutsid. Kasutusele tuleb viidata."], ["Tehisaru", "Nimeta kaks keelatud tehisaru kasutust.", "Näiteks pikkade tekstilõikude genereerimine enda omana, andmete väljamõtlemine, kontrollimata info esitamine või isikuandmete andmine tehisarule."]];
+  var QUIZ = JSON.parse(document.getElementById('quiz-data').textContent);
 
   function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   document.querySelectorAll('.quiz[data-quiz]').forEach(function(box){
     var QA = QUIZ[box.getAttribute('data-quiz')] || [];
-    box.innerHTML = '<div class="quizbar"><button class="btn" type="button" data-act="shuffle">Sega küsimused</button>' +
-      '<button class="btn sec" type="button" data-act="close">Peida vastused</button><span class="count"></span></div><div class="cards"></div>';
+    box.innerHTML = '<div class="quizbar"><button class="btn" type="button" data-act="shuffle">' + t('Sega küsimused') + '</button>' +
+      '<button class="btn sec" type="button" data-act="close">' + t('Peida vastused') + '</button><span class="count"></span></div><div class="cards"></div>';
     var cards = box.querySelector('.cards'), count = box.querySelector('.count');
-    function update(){ count.textContent = cards.querySelectorAll('details[open]').length + ' / ' + QA.length + ' vastust avatud'; }
+    function update(){ count.textContent = t('{n} / {m} vastust avatud', { n: cards.querySelectorAll('details[open]').length, m: QA.length }); }
     function render(list){
       cards.innerHTML = list.map(function(q){
         return '<details class="card"><summary><span class="tag">'+esc(q[0])+'</span><span>'+esc(q[1])+'</span></summary><div class="ans">'+esc(q[2])+'</div></details>';
@@ -1046,7 +1069,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
     cards.addEventListener('toggle', update, true);
     box.querySelector('[data-act=shuffle]').addEventListener('click', function(){
       var a = QA.slice();
-      for (var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+      for (var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=a[i];a[i]=a[j];a[j]=tmp;}
       render(a);
     });
     box.querySelector('[data-act=close]').addEventListener('click', function(){
@@ -1069,9 +1092,9 @@ ol{margin:0 0 12px;padding-left:1.4em}
       sec.querySelectorAll('h2, h3, p, li, td, .person, .when').forEach(function(el){
         if (el.closest('.seenfoot') || el.closest('.person') && !el.classList.contains('person') || el.querySelector('li')) return;
         var c = el.cloneNode(true); c.querySelectorAll('.src, .yr + .yr').forEach(function(x){ x.remove(); });
-        var t = c.textContent.replace(/\s+/g, ' ').trim();
-        if (t.length < 3) return;
-        index.push({ pid: sec.id, where: where, text: t, n: norm(t) });
+        var txt = c.textContent.replace(/\s+/g, ' ').trim();
+        if (txt.length < 3) return;
+        index.push({ pid: sec.id, where: where, text: txt, n: norm(txt) });
       });
     });
     function snippet(e, terms){
@@ -1093,11 +1116,11 @@ ol{margin:0 0 12px;padding-left:1.4em}
       var seen = {}, list = [];
       hits.forEach(function(e){ var k = e.pid + '|' + e.text; if (!seen[k]) { seen[k] = 1; list.push(e); } });
       out.hidden = false;
-      if (!list.length) { out.innerHTML = '<p class="muted">Midagi ei leitud. Proovi teist sõna.</p>'; return; }
-      out.innerHTML = '<p class="qcount">' + list.length + (list.length === 1 ? ' tulemus' : ' tulemust') + '</p>' +
+      if (!list.length) { out.innerHTML = '<p class="muted">' + esc(t('Midagi ei leitud. Proovi teist sõna.')) + '</p>'; return; }
+      out.innerHTML = '<p class="qcount">' + esc(t('Tulemusi: {n}', { n: list.length })) + '</p>' +
         list.slice(0, 15).map(function(e){
           return '<a class="qhit" href="#' + e.pid + '"><span class="qwhere">' + esc(e.where) + '</span><span class="qtext">' + snippet(e, terms) + '</span></a>';
-        }).join('') + (list.length > 15 ? '<p class="muted" style="font-size:13px">Näitan esimest 15. Täpsusta otsingut.</p>' : '');
+        }).join('') + (list.length > 15 ? '<p class="muted" style="font-size:13px">' + esc(t('Näitan esimest 15. Täpsusta otsingut.')) + '</p>' : '');
     }
     var timer; input.addEventListener('input', function(){ clearTimeout(timer); timer = setTimeout(run, 120); });
     input.addEventListener('keydown', function(e){ if (e.key === 'Escape') { input.value = ''; run(); } });
@@ -1111,18 +1134,52 @@ ol{margin:0 0 12px;padding-left:1.4em}
     document.querySelectorAll('.view[data-updated]').forEach(function(v){
       var d = v.getAttribute('data-updated'), id = v.id.slice(2);
       var head = v.querySelector('.pagehead');
-      if (head) { var u = document.createElement('span'); u.className = 'upd'; u.textContent = 'Uuendatud ' + fmt(d); head.appendChild(u); }
+      if (head) { var u = document.createElement('span'); u.className = 'upd'; u.textContent = t('Uuendatud {d}', { d: fmt(d) }); head.appendChild(u); }
       document.querySelectorAll('a.subjcard[href="#' + id + '"]').forEach(function(c){
-        var u = document.createElement('span'); u.className = 'cupd'; u.textContent = 'uuendatud ' + fmt(d); c.appendChild(u);
+        var u = document.createElement('span'); u.className = 'cupd'; u.textContent = t('uuendatud {d}', { d: fmt(d) }); c.appendChild(u);
       });
       var par = v.getAttribute('data-parent');
       if (par && (!latest[par] || d > latest[par])) latest[par] = d;
     });
     Object.keys(latest).forEach(function(par){
       document.querySelectorAll('a.subjcard[href="#' + par + '"]').forEach(function(c){
-        var u = document.createElement('span'); u.className = 'cupd'; u.textContent = 'uuendatud ' + fmt(latest[par]); c.appendChild(u);
+        var u = document.createElement('span'); u.className = 'cupd'; u.textContent = t('uuendatud {d}', { d: fmt(latest[par]) }); c.appendChild(u);
       });
     });
+  })();
+
+
+  // --- seaded: teema ja keel ---
+  (function(){
+    var gear = document.getElementById('gear'), pop = document.getElementById('settings-pop');
+    function open(on){ pop.hidden = !on; gear.setAttribute('aria-expanded', on ? 'true' : 'false'); }
+    gear.addEventListener('click', function(e){ e.stopPropagation(); open(pop.hidden); });
+    document.addEventListener('click', function(e){ if (!pop.hidden && !pop.contains(e.target)) open(false); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !pop.hidden) { open(false); gear.focus(); } });
+    var meta = document.querySelector('meta[name="theme-color"]');
+    function paintTheme(){
+      var light = document.documentElement.getAttribute('data-theme') === 'light';
+      pop.querySelectorAll('[data-theme-set]').forEach(function(b){ b.setAttribute('aria-pressed', (b.getAttribute('data-theme-set') === 'light') === light ? 'true' : 'false'); });
+      if (meta) meta.setAttribute('content', light ? '#F7F7F8' : '#181818');
+    }
+    pop.querySelectorAll('[data-theme-set]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var v = b.getAttribute('data-theme-set');
+        if (v === 'light') document.documentElement.setAttribute('data-theme', 'light'); else document.documentElement.removeAttribute('data-theme');
+        try { localStorage.setItem('ajukas-theme', v); } catch (e) {}
+        paintTheme();
+      });
+    });
+    var here = document.documentElement.lang;
+    pop.querySelectorAll('[data-lang-set]').forEach(function(a){
+      if (a.getAttribute('data-lang-set') === here) a.setAttribute('aria-current', 'true');
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        try { localStorage.setItem('ajukas-lang', a.getAttribute('data-lang-set')); } catch (err) {}
+        location.href = a.getAttribute('href') + location.hash;
+      });
+    });
+    paintTheme();
   })();
 
   var views = Array.prototype.slice.call(document.querySelectorAll('.view'));
@@ -1153,7 +1210,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
       var v = document.getElementById('v-' + el.getAttribute('data-topic'));
       var tabs = v ? v.querySelectorAll('[role="tab"]') : [];
       var n = 0; tabs.forEach(function(t){ if (P.seen[t.getAttribute('aria-controls')]) n++; });
-      el.textContent = n ? n + ' / ' + tabs.length + ' vahekaarti läbitud' : '';
+      el.textContent = n ? t('{n} / {m} vahekaarti läbitud', { n: n, m: tabs.length }) : '';
     });
     var box = document.getElementById('resume-box');
     if (P.last && document.getElementById(P.last.hash)) {
@@ -1161,7 +1218,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
       link.href = '#' + P.last.hash;
       link.innerHTML = '';
       link.appendChild(document.createTextNode('→ ' + P.last.label));
-      var sm = document.createElement('small'); sm.textContent = 'sealt, kus viimati pooleli jäi'; link.appendChild(sm);
+      var sm = document.createElement('small'); sm.textContent = t('sealt, kus viimati pooleli jäi'); link.appendChild(sm);
       box.hidden = false;
     } else box.hidden = true;
   }
@@ -1169,8 +1226,8 @@ ol{margin:0 0 12px;padding-left:1.4em}
     document.querySelectorAll('.seenbtn').forEach(function(b){
       var on = !!P.seen[b.getAttribute('data-pid')];
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      b.textContent = on ? '✓ Vahekaart vaadatud' : 'Märgi vahekaart vaadatuks';
-      b.title = on ? 'Klõpsa, et märge eemaldada' : '';
+      b.textContent = on ? t('✓ Vahekaart vaadatud') : t('Märgi vahekaart vaadatuks');
+      b.title = on ? t('Klõpsa, et märge eemaldada') : '';
     });
   }
   document.querySelectorAll('section[role="tabpanel"]').forEach(function(sec){
@@ -1220,8 +1277,8 @@ ol{margin:0 0 12px;padding-left:1.4em}
     if (!view) view = homeView;
     views.forEach(function(v){ v.hidden = v !== view; });
     showTab(view, pid || load('ajukas-tab-' + view.id));
-    var t = view.getAttribute('data-title');
-    document.title = view === homeView ? 'Ajukas' : t + ' · Ajukas';
+    var title = view.getAttribute('data-title');
+    document.title = view === homeView ? 'Ajukas' : title + ' · Ajukas';
   }
   views.forEach(function(view){
     var tabs = Array.prototype.slice.call(view.querySelectorAll('[role="tab"]'));
@@ -1236,7 +1293,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
     });
   });
   function top(){
-    if (location.hash === '#soovita') { var b = document.getElementById('sugg'); if (b) { b.scrollIntoView({block:'start'}); var t = document.getElementById('sg-text'); if (t) t.focus({preventScroll:true}); return; } }
+    if (location.hash === '#soovita') { var b = document.getElementById('sugg'); if (b) { b.scrollIntoView({block:'start'}); var ta = document.getElementById('sg-text'); if (ta) ta.focus({preventScroll:true}); return; } }
     window.scrollTo(0,0);
   }
   try { history.scrollRestoration = 'manual'; } catch(e) {}
@@ -1269,7 +1326,7 @@ if (!FIREBASE_CONFIG) {
   $('acct-out').hidden = true;
   $('acct-off').hidden = false;
   $('sg-send').disabled = true;
-  $('sg-msg').textContent = 'Soovituste saatmine lülitatakse peagi sisse.';
+  $('sg-msg').textContent = t('Soovituste saatmine lülitatakse peagi sisse.');
 } else {
   const V = '10.12.2';
   const [{ initializeApp }, authM, fsM] = await Promise.all([
@@ -1300,24 +1357,24 @@ if (!FIREBASE_CONFIG) {
     const u = $('lg-user').value.trim().toLowerCase();
     const p = $('lg-pass').value;
     if (!/^[a-z0-9._-]{3,20}$/.test(u)) {
-      msg($('lg-msg'), 'Kasutajanimi peab olema 3–20 märki: tähed a–z, numbrid, punkt, sidekriips või alakriips.', 'err');
+      msg($('lg-msg'), t('Kasutajanimi peab olema 3–20 märki: tähed a–z, numbrid, punkt, sidekriips või alakriips.'), 'err');
       return null;
     }
-    if (p.length < 6) { msg($('lg-msg'), 'Parool peab olema vähemalt 6 märki pikk.', 'err'); return null; }
+    if (p.length < 6) { msg($('lg-msg'), t('Parool peab olema vähemalt 6 märki pikk.'), 'err'); return null; }
     return { email: u + '@' + DOMAIN, pass: p };
   }
   $('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const c = readLogin(); if (!c) return;
-    msg($('lg-msg'), 'Login sisse…');
+    msg($('lg-msg'), t('Login sisse…'));
     try { await signInWithEmailAndPassword(auth, c.email, c.pass); msg($('lg-msg'), ''); }
-    catch (err) { msg($('lg-msg'), ERR[err.code] || 'Sisselogimine ebaõnnestus. Proovi uuesti.', 'err'); }
+    catch (err) { msg($('lg-msg'), t(ERR[err.code] || 'Sisselogimine ebaõnnestus. Proovi uuesti.'), 'err'); }
   });
   $('lg-new').addEventListener('click', async () => {
     const c = readLogin(); if (!c) return;
-    msg($('lg-msg'), 'Loon kontot…');
+    msg($('lg-msg'), t('Loon kontot…'));
     try { await createUserWithEmailAndPassword(auth, c.email, c.pass); msg($('lg-msg'), ''); }
-    catch (err) { msg($('lg-msg'), ERR[err.code] || 'Konto loomine ebaõnnestus. Proovi uuesti.', 'err'); }
+    catch (err) { msg($('lg-msg'), t(ERR[err.code] || 'Konto loomine ebaõnnestus. Proovi uuesti.'), 'err'); }
   });
   $('lg-out').addEventListener('click', () => signOut(auth));
 
@@ -1364,18 +1421,18 @@ if (!FIREBASE_CONFIG) {
   }
   $('sg-files').addEventListener('change', async (e) => {
     const files = Array.from(e.target.files || []).slice(0, MAX_FILES);
-    pending = files.map((f) => ({ nimi: f.name, viga: 'töötlen…' }));
+    pending = files.map((f) => ({ nimi: f.name, viga: t('töötlen…') }));
     paintFiles();
     pending = await Promise.all(files.map(async (f) => {
       try {
         if (f.type.startsWith('image/') && f.type !== 'image/gif' && f.type !== 'image/svg+xml') return await shrinkImage(f);
-        if (f.size > 600 * 1024) return { nimi: f.name, viga: 'liiga suur (üle 600 kB)' };
+        if (f.size > 600 * 1024) return { nimi: f.name, viga: t('liiga suur (üle 600 kB)') };
         return { nimi: f.name, tyyp: f.type || 'application/octet-stream', andmed: await readAsDataURL(f) };
-      } catch (err) { return { nimi: f.name, viga: 'ei saanud lugeda' }; }
+      } catch (err) { return { nimi: f.name, viga: t('ei saanud lugeda') }; }
     }));
-    if (e.target.files.length > MAX_FILES) msg($('sg-msg'), 'Lisada saab kuni 3 faili, ülejäänud jäeti välja.', 'err');
+    if (e.target.files.length > MAX_FILES) msg($('sg-msg'), t('Lisada saab kuni 3 faili, ülejäänud jäeti välja.'), 'err');
     const total = paintFiles();
-    if (total > MAX_TOTAL) msg($('sg-msg'), 'Failid on kokku liiga suured. Vali väiksemad või vähem faile.', 'err');
+    if (total > MAX_TOTAL) msg($('sg-msg'), t('Failid on kokku liiga suured. Vali väiksemad või vähem faile.'), 'err');
   });
   // Turvalisus: pildina näidatakse ainult tavalisi rastervorminguid; kõik muu (ka HTML ja SVG)
   // antakse ainult allalaadimiseks tüübiga application/octet-stream, et see ei saaks lehe nimel käivituda.
@@ -1399,7 +1456,7 @@ if (!FIREBASE_CONFIG) {
         link.target = '_blank'; link.rel = 'noopener';
         const im = document.createElement('img'); im.src = url; im.alt = name; link.append(im);
       } else {
-        link.className = 'file'; link.download = name; link.textContent = '📎 ' + name + ' (laadi alla)';
+        link.className = 'file'; link.download = name; link.textContent = '📎 ' + name + ' (' + t('laadi alla') + ')';
       }
       box.append(link);
     });
@@ -1410,12 +1467,12 @@ if (!FIREBASE_CONFIG) {
   const DAY = 24 * 60 * 60 * 1000;
   const S = { items: [], filter: 'uus', loaded: false };
   const stateOf = (x) => (x.kustutatud ? 'prygi' : (x.olek || 'uus'));
-  const LABEL = { uus: 'vaatamata', vaadatud: 'vaadatud', tehtud: 'tehtud', prygi: 'prügikastis' };
+  const LABEL = { uus: t('vaatamata'), vaadatud: t('vaadatud'), tehtud: t('tehtud'), prygi: t('prügikastis') };
   const HINT = {
-    uus: 'Uued soovitused, mida sa pole veel vaadatuks märkinud.',
-    vaadatud: 'Loetud, aga veel tegemata.',
-    tehtud: 'Soovitused, mille oled ära teinud.',
-    prygi: 'Kustutatud soovitused kaovad jäädavalt 24 tunni pärast, kui sa neid enne ei taasta.',
+    uus: t('Uued soovitused, mida sa pole veel vaadatuks märkinud.'),
+    vaadatud: t('Loetud, aga veel tegemata.'),
+    tehtud: t('Soovitused, mille oled ära teinud.'),
+    prygi: t('Kustutatud soovitused kaovad jäädavalt 24 tunni pärast, kui sa neid enne ei taasta.'),
   };
 
   async function loadInbox() {
@@ -1433,8 +1490,8 @@ if (!FIREBASE_CONFIG) {
       S.items = items; S.loaded = true;
       renderInbox();
     } catch (e) {
-      $('inbox-sum').textContent = 'Soovitusi ei õnnestunud laadida.';
-      msg($('sv-msg'), 'Soovitusi ei õnnestunud laadida. Värskenda lehte.', 'err');
+      $('inbox-sum').textContent = t('Soovitusi ei õnnestunud laadida.');
+      msg($('sv-msg'), t('Soovitusi ei õnnestunud laadida. Värskenda lehte.'), 'err');
     }
   }
 
@@ -1444,8 +1501,8 @@ if (!FIREBASE_CONFIG) {
     Object.keys(count).forEach((k) => { $('n-' + k).textContent = count[k] ? '(' + count[k] + ')' : ''; });
     const sum = $('inbox-sum');
     sum.textContent = '';
-    if (count.uus) { const b = document.createElement('span'); b.className = 'new'; b.textContent = count.uus + ' vaatamata'; sum.append(b, ' · '); }
-    sum.append((count.vaadatud + count.tehtud + count.uus) + ' kokku');
+    if (count.uus) { const b = document.createElement('span'); b.className = 'new'; b.textContent = t('{n} vaatamata', { n: count.uus }); sum.append(b, ' · '); }
+    sum.append(t('{n} kokku', { n: count.vaadatud + count.tehtud + count.uus }));
 
     document.querySelectorAll('.filter').forEach((f) => f.setAttribute('aria-pressed', f.dataset.f === S.filter ? 'true' : 'false'));
     $('sv-hint').textContent = HINT[S.filter];
@@ -1454,7 +1511,7 @@ if (!FIREBASE_CONFIG) {
     const shown = S.items.filter((x) => stateOf(x) === S.filter);
     if (!shown.length) {
       const p = document.createElement('p'); p.className = 'sempty';
-      p.textContent = S.filter === 'prygi' ? 'Prügikast on tühi.' : 'Siin pole praegu ühtegi soovitust.';
+      p.textContent = S.filter === 'prygi' ? t('Prügikast on tühi.') : t('Siin pole praegu ühtegi soovitust.');
       list.append(p); return;
     }
     shown.forEach((x) => list.append(card(x)));
@@ -1465,37 +1522,37 @@ if (!FIREBASE_CONFIG) {
     const el = document.createElement('article'); el.className = 'scard is-' + st;
     const meta = document.createElement('div'); meta.className = 'meta';
     const who = document.createElement('span');
-    const when = x.aeg && x.aeg.toDate ? x.aeg.toDate().toLocaleString('et-EE', { dateStyle: 'short', timeStyle: 'short' }) : '';
-    who.textContent = (x.nimi || 'Anonüümne') + (when ? ' · ' + when : '');
+    const when = x.aeg && x.aeg.toDate ? x.aeg.toDate().toLocaleString(t('et-EE'), { dateStyle: 'short', timeStyle: 'short' }) : '';
+    who.textContent = (x.nimi || t('Anonüümne')) + (when ? ' · ' + when : '');
     const chip = document.createElement('span'); chip.className = 'chip ' + st; chip.textContent = LABEL[st];
     meta.append(who, chip);
-    const t = document.createElement('p'); t.className = 'txt'; t.textContent = x.tekst || '';
+    const body = document.createElement('p'); body.className = 'txt'; body.textContent = x.tekst || '';
     const acts = document.createElement('div'); acts.className = 'acts';
     const btn = (label, fn, danger) => {
       const b = document.createElement('button'); b.type = 'button'; b.className = 'sbtn' + (danger ? ' danger' : ''); b.textContent = label;
       b.addEventListener('click', async () => {
         acts.querySelectorAll('button').forEach((z) => z.disabled = true);
         try { await fn(); renderInbox(); }
-        catch (e) { msg($('sv-msg'), 'Muudatus ei läinud läbi. Proovi uuesti.', 'err'); acts.querySelectorAll('button').forEach((z) => z.disabled = false); }
+        catch (e) { msg($('sv-msg'), t('Muudatus ei läinud läbi. Proovi uuesti.'), 'err'); acts.querySelectorAll('button').forEach((z) => z.disabled = false); }
       });
       acts.append(b);
     };
     const set = async (patch) => { await updateDoc(doc(db, 'soovitused', x.id), patch); Object.assign(x, patch); };
-    if (st === 'uus') btn('Märgi vaadatuks', () => set({ olek: 'vaadatud' }));
-    if (st === 'vaadatud') btn('Märgi vaatamata', () => set({ olek: 'uus' }));
-    if (st === 'uus' || st === 'vaadatud') btn('Tehtud ✓', () => set({ olek: 'tehtud' }));
-    if (st === 'tehtud') btn('Tagasi tegemata', () => set({ olek: 'vaadatud' }));
-    if (st !== 'prygi') btn('Kustuta', async () => { await updateDoc(doc(db, 'soovitused', x.id), { kustutatud: serverTimestamp() }); x.kustutatud = Timestamp.now(); }, true);
+    if (st === 'uus') btn(t('Märgi vaadatuks'), () => set({ olek: 'vaadatud' }));
+    if (st === 'vaadatud') btn(t('Märgi vaatamata'), () => set({ olek: 'uus' }));
+    if (st === 'uus' || st === 'vaadatud') btn(t('Tehtud ✓'), () => set({ olek: 'tehtud' }));
+    if (st === 'tehtud') btn(t('Tagasi tegemata'), () => set({ olek: 'vaadatud' }));
+    if (st !== 'prygi') btn(t('Kustuta'), async () => { await updateDoc(doc(db, 'soovitused', x.id), { kustutatud: serverTimestamp() }); x.kustutatud = Timestamp.now(); }, true);
     if (st === 'prygi') {
       const left = Math.max(0, DAY - (Date.now() - x.kustutatud.toMillis()));
       const h = Math.ceil(left / 3600000);
       const info = document.createElement('span'); info.className = 'muted'; info.style.fontSize = '12px';
-      info.textContent = 'Kustub jäädavalt ' + (h <= 1 ? 'tunni jooksul' : h + ' tunni pärast');
+      info.textContent = h <= 1 ? t('Kustub jäädavalt tunni jooksul') : t('Kustub jäädavalt {h} tunni pärast', { h: h });
       meta.append(info);
-      btn('Taasta', () => set({ kustutatud: null }));
-      btn('Kustuta jäädavalt', async () => { await deleteDoc(doc(db, 'soovitused', x.id)); S.items = S.items.filter((y) => y !== x); }, true);
+      btn(t('Taasta'), () => set({ kustutatud: null }));
+      btn(t('Kustuta jäädavalt'), async () => { await deleteDoc(doc(db, 'soovitused', x.id)); S.items = S.items.filter((y) => y !== x); }, true);
     }
-    el.append(meta, t);
+    el.append(meta, body);
     if (x.failid && x.failid.length) el.append(attachmentsEl(x.failid));
     el.append(acts);
     return el;
@@ -1537,21 +1594,21 @@ if (!FIREBASE_CONFIG) {
     e.preventDefault();
     const tekst = $('sg-text').value.trim();
     const nimi = $('sg-name').value.trim().slice(0, 60);
-    if (!tekst) { msg($('sg-msg'), 'Kirjuta enne saatmist soovitus.', 'err'); return; }
+    if (!tekst) { msg($('sg-msg'), t('Kirjuta enne saatmist soovitus.'), 'err'); return; }
     $('sg-send').disabled = true;
-    msg($('sg-msg'), 'Saadan…');
+    msg($('sg-msg'), t('Saadan…'));
     try {
       const ok = pending.filter((p) => p.andmed);
-      if (pending.some((p) => p.viga)) { msg($('sg-msg'), 'Mõnda faili ei saa saata. Eemalda see või vali teine.', 'err'); $('sg-send').disabled = false; return; }
-      if (ok.reduce((n, p) => n + p.andmed.length, 0) > MAX_TOTAL) { msg($('sg-msg'), 'Failid on kokku liiga suured. Vali väiksemad või vähem faile.', 'err'); $('sg-send').disabled = false; return; }
+      if (pending.some((p) => p.viga)) { msg($('sg-msg'), t('Mõnda faili ei saa saata. Eemalda see või vali teine.'), 'err'); $('sg-send').disabled = false; return; }
+      if (ok.reduce((n, p) => n + p.andmed.length, 0) > MAX_TOTAL) { msg($('sg-msg'), t('Failid on kokku liiga suured. Vali väiksemad või vähem faile.'), 'err'); $('sg-send').disabled = false; return; }
       const data = { nimi, tekst: tekst.slice(0, 2000), aeg: serverTimestamp(), uid: auth.currentUser ? auth.currentUser.uid : '' };
       if (ok.length) data.failid = ok.map((p) => ({ nimi: p.nimi.slice(0, 100), tyyp: p.tyyp.slice(0, 100), andmed: p.andmed }));
       await addDoc(collection(db, 'soovitused'), data);
       $('sg-text').value = ''; $('sg-files').value = ''; pending = []; paintFiles();
-      msg($('sg-msg'), 'Aitäh! Soovitus on saadetud.', 'ok');
+      msg($('sg-msg'), t('Aitäh! Soovitus on saadetud.'), 'ok');
       if (userOf(auth.currentUser) === ADMIN_USER) loadInbox();
     } catch (err) {
-      msg($('sg-msg'), 'Saatmine ebaõnnestus. Proovi hiljem uuesti.', 'err');
+      msg($('sg-msg'), t('Saatmine ebaõnnestus. Proovi hiljem uuesti.'), 'err');
     }
     $('sg-send').disabled = false;
   });
