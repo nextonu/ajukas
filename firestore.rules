@@ -25,6 +25,18 @@ service cloud.firestore {
             || (request.auth != null && request.resource.data.uid == request.auth.uid));
       allow read, delete: if isAdmin();
       // Admin võib muuta ainult olekut (uus / vaadatud / tehtud) ja prügikasti aega.
+      // Manused: luuakse ainult koos soovitusega samas partiis; lugeda ja kustutada saab ainult admin.
+      match /manused/{n} {
+        allow create: if n in ['0', '1', '2']
+          && request.resource.data.keys().hasOnly(['nimi', 'tyyp', 'andmed'])
+          && request.resource.data.nimi is string && request.resource.data.nimi.size() <= 100
+          && request.resource.data.tyyp is string && request.resource.data.tyyp.size() <= 100
+          && request.resource.data.andmed is string && request.resource.data.andmed.size() < 1000000
+          && !exists(/databases/$(database)/documents/soovitused/$(id))
+          && getAfter(/databases/$(database)/documents/soovitused/$(id)).data.aeg == request.time;
+        allow read, delete: if isAdmin();
+      }
+
       allow update: if isAdmin()
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['olek', 'kustutatud'])
         && (!('olek' in request.resource.data)
