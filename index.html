@@ -18,7 +18,7 @@
 html,body{margin:0}
 body{background:var(--bg);color:var(--text);font-family:var(--ui);font-size:16px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
 .wrap{max-width:900px;margin:0 auto}
-header{padding-block:36px 18px;display:flex;flex-direction:column;gap:6px}
+header{padding-block:28px 10px;display:flex;flex-direction:column;gap:6px}
 .eyebrow{font-family:var(--mono);font-size:12px;color:var(--muted)}
 .eyebrow::before{content:"// "}
 h1{font-size:clamp(36px,7vw,52px);font-weight:700;line-height:1.05;margin:0;color:var(--bright);letter-spacing:-.02em}
@@ -92,23 +92,54 @@ tbody th{font-weight:600;color:var(--muted)}
 .card .ans{padding:10px 14px 12px;color:var(--text)}
 footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-family:var(--mono)}
 @media (max-width:520px){.card summary{flex-direction:column;gap:2px}.card summary .tag{min-width:0}}
+
+.brand{color:inherit;text-decoration:none}
+.home .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:8px 0 28px}
+.subjcard{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border:1px dashed var(--line2);border-radius:4px;color:var(--muted);text-decoration:none;min-height:76px}
+.subjcard .sname{font-weight:600;font-size:16px}
+.subjcard .stopic{font-family:var(--mono);font-size:12px}
+.subjcard.ready{border:1px solid var(--line2);background:var(--panel);color:var(--bright)}
+.subjcard.ready .stopic{color:var(--muted)}
+.subjcard.ready:hover{border-color:var(--bright)}
+.subjcard.ready .sname::after{content:" →";color:var(--muted)}
+.subjcard:focus-visible{outline:1px solid var(--key);outline-offset:1px}
+.disclaimer{max-width:70ch;border:1px solid var(--line);border-radius:4px;padding:12px 14px;color:var(--muted);font-size:14px;background:var(--panel)}
+.disclaimer strong{background:none;color:var(--text);padding:0}
+.crumb{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:6px 0 14px}
+.crumb a{font-family:var(--mono);font-size:13px;color:var(--muted);text-decoration:none}
+.crumb a:hover{color:var(--bright)}
+.crumb .subjname{font-size:22px;font-weight:700;color:var(--bright)}
+ol{margin:0 0 12px;padding-left:1.4em}
 </style>
 </head>
 <body>
-
 <div class="wrap">
 <header>
   <span class="eyebrow">Kordamine kontrolltöödeks</span>
-  <h1>Ajukas<span class="dot">.</span></h1>
-  <p class="tagline">Kõik kontrolltööde konspektid ühes kohas, aine kaupa. Vali aine, siis teema, ja testi end lõpus.</p>
-  <div class="subjects" aria-label="Ained">
-    <span class="subj" aria-current="true">Muusika<small>Varajane jazz</small></span>
-    <span class="subj soon">Uued ained tulekul</span>
-  </div>
+  <h1><a class="brand" href="#">Ajukas<span class="dot">.</span></a></h1>
 </header>
 
-<nav aria-label="Teemad">
-  <div class="tabs" role="tablist" id="tabs">
+<div class="home" id="home">
+  <p class="tagline">Kõigi ainete konspektid ühes kohas. Vali aine, siis teema, ja testi end lõpus.</p>
+  <div class="grid">
+    <div class="subjcard"><span class="sname">Ajalugu</span><span class="stopic">Materjal tulekul</span></div>
+    <div class="subjcard"><span class="sname">Eesti keel</span><span class="stopic">Materjal tulekul</span></div>
+    <div class="subjcard"><span class="sname">Ennastjuhtiv õppija</span><span class="stopic">Materjal tulekul</span></div>
+    <div class="subjcard"><span class="sname">Inglise keel</span><span class="stopic">Materjal tulekul</span></div>
+    <div class="subjcard"><span class="sname">Kirjandus</span><span class="stopic">Materjal tulekul</span></div>
+    <div class="subjcard"><span class="sname">Lai matemaatika</span><span class="stopic">Materjal tulekul</span></div>
+    <div class="subjcard"><span class="sname">Füüsika</span><span class="stopic">Materjal tulekul</span></div>
+    <div class="subjcard"><span class="sname">Keemia</span><span class="stopic">Materjal tulekul</span></div>
+    <a class="subjcard ready" href="#muusika"><span class="sname">Muusika</span><span class="stopic">Varajane jazz</span></a>
+    <div class="subjcard"><span class="sname">Vene keel</span><span class="stopic">Materjal tulekul</span></div>
+    <a class="subjcard ready" href="#upt"><span class="sname">UPT</span><span class="stopic">Uurimus või praktiline töö</span></a>
+  </div>
+  <p class="disclaimer"><strong>NB!</strong> Selle lehe on tunnimaterjalide ja juhendite põhjal koostanud tehisaru. Vigu tuleb harva ette, aga päris välistada neid ei saa. Kui miski tundub kahtlane, kontrolli slaididelt, õpikust või küsi õpetajalt.</p>
+</div>
+
+<div class="subject" id="s-muusika" hidden>
+  <div class="crumb"><a href="#">← Kõik ained</a><span class="subjname">Muusika</span></div>
+  <nav aria-label="Muusika teemad"><div class="tabs" role="tablist">
     <button role="tab" id="t-ajajoon" aria-controls="ajajoon" aria-selected="true">Ajajoon</button>
     <button role="tab" id="t-tunnused" aria-controls="tunnused" aria-selected="false">Jazzi tunnused</button>
     <button role="tab" id="t-varajased" aria-controls="varajased" aria-selected="false">Ragtime ja bluus</button>
@@ -117,12 +148,10 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
     <button role="tab" id="t-chicago" aria-controls="chicago" aria-selected="false">Chicago</button>
     <button role="tab" id="t-vordlus" aria-controls="vordlus" aria-selected="false">Võrdlus</button>
     <button role="tab" id="t-test" aria-controls="test" aria-selected="false">Testi ennast</button>
-  </div>
-</nav>
-
-<main>
+  </div></nav>
+  <main>
 <!-- AJAJOON -->
-<section role="tabpanel" id="ajajoon" aria-labelledby="t-ajajoon">
+<section role="tabpanel" id="ajajoon" aria-labelledby="t-ajajoon" hidden>
   <h2>Ajajoon</h2>
   <p class="lead">Kogu teema ühe pilguga. Kui need aastad on peas, loksub muu paika.</p>
   <ol class="timeline">
@@ -164,8 +193,8 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
     <li><b>Congo Square</b> oli väljak, kus nädalavahetustel mängiti muusikat, tantsiti ja hoiti alles kultuuripärandit.</li>
     <li><b>Matuserongkäikude orkestrid</b> on üks jazzi alustalasid.</li>
   </ul>
-  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://www.youtube.com/watch?v=VSkz3j9b23Y" target="_blank" rel="noopener">Mis teeb jazzist jazzi? (näide 1)</a><span class="src">sissejuhatus</span></li><li><a href="https://www.youtube.com/watch?v=27Pn5mmIjO8" target="_blank" rel="noopener">Mis teeb jazzist jazzi? (näide 2)</a><span class="src">sissejuhatus</span></li><li><a href="https://www.youtube.com/watch?v=IiUyz4HG-Kc" target="_blank" rel="noopener">Bach: „Wachet auf, ruft uns die Stimme"</a><span class="src">kuulamisülesanne</span></li><li><a href="https://www.youtube.com/watch?v=27Pn5mmIjO8" target="_blank" rel="noopener">Bobby McFerrin: „Wachet auf, ruft uns die Stimme"</a><span class="src">kuulamisülesanne</span></li><li><a href="https://www.youtube.com/watch?v=qwf_m0p86KU" target="_blank" rel="noopener">Harmoonia jazzis</a><span class="src">põhijooned</span></li><li><a href="https://www.youtube.com/watch?v=4MwQcm4eH18" target="_blank" rel="noopener">Töölaulud</a><span class="src">sotsiaalne taust</span></li><li><a href="https://www.youtube.com/watch?v=zcJ6Wxdcj-E" target="_blank" rel="noopener">Raske tööelu</a><span class="src">sotsiaalne taust</span></li><li><a href="https://www.youtube.com/watch?v=DOoNEjrVcpo" target="_blank" rel="noopener">Congo Square</a><span class="src">New Orleans</span></li><li><a href="https://www.youtube.com/watch?v=alzPbV61sOM" target="_blank" rel="noopener">Matuserongkäik</a><span class="src">New Orleans</span></li><li><a href="https://www.youtube.com/watch?v=oVOGylzaMiA" target="_blank" rel="noopener">Matuserongkäigu orkestrid</a><span class="src">New Orleans</span></li></ul></div>
-  <div class="listen"><h3>Kontserdi arvustus</h3><p>Käi septembrist veebruarini ühel vabalt valitud kontserdil ja kirjuta sellest arvustus. Kontserdi vali nendelt lehtedelt:</p><ul><li><a href="https://muba.edu.ee/sundmused/" target="_blank" rel="noopener">MUBA sündmused</a><span class="src">muba.edu.ee</span></li><li><a href="https://emtasaalid.ee/kalender/" target="_blank" rel="noopener">EMTA saalide kalender</a><span class="src">emtasaalid.ee</span></li></ul></div>
+  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://www.youtube.com/watch?v=27Pn5mmIjO8" target="_blank" rel="noopener">Mis teeb jazzist jazzi? (näide 2)</a><span class="src">sissejuhatus</span></li><li><a href="https://www.youtube.com/watch?v=IiUyz4HG-Kc" target="_blank" rel="noopener">Bach: „Wachet auf, ruft uns die Stimme"</a><span class="src">kuulamisülesanne</span></li><li><a href="https://www.youtube.com/watch?v=27Pn5mmIjO8" target="_blank" rel="noopener">Bobby McFerrin: „Wachet auf, ruft uns die Stimme"</a><span class="src">kuulamisülesanne</span></li><li><a href="https://www.youtube.com/watch?v=qwf_m0p86KU" target="_blank" rel="noopener">Harmoonia jazzis</a><span class="src">põhijooned</span></li><li><a href="https://www.youtube.com/watch?v=4MwQcm4eH18" target="_blank" rel="noopener">Töölaulud</a><span class="src">sotsiaalne taust</span></li><li><a href="https://www.youtube.com/watch?v=zcJ6Wxdcj-E" target="_blank" rel="noopener">Raske tööelu</a><span class="src">sotsiaalne taust</span></li><li><a href="https://www.youtube.com/watch?v=DOoNEjrVcpo" target="_blank" rel="noopener">Congo Square</a><span class="src">New Orleans</span></li><li><a href="https://www.youtube.com/watch?v=alzPbV61sOM" target="_blank" rel="noopener">Matuserongkäik</a><span class="src">New Orleans</span></li><li><a href="https://www.youtube.com/watch?v=oVOGylzaMiA" target="_blank" rel="noopener">Matuserongkäigu orkestrid</a><span class="src">New Orleans</span></li></ul></div>
+  <div class="listen"><h3>Kontserdi arvustus</h3><p>Käi septembrist veebruarini ühel kontserdil ja kirjuta sellest arvustus. Kontserdi valid ise. Allpool on kaks kalendrit, kust on hea alustada, aga sobib ka mõni muu kontsert.</p><ul><li><a href="https://muba.edu.ee/sundmused/" target="_blank" rel="noopener">MUBA sündmused</a><span class="src">muba.edu.ee</span></li><li><a href="https://emtasaalid.ee/kalender/" target="_blank" rel="noopener">EMTA saalide kalender</a><span class="src">emtasaalid.ee</span></li></ul></div>
 </section>
 
 <!-- VARAJASED -->
@@ -199,7 +228,7 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
     <li><b>Jelly Roll Morton</b> oli üks esimesi jazzi heliloojaid ja pianiste.</li>
     <li><b>Louis Armstrong</b> oli 1920. aastate trompetist, kes on seotud svingiga.</li>
   </ul>
-  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://www.youtube.com/watch?v=hy-aYX5kMoM" target="_blank" rel="noopener">Ragtime</a><span class="src">ragtime</span></li><li><a href="https://www.youtube.com/watch?v=bCxLAr_bwpA" target="_blank" rel="noopener">Scott Joplin: „Maple Leaf Rag"</a><span class="src">Joplin</span></li><li><a href="https://www.youtube.com/watch?v=ND2rMET4MVw" target="_blank" rel="noopener">Scott Joplin: „The Entertainer"</a><span class="src">Joplin</span></li><li><a href="https://www.youtube.com/watch?v=5Bo3f_9hLkQ" target="_blank" rel="noopener">Bluus</a><span class="src">bluus</span></li><li><a href="https://www.youtube.com/watch?v=4gXShOJVwaM" target="_blank" rel="noopener">Bessie Smith</a><span class="src">bluus</span></li><li><a href="https://www.youtube.com/watch?v=0EoDHWqPhbU" target="_blank" rel="noopener">Muddy Waters</a><span class="src">bluus</span></li><li><a href="https://www.youtube.com/watch?v=OIW4ARVbhrw" target="_blank" rel="noopener">B.B. King</a><span class="src">bluus</span></li></ul></div>
+  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://www.youtube.com/watch?v=hy-aYX5kMoM" target="_blank" rel="noopener">Ragtime</a><span class="src">ragtime</span></li><li><a href="https://www.youtube.com/watch?v=bCxLAr_bwpA" target="_blank" rel="noopener">Scott Joplin: „Maple Leaf Rag"</a><span class="src">Joplin</span></li><li><a href="https://www.youtube.com/watch?v=ND2rMET4MVw" target="_blank" rel="noopener">Scott Joplin: „The Entertainer"</a><span class="src">Joplin</span></li><li><a href="https://www.youtube.com/watch?v=5Bo3f_9hLkQ" target="_blank" rel="noopener">Bluus</a><span class="src">bluus</span></li><li><a href="https://www.youtube.com/watch?v=4gXShOJVwaM" target="_blank" rel="noopener">Bessie Smith</a><span class="src">bluus</span></li><li><a href="https://www.youtube.com/results?search_query=Muddy+Waters+Hoochie+Coochie+Man" target="_blank" rel="noopener">Muddy Waters</a><span class="src">YouTube'i otsing, slaidi link ei tööta</span></li><li><a href="https://www.youtube.com/watch?v=OIW4ARVbhrw" target="_blank" rel="noopener">B.B. King</a><span class="src">bluus</span></li></ul></div>
 </section>
 
 <!-- NEW ORLEANS -->
@@ -256,7 +285,7 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
 
   <h3>Lõpp</h3>
   <p><span class="yr">1917</span> suleti lõbustusasutuste rajoon Storyville ja muusikud suundusid <b>Chicagosse</b>.</p>
-  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://youtu.be/BOY6NFP_KyQ?t=50" target="_blank" rel="noopener">Marsid</a><span class="src">juured</span></li><li><a href="https://www.youtube.com/watch?v=5SS9EnD_-_Y" target="_blank" rel="noopener">Hübriidmuusika</a><span class="src">juured</span></li><li><a href="https://youtu.be/EadpcjMB_2s?t=158" target="_blank" rel="noopener">Kuulmise järgi improviseerimine</a><span class="src">harrastusorkestrid</span></li><li><a href="https://www.youtube.com/watch?v=PwpriGltf9g" target="_blank" rel="noopener">Joe „King" Oliver</a><span class="src">muusikud</span></li><li><a href="https://youtu.be/8CorqfnI2MY?t=22" target="_blank" rel="noopener">Jelly Roll Morton</a><span class="src">muusikud</span></li><li><a href="https://youtu.be/UofL8pD69co?t=65" target="_blank" rel="noopener">Louis Armstrong: jazzist sai solistide muusika</a><span class="src">Armstrong</span></li><li><a href="https://www.youtube.com/watch?v=VqhCQZaH4Vs" target="_blank" rel="noopener">Louis Armstrong: „What a Wonderful World"</a><span class="src">Armstrong</span></li><li><a href="https://www.youtube.com/watch?v=907EnjE8NEI" target="_blank" rel="noopener">Louis Armstrong: „West End Blues"</a><span class="src">Armstrong</span></li></ul></div>
+  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://youtu.be/BOY6NFP_KyQ?t=50" target="_blank" rel="noopener">Marsid</a><span class="src">juured</span></li><li><a href="https://www.youtube.com/watch?v=5SS9EnD_-_Y" target="_blank" rel="noopener">Hübriidmuusika</a><span class="src">juured</span></li><li><a href="https://youtu.be/EadpcjMB_2s?t=158" target="_blank" rel="noopener">Kuulmise järgi improviseerimine</a><span class="src">harrastusorkestrid</span></li><li><a href="https://www.youtube.com/watch?v=PwpriGltf9g" target="_blank" rel="noopener">Joe „King" Oliver</a><span class="src">muusikud</span></li><li><a href="https://youtu.be/8CorqfnI2MY?t=22" target="_blank" rel="noopener">Jelly Roll Morton</a><span class="src">muusikud</span></li><li><a href="https://youtu.be/UofL8pD69co?t=65" target="_blank" rel="noopener">Louis Armstrong: jazzist sai solistide muusika</a><span class="src">Armstrong</span></li><li><a href="https://www.youtube.com/watch?v=VqhCQZaH4Vs" target="_blank" rel="noopener">Louis Armstrong: „What a Wonderful World"</a><span class="src">Armstrong</span></li><li><a href="https://www.youtube.com/results?search_query=Louis+Armstrong+West+End+Blues+1928" target="_blank" rel="noopener">Louis Armstrong: „West End Blues"</a><span class="src">YouTube'i otsing, slaidi link ei tööta</span></li></ul></div>
 </section>
 
 <!-- DIXIELAND -->
@@ -390,10 +419,168 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
   <div class="cards" id="cards"></div>
 </section>
 </main>
-
-<footer>Koostatud tunni slaidide põhjal. Slaidil on „I'm in the Mood of Love", õige pealkiri on „I'm in the Mood for Love".</footer>
+</div>
+<div class="subject" id="s-upt" hidden>
+  <div class="crumb"><a href="#">← Kõik ained</a><span class="subjname">UPT</span></div>
+  <nav aria-label="UPT teemad"><div class="tabs" role="tablist"><button role="tab" id="t-upt-ajakava" aria-controls="upt-ajakava" aria-selected="false">Ajakava</button><button role="tab" id="t-upt-pohitoed" aria-controls="upt-pohitoed" aria-selected="false">Mis UPT on</button><button role="tab" id="t-upt-ulesehitus" aria-controls="upt-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-upt-vormistus" aria-controls="upt-vormistus" aria-selected="false">Vormistus</button><button role="tab" id="t-upt-viitamine" aria-controls="upt-viitamine" aria-selected="false">Viitamine</button><button role="tab" id="t-upt-ai" aria-controls="upt-ai" aria-selected="false">Tehisaru</button><button role="tab" id="t-upt-nipid" aria-controls="upt-nipid" aria-selected="false">Nipid</button></div></nav>
+  <main><section role="tabpanel" id="upt-ajakava" aria-labelledby="t-upt-ajakava" hidden>
+  <h2>UPT ajakava 2026/2027</h2>
+  <p class="lead">UPT ehk õpilasuurimus või praktiline töö tehakse G2 aasta jooksul. Ilma selleta gümnaasiumi ei lõpeta.</p>
+  <ol class="timeline">
+    <li><span class="when">2. oktoober</span><b>UPT avalduse esitamine.</b> Teema, juhendaja nõusolek ja grupitöö korral kõik liikmed ühel avaldusel.</li>
+    <li><span class="when">2. november</span><b>I seminar</b></li>
+    <li><span class="when">17. detsember</span>Kirjutamislaager</li>
+    <li><span class="when">2. veebruar</span><b>II seminar</b></li>
+    <li><span class="when">17. veebruar</span>Kirjutamislaager</li>
+    <li><span class="when">17. märts</span>Töö esitamine kaasõpilasele retsenseerimiseks</li>
+    <li><span class="when">18.–31. märts</span>Kaasõpilase töö retsenseerimine. Retsensioon tuleb esitada <span class="yr">31. märtsiks</span>.</li>
+    <li><span class="when">22. aprill</span><b>Lõpliku töö esitamine</b></li>
+    <li><span class="when">26. aprill – 13. mai</span>Õpetajad retsenseerivad töid</li>
+    <li><span class="when">3. mai</span><b>Eelkaitsmine.</b> Hinnet ei saa, aga osalemine on kaitsmisele pääsemise tingimus.</li>
+    <li><span class="when">14. mai</span>Retsensioonid jõuavad õpilasteni</li>
+    <li><span class="when">18. mai</span><b>Kaitsmine</b></li>
+  </ol>
+  <div class="key"><span class="label">Tähtis</span>UPT info liigub <b>eKoolis</b>. Kui eKoolis öeldakse midagi muud kui juhendis või sellel lehel, kehtib eKooli viimane teade.</div>
+</section>
+<section role="tabpanel" id="upt-pohitoed" aria-labelledby="t-upt-pohitoed" hidden>
+  <h2>Mis UPT on</h2>
+  <p class="lead">Kirjalik töö, mille teed üksi, paaris või grupis koos juhendajaga. Kaitsed selle komisjoni ees.</p>
+  <h3>Kolm vormi</h3>
+  <ul>
+    <li><b>Uurimistöö:</b> uurid probleemi ja leiad vastused uurimisküsimustele.</li>
+    <li><b>Praktiline töö:</b> lood midagi (näiteks rakenduse, mängu, ürituse või kunstiteose) ja analüüsid oma tööprotsessi.</li>
+    <li><b>Õpilasfirma:</b> kirjalik töö ja tegevusaruanne.</li>
+  </ul>
+  <h3>Uurimistöö liigid</h3>
+  <ul>
+    <li>Küsitlusel põhinev</li><li>Intervjuul põhinev</li><li>Katsel või vaatlusel põhinev</li><li>Teksti- või videoanalüüsil põhinev</li><li>Kodulooline</li><li>Karjääriuurimus</li>
+  </ul>
+  <h3>Põhireeglid</h3>
+  <ul>
+    <li>Töö kirjutatakse <b>eesti keeles</b> ja teaduslikus stiilis: selgelt, täpselt ja neutraalselt. Üks lause on üks mõte, üks lõik on üks mõttearendus.</li>
+    <li>Mitme autoriga töö on mahukam ja iga autori panus peab olema eristatav. Kõik autorid esitlevad.</li>
+    <li>Juhendaja on kooli töötaja. Ta võib keelduda, kui tal on juhendatavaid liiga palju või teema pole tema valdkond.</li>
+    <li>Abiks on Moodle'i kursus <b>„Uurimistöö alused"</b>, juhendaja, kirjutamislaagrid ja seminarid.</li>
+  </ul>
+  <h3>Sinu kohustused</h3>
+  <ul>
+    <li>Lepi juhendajaga kokku regulaarsed kohtumised ja pea tähtaegadest kinni.</li>
+    <li>Sina vastutad oma andmete õigsuse eest.</li>
+    <li>Juhendajal ja UPT koordinaatoril peab olema ligipääs sinu materjalidele (OneDrive).</li>
+    <li>Töö ei tohi olla plagiaat ja peab olema korrektselt vormistatud.</li>
+  </ul>
+  <h3>Tundlikud teemad</h3>
+  <p>Väldi tundlikke andmeid (tervis, sh vaimne tervis, etniline päritolu, biomeetria jne) ja ühiskonda lõhestavaid teemasid (usk, poliitika). Kui siiski tahad sellist teemat, on vaja juhendaja, kooli juhtkonna ja UPT koordinaatori nõusolekut.</p>
+</section>
+<section role="tabpanel" id="upt-ulesehitus" aria-labelledby="t-upt-ulesehitus" hidden>
+  <h2>Töö ülesehitus</h2>
+  <p class="lead">Osad on alati selles järjekorras. Sisukord, pealkirjad ja leheküljenumbrid peavad omavahel klappima.</p>
+  <h3>Uurimistöö</h3>
+  <ol>
+    <li>Tiitelleht</li><li>Autorideklaratsioon</li><li>Sisukord</li><li>Kasutatud lühendite loetelu (kui vaja)</li>
+    <li><b>Sissejuhatus:</b> teema, probleem, eesmärk ja uurimisküsimused või hüpoteesid</li>
+    <li><b>Teoreetiline taust:</b> mida allikad teemast ütlevad, mõisted lahti seletatud</li>
+    <li><b>Metoodika:</b> kuidas ja keda uurisid ning miks just nii</li>
+    <li><b>Tulemused ja arutelu</b></li>
+    <li><b>Kokkuvõte:</b> vastused uurimisküsimustele</li>
+    <li>Kasutatud allikad</li><li>Lisad</li>
+  </ol>
+  <h3>Praktiline töö</h3>
+  <ol>
+    <li>Tiitelleht</li><li>Autorideklaratsioon</li><li>Sisukord</li>
+    <li><b>Sissejuhatus</b></li>
+    <li><b>Teoreetiline taust</b></li>
+    <li><b>Protsessi ja tulemuse kirjeldus:</b> mida ja kuidas tegid</li>
+    <li><b>Tööprotsessi analüüs ja eneseanalüüs:</b> mis läks hästi, mis mitte, mida õppisid</li>
+    <li><b>Kokkuvõte</b></li>
+    <li>Kasutatud allikad</li><li>Lisad</li>
+  </ol>
+  <h3>Resümee</h3>
+  <p>Juurde käib <b>resümee eesti ja inglise keeles</b>. Vormid on UPT juhendi lisades 3 ja 4.</p>
+</section>
+<section role="tabpanel" id="upt-vormistus" aria-labelledby="t-upt-vormistus" hidden>
+  <h2>Vormistus</h2>
+  <p class="lead">Kõige tähtsam on, et kogu töö oleks ühtne. Seadista laadid kohe alguses, siis tuleb sisukord automaatselt.</p>
+  <div class="key"><span class="label">Programm</span>Töö tehakse <b>MS Wordis</b> (Microsoft 365 on õpilastele tasuta) ja salvestatakse <b>OneDrive'i</b>, et juhendaja näeks.</div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Element</th><th>Nõue</th></tr></thead>
+    <tbody>
+      <tr><th>Leht</th><td>A4, veerised üleval ja all <span class="yr">2,5 cm</span>, vasakul ja paremal <span class="yr">2 cm</span></td></tr>
+      <tr><th>Põhitekst</th><td>Times New Roman <span class="yr">12 p</span>, must, rööpjoondus, reasamm <span class="yr">1,5</span>, taandridu ei ole. Lõikude vahel ei ole tühja rida, vaid <span class="yr">6 p</span> enne ja pärast.</td></tr>
+      <tr><th>Pealkiri 1</th><td>TNR <span class="yr">16 p</span>, paks, SUURTÄHED, vasakjoondus, vahe <span class="yr">0 p</span> enne ja <span class="yr">24 p</span> pärast. Algab uuelt lehelt.</td></tr>
+      <tr><th>Pealkiri 2</th><td>TNR <span class="yr">14 p</span>, paks, vahe <span class="yr">24 p</span> enne ja <span class="yr">24 p</span> pärast</td></tr>
+      <tr><th>Pealkiri 3</th><td>TNR <span class="yr">14 p</span>, kursiiv, vahe <span class="yr">12 p</span> enne ja <span class="yr">6 p</span> pärast</td></tr>
+      <tr><th>Tabeli pealkiri, joonise allkiri</th><td>TNR <span class="yr">12 p</span>, paks, reasamm <span class="yr">1,0</span>, vahe <span class="yr">6 p</span> enne ja pärast</td></tr>
+      <tr><th>Leheküljenumbrid</th><td>Automaatselt, all keskel. Tiitellehel numbrit ei näidata, aga see on 1. leht. Autorideklaratsioon on lk <span class="yr">2</span>.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Kirjutamise reeglid</h3>
+  <ul>
+    <li>Ühekohalised arvud sõnadega (kaks punkti), suuremad numbritega (120 ettevõtet). Mõõtühikuga alati numbriga (5 cm).</li>
+    <li>Aastad numbritega, mitte „eelmisel aastal".</li>
+    <li>Vali üks vorm ja hoia seda kogu töö: umbisikuline (uuriti), meie-vorm (uurisime) või mina-vorm (uurisin). Sama kehtib ajavormi kohta.</li>
+    <li>Võõrkeelne mõiste esimesel korral sulgudes kursiivis: enesetõhusus (<em>self-efficacy</em>).</li>
+    <li>Kirjavahemärk käib sõna külge, siis tühik. Sulud ja jutumärgid käivad tihedalt vastu teksti.</li>
+  </ul>
+</section>
+<section role="tabpanel" id="upt-viitamine" aria-labelledby="t-upt-viitamine" hidden>
+  <h2>Viitamine</h2>
+  <p class="lead">PERGis kasutatakse <b>APA 7</b> süsteemi: tekstis on autori nimi ja aasta, täiskirje on peatükis „Kasutatud allikad".</p>
+  <ul>
+    <li>Viita kõigele, mille mõtteid või andmeid kasutad, ka piltidele ja graafikutele. Ainult üldtuntud faktidele ei pea.</li>
+    <li><b>Refereering</b> on peamine viis: võtad mõtte oma sõnadega kokku ja lisad viite, näiteks (Covington, 2000).</li>
+    <li><b>Tsitaat</b> on jutumärkides ja lõpeb viitega. Väljajätt märgitakse … või [---].</li>
+    <li>Tsitaadi esitamine refereeringuna on <b>plagiaat</b>, isegi kui viide on olemas.</li>
+    <li><b>Vikipeediat allikana ei kasutata.</b> Kasuta artikli allosas olevaid originaalallikaid.</li>
+    <li>Ajaviiteajakirjad, meelelahutusportaalid ja reklaamlehed ei sobi allikaks (kui need just pole uurimisobjekt).</li>
+    <li>Kasuta <b>Zoterot</b>: see teeb viited ja allikate loetelu automaatselt.</li>
+  </ul>
+  <div class="key"><span class="label">Näide</span>„Kogutud andmete analüüsimine […] on uurimuses otsustava tähtsusega." (Hirsjärvi jt, 2010, lk 206)</div>
+</section>
+<section role="tabpanel" id="upt-ai" aria-labelledby="t-upt-ai" hidden>
+  <h2>Tehisaru kasutamine</h2>
+  <p class="lead">Tehisaru tohib kasutada ainult viidatult ja kasutusviisi kirjeldades: mida küsisid, mis vastus tuli ja kuidas seda muutsid.</p>
+  <h3>Üldiselt lubatud</h3>
+  <ul>
+    <li>Allikate leidmiseks soovituste küsimine</li>
+    <li>Otsisõnadele sünonüümide leidmine</li>
+    <li>Keerulise teooria lahtiseletamine endale</li>
+    <li>Pika teksti kokkuvõte esmaseks ülevaateks (aga mitte oma tekstiks)</li>
+    <li>Tõlkimine</li>
+    <li>Abi statistika, graafikute ja tulemuste tõlgendamisega</li>
+    <li>Programmeerimisvigade leidmine</li>
+    <li>Oma teksti toimetamine (lühemaks, sõnakordused välja)</li>
+    <li>Vormistuse ja struktuuri parandamine</li>
+  </ul>
+  <h3>Keelatud</h3>
+  <ul>
+    <li>Pikkade tekstilõikude genereerimine ja enda omana esitamine</li>
+    <li>Kontrollimata info esitamine</li>
+    <li>Andmete väljamõtlemine või võltsimine</li>
+    <li>Isikuandmetega uurimisandmete andmine tehisarule</li>
+    <li>Teiste avaldamata töö andmine tehisarule</li>
+  </ul>
+  <div class="key"><span class="label">Meeles pea</span>Tehisaru teksti esitamine enda mõtetena on <b>akadeemiline petturlus</b>.</div>
+</section>
+<section role="tabpanel" id="upt-nipid" aria-labelledby="t-upt-nipid" hidden>
+  <h2>Nipid, mis aega säästavad</h2>
+  <p class="lead">Need ei ole juhendi nõuded, vaid soovitused, mis teevad elu lihtsamaks.</p>
+  <ul>
+    <li><b>Seadista Wordi laadid esimesel päeval.</b> Kui pealkirjad ja põhitekst on kohe õiged, tuleb sisukord ühe klikiga.</li>
+    <li><b>Lisa allikad Zoterosse kohe, kui neid loed.</b> Lõpus allikate otsimine on kõige tüütum osa.</li>
+    <li><b>Pane iga juhendajaga kohtumise järel kirja</b>, mis kokku lepiti ja mis on järgmine tähtaeg.</li>
+    <li><b>Loe tagasisidejuhendeid</b> (UPT juhendi lisad 9 ja 10). Seal on täpselt kirjas, mille eest seminaril ja kaitsmisel punkte saab.</li>
+    <li><b>Sõnasta eesmärk ja uurimisküsimused varakult.</b> Ilma nendeta ei saa juhendaja aidata ja teoreetiline osa läheb laiali.</li>
+    <li><b>Praktilise töö puhul pea arenduspäevikut</b>: mida tegid, mis ei töötanud ja miks muutsid. Eneseanalüüsi on siis lihtne kirjutada.</li>
+    <li><b>Ära jäta kõike kirjutamislaagrisse.</b> Laagris on hea viimistleda, mitte nullist alustada.</li>
+    <li>Harjuta kaitsekõnet kellegi ees ja mõtle läbi, mida komisjon võiks küsida.</li>
+  </ul>
+</section>
+</main>
 </div>
 
+<footer>Koostatud tunni slaidide ja kooli juhendite põhjal tehisaru abiga. Võib sisaldada üksikuid vigu.</footer>
+</div>
 <script>
 (function(){
   var QA = [
@@ -441,10 +628,7 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
     }).join('');
     update();
   }
-  function update(){
-    var open = cards.querySelectorAll('details[open]').length;
-    count.textContent = open + ' / ' + QA.length + ' vastust avatud';
-  }
+  function update(){ count.textContent = cards.querySelectorAll('details[open]').length + ' / ' + QA.length + ' vastust avatud'; }
   cards.addEventListener('toggle', update, true);
   document.getElementById('shuffle').addEventListener('click', function(){
     var a = QA.slice();
@@ -452,47 +636,57 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
     render(a);
   });
   document.getElementById('closeall').addEventListener('click', function(){
-    cards.querySelectorAll('details[open]').forEach(function(d){d.open=false;});
-    update();
+    cards.querySelectorAll('details[open]').forEach(function(d){d.open=false;}); update();
   });
   render(QA);
 
-  // tabs
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
-  function show(id, focus){
-    var found = false;
+  var home = document.getElementById('home');
+  var subjects = Array.prototype.slice.call(document.querySelectorAll('.subject'));
+  function store(k,v){ try { localStorage.setItem(k,v); } catch(e) {} }
+  function load(k){ try { return localStorage.getItem(k); } catch(e) { return null; } }
+
+  function showTab(subj, pid){
+    var tabs = Array.prototype.slice.call(subj.querySelectorAll('[role="tab"]'));
+    var ok = tabs.some(function(t){ return t.getAttribute('aria-controls') === pid; });
+    if (!ok) pid = tabs[0].getAttribute('aria-controls');
     tabs.forEach(function(t){
-      var on = t.getAttribute('aria-controls') === id;
-      if (on) found = true;
+      var on = t.getAttribute('aria-controls') === pid;
       t.setAttribute('aria-selected', on ? 'true' : 'false');
       t.tabIndex = on ? 0 : -1;
       document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-      if (on && focus) t.focus();
       if (on) { var bar = t.parentNode; bar.scrollLeft = t.offsetLeft - bar.clientWidth/2 + t.clientWidth/2; }
     });
-    if (!found) return false;
-    try { localStorage.setItem('ajukas-muusika-tab', id); } catch(e) {}
-    return true;
+    store('ajukas-tab-' + subj.id, pid);
   }
-  tabs.forEach(function(t, i){
-    t.addEventListener('click', function(){
-      show(t.getAttribute('aria-controls'));
-      try { history.replaceState(null, '', '#' + t.getAttribute('aria-controls')); } catch(e) {}
-      window.scrollTo({top:0});
-    });
-    t.addEventListener('keydown', function(e){
-      var n = null;
-      if (e.key === 'ArrowRight') n = tabs[(i+1)%tabs.length];
-      if (e.key === 'ArrowLeft') n = tabs[(i-1+tabs.length)%tabs.length];
-      if (n){ e.preventDefault(); show(n.getAttribute('aria-controls'), true); }
+  function route(){
+    var h = decodeURIComponent((location.hash || '').slice(1));
+    var subj = null, pid = null;
+    if (h) {
+      subj = document.getElementById('s-' + h);
+      if (!subj) {
+        var el = document.getElementById(h);
+        if (el && el.getAttribute('role') === 'tabpanel') { subj = el.closest('.subject'); pid = h; }
+      }
+    }
+    home.hidden = !!subj;
+    subjects.forEach(function(s){ s.hidden = s !== subj; });
+    if (subj) showTab(subj, pid || load('ajukas-tab-' + subj.id));
+    document.title = subj ? subj.querySelector('.subjname').textContent + ' · Ajukas' : 'Ajukas';
+  }
+  subjects.forEach(function(subj){
+    var tabs = Array.prototype.slice.call(subj.querySelectorAll('[role="tab"]'));
+    tabs.forEach(function(t, i){
+      t.addEventListener('click', function(){ location.hash = t.getAttribute('aria-controls'); });
+      t.addEventListener('keydown', function(e){
+        var n = null;
+        if (e.key === 'ArrowRight') n = tabs[(i+1)%tabs.length];
+        if (e.key === 'ArrowLeft') n = tabs[(i-1+tabs.length)%tabs.length];
+        if (n) { e.preventDefault(); location.hash = n.getAttribute('aria-controls'); n.focus(); }
+      });
     });
   });
-  var start = (location.hash || '').slice(1);
-  if (!start || !show(start)) {
-    var saved = null;
-    try { saved = localStorage.getItem('ajukas-muusika-tab'); } catch(e) {}
-    if (!saved || !show(saved)) show('ajajoon');
-  }
+  window.addEventListener('hashchange', function(){ route(); window.scrollTo({top:0}); });
+  route();
 })();
 </script>
 </body>

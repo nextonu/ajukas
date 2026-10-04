@@ -1,6 +1,7 @@
 # Ajukas
 
-Kontrolltööde kordamismaterjalid aine ja teema kaupa. Kogu leht on üks fail: `index.html`.
+Kontrolltööde kordamismaterjalid aine ja teema kaupa: https://nextonu.github.io/ajukas/
 
-Ained:
-- Muusika: varajane jazz (ragtime ja bluus, New Orleans, dixieland, Chicago)
+Kogu leht on üks fail: `index.html`. Avaleht näitab kõiki aineid; valmis on muusika (varajane jazz) ja UPT.
+
+Koostatud tehisaru abiga, võib sisaldada üksikuid vigu.
