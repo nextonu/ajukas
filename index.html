@@ -18,7 +18,7 @@
 html,body{margin:0}
 body{background:var(--bg);color:var(--text);font-family:var(--ui);font-size:16px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
 .wrap{max-width:900px;margin:0 auto}
-header{padding-block:28px 10px;display:flex;flex-direction:column;gap:6px}
+header{padding-block:36px 10px;display:flex;flex-direction:column;gap:6px}
 .eyebrow{font-family:var(--mono);font-size:12px;color:var(--muted)}
 .eyebrow::before{content:"// "}
 h1{font-size:clamp(36px,7vw,52px);font-weight:700;line-height:1.05;margin:0;color:var(--bright);letter-spacing:-.02em}
@@ -28,7 +28,7 @@ h1 .dot{color:#EAB308}
 .subj{font-size:14px;font-weight:600;border:1px solid var(--line2);background:var(--raised);color:var(--bright);padding:6px 12px;border-radius:4px}
 .subj small{font-family:var(--mono);font-weight:400;font-size:12px;color:var(--muted);margin-left:8px}
 .subj.soon{background:transparent;color:var(--muted);border-style:dashed;font-weight:400}
-nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-bottom:28px}
+
 .tabs{display:flex;overflow-x:auto;scrollbar-width:thin}
 .tabs button{flex:0 0 auto;font-family:var(--ui);font-size:14px;border:0;border-top:2px solid transparent;border-right:1px solid var(--line);background:var(--panel);color:var(--muted);padding:9px 16px;cursor:pointer}
 .tabs button:hover{color:var(--text)}
@@ -110,17 +110,34 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
 .crumb a:hover{color:var(--bright)}
 .crumb .subjname{font-size:22px;font-weight:700;color:var(--bright)}
 ol{margin:0 0 12px;padding-left:1.4em}
+
+.appbar{display:flex;align-items:stretch;border-bottom:1px solid var(--line);margin-bottom:18px;background:var(--bg)}
+.appbar.sticky{position:sticky;top:0;z-index:5}
+.appbar .logo{flex:0 0 auto;display:flex;align-items:center;padding:8px 16px 8px 0;margin-right:4px;border-right:1px solid var(--line);font-weight:700;font-size:17px;color:var(--bright);text-decoration:none;letter-spacing:-.01em}
+.appbar .logo .dot{color:#EAB308}
+.appbar .logo:hover{color:#fff}
+.appbar .logo:focus-visible,.back:focus-visible,.path a:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+.appbar .tabs{flex:1 1 auto;min-width:0}
+.pagehead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:4px 0 22px}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--bright);text-decoration:none;background:var(--raised);border:1px solid var(--line2);border-radius:4px;padding:8px 16px}
+.back:hover{border-color:var(--bright);background:#2D2D2D}
+.path{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.path a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:3px}
+.path a:hover{color:var(--bright)}
+.pagetitle{font-size:clamp(30px,6vw,42px);margin:0 0 4px}
+.view .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:8px 0 28px}
+@media (max-width:520px){.appbar .logo{font-size:15px;padding-right:12px}.path{display:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header>
-  <span class="eyebrow">Kordamine kontrolltöödeks</span>
-  <h1><a class="brand" href="#">Ajukas<span class="dot">.</span></a></h1>
-</header>
 
-<div class="home" id="home">
-  <p class="tagline">Kõigi ainete konspektid ühes kohas. Vali aine, siis teema, ja testi end lõpus.</p>
+<div class="view home" id="v-home" data-title="Ajukas">
+  <header>
+    <span class="eyebrow">Kordamine kontrolltöödeks</span>
+    <h1>Ajukas<span class="dot">.</span></h1>
+  </header>
+  <p class="tagline">Kõigi ainete konspektid ühes kohas. Vali aine, siis teema.</p>
   <div class="grid">
     <div class="subjcard"><span class="sname">Ajalugu</span><span class="stopic">Materjal tulekul</span></div>
     <div class="subjcard"><span class="sname">Eesti keel</span><span class="stopic">Materjal tulekul</span></div>
@@ -130,16 +147,27 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <div class="subjcard"><span class="sname">Lai matemaatika</span><span class="stopic">Materjal tulekul</span></div>
     <div class="subjcard"><span class="sname">Füüsika</span><span class="stopic">Materjal tulekul</span></div>
     <div class="subjcard"><span class="sname">Keemia</span><span class="stopic">Materjal tulekul</span></div>
-    <a class="subjcard ready" href="#muusika"><span class="sname">Muusika</span><span class="stopic">Varajane jazz</span></a>
+    <a class="subjcard ready" href="#muusika"><span class="sname">Muusika</span><span class="stopic">Varajane jazz, Kontserdi arvustus</span></a>
     <div class="subjcard"><span class="sname">Vene keel</span><span class="stopic">Materjal tulekul</span></div>
-    <a class="subjcard ready" href="#upt"><span class="sname">UPT</span><span class="stopic">Uurimus või praktiline töö</span></a>
+    <a class="subjcard ready" href="#upt"><span class="sname">UPT</span><span class="stopic">UPT juhend</span></a>
   </div>
   <p class="disclaimer"><strong>NB!</strong> Selle lehe on tunnimaterjalide ja juhendite põhjal koostanud tehisaru. Vigu tuleb harva ette, aga päris välistada neid ei saa. Kui miski tundub kahtlane, kontrolli slaididelt, õpikust või küsi õpetajalt.</p>
 </div>
 
-<div class="subject" id="s-muusika" hidden>
-  <div class="crumb"><a href="#">← Kõik ained</a><span class="subjname">Muusika</span></div>
-  <nav aria-label="Muusika teemad"><div class="tabs" role="tablist">
+<div class="view" id="v-muusika" data-title="Muusika" hidden>
+  <div class="appbar"><a class="logo" href="#" aria-label="Ajukas avaleht">Ajukas<span class="dot">.</span></a></div>
+  <div class="pagehead">
+    <a class="back" href="#"><span aria-hidden="true">←</span> Kõik ained</a>
+  </div>
+  <h2 class="pagetitle">Muusika</h2>
+  <p class="tagline">Vali teema.</p>
+  <div class="grid">
+    <a class="subjcard ready" href="#jazz"><span class="sname">Varajane jazz</span><span class="stopic">Ragtime, bluus, New Orleans, dixieland, Chicago. Kontrolltöö.</span></a>
+    <a class="subjcard ready" href="#kontsert"><span class="sname">Kontserdi arvustus</span><span class="stopic">Nõuded, analüüsi küsimused ja näpunäited. Rühmaesitlus.</span></a>
+  </div>
+</div>
+<div class="view" id="v-jazz" data-title="Varajane jazz" data-parent="muusika" data-parent-title="Muusika" hidden>
+  <nav class="appbar sticky" aria-label="Varajane jazz teemad"><a class="logo" href="#" aria-label="Ajukas avaleht">Ajukas<span class="dot">.</span></a><div class="tabs" role="tablist">
     <button role="tab" id="t-ajajoon" aria-controls="ajajoon" aria-selected="true">Ajajoon</button>
     <button role="tab" id="t-tunnused" aria-controls="tunnused" aria-selected="false">Jazzi tunnused</button>
     <button role="tab" id="t-varajased" aria-controls="varajased" aria-selected="false">Ragtime ja bluus</button>
@@ -149,6 +177,10 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <button role="tab" id="t-vordlus" aria-controls="vordlus" aria-selected="false">Võrdlus</button>
     <button role="tab" id="t-test" aria-controls="test" aria-selected="false">Testi ennast</button>
   </div></nav>
+  <div class="pagehead">
+    <a class="back" href="#muusika"><span aria-hidden="true">←</span> Muusika</a>
+    <span class="path"><a href="#">Avaleht</a> / <a href="#muusika">Muusika</a> / Varajane jazz</span>
+  </div>
   <main>
 <!-- AJAJOON -->
 <section role="tabpanel" id="ajajoon" aria-labelledby="t-ajajoon" hidden>
@@ -194,7 +226,6 @@ ol{margin:0 0 12px;padding-left:1.4em}
     <li><b>Matuserongkäikude orkestrid</b> on üks jazzi alustalasid.</li>
   </ul>
   <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://www.youtube.com/watch?v=27Pn5mmIjO8" target="_blank" rel="noopener">Mis teeb jazzist jazzi? (näide 2)</a><span class="src">sissejuhatus</span></li><li><a href="https://www.youtube.com/watch?v=IiUyz4HG-Kc" target="_blank" rel="noopener">Bach: „Wachet auf, ruft uns die Stimme"</a><span class="src">kuulamisülesanne</span></li><li><a href="https://www.youtube.com/watch?v=27Pn5mmIjO8" target="_blank" rel="noopener">Bobby McFerrin: „Wachet auf, ruft uns die Stimme"</a><span class="src">kuulamisülesanne</span></li><li><a href="https://www.youtube.com/watch?v=qwf_m0p86KU" target="_blank" rel="noopener">Harmoonia jazzis</a><span class="src">põhijooned</span></li><li><a href="https://www.youtube.com/watch?v=4MwQcm4eH18" target="_blank" rel="noopener">Töölaulud</a><span class="src">sotsiaalne taust</span></li><li><a href="https://www.youtube.com/watch?v=zcJ6Wxdcj-E" target="_blank" rel="noopener">Raske tööelu</a><span class="src">sotsiaalne taust</span></li><li><a href="https://www.youtube.com/watch?v=DOoNEjrVcpo" target="_blank" rel="noopener">Congo Square</a><span class="src">New Orleans</span></li><li><a href="https://www.youtube.com/watch?v=alzPbV61sOM" target="_blank" rel="noopener">Matuserongkäik</a><span class="src">New Orleans</span></li><li><a href="https://www.youtube.com/watch?v=oVOGylzaMiA" target="_blank" rel="noopener">Matuserongkäigu orkestrid</a><span class="src">New Orleans</span></li></ul></div>
-  <div class="listen"><h3>Kontserdi arvustus</h3><p>Käi septembrist veebruarini ühel kontserdil ja kirjuta sellest arvustus. Kontserdi valid ise. Allpool on kaks kalendrit, kust on hea alustada, aga sobib ka mõni muu kontsert.</p><ul><li><a href="https://muba.edu.ee/sundmused/" target="_blank" rel="noopener">MUBA sündmused</a><span class="src">muba.edu.ee</span></li><li><a href="https://emtasaalid.ee/kalender/" target="_blank" rel="noopener">EMTA saalide kalender</a><span class="src">emtasaalid.ee</span></li></ul></div>
 </section>
 
 <!-- VARAJASED -->
@@ -420,9 +451,114 @@ ol{margin:0 0 12px;padding-left:1.4em}
 </section>
 </main>
 </div>
-<div class="subject" id="s-upt" hidden>
-  <div class="crumb"><a href="#">← Kõik ained</a><span class="subjname">UPT</span></div>
-  <nav aria-label="UPT teemad"><div class="tabs" role="tablist"><button role="tab" id="t-upt-ajakava" aria-controls="upt-ajakava" aria-selected="false">Ajakava</button><button role="tab" id="t-upt-pohitoed" aria-controls="upt-pohitoed" aria-selected="false">Mis UPT on</button><button role="tab" id="t-upt-ulesehitus" aria-controls="upt-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-upt-vormistus" aria-controls="upt-vormistus" aria-selected="false">Vormistus</button><button role="tab" id="t-upt-viitamine" aria-controls="upt-viitamine" aria-selected="false">Viitamine</button><button role="tab" id="t-upt-ai" aria-controls="upt-ai" aria-selected="false">Tehisaru</button><button role="tab" id="t-upt-nipid" aria-controls="upt-nipid" aria-selected="false">Nipid</button></div></nav>
+<div class="view" id="v-kontsert" data-title="Kontserdi arvustus" data-parent="muusika" data-parent-title="Muusika" hidden>
+  <nav class="appbar sticky" aria-label="Kontserdi arvustus teemad"><a class="logo" href="#" aria-label="Ajukas avaleht">Ajukas<span class="dot">.</span></a><div class="tabs" role="tablist"><button role="tab" id="t-kontsert-ulesehitus" aria-controls="kontsert-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-kontsert-kysimused" aria-controls="kontsert-kysimused" aria-selected="false">Analüüsi küsimused</button><button role="tab" id="t-kontsert-nipid" aria-controls="kontsert-nipid" aria-selected="false">Näpunäited</button><button role="tab" id="t-kontsert-kohad" aria-controls="kontsert-kohad" aria-selected="false">Kust kontserti leida</button></div></nav>
+  <div class="pagehead">
+    <a class="back" href="#muusika"><span aria-hidden="true">←</span> Muusika</a>
+    <span class="path"><a href="#">Avaleht</a> / <a href="#muusika">Muusika</a> / Kontserdi arvustus</span>
+  </div>
+  <main><section role="tabpanel" id="kontsert-ulesehitus" aria-labelledby="t-kontsert-ulesehitus" hidden>
+  <h2>Kontserdi arvustus</h2>
+  <p class="lead">Käid septembrist veebruarini ühel kontserdil või muusikalavastusel ja teed sellest rühmaga suulise arvustuse.</p>
+  <div class="key"><span class="label">Esitlus</span>Pikkus <b>7–10 minutit</b>. Iga rühmaliige räägib <b>oma arvamusest</b> kontserdi kohta (teema arenduse osa).</div>
+  <h3>1. Sissejuhatus</h3>
+  <ul>
+    <li>Mis kuupäeval ja kus kontsert toimus</li>
+    <li>Kes esinesid</li>
+    <li>Milliseid teoseid esitati</li>
+    <li>Paar üldistavat lauset kontserdi meeleolust või kava ülesehitusest</li>
+  </ul>
+  <h3>2. Teema arendus ehk arvustus</h3>
+  <ul>
+    <li>Alusta esitatud teostest. Võid leida huvitavaid fakte ja tsitaate heliloojate kohta või kasutada kavalehte.</li>
+    <li>Ära tsiteeri kavalehte sõna-sõnalt ega trüki seda slaididele ümber. Võta üks huvitav mõte või fakt ja ütle selle põhjal <b>oma mõtted ja järeldused</b>.</li>
+    <li><b>Suurem osa</b> teema arendusest peab olema mõtted <b>esinejate ja esituste</b> kohta. Küsimused, millest lähtuda, on vahekaardil „Analüüsi küsimused".</li>
+  </ul>
+  <h3>3. Kokkuvõte</h3>
+  <p>Kolm-neli lauset, kus on:</p>
+  <ul>
+    <li>arutlusest tekkinud järeldused;</li>
+    <li>kas muusika selle esitaja esituses tekitas mõtteid (milliseid?), vaimustas (miks?) või tekitas igavust (miks?);</li>
+    <li>võrdlus sinu varasemate kontserdikogemustega;</li>
+    <li>ettepanekud esinejatele või korraldajatele.</li>
+  </ul>
+</section>
+<section role="tabpanel" id="kontsert-kysimused" aria-labelledby="t-kontsert-kysimused" hidden>
+  <h2>Analüüsi küsimused</h2>
+  <p class="lead">Kasuta neid küsimusi, kui mõtled, mida esinejate ja esituse kohta öelda. Iga vastuse juures põhjenda, <b>miks</b> sa nii arvad.</p>
+  <h3>Esinejad</h3>
+  <ul>
+    <li>Kes nad on? Kasuta kavalehte või internetti. Kui materjali on palju, vali olulisem: konkursivõidud, esinemised kuulsates saalides, koostöö tuntud muusikutega.</li>
+    <li>Kas pilli- või lauluoskus oli heal tasemel või jättis soovida? Miks?</li>
+  </ul>
+  <h3>Esitus ja sinu mulje</h3>
+  <ul>
+    <li>Kuidas esitaja teost esitab?</li>
+    <li>Milliseid emotsioone see sinus tekitas?</li>
+    <li>Kuidas teos sind isiklikult mõjutas? Kas see tekitas mõtteid, tundeid või mälestusi?</li>
+  </ul>
+  <h3>Helilooja</h3>
+  <ul>
+    <li>Kas esitus avas helilooja stiili ja mõttemaailma?</li>
+    <li>Mida sina selle helilooja muusikast arvad ja kuidas peaks seda sinu arvates esitama?</li>
+  </ul>
+  <h3>Hinnang</h3>
+  <p>Kas esitus oli</p>
+  <ul>
+    <li>originaalne ja erakordne,</li>
+    <li>veider ja arusaamatu,</li>
+    <li>või pettumus?</li>
+  </ul>
+  <p>Põhjenda kindlasti.</p>
+  <div class="key"><span class="label">Ooper või ballett</span>Räägi ka lavastusest, dekoratsioonidest, kostüümidest ja tantsuseadetest.</div>
+</section>
+<section role="tabpanel" id="kontsert-nipid" aria-labelledby="t-kontsert-nipid" hidden>
+  <h2>Näpunäited</h2>
+  <h3>Õpetaja näpunäited</h3>
+  <ul>
+    <li>Ole aus, aga objektiivne. Väljenda oma tundeid, aga toeta neid konkreetsete näidetega.</li>
+    <li>Väldi üldisi fraase nagu „see oli hea". Selgita, <b>miks</b> see oli hea.</li>
+    <li>Räägi selgelt ja loogiliselt, et kuulaja saaks aru.</li>
+    <li>Jälgi õigekeelsust, aga ära karda kujundlikku väljendust ja isikupärast stiili.</li>
+    <li>Kontrolli esinejate ja heliloojate nimesid kavalehelt. Kui kavalehte pole, siis ENE-st, muusikaleksikonist või äärmisel juhul internetist.</li>
+  </ul>
+  <h3>Lisaks soovitan</h3>
+  <ul>
+    <li>Võta kavaleht kaasa või pildista see. Selles on nimed, teosed ja faktid, mida pärast vaja läheb.</li>
+    <li>Tee kohe pärast kontserti märkmed, kuni mulje on värske: mis meeldis, mis üllatas, mis jäi meelde.</li>
+    <li>Leppige rühmas varakult kokku, kes millest räägib, et samad mõtted ei korduks.</li>
+    <li>Ära loe slaididelt maha. Slaididel olgu märksõnad ja pildid, jutt tule enda peast.</li>
+    <li>Tee proovi ja mõõda aega. 7–10 minutit on kiiremini täis, kui tundub.</li>
+  </ul>
+</section>
+<section role="tabpanel" id="kontsert-kohad" aria-labelledby="t-kontsert-kohad" hidden>
+  <h2>Kust kontserti leida</h2>
+  <p class="lead">Kontsert peab toimuma <b>septembrist veebruarini</b> ja selle valid ise.</p>
+  <p>Need kaks kalendrit on head kohad, kust alustada. Sobib ka mõni muu kontsert või muusikalavastus, kui see sind rohkem huvitab.</p>
+  <div class="listen" style="border-top:0;padding-top:0;margin-top:8px"><ul>
+    <li><a href="https://muba.edu.ee/sundmused/" target="_blank" rel="noopener">MUBA sündmused</a><span class="src">muba.edu.ee</span></li>
+    <li><a href="https://emtasaalid.ee/kalender/" target="_blank" rel="noopener">EMTA saalide kalender</a><span class="src">emtasaalid.ee</span></li>
+  </ul></div>
+</section>
+</main>
+</div>
+<div class="view" id="v-upt" data-title="UPT" hidden>
+  <div class="appbar"><a class="logo" href="#" aria-label="Ajukas avaleht">Ajukas<span class="dot">.</span></a></div>
+  <div class="pagehead">
+    <a class="back" href="#"><span aria-hidden="true">←</span> Kõik ained</a>
+  </div>
+  <h2 class="pagetitle">UPT</h2>
+  <p class="tagline">Vali teema.</p>
+  <div class="grid">
+    <a class="subjcard ready" href="#upt-juhend"><span class="sname">UPT juhend</span><span class="stopic">Tähtajad, ülesehitus, vormistus, viitamine ja tehisaru reeglid.</span></a>
+  </div>
+</div>
+<div class="view" id="v-upt-juhend" data-title="UPT juhend" data-parent="upt" data-parent-title="UPT" hidden>
+  <nav class="appbar sticky" aria-label="UPT juhend teemad"><a class="logo" href="#" aria-label="Ajukas avaleht">Ajukas<span class="dot">.</span></a><div class="tabs" role="tablist"><button role="tab" id="t-upt-ajakava" aria-controls="upt-ajakava" aria-selected="false">Ajakava</button><button role="tab" id="t-upt-pohitoed" aria-controls="upt-pohitoed" aria-selected="false">Mis UPT on</button><button role="tab" id="t-upt-ulesehitus" aria-controls="upt-ulesehitus" aria-selected="false">Ülesehitus</button><button role="tab" id="t-upt-vormistus" aria-controls="upt-vormistus" aria-selected="false">Vormistus</button><button role="tab" id="t-upt-viitamine" aria-controls="upt-viitamine" aria-selected="false">Viitamine</button><button role="tab" id="t-upt-ai" aria-controls="upt-ai" aria-selected="false">Tehisaru</button><button role="tab" id="t-upt-nipid" aria-controls="upt-nipid" aria-selected="false">Nipid</button></div></nav>
+  <div class="pagehead">
+    <a class="back" href="#upt"><span aria-hidden="true">←</span> UPT</a>
+    <span class="path"><a href="#">Avaleht</a> / <a href="#upt">UPT</a> / UPT juhend</span>
+  </div>
   <main><section role="tabpanel" id="upt-ajakava" aria-labelledby="t-upt-ajakava" hidden>
   <h2>UPT ajakava 2026/2027</h2>
   <p class="lead">UPT ehk õpilasuurimus või praktiline töö tehakse G2 aasta jooksul. Ilma selleta gümnaasiumi ei lõpeta.</p>
@@ -579,7 +715,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 </main>
 </div>
 
-<footer>Koostatud tunni slaidide ja kooli juhendite põhjal tehisaru abiga. Võib sisaldada üksikuid vigu.</footer>
+<footer>Koostatud tunnimaterjalide ja kooli juhendite põhjal tehisaru abiga. Võib sisaldada üksikuid vigu.</footer>
 </div>
 <script>
 (function(){
@@ -640,13 +776,14 @@ ol{margin:0 0 12px;padding-left:1.4em}
   });
   render(QA);
 
-  var home = document.getElementById('home');
-  var subjects = Array.prototype.slice.call(document.querySelectorAll('.subject'));
+  var views = Array.prototype.slice.call(document.querySelectorAll('.view'));
+  var homeView = document.getElementById('v-home');
   function store(k,v){ try { localStorage.setItem(k,v); } catch(e) {} }
   function load(k){ try { return localStorage.getItem(k); } catch(e) { return null; } }
 
-  function showTab(subj, pid){
-    var tabs = Array.prototype.slice.call(subj.querySelectorAll('[role="tab"]'));
+  function showTab(view, pid){
+    var tabs = Array.prototype.slice.call(view.querySelectorAll('[role="tab"]'));
+    if (!tabs.length) return;
     var ok = tabs.some(function(t){ return t.getAttribute('aria-controls') === pid; });
     if (!ok) pid = tabs[0].getAttribute('aria-controls');
     tabs.forEach(function(t){
@@ -656,25 +793,26 @@ ol{margin:0 0 12px;padding-left:1.4em}
       document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
       if (on) { var bar = t.parentNode; bar.scrollLeft = t.offsetLeft - bar.clientWidth/2 + t.clientWidth/2; }
     });
-    store('ajukas-tab-' + subj.id, pid);
+    store('ajukas-tab-' + view.id, pid);
   }
   function route(){
     var h = decodeURIComponent((location.hash || '').slice(1));
-    var subj = null, pid = null;
+    var view = null, pid = null;
     if (h) {
-      subj = document.getElementById('s-' + h);
-      if (!subj) {
+      view = document.getElementById('v-' + h);
+      if (!view) {
         var el = document.getElementById(h);
-        if (el && el.getAttribute('role') === 'tabpanel') { subj = el.closest('.subject'); pid = h; }
+        if (el && el.getAttribute('role') === 'tabpanel') { view = el.closest('.view'); pid = h; }
       }
     }
-    home.hidden = !!subj;
-    subjects.forEach(function(s){ s.hidden = s !== subj; });
-    if (subj) showTab(subj, pid || load('ajukas-tab-' + subj.id));
-    document.title = subj ? subj.querySelector('.subjname').textContent + ' · Ajukas' : 'Ajukas';
+    if (!view) view = homeView;
+    views.forEach(function(v){ v.hidden = v !== view; });
+    showTab(view, pid || load('ajukas-tab-' + view.id));
+    var t = view.getAttribute('data-title');
+    document.title = view === homeView ? 'Ajukas' : t + ' · Ajukas';
   }
-  subjects.forEach(function(subj){
-    var tabs = Array.prototype.slice.call(subj.querySelectorAll('[role="tab"]'));
+  views.forEach(function(view){
+    var tabs = Array.prototype.slice.call(view.querySelectorAll('[role="tab"]'));
     tabs.forEach(function(t, i){
       t.addEventListener('click', function(){ location.hash = t.getAttribute('aria-controls'); });
       t.addEventListener('keydown', function(e){
@@ -685,8 +823,12 @@ ol{margin:0 0 12px;padding-left:1.4em}
       });
     });
   });
-  window.addEventListener('hashchange', function(){ route(); window.scrollTo({top:0}); });
+  function top(){ window.scrollTo(0,0); }
+  try { history.scrollRestoration = 'manual'; } catch(e) {}
+  window.addEventListener('hashchange', function(){ route(); top(); requestAnimationFrame(top); });
   route();
+  requestAnimationFrame(top);
+  window.addEventListener('load', function(){ setTimeout(top, 0); });
 })();
 </script>
 </body>
