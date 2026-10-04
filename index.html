@@ -359,7 +359,7 @@ header{padding-right:46px}
     <div id="q-res" class="qres" hidden></div>
   </div>
   <div class="grid">
-    <div class="subjcard"><span class="sname">Ajalugu</span><span class="stopic">Materjal tulekul</span></div>
+    <a class="subjcard ready" href="#ajalugu"><span class="sname">Ajalugu</span><span class="stopic">Kontrolltöö 1: tänapäev</span></a>
     <div class="subjcard"><span class="sname">Eesti keel</span><span class="stopic">Materjal tulekul</span></div>
     <div class="subjcard"><span class="sname">Ennastjuhtiv õppija</span><span class="stopic">Materjal tulekul</span></div>
     <div class="subjcard"><span class="sname">Inglise keel</span><span class="stopic">Materjal tulekul</span></div>
@@ -1031,6 +1031,410 @@ header{padding-right:46px}
 </main>
 </div>
 
+<div class="view" id="v-ajalugu" data-title="Ajalugu" hidden>
+  <div class="appbar"><a class="logo" translate="no" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
+  <div class="pagehead">
+    <a class="back" href="#"><span aria-hidden="true">←</span> Kõik ained</a>
+  </div>
+  <h2 class="pagetitle">Ajalugu</h2>
+  <p class="tagline">Vali teema.</p>
+  <div class="grid">
+    <a class="subjcard ready" href="#ajalugu-kt1"><span class="sname">Kontrolltöö 1: tänapäev</span><span class="stopic">Fakt, mitmeperspektiivsus, COVID-19, EL ja NATO, Araabia kevad, Venemaa, Gruusia, Ukraina.</span><span class="prog" data-topic="ajalugu-kt1"></span></a>
+  </div>
+</div>
+<div class="view" id="v-ajalugu-kt1" data-updated="2026-10-05" data-title="Kontrolltöö 1: tänapäev" data-parent="ajalugu" data-parent-title="Ajalugu" hidden>
+  <nav class="appbar sticky" aria-label="Kontrolltöö 1 teemad"><a class="logo" translate="no" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabs" role="tablist"><button role="tab" id="t-aj-ulevaade" aria-controls="aj-ulevaade" aria-selected="false">Ülevaade</button><button role="tab" id="t-aj-fakt" aria-controls="aj-fakt" aria-selected="false">Fakt ja arvamus</button><button role="tab" id="t-aj-perspektiiv" aria-controls="aj-perspektiiv" aria-selected="false">Mitmeperspektiivsus</button><button role="tab" id="t-aj-covid" aria-controls="aj-covid" aria-selected="false">COVID-19</button><button role="tab" id="t-aj-el-nato" aria-controls="aj-el-nato" aria-selected="false">EL ja NATO</button><button role="tab" id="t-aj-araabia" aria-controls="aj-araabia" aria-selected="false">Araabia kevad</button><button role="tab" id="t-aj-venemaa" aria-controls="aj-venemaa" aria-selected="false">Venemaa 1990ndad</button><button role="tab" id="t-aj-gruusia" aria-controls="aj-gruusia" aria-selected="false">Gruusia</button><button role="tab" id="t-aj-ukraina" aria-controls="aj-ukraina" aria-selected="false">Ukraina</button><button role="tab" id="t-aj-ajajoon" aria-controls="aj-ajajoon" aria-selected="false">Ajajoon</button><button role="tab" id="t-aj-test" aria-controls="aj-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-aj-viited" aria-controls="aj-viited" aria-selected="false">Viited</button></div></nav>
+  <div class="pagehead">
+    <a class="back" href="#ajalugu"><span aria-hidden="true">←</span> Ajalugu</a>
+    <span class="path"><a href="#">Avaleht</a> / <a href="#ajalugu">Ajalugu</a> / Kontrolltöö 1</span>
+  </div>
+  <main><section role="tabpanel" id="aj-ulevaade" aria-labelledby="t-aj-ulevaade" hidden>
+  <h2>Kontrolltöö nr 1: tänapäev</h2>
+  <p class="lead">I trimestri esimene ajaloo kontrolltöö käsitleb tänapäeva teemasid. See on arvestuslik hinne, mis kaalub rohkem kui tunnikontrollid.</p>
+  <h3>Teemad</h3>
+  <ul>
+    <li><a href="#aj-fakt">Fakt ja faktipõhine mõtlemine</a></li>
+    <li><a href="#aj-perspektiiv">Mitmeperspektiivne ajalugu</a></li>
+    <li><a href="#aj-covid">COVID-19 pandeemia</a></li>
+    <li><a href="#aj-el-nato">Eesti tee Euroopa Liitu ja NATOsse</a></li>
+    <li><a href="#aj-araabia">Ida ja Lääne konfliktid: Araabia kevad ja Süüria</a></li>
+    <li><a href="#aj-venemaa">Venemaa 1990. aastatel ja Tšetšeenia sõjad</a></li>
+    <li><a href="#aj-gruusia">Gruusia: Abhaasia, Lõuna-Osseetia ja 2008. aasta sõda</a></li>
+    <li><a href="#aj-ukraina">Ukraina: oranž revolutsioon ja sõda</a></li>
+  </ul>
+  <p>Kiireks kordamiseks on vahekaart <a href="#aj-ajajoon">Ajajoon</a>, kus on kõik olulised aastad, ja <a href="#aj-test">Testi ennast</a>.</p>
+  <h3>Hindamine I trimestril</h3>
+  <ul>
+    <li><b>Kontrolltöö</b> tänapäeva teemadel: arvestuslik hinne, suurem kaal.</li>
+    <li><b>Töö allikatega ja seminar</b> keskaja teemal: arvestuslik hinne, suurem kaal.</li>
+    <li><b>Tunnikontrollid</b>: väiksem kaal.</li>
+    <li>Hinded antakse protsentidega. Positiivse trimestrihinde eeldus on, et <b>kõik jooksvad hinded on vähemalt 50%</b>.</li>
+    <li>Negatiivset hinnet (tegemata töö või alla 50%) saab parandada <b>10 tööpäeva jooksul</b> alates hinde eKooli kandmisest.</li>
+    <li>Kui puudusid hindelise töö ajal, on eKoolis märge <b>„T”</b> ja töö tuleb järele vastata.</li>
+  </ul>
+  <div class="key"><span class="label">Aus käitumine</span>Kõrvalise abi, plagiaadi või spikerdamise eest on hinne <b>„0”</b>, samuti siis, kui keeldud vastamast või ei anna tööd ära. Seda hinnet järele vastata ei saa.</div>
+</section>
+<section role="tabpanel" id="aj-fakt" aria-labelledby="t-aj-fakt" hidden>
+  <h2>Fakt ja faktipõhine mõtlemine</h2>
+  <p class="lead">Teaduslik ajalooõpetus põhineb faktidel: väidetel, mida saab allikate abil kontrollida.</p>
+  <h3>Mis on fakt?</h3>
+  <p><b>Fakt</b> on tõsiasi, mis annab infot toimunu kohta <b>neutraalselt</b> ja mida saab allikate põhjal <b>kontrollida</b>. Fakt vastab küsimustele kes, mis, kus, millal, mida.</p>
+  <div class="key"><span class="label">Näide</span>Eesti Vabadussõda lõppes 2. veebruaril 1920 Tartu rahulepinguga.</div>
+  <h3>Fakt, tõlgendus ja hinnang</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Väite liik</th><th>Mis see on</th><th>Näide</th></tr></thead>
+    <tbody>
+      <tr><th>Fakt</th><td>Kontrollitav väide</td><td>Berliini müür ehitati 1961. aastal.</td></tr>
+      <tr><th>Tõlgendus</th><td>Annab faktile tähenduse</td><td>Müür sümboliseeris Euroopa jagunemist.</td></tr>
+      <tr><th>Hinnang (arvamus)</th><td>Väljendab väärtust või emotsiooni, on subjektiivne</td><td>Müüri ehitamine oli ebaõiglane ja julm.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Sageli on ühes lauses korraga fakt ja tõlgendus. Küsi: <b>milline osa lausest on kontrollitav ja milline on autori järeldus?</b></p>
+  <h3>Harjutus: fakt või arvamus?</h3>
+  <ul>
+    <li>Vana-Egiptuses ehitati püramiide juba üle 4500 aasta tagasi. <b>Fakt</b></li>
+    <li>Kuu peale jõudmine oli 20. sajandi suurim saavutus. <b>Arvamus</b></li>
+    <li>Molotovi-Ribbentropi pakti salajases lisaprotokollis (1939) jagasid Saksamaa ja NSV Liit Ida-Euroopa mõjusfäärideks. <b>Fakt</b></li>
+    <li>Eesti taasiseseisvumine on Eesti lähiajaloo kõige tähtsam sündmus. <b>Arvamus</b></li>
+  </ul>
+  <h3>Propaganda</h3>
+  <p><b>Propaganda</b> on teadlikult kujundatud sõnum, mille eesmärk on mõjutada inimeste arvamusi, hoiakuid või käitumist. Propaganda võib kasutada fakte, arvamusi, tugevaid emotsioone ja liialdusi või jätta osa olulist infot välja. Näide slaididelt: Hitlerjugendi plakat „Noored teenivad füürerit!”.</p>
+  <h3>Kuidas mõelda faktipõhiselt (kriitiliselt)?</h3>
+  <p>Ära otsusta selle järgi, mis tundub õige või mida paljud väidavad. Uuri, millele väide toetub:</p>
+  <ul>
+    <li>sõnasta väide täpselt;</li>
+    <li>otsi tõendeid;</li>
+    <li>uuri, kes on allika autor;</li>
+    <li>arvesta, millal ja mis eesmärgil allikas loodi;</li>
+    <li>võrdle eri allikaid;</li>
+    <li>ole aus, kui kogu info pole teada.</li>
+  </ul>
+  <p>Ka foto ei ole automaatselt tõde. Slaididel oli „foto” Berliini müüri ehitusest, millel on jalgpallur Cristiano Ronaldo. Pilt oli tehisaruga loodud: müür ehitati 1961, Ronaldo sündis 1985.</p>
+  <h3>Allika analüüsi viis sammu</h3>
+  <ol>
+    <li><b>Kirjelda:</b> mis liiki allikas see on? Kes, millal ja kus selle koostas? Kellele ja mis eesmärgil?</li>
+    <li><b>Tõlgenda:</b> mis fakte allikas esitab? Mis on autori arvamus? Kas autor on sündmusega seotud või kallutatud? Milliste sõnadega ta hinnangut annab?</li>
+    <li><b>Loo seoseid:</b> mida allikas kinnitab? Milliste allikatega saab seda võrrelda? Millisesse laiemasse protsessi sündmus kuulub?</li>
+    <li><b>Leia infoaugud:</b> mida allikas ei räägi? Kelle hääl on puudu?</li>
+    <li><b>Otsi lisaallikaid:</b> kust infot kontrollida (dokument, ajaleht, foto, statistika, mälestus, ajaloolase uurimus)?</li>
+  </ol>
+  <div class="key"><span class="label">Meeles pea</span>Hea ajalooline mõtlemine ühendab <b>faktid, allikakriitika, eri vaatenurgad ja põhjendatud järeldused</b>.</div>
+  <div class="listen"><h3>Vaata ja loe slaididelt</h3><ul><li><a href="https://nypost.com/2019/11/08/the-unbelievable-night-the-berlin-wall-fell/" target="_blank" rel="noopener">Berliini müüri langemise öö (New York Post)</a><span class="src">foto</span></li><li><a href="https://edition.cnn.com/videos/world/2019/11/07/berlin-30th-anniversary-since-wall-came-down-lc-lon-orig.cnn" target="_blank" rel="noopener">Berliini müüri langemise 30. aastapäev (CNN)</a><span class="src">video</span></li><li><a href="https://arvamus.delfi.ee/artikkel/120610081/andreas-umland-afd-voidutses-sest-laanesakslased-ei-suhtu-siiani-idasakslastesse-piisava-lugupidamisega" target="_blank" rel="noopener">Andreas Umland: AfD võidutses… (Delfi)</a><span class="src">lisalugemine</span></li></ul></div>
+</section>
+<section role="tabpanel" id="aj-perspektiiv" aria-labelledby="t-aj-perspektiiv" hidden>
+  <h2>Mitmeperspektiivne ajalugu</h2>
+  <p class="lead">Ajalugu ei ole ainult üks lugu. Sama sündmus võib ühe inimese jaoks tähendada vabadust, teise jaoks kaotust ja kolmanda jaoks segadust.</p>
+  <p><b>Mitmeperspektiivne ajalooõpe</b> tähendab, et sündmust vaadeldakse mitme inimese, rühma, riigi või ajastu silmade kaudu. Ei ole olemas üht vaatenurka, mida kõik aktsepteeriksid: igal inimesel ja kogukonnal on oma nägemus, mida kujundavad isiklikud ja ühised kogemused.</p>
+  <h3>Mida see aitab?</h3>
+  <ul>
+    <li>märgata, kelle hääl ajalookäsitlusest puudub;</li>
+    <li>vältida liiga lihtsaid vastuseid;</li>
+    <li>arendada kriitilist mõtlemist ja empaatiat;</li>
+    <li>mõista, kuidas minevik mõjutab tänapäeva;</li>
+    <li>arutleda inimestega, kelle arvamus erineb sinu omast;</li>
+    <li>siduda kohalikku ajalugu maailmaajalooga.</li>
+  </ul>
+  <div class="key"><span class="label">Tähtis</span>Mitmeperspektiivsus <b>ei tähenda, et kõik arvamused on võrdselt õiged</b>. Väidet hinnatakse selle järgi, millistele allikatele ja tõenditele see toetub. Teise vaatenurga mõistmine ei tähenda tema tegude õigustamist.</div>
+  <h3>Kolm vaatenurka ajaloole</h3>
+  <ol>
+    <li><b>Kaasaegsete vaatenurk:</b> kuidas kogesid sündmust need, kes sel ajal elasid (sõdurid, tsiviilisikud, poliitikud, lapsed, vähemused, ajakirjanikud)?</li>
+    <li><b>Ajaloolaste vaatenurk:</b> kuidas on sündmust eri aegadel uuritud? Seisukohad muutuvad, sest lisandub uusi allikaid ja ühiskond esitab uusi küsimusi.</li>
+    <li><b>Tänapäeva vaatenurk:</b> kuidas meie sündmust mõistame? Seda mõjutavad pere, rahvus, meedia, kool, kultuur ja varasemad teadmised.</li>
+  </ol>
+  <p>Küsi alati: kes seda lugu jutustab? Millised kogemused on esile tõstetud? Kelle vaatenurk puudub? Kas lugu toetub primaarsetele või sekundaarsetele allikatele?</p>
+  <h3>Näide: Berliini müüri langemine 1989</h3>
+  <ul>
+    <li><b>Ida-Saksamaa noor:</b> „Meie pere ei saanud aastaid vabalt Lääne-Saksamaale sõita. Müüri avanemine tähendas võimalust kohtuda sugulastega.”</li>
+    <li><b>Lääne-Berliini elanik:</b> „Tundus, et Euroopa ajalugu muutub meie silme all, aga me ei teadnud veel, mida see poliitiliselt kaasa toob.”</li>
+    <li><b>Ajaloolane:</b> „Müüri langemine ei olnud ühe inimese või otsuse tulemus. Sellele eelnesid rahumeelsed protestid, muutused Nõukogude Liidus, sündmused teistes Ida-Euroopa riikides ja Ida-Saksamaa sisekriis.”</li>
+  </ul>
+  <p>Väide „Berliini müüri langemine vabastas Ida-Saksamaa inimesed” sisaldab tõlgendust. Täpsem, faktipõhine sõnastus: <b>9. novembril 1989 avanesid Berliini müüri piiripunktid ja inimesed said liikuda Ida- ja Lääne-Berliini vahel.</b></p>
+  <h3>Laul kui allikas</h3>
+  <p>Scorpionsi „Wind of Change” näitab, milliseid lootusi inimesed tundsid ja millise tähenduse sündmusele andsid. See on <b>ajastu meeleolude allikas, mitte faktiallikas</b>: laul ei tõenda, mis konkreetsel päeval juhtus.</p>
+  <div class="listen"><h3>Vaata ja loe slaididelt</h3><ul><li><a href="https://www.youtube.com/watch?v=n4RjJKxsamQ" target="_blank" rel="noopener">Scorpions „Wind of Change” (2.51–4.32)</a><span class="src">laul</span></li><li><a href="https://sisu.ut.ee/sites/default/files/ranne/files/rita_mitmeperspektiivse_ajalooopetuse_metoodiline_juhend.pdf" target="_blank" rel="noopener">M. Oja (2018) Mitmeperspektiivse ajalooõpetuse metoodiline juhend</a><span class="src">Tallinna Ülikool, PDF</span></li></ul></div>
+</section>
+<section role="tabpanel" id="aj-covid" aria-labelledby="t-aj-covid" hidden>
+  <h2>COVID-19 pandeemia</h2>
+  <p class="lead">21. sajandi suurim pandeemia. Maailma kolm suurt riski on kliimamuutus, majanduskriis ja pandeemiad.</p>
+  <h3>21. sajandi epideemiad ja pandeemiad</h3>
+  <p>Ahvirõuged, Ebola, Zika viirus, MERS, SARS, seagripp, leetrid, COVID-19.</p>
+  <h3>Miks pandeemiaid tuleb juurde?</h3>
+  <ul>
+    <li>Inimeste arvukus kasvab, kokkupuude looduslike elupaikadega suureneb ja seega ka kokkupuude uute haigustekitajatega.</li>
+    <li>Kliimamuutus.</li>
+    <li>Antibiootikumide väärkasutus põllumajanduses ja tervishoius.</li>
+    <li>Globaliseerumine.</li>
+  </ul>
+  <h3>Kuidas see kulges</h3>
+  <ol class="timeline">
+    <li><span class="when">detsember 2019</span>Hiina teatab uue kopsupõletikku põhjustava viiruse puhangust <b>Wuhanis</b> (Hubei provints).</li>
+    <li><span class="when">30. jaanuar 2020</span>WHO kuulutab rahvusvahelise tähtsusega rahvatervise hädaolukorra.</li>
+    <li><span class="when">11. veebruar 2020</span>Haigus saab nime <b>COVID-19</b>.</li>
+    <li><span class="when">27. veebruar 2020</span>Esimene nakatunu Eestis.</li>
+    <li><span class="when">11. märts 2020</span>WHO kuulutab <b>pandeemia</b>.</li>
+    <li><span class="when">12. märts 2020</span>Eesti valitsus kuulutab välja <b>eriolukorra</b>.</li>
+    <li><span class="when">2020 lõpp</span>Heakskiidu saavad esimesed vaktsiinid (Pfizer-BioNTech, Moderna). Laiaulatuslik vaktsineerimine algab 2021 alguses.</li>
+    <li><span class="when">2021–…</span>Uued tüved, näiteks <b>Delta</b> ja <b>Omicron</b>, on nakkavamad.</li>
+    <li><span class="when">2. mai 2023</span>Eestis lõpetatakse COVID-19 hädaolukorra oht.</li>
+    <li><span class="when">5. mai 2023</span>WHO lõpetab rahvusvahelise hädaolukorra.</li>
+  </ol>
+  <h3>COVID-19 mõju</h3>
+  <ul>
+    <li>Füüsilisele ja vaimsele tervisele.</li>
+    <li>Enesekohastele ja sotsiaalsetele oskustele.</li>
+    <li>Igapäevaelule: isolatsioon ja piirangud avalikus ruumis.</li>
+    <li>Majandusele: majanduslangus.</li>
+    <li>Kultuurile.</li>
+    <li>Teadus- ja faktipõhisele mõtlemisele.</li>
+    <li>Tõi veelgi enam nähtavale ebavõrdsuse.</li>
+    <li>Riikidevahelisele koostööle.</li>
+    <li>Kestliku arengu eesmärkide saavutamisele (negatiivne).</li>
+  </ul>
+  <h3>Mida kriisist õppida?</h3>
+  <ul>
+    <li>Inimeste ja riigi valmisolek kriisiga toime tulla.</li>
+    <li>Kommunikatsioon.</li>
+    <li>Kuidas toetada ühiskonna haavatavamaid gruppe.</li>
+    <li>Rahvusvaheline koostöö globaalse kriisi ajal.</li>
+  </ul>
+  <p class="muted">Tunnis tuli iga mõju kohta leida faktipõhine näide Eestist või maailmast koos aastaga ja arutleda, kas pandeemial oli ka positiivset mõju.</p>
+</section>
+<section role="tabpanel" id="aj-el-nato" aria-labelledby="t-aj-el-nato" hidden>
+  <h2>Eesti tee Euroopa Liitu ja NATOsse</h2>
+  <p class="lead">Eesti sai mõlema liikmeks 2004. aastal: NATO liikmeks 29. märtsil ja Euroopa Liidu liikmeks 1. mail.</p>
+  <h3>Euroopa Liit</h3>
+  <ol class="timeline">
+    <li><span class="when">1950</span>Käiakse välja tänasele EL-ile aluse pannud idee.</li>
+    <li><span class="when">1957</span>Sünnib <b>Euroopa Majandusühendus</b>.</li>
+    <li><span class="when">1989</span>Külma sõja lõpp.</li>
+    <li><span class="when">7. veebruar 1992</span>Euroopa Ühendusest saab <b>Euroopa Liit</b>.</li>
+    <li><span class="when">12. juuni 1995</span>Eesti, Läti ja Leedu allkirjastavad EL-iga assotsiatsioonilepingud.</li>
+    <li><span class="when">28. november 1995</span>Eesti esitab ametliku liitumisavalduse.</li>
+    <li><span class="when">13. detsember 1997</span>EL otsustab Eestiga liitumisläbirääkimisi alustada.</li>
+    <li><span class="when">13. detsember 2002</span>Läbirääkimised lõpevad.</li>
+    <li><span class="when">16. aprill 2003</span>Allkirjastatakse liitumisleping.</li>
+    <li><span class="when">14. september 2003</span><b>Rahvahääletus</b>: poolt 66,5%.</li>
+    <li><span class="when">1. mai 2004</span>Eesti ühineb EL-iga koos üheksa teise Ida- ja Lõuna-Euroopa riigiga.</li>
+    <li><span class="when">2007</span>Eesti ühineb <b>Schengeni</b> alaga.</li>
+    <li><span class="when">2011</span>Eesti ühineb <b>euroalaga</b>.</li>
+    <li><span class="when">2020</span>Suurbritannia lahkub EL-ist (Brexit).</li>
+  </ol>
+  <div class="key"><span class="label">Arvud slaididelt</span>EL: <b>27</b> liikmesriiki · Schengeni viisaruum: <b>29</b> riiki · euroala: <b>21</b> riiki</div>
+  <h3>NATO</h3>
+  <p><b>Põhja-Atlandi Lepingu Organisatsioon</b> (inglise k North Atlantic Treaty Organization) on sõjaline liit, mis asutati <b>4. aprillil 1949</b> Põhja-Atlandi ehk <b>Washingtoni lepinguga</b>. NATO põhineb <b>kollektiivkaitsel</b>: välise rünnaku korral kaitsevad liikmed üksteist (<b>artikkel 5</b>). Kõrgeim organ on Põhja-Atlandi Nõukogu, mida juhib peasekretär. Peakorter asub <b>Brüsselis</b>.</p>
+  <ol class="timeline">
+    <li><span class="when">4. aprill 1949</span>NATO asutamine.</li>
+    <li><span class="when">3. veebruar 1994</span>Eesti ühineb programmiga <b>„Partnerlus rahu nimel”</b> (PfP).</li>
+    <li><span class="when">1999</span>Washingtoni tippkohtumisel tunnustatakse Eestit liikmekandidaadina, algab liikmesuse tegevuskava (MAP).</li>
+    <li><span class="when">11. september 2001</span>Terrorirünnakud USA-s: <b>5. artiklit rakendatakse esimest korda</b>. Sügisel algab Afganistani sõda.</li>
+    <li><span class="when">november 2002</span>Praha tippkohtumisel kutsutakse liituma Eesti, Läti, Leedu, Bulgaaria, Rumeenia, Slovakkia ja Sloveenia.</li>
+    <li><span class="when">jaanuar–märts 2003</span>Eesti liitumisläbirääkimised. Märtsis algab Iraagi sõda.</li>
+    <li><span class="when">26. märts 2003</span>Allkirjastatakse seitsme riigi liitumisprotokollid.</li>
+    <li><span class="when">10. märts 2004</span>Riigikogu ratifitseerib Washingtoni lepingu.</li>
+    <li><span class="when">29. märts 2004</span>Ühinemiskirjad antakse hoiule Washingtonis: <b>Eesti on NATO täieõiguslik liige</b>.</li>
+    <li><span class="when">pärast 2022</span>Ukraina täiemõõdulise sõja järel liituvad <b>Soome ja Rootsi</b>.</li>
+  </ol>
+  <div class="key"><span class="label">Arv slaididelt</span>NATO-s on täna <b>32</b> liikmesriiki.</div>
+  <p class="muted">Tunni ülesanne: leia riigid, mis kuuluvad korraga EL-i, NATO-sse, Schengeni alasse ja euroalasse (Eesti on üks neist).</p>
+  <div class="listen"><h3>Vaata ja loe slaididelt</h3><ul><li><a href="https://european-union.europa.eu/principles-countries-history/eu-countries_et" target="_blank" rel="noopener">Euroopa Liidu liikmesriigid</a><span class="src">europa.eu</span></li><li><a href="https://www.youtube.com/watch?v=4VfBnCL8AR0" target="_blank" rel="noopener">Kuidas toimib Euroopa Liidu otsustusprotsess?</a><span class="src">video</span></li><li><a href="https://www.nato.int/cps/en/natohq/official_texts_17120.htm?selectedLocale=et" target="_blank" rel="noopener">Põhja-Atlandi leping (eesti keeles)</a><span class="src">nato.int</span></li><li><a href="https://www.youtube.com/watch?v=Hr0D2m8iLSE" target="_blank" rel="noopener">The history of NATO: video timeline</a><span class="src">video</span></li></ul></div>
+</section>
+<section role="tabpanel" id="aj-araabia" aria-labelledby="t-aj-araabia" hidden>
+  <h2>Ida ja Lääne konfliktid: Araabia kevad</h2>
+  <p class="lead">2011. aastal araabia maades levinud protestilaine, mis kukutas mitu valitsust, aga demokraatiat enamasti ei toonud.</p>
+  <h3>Kuidas see kulges</h3>
+  <ul>
+    <li>Protestid algasid <b>Tuneesiast</b> (2011).</li>
+    <li>Protesteeriti <b>ühiskondliku ebaõigluse ja majandusliku stagnatsiooni</b> vastu.</li>
+    <li>Peamised algatajad olid <b>noored ja ametiühingud</b>. Kahtlustati ka USA agitatsiooni.</li>
+    <li>Protestid levisid paljudesse araabia maadesse <b>sotsiaalmeedia</b> abil.</li>
+    <li>Kukutati valitsused ja valitsejad <b>Tuneesias, Liibüas, Egiptuses ja Jeemenis</b>.</li>
+    <li>Mõnes riigis jäid protestid rahumeelseks, teistes surus valitsus need vägivaldselt maha.</li>
+  </ul>
+  <h3>Süüria</h3>
+  <ul>
+    <li>Protestidest kasvas <b>kodusõda</b> keskvõimu (<b>Bashar al-Assad</b>) vastu.</li>
+    <li>Sekkusid mitmed islamirühmitused, <b>USA ja Venemaa</b>.</li>
+    <li>Assadi võim kukkus <b>8. detsembril 2024</b>.</li>
+    <li><b>ISIS</b> hävitas 2015. aastal 2000 aasta vanuse Rooma-aegse <b>Palmyra</b> võidukaare ning lõhkus teisi kultuurimälestisi.</li>
+  </ul>
+  <h3>Kas Araabia kevad tõi oodatud tulemuse?</h3>
+  <p>Enamasti mitte. Demokraatia indeksi järgi (2010 vs 2015 vs 2024) jäid araabia maad suuresti mittedemokraatlikuks. Protestide ja sõdade järel põgenesid paljud inimesed oma kodumaalt (tunnis vaadatud film „Üle mere”).</p>
+  <h3>Küsimused õpikust (Lähiajalugu III lk 118–121, Opiq ptk 4.6)</h3>
+  <ul>
+    <li>Mis olid revolutsioonilaine põhjused ja ajendid?</li>
+    <li>Kas Araabia kevad tõi demokraatia? Põhjenda näidetega.</li>
+    <li>Milliseid võimalusi annab sotsiaalmeedia rahva organiseerimiseks? Kas see soodustab või pärsib demokraatiat?</li>
+    <li>Miks on islamimaailmal tänapäeval nii tähtis roll?</li>
+  </ul>
+  <div class="listen"><h3>Vaata ja loe slaididelt</h3><ul><li><a href="https://ourworldindata.org/grapher/democracy-index-eiu" target="_blank" rel="noopener">Demokraatia indeks (Our World in Data)</a><span class="src">graafik</span></li><li><a href="https://www.youtube.com/watch?v=3btW2VCRK7E" target="_blank" rel="noopener">Palmyra (UNESCO/NHK)</a><span class="src">video</span></li><li><a href="https://www.theguardian.com/world/2017/jan/20/isis-destroys-tetrapylon-monument-palmyra-syria" target="_blank" rel="noopener">ISIS hävitas Palmyra tetrapüloni (The Guardian)</a><span class="src">artikkel</span></li><li><a href="https://www.bbc.com/news/world-middle-east-34043676" target="_blank" rel="noopener">Süüria sõja ülevaade (BBC)</a><span class="src">artikkel</span></li><li><a href="https://maailmakool.ee/v/2pj1jf/" target="_blank" rel="noopener">Film „Üle mere” (Maailmakool, link kehtib 28.10-ni)</a><span class="src">film</span></li><li><a href="https://vikerraadio.err.ee/1609424086/hommikumaa-vagevad-kevad-talve-lapsuke" target="_blank" rel="noopener">Hommikumaa: väged, kevad, talvelapsuke (Vikerraadio)</a><span class="src">lisamaterjal</span></li></ul></div>
+</section>
+<section role="tabpanel" id="aj-venemaa" aria-labelledby="t-aj-venemaa" hidden>
+  <h2>Venemaa 1990. aastatel ja Tšetšeenia sõjad</h2>
+  <p class="lead">Nõukogude Liidu lagunemise järel oli Venemaal korruptsioon, oligarhide võim ja kaks sõda Tšetšeenias. Nendest kasvas välja Putini võim.</p>
+  <h3>Nõukogude Liidu lõpp</h3>
+  <ul>
+    <li><b>1. detsember 1991:</b> Ukraina rahvahääletusel toetas iseseisvust 92% hääletanutest (ka Donbassis 84% ja Krimmis 54%). See oli Gorbatšovile šokk ja viimane löök NSV Liidule.</li>
+    <li><b>25. detsember 1991:</b> <b>Mihhail Gorbatšov</b> astus tagasi, Nõukogude Liit lakkas olemast. Järglane oli Vene Föderatsioon, presidendiks <b>Boris Jeltsin</b>.</li>
+    <li>Enamik inimesi oli elanud ainult riiklikus sotsialismis. Demokraatiat ja lääne kapitalismi tundsid nad vaid teooriast (Hans Asenbaumi tsitaat perestroika ajast).</li>
+  </ul>
+  <h3>Olukord 1990. aastatel</h3>
+  <ul>
+    <li>Lokkasid <b>korruptsioon ja oligarhide võim</b>.</li>
+    <li>Jeltsin ja tema ministrid ei suutnud reforme läbi viia. Jeltsin oli väga ebapopulaarne.</li>
+    <li>I Tšetšeenia sõja kaotus halvendas olukorda.</li>
+    <li><b>1998</b> kukkus rubla väärtus järsult.</li>
+    <li><b>1999</b> nimetas Jeltsin peaministriks <b>Vladimir Putini</b>.</li>
+  </ul>
+  <h3>I Tšetšeenia sõda <span class="yr">1994–1996</span></h3>
+  <ul>
+    <li>Väga raevukas ja vägivaldne sõda. Hoolimata tehnika ja inimjõu ülekaalust ei suutnud Venemaa võita.</li>
+    <li>Hukkus <b>30 000–50 000</b> inimest, <b>500 000</b> põgenes.</li>
+    <li>Sõda oli ebapopulaarne nii armees kui ka rahva seas.</li>
+    <li>Tšetšeenias on suur osa rahvast moslemid, kohale tuli palju vabatahtlikke araabia maadest.</li>
+    <li>Tšetšeenia esimene president <b>Džohhar Dudajev</b> hukkus raketilöögis aprillis 1996.</li>
+  </ul>
+  <p class="muted">Ühel slaidil on sõja algus märgitud 1993, teisel 1994. Õige on 1994.</p>
+  <h3>II Tšetšeenia sõda ja Putini võimuletulek</h3>
+  <ul>
+    <li>Pärast 1996. aasta rahu Tšetšeenia ei stabiliseerunud: välikomandörid ja islamistid kehtestasid oma seadusi, levisid bandiitlus ja inimröövid. Osa komandöre läks üle Venemaa poolele.</li>
+    <li><b>1999</b> ründas Venemaa uuesti ja seekord edukalt. <b>2000</b> kuulutati operatsioon lõppenuks.</li>
+    <li>Putini populaarsus kasvas. <b>31. detsembril 1999</b> kuulutas Jeltsin ta oma järglaseks, <b>2000</b> võitis Putin valimised.</li>
+    <li>Putin turgutas majandust, kasvas tema isikukultus, opositsioon suruti maha ja massimeedia võeti üle.</li>
+    <li>Riiklikus propagandas kasvas sõnum, et <b>Lääs on Venemaa sisse piiranud</b> ja tahab seda kontrollida.</li>
+  </ul>
+</section>
+<section role="tabpanel" id="aj-gruusia" aria-labelledby="t-aj-gruusia" hidden>
+  <h2>Gruusia: Abhaasia, Lõuna-Osseetia ja 2008. aasta sõda</h2>
+  <p class="lead">Gruusia läänemeelsus ja soov liituda EL-i ja NATO-ga viis 2008. aastal sõjani Venemaaga.</p>
+  <h3>Taust</h3>
+  <ul>
+    <li><b>1991</b> kuulutas Gruusia end NSV Liidust iseseisvaks.</li>
+    <li><b>Lõuna-Osseetia</b> (grusiinid ja osseedid) tahtis liituda Venemaaga, sest Põhja-Osseetia on Venemaa osa. <b>1991–1992</b> sõjas hukkus umbes 1000 inimest, kümned tuhanded said haavata.</li>
+    <li><b>Abhaasia</b> nõudis samal ajal iseseisvust ja sai sõjalist abi Venemaalt. Verises sõjas hukkus <b>20 000–30 000</b> inimest, kodu kaotas <b>200 000–300 000</b> inimest, enamik neist grusiinid.</li>
+    <li>Abhaasias olid 1880. aastatest <b>eestlaste külad</b> (Estonia, Linda, Sulevi, Salme). <b>1992</b> evakueeriti Eestisse 170 eestlast ja nende pereliiget. Sellest räägib film <b>„Mandariinid”</b>.</li>
+  </ul>
+  <h3>Roosirevolutsioon <span class="yr">2003</span></h3>
+  <ul>
+    <li>President <b>Eduard Ševardnadze</b> oli Venemaa ja kohalike oligarhide mõju all.</li>
+    <li><b>2. novembri</b> valimised kukkusid läbi (valed valijanimekirjad jm), opositsioon tuli tänavale.</li>
+    <li><b>22. novembril</b> tungisid meeleavaldajad koos <b>Mihheil Saakašviliga</b> rooside käes parlamendihoonesse ja ajasid presidendi põgenema. Sõjavägi keeldus valitsust toetamast.</li>
+    <li><b>4. jaanuaril 2004</b> võitis Saakašvili presidendivalimised ülekaalukalt.</li>
+  </ul>
+  <h3>Sõda <span class="yr">7.–8. august 2008</span></h3>
+  <ul>
+    <li>2008. aasta algusest olid relvakonfliktid Gruusia ja osseetide vahel. 1. augustil sõitis Gruusia politseiauto pommi otsa, Gruusia tappis vastuseks 4 mässulist ja osseedid ründasid grusiinide külasid.</li>
+    <li>Venemaa koondas väed piirile, aga eitas seda. 3. augustil evakueeriti L-Osseetiast naisi ja lapsi Venemaale.</li>
+    <li>7. augusti läbirääkimistele tulid ainult Gruusia diplomaadid. Gruusia ühepoolne relvarahu katkes osseetide rünnakute tõttu 3 tunniga.</li>
+    <li><b>7. augusti õhtul</b> andis Gruusia hoiatuslasud, lubas tsiviilelanikel 30 minutiga lahkuda ja ründas Osseetia sõjalisi sihtmärke. Vene rahuvalvajad tulistasid Gruusia vägesid.</li>
+    <li><b>8. augustil</b> tõi Venemaa väed L-Osseetiasse, väites, et tagab piirkonnas rahu (<b>„rahuvalvemissioon”</b>). Samal ajal toimusid suveolümpiamängud.</li>
+    <li>Sõda kestis <b>16 päeva</b>. Slaidi järgi oli see esimene sõda, kus kasutati <b>küberrünnakuid</b> sõjategevuse osana.</li>
+  </ul>
+  <h3>Miks Venemaa ründas?</h3>
+  <ol>
+    <li>Putinil seisid ees valimised ja ta vajas populaarsust: sõda liidab rahva võimul oleva liidri taha.</li>
+    <li>Gruusia vaatas läände ja teatas, et tahab liituda EL-i ja NATO-ga.</li>
+  </ol>
+  <h3>Tagajärjed</h3>
+  <ul>
+    <li>Hukkus umbes <b>2000</b> inimest, umbes <b>200 000</b> kaotas kodu või pidi lahkuma.</li>
+    <li>Gruusia kaotas kontrolli <b>Abhaasia ja Lõuna-Osseetia</b> üle. Neid tunnustavad iseseisvana Venemaa ja Venezuela, teised riigid mitte.</li>
+    <li>Paljud Euroopa riigid toetasid Gruusiat, eriti Balti riigid. Itaalia jäi „neutraalseks”.</li>
+    <li>Venemaa süüdistas sõjas USA-d.</li>
+  </ul>
+  <h3>Gruusia täna</h3>
+  <p>Alates <b>oktoobrist 2024</b> on olukord märgatavalt halvenenud: autokraatia tõus, äärmusluse ja vägivalla kasv, LGBTQ+ inimeste tagakiusamine, inimõiguste piiramine, kaugenemine läänest ja EL-ist ning lähedasemad suhted Venemaaga. Valitsuspartei on „Gruusia unistus”.</p>
+  <div class="listen"><h3>Vaata ja loe slaididelt</h3><ul><li><a href="https://www.youtube.com/watch?v=IuAFAqYSVNk" target="_blank" rel="noopener">Video Gruusia protestidest (kodune ülesanne)</a><span class="src">video</span></li></ul></div>
+</section>
+<section role="tabpanel" id="aj-ukraina" aria-labelledby="t-aj-ukraina" hidden>
+  <h2>Ukraina: oranž revolutsioon ja sõda</h2>
+  <div class="key"><span class="label">NB! Ei ole slaididelt</span>Selle teema kohta polnud allalaaditud failide hulgas slaide. Kokkuvõte on tehtud üldteadmiste põhjal. Kontrolli õpikust ja tunnimärkmetest, mida õpetaja rõhutas, ja kui sul on slaidid, saada need, siis teen selle vahekaardi nende põhjal ümber.</div>
+  <h3>Oranž revolutsioon <span class="yr">2004</span></h3>
+  <ul>
+    <li>Presidendivalimistel olid vastamisi läänemeelne <b>Viktor Juštšenko</b> ja Venemaa toetatud <b>Viktor Janukovõtš</b>.</li>
+    <li>Novembri teise vooru tulemused võltsiti Janukovõtši kasuks. Valimiskampaania ajal mürgitati Juštšenkot.</li>
+    <li>Kiievis <b>Maidani</b> väljakul algasid suured rahumeelsed protestid, värviks oli oranž.</li>
+    <li>Ülemkohus tühistas tulemused, <b>detsembris 2004</b> korraldati kordusvoor ja selle võitis Juštšenko.</li>
+    <li>Oranž revolutsioon oli osa „värvirevolutsioonide” lainest koos Gruusia roosirevolutsiooniga (2003). Venemaa pidas neid lääne sekkumiseks.</li>
+  </ul>
+  <h3>Euromaidan ja Krimm <span class="yr">2013–2014</span></h3>
+  <ul>
+    <li><b>November 2013:</b> president Janukovõtš loobus EL-iga assotsiatsioonilepingu allkirjastamisest. Algasid <b>Euromaidani</b> protestid.</li>
+    <li><b>Veebruar 2014:</b> pärast vägivaldseid kokkupõrkeid Kiievis põgenes Janukovõtš Venemaale.</li>
+    <li><b>Märts 2014:</b> Venemaa okupeeris ja annekteeris <b>Krimmi</b> pärast rahvusvaheliselt tunnustamata „rahvahääletust”.</li>
+    <li><b>2014. aasta kevadest</b> sõda <b>Donbassis</b> (Donetski ja Luhanski oblastis), kus Venemaa toetas separatiste. Juulis 2014 tulistati Ida-Ukraina kohal alla reisilennuk MH17.</li>
+    <li><b>Minski kokkulepped</b> (2014, 2015) ei toonud püsivat rahu.</li>
+  </ul>
+  <h3>Täiemõõduline sõda <span class="yr">alates 24. veebruarist 2022</span></h3>
+  <ul>
+    <li><b>24. veebruaril 2022</b> alustas Venemaa täiemõõdulist sissetungi Ukrainasse.</li>
+    <li>Kiievi vallutamine ebaõnnestus. Venemaa vägede taandumise järel avastati Butšas tsiviilisikute massimõrv.</li>
+    <li>2022. aasta sügisel vabastas Ukraina vastupealetungiga suure osa Harkivi oblastist ja Hersoni linna.</li>
+    <li>Septembris 2022 kuulutas Venemaa enda omaks neli Ukraina oblastit, mida rahvusvaheliselt ei tunnustata.</li>
+    <li>Sõja tõttu liitusid NATO-ga <b>Soome (2023) ja Rootsi (2024)</b>, ja lääneriigid toetavad Ukrainat relvade, raha ja sanktsioonidega Venemaa vastu.</li>
+  </ul>
+</section>
+<section role="tabpanel" id="aj-ajajoon" aria-labelledby="t-aj-ajajoon" hidden>
+  <h2>Ajajoon</h2>
+  <p class="lead">Kõik selle kontrolltöö olulised aastad ühes kohas.</p>
+  <ol class="timeline">
+    <li><span class="when">1949</span><b>NATO</b> asutatakse (4. aprill, Washingtoni leping).</li>
+    <li><span class="when">1957</span>Euroopa Majandusühendus.</li>
+    <li><span class="when">1961</span>Berliini müür ehitatakse.</li>
+    <li><span class="when">1989</span>Berliini müüri piiripunktid avatakse 9. novembril. Külma sõja lõpp.</li>
+    <li><span class="when">1991</span>Gruusia iseseisvub. Ukraina rahvahääletus (1. dets). Gorbatšov astub tagasi, NSV Liit lakkab olemast (25. dets).</li>
+    <li><span class="when">1991–1992</span>Gruusia ja Lõuna-Osseetia sõda.</li>
+    <li><span class="when">1992</span>Euroopa Liit (7. veebr). Abhaasia eestlased evakueeritakse Eestisse.</li>
+    <li><span class="when">1992–1993</span>Abhaasia sõda.</li>
+    <li><span class="when">1994</span>Eesti ühineb „Partnerlus rahu nimel” programmiga.</li>
+    <li><span class="when">1994–1996</span>I Tšetšeenia sõda.</li>
+    <li><span class="when">1995</span>Eesti liitumisavaldus EL-ile (28. nov).</li>
+    <li><span class="when">1998</span>Rubla krahh Venemaal.</li>
+    <li><span class="when">1999</span>II Tšetšeenia sõda algab. Putin peaministriks, 31. detsembril Jeltsini järglaseks.</li>
+    <li><span class="when">2000</span>Putin võidab presidendivalimised.</li>
+    <li><span class="when">2001</span>11. september: NATO 5. artikkel esimest korda.</li>
+    <li><span class="when">2003</span>Gruusia roosirevolutsioon. Eesti rahvahääletus EL-i üle (66,5% poolt).</li>
+    <li><span class="when">2004</span>Eesti NATO-sse (29. märts) ja EL-i (1. mai). Ukraina oranž revolutsioon.</li>
+    <li><span class="when">2007</span>Eesti Schengeni alasse.</li>
+    <li><span class="when">2008</span>Venemaa–Gruusia sõda (august, 16 päeva).</li>
+    <li><span class="when">2011</span>Araabia kevad. Eesti euroalasse.</li>
+    <li><span class="when">2013–2014</span>Euromaidan, Krimmi annekteerimine, sõda Donbassis.</li>
+    <li><span class="when">2015</span>ISIS hävitab Palmyra võidukaare.</li>
+    <li><span class="when">2019</span>Detsember: uus viirus Wuhanis.</li>
+    <li><span class="when">2020</span>COVID-19 pandeemia (WHO 11. märts), Eestis eriolukord (12. märts). Brexit.</li>
+    <li><span class="when">2022</span>Venemaa täiemõõduline sissetung Ukrainasse (24. veebr).</li>
+    <li><span class="when">2023</span>COVID-19 hädaolukord lõpeb (Eestis 2. mai, WHO 5. mai).</li>
+    <li><span class="when">2024</span>Gruusia olukord halveneb (oktoobrist). Assadi võim Süürias kukub (8. dets).</li>
+  </ol>
+</section>
+<section role="tabpanel" id="aj-test" aria-labelledby="t-aj-test" hidden>
+  <h2>Testi ennast</h2>
+  <p class="lead">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
+  <div class="quiz" data-quiz="ajalugu"></div>
+</section>
+<section role="tabpanel" id="aj-viited" aria-labelledby="t-aj-viited" hidden>
+  <h2>Viited</h2>
+  <p class="lead">Kust selle teema sisu pärineb.</p>
+  <h3>Tunnimaterjalid (Ajalugu G2, I trimester 2026)</h3>
+  <ul>
+    <li><b>G2 I trimester 1. tund: ajaloo perspektiivid ja erinevad ajaloo käsitlused</b> (fakt, arvamus, propaganda, mitmeperspektiivsus, allika analüüs)</li>
+    <li><b>Mitmeperspektiivne ajalooõpe ja faktipõhine mõtlemine, teooria</b> (kokkuvõtte koostaja Karin Ahven, sept 2026)</li>
+    <li><b>COVID-19 pandeemia</b></li>
+    <li><b>G2 Eesti tee Euroopa Liitu ja NATOsse</b></li>
+    <li><b>Araabia kevad</b> ja <b>Araabia kevad 2: Süüria, film</b></li>
+    <li><b>Venemaa 90, Tšetšeenia sõjad ja Gruusia sõda 2008</b></li>
+    <li><b>Hindamisjuhend I trim G2 2026</b></li>
+  </ul>
+  <p class="muted">Slaide endid siia üles ei pane, sest need on õpetaja materjal. Need on Teamsis.</p>
+  <h3>Muu</h3>
+  <ul>
+    <li>Õpik: Lähiajalugu III, lk 118–121 (Opiq ptk 4.6).</li>
+    <li><a href="https://sisu.ut.ee/sites/default/files/ranne/files/rita_mitmeperspektiivse_ajalooopetuse_metoodiline_juhend.pdf" target="_blank" rel="noopener">Oja, M. (2018). Mitmeperspektiivse ajalooõpetuse metoodiline juhend</a>. Tallinna Ülikool.</li>
+    <li>Vahekaart „Ukraina” ei ole slaididelt, vaid üldteadmiste põhjal.</li>
+  </ul>
+  <div class="key"><span class="label">Midagi puudu?</span>Siin ei pruugi kõik olla. Kui tead veel mõnda materjali või allikat, <a href="#soovita">kirjuta soovitustesse</a>.</div>
+</section>
+</main>
+</div>
 <div class="view" id="v-soovitused" data-title="Soovitused" hidden>
   <div class="appbar"><a class="logo" translate="no" href="#" aria-label="Ajukas avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
   <div class="pagehead">
@@ -1061,7 +1465,7 @@ header{padding-right:46px}
     <p class="muted" style="font-size:13px;text-align:center"><a class="inl" href="qr.png" download="ajukas-qr.png">Laadi QR-kood alla</a> (sobib esitlusele või paberile)</p>
   </div>
 </div>
-<script type="application/json" id="quiz-data">{"jazz": [["Tunnused", "Millal ja kus jazz tekkis?", "19. sajandi lõpus ja 20. sajandi alguses USA-s, eelkõige New Orleansis."], ["Tunnused", "Millal ja kus tekkis sõna „jazz\"?", "1915. aastal Chicagos."], ["Tunnused", "Nimeta jazzi neli põhijoont.", "Improvisatsioon, kõlavärv ehk tämber, pillikoosseisud ning rütm, meloodia ja harmoonia."], ["Tunnused", "Mida andsid jazzile Aafrika, Euroopa ja Kariibi mere piirkond?", "Aafrika: kollektiivne muusika loomine, improvisatsioon, ees- ja järellaulja. Euroopa: harmoonia ja instrumendid. Kariibid: rütmipõhine tantsumuusika ja keerukamad rütmid."], ["Tunnused", "Mis oli Congo Square?", "New Orleansi väljak, kus nädalavahetustel mängiti muusikat, tantsiti ja hoiti alles kultuuripärandit."], ["Tunnused", "Milline orkestritüüp on üks jazzi alustalasid?", "Matuserongkäikude orkestrid."], ["Ragtime", "Mis pillil ragtime'i peamiselt mängiti ja millal oli see populaarne?", "Klaveril, 1890. aastatel."], ["Ragtime", "Kes oli ragtime'i looja? Nimeta kaks tema pala.", "Scott Joplin (1868–1917). Näiteks „Maple Leaf Rag\" ja „The Entertainer\"."], ["Bluus", "Mis on bluusi struktuur ja millest see põhines?", "12-taktiline. Põhines töölauludel ja spirituaalidel."], ["Bluus", "Nimeta kolm bluusiartisti.", "Bessie Smith, Muddy Waters, B.B. King."], ["Mõiste", "Mis on kollektiivne improvisatsioon?", "Pillimehed mängivad samal ajal, aga igaüks improviseerib iseseisvalt."], ["New Orleans", "Kus mängisid New Orleansi harrastusorkestrid?", "Storyville'i linnaosa lõbustusasutustes. Orkestreid oli ligi 30."], ["New Orleans", "Millistel löökidel on New Orleansi jazzis rõhk?", "1. ja 3. löögil (marsilik pulss). Off-beat ehk 2. ja 4. löögi rõhk puudub."], ["New Orleans", "Nimeta meloodiagrupi ja rütmigrupi pillid.", "Meloodia: kornet või trompet, tromboon, klarnet. Rütm: tuuba, bandžo, trummid."], ["New Orleans", "Mis asendas tuuba ja bandžo ning mis lisandus?", "Tuuba asendus kontrabassiga, bandžo kitarriga ja lisandus klaver."], ["New Orleans", "Mis oli improvisatsiooni aluseks?", "Marsi- või kirikumeloodia, ragtime'i pala või 12-taktiline bluus."], ["New Orleans", "Kes juhtis King Oliver's Creole Jazz Bandi?", "Joe „King\" Oliver, kornetist-trompetist."], ["New Orleans", "Millise ansambliga tegi Jelly Roll Morton salvestusi?", "Red Hot Peppers."], ["New Orleans", "Miks New Orleansi jazzi õitseaeg 1917. aastal lõppes?", "Storyville suleti ja muusikud läksid Chicagosse."], ["Armstrong", "Mida uut tõi jazzi Louis Armstrong?", "Jazzist sai solistide muusika. Ta võttis kasutusele akordid ja noodikirja, tõi sisse blue note'id ja scat-laulu."], ["Armstrong", "Mis on scat-laul?", "Sõnadeta, silpidega improviseeritud laul."], ["Armstrong", "Kelle tsitaat on „Ilma Armstrongita poleks jazz'i…\"?", "Joachim-Ernst Berendt, „Das Jazzbuch\"."], ["Dixieland", "Kes oli dixielandi looja?", "Orkestrijuht ja trummar Papa Jack Laine."], ["Dixieland", "Kes tegi esimese jazzisalvestuse ja millal?", "Original Dixieland Jazz Band Nick LaRocca juhatusel 1917. aastal. Plaati müüdi üle miljoni."], ["Dixieland", "Kuidas erines dixielandi kõla New Orleansi omast?", "Väiksem kõlajõud, parem tehnika, kiirem muusika, sujuvam meloodia, vähem intensiivsed kõlavärvid. Iseloomuliku kõla andis soolopill. Koosseis jäi samaks."], ["Dixieland", "Mis lõpetas dixielandi hiilgeaja?", "Sving ja bigbändid 1930. aastate algul. Dixieland tuli tagasi 1940. aastate lõpus."], ["Chicago", "Mis oli Chicago jazzi peamine muutus improvisatsioonis?", "Kollektiivne improvisatsioon asendus solistlikuga."], ["Chicago", "Mis on break?", "Hetk, kui orkester vaikib ja solist improviseerib."], ["Chicago", "Mis oli Austin High School Gang?", "Valgete keskkoolinoorte ansambel, noorte talentide ja Chicago stiili taimelava."], ["Chicago", "Kes oli esimene saksofonivirtuoos?", "Tenorsaksofonist Bud Freeman."], ["Chicago", "Mida uut tõi Fletcher Henderson?", "Jagas orkestri pilligruppideks, lõi tämbrilise vastandamisega uue orkestristiili ja arranžeerimise põhimõtted suurele koosseisule."], ["Chicago", "Kes juhtis kõige populaarsemat tantsuorkestrit ja kes seal mängis?", "Paul Whiteman. Seal mängisid kornetist Bix Beiderbecke ja kitarrist Eddie Lang."], ["Ellington", "Kus tegutses Duke Ellington ja mis on džunglistiil?", "New Yorgis, Harlemi Cotton Clubis. Džunglistiil tähendab trompeti ja trombooni väljendusrikkaid helisid."]]}</script>
+<script type="application/json" id="quiz-data">{"jazz": [["Tunnused", "Millal ja kus jazz tekkis?", "19. sajandi lõpus ja 20. sajandi alguses USA-s, eelkõige New Orleansis."], ["Tunnused", "Millal ja kus tekkis sõna „jazz\"?", "1915. aastal Chicagos."], ["Tunnused", "Nimeta jazzi neli põhijoont.", "Improvisatsioon, kõlavärv ehk tämber, pillikoosseisud ning rütm, meloodia ja harmoonia."], ["Tunnused", "Mida andsid jazzile Aafrika, Euroopa ja Kariibi mere piirkond?", "Aafrika: kollektiivne muusika loomine, improvisatsioon, ees- ja järellaulja. Euroopa: harmoonia ja instrumendid. Kariibid: rütmipõhine tantsumuusika ja keerukamad rütmid."], ["Tunnused", "Mis oli Congo Square?", "New Orleansi väljak, kus nädalavahetustel mängiti muusikat, tantsiti ja hoiti alles kultuuripärandit."], ["Tunnused", "Milline orkestritüüp on üks jazzi alustalasid?", "Matuserongkäikude orkestrid."], ["Ragtime", "Mis pillil ragtime'i peamiselt mängiti ja millal oli see populaarne?", "Klaveril, 1890. aastatel."], ["Ragtime", "Kes oli ragtime'i looja? Nimeta kaks tema pala.", "Scott Joplin (1868–1917). Näiteks „Maple Leaf Rag\" ja „The Entertainer\"."], ["Bluus", "Mis on bluusi struktuur ja millest see põhines?", "12-taktiline. Põhines töölauludel ja spirituaalidel."], ["Bluus", "Nimeta kolm bluusiartisti.", "Bessie Smith, Muddy Waters, B.B. King."], ["Mõiste", "Mis on kollektiivne improvisatsioon?", "Pillimehed mängivad samal ajal, aga igaüks improviseerib iseseisvalt."], ["New Orleans", "Kus mängisid New Orleansi harrastusorkestrid?", "Storyville'i linnaosa lõbustusasutustes. Orkestreid oli ligi 30."], ["New Orleans", "Millistel löökidel on New Orleansi jazzis rõhk?", "1. ja 3. löögil (marsilik pulss). Off-beat ehk 2. ja 4. löögi rõhk puudub."], ["New Orleans", "Nimeta meloodiagrupi ja rütmigrupi pillid.", "Meloodia: kornet või trompet, tromboon, klarnet. Rütm: tuuba, bandžo, trummid."], ["New Orleans", "Mis asendas tuuba ja bandžo ning mis lisandus?", "Tuuba asendus kontrabassiga, bandžo kitarriga ja lisandus klaver."], ["New Orleans", "Mis oli improvisatsiooni aluseks?", "Marsi- või kirikumeloodia, ragtime'i pala või 12-taktiline bluus."], ["New Orleans", "Kes juhtis King Oliver's Creole Jazz Bandi?", "Joe „King\" Oliver, kornetist-trompetist."], ["New Orleans", "Millise ansambliga tegi Jelly Roll Morton salvestusi?", "Red Hot Peppers."], ["New Orleans", "Miks New Orleansi jazzi õitseaeg 1917. aastal lõppes?", "Storyville suleti ja muusikud läksid Chicagosse."], ["Armstrong", "Mida uut tõi jazzi Louis Armstrong?", "Jazzist sai solistide muusika. Ta võttis kasutusele akordid ja noodikirja, tõi sisse blue note'id ja scat-laulu."], ["Armstrong", "Mis on scat-laul?", "Sõnadeta, silpidega improviseeritud laul."], ["Armstrong", "Kelle tsitaat on „Ilma Armstrongita poleks jazz'i…\"?", "Joachim-Ernst Berendt, „Das Jazzbuch\"."], ["Dixieland", "Kes oli dixielandi looja?", "Orkestrijuht ja trummar Papa Jack Laine."], ["Dixieland", "Kes tegi esimese jazzisalvestuse ja millal?", "Original Dixieland Jazz Band Nick LaRocca juhatusel 1917. aastal. Plaati müüdi üle miljoni."], ["Dixieland", "Kuidas erines dixielandi kõla New Orleansi omast?", "Väiksem kõlajõud, parem tehnika, kiirem muusika, sujuvam meloodia, vähem intensiivsed kõlavärvid. Iseloomuliku kõla andis soolopill. Koosseis jäi samaks."], ["Dixieland", "Mis lõpetas dixielandi hiilgeaja?", "Sving ja bigbändid 1930. aastate algul. Dixieland tuli tagasi 1940. aastate lõpus."], ["Chicago", "Mis oli Chicago jazzi peamine muutus improvisatsioonis?", "Kollektiivne improvisatsioon asendus solistlikuga."], ["Chicago", "Mis on break?", "Hetk, kui orkester vaikib ja solist improviseerib."], ["Chicago", "Mis oli Austin High School Gang?", "Valgete keskkoolinoorte ansambel, noorte talentide ja Chicago stiili taimelava."], ["Chicago", "Kes oli esimene saksofonivirtuoos?", "Tenorsaksofonist Bud Freeman."], ["Chicago", "Mida uut tõi Fletcher Henderson?", "Jagas orkestri pilligruppideks, lõi tämbrilise vastandamisega uue orkestristiili ja arranžeerimise põhimõtted suurele koosseisule."], ["Chicago", "Kes juhtis kõige populaarsemat tantsuorkestrit ja kes seal mängis?", "Paul Whiteman. Seal mängisid kornetist Bix Beiderbecke ja kitarrist Eddie Lang."], ["Ellington", "Kus tegutses Duke Ellington ja mis on džunglistiil?", "New Yorgis, Harlemi Cotton Clubis. Džunglistiil tähendab trompeti ja trombooni väljendusrikkaid helisid."]], "ajalugu": [["Fakt", "Mis on fakt?", "Tõsiasi, mis annab infot toimunu kohta neutraalselt ja mida saab allikate põhjal kontrollida (kes, mis, kus, millal)."], ["Fakt", "Mis vahe on faktil, tõlgendusel ja hinnangul?", "Fakt on kontrollitav väide. Tõlgendus annab faktile tähenduse. Hinnang väljendab väärtust või emotsiooni ja on subjektiivne."], ["Fakt", "Kas „Kuu peale jõudmine oli 20. sajandi suurim saavutus” on fakt?", "Ei, see on arvamus ehk hinnang."], ["Fakt", "Mis on propaganda?", "Teadlikult kujundatud sõnum, mille eesmärk on mõjutada inimeste arvamusi, hoiakuid või käitumist. See võib kasutada fakte, emotsioone, liialdusi ja infot välja jätta."], ["Fakt", "Nimeta allika analüüsi viis sammu.", "Kirjelda, tõlgenda, loo seoseid, leia infoaugud, otsi lisaallikaid."], ["Fakt", "Kuidas teha väide „Berliini müüri langemine vabastas Ida-Saksamaa inimesed” faktipõhiseks?", "9. novembril 1989 avanesid Berliini müüri piiripunktid ja inimesed said liikuda Ida- ja Lääne-Berliini vahel."], ["Perspektiiv", "Mis on mitmeperspektiivne ajalugu?", "Sündmust vaadeldakse mitme inimese, rühma, riigi või ajastu silmade kaudu. Ühte kõigi poolt aktsepteeritud vaatenurka ei ole."], ["Perspektiiv", "Millised on kolm vaatenurka ajaloole?", "Sündmuse kaasaegsete, ajaloolaste ja tänapäeva (meie enda) vaatenurk."], ["Perspektiiv", "Kas mitmeperspektiivsus tähendab, et kõik arvamused on võrdselt õiged?", "Ei. Väidet hinnatakse tõendite järgi ja teise vaatenurga mõistmine ei tähenda tema tegude õigustamist."], ["Perspektiiv", "Kas laul „Wind of Change” on faktiallikas?", "Pigem ajastu meeleolude ja tõlgenduste allikas: näitab lootusi ja tähendust, aga ei tõenda, mis konkreetsel päeval juhtus."], ["COVID-19", "Kus ja millal teatati esimest korda uuest viirusest?", "Detsembris 2019 Wuhanis, Hubei provintsis Hiinas."], ["COVID-19", "Millal kuulutas WHO COVID-19 pandeemiaks?", "11. märtsil 2020."], ["COVID-19", "Millal kuulutati Eestis välja eriolukord?", "12. märtsil 2020. Esimene nakatunu Eestis oli 27. veebruaril 2020."], ["COVID-19", "Nimeta neli põhjust, miks pandeemiaid tuleb juurde.", "Rahvastiku kasv ja kokkupuude loodusega, kliimamuutus, antibiootikumide väärkasutus, globaliseerumine."], ["COVID-19", "Nimeta viis COVID-19 mõju.", "Näiteks mõju füüsilisele ja vaimsele tervisele, igapäevaelule (piirangud), majandusele (langus), kultuurile, ebavõrdsusele, riikide koostööle, faktipõhisele mõtlemisele."], ["COVID-19", "Millal lõppes COVID-19 hädaolukord?", "Eestis 2. mail 2023, WHO lõpetas rahvusvahelise hädaolukorra 5. mail 2023."], ["EL ja NATO", "Millal sai Eesti EL-i ja NATO liikmeks?", "NATO-ga 29. märtsil 2004, EL-iga 1. mail 2004."], ["EL ja NATO", "Millal toimus EL-i rahvahääletus Eestis ja kui palju oli poolt?", "14. septembril 2003, poolt 66,5%."], ["EL ja NATO", "Millal ühines Eesti Schengeni ja euroalaga?", "Schengeniga 2007, euroalaga 2011."], ["EL ja NATO", "Mitu liiget on EL-is, NATO-s, Schengenis ja euroalas (slaidide järgi)?", "EL 27, NATO 32, Schengen 29, euroala 21."], ["EL ja NATO", "Millal ja millega asutati NATO?", "4. aprillil 1949 Põhja-Atlandi ehk Washingtoni lepinguga."], ["EL ja NATO", "Mis on NATO artikkel 5 ja millal seda esimest korda rakendati?", "Kollektiivkaitse: rünnak ühe vastu on rünnak kõigi vastu. Esimest korda pärast 11. septembri 2001 terrorirünnakuid USA-s."], ["EL ja NATO", "Mis on „Partnerlus rahu nimel” ja millal Eesti sellega liitus?", "NATO programm (PfP). Eesti ühines 3. veebruaril 1994."], ["Araabia kevad", "Kust ja millal algas Araabia kevad?", "Tuneesiast 2011. aastal."], ["Araabia kevad", "Mille vastu protesteeriti ja kes olid algatajad?", "Ühiskondliku ebaõigluse ja majandusliku stagnatsiooni vastu. Algatajad olid noored ja ametiühingud."], ["Araabia kevad", "Millistes riikides kukutati valitsejad?", "Tuneesias, Liibüas, Egiptuses ja Jeemenis."], ["Araabia kevad", "Mis juhtus Süürias?", "Kodusõda Bashar al-Assadi vastu, sekkusid islamirühmitused, USA ja Venemaa. Assadi võim kukkus 8. detsembril 2024."], ["Venemaa", "Millal lagunes Nõukogude Liit?", "25. detsembril 1991, kui Gorbatšov tagasi astus. Venemaa president oli Boris Jeltsin."], ["Venemaa", "Iseloomusta Venemaad 1990. aastatel.", "Korruptsioon, oligarhide võim, ebaõnnestunud reformid, ebapopulaarne Jeltsin, kaotatud Tšetšeenia sõda, rubla krahh 1998."], ["Venemaa", "Millal oli I Tšetšeenia sõda ja kuidas see lõppes?", "1994–1996. Venemaa ei suutnud võita, hukkus 30 000–50 000 inimest."], ["Venemaa", "Kuidas tuli Putin võimule?", "1999 sai ta peaministriks, II Tšetšeenia sõda tõstis tema populaarsust, 31.12.1999 kuulutas Jeltsin ta järglaseks ja 2000 võitis ta valimised."], ["Gruusia", "Mis oli roosirevolutsioon?", "2003 Gruusias: pärast võltsitud valimisi tungisid meeleavaldajad koos Saakašviliga rooside käes parlamenti ja Ševardnadze põgenes. 2004 võitis Saakašvili valimised."], ["Gruusia", "Millised kaks piirkonda Gruusia kaotas?", "Abhaasia ja Lõuna-Osseetia."], ["Gruusia", "Millal oli Venemaa–Gruusia sõda ja kui kaua see kestis?", "August 2008, 16 päeva."], ["Gruusia", "Miks Venemaa 2008 Gruusiat ründas?", "Putin vajas valimiste eel populaarsust ja Gruusia tahtis liituda EL-i ja NATO-ga."], ["Gruusia", "Mis seob Abhaasiat Eestiga?", "Seal olid 1880. aastatest eestlaste külad (Estonia, Linda, Sulevi, Salme). 1992 evakueeriti 170 inimest Eestisse. Film „Mandariinid”."], ["Ukraina", "Mis oli oranž revolutsioon?", "2004 Ukrainas: protestid võltsitud presidendivalimiste vastu. Kordusvalimised võitis läänemeelne Viktor Juštšenko."], ["Ukraina", "Millal algas Venemaa täiemõõduline sõda Ukrainas?", "24. veebruaril 2022. Krimm annekteeriti ja sõda Donbassis algas juba 2014."]]}</script>
 <footer>Koostatud tunnimaterjalide ja kooli juhendite põhjal tehisaru abiga. Võib sisaldada üksikuid vigu.</footer>
 </div>
 <script>
