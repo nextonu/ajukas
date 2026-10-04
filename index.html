@@ -165,7 +165,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .view .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:8px 0 28px}
 @media (max-width:520px){.appbar .logo{font-size:15px;padding-right:12px}.path{display:none}}
 
-.view main a:not(.back),.side a.inl{color:var(--bright);text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:3px}
+.view main a:not(.back),.side a.inl,.modal a.inl{color:var(--bright);text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:3px}
 .view main a:not(.back):hover{text-decoration-color:var(--bright)}
 .homecols{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:start}
 @media (max-width:860px){.homecols{grid-template-columns:1fr}}
@@ -301,6 +301,24 @@ header{padding-right:46px}
 
 
 .attbtn{align-self:flex-start;font-family:var(--mono);font-size:12px}
+
+.sharerow{margin:2px 0 10px}
+.sharebtn{display:inline-flex;align-items:center;gap:8px;font-size:14px;padding:8px 14px}
+.sharebtn svg{width:16px;height:16px}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.55);display:grid;place-items:center;padding:16px}
+.modal-box{background:var(--panel);border:1px solid var(--line2);border-radius:6px;max-width:420px;width:100%;max-height:calc(100% - 32px);overflow:auto;padding:18px 20px;box-shadow:0 12px 40px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:10px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.modal-box h2{font-size:20px;margin:0}
+.modal-box p{margin:0;font-size:14.5px}
+.xbtn{font:inherit;font-size:24px;line-height:1;width:36px;height:36px;border-radius:50%;border:1px solid var(--line2);background:transparent;color:var(--muted);cursor:pointer}
+.xbtn:hover{color:var(--bright);border-color:var(--bright)}
+.linkrow{display:flex;gap:6px}
+.linkrow input{flex:1;min-width:0;font:inherit;font-size:15px;font-family:var(--mono);color:var(--bright);background:var(--bg);border:1px solid var(--line2);border-radius:3px;padding:7px 9px}
+.linkrow .btn{font-size:14px;padding:7px 14px}
+#share-native{font-size:14px;padding:9px 14px}
+.qr{display:flex;justify-content:center;background:#fff;border-radius:6px;padding:10px;align-self:center}
+.qr img{display:block;width:min(264px,60vw);height:auto;image-rendering:pixelated}
+.xbtn:focus-visible,.linkrow input:focus-visible{outline:1px solid var(--key);outline-offset:2px}
 </style>
 </head>
 <body>
@@ -334,6 +352,7 @@ header{padding-right:46px}
 <div class="homemain">
   <p class="tagline">Kõigi ainete konspektid ühes kohas. Vali aine, siis teema.</p>
   <p class="muted" style="font-size:14px;margin-top:-4px">Alustasin seda lehte G2-s oktoobris 2026, seega varasemate kursuste ja tundide materjali siin enamasti pole.</p>
+  <div class="sharerow"><button type="button" class="btn sec sharebtn" id="share-open" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18 16a3 3 0 0 0-2.4 1.2l-6.7-3.4a3 3 0 0 0 0-1.6l6.7-3.4A3 3 0 1 0 15 7l-6.7 3.4a3 3 0 1 0 0 3.2L15 17a3 3 0 1 0 3-1Z"/></svg>Jaga lehte</button></div>
   <div class="search">
     <label for="q" class="vh">Otsi</label>
     <input id="q" type="search" placeholder="Otsi kõigist teemadest, nt Armstrong või veerised" autocomplete="off" spellcheck="false">
@@ -1031,6 +1050,17 @@ header{padding-right:46px}
   </div>
 </div>
 
+<div class="modal" id="share" role="dialog" aria-modal="true" aria-labelledby="share-h" hidden>
+  <div class="modal-box">
+    <div class="modal-head"><h2 id="share-h">Jaga Ajukast</h2><button type="button" class="xbtn" id="share-close" aria-label="Sulge">×</button></div>
+    <p class="muted">Saada link sõbrale või näita QR-koodi, mida saab telefoniga skaneerida.</p>
+    <div class="linkrow"><input id="share-url" readonly value="https://nextonu.github.io/ajukas/" aria-label="Lehe link"><button type="button" class="btn" id="share-copy">Kopeeri</button></div>
+    <p class="msg" id="share-msg" role="status"></p>
+    <button type="button" class="btn sec" id="share-native" hidden>Jaga telefoni kaudu (WhatsApp, Messenger…)</button>
+    <div class="qr"><img src="qr.svg" alt="QR-kood: https://nextonu.github.io/ajukas/" width="264" height="264"></div>
+    <p class="muted" style="font-size:13px;text-align:center"><a class="inl" href="qr.png" download="ajukas-qr.png">Laadi QR-kood alla</a> (sobib esitlusele või paberile)</p>
+  </div>
+</div>
 <script type="application/json" id="quiz-data">{"jazz": [["Tunnused", "Millal ja kus jazz tekkis?", "19. sajandi lõpus ja 20. sajandi alguses USA-s, eelkõige New Orleansis."], ["Tunnused", "Millal ja kus tekkis sõna „jazz\"?", "1915. aastal Chicagos."], ["Tunnused", "Nimeta jazzi neli põhijoont.", "Improvisatsioon, kõlavärv ehk tämber, pillikoosseisud ning rütm, meloodia ja harmoonia."], ["Tunnused", "Mida andsid jazzile Aafrika, Euroopa ja Kariibi mere piirkond?", "Aafrika: kollektiivne muusika loomine, improvisatsioon, ees- ja järellaulja. Euroopa: harmoonia ja instrumendid. Kariibid: rütmipõhine tantsumuusika ja keerukamad rütmid."], ["Tunnused", "Mis oli Congo Square?", "New Orleansi väljak, kus nädalavahetustel mängiti muusikat, tantsiti ja hoiti alles kultuuripärandit."], ["Tunnused", "Milline orkestritüüp on üks jazzi alustalasid?", "Matuserongkäikude orkestrid."], ["Ragtime", "Mis pillil ragtime'i peamiselt mängiti ja millal oli see populaarne?", "Klaveril, 1890. aastatel."], ["Ragtime", "Kes oli ragtime'i looja? Nimeta kaks tema pala.", "Scott Joplin (1868–1917). Näiteks „Maple Leaf Rag\" ja „The Entertainer\"."], ["Bluus", "Mis on bluusi struktuur ja millest see põhines?", "12-taktiline. Põhines töölauludel ja spirituaalidel."], ["Bluus", "Nimeta kolm bluusiartisti.", "Bessie Smith, Muddy Waters, B.B. King."], ["Mõiste", "Mis on kollektiivne improvisatsioon?", "Pillimehed mängivad samal ajal, aga igaüks improviseerib iseseisvalt."], ["New Orleans", "Kus mängisid New Orleansi harrastusorkestrid?", "Storyville'i linnaosa lõbustusasutustes. Orkestreid oli ligi 30."], ["New Orleans", "Millistel löökidel on New Orleansi jazzis rõhk?", "1. ja 3. löögil (marsilik pulss). Off-beat ehk 2. ja 4. löögi rõhk puudub."], ["New Orleans", "Nimeta meloodiagrupi ja rütmigrupi pillid.", "Meloodia: kornet või trompet, tromboon, klarnet. Rütm: tuuba, bandžo, trummid."], ["New Orleans", "Mis asendas tuuba ja bandžo ning mis lisandus?", "Tuuba asendus kontrabassiga, bandžo kitarriga ja lisandus klaver."], ["New Orleans", "Mis oli improvisatsiooni aluseks?", "Marsi- või kirikumeloodia, ragtime'i pala või 12-taktiline bluus."], ["New Orleans", "Kes juhtis King Oliver's Creole Jazz Bandi?", "Joe „King\" Oliver, kornetist-trompetist."], ["New Orleans", "Millise ansambliga tegi Jelly Roll Morton salvestusi?", "Red Hot Peppers."], ["New Orleans", "Miks New Orleansi jazzi õitseaeg 1917. aastal lõppes?", "Storyville suleti ja muusikud läksid Chicagosse."], ["Armstrong", "Mida uut tõi jazzi Louis Armstrong?", "Jazzist sai solistide muusika. Ta võttis kasutusele akordid ja noodikirja, tõi sisse blue note'id ja scat-laulu."], ["Armstrong", "Mis on scat-laul?", "Sõnadeta, silpidega improviseeritud laul."], ["Armstrong", "Kelle tsitaat on „Ilma Armstrongita poleks jazz'i…\"?", "Joachim-Ernst Berendt, „Das Jazzbuch\"."], ["Dixieland", "Kes oli dixielandi looja?", "Orkestrijuht ja trummar Papa Jack Laine."], ["Dixieland", "Kes tegi esimese jazzisalvestuse ja millal?", "Original Dixieland Jazz Band Nick LaRocca juhatusel 1917. aastal. Plaati müüdi üle miljoni."], ["Dixieland", "Kuidas erines dixielandi kõla New Orleansi omast?", "Väiksem kõlajõud, parem tehnika, kiirem muusika, sujuvam meloodia, vähem intensiivsed kõlavärvid. Iseloomuliku kõla andis soolopill. Koosseis jäi samaks."], ["Dixieland", "Mis lõpetas dixielandi hiilgeaja?", "Sving ja bigbändid 1930. aastate algul. Dixieland tuli tagasi 1940. aastate lõpus."], ["Chicago", "Mis oli Chicago jazzi peamine muutus improvisatsioonis?", "Kollektiivne improvisatsioon asendus solistlikuga."], ["Chicago", "Mis on break?", "Hetk, kui orkester vaikib ja solist improviseerib."], ["Chicago", "Mis oli Austin High School Gang?", "Valgete keskkoolinoorte ansambel, noorte talentide ja Chicago stiili taimelava."], ["Chicago", "Kes oli esimene saksofonivirtuoos?", "Tenorsaksofonist Bud Freeman."], ["Chicago", "Mida uut tõi Fletcher Henderson?", "Jagas orkestri pilligruppideks, lõi tämbrilise vastandamisega uue orkestristiili ja arranžeerimise põhimõtted suurele koosseisule."], ["Chicago", "Kes juhtis kõige populaarsemat tantsuorkestrit ja kes seal mängis?", "Paul Whiteman. Seal mängisid kornetist Bix Beiderbecke ja kitarrist Eddie Lang."], ["Ellington", "Kus tegutses Duke Ellington ja mis on džunglistiil?", "New Yorgis, Harlemi Cotton Clubis. Džunglistiil tähendab trompeti ja trombooni väljendusrikkaid helisid."]]}</script>
 <footer>Koostatud tunnimaterjalide ja kooli juhendite põhjal tehisaru abiga. Võib sisaldada üksikuid vigu.</footer>
 </div>
@@ -1135,6 +1165,30 @@ header{padding-right:46px}
 
 
 
+
+
+  // --- jagamine ---
+  (function(){
+    var m = document.getElementById('share'), openBtn = document.getElementById('share-open');
+    var url = 'https://nextonu.github.io/ajukas/', input = document.getElementById('share-url'), out = document.getElementById('share-msg');
+    var native = document.getElementById('share-native');
+    if (navigator.share) native.hidden = false;
+    function open(){ m.hidden = false; out.textContent = ''; document.getElementById('share-copy').focus(); }
+    function close(){ m.hidden = true; openBtn.focus(); }
+    openBtn.addEventListener('click', open);
+    document.getElementById('share-close').addEventListener('click', close);
+    m.addEventListener('click', function(e){ if (e.target === m) close(); });
+    m.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+    document.getElementById('share-copy').addEventListener('click', function(){
+      function done(){ out.className = 'msg ok'; out.textContent = t('Link on kopeeritud. Kleebi see sõnumisse (Ctrl+V).'); }
+      function fallback(){ input.focus(); input.select(); try { if (document.execCommand('copy')) return done(); } catch (e) {} out.className = 'msg'; out.textContent = t('Link on valitud, vajuta Ctrl+C.'); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, fallback); else fallback();
+    });
+    input.addEventListener('focus', function(){ input.select(); });
+    native.addEventListener('click', function(){
+      navigator.share({ title: 'Ajukas', text: t('Ajukas: kontrolltööde kordamine aine ja teema kaupa'), url: url }).catch(function(){});
+    });
+  })();
 
   // --- seaded: teema ja keel ---
   (function(){
