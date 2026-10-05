@@ -404,6 +404,18 @@ body{padding-bottom:80px}
 .suvi-src{margin:8px 0 0;font-size:11.5px;color:var(--muted)}
 .suvi-src a{color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.analog .sh{transition:none}}
+
+.chains{margin:10px 0 0}
+.chains-art svg{display:block;width:100%;height:auto;border-radius:6px}
+.chains figcaption{margin-top:6px;font-size:13px;color:var(--text)}
+.chains figcaption b{background:none;padding:0;color:var(--brand);font-family:var(--mono);font-size:12px;margin-right:4px}
+@keyframes chainshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-.6px)}75%{transform:translateX(.6px)}}
+@keyframes spark{0%{opacity:1}50%{opacity:.2}100%{opacity:1}}
+@keyframes fall{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(26px) rotate(140deg);opacity:0}}
+.ch-shake{animation:chainshake .18s linear infinite}
+.ch-spark{animation:spark .5s steps(2) infinite}
+.ch-fall{animation:fall 2.4s ease-in infinite;transform-box:fill-box;transform-origin:center}
+@media (prefers-reduced-motion:reduce){.ch-shake,.ch-spark,.ch-fall{animation:none}}
 </style>
 </head>
 <body>
@@ -461,6 +473,10 @@ body{padding-bottom:80px}
       <div><b id="sv-s">00</b><span>sekundit</span></div>
     </div>
     <p class="suvi-done" id="suvi-done" hidden>Head suvevaheaega! ☀️</p>
+    <figure class="chains" id="chains" aria-live="polite">
+      <div class="chains-art" id="chains-art"></div>
+      <figcaption><b id="chains-lvl"></b> <span id="chains-cap"></span></figcaption>
+    </figure>
     <p class="suvi-src">Algab 9. juunil 2027 (<a href="https://www.riigiteataja.ee/akt/119032025005" target="_blank" rel="noopener">Riigi Teataja</a>, v.a lõpuklassid)</p>
   </div>
 </aside>
@@ -1855,6 +1871,89 @@ body{padding-bottom:80px}
     try { if (localStorage.getItem('ajukas-notes-open') === '1') open(true); } catch (e) {}
   })();
 
+
+
+  // --- ketid: 5 taset, mida lähemal suvi, seda rohkem käed lahti ---
+  (function(){
+    var START = Date.UTC(2026, 7, 31, 21, 0, 0);   // 1. september 2026 00:00 Eesti aja järgi
+    var END = Date.UTC(2027, 5, 8, 21, 0, 0);      // 9. juuni 2027 00:00
+    var art = document.getElementById('chains-art'), lvlEl = document.getElementById('chains-lvl'), cap = document.getElementById('chains-cap');
+    var CAPS = [
+      t('Kooliaasta alles algas: ketid on tugevalt kinni.'),
+      t('Kett hakkab venima.'),
+      t('Pool aastat läbi: kett on pingul.'),
+      t('Kett hakkab katkema!'),
+      t('Vaba! Head suvevaheaega!')
+    ];
+    var SKY = [['#2f3646', '#4a5163', '#5c6070'], ['#34405e', '#56607a', '#7a6a6a'], ['#3b5487', '#6f78a0', '#c08a64'], ['#3f66b0', '#8f86b0', '#ee9a52'], ['#4a86d8', '#f2b35b', '#ff7a2f']];
+    var HANDS = [[93, 26, 107, 26], [82, 24, 118, 24], [68, 22, 132, 22], [54, 20, 146, 20], [40, 14, 160, 14]];
+    function link(x, y, ang, i){
+      var rx = i % 2 ? 2.2 : 4.2, ry = i % 2 ? 2.6 : 2.4;
+      return '<ellipse cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" rx="' + rx + '" ry="' + ry + '" transform="rotate(' + ang.toFixed(1) + ' ' + x.toFixed(1) + ' ' + y.toFixed(1) + ')" fill="none" stroke="#8a8f99" stroke-width="1.6"/>';
+    }
+    function chainPath(x1, y1, x2, y2, sag){
+      var n = Math.max(3, Math.round(Math.hypot(x2 - x1, y2 - y1) / 6)), out = '';
+      for (var i = 0; i <= n; i++) {
+        var u = i / n, cx = (x1 + x2) / 2, cy = (y1 + y2) / 2 + sag;
+        var x = (1 - u) * (1 - u) * x1 + 2 * (1 - u) * u * cx + u * u * x2;
+        var y = (1 - u) * (1 - u) * y1 + 2 * (1 - u) * u * cy + u * u * y2;
+        var dx = 2 * (1 - u) * (cx - x1) + 2 * u * (x2 - cx), dy = 2 * (1 - u) * (cy - y1) + 2 * u * (y2 - cy);
+        out += link(x, y, Math.atan2(dy, dx) * 180 / Math.PI, i);
+      }
+      return out;
+    }
+    function draw(L){
+      var sky = SKY[L], h = HANDS[L], S = '#121212';
+      var lx = h[0], ly = h[1], rx = h[2], ry = h[3];
+      var svg = '<svg viewBox="0 0 200 130" role="img" aria-label="' + CAPS[L] + '"><defs><linearGradient id="chsky" x1="0" y1="0" x2="0" y2="1">' +
+        '<stop offset="0" stop-color="' + sky[0] + '"/><stop offset=".6" stop-color="' + sky[1] + '"/><stop offset="1" stop-color="' + sky[2] + '"/></linearGradient>' +
+        '<radialGradient id="chsun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff6c2"/><stop offset=".45" stop-color="#ffcf5a" stop-opacity=".9"/><stop offset="1" stop-color="#ff9a3d" stop-opacity="0"/></radialGradient></defs>' +
+        '<rect width="200" height="130" fill="url(#chsky)"/>';
+      if (L >= 2) svg += '<circle cx="150" cy="120" r="' + (14 + L * 8) + '" fill="url(#chsun)" opacity="' + (0.3 + L * 0.17) + '"/>';
+      // keha ja pea
+      svg += '<path d="M64 131 C66 110 76 100 100 98 C124 100 134 110 136 131 Z" fill="' + S + '"/>';
+      // käsivarred ja rusikad
+      svg += '<path d="M77 106 L' + lx + ' ' + (ly + 10) + '" stroke="' + S + '" stroke-width="10" stroke-linecap="round"/>' +
+             '<path d="M123 106 L' + rx + ' ' + (ry + 10) + '" stroke="' + S + '" stroke-width="10" stroke-linecap="round"/>' +
+             '<rect x="' + (lx - 7) + '" y="' + (ly - 4) + '" width="14" height="15" rx="5" fill="' + S + '"/>' +
+             '<rect x="' + (rx - 7) + '" y="' + (ry - 4) + '" width="14" height="15" rx="5" fill="' + S + '"/>';
+      svg += '<circle cx="100" cy="84" r="13" fill="' + S + '"/>';
+      // käerauad
+      svg += '<rect x="' + (lx - 7.5) + '" y="' + (ly + 9) + '" width="15" height="4" rx="2" fill="#9aa0aa"/><rect x="' + (rx - 7.5) + '" y="' + (ry + 9) + '" width="15" height="4" rx="2" fill="#9aa0aa"/>';
+      var wy1 = ly + 11, wy2 = ry + 11;
+      if (L === 0) svg += chainPath(lx, wy1, rx, wy2, 9);
+      else if (L === 1) svg += chainPath(lx, wy1, rx, wy2, 4);
+      else if (L === 2) svg += '<g class="ch-shake">' + chainPath(lx, wy1, rx, wy2, 0) + '</g>';
+      else if (L === 3) {
+        var mx = (lx + rx) / 2, my = (wy1 + wy2) / 2;
+        svg += '<g class="ch-shake">' + chainPath(lx, wy1, mx - 5, my, 0) + chainPath(mx + 5, my, rx, wy2, 0) + '</g>' +
+          '<path d="M' + (mx - 4) + ' ' + (my - 3) + ' q4 -4 8 0" fill="none" stroke="#c9ccd2" stroke-width="1.6"/>' +
+          '<g class="ch-spark" stroke="#ffd36b" stroke-width="1.3" stroke-linecap="round">' +
+          '<path d="M' + mx + ' ' + (my - 4) + ' l0 -7"/><path d="M' + (mx - 3) + ' ' + (my - 3) + ' l-5 -5"/><path d="M' + (mx + 3) + ' ' + (my - 3) + ' l5 -5"/><path d="M' + (mx - 4) + ' ' + (my + 2) + ' l-6 2"/><path d="M' + (mx + 4) + ' ' + (my + 2) + ' l6 2"/></g>';
+      } else {
+        // katkenud kett: jupid ripuvad randmetest, lülid kukuvad
+        svg += chainPath(lx, wy1, lx + 14, wy1 + 12, 2) + chainPath(rx, wy2, rx - 14, wy2 + 12, 2);
+        [[88, 40, 0], [100, 30, .6], [112, 42, 1.2], [96, 50, 1.8]].forEach(function(f){
+          svg += '<g class="ch-fall" style="animation-delay:' + f[2] + 's">' + link(f[0], f[1], 30 + f[2] * 40, 0) + '</g>';
+        });
+      }
+      svg += '</svg>';
+      art.innerHTML = svg;
+      lvlEl.textContent = t('Tase {n}/5', { n: L + 1 });
+      cap.textContent = CAPS[L];
+    }
+    var last = -1;
+    function update(){
+      var now = Date.now(), L;
+      if (now >= END) L = 4;
+      else L = Math.max(0, Math.min(3, Math.floor((now - START) / (END - START) * 4)));
+      if (L !== last) { last = L; draw(L); }
+    }
+    update();
+    setInterval(update, 60000);
+    window.Ajukas = window.Ajukas || {};
+    window.Ajukas.chainsPreview = function(L){ last = -1; draw(L); };
+  })();
 
   // --- suvevaheaja taimer ja kell (heli pole) ---
   (function(){
