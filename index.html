@@ -260,7 +260,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .att a.file{font-family:var(--mono);font-size:12px;color:var(--bright);border:1px solid var(--line2);border-radius:3px;padding:4px 8px;text-decoration:none;max-width:100%;overflow-wrap:anywhere}
 .att a.file:hover{border-color:var(--bright)}
 
-.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.vh{position:absolute!important;left:0;top:0;width:1px!important;height:1px!important;padding:0!important;border:0!important;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .filepick{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
 .filepick .flabel{font-size:13px;color:var(--muted)}
 .box label.pickbtn{display:inline-flex;flex-direction:row;color:var(--text);font-size:13px;cursor:pointer}
@@ -366,6 +366,18 @@ body{padding-bottom:80px}
 .notes .rz-nw:hover,.notes .rz-ne:hover,.notes .rz-sw:hover,.notes .rz-se:hover{border-color:var(--bright)}
 .notes .notes-head{padding-left:16px}
 .notes .notes-foot{padding-right:22px}
+
+.ntabs{display:flex;flex-wrap:wrap;gap:4px;align-items:center;max-height:40%;overflow-y:auto;padding:6px 8px;border-bottom:1px solid var(--line);background:var(--panel);flex:0 0 auto}
+.ntab{display:inline-flex;align-items:center;flex:0 0 auto;border:1px solid var(--line2);border-radius:5px;background:var(--panel);color:var(--text);font-size:13px;max-width:180px}
+.ntab > button{font:inherit;background:none;border:0;color:inherit;cursor:pointer;padding:4px 9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.ntab:hover{border-color:var(--muted);color:var(--bright)}
+.ntab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ntab .nact{padding:4px 5px;font-size:12px;opacity:.85}
+.ntab .nact:hover{opacity:1}
+.ntab input{font:inherit;font-size:13px;width:120px;border:0;border-radius:4px;padding:3px 6px;margin:1px;color:var(--bright);background:var(--bg)}
+.nadd{font:inherit;font-size:16px;line-height:1;flex:0 0 auto;width:28px;height:26px;border:1px dashed var(--line2);border-radius:5px;background:none;color:var(--muted);cursor:pointer}
+.nadd:hover{color:var(--bright);border-color:var(--bright)}
+.ntab > button:focus-visible,.nadd:focus-visible{outline:1px solid var(--key);outline-offset:1px}
 </style>
 </head>
 <body>
@@ -1511,6 +1523,7 @@ body{padding-bottom:80px}
     <h2 id="notes-h"><span>Märkmed</span> <span class="notes-scope" id="notes-scope"></span></h2>
     <button type="button" class="notes-x" id="notes-close" aria-label="Sulge märkmed" title="Sulge">×</button>
   </header>
+  <div class="ntabs" id="notes-tabs" role="tablist" aria-label="Märkmikud"></div>
   <label for="notes-text" class="vh">Märkmed</label>
   <textarea id="notes-text" spellcheck="true" placeholder="Kirjuta siia oma märkmed selle teema kohta…"></textarea>
   <footer class="notes-foot"><span id="notes-status">Salvestub automaatselt</span></footer>
@@ -1669,23 +1682,83 @@ body{padding-bottom:80px}
       try { localStorage.setItem('ajukas-notes', JSON.stringify(NOTES)); } catch (e) {}
       if (NA.onNotes) NA.onNotes(NOTES);
     }
-    function setScope(id, title){
-      scope = id; scopeTitle = title;
-      scopeEl.textContent = '· ' + title;
-      ta.value = NOTES[scope] || '';
+    // märkmikud: teema märkmed (vahetub koos teemaga), üldine ja kasutaja enda vahekaardid
+    var tabsEl = document.getElementById('notes-tabs');
+    var topicKey = null, topicTitle = '', active = 'topic';
+    try { active = localStorage.getItem('ajukas-notes-tab') || 'topic'; } catch (e) {}
+    function custom(){ if (!Array.isArray(NOTES.__tabs)) NOTES.__tabs = []; return NOTES.__tabs; }
+    function key(){
+      if (active === 'topic') return topicKey || 'uldine';
+      if (active === 'uldine') return 'uldine';
+      return custom().some(function(c){ return 'tab:' + c.id === active; }) ? active : (topicKey || 'uldine');
+    }
+    function select(a){ active = a; try { localStorage.setItem('ajukas-notes-tab', a); } catch (e) {} load(); }
+    function load(){
+      var k = key();
+      ta.value = NOTES[k] || '';
+      ta.placeholder = k === topicKey ? t('Kirjuta siia oma märkmed selle teema kohta…') : k === 'uldine' ? t('Üldised märkmed, mis ei ole ühegi teemaga seotud…') : t('Kirjuta siia…');
+      scopeEl.textContent = '';
       status.textContent = t('Salvestub automaatselt');
+      render();
+    }
+    function tabBtn(label, a, title){
+      var w = document.createElement('span'); w.className = 'ntab'; w.setAttribute('role', 'tab');
+      var on = (a === 'topic' && key() === topicKey && topicKey) || (a !== 'topic' && key() === a) || (a === 'topic' && !topicKey && false);
+      w.setAttribute('aria-selected', on ? 'true' : 'false');
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = label; if (title) b.title = title;
+      b.addEventListener('click', function(){ select(a); ta.focus(); });
+      w.appendChild(b);
+      return w;
+    }
+    function render(){
+      tabsEl.textContent = '';
+      if (topicKey) tabsEl.appendChild(tabBtn('📘 ' + topicTitle, 'topic', t('Selle teema märkmed')));
+      tabsEl.appendChild(tabBtn(t('Üldine'), 'uldine'));
+      custom().forEach(function(c){
+        var a = 'tab:' + c.id, w = tabBtn(c.name, a);
+        if (key() === a) {
+          var ren = document.createElement('button'); ren.type = 'button'; ren.className = 'nact'; ren.textContent = '✎'; ren.title = t('Nimeta ümber'); ren.setAttribute('aria-label', t('Nimeta ümber'));
+          ren.addEventListener('click', function(){ rename(w, c); });
+          var del = document.createElement('button'); del.type = 'button'; del.className = 'nact'; del.textContent = '×'; del.title = t('Kustuta märkmik'); del.setAttribute('aria-label', t('Kustuta märkmik'));
+          del.addEventListener('click', function(){
+            if (!confirm(t('Kustutada märkmik „{n}” koos sisuga?', { n: c.name }))) return;
+            NOTES.__tabs = custom().filter(function(x){ return x !== c; }); delete NOTES[a];
+            saveNotes(); select('topic');
+          });
+          w.appendChild(ren); w.appendChild(del);
+          w.firstChild.addEventListener('dblclick', function(){ rename(w, c); });
+        }
+        tabsEl.appendChild(w);
+      });
+      var add = document.createElement('button'); add.type = 'button'; add.className = 'nadd'; add.textContent = '+'; add.title = t('Uus märkmik'); add.setAttribute('aria-label', t('Uus märkmik'));
+      add.addEventListener('click', function(){
+        if (custom().length >= 20) return;
+        var c = { id: Date.now().toString(36), name: t('Märkmik {n}', { n: custom().length + 1 }) };
+        custom().push(c); saveNotes(); select('tab:' + c.id);
+        var w = tabsEl.querySelector('.ntab[aria-selected="true"]'); if (w) rename(w, c);
+      });
+      tabsEl.appendChild(add);
+      var cur = tabsEl.querySelector('.ntab[aria-selected="true"]'); if (cur) tabsEl.scrollLeft = cur.offsetLeft - 40;
+    }
+    function rename(w, c){
+      var inp = document.createElement('input'); inp.value = c.name; inp.maxLength = 30; inp.setAttribute('aria-label', t('Märkmiku nimi'));
+      w.textContent = ''; w.appendChild(inp); inp.focus(); inp.select();
+      var done = false;
+      function finish(ok){ if (done) return; done = true; var v = inp.value.trim(); if (ok && v) { c.name = v; saveNotes(); } render(); }
+      inp.addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); finish(true); ta.focus(); } if (e.key === 'Escape') { e.stopPropagation(); finish(false); } });
+      inp.addEventListener('blur', function(){ finish(true); });
     }
     NA.notesScope = function(view){
       var topic = view && view.getAttribute('data-parent');
-      if (topic) setScope(view.id.slice(2), view.getAttribute('data-title'));
-      else setScope('uldine', t('üldine'));
+      topicKey = topic ? view.id.slice(2) : null; topicTitle = topic ? view.getAttribute('data-title') : '';
+      load();
     };
     NA.getNotes = function(){ return NOTES; };
-    NA.setNotes = function(n){ NOTES = n || {}; try { localStorage.setItem('ajukas-notes', JSON.stringify(NOTES)); } catch (e) {} ta.value = NOTES[scope] || ''; };
+    NA.setNotes = function(n){ NOTES = n || {}; try { localStorage.setItem('ajukas-notes', JSON.stringify(NOTES)); } catch (e) {} load(); };
     var timer;
     ta.addEventListener('input', function(){
       if (ta.value.length > MAX) ta.value = ta.value.slice(0, MAX);
-      if (ta.value) NOTES[scope] = ta.value; else delete NOTES[scope];
+      var k = key(); if (ta.value) NOTES[k] = ta.value; else delete NOTES[k];
       status.textContent = t('Salvestan…');
       clearTimeout(timer);
       timer = setTimeout(function(){ saveNotes(); status.textContent = t('Salvestatud'); }, 500);
@@ -2117,8 +2190,12 @@ if (!FIREBASE_CONFIG) {
     Object.keys(count).forEach((k) => { $('n-' + k).textContent = count[k] ? '(' + count[k] + ')' : ''; });
     const sum = $('inbox-sum');
     sum.textContent = '';
-    if (count.uus) { const b = document.createElement('span'); b.className = 'new'; b.textContent = t('{n} vaatamata', { n: count.uus }); sum.append(b, ' · '); }
-    sum.append(t('{n} kokku', { n: count.vaadatud + count.tehtud + count.uus }));
+    if (!count.uus && !count.vaadatud) sum.append(t('Uusi soovitusi pole.'));
+    else {
+      if (count.uus) { const b = document.createElement('span'); b.className = 'new'; b.textContent = t('{n} vaatamata', { n: count.uus }); sum.append(b); }
+      if (count.uus && count.vaadatud) sum.append(' · ');
+      if (count.vaadatud) sum.append(t('{n} vaadatud', { n: count.vaadatud }));
+    }
 
     document.querySelectorAll('.filter').forEach((f) => f.setAttribute('aria-pressed', f.dataset.f === S.filter ? 'true' : 'false'));
     $('sv-hint').textContent = HINT[S.filter];
@@ -2222,7 +2299,9 @@ if (!FIREBASE_CONFIG) {
       // märkmed: kohalik tekst jääb alles, puuduvad teemad tulevad kontolt
       const ln = A.getNotes ? A.getNotes() : {}, rn = remote.markmed || {};
       const mn = Object.assign({}, rn);
-      Object.keys(ln).forEach((k) => { if (ln[k]) mn[k] = ln[k]; });
+      Object.keys(ln).forEach((k) => { if (ln[k] && k !== '__tabs') mn[k] = ln[k]; });
+      const tabs = (rn.__tabs || []).slice(); (ln.__tabs || []).forEach((c) => { if (!tabs.some((x) => x.id === c.id)) tabs.push(c); });
+      if (tabs.length) mn.__tabs = tabs;
       if (A.setNotes) A.setNotes(mn);
       A.onNotes = pushNotes;
       pushNotes(mn);
