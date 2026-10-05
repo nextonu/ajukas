@@ -378,6 +378,32 @@ body{padding-bottom:80px}
 .nadd{font:inherit;font-size:16px;line-height:1;flex:0 0 auto;width:28px;height:26px;border:1px dashed var(--line2);border-radius:5px;background:none;color:var(--muted);cursor:pointer}
 .nadd:hover{color:var(--bright);border-color:var(--bright)}
 .ntab > button:focus-visible,.nadd:focus-visible{outline:1px solid var(--key);outline-offset:1px}
+
+.suvi{background:var(--panel);border:1px solid var(--line2);border-radius:8px;padding:14px 16px;margin:6px 0 14px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+@media (min-width:1560px){.suvi{position:fixed;left:24px;top:110px;width:250px;flex-direction:column;align-items:stretch;margin:0;z-index:4}.suvi .suvi-count{flex:0 0 auto}}
+.suvi-clock{display:flex;align-items:center;gap:12px}
+.analog{width:84px;height:84px;flex:0 0 auto}
+.analog .face{fill:var(--bg);stroke:var(--line2);stroke-width:2}
+.analog .tk{stroke:var(--muted);stroke-width:1}
+.analog .tk5{stroke:var(--text);stroke-width:2}
+.analog .hh{stroke:var(--bright);stroke-width:4;stroke-linecap:round}
+.analog .mh{stroke:var(--bright);stroke-width:2.6;stroke-linecap:round}
+.analog .sh{stroke:var(--brand);stroke-width:1.4;stroke-linecap:round;transition:transform .18s cubic-bezier(.4,2.2,.6,1);transform-origin:50px 50px}
+.analog .sh.nojump{transition:none}
+.analog .pin{fill:var(--brand)}
+.digital{display:flex;flex-direction:column}
+.digital span{font-family:var(--mono);font-size:24px;color:var(--bright);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.digital small{font-size:12.5px;color:var(--muted)}
+.suvi-count{flex:1 1 260px;min-width:0}
+.suvi-h{margin:0 0 6px;font-size:13px;font-family:var(--mono);color:var(--muted)}
+.units{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.units div{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 4px;text-align:center}
+.units b{background:none;padding:0;border-radius:0;display:block;font-family:var(--mono);font-size:22px;color:var(--brand);font-variant-numeric:tabular-nums;line-height:1.2}
+.units span{font-size:11.5px;color:var(--muted)}
+.suvi-done{margin:4px 0 0;font-size:18px;font-weight:700;color:var(--bright)}
+.suvi-src{margin:8px 0 0;font-size:11.5px;color:var(--muted)}
+.suvi-src a{color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.analog .sh{transition:none}}
 </style>
 </head>
 <body>
@@ -399,6 +425,11 @@ body{padding-bottom:80px}
       <button type="button" data-theme-set="dark">Tume</button>
       <button type="button" data-theme-set="light">Hele</button>
     </div>
+    <p class="plabel">Suvevaheaeg</p>
+    <div class="seg" role="group" aria-label="Suvevaheaja taimer">
+      <button type="button" data-suvi-set="0">Väljas</button>
+      <button type="button" data-suvi-set="1">Sees</button>
+    </div>
   </div>
 </div>
 
@@ -409,6 +440,30 @@ body{padding-bottom:80px}
   </header>
   <div class="homecols">
 <div class="homemain">
+<aside class="suvi" id="suvi" aria-label="Suvevaheaja taimer" hidden>
+  <div class="suvi-clock">
+    <svg viewBox="0 0 100 100" class="analog" aria-hidden="true">
+      <circle cx="50" cy="50" r="47" class="face"/>
+      <line x1="50" y1="6" x2="50" y2="14" transform="rotate(0 50 50)" class="tk5"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(6 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(12 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(18 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(24 50 50)" class="tk"/><line x1="50" y1="6" x2="50" y2="14" transform="rotate(30 50 50)" class="tk5"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(36 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(42 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(48 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(54 50 50)" class="tk"/><line x1="50" y1="6" x2="50" y2="14" transform="rotate(60 50 50)" class="tk5"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(66 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(72 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(78 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(84 50 50)" class="tk"/><line x1="50" y1="6" x2="50" y2="14" transform="rotate(90 50 50)" class="tk5"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(96 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(102 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(108 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(114 50 50)" class="tk"/><line x1="50" y1="6" x2="50" y2="14" transform="rotate(120 50 50)" class="tk5"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(126 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(132 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(138 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(144 50 50)" class="tk"/><line x1="50" y1="6" x2="50" y2="14" transform="rotate(150 50 50)" class="tk5"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(156 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(162 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(168 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(174 50 50)" class="tk"/><line x1="50" y1="6" x2="50" y2="14" transform="rotate(180 50 50)" class="tk5"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(186 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(192 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(198 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(204 50 50)" class="tk"/><line x1="50" y1="6" x2="50" y2="14" transform="rotate(210 50 50)" class="tk5"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(216 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(222 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(228 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(234 50 50)" class="tk"/><line x1="50" y1="6" x2="50" y2="14" transform="rotate(240 50 50)" class="tk5"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(246 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(252 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(258 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(264 50 50)" class="tk"/><line x1="50" y1="6" x2="50" y2="14" transform="rotate(270 50 50)" class="tk5"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(276 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(282 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(288 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(294 50 50)" class="tk"/><line x1="50" y1="6" x2="50" y2="14" transform="rotate(300 50 50)" class="tk5"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(306 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(312 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(318 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(324 50 50)" class="tk"/><line x1="50" y1="6" x2="50" y2="14" transform="rotate(330 50 50)" class="tk5"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(336 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(342 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(348 50 50)" class="tk"/><line x1="50" y1="8" x2="50" y2="11" transform="rotate(354 50 50)" class="tk"/>
+      <line x1="50" y1="50" x2="50" y2="27" class="hh" id="clk-h"/>
+      <line x1="50" y1="50" x2="50" y2="16" class="mh" id="clk-m"/>
+      <line x1="50" y1="58" x2="50" y2="12" class="sh" id="clk-s"/>
+      <circle cx="50" cy="50" r="2.6" class="pin"/>
+    </svg>
+    <div class="digital"><span id="clk-time">--:--:--</span><small id="clk-date"></small></div>
+  </div>
+  <div class="suvi-count">
+    <p class="suvi-h">Suvevaheajani</p>
+    <div class="units" id="suvi-units">
+      <div><b id="sv-d">0</b><span>päeva</span></div>
+      <div><b id="sv-h">00</b><span>tundi</span></div>
+      <div><b id="sv-m">00</b><span>minutit</span></div>
+      <div><b id="sv-s">00</b><span>sekundit</span></div>
+    </div>
+    <p class="suvi-done" id="suvi-done" hidden>Head suvevaheaega! ☀️</p>
+    <p class="suvi-src">Algab 9. juunil 2027 (<a href="https://www.riigiteataja.ee/akt/119032025005" target="_blank" rel="noopener">Riigi Teataja</a>, v.a lõpuklassid)</p>
+  </div>
+</aside>
   <p class="tagline">Kõigi ainete konspektid ühes kohas. Vali aine, siis teema.</p>
   <p class="muted" style="font-size:14px;margin-top:-4px">Alustasin seda lehte G2-s oktoobris 2026, seega varasemate kursuste ja tundide materjali siin enamasti pole.</p>
   <div class="sharerow"><button type="button" class="btn sec sharebtn" id="share-open" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18 16a3 3 0 0 0-2.4 1.2l-6.7-3.4a3 3 0 0 0 0-1.6l6.7-3.4A3 3 0 1 0 15 7l-6.7 3.4a3 3 0 1 0 0 3.2L15 17a3 3 0 1 0 3-1Z"/></svg>Jaga lehte</button></div>
@@ -1798,6 +1853,66 @@ body{padding-bottom:80px}
     });
     window.addEventListener('resize', function(){ if (!box.hidden) applyGeo(); });
     try { if (localStorage.getItem('ajukas-notes-open') === '1') open(true); } catch (e) {}
+  })();
+
+
+  // --- suvevaheaja taimer ja kell (heli pole) ---
+  (function(){
+    var box = document.getElementById('suvi'), pop = document.getElementById('settings-pop');
+    var TARGET = Date.UTC(2027, 5, 8, 21, 0, 0); // 9. juuni 2027 kell 00:00 Eesti suveaja järgi (UTC+3)
+    var timer = null, lastSec = -1, secTurns = 0;
+    function on(){ try { return localStorage.getItem('ajukas-suvi') === '1'; } catch (e) { return false; } }
+    function pad(n){ return (n < 10 ? '0' : '') + n; }
+    var sh = document.getElementById('clk-s'), mh = document.getElementById('clk-m'), hh = document.getElementById('clk-h');
+    function tick(){
+      var home = document.getElementById('v-home');
+      if (home && home.hidden) { stop(); return; }
+      var now = new Date(), sec = now.getSeconds(), min = now.getMinutes(), hr = now.getHours();
+      document.getElementById('clk-time').textContent = pad(hr) + ':' + pad(min) + ':' + pad(sec);
+      document.getElementById('clk-date').textContent = now.toLocaleDateString(t('et-EE'), { weekday: 'long', day: 'numeric', month: 'long' });
+      if (sec !== lastSec) {
+        if (lastSec === 59 && sec === 0) secTurns++;
+        lastSec = sec;
+        sh.style.transform = 'rotate(' + (secTurns * 360 + sec * 6) + 'deg)';
+      }
+      mh.setAttribute('transform', 'rotate(' + (min * 6 + sec * 0.1) + ' 50 50)');
+      hh.setAttribute('transform', 'rotate(' + ((hr % 12) * 30 + min * 0.5) + ' 50 50)');
+      var left = TARGET - now.getTime();
+      var done = left <= 0;
+      document.getElementById('suvi-units').hidden = done;
+      document.getElementById('suvi-done').hidden = !done;
+      if (!done) {
+        var s = Math.floor(left / 1000);
+        document.getElementById('sv-d').textContent = Math.floor(s / 86400);
+        document.getElementById('sv-h').textContent = pad(Math.floor(s % 86400 / 3600));
+        document.getElementById('sv-m').textContent = pad(Math.floor(s % 3600 / 60));
+        document.getElementById('sv-s').textContent = pad(s % 60);
+      }
+    }
+    function start(){
+      if (timer) return;
+      sh.classList.add('nojump'); lastSec = -1; secTurns = 0; tick();
+      requestAnimationFrame(function(){ sh.classList.remove('nojump'); });
+      var wait = 1000 - (Date.now() % 1000);
+      timer = setTimeout(function loop(){ tick(); timer = setTimeout(loop, 1000 - (Date.now() % 1000)); }, wait);
+    }
+    function stop(){ clearTimeout(timer); timer = null; }
+    function sync(){
+      var show = on();
+      box.hidden = !show;
+      var home = document.getElementById('v-home');
+      if (show && home && !home.hidden && !document.hidden) start(); else stop();
+      pop.querySelectorAll('[data-suvi-set]').forEach(function(b){ b.setAttribute('aria-pressed', (b.getAttribute('data-suvi-set') === '1') === show ? 'true' : 'false'); });
+    }
+    pop.querySelectorAll('[data-suvi-set]').forEach(function(b){
+      b.addEventListener('click', function(){
+        try { localStorage.setItem('ajukas-suvi', b.getAttribute('data-suvi-set')); } catch (e) {}
+        sync();
+      });
+    });
+    document.addEventListener('visibilitychange', sync);
+    window.addEventListener('hashchange', function(){ setTimeout(sync, 0); });
+    sync();
   })();
 
   // --- seaded: teema ja keel ---
