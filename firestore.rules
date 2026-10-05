@@ -4,6 +4,12 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // Teavitaja konto (GitHub Actions): võib soovitusi ainult lugeda ja märkida teavitatuks.
+    function isBot() {
+      return request.auth != null
+        && request.auth.token.email == 'teavitaja@kasutaja.ajukas.app';
+    }
+
     function isAdmin() {
       return request.auth != null
         && request.auth.token.email == 'nextonu@kasutaja.ajukas.app';
@@ -23,7 +29,8 @@ service cloud.firestore {
         && request.resource.data.uid is string
         && (request.resource.data.uid == ''
             || (request.auth != null && request.resource.data.uid == request.auth.uid));
-      allow read, delete: if isAdmin();
+      allow read: if isAdmin() || isBot();
+      allow delete: if isAdmin();
       // Admin võib muuta ainult olekut (uus / vaadatud / tehtud) ja prügikasti aega.
       // Manused: luuakse ainult koos soovitusega samas partiis; lugeda ja kustutada saab ainult admin.
       match /manused/{n} {
@@ -37,13 +44,16 @@ service cloud.firestore {
         allow read, delete: if isAdmin();
       }
 
-      allow update: if isAdmin()
+      allow update: if (isAdmin()
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['olek', 'kustutatud'])
         && (!('olek' in request.resource.data)
             || request.resource.data.olek in ['uus', 'vaadatud', 'tehtud'])
         && (!('kustutatud' in request.resource.data)
             || request.resource.data.kustutatud == null
-            || request.resource.data.kustutatud == request.time);
+            || request.resource.data.kustutatud == request.time))
+        || (isBot()
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['teavitatud'])
+            && request.resource.data.teavitatud == true);
     }
 
     // Iga kasutaja näeb ja muudab ainult enda edusamme.

@@ -1,0 +1,16 @@
+{
+  "name": "Ajukas – kordamine kontrolltöödeks",
+  "short_name": "Ajukas",
+  "description": "Kõigi ainete konspektid ühes kohas: vali aine, siis teema, ja testi end lõpus.",
+  "lang": "et",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#181818",
+  "theme_color": "#181818",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

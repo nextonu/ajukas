@@ -18,6 +18,12 @@
 <meta property="og:image:alt" content="Ajukas: kordamine kontrolltöödeks">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#181818">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Ajukas">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
   try {
@@ -482,6 +488,16 @@ body{padding-bottom:80px}
 
 .ttselect{font:inherit;font-size:16px;color:var(--bright);background:var(--bg);border:1px solid var(--line2);border-radius:4px;padding:8px 10px;width:100%}
 .ttselect:focus{outline:1px solid var(--accent);border-color:var(--accent)}
+
+.appbox{max-width:520px}
+.appbox h3{margin:6px 0 2px;font-size:15px}
+.appbox ul{margin:0;padding-left:1.2em;font-size:14px}
+.appbox li{margin-bottom:4px}
+.appbox b{background:none;padding:0;color:var(--bright)}
+.app-pro li::marker{content:"+ ";color:var(--ok);font-weight:700}
+.app-con li::marker{content:"− ";color:var(--err);font-weight:700}
+.app-done{color:var(--ok);font-weight:600}
+.app-how li.here{border-left:3px solid var(--brand);padding-left:8px;margin-left:-11px;list-style:none}
 </style>
 </head>
 <body>
@@ -521,7 +537,7 @@ body{padding-bottom:80px}
 
   <p class="tagline">Kõigi ainete konspektid ühes kohas. Vali aine, siis teema.</p>
   <p class="muted" style="font-size:14px;margin-top:-4px">Alustasin seda lehte G2-s oktoobris 2026, seega varasemate kursuste ja tundide materjali siin enamasti pole.</p>
-  <div class="sharerow"><button type="button" class="btn sec sharebtn" id="share-open" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18 16a3 3 0 0 0-2.4 1.2l-6.7-3.4a3 3 0 0 0 0-1.6l6.7-3.4A3 3 0 1 0 15 7l-6.7 3.4a3 3 0 1 0 0 3.2L15 17a3 3 0 1 0 3-1Z"/></svg>Jaga lehte</button><a class="btn sec sharebtn" id="tt-open" href="https://perg.edupage.org/timetable/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2Zm-2 7h14v10H5Zm2 2v2h2v-2Zm4 0v2h2v-2Zm4 0v2h2v-2Zm-8 4v2h2v-2Zm4 0v2h2v-2Z"/></svg><span id="tt-label">PERG-i tunniplaan</span></a><button type="button" class="linkbtn ttchange" id="tt-change">Vali klass</button></div>
+  <div class="sharerow"><button type="button" class="btn sec sharebtn" id="share-open" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18 16a3 3 0 0 0-2.4 1.2l-6.7-3.4a3 3 0 0 0 0-1.6l6.7-3.4A3 3 0 1 0 15 7l-6.7 3.4a3 3 0 1 0 0 3.2L15 17a3 3 0 1 0 3-1Z"/></svg>Jaga lehte</button><a class="btn sec sharebtn" id="tt-open" href="https://perg.edupage.org/timetable/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2Zm-2 7h14v10H5Zm2 2v2h2v-2Zm4 0v2h2v-2Zm4 0v2h2v-2Zm-8 4v2h2v-2Zm4 0v2h2v-2Z"/></svg><span id="tt-label">PERG-i tunniplaan</span></a><button type="button" class="linkbtn ttchange" id="tt-change">Vali klass</button><button type="button" class="btn sec sharebtn" id="app-open" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 1h10a2 2 0 0 1 2 2v18a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2Zm0 3v15h10V4Zm5 16.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"/></svg>Lisa telefoni</button></div>
 <div class="leftcol" id="leftcol">
   <section class="box tood" id="tood" aria-labelledby="tood-h">
     <h3 id="tood-h">Järgmised tööd</h3>
@@ -1738,6 +1754,35 @@ body{padding-bottom:80px}
     <div class="row"><button type="button" class="btn" id="tt-go">Ava tunniplaan</button><button type="button" class="btn sec" id="tt-forget" hidden>Unusta klass</button></div>
   </div>
 </div>
+<div class="modal" id="app-modal" role="dialog" aria-modal="true" aria-labelledby="app-h" hidden>
+  <div class="modal-box appbox">
+    <div class="modal-head"><h2 id="app-h">Ajukas telefoni avakuvale</h2><button type="button" class="xbtn" id="app-close" aria-label="Sulge">×</button></div>
+    <p>Ajukase saab lisada telefoni (või arvuti) avakuvale nagu äpi. See <b>ei ole</b> App Store'i ega Google Play äpp, vaid veebileht, mis käitub nagu äpp (inglise keeles „PWA”).</p>
+    <p class="app-done" id="app-done" hidden>✓ Ajukas on selles seadmes juba äpina avatud.</p>
+    <div class="app-install" id="app-install-box" hidden><button type="button" class="btn" id="app-install">Paigalda Ajukas</button></div>
+    <h3>Kuidas lisada</h3>
+    <ul class="app-how">
+      <li id="how-ios"><b>iPhone / iPad (Safari):</b> vajuta all <b>Jaga</b>-nuppu (ruut noolega üles) → <b>„Lisa avakuvale”</b> → <b>Lisa</b>. Teistes brauserites iPhone'is see ei tööta.</li>
+      <li id="how-android"><b>Android (Chrome):</b> vajuta ülal nuppu „Paigalda Ajukas” või menüüs <b>⋮</b> → <b>„Installi rakendus”</b> / „Lisa avakuvale”.</li>
+      <li id="how-pc"><b>Arvuti (Chrome, Edge):</b> aadressiriba paremas otsas paigaldusikoon või menüüs <b>„Installi Ajukas”</b>.</li>
+    </ul>
+    <h3>Plussid</h3>
+    <ul class="app-pro">
+      <li>Oma ikoon avakuval, avaneb ühe vajutusega.</li>
+      <li>Avaneb täisekraanil, ilma brauseri aadressiribata.</li>
+      <li>Konspektid ja enesetestid töötavad ka <b>ilma internetita</b> (nt bussis), kui oled lehte korra internetiga avanud.</li>
+      <li>Võtab ruumi alla 1 MB ja uueneb ise, poest midagi alla laadida ei pea.</li>
+      <li>Tasuta, ei küsi telefoni lubasid ega kasutajakontot.</li>
+    </ul>
+    <h3>Miinused</h3>
+    <ul class="app-con">
+      <li>Ilma internetita ei tööta sisselogimine, märkmete ja tulemuste sünkroniseerimine, soovituste saatmine ega tunniplaan.</li>
+      <li>iPhone'is saab lisada ainult Safariga ja ainult menüü kaudu (nuppu pole).</li>
+      <li>iPhone'is on äpil brauserist eraldi mälu: logi äpis sisse, siis tulevad märkmed ja tulemused kaasa.</li>
+      <li>Teavitusi (nagu päris äppidel) praegu ei saadeta.</li>
+    </ul>
+  </div>
+</div>
 <script type="application/json" id="quiz-data">{"jazz": [["Tunnused", "Millal ja kus jazz tekkis?", "19. sajandi lõpus ja 20. sajandi alguses USA-s, eelkõige New Orleansis."], ["Tunnused", "Millal ja kus tekkis sõna „jazz\"?", "1915. aastal Chicagos."], ["Tunnused", "Nimeta jazzi neli põhijoont.", "Improvisatsioon, kõlavärv ehk tämber, pillikoosseisud ning rütm, meloodia ja harmoonia."], ["Tunnused", "Mida andsid jazzile Aafrika, Euroopa ja Kariibi mere piirkond?", "Aafrika: kollektiivne muusika loomine, improvisatsioon, ees- ja järellaulja. Euroopa: harmoonia ja instrumendid. Kariibid: rütmipõhine tantsumuusika ja keerukamad rütmid."], ["Tunnused", "Mis oli Congo Square?", "New Orleansi väljak, kus nädalavahetustel mängiti muusikat, tantsiti ja hoiti alles kultuuripärandit."], ["Tunnused", "Milline orkestritüüp on üks jazzi alustalasid?", "Matuserongkäikude orkestrid."], ["Ragtime", "Mis pillil ragtime'i peamiselt mängiti ja millal oli see populaarne?", "Klaveril, 1890. aastatel."], ["Ragtime", "Kes oli ragtime'i looja? Nimeta kaks tema pala.", "Scott Joplin (1868–1917). Näiteks „Maple Leaf Rag\" ja „The Entertainer\"."], ["Bluus", "Mis on bluusi struktuur ja millest see põhines?", "12-taktiline. Põhines töölauludel ja spirituaalidel."], ["Bluus", "Nimeta kolm bluusiartisti.", "Bessie Smith, Muddy Waters, B.B. King."], ["Mõiste", "Mis on kollektiivne improvisatsioon?", "Pillimehed mängivad samal ajal, aga igaüks improviseerib iseseisvalt."], ["New Orleans", "Kus mängisid New Orleansi harrastusorkestrid?", "Storyville'i linnaosa lõbustusasutustes. Orkestreid oli ligi 30."], ["New Orleans", "Millistel löökidel on New Orleansi jazzis rõhk?", "1. ja 3. löögil (marsilik pulss). Off-beat ehk 2. ja 4. löögi rõhk puudub."], ["New Orleans", "Nimeta meloodiagrupi ja rütmigrupi pillid.", "Meloodia: kornet või trompet, tromboon, klarnet. Rütm: tuuba, bandžo, trummid."], ["New Orleans", "Mis asendas tuuba ja bandžo ning mis lisandus?", "Tuuba asendus kontrabassiga, bandžo kitarriga ja lisandus klaver."], ["New Orleans", "Mis oli improvisatsiooni aluseks?", "Marsi- või kirikumeloodia, ragtime'i pala või 12-taktiline bluus."], ["New Orleans", "Kes juhtis King Oliver's Creole Jazz Bandi?", "Joe „King\" Oliver, kornetist-trompetist."], ["New Orleans", "Millise ansambliga tegi Jelly Roll Morton salvestusi?", "Red Hot Peppers."], ["New Orleans", "Miks New Orleansi jazzi õitseaeg 1917. aastal lõppes?", "Storyville suleti ja muusikud läksid Chicagosse."], ["Armstrong", "Mida uut tõi jazzi Louis Armstrong?", "Jazzist sai solistide muusika. Ta võttis kasutusele akordid ja noodikirja, tõi sisse blue note'id ja scat-laulu."], ["Armstrong", "Mis on scat-laul?", "Sõnadeta, silpidega improviseeritud laul."], ["Armstrong", "Kelle tsitaat on „Ilma Armstrongita poleks jazz'i…\"?", "Joachim-Ernst Berendt, „Das Jazzbuch\"."], ["Dixieland", "Kes oli dixielandi looja?", "Orkestrijuht ja trummar Papa Jack Laine."], ["Dixieland", "Kes tegi esimese jazzisalvestuse ja millal?", "Original Dixieland Jazz Band Nick LaRocca juhatusel 1917. aastal. Plaati müüdi üle miljoni."], ["Dixieland", "Kuidas erines dixielandi kõla New Orleansi omast?", "Väiksem kõlajõud, parem tehnika, kiirem muusika, sujuvam meloodia, vähem intensiivsed kõlavärvid. Iseloomuliku kõla andis soolopill. Koosseis jäi samaks."], ["Dixieland", "Mis lõpetas dixielandi hiilgeaja?", "Sving ja bigbändid 1930. aastate algul. Dixieland tuli tagasi 1940. aastate lõpus."], ["Chicago", "Mis oli Chicago jazzi peamine muutus improvisatsioonis?", "Kollektiivne improvisatsioon asendus solistlikuga."], ["Chicago", "Mis on break?", "Hetk, kui orkester vaikib ja solist improviseerib."], ["Chicago", "Mis oli Austin High School Gang?", "Valgete keskkoolinoorte ansambel, noorte talentide ja Chicago stiili taimelava."], ["Chicago", "Kes oli esimene saksofonivirtuoos?", "Tenorsaksofonist Bud Freeman."], ["Chicago", "Mida uut tõi Fletcher Henderson?", "Jagas orkestri pilligruppideks, lõi tämbrilise vastandamisega uue orkestristiili ja arranžeerimise põhimõtted suurele koosseisule."], ["Chicago", "Kes juhtis kõige populaarsemat tantsuorkestrit ja kes seal mängis?", "Paul Whiteman. Seal mängisid kornetist Bix Beiderbecke ja kitarrist Eddie Lang."], ["Ellington", "Kus tegutses Duke Ellington ja mis on džunglistiil?", "New Yorgis, Harlemi Cotton Clubis. Džunglistiil tähendab trompeti ja trombooni väljendusrikkaid helisid."]], "ajalugu": [["Fakt", "Mis on fakt?", "Tõsiasi, mis annab infot toimunu kohta neutraalselt ja mida saab allikate põhjal kontrollida (kes, mis, kus, millal)."], ["Fakt", "Mis vahe on faktil, tõlgendusel ja hinnangul?", "Fakt on kontrollitav väide. Tõlgendus annab faktile tähenduse. Hinnang väljendab väärtust või emotsiooni ja on subjektiivne."], ["Fakt", "Kas „Kuu peale jõudmine oli 20. sajandi suurim saavutus” on fakt?", "Ei, see on arvamus ehk hinnang."], ["Fakt", "Mis on propaganda?", "Teadlikult kujundatud sõnum, mille eesmärk on mõjutada inimeste arvamusi, hoiakuid või käitumist. See võib kasutada fakte, emotsioone, liialdusi ja infot välja jätta."], ["Fakt", "Nimeta allika analüüsi viis sammu.", "Kirjelda, tõlgenda, loo seoseid, leia infoaugud, otsi lisaallikaid."], ["Fakt", "Kuidas teha väide „Berliini müüri langemine vabastas Ida-Saksamaa inimesed” faktipõhiseks?", "9. novembril 1989 avanesid Berliini müüri piiripunktid ja inimesed said liikuda Ida- ja Lääne-Berliini vahel."], ["Perspektiiv", "Mis on mitmeperspektiivne ajalugu?", "Sündmust vaadeldakse mitme inimese, rühma, riigi või ajastu silmade kaudu. Ühte kõigi poolt aktsepteeritud vaatenurka ei ole."], ["Perspektiiv", "Millised on kolm vaatenurka ajaloole?", "Sündmuse kaasaegsete, ajaloolaste ja tänapäeva (meie enda) vaatenurk."], ["Perspektiiv", "Kas mitmeperspektiivsus tähendab, et kõik arvamused on võrdselt õiged?", "Ei. Väidet hinnatakse tõendite järgi ja teise vaatenurga mõistmine ei tähenda tema tegude õigustamist."], ["Perspektiiv", "Kas laul „Wind of Change” on faktiallikas?", "Pigem ajastu meeleolude ja tõlgenduste allikas: näitab lootusi ja tähendust, aga ei tõenda, mis konkreetsel päeval juhtus."], ["COVID-19", "Kus ja millal teatati esimest korda uuest viirusest?", "Detsembris 2019 Wuhanis, Hubei provintsis Hiinas."], ["COVID-19", "Millal kuulutas WHO COVID-19 pandeemiaks?", "11. märtsil 2020."], ["COVID-19", "Millal kuulutati Eestis välja eriolukord?", "12. märtsil 2020. Esimene nakatunu Eestis oli 27. veebruaril 2020."], ["COVID-19", "Nimeta neli põhjust, miks pandeemiaid tuleb juurde.", "Rahvastiku kasv ja kokkupuude loodusega, kliimamuutus, antibiootikumide väärkasutus, globaliseerumine."], ["COVID-19", "Nimeta viis COVID-19 mõju.", "Näiteks mõju füüsilisele ja vaimsele tervisele, igapäevaelule (piirangud), majandusele (langus), kultuurile, ebavõrdsusele, riikide koostööle, faktipõhisele mõtlemisele."], ["COVID-19", "Millal lõppes COVID-19 hädaolukord?", "Eestis 2. mail 2023, WHO lõpetas rahvusvahelise hädaolukorra 5. mail 2023."], ["EL ja NATO", "Millal sai Eesti EL-i ja NATO liikmeks?", "NATO-ga 29. märtsil 2004, EL-iga 1. mail 2004."], ["EL ja NATO", "Millal toimus EL-i rahvahääletus Eestis ja kui palju oli poolt?", "14. septembril 2003, poolt 66,5%."], ["EL ja NATO", "Millal ühines Eesti Schengeni ja euroalaga?", "Schengeniga 2007, euroalaga 2011."], ["EL ja NATO", "Mitu liiget on EL-is, NATO-s, Schengenis ja euroalas (slaidide järgi)?", "EL 27, NATO 32, Schengen 29, euroala 21."], ["EL ja NATO", "Millal ja millega asutati NATO?", "4. aprillil 1949 Põhja-Atlandi ehk Washingtoni lepinguga."], ["EL ja NATO", "Mis on NATO artikkel 5 ja millal seda esimest korda rakendati?", "Kollektiivkaitse: rünnak ühe vastu on rünnak kõigi vastu. Esimest korda pärast 11. septembri 2001 terrorirünnakuid USA-s."], ["EL ja NATO", "Mis on „Partnerlus rahu nimel” ja millal Eesti sellega liitus?", "NATO programm (PfP). Eesti ühines 3. veebruaril 1994."], ["Araabia kevad", "Kust ja millal algas Araabia kevad?", "Tuneesiast 2011. aastal."], ["Araabia kevad", "Mille vastu protesteeriti ja kes olid algatajad?", "Ühiskondliku ebaõigluse ja majandusliku stagnatsiooni vastu. Algatajad olid noored ja ametiühingud."], ["Araabia kevad", "Millistes riikides kukutati valitsejad?", "Tuneesias, Liibüas, Egiptuses ja Jeemenis."], ["Araabia kevad", "Mis juhtus Süürias?", "Kodusõda Bashar al-Assadi vastu, sekkusid islamirühmitused, USA ja Venemaa. Assadi võim kukkus 8. detsembril 2024."], ["Venemaa", "Millal lagunes Nõukogude Liit?", "25. detsembril 1991, kui Gorbatšov tagasi astus. Venemaa president oli Boris Jeltsin."], ["Venemaa", "Iseloomusta Venemaad 1990. aastatel.", "Korruptsioon, oligarhide võim, ebaõnnestunud reformid, ebapopulaarne Jeltsin, kaotatud Tšetšeenia sõda, rubla krahh 1998."], ["Venemaa", "Millal oli I Tšetšeenia sõda ja kuidas see lõppes?", "1994–1996. Venemaa ei suutnud võita, hukkus 30 000–50 000 inimest."], ["Venemaa", "Kuidas tuli Putin võimule?", "1999 sai ta peaministriks, II Tšetšeenia sõda tõstis tema populaarsust, 31.12.1999 kuulutas Jeltsin ta järglaseks ja 2000 võitis ta valimised."], ["Gruusia", "Mis oli roosirevolutsioon?", "2003 Gruusias: pärast võltsitud valimisi tungisid meeleavaldajad koos Saakašviliga rooside käes parlamenti ja Ševardnadze põgenes. 2004 võitis Saakašvili valimised."], ["Gruusia", "Millised kaks piirkonda Gruusia kaotas?", "Abhaasia ja Lõuna-Osseetia."], ["Gruusia", "Millal oli Venemaa–Gruusia sõda ja kui kaua see kestis?", "August 2008, 16 päeva."], ["Gruusia", "Miks Venemaa 2008 Gruusiat ründas?", "Putin vajas valimiste eel populaarsust ja Gruusia tahtis liituda EL-i ja NATO-ga."], ["Gruusia", "Mis seob Abhaasiat Eestiga?", "Seal olid 1880. aastatest eestlaste külad (Estonia, Linda, Sulevi, Salme). 1992 evakueeriti 170 inimest Eestisse. Film „Mandariinid”."], ["Ukraina", "Milline on Venemaa sõdade korduv muster?", "Sõditakse naaberriikidega, ettekäändeks on venekeelsete vähemuste „kaitsmine” ja Venemaa ei taha, et riigid liiguksid Lääne mõjusfääri."], ["Ukraina", "Mis oli oranž revolutsioon?", "Protestid novembrist 2004 jaanuarini 2005 võltsitud presidendivalimiste vastu (Janukovõtš vs Juštšenko). Valimised korrati ja võitis Juštšenko. Ukraina teatas soovist saada EL-i ja NATO liikmeks."], ["Ukraina", "Kuidas kasutas Venemaa gaasi survevahendina?", "Juštšenko ajal tõsteti gaasi hinda neljakordselt ja 1. jaanuaril 2006 keeras Venemaa gaasikraanid kinni."], ["Ukraina", "Mis vallandas Euromaidani?", "Novembris 2013 keeldus president Janukovõtš EL-iga assotsiatsioonilepingut allkirjastamast. Veebruaris 2014 ta põgenes."], ["Ukraina", "Kes olid „rohelised mehikesed”?", "Tundemärkideta relvastatud mehed, kes 27. veebruaril 2014 hõivasid Krimmi parlamendi ja valitsushooned."], ["Ukraina", "Millal toimus Krimmi „referendum”?", "16. märtsil 2014. Ametlikult oli poolt 96,77%, tegelikult osales hinnanguliselt vaid 30–50%."], ["Ukraina", "Mis juhtus lennuga MH17?", "17. juulil 2014 tulistati Ida-Ukraina kohal alla Malaysia Airlinesi lend MH17, hukkus 298 inimest."], ["Ukraina", "Mis olid Minski kokkulepped?", "5.09.2014 ja 12.02.2015 sõlmitud kokkulepped, mis külmutasid suurema sõjategevuse Donbassis, aga olid Ukrainale ebasoodsad."], ["Ukraina", "Kes ja millal sai Ukraina presidendiks 2019?", "Volodõmõr Zelenskõi 73% häältega. Ta oli mänginud telesarjas „Rahva teener” ausat presidenti."], ["Ukraina", "Millal algas täiemahuline sõda ja mis eelnes?", "24. veebruaril 2022. Eelnes vägede koondamine (nov 2021), ultimaatum NATO-le (dets 2021) ja Donbassi „vabariikide” tunnustamine 21.02.2022."], ["Ukraina", "Mis oli Butša massimõrv?", "Märtsis 2022 Butšas toime pandud tsiviilisikute tapmine. Pärast Vene vägede lahkumist 1. aprillil leiti 458 surnukeha."], ["Ukraina", "Mis oli Prigožini mäss?", "Wagneri juhi Jevgeni Prigožini mäss Vene armee vastu 23.–24. juunil 2023."]]}</script>
 <footer>Koostatud tunnimaterjalide ja kooli juhendite põhjal tehisaru abiga. Võib sisaldada üksikuid vigu.</footer>
 </div>
@@ -2528,6 +2573,27 @@ body{padding-bottom:80px}
     fetch('tunniplaan.json', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
       if (d && d.classes) { info = d; paint(); }
     }).catch(function(){});
+  })();
+
+  // --- äpp telefoni (PWA) ---
+  (function(){
+    if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(function(){});
+    var modal = document.getElementById('app-modal'), openB = document.getElementById('app-open'), deferred = null;
+    var standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+    var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1), android = /Android/.test(ua);
+    var here = document.getElementById(ios ? 'how-ios' : android ? 'how-android' : 'how-pc'); if (here) here.classList.add('here');
+    if (standalone) { openB.hidden = true; document.getElementById('app-done').hidden = false; }
+    window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferred = e; document.getElementById('app-install-box').hidden = false; });
+    window.addEventListener('appinstalled', function(){ deferred = null; document.getElementById('app-install-box').hidden = true; document.getElementById('app-done').hidden = false; });
+    document.getElementById('app-install').addEventListener('click', function(){
+      if (!deferred) return;
+      deferred.prompt(); deferred.userChoice.finally(function(){ deferred = null; document.getElementById('app-install-box').hidden = true; });
+    });
+    function close(){ modal.hidden = true; openB.focus(); }
+    openB.addEventListener('click', function(){ modal.hidden = false; document.getElementById('app-close').focus(); });
+    document.getElementById('app-close').addEventListener('click', close);
+    modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
+    modal.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
   })();
   route();
   paintProgress();

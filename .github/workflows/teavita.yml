@@ -1,0 +1,27 @@
+name: Soovituste teavitus Discordi
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'   # iga 5 minuti tagant (GitHub võib mõnikord hilineda)
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: teavita
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Saada uued soovitused Discordi
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          AJUKAS_BOT_PASSWORD: ${{ secrets.AJUKAS_BOT_PASSWORD }}
+        run: python tools/teavita.py
