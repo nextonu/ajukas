@@ -232,6 +232,8 @@ ol{margin:0 0 12px;padding-left:1.4em}
 }
 
 .inboxlink{display:block;text-decoration:none;color:inherit}
+.livenum{margin:4px 0}
+.livenum b{font-size:30px;color:var(--bright);font-variant-numeric:tabular-nums;margin-right:4px}
 .inboxlink:hover{border-color:var(--bright)}
 .inboxlink h3{color:var(--bright)}
 .inboxlink .new{color:var(--warn);font-weight:600}
@@ -628,7 +630,7 @@ sub{font-size:.72em;line-height:0}
     <div class="subjcard"><span class="sname">Vene keel</span><span class="stopic">Materjal tulekul</span></div>
     <a class="subjcard ready" href="#upt"><span class="sname">UPT</span><span class="stopic">UPT juhend</span></a>
   </div>
-  <p class="disclaimer"><strong>NB!</strong> Selle lehe on tunnimaterjalide ja juhendite põhjal koostanud tehisaru. Vigu tuleb harva ette, aga päris välistada neid ei saa. Kui miski tundub kahtlane, kontrolli slaididelt, õpikust või küsi õpetajalt.</p>
+  <p class="disclaimer"><strong>NB!</strong> Selle lehe on tunnimaterjalide ja juhendite põhjal koostanud tehisaru. Vigu tuleb harva ette, aga päris välistada neid ei saa. Kui miski tundub kahtlane, kontrolli slaididelt, õpikust või küsi õpetajalt.<br>Leht loendab anonüümselt, mitu inimest on parasjagu lehel. Küpsiseid ja isikuandmeid selleks ei kasutata.</p>
 </div>
 <aside class="side" aria-label="Konto ja soovitused">
   <section class="box" id="acct">
@@ -676,6 +678,11 @@ sub{font-size:.72em;line-height:0}
     <h3>Saabunud soovitused →</h3>
     <p class="muted" id="inbox-sum">Laen…</p>
   </a>
+  <section class="box" id="live" hidden>
+    <h3>Praegu lehel</h3>
+    <p class="livenum"><b id="live-n">…</b> <span class="muted" id="live-lbl"></span></p>
+    <p class="muted" id="live-day"></p>
+  </section>
 </aside>
 </div>
 </div>
@@ -2997,10 +3004,49 @@ if (!FIREBASE_CONFIG) {
     import(`https://www.gstatic.com/firebasejs/${V}/firebase-firestore.js`),
   ]);
   const { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } = authM;
-  const { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, serverTimestamp, getDocs, query, orderBy, Timestamp, writeBatch } = fsM;
+  const { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, serverTimestamp, getDocs, query, orderBy, Timestamp, writeBatch, where, limit, getCountFromServer } = fsM;
   const app = initializeApp(FIREBASE_CONFIG);
   const auth = getAuth(app);
   const db = getFirestore(app);
+
+  // kohalolu: juhuslik id on ainult mälus, seadmesse midagi ei salvestata
+  const PID = Array.from(crypto.getRandomValues(new Uint8Array(10)), (b) => b.toString(16).padStart(2, '0')).join('');
+  let lastBeat = 0;
+  const beat = () => {
+    if (document.visibilityState !== 'visible' || Date.now() - lastBeat < 20000) return;
+    lastBeat = Date.now();
+    setDoc(doc(db, 'kohal', PID), { t: serverTimestamp() }).catch(() => {});
+  };
+  beat(); setInterval(beat, 60000); document.addEventListener('visibilitychange', beat);
+
+  let liveTimer = 0;
+  async function loadLive() {
+    if (!A.isAdmin) return;
+    const now = Date.now(), day = new Date(); day.setHours(0, 0, 0, 0);
+    const col = collection(db, 'kohal');
+    try {
+      const [cNow, cDay] = await Promise.all([
+        getCountFromServer(query(col, where('t', '>', Timestamp.fromMillis(now - 150000)))),
+        getCountFromServer(query(col, where('t', '>=', Timestamp.fromDate(day)))),
+      ]);
+      const n = cNow.data().count;
+      $('live-n').textContent = n;
+      $('live-lbl').textContent = n === 1 ? t('inimene (sina)') : t('inimest, sealhulgas sina');
+      $('live-day').textContent = t('Täna avatud: {n} korda', { n: cDay.data().count });
+    } catch (e) { $('live-n').textContent = '?'; $('live-lbl').textContent = t('Reeglid on Firebase\'is veel avaldamata.'); }
+  }
+  async function cleanLive() {
+    try {
+      const old = await getDocs(query(collection(db, 'kohal'), where('t', '<', Timestamp.fromMillis(Date.now() - 7 * 864e5)), limit(400)));
+      if (old.empty) return;
+      const b = writeBatch(db); old.forEach((d) => b.delete(d.ref)); await b.commit();
+    } catch (e) {}
+  }
+  function startLive() {
+    $('live').hidden = false; loadLive(); cleanLive();
+    clearInterval(liveTimer);
+    liveTimer = setInterval(() => { if (document.visibilityState === 'visible') loadLive(); }, 30000);
+  }
 
   const userOf = (u) => (u && u.email ? u.email.split('@')[0] : '');
   const msg = (el, text, kind) => { el.textContent = text; el.className = 'msg' + (kind ? ' ' + kind : ''); };
@@ -3273,6 +3319,7 @@ if (!FIREBASE_CONFIG) {
     $('inbox').hidden = true;
     $('sv-app').hidden = true;
     if (A.isAdmin) { A.isAdmin = false; A.route && A.route(); }
+    clearInterval(liveTimer); $('live').hidden = true;
     if (!u) {
       A.onProgress = null;
       A.onNotes = null; A.onTest = null;
@@ -3307,7 +3354,7 @@ if (!FIREBASE_CONFIG) {
       A.onTest = pushTest;
       pushTest(mt);
     } catch (e) { A.onProgress = pushProgress; A.onNotes = pushNotes; A.onTest = pushTest; }
-    if (name === ADMIN_USER) { A.isAdmin = true; $('inbox').hidden = false; $('sv-app').hidden = false; A.route && A.route(); loadInbox(); }
+    if (name === ADMIN_USER) { A.isAdmin = true; $('inbox').hidden = false; $('sv-app').hidden = false; A.route && A.route(); loadInbox(); startLive(); }
   });
 
   $('sugg-form').addEventListener('submit', async (e) => {
