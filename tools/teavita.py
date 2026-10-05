@@ -1,4 +1,4 @@
-"""Saadab uued Ajukase soovitused Discordi.
+"""Saadab Ajuka uued soovitused Discordi.
 
 Käivitab GitHub Actions (.github/workflows/teavita.yml) iga 5 minuti tagant.
 Vajab GitHubi salajasi väärtusi (Settings → Secrets and variables → Actions):
@@ -86,7 +86,7 @@ def main():
         tekst = val(f, 'tekst')[:1800]
         nimi = val(f, 'nimi') or 'Anonüümne'
         failid = len(val(f, 'failid', []))
-        embed = {'title': 'Uus soovitus Ajukases', 'url': SITE, 'description': tekst, 'color': 0xEAB308,
+        embed = {'title': 'Ajukasse saabus uus soovitus', 'url': SITE, 'description': tekst, 'color': 0xEAB308,
                  'fields': [{'name': 'Saatja', 'value': nimi[:100], 'inline': True}],
                  'timestamp': when.isoformat()}
         if failid:
