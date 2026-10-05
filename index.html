@@ -416,6 +416,9 @@ body{padding-bottom:80px}
 .ch-spark{animation:spark .5s steps(2) infinite}
 .ch-fall{animation:fall 2.4s ease-in infinite;transform-box:fill-box;transform-origin:center}
 @media (prefers-reduced-motion:reduce){.ch-shake,.ch-spark,.ch-fall{animation:none}}
+
+.keyhint{margin:10px 0 0;font-size:12.5px;color:var(--muted);text-align:center}
+.keyhint kbd{font-family:var(--mono);font-size:12px;border:1px solid var(--line2);border-bottom-width:2px;border-radius:4px;padding:0 6px;background:var(--panel);color:var(--text)}
 </style>
 </head>
 <body>
@@ -2185,6 +2188,38 @@ body{padding-bottom:80px}
     });
   })();
 
+
+  // --- klaviatuur (ainult arvutis): ← ja → vahetavad vahekaarte ---
+  var desktop = window.matchMedia('(hover: hover) and (pointer: fine)');
+  document.addEventListener('keydown', function(e){
+    if (!desktop.matches || e.defaultPrevented) return;
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    var el = document.activeElement;
+    if (el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))) return;
+    if (el && el.closest && el.closest('.tablewrap, .notes, .modal, .pop')) return;
+    var view = views.filter(function(v){ return !v.hidden; })[0];
+    if (!view) return;
+    var tabs = Array.prototype.slice.call(view.querySelectorAll('[role="tab"]'));
+    if (!tabs.length) return;
+    var cur = decodeURIComponent(location.hash.slice(1));
+    var i = tabs.findIndex(function(tb){ return tb.getAttribute('aria-controls') === cur; });
+    if (i < 0) i = tabs.findIndex(function(tb){ return tb.getAttribute('aria-selected') === 'true'; });
+    var j = i + (e.key === 'ArrowRight' ? 1 : -1);
+    if (j < 0 || j >= tabs.length) return;
+    e.preventDefault();
+    location.hash = tabs[j].getAttribute('aria-controls');
+  });
+  function keyHint(){
+    document.querySelectorAll('.keyhint').forEach(function(h){ h.hidden = !desktop.matches; });
+  }
+  document.querySelectorAll('.pnav').forEach(function(n){
+    var h = document.createElement('p'); h.className = 'keyhint';
+    h.innerHTML = '<kbd>←</kbd> <kbd>→</kbd> ' + t('klahvidega saab ka vahekaarte vahetada');
+    n.parentNode.insertBefore(h, n.nextSibling);
+  });
+  keyHint();
+  if (desktop.addEventListener) desktop.addEventListener('change', keyHint);
   route();
   paintProgress();
   requestAnimationFrame(top);
