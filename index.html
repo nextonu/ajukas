@@ -2941,7 +2941,9 @@ H — C — C — C — H
     forget.addEventListener('click', function(){ try { localStorage.removeItem('ajukas-klass'); } catch (e) {} paint(); close(); });
     paint();
     fetch('teade.json', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
-      if (d && d.aktiivne) document.getElementById('worknote').hidden = false;
+      // teade aegub ise, kui "kuni" on möödas (tools/teade.py)
+      var left = d && d.aktiivne ? (d.kuni ? Date.parse(d.kuni) - Date.now() : Infinity) : 0, wn = document.getElementById('worknote');
+      if (left > 0) { wn.hidden = false; if (left < 864e5) setTimeout(function(){ wn.hidden = true; }, left); }
     }).catch(function(){});
     fetch('tunniplaan.json', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
       if (d && d.classes) { info = d; paint(); }
