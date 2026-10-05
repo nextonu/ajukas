@@ -332,6 +332,10 @@ header{padding-right:46px}
 
 .notes-fab{position:fixed;right:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:35;display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:14px;font-weight:600;padding:10px 16px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);color:var(--bright);cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.3)}
 .notes-fab svg{width:18px;height:18px}
+.worknote{position:fixed;left:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:36;margin:0;max-width:calc(100vw - 100px);display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);background:var(--panel);border:1px solid var(--line2);border-radius:999px;padding:7px 13px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.worknote .wdot{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--warn);animation:wpulse 1.6s ease-in-out infinite}
+@keyframes wpulse{50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){.worknote .wdot{animation:none}}
 .notes-fab:hover{border-color:var(--bright)}
 .notes-fab[aria-expanded="true"]{background:var(--bright);color:var(--bg);border-color:var(--bright)}
 .notes-fab:focus-visible{outline:1px solid var(--key);outline-offset:2px}
@@ -560,6 +564,7 @@ sub{font-size:.72em;line-height:0}
 </div>
 
 <div class="view home" id="v-home" data-title="Ajukas">
+  <p class="worknote" id="worknote" role="status" hidden><span class="wdot" aria-hidden="true"></span>Lehte uuendatakse praegu. Mõni asi võib muutuda.</p>
   <header>
     <span class="eyebrow">Kordamine kontrolltöödeks</span>
     <h1 class="brandline" translate="no"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></h1>
@@ -2935,6 +2940,9 @@ H — C — C — C — H
     });
     forget.addEventListener('click', function(){ try { localStorage.removeItem('ajukas-klass'); } catch (e) {} paint(); close(); });
     paint();
+    fetch('teade.json', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
+      if (d && d.aktiivne) document.getElementById('worknote').hidden = false;
+    }).catch(function(){});
     fetch('tunniplaan.json', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
       if (d && d.classes) { info = d; paint(); }
     }).catch(function(){});
