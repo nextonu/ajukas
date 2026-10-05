@@ -630,7 +630,7 @@ sub{font-size:.72em;line-height:0}
     <div class="subjcard"><span class="sname">Vene keel</span><span class="stopic">Materjal tulekul</span></div>
     <a class="subjcard ready" href="#upt"><span class="sname">UPT</span><span class="stopic">UPT juhend</span></a>
   </div>
-  <p class="disclaimer"><strong>NB!</strong> Selle lehe on tunnimaterjalide ja juhendite põhjal koostanud tehisaru. Vigu tuleb harva ette, aga päris välistada neid ei saa. Kui miski tundub kahtlane, kontrolli slaididelt, õpikust või küsi õpetajalt.<br>Leht loendab anonüümselt, mitu inimest on parasjagu lehel. Küpsiseid ja isikuandmeid selleks ei kasutata.</p>
+  <p class="disclaimer"><strong>NB!</strong> Selle lehe on tunnimaterjalide ja juhendite põhjal koostanud tehisaru. Vigu tuleb harva ette, aga päris välistada neid ei saa. Kui miski tundub kahtlane, kontrolli slaididelt, õpikust või küsi õpetajalt.<br>Leht loendab anonüümselt, mitu inimest on parasjagu lehel. Selleks on brauseri vahekaardil juhuslik number, mis kustub vahekaardi sulgemisel. Küpsiseid ega isikuandmeid ei kasutata.</p>
 </div>
 <aside class="side" aria-label="Konto ja soovitused">
   <section class="box" id="acct">
@@ -3009,8 +3009,13 @@ if (!FIREBASE_CONFIG) {
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  // kohalolu: juhuslik id on ainult mälus, seadmesse midagi ei salvestata
-  const PID = Array.from(crypto.getRandomValues(new Uint8Array(10)), (b) => b.toString(16).padStart(2, '0')).join('');
+  // kohalolu: juhuslik id on vahekaardi sessionStorage'is (värskendamisel sama, vahekaardi sulgemisel kaob)
+  let PID = '';
+  try { PID = sessionStorage.getItem('ajukas-kohal') || ''; } catch (e) {}
+  if (!/^[0-9a-f]{20}$/.test(PID)) {
+    PID = Array.from(crypto.getRandomValues(new Uint8Array(10)), (b) => b.toString(16).padStart(2, '0')).join('');
+    try { sessionStorage.setItem('ajukas-kohal', PID); } catch (e) {}
+  }
   let lastBeat = 0;
   const beat = () => {
     if (document.visibilityState !== 'visible' || Date.now() - lastBeat < 20000) return;
