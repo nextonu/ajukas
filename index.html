@@ -2188,7 +2188,7 @@ H — C — C — C — H
       card.querySelector('.mark').textContent = nv === 1 ? '✓' : nv === 0 ? '✗' : '';
       card.querySelectorAll('.judge button').forEach(function(x){ x.setAttribute('aria-pressed', +x.getAttribute('data-v') === nv ? 'true' : 'false'); });
       stats();
-      if (nv !== undefined) { card.open = false; var next = card.nextElementSibling; while (next && next.classList.contains('is-ok')) next = next.nextElementSibling; if (next && next.tagName === 'DETAILS') { next.open = true; next.querySelector('summary').focus(); } }
+      if (nv !== undefined) { card.open = false; var next = card.nextElementSibling; while (next && next.classList.contains('is-ok')) next = next.nextElementSibling; if (next && next.tagName === 'DETAILS') { next.querySelector('summary').focus({ preventScroll: true }); next.scrollIntoView({ block: 'nearest' }); } }
     });
     box.querySelector('[data-act=shuffle]').addEventListener('click', function(){
       var a = QA.slice();
