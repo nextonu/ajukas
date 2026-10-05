@@ -319,6 +319,26 @@ header{padding-right:46px}
 .qr{display:flex;justify-content:center;background:#fff;border-radius:6px;padding:10px;align-self:center}
 .qr img{display:block;width:min(264px,60vw);height:auto;image-rendering:pixelated}
 .xbtn:focus-visible,.linkrow input:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+
+.notes-fab{position:fixed;right:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:35;display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:14px;font-weight:600;padding:10px 16px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);color:var(--bright);cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.notes-fab svg{width:18px;height:18px}
+.notes-fab:hover{border-color:var(--bright)}
+.notes-fab[aria-expanded="true"]{background:var(--bright);color:var(--bg);border-color:var(--bright)}
+.notes-fab:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+.notes{position:fixed;z-index:40;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line2);border-radius:8px;box-shadow:0 12px 36px rgba(0,0,0,.4);min-width:220px;min-height:160px;overflow:hidden}
+.notes .notes-head{display:flex;flex-direction:row;align-items:center;gap:8px;padding:6px 6px 6px 10px;padding-block:6px;border-bottom:1px solid var(--line);cursor:move;user-select:none;touch-action:none;background:var(--raised)}
+.notes-grip{color:var(--muted);font-size:14px;line-height:1}
+.notes-head h2{flex:1;min-width:0;margin:0;font-size:14px;color:var(--bright);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notes-scope{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--muted)}
+.notes-x{font:inherit;font-size:20px;line-height:1;width:30px;height:30px;border-radius:50%;border:0;background:transparent;color:var(--muted);cursor:pointer;flex:0 0 auto}
+.notes-x:hover{color:var(--bright);background:var(--hover)}
+.notes textarea{flex:1;width:100%;resize:none;border:0;outline:0;padding:10px 12px;font:inherit;font-size:16px;line-height:1.5;color:var(--bright);background:var(--panel)}
+.notes textarea::placeholder{color:var(--muted)}
+.notes-foot{display:flex;justify-content:space-between;align-items:center;padding:4px 4px 4px 12px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--muted)}
+.notes-resize{width:22px;height:22px;cursor:nwse-resize;touch-action:none;background:linear-gradient(135deg,transparent 0 45%,var(--muted) 45% 52%,transparent 52% 64%,var(--muted) 64% 71%,transparent 71%)}
+.notes-x:focus-visible{outline:1px solid var(--key);outline-offset:1px}
+@media (max-width:600px){.notes-fab span{display:none}.notes-fab{padding:12px}}
+body{padding-bottom:80px}
 </style>
 </head>
 <body>
@@ -1050,7 +1070,7 @@ header{padding-right:46px}
   </div>
   <main><section role="tabpanel" id="aj-ulevaade" aria-labelledby="t-aj-ulevaade" hidden>
   <h2>Kontrolltöö nr 1: tänapäev</h2>
-  <p class="lead">I trimestri esimene ajaloo kontrolltöö käsitleb tänapäeva teemasid. See on arvestuslik hinne, mis kaalub rohkem kui tunnikontrollid.</p>
+  <p class="lead">I trimestri esimene ajaloo kontrolltöö käsitleb tänapäeva teemasid.</p>
   <h3>Teemad</h3>
   <ul>
     <li><a href="#aj-fakt">Fakt ja faktipõhine mõtlemine</a></li>
@@ -1063,16 +1083,6 @@ header{padding-right:46px}
     <li><a href="#aj-ukraina">Ukraina: oranž revolutsioon ja sõda</a></li>
   </ul>
   <p>Kiireks kordamiseks on vahekaart <a href="#aj-ajajoon">Ajajoon</a>, kus on kõik olulised aastad, ja <a href="#aj-test">Testi ennast</a>.</p>
-  <h3>Hindamine I trimestril</h3>
-  <ul>
-    <li><b>Kontrolltöö</b> tänapäeva teemadel: arvestuslik hinne, suurem kaal.</li>
-    <li><b>Töö allikatega ja seminar</b> keskaja teemal: arvestuslik hinne, suurem kaal.</li>
-    <li><b>Tunnikontrollid</b>: väiksem kaal.</li>
-    <li>Hinded antakse protsentidega. Positiivse trimestrihinde eeldus on, et <b>kõik jooksvad hinded on vähemalt 50%</b>.</li>
-    <li>Negatiivset hinnet (tegemata töö või alla 50%) saab parandada <b>10 tööpäeva jooksul</b> alates hinde eKooli kandmisest.</li>
-    <li>Kui puudusid hindelise töö ajal, on eKoolis märge <b>„T”</b> ja töö tuleb järele vastata.</li>
-  </ul>
-  <div class="key"><span class="label">Aus käitumine</span>Kõrvalise abi, plagiaadi või spikerdamise eest on hinne <b>„0”</b>, samuti siis, kui keeldud vastamast või ei anna tööd ära. Seda hinnet järele vastata ei saa.</div>
 </section>
 <section role="tabpanel" id="aj-fakt" aria-labelledby="t-aj-fakt" hidden>
   <h2>Fakt ja faktipõhine mõtlemine</h2>
@@ -1422,7 +1432,6 @@ header{padding-right:46px}
     <li><b>G2 Eesti tee Euroopa Liitu ja NATOsse</b></li>
     <li><b>Araabia kevad</b> ja <b>Araabia kevad 2: Süüria, film</b></li>
     <li><b>Venemaa 90, Tšetšeenia sõjad ja Gruusia sõda 2008</b></li>
-    <li><b>Hindamisjuhend I trim G2 2026</b></li>
   </ul>
   <p class="muted">Slaide endid siia üles ei pane, sest need on õpetaja materjal. Need on Teamsis.</p>
   <h3>Muu</h3>
@@ -1465,6 +1474,20 @@ header{padding-right:46px}
     <p class="muted" style="font-size:13px;text-align:center"><a class="inl" href="qr.png" download="ajukas-qr.png">Laadi QR-kood alla</a> (sobib esitlusele või paberile)</p>
   </div>
 </div>
+<button type="button" class="notes-fab" id="notes-fab" aria-expanded="false" aria-controls="notes" title="Märkmed">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 17.2V20h2.8l8.3-8.3-2.8-2.8L4 17.2Zm13.7-7.5a.8.8 0 0 0 0-1.1l-2.3-2.3a.8.8 0 0 0-1.1 0l-1.6 1.6 2.8 2.8 2.2-1Z"/><path fill="currentColor" d="M13 20h7v-2h-7z" opacity=".6"/></svg>
+  <span>Märkmed</span>
+</button>
+<section class="notes" id="notes" aria-labelledby="notes-h" hidden>
+  <header class="notes-head" id="notes-drag">
+    <span class="notes-grip" aria-hidden="true">⠿</span>
+    <h2 id="notes-h"><span>Märkmed</span> <span class="notes-scope" id="notes-scope"></span></h2>
+    <button type="button" class="notes-x" id="notes-close" aria-label="Sulge märkmed" title="Sulge">×</button>
+  </header>
+  <label for="notes-text" class="vh">Märkmed</label>
+  <textarea id="notes-text" spellcheck="true" placeholder="Kirjuta siia oma märkmed selle teema kohta…"></textarea>
+  <footer class="notes-foot"><span id="notes-status">Salvestub automaatselt</span><span class="notes-resize" id="notes-resize" aria-hidden="true" title="Muuda suurust"></span></footer>
+</section>
 <script type="application/json" id="quiz-data">{"jazz": [["Tunnused", "Millal ja kus jazz tekkis?", "19. sajandi lõpus ja 20. sajandi alguses USA-s, eelkõige New Orleansis."], ["Tunnused", "Millal ja kus tekkis sõna „jazz\"?", "1915. aastal Chicagos."], ["Tunnused", "Nimeta jazzi neli põhijoont.", "Improvisatsioon, kõlavärv ehk tämber, pillikoosseisud ning rütm, meloodia ja harmoonia."], ["Tunnused", "Mida andsid jazzile Aafrika, Euroopa ja Kariibi mere piirkond?", "Aafrika: kollektiivne muusika loomine, improvisatsioon, ees- ja järellaulja. Euroopa: harmoonia ja instrumendid. Kariibid: rütmipõhine tantsumuusika ja keerukamad rütmid."], ["Tunnused", "Mis oli Congo Square?", "New Orleansi väljak, kus nädalavahetustel mängiti muusikat, tantsiti ja hoiti alles kultuuripärandit."], ["Tunnused", "Milline orkestritüüp on üks jazzi alustalasid?", "Matuserongkäikude orkestrid."], ["Ragtime", "Mis pillil ragtime'i peamiselt mängiti ja millal oli see populaarne?", "Klaveril, 1890. aastatel."], ["Ragtime", "Kes oli ragtime'i looja? Nimeta kaks tema pala.", "Scott Joplin (1868–1917). Näiteks „Maple Leaf Rag\" ja „The Entertainer\"."], ["Bluus", "Mis on bluusi struktuur ja millest see põhines?", "12-taktiline. Põhines töölauludel ja spirituaalidel."], ["Bluus", "Nimeta kolm bluusiartisti.", "Bessie Smith, Muddy Waters, B.B. King."], ["Mõiste", "Mis on kollektiivne improvisatsioon?", "Pillimehed mängivad samal ajal, aga igaüks improviseerib iseseisvalt."], ["New Orleans", "Kus mängisid New Orleansi harrastusorkestrid?", "Storyville'i linnaosa lõbustusasutustes. Orkestreid oli ligi 30."], ["New Orleans", "Millistel löökidel on New Orleansi jazzis rõhk?", "1. ja 3. löögil (marsilik pulss). Off-beat ehk 2. ja 4. löögi rõhk puudub."], ["New Orleans", "Nimeta meloodiagrupi ja rütmigrupi pillid.", "Meloodia: kornet või trompet, tromboon, klarnet. Rütm: tuuba, bandžo, trummid."], ["New Orleans", "Mis asendas tuuba ja bandžo ning mis lisandus?", "Tuuba asendus kontrabassiga, bandžo kitarriga ja lisandus klaver."], ["New Orleans", "Mis oli improvisatsiooni aluseks?", "Marsi- või kirikumeloodia, ragtime'i pala või 12-taktiline bluus."], ["New Orleans", "Kes juhtis King Oliver's Creole Jazz Bandi?", "Joe „King\" Oliver, kornetist-trompetist."], ["New Orleans", "Millise ansambliga tegi Jelly Roll Morton salvestusi?", "Red Hot Peppers."], ["New Orleans", "Miks New Orleansi jazzi õitseaeg 1917. aastal lõppes?", "Storyville suleti ja muusikud läksid Chicagosse."], ["Armstrong", "Mida uut tõi jazzi Louis Armstrong?", "Jazzist sai solistide muusika. Ta võttis kasutusele akordid ja noodikirja, tõi sisse blue note'id ja scat-laulu."], ["Armstrong", "Mis on scat-laul?", "Sõnadeta, silpidega improviseeritud laul."], ["Armstrong", "Kelle tsitaat on „Ilma Armstrongita poleks jazz'i…\"?", "Joachim-Ernst Berendt, „Das Jazzbuch\"."], ["Dixieland", "Kes oli dixielandi looja?", "Orkestrijuht ja trummar Papa Jack Laine."], ["Dixieland", "Kes tegi esimese jazzisalvestuse ja millal?", "Original Dixieland Jazz Band Nick LaRocca juhatusel 1917. aastal. Plaati müüdi üle miljoni."], ["Dixieland", "Kuidas erines dixielandi kõla New Orleansi omast?", "Väiksem kõlajõud, parem tehnika, kiirem muusika, sujuvam meloodia, vähem intensiivsed kõlavärvid. Iseloomuliku kõla andis soolopill. Koosseis jäi samaks."], ["Dixieland", "Mis lõpetas dixielandi hiilgeaja?", "Sving ja bigbändid 1930. aastate algul. Dixieland tuli tagasi 1940. aastate lõpus."], ["Chicago", "Mis oli Chicago jazzi peamine muutus improvisatsioonis?", "Kollektiivne improvisatsioon asendus solistlikuga."], ["Chicago", "Mis on break?", "Hetk, kui orkester vaikib ja solist improviseerib."], ["Chicago", "Mis oli Austin High School Gang?", "Valgete keskkoolinoorte ansambel, noorte talentide ja Chicago stiili taimelava."], ["Chicago", "Kes oli esimene saksofonivirtuoos?", "Tenorsaksofonist Bud Freeman."], ["Chicago", "Mida uut tõi Fletcher Henderson?", "Jagas orkestri pilligruppideks, lõi tämbrilise vastandamisega uue orkestristiili ja arranžeerimise põhimõtted suurele koosseisule."], ["Chicago", "Kes juhtis kõige populaarsemat tantsuorkestrit ja kes seal mängis?", "Paul Whiteman. Seal mängisid kornetist Bix Beiderbecke ja kitarrist Eddie Lang."], ["Ellington", "Kus tegutses Duke Ellington ja mis on džunglistiil?", "New Yorgis, Harlemi Cotton Clubis. Džunglistiil tähendab trompeti ja trombooni väljendusrikkaid helisid."]], "ajalugu": [["Fakt", "Mis on fakt?", "Tõsiasi, mis annab infot toimunu kohta neutraalselt ja mida saab allikate põhjal kontrollida (kes, mis, kus, millal)."], ["Fakt", "Mis vahe on faktil, tõlgendusel ja hinnangul?", "Fakt on kontrollitav väide. Tõlgendus annab faktile tähenduse. Hinnang väljendab väärtust või emotsiooni ja on subjektiivne."], ["Fakt", "Kas „Kuu peale jõudmine oli 20. sajandi suurim saavutus” on fakt?", "Ei, see on arvamus ehk hinnang."], ["Fakt", "Mis on propaganda?", "Teadlikult kujundatud sõnum, mille eesmärk on mõjutada inimeste arvamusi, hoiakuid või käitumist. See võib kasutada fakte, emotsioone, liialdusi ja infot välja jätta."], ["Fakt", "Nimeta allika analüüsi viis sammu.", "Kirjelda, tõlgenda, loo seoseid, leia infoaugud, otsi lisaallikaid."], ["Fakt", "Kuidas teha väide „Berliini müüri langemine vabastas Ida-Saksamaa inimesed” faktipõhiseks?", "9. novembril 1989 avanesid Berliini müüri piiripunktid ja inimesed said liikuda Ida- ja Lääne-Berliini vahel."], ["Perspektiiv", "Mis on mitmeperspektiivne ajalugu?", "Sündmust vaadeldakse mitme inimese, rühma, riigi või ajastu silmade kaudu. Ühte kõigi poolt aktsepteeritud vaatenurka ei ole."], ["Perspektiiv", "Millised on kolm vaatenurka ajaloole?", "Sündmuse kaasaegsete, ajaloolaste ja tänapäeva (meie enda) vaatenurk."], ["Perspektiiv", "Kas mitmeperspektiivsus tähendab, et kõik arvamused on võrdselt õiged?", "Ei. Väidet hinnatakse tõendite järgi ja teise vaatenurga mõistmine ei tähenda tema tegude õigustamist."], ["Perspektiiv", "Kas laul „Wind of Change” on faktiallikas?", "Pigem ajastu meeleolude ja tõlgenduste allikas: näitab lootusi ja tähendust, aga ei tõenda, mis konkreetsel päeval juhtus."], ["COVID-19", "Kus ja millal teatati esimest korda uuest viirusest?", "Detsembris 2019 Wuhanis, Hubei provintsis Hiinas."], ["COVID-19", "Millal kuulutas WHO COVID-19 pandeemiaks?", "11. märtsil 2020."], ["COVID-19", "Millal kuulutati Eestis välja eriolukord?", "12. märtsil 2020. Esimene nakatunu Eestis oli 27. veebruaril 2020."], ["COVID-19", "Nimeta neli põhjust, miks pandeemiaid tuleb juurde.", "Rahvastiku kasv ja kokkupuude loodusega, kliimamuutus, antibiootikumide väärkasutus, globaliseerumine."], ["COVID-19", "Nimeta viis COVID-19 mõju.", "Näiteks mõju füüsilisele ja vaimsele tervisele, igapäevaelule (piirangud), majandusele (langus), kultuurile, ebavõrdsusele, riikide koostööle, faktipõhisele mõtlemisele."], ["COVID-19", "Millal lõppes COVID-19 hädaolukord?", "Eestis 2. mail 2023, WHO lõpetas rahvusvahelise hädaolukorra 5. mail 2023."], ["EL ja NATO", "Millal sai Eesti EL-i ja NATO liikmeks?", "NATO-ga 29. märtsil 2004, EL-iga 1. mail 2004."], ["EL ja NATO", "Millal toimus EL-i rahvahääletus Eestis ja kui palju oli poolt?", "14. septembril 2003, poolt 66,5%."], ["EL ja NATO", "Millal ühines Eesti Schengeni ja euroalaga?", "Schengeniga 2007, euroalaga 2011."], ["EL ja NATO", "Mitu liiget on EL-is, NATO-s, Schengenis ja euroalas (slaidide järgi)?", "EL 27, NATO 32, Schengen 29, euroala 21."], ["EL ja NATO", "Millal ja millega asutati NATO?", "4. aprillil 1949 Põhja-Atlandi ehk Washingtoni lepinguga."], ["EL ja NATO", "Mis on NATO artikkel 5 ja millal seda esimest korda rakendati?", "Kollektiivkaitse: rünnak ühe vastu on rünnak kõigi vastu. Esimest korda pärast 11. septembri 2001 terrorirünnakuid USA-s."], ["EL ja NATO", "Mis on „Partnerlus rahu nimel” ja millal Eesti sellega liitus?", "NATO programm (PfP). Eesti ühines 3. veebruaril 1994."], ["Araabia kevad", "Kust ja millal algas Araabia kevad?", "Tuneesiast 2011. aastal."], ["Araabia kevad", "Mille vastu protesteeriti ja kes olid algatajad?", "Ühiskondliku ebaõigluse ja majandusliku stagnatsiooni vastu. Algatajad olid noored ja ametiühingud."], ["Araabia kevad", "Millistes riikides kukutati valitsejad?", "Tuneesias, Liibüas, Egiptuses ja Jeemenis."], ["Araabia kevad", "Mis juhtus Süürias?", "Kodusõda Bashar al-Assadi vastu, sekkusid islamirühmitused, USA ja Venemaa. Assadi võim kukkus 8. detsembril 2024."], ["Venemaa", "Millal lagunes Nõukogude Liit?", "25. detsembril 1991, kui Gorbatšov tagasi astus. Venemaa president oli Boris Jeltsin."], ["Venemaa", "Iseloomusta Venemaad 1990. aastatel.", "Korruptsioon, oligarhide võim, ebaõnnestunud reformid, ebapopulaarne Jeltsin, kaotatud Tšetšeenia sõda, rubla krahh 1998."], ["Venemaa", "Millal oli I Tšetšeenia sõda ja kuidas see lõppes?", "1994–1996. Venemaa ei suutnud võita, hukkus 30 000–50 000 inimest."], ["Venemaa", "Kuidas tuli Putin võimule?", "1999 sai ta peaministriks, II Tšetšeenia sõda tõstis tema populaarsust, 31.12.1999 kuulutas Jeltsin ta järglaseks ja 2000 võitis ta valimised."], ["Gruusia", "Mis oli roosirevolutsioon?", "2003 Gruusias: pärast võltsitud valimisi tungisid meeleavaldajad koos Saakašviliga rooside käes parlamenti ja Ševardnadze põgenes. 2004 võitis Saakašvili valimised."], ["Gruusia", "Millised kaks piirkonda Gruusia kaotas?", "Abhaasia ja Lõuna-Osseetia."], ["Gruusia", "Millal oli Venemaa–Gruusia sõda ja kui kaua see kestis?", "August 2008, 16 päeva."], ["Gruusia", "Miks Venemaa 2008 Gruusiat ründas?", "Putin vajas valimiste eel populaarsust ja Gruusia tahtis liituda EL-i ja NATO-ga."], ["Gruusia", "Mis seob Abhaasiat Eestiga?", "Seal olid 1880. aastatest eestlaste külad (Estonia, Linda, Sulevi, Salme). 1992 evakueeriti 170 inimest Eestisse. Film „Mandariinid”."], ["Ukraina", "Mis oli oranž revolutsioon?", "2004 Ukrainas: protestid võltsitud presidendivalimiste vastu. Kordusvalimised võitis läänemeelne Viktor Juštšenko."], ["Ukraina", "Millal algas Venemaa täiemõõduline sõda Ukrainas?", "24. veebruaril 2022. Krimm annekteeriti ja sõda Donbassis algas juba 2014."]]}</script>
 <footer>Koostatud tunnimaterjalide ja kooli juhendite põhjal tehisaru abiga. Võib sisaldada üksikuid vigu.</footer>
 </div>
@@ -1594,6 +1617,76 @@ header{padding-right:46px}
     });
   })();
 
+
+  // --- märkmed: liigutatav ja suurust muutev aken, märkmed teema kaupa ---
+  (function(){
+    var fab = document.getElementById('notes-fab'), box = document.getElementById('notes');
+    var ta = document.getElementById('notes-text'), scopeEl = document.getElementById('notes-scope'), status = document.getElementById('notes-status');
+    var NOTES = {}, GEO = null, scope = 'uldine', scopeTitle = '';
+    try { NOTES = JSON.parse(localStorage.getItem('ajukas-notes') || '{}') || {}; } catch (e) {}
+    try { GEO = JSON.parse(localStorage.getItem('ajukas-notes-geo') || 'null'); } catch (e) {}
+    var NA = window.Ajukas = window.Ajukas || {};
+    var MAX = 50000;
+    function vw(){ return document.documentElement.clientWidth; }
+    function vh(){ return window.innerHeight; }
+    function clampGeo(g){
+      var w = Math.min(Math.max(g.w, 220), vw() - 16), h = Math.min(Math.max(g.h, 160), vh() - 16);
+      return { w: w, h: h, x: Math.min(Math.max(g.x, 8), vw() - w - 8), y: Math.min(Math.max(g.y, 8), vh() - h - 8) };
+    }
+    function defaultGeo(){ var w = Math.min(360, vw() - 24), h = Math.min(340, Math.round(vh() * 0.55)); return { w: w, h: h, x: vw() - w - 14, y: vh() - h - 70 }; }
+    function applyGeo(){ var g = clampGeo(GEO || defaultGeo()); GEO = g; box.style.left = g.x + 'px'; box.style.top = g.y + 'px'; box.style.width = g.w + 'px'; box.style.height = g.h + 'px'; }
+    function saveGeo(){ try { localStorage.setItem('ajukas-notes-geo', JSON.stringify(GEO)); } catch (e) {} }
+    function saveNotes(){
+      try { localStorage.setItem('ajukas-notes', JSON.stringify(NOTES)); } catch (e) {}
+      if (NA.onNotes) NA.onNotes(NOTES);
+    }
+    function setScope(id, title){
+      scope = id; scopeTitle = title;
+      scopeEl.textContent = '· ' + title;
+      ta.value = NOTES[scope] || '';
+      status.textContent = t('Salvestub automaatselt');
+    }
+    NA.notesScope = function(view){
+      var topic = view && view.getAttribute('data-parent');
+      if (topic) setScope(view.id.slice(2), view.getAttribute('data-title'));
+      else setScope('uldine', t('üldine'));
+    };
+    NA.getNotes = function(){ return NOTES; };
+    NA.setNotes = function(n){ NOTES = n || {}; try { localStorage.setItem('ajukas-notes', JSON.stringify(NOTES)); } catch (e) {} ta.value = NOTES[scope] || ''; };
+    var timer;
+    ta.addEventListener('input', function(){
+      if (ta.value.length > MAX) ta.value = ta.value.slice(0, MAX);
+      if (ta.value) NOTES[scope] = ta.value; else delete NOTES[scope];
+      status.textContent = t('Salvestan…');
+      clearTimeout(timer);
+      timer = setTimeout(function(){ saveNotes(); status.textContent = t('Salvestatud'); }, 500);
+    });
+    function open(on){
+      box.hidden = !on; fab.setAttribute('aria-expanded', on ? 'true' : 'false');
+      try { localStorage.setItem('ajukas-notes-open', on ? '1' : '0'); } catch (e) {}
+      if (on) { applyGeo(); ta.focus(); }
+    }
+    fab.addEventListener('click', function(){ open(box.hidden); });
+    document.getElementById('notes-close').addEventListener('click', function(){ open(false); fab.focus(); });
+    box.addEventListener('keydown', function(e){ if (e.key === 'Escape') { open(false); fab.focus(); } });
+    // lohistamine ja suuruse muutmine (hiir ja puutetundlik ekraan)
+    function drag(handle, onMove){
+      handle.addEventListener('pointerdown', function(e){
+        if (e.target.closest('.notes-x')) return;
+        e.preventDefault();
+        var sx = e.clientX, sy = e.clientY, g0 = { x: GEO.x, y: GEO.y, w: GEO.w, h: GEO.h };
+        handle.setPointerCapture(e.pointerId);
+        function move(ev){ GEO = clampGeo(onMove(g0, ev.clientX - sx, ev.clientY - sy)); applyGeo(); }
+        function up(){ handle.removeEventListener('pointermove', move); handle.removeEventListener('pointerup', up); handle.removeEventListener('pointercancel', up); saveGeo(); }
+        handle.addEventListener('pointermove', move); handle.addEventListener('pointerup', up); handle.addEventListener('pointercancel', up);
+      });
+    }
+    drag(document.getElementById('notes-drag'), function(g, dx, dy){ return { x: g.x + dx, y: g.y + dy, w: g.w, h: g.h }; });
+    drag(document.getElementById('notes-resize'), function(g, dx, dy){ return { x: g.x, y: g.y, w: g.w + dx, h: g.h + dy }; });
+    window.addEventListener('resize', function(){ if (!box.hidden) applyGeo(); });
+    try { if (localStorage.getItem('ajukas-notes-open') === '1') open(true); } catch (e) {}
+  })();
+
   // --- seaded: teema ja keel ---
   (function(){
     var gear = document.getElementById('gear'), pop = document.getElementById('settings-pop');
@@ -1713,6 +1806,7 @@ header{padding-right:46px}
     if (!view) view = homeView;
     views.forEach(function(v){ v.hidden = v !== view; });
     showTab(view, pid || load('ajukas-tab-' + view.id));
+    if (Ajukas.notesScope) Ajukas.notesScope(view === homeView ? null : view);
     var title = view.getAttribute('data-title');
     document.title = view === homeView ? 'Ajukas' : title + ' · Ajukas';
   }
@@ -1816,11 +1910,19 @@ if (!FIREBASE_CONFIG) {
 
   // edusammude sünkroniseerimine
   let saveTimer = null;
+  let notesTimer = null;
+  function pushNotes(n) {
+    const u = auth.currentUser; if (!u) return;
+    clearTimeout(notesTimer);
+    notesTimer = setTimeout(() => {
+      setDoc(doc(db, 'kasutajad', u.uid), { markmed: n || {}, muudetud: serverTimestamp() }, { merge: true }).catch(() => {});
+    }, 1500);
+  }
   function pushProgress(p) {
     const u = auth.currentUser; if (!u) return;
     clearTimeout(saveTimer);
     saveTimer = setTimeout(() => {
-      setDoc(doc(db, 'kasutajad', u.uid), { seen: p.seen || {}, last: p.last || null, muudetud: serverTimestamp() }).catch(() => {});
+      setDoc(doc(db, 'kasutajad', u.uid), { seen: p.seen || {}, last: p.last || null, muudetud: serverTimestamp() }, { merge: true }).catch(() => {});
     }, 1200);
   }
 
@@ -2029,7 +2131,8 @@ if (!FIREBASE_CONFIG) {
     if (A.isAdmin) { A.isAdmin = false; A.route && A.route(); }
     if (!u) {
       A.onProgress = null;
-      if (A._wasIn) A.setProgress({ seen: {}, last: null }); // jagatud arvutis ei jää eelmise kasutaja andmed näha
+      A.onNotes = null;
+      if (A._wasIn) { A.setProgress({ seen: {}, last: null }); if (A.setNotes) A.setNotes({}); } // jagatud arvutis ei jää eelmise kasutaja andmed näha
       A._wasIn = false;
       return;
     }
@@ -2046,7 +2149,14 @@ if (!FIREBASE_CONFIG) {
       A.setProgress(merged);
       A.onProgress = pushProgress;
       pushProgress(merged);
-    } catch (e) { A.onProgress = pushProgress; }
+      // märkmed: kohalik tekst jääb alles, puuduvad teemad tulevad kontolt
+      const ln = A.getNotes ? A.getNotes() : {}, rn = remote.markmed || {};
+      const mn = Object.assign({}, rn);
+      Object.keys(ln).forEach((k) => { if (ln[k]) mn[k] = ln[k]; });
+      if (A.setNotes) A.setNotes(mn);
+      A.onNotes = pushNotes;
+      pushNotes(mn);
+    } catch (e) { A.onProgress = pushProgress; A.onNotes = pushNotes; }
     if (name === ADMIN_USER) { A.isAdmin = true; $('inbox').hidden = false; $('sv-app').hidden = false; A.route && A.route(); loadInbox(); }
   });
 
