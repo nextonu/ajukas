@@ -376,6 +376,18 @@ header{padding-right:46px}
 .worknote .wdot{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--warn);animation:wpulse 1.6s ease-in-out infinite}
 @keyframes wpulse{50%{opacity:.3}}
 @media (max-width:1559px){.worknote{position:static;display:flex;width:fit-content;max-width:calc(100% - 52px);margin:0 0 14px;box-shadow:none}}
+/* arvutis: teade igal lehel vasakus ülanurgas; telefonis ainult avalehel nagu enne */
+.worknote.wn-d{position:fixed;left:14px;top:12px;margin:0;width:auto;max-width:none;box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:60}
+.wn-d .wshort{display:none}
+@media (min-width:601px){#worknote{display:none!important}}
+@media (max-width:600px){#worknote-d{display:none!important}}
+@media (max-width:1829px){.wn-d .wfull{display:none}.wn-d .wshort{display:inline}}
+@media (max-width:1499px){
+  .worknote.wn-d{left:4px;top:4px;padding:0;width:18px;height:18px;justify-content:center;background:none;border-color:transparent;box-shadow:none;cursor:default}
+  .wn-d .wshort{display:none}
+  .worknote.wn-d:hover,.worknote.wn-d:focus{width:auto;height:auto;padding:7px 13px;background:var(--panel);border-color:var(--line2);box-shadow:0 6px 18px rgba(0,0,0,.25);outline:none}
+  .wn-d:hover .wfull,.wn-d:focus .wfull{display:inline}
+}
 @media (prefers-reduced-motion:reduce){.worknote .wdot{animation:none}}
 .notes-fab:hover{border-color:var(--bright)}
 .notes-fab[aria-expanded="true"]{background:var(--bright);color:var(--bg);border-color:var(--bright)}
@@ -626,6 +638,7 @@ sub{font-size:.72em;line-height:0}
   </div>
 </div>
 
+<p class="worknote wn-d" id="worknote-d" role="status" tabindex="0" title="Lehte uuendatakse praegu. Mõni asi võib muutuda." hidden><span class="wdot" aria-hidden="true"></span><span class="wfull">Lehte uuendatakse praegu. Mõni asi võib muutuda.</span><span class="wshort">Lehte uuendatakse</span></p>
 <div class="view home" id="v-home" data-title="Ajukas">
   <p class="worknote" id="worknote" role="status" hidden><span class="wdot" aria-hidden="true"></span>Lehte uuendatakse praegu. Mõni asi võib muutuda.</p>
   <header>
@@ -3024,7 +3037,8 @@ H — C — C — C — H
     fetch('teade.json', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
       // teade aegub ise, kui "kuni" on möödas (tools/teade.py)
       var left = d && d.aktiivne ? (d.kuni ? Date.parse(d.kuni) - Date.now() : Infinity) : 0, wn = document.getElementById('worknote');
-      if (left > 0) { wn.hidden = false; if (left < 864e5) setTimeout(function(){ wn.hidden = true; }, left); }
+      var wd = document.getElementById('worknote-d');
+      if (left > 0) { wn.hidden = false; wd.hidden = false; if (left < 864e5) setTimeout(function(){ wn.hidden = true; wd.hidden = true; }, left); }
     }).catch(function(){});
     fetch('tunniplaan.json', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
       if (d && d.classes) { info = d; paint(); }
