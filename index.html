@@ -556,6 +556,73 @@ body{padding-bottom:80px}
 .app-pro li::marker{content:"+ ";color:var(--ok);font-weight:700}
 .app-con li::marker{content:"− ";color:var(--err);font-weight:700}
 .app-done{color:var(--ok);font-weight:600}
+/* tööriistad: proovitöö, ajajoone mäng, nimetamise treener, kuulamistest, spikker */
+.tool{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;margin:12px 0}
+.tool .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tool .big{font-size:22px;font-weight:700;color:var(--bright)}
+.tool .btn{font-size:14px;padding:8px 16px}
+.exam-timer{position:fixed;left:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:44;box-shadow:0 6px 18px rgba(0,0,0,.3);display:inline-flex;gap:8px;align-items:center;font-family:var(--mono);font-size:18px;color:var(--bright);background:var(--raised);border:1px solid var(--line2);border-radius:999px;padding:5px 14px;margin-bottom:10px}
+.exam-timer.low{color:var(--err);border-color:var(--err)}
+.exam-q{border-top:1px solid var(--line);padding:12px 0}
+.exam-q:first-of-type{border-top:0}
+.exam-q .qh{display:flex;gap:10px;color:var(--bright);font-weight:600}
+.exam-q .qn{font-family:var(--mono);color:var(--muted);font-weight:400;min-width:24px}
+.exam-q textarea{width:100%;margin-top:8px;min-height:54px;resize:vertical;font:inherit;font-size:15px;background:var(--bg);color:var(--text);border:1px solid var(--line2);border-radius:4px;padding:8px}
+.exam-q .mine{margin:8px 0 4px;color:var(--muted);font-size:14px;white-space:pre-wrap}
+.exam-q .right{margin:4px 0 8px;padding:8px 10px;border-left:3px solid var(--ok);background:var(--bg);border-radius:0 4px 4px 0}
+.exam-q .grade{display:flex;gap:6px;flex-wrap:wrap}
+.exam-q .grade button{font:inherit;font-size:13px;padding:5px 12px;border-radius:999px;border:1px solid var(--line2);background:var(--raised);color:var(--text);cursor:pointer}
+.exam-q .grade button[aria-pressed=true][data-g="1"]{background:var(--ok);color:#111;border-color:var(--ok)}
+.exam-q .grade button[aria-pressed=true][data-g="0.5"]{background:var(--warn);color:#111;border-color:var(--warn)}
+.exam-q .grade button[aria-pressed=true][data-g="0"]{background:var(--err);color:#111;border-color:var(--err)}
+.exam-res{font-size:20px;color:var(--bright);margin:6px 0 12px}
+.exam-res b{font-size:30px}
+.tl-items{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.tl-item{display:flex;gap:12px;align-items:center;text-align:left;font:inherit;font-size:15px;color:var(--text);background:var(--bg);border:1px solid var(--line2);border-radius:6px;padding:10px 12px;cursor:pointer}
+.tl-item:hover{border-color:var(--bright)}
+.tl-item .ord{flex:0 0 28px;height:28px;border-radius:50%;border:1px dashed var(--line2);display:grid;place-items:center;font-family:var(--mono);font-size:14px;color:var(--muted)}
+.tl-item.on .ord{border:0;background:var(--brand);color:#111;font-weight:700}
+.tl-item .yr{margin-left:auto;font-family:var(--mono);color:var(--num);white-space:nowrap}
+.tl-item.ok{border-color:var(--ok)} .tl-item.no{border-color:var(--err)}
+.tl-item.ok .ord{background:var(--ok)} .tl-item.no .ord{background:var(--err)}
+.tl-sol{margin:8px 0 0;padding-left:22px;font-size:14px}
+.tl-sol .y{font-family:var(--mono);color:var(--num)}
+.nm-filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.nm-filters button{font:inherit;font-size:13px;padding:5px 12px;border-radius:999px;border:1px solid var(--line2);background:var(--raised);color:var(--muted);cursor:pointer}
+.nm-filters button[aria-pressed=true]{background:var(--bright);color:var(--bg);border-color:var(--bright)}
+.nm-kind{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.nm-formula{font-size:24px;color:var(--bright);margin:8px 0 14px;overflow-x:auto;white-space:nowrap;padding-bottom:4px}
+.nm-formula svg{display:block}
+.nm-formula svg polygon,.nm-formula svg line{fill:none;stroke:var(--bright);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.nm-formula svg text{fill:var(--bright);font:600 14px var(--ui)}
+.nm-in{flex:1;min-width:200px;font:inherit;font-size:17px;padding:9px 12px;background:var(--bg);color:var(--bright);border:1px solid var(--line2);border-radius:4px}
+.nm-fb{margin:12px 0 0;min-height:24px}
+.nm-fb.ok{color:var(--ok);font-weight:600} .nm-fb.no{color:var(--err)}
+.nm-fb .ans{color:var(--bright);font-weight:700}
+.nm-stats{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:12px}
+.ls-video{position:relative;aspect-ratio:16/9;max-width:560px;background:#000;border-radius:6px;overflow:hidden;margin:10px 0}
+.ls-video iframe,.ls-video>div{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ls-cover{position:absolute;inset:0;background:var(--raised);display:grid;place-items:center;color:var(--muted);font-size:15px;pointer-events:none;text-align:center;padding:12px}
+.ls-cover .note{font-size:46px;color:var(--brand);line-height:1}
+.ls-cover.off{display:none}
+.ls-opts{display:grid;gap:8px;margin:12px 0}
+.ls-opts button{text-align:left;font:inherit;font-size:15px;color:var(--text);background:var(--bg);border:1px solid var(--line2);border-radius:6px;padding:10px 12px;cursor:pointer}
+.ls-opts button:hover:not(:disabled){border-color:var(--bright)}
+.ls-opts button.ok{border-color:var(--ok);color:var(--ok)} .ls-opts button.no{border-color:var(--err);color:var(--err)}
+.ls-opts button:disabled{cursor:default}
+.ls-info{color:var(--muted);font-size:14px}
+.spk-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.spk-head h2{margin:0}
+section[role=tabpanel]:has(.spikker){max-width:1100px}
+.spikker{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-top:8px}
+.spk-box{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;font-size:14px}
+.spk-box h4{margin:0 0 6px;color:var(--brand);font-size:15px}
+.spk-box ul{margin:0;padding-left:18px}
+.spk-box li{margin-bottom:3px}
+.spk-box table{width:100%;min-width:0;border-collapse:collapse;font-size:13px;margin:2px 0 6px}
+.spk-box th,.spk-box td{border-bottom:1px solid var(--line);padding:3px 6px 3px 0;text-align:left;vertical-align:top}
+.spk-box th{color:var(--muted);font-weight:600}
+
 .pname{border-bottom:1px dotted var(--muted);cursor:pointer}
 .pname:hover,.pname:focus-visible{color:var(--bright);border-bottom-color:var(--bright);outline:none}
 .pfig{float:right;clear:right;width:112px;margin:4px 0 12px 18px;cursor:pointer}
@@ -660,7 +727,7 @@ sub{font-size:.72em;line-height:0}
   </section>
   <details class="box updlog" id="updlog">
     <summary><span class="ul-title">Uuendused</span><span class="ul-date">6. oktoober 2026</span><span class="ul-last">Muusikas ja ajaloos on inimeste pildid.</span></summary>
-    <div class="ul-body"><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
+    <div class="ul-body"><h4>7. oktoober 2026</h4><ul><li>Igal kontrolltööl on nüüd <b>proovitöö</b> taimeriga ja <b>spikker</b>.</li><li>Keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
   </details>
   <aside class="suvi" id="suvi" aria-label="Suvevaheaja taimer" hidden>
   <div class="suvi-clock">
@@ -773,7 +840,7 @@ sub{font-size:.72em;line-height:0}
     <a class="subjcard ready" href="#kontsert"><span class="sname">Kontserdi arvustus</span><span class="stopic">Nõuded, analüüsi küsimused ja näpunäited. Rühmaesitlus.</span><span class="prog" data-topic="kontsert"></span></a>
   </div>
 </div>
-<div class="view" id="v-jazz" data-updated="2026-10-04" data-title="Varajane jazz" data-parent="muusika" data-parent-title="Muusika" hidden>
+<div class="view" id="v-jazz" data-updated="2026-10-07" data-title="Varajane jazz" data-parent="muusika" data-parent-title="Muusika" hidden>
   <nav class="appbar sticky" aria-label="Varajane jazz teemad"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist">
     <button role="tab" id="t-ajajoon" aria-controls="ajajoon" aria-selected="true">Ajajoon</button>
     <button role="tab" id="t-tunnused" aria-controls="tunnused" aria-selected="false">Jazzi tunnused</button>
@@ -783,7 +850,7 @@ sub{font-size:.72em;line-height:0}
     <button role="tab" id="t-chicago" aria-controls="chicago" aria-selected="false">Chicago</button>
     <button role="tab" id="t-vordlus" aria-controls="vordlus" aria-selected="false">Võrdlus</button>
     <button role="tab" id="t-test" aria-controls="test" aria-selected="false">Testi ennast</button>
-  <button role="tab" id="t-jazz-viited" aria-controls="jazz-viited" aria-selected="false">Viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
+  <button role="tab" id="t-jazz-kuula" aria-controls="jazz-kuula" aria-selected="false">Kuulamistest</button><button role="tab" id="t-jazz-mang" aria-controls="jazz-mang" aria-selected="false">Ajajoone mäng</button><button role="tab" id="t-jazz-proov" aria-controls="jazz-proov" aria-selected="false">Proovitöö</button><button role="tab" id="t-jazz-spikker" aria-controls="jazz-spikker" aria-selected="false">Spikker</button><button role="tab" id="t-jazz-viited" aria-controls="jazz-viited" aria-selected="false">Viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#muusika"><span aria-hidden="true">←</span> Muusika</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#muusika">Muusika</a> / Varajane jazz</span>
@@ -1051,6 +1118,28 @@ sub{font-size:.72em;line-height:0}
   <h2>Testi ennast</h2>
   <p class="lead">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
   <div class="quiz" data-quiz="jazz"></div>
+</section>
+<section role="tabpanel" id="jazz-kuula" aria-labelledby="t-jazz-kuula" hidden>
+  <h2>Kuulamistest</h2>
+  <p class="lead">Kuula lõiku ja vali, kes esitab ja mis pala see on. Video on peidus, et pilt vastust ette ei ütleks.</p>
+  <div class="listen"></div>
+  <p class="muted">Salvestised mängitakse YouTube'ist, seega on vaja internetti. Kui heli ei hakka nupust mängima, vajuta peidetud video keskele.</p>
+</section>
+<section role="tabpanel" id="jazz-mang" aria-labelledby="t-jazz-mang" hidden>
+  <h2>Ajajoone mäng</h2>
+  <p class="lead">Pane sündmused õigesse järjekorda: vajuta neid vanimast uusimani. Uuesti vajutades saad valiku tühistada.</p>
+  <div class="tlgame" data-src="ajajoon"></div>
+</section>
+<section role="tabpanel" id="jazz-proov" aria-labelledby="t-jazz-proov" hidden>
+  <h2>Proovitöö</h2>
+  <p class="lead">10 juhuslikku küsimust ja 15 minutit aega, nagu päris töös. Kirjuta vastused, siis võrdle õigetega ja hinda ennast ise.</p>
+  <div class="exam" data-quiz="jazz" data-n="10" data-min="15"></div>
+  <p class="muted">Pärast lõpetamist näed iga küsimuse juures õiget vastust ja märgid ise, kas sinu vastus oli õige.</p>
+</section>
+<section role="tabpanel" id="jazz-spikker" aria-labelledby="t-jazz-spikker" hidden>
+  <div class="spk-head"><h2>Spikker</h2><button type="button" class="btn sec spk-print">Prindi / salvesta PDF</button></div>
+  <p class="lead">Kõige olulisem ühel lehel, et töö eel kiiresti üle vaadata.</p>
+  <div class="spikker" data-title="Muusika · Varajane jazz"><div class="spk-box"><h4>Jazz üldiselt</h4><ul><li>Tekkis <b>19. saj lõpus – 20. saj alguses USA-s</b>, eelkõige <b>New Orleansis</b>. Sõna „jazz” <b>1915 Chicagos</b>.</li><li>Põhijooned: <b>improvisatsioon</b>, kõlavärv (tämber), pillikoosseisud, rütm-meloodia-harmoonia.</li><li>Mõjud: <b>Aafrika</b> (kollektiivne loomine, improvisatsioon, ees- ja järellaulja), <b>Euroopa</b> (harmoonia, pillid), <b>Kariibid</b> (rütmid, tantsumuusika).</li><li>Taust: aafrika ameeriklaste kogukonnad, orjuse pärand; töölaulud ja spirituaalid. Congo Square, matuserongkäikude orkestrid.</li></ul></div><div class="spk-box"><h4>Ragtime ja bluus</h4><ul><li><b>Ragtime</b>: 1890. aastad, klaver, mustanahalised pianistid. <b>Scott Joplin</b>: „Maple Leaf Rag”, „The Entertainer”.</li><li><b>Bluus</b>: <b>12-taktiline</b>, soololaul, töölaulud ja spirituaalid, isiklik valu ja rõõm. Bessie Smith, Muddy Waters, B.B. King.</li></ul></div><div class="spk-box"><h4>Stiilid kõrvuti</h4><table><thead><tr><th></th><th>New Orleans</th><th>Dixieland</th><th>Chicago</th></tr></thead><tbody><tr><td>Kes</td><td>mustanahalised</td><td>valged</td><td>valged, keskkoolinoored</td></tr><tr><td>Improvisatsioon</td><td><b>kollektiivne</b></td><td>kollektiivne, soolopill esile</td><td><b>solistlik</b>, breakid</td></tr><tr><td>Rütm</td><td>marsilik, rõhk 1. ja 3. löögil</td><td>kiirem, sujuvam meloodia</td><td>sujuv, bluusilik</td></tr><tr><td>Kõla</td><td>räme, intensiivne</td><td>väiksem kõlajõud, parem tehnika</td><td>viimistletud, arranžeeritud</td></tr><tr><td>Uus</td><td>tuuba, bandžo → kontrabass, kitarr, klaver</td><td>koosseis sama</td><td><b>saksofon</b></td></tr><tr><td>Aeg</td><td>kuni 1917 (Storyville suleti)</td><td>1917 esimene salvestus – 1930. a algus</td><td>tippaeg 1920. aastad</td></tr><tr><td>Nimed</td><td>King Oliver, Jelly Roll Morton, Louis Armstrong</td><td>Papa Jack Laine, Nick LaRocca (ODJB)</td><td>Bud Freeman, Fletcher Henderson, Coleman Hawkins, Paul Whiteman, Bix Beiderbecke</td></tr></tbody></table></div><div class="spk-box"><h4>New Orleansi koosseis</h4><ul><li><b>Meloodia</b>: kornet/trompet, tromboon, klarnet. <b>Rütm</b>: tuuba, bandžo, trummid.</li><li>Improvisatsiooni alus: marsi- või kirikumeloodia, ragtime’i pala või 12-taktiline bluus. Muusikat üles ei kirjutatud.</li></ul></div><div class="spk-box"><h4>Louis Armstrong</h4><ul><li>Jazzist sai <b>solistide muusika</b>. Akordid ja noodikiri, <b>blue note’id</b>, <b>scat-laul</b> (sõnadeta, silpidega).</li><li>„What a Wonderful World”, „West End Blues”, „Hotter Than Hot”.</li><li>Berendt: „Ilma Armstrongita poleks jazz’i …”</li></ul></div><div class="spk-box"><h4>Dixieland ja Chicago</h4><ul><li>Dixielandi looja <b>Papa Jack Laine</b>. <b>1917</b> Original Dixieland Jazz Band (Nick LaRocca) tegi <b>esimese jazzisalvestuse</b>, üle miljoni plaadi.</li><li>Lõpp: <b>sving ja bigbändid</b> 1930. a algul, tagasitulek 1940. a lõpus.</li><li>Chicago: <b>break</b> = orkester vaikib, solist improviseerib. Austin High School Gang. Bud Freeman esimene saksofonivirtuoos.</li><li><b>Fletcher Henderson</b>: pilligrupid, tämbriline vastandamine, suure koosseisu arranžeerimine.</li></ul></div><div class="spk-box"><h4>Duke Ellington</h4><ul><li>New York, Harlemi <b>Cotton Club</b>. <b>Džunglistiil</b>: trompeti ja trombooni väljendusrikkad helid.</li><li>„Mood Indigo”, „It Don’t Mean a Thing”.</li></ul></div></div>
 </section>
 <section role="tabpanel" id="jazz-viited" aria-labelledby="t-jazz-viited" hidden>
   <h2>Viited</h2>
@@ -1380,8 +1469,8 @@ sub{font-size:.72em;line-height:0}
     <a class="subjcard ready" href="#ajalugu-kt1"><span class="sname">Kontrolltöö 1: tänapäev</span><span class="stopic">Fakt, mitmeperspektiivsus, COVID-19, EL ja NATO, Araabia kevad, Venemaa, Gruusia, Ukraina.</span><span class="prog" data-topic="ajalugu-kt1"></span></a>
   </div>
 </div>
-<div class="view" id="v-ajalugu-kt1" data-updated="2026-10-05" data-title="Kontrolltöö 1: tänapäev" data-parent="ajalugu" data-parent-title="Ajalugu" hidden>
-  <nav class="appbar sticky" aria-label="Kontrolltöö 1 teemad"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-aj-ulevaade" aria-controls="aj-ulevaade" aria-selected="false">Ülevaade</button><button role="tab" id="t-aj-fakt" aria-controls="aj-fakt" aria-selected="false">Fakt ja arvamus</button><button role="tab" id="t-aj-perspektiiv" aria-controls="aj-perspektiiv" aria-selected="false">Mitmeperspektiivsus</button><button role="tab" id="t-aj-covid" aria-controls="aj-covid" aria-selected="false">COVID-19</button><button role="tab" id="t-aj-el-nato" aria-controls="aj-el-nato" aria-selected="false">EL ja NATO</button><button role="tab" id="t-aj-araabia" aria-controls="aj-araabia" aria-selected="false">Araabia kevad</button><button role="tab" id="t-aj-venemaa" aria-controls="aj-venemaa" aria-selected="false">Venemaa 1990ndad</button><button role="tab" id="t-aj-gruusia" aria-controls="aj-gruusia" aria-selected="false">Gruusia</button><button role="tab" id="t-aj-ukraina" aria-controls="aj-ukraina" aria-selected="false">Ukraina</button><button role="tab" id="t-aj-ajajoon" aria-controls="aj-ajajoon" aria-selected="false">Ajajoon</button><button role="tab" id="t-aj-test" aria-controls="aj-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-aj-viited" aria-controls="aj-viited" aria-selected="false">Viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
+<div class="view" id="v-ajalugu-kt1" data-updated="2026-10-07" data-title="Kontrolltöö 1: tänapäev" data-parent="ajalugu" data-parent-title="Ajalugu" hidden>
+  <nav class="appbar sticky" aria-label="Kontrolltöö 1 teemad"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-aj-ulevaade" aria-controls="aj-ulevaade" aria-selected="false">Ülevaade</button><button role="tab" id="t-aj-fakt" aria-controls="aj-fakt" aria-selected="false">Fakt ja arvamus</button><button role="tab" id="t-aj-perspektiiv" aria-controls="aj-perspektiiv" aria-selected="false">Mitmeperspektiivsus</button><button role="tab" id="t-aj-covid" aria-controls="aj-covid" aria-selected="false">COVID-19</button><button role="tab" id="t-aj-el-nato" aria-controls="aj-el-nato" aria-selected="false">EL ja NATO</button><button role="tab" id="t-aj-araabia" aria-controls="aj-araabia" aria-selected="false">Araabia kevad</button><button role="tab" id="t-aj-venemaa" aria-controls="aj-venemaa" aria-selected="false">Venemaa 1990ndad</button><button role="tab" id="t-aj-gruusia" aria-controls="aj-gruusia" aria-selected="false">Gruusia</button><button role="tab" id="t-aj-ukraina" aria-controls="aj-ukraina" aria-selected="false">Ukraina</button><button role="tab" id="t-aj-ajajoon" aria-controls="aj-ajajoon" aria-selected="false">Ajajoon</button><button role="tab" id="t-aj-test" aria-controls="aj-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-aj-proov" aria-controls="aj-proov" aria-selected="false">Proovitöö</button><button role="tab" id="t-aj-mang" aria-controls="aj-mang" aria-selected="false">Ajajoone mäng</button><button role="tab" id="t-aj-spikker" aria-controls="aj-spikker" aria-selected="false">Spikker</button><button role="tab" id="t-aj-viited" aria-controls="aj-viited" aria-selected="false">Viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#ajalugu"><span aria-hidden="true">←</span> Ajalugu</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#ajalugu">Ajalugu</a> / Kontrolltöö 1</span>
@@ -1794,6 +1883,22 @@ sub{font-size:.72em;line-height:0}
   <p class="lead">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
   <div class="quiz" data-quiz="ajalugu"></div>
 </section>
+<section role="tabpanel" id="aj-proov" aria-labelledby="t-aj-proov" hidden>
+  <h2>Proovitöö</h2>
+  <p class="lead">10 juhuslikku küsimust ja 15 minutit aega, nagu päris töös. Kirjuta vastused, siis võrdle õigetega ja hinda ennast ise.</p>
+  <div class="exam" data-quiz="ajalugu" data-n="10" data-min="15"></div>
+  <p class="muted">Vastuseid ei kontrolli arvuti: pärast lõpetamist näed iga küsimuse juures õiget vastust ja märgid ise, kas sinu vastus oli õige.</p>
+</section>
+<section role="tabpanel" id="aj-mang" aria-labelledby="t-aj-mang" hidden>
+  <h2>Ajajoone mäng</h2>
+  <p class="lead">Pane sündmused õigesse järjekorda: vajuta neid vanimast uusimani. Uuesti vajutades saad valiku tühistada.</p>
+  <div class="tlgame" data-src="aj-ajajoon"></div>
+</section>
+<section role="tabpanel" id="aj-spikker" aria-labelledby="t-aj-spikker" hidden>
+  <div class="spk-head"><h2>Spikker</h2><button type="button" class="btn sec spk-print">Prindi / salvesta PDF</button></div>
+  <p class="lead">Kõige olulisem ühel lehel, et töö eel kiiresti üle vaadata.</p>
+  <div class="spikker" data-title="Ajalugu · Kontrolltöö 1: tänapäev"><div class="spk-box"><h4>Fakt ja arvamus</h4><ul><li><b>Fakt</b>: kontrollitav väide (kes, mis, kus, millal).</li><li><b>Tõlgendus</b> annab faktile tähenduse, <b>hinnang</b> väljendab väärtust või emotsiooni.</li><li><b>Propaganda</b>: teadlikult kujundatud sõnum, et mõjutada arvamusi ja käitumist.</li><li>Allika analüüs: kirjelda → tõlgenda → loo seoseid → leia infoaugud → otsi lisaallikaid.</li></ul></div><div class="spk-box"><h4>Mitmeperspektiivsus</h4><ul><li>Sündmust vaadeldakse eri inimeste, rühmade, riikide ja ajastute silmade läbi.</li><li>Kolm vaatenurka: <b>kaasaegsed</b>, <b>ajaloolased</b>, <b>meie</b> (tänapäev).</li><li>Kõik arvamused ei ole võrdselt õiged: otsustavad tõendid.</li></ul></div><div class="spk-box"><h4>COVID-19</h4><table><thead><tr><th>Millal</th><th>Mis</th></tr></thead><tbody><tr><td>dets 2019</td><td>uus viirus Wuhanis (Hiina)</td></tr><tr><td>27.02.2020</td><td>esimene nakatunu Eestis</td></tr><tr><td>11.03.2020</td><td>WHO: pandeemia</td></tr><tr><td>12.03.2020</td><td>Eestis eriolukord</td></tr><tr><td>2.05.2023</td><td>Eestis hädaolukord lõpeb (WHO 5.05.2023)</td></tr></tbody></table><ul><li>Pandeemiaid tuleb juurde: rahvastiku kasv ja kokkupuude loodusega, kliimamuutus, antibiootikumide väärkasutus, globaliseerumine.</li></ul></div><div class="spk-box"><h4>EL ja NATO</h4><table><thead><tr><th>Millal</th><th>Mis</th></tr></thead><tbody><tr><td>4.04.1949</td><td>NATO (Washingtoni leping)</td></tr><tr><td>1992</td><td>Euroopa Liit (7. veebr)</td></tr><tr><td>1994</td><td>Eesti: „Partnerlus rahu nimel”</td></tr><tr><td>2001</td><td>NATO 5. artikkel esimest korda (11. september)</td></tr><tr><td>14.09.2003</td><td>EL-i rahvahääletus, poolt 66,83% (slaidil 66,5%)</td></tr><tr><td>29.03.2004</td><td>Eesti NATO-sse</td></tr><tr><td>1.05.2004</td><td>Eesti EL-i</td></tr><tr><td>2007 / 2011</td><td>Schengen / euro</td></tr></tbody></table><ul><li><b>Artikkel 5</b>: rünnak ühe vastu on rünnak kõigi vastu.</li></ul></div><div class="spk-box"><h4>Araabia kevad</h4><ul><li><b>2011</b>, algas <b>Tuneesiast</b>. Protest ebaõigluse ja majandusliku stagnatsiooni vastu, algatajad noored ja ametiühingud.</li><li>Valitsejad kukutati: <b>Tuneesia, Liibüa, Egiptus, Jeemen</b>. Demokraatiat enamasti ei tulnud.</li><li><b>Süüria</b>: kodusõda Assadi vastu, sekkusid islamistid, USA ja Venemaa. Assadi võim kukkus <b>8.12.2024</b>.</li></ul></div><div class="spk-box"><h4>Venemaa 1990. aastatel</h4><ul><li><b>25.12.1991</b> Gorbatšov astub tagasi, NSV Liit laguneb. Venemaa president Jeltsin.</li><li>Korruptsioon, oligarhid, ebaõnnestunud reformid, <b>1998</b> rubla krahh.</li><li><b>I Tšetšeenia sõda 1994–1996</b>: Venemaa ei võitnud. <b>II sõda 1999</b>.</li><li><b>1999</b> Putin peaministriks, <b>31.12.1999</b> Jeltsini järglaseks, <b>2000</b> president.</li></ul></div><div class="spk-box"><h4>Gruusia</h4><ul><li>1991 iseseisvus. Sõjad: <b>Lõuna-Osseetia 1991–92</b>, <b>Abhaasia 1992–93</b> (1992 evakueeriti Abhaasia eestlased).</li><li><b>2003 roosirevolutsioon</b>: Saakašvili, Ševardnadze kukutati.</li><li><b>August 2008</b> sõda Venemaaga (viiepäevane, 7.–12.08; slaidil 16 päeva). Põhjus slaidi järgi: Gruusia tahtis EL-i ja NATO-sse.</li></ul></div><div class="spk-box"><h4>Ukraina</h4><table><thead><tr><th>Millal</th><th>Mis</th></tr></thead><tbody><tr><td>nov 2004 – jaan 2005</td><td>oranž revolutsioon (Janukovõtš vs Juštšenko)</td></tr><tr><td>1.01.2006</td><td>Venemaa keerab gaasi kinni</td></tr><tr><td>nov 2013</td><td>Euromaidan: Janukovõtš keeldub EL-i lepingust</td></tr><tr><td>27.02.2014</td><td>„rohelised mehikesed” Krimmis</td></tr><tr><td>16.03.2014</td><td>Krimmi „referendum”</td></tr><tr><td>17.07.2014</td><td>MH17 alla tulistatud (298 hukkunut)</td></tr><tr><td>5.09.2014 / 12.02.2015</td><td>Minsk I / Minsk II</td></tr><tr><td>2019</td><td>Zelenskõi president (73%)</td></tr><tr><td>24.02.2022</td><td>täiemahuline sissetung</td></tr><tr><td>märts 2022</td><td>Butša massimõrv</td></tr><tr><td>23.–24.06.2023</td><td>Prigožini mäss</td></tr></tbody></table><ul><li>Venemaa muster: sõda naabritega, ettekääne „venekeelsete kaitse”, ei taha, et naabrid läheksid EL-i/NATO-sse.</li></ul></div></div>
+</section>
 <section role="tabpanel" id="aj-viited" aria-labelledby="t-aj-viited" hidden>
   <h2>Viited</h2>
   <p class="lead">Kust selle teema sisu pärineb.</p>
@@ -1828,8 +1933,8 @@ sub{font-size:.72em;line-height:0}
     <a class="subjcard ready" href="#keemia-kt1"><span class="sname">Kontrolltöö 1: orgaanika</span><span class="stopic">Alkaanid, asendatud alkaanid, alkeenid, alküünid, aromaatsed, isomeeria, reaktsioonid.</span><span class="prog" data-topic="keemia-kt1"></span></a>
   </div>
 </div>
-<div class="view" id="v-keemia-kt1" data-updated="2026-10-05" data-title="Kontrolltöö 1: orgaanika" data-parent="keemia" data-parent-title="Keemia" hidden>
-  <nav class="appbar sticky" aria-label="Keemia kontrolltöö 1 teemad"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-ke-ulevaade" aria-controls="ke-ulevaade" aria-selected="false">Ülevaade</button><button role="tab" id="t-ke-valemid" aria-controls="ke-valemid" aria-selected="false">Sidemed ja valemid</button><button role="tab" id="t-ke-alkaanid" aria-controls="ke-alkaanid" aria-selected="false">Alkaanid</button><button role="tab" id="t-ke-asendatud" aria-controls="ke-asendatud" aria-selected="false">Asendatud alkaanid</button><button role="tab" id="t-ke-kullastumata" aria-controls="ke-kullastumata" aria-selected="false">Alkeenid ja alküünid</button><button role="tab" id="t-ke-aromaatsed" aria-controls="ke-aromaatsed" aria-selected="false">Aromaatsed</button><button role="tab" id="t-ke-isomeeria" aria-controls="ke-isomeeria" aria-selected="false">Isomeeria</button><button role="tab" id="t-ke-omadused" aria-controls="ke-omadused" aria-selected="false">Keemistemp ja lahustuvus</button><button role="tab" id="t-ke-reaktsioonid" aria-controls="ke-reaktsioonid" aria-selected="false">Reaktsioonid</button><button role="tab" id="t-ke-harjutused" aria-controls="ke-harjutused" aria-selected="false">Harjutused</button><button role="tab" id="t-ke-test" aria-controls="ke-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-ke-viited" aria-controls="ke-viited" aria-selected="false">Videod ja viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
+<div class="view" id="v-keemia-kt1" data-updated="2026-10-07" data-title="Kontrolltöö 1: orgaanika" data-parent="keemia" data-parent-title="Keemia" hidden>
+  <nav class="appbar sticky" aria-label="Keemia kontrolltöö 1 teemad"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-ke-ulevaade" aria-controls="ke-ulevaade" aria-selected="false">Ülevaade</button><button role="tab" id="t-ke-valemid" aria-controls="ke-valemid" aria-selected="false">Sidemed ja valemid</button><button role="tab" id="t-ke-alkaanid" aria-controls="ke-alkaanid" aria-selected="false">Alkaanid</button><button role="tab" id="t-ke-asendatud" aria-controls="ke-asendatud" aria-selected="false">Asendatud alkaanid</button><button role="tab" id="t-ke-kullastumata" aria-controls="ke-kullastumata" aria-selected="false">Alkeenid ja alküünid</button><button role="tab" id="t-ke-aromaatsed" aria-controls="ke-aromaatsed" aria-selected="false">Aromaatsed</button><button role="tab" id="t-ke-isomeeria" aria-controls="ke-isomeeria" aria-selected="false">Isomeeria</button><button role="tab" id="t-ke-omadused" aria-controls="ke-omadused" aria-selected="false">Keemistemp ja lahustuvus</button><button role="tab" id="t-ke-reaktsioonid" aria-controls="ke-reaktsioonid" aria-selected="false">Reaktsioonid</button><button role="tab" id="t-ke-harjutused" aria-controls="ke-harjutused" aria-selected="false">Harjutused</button><button role="tab" id="t-ke-test" aria-controls="ke-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-ke-treener" aria-controls="ke-treener" aria-selected="false">Nimetamise treener</button><button role="tab" id="t-ke-proov" aria-controls="ke-proov" aria-selected="false">Proovitöö</button><button role="tab" id="t-ke-spikker" aria-controls="ke-spikker" aria-selected="false">Spikker</button><button role="tab" id="t-ke-viited" aria-controls="ke-viited" aria-selected="false">Videod ja viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#keemia"><span aria-hidden="true">←</span> Keemia</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#keemia">Keemia</a> / Kontrolltöö 1</span>
@@ -2114,6 +2219,23 @@ H — C — C — C — H
   <h2>Testi ennast</h2>
   <p class="lead">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
   <div class="quiz" data-quiz="keemia"></div>
+</section>
+<section role="tabpanel" id="ke-treener" aria-labelledby="t-ke-treener" hidden>
+  <h2>Nimetamise treener</h2>
+  <p class="lead">Arvuti teeb juhusliku ühendi, sina kirjutad nime. Ülesandeid tuleb lõputult, nii et saad harjutada nii kaua, kui vaja.</p>
+  <div class="namer"></div>
+  <p class="muted">Täpitähtedeta (nt „metuul”) ja tühikutega kirjutatud vastuseid loetakse ka õigeks, aga õige kirjapilt näidatakse alati. Alkoholide ja alkeenide puhul sobivad nii uuem (pentaan-2-ool, pent-2-een) kui ka vanem kuju (2-pentanool, 2-penteen).</p>
+</section>
+<section role="tabpanel" id="ke-proov" aria-labelledby="t-ke-proov" hidden>
+  <h2>Proovitöö</h2>
+  <p class="lead">10 juhuslikku küsimust ja 20 minutit aega, nagu päris töös. Kirjuta vastused, siis võrdle õigetega ja hinda ennast ise.</p>
+  <div class="exam" data-quiz="keemia" data-n="10" data-min="20"></div>
+  <p class="muted">Pärast lõpetamist näed iga küsimuse juures õiget vastust ja märgid ise, kas sinu vastus oli õige.</p>
+</section>
+<section role="tabpanel" id="ke-spikker" aria-labelledby="t-ke-spikker" hidden>
+  <div class="spk-head"><h2>Spikker</h2><button type="button" class="btn sec spk-print">Prindi / salvesta PDF</button></div>
+  <p class="lead">Kõige olulisem ühel lehel, et töö eel kiiresti üle vaadata.</p>
+  <div class="spikker" data-title="Keemia · Kontrolltöö 1: orgaanika"><div class="spk-box"><h4>Sidemed</h4><table><thead><tr><th>C</th><th>N</th><th>O</th><th>H, halogeen</th></tr></thead><tbody><tr><td>4</td><td>3</td><td>2</td><td>1</td></tr></tbody></table></div><div class="spk-box"><h4>Nimetamise skeem</h4><ul><li>Leia <b>pikim ahel</b> (kordne side / OH peab olema sees), nummerda nii, et rühmad saaksid <b>väikseimad numbrid</b>.</li><li>asukoht + (di-, tri-) + rühm + tüvi + järelliide, nt <b>3-etüül-2,4-dimetüülheksaan</b></li><li>Rühmad <b>tähestiku järjekorras</b> (di-, tri- ei loe). Võrdsete numbrite korral saab väiksema numbri tähestikus esimene rühm.</li></ul></div><div class="spk-box"><h4>Tüved</h4><table><thead><tr><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr></thead><tbody><tr><td>met</td><td>et</td><td>prop</td><td>but</td><td>pent</td><td>heks</td><td>hept</td><td>okt</td><td>non</td><td>dek</td></tr></tbody></table></div><div class="spk-box"><h4>Aineklassid</h4><table><thead><tr><th>Klass</th><th>Tunnus</th><th>Näide</th></tr></thead><tbody><tr><td>alkaan</td><td>-aan</td><td>propaan</td></tr><tr><td>tsükloalkaan</td><td>tsüklo-…-aan</td><td>tsükloheksaan</td></tr><tr><td>alkeen</td><td>-een (C=C)</td><td>but-2-een</td></tr><tr><td>alküün</td><td>-üün (C≡C)</td><td>propüün</td></tr><tr><td>areen</td><td>benseen</td><td>metüülbenseen</td></tr><tr><td>halogeeniühend</td><td>fluoro-, kloro-, bromo-, jodo-</td><td>2-klorobutaan</td></tr><tr><td>alkohol</td><td>-ool (–OH)</td><td>propaan-2-ool</td></tr><tr><td>amiin</td><td>-amiin, amino- (–NH₂)</td><td>etüülamiin</td></tr></tbody></table><ul><li>Üldvalemid: alkaan C<sub>n</sub>H<sub>2n+2</sub>, tsükloalkaan ja alkeen C<sub>n</sub>H<sub>2n</sub>, alküün C<sub>n</sub>H<sub>2n−2</sub>.</li></ul></div><div class="spk-box"><h4>Keemistemperatuur ja lahustuvus</h4><ul><li>Pikem ahel → <b>kõrgem</b> keemistemperatuur. Hargnenum → <b>madalam</b>.</li><li>Sama suuruse korral: <b>alkaan &lt; halogeeniühend &lt; amiin &lt; alkohol</b> (vesiniksidemed).</li><li>Vees lahustuvad alkoholid ja amiinid (vesiniksidemed). Pikem ahel → halvemini, rohkem OH-rühmi → paremini.</li><li>Halogeeniühendid: vees ei lahustu, tihedus suur (raskem halogeen → suurem tihedus).</li></ul></div><div class="spk-box"><h4>Reaktsioonid</h4><table><thead><tr><th>Reaktsioon</th><th>Tingimus</th><th>Saadus</th></tr></thead><tbody><tr><td>alkaan + O₂ (põlemine)</td><td>süütamine</td><td>CO₂ + H₂O</td></tr><tr><td>alkaan + Cl₂ / Br₂ (asendus)</td><td><b>kiirgus</b></td><td>halogeeniühend + HCl / HBr</td></tr><tr><td>alkeen + Br₂ (liitumine)</td><td><b>iseeneslik</b></td><td>dibromoühend</td></tr><tr><td>alkeen + H₂O (hüdraatimine)</td><td><b>H⁺</b> (hape)</td><td>alkohol</td></tr><tr><td>alkeen + H₂ (hüdrogeenimine)</td><td><b>Pt</b> / Ni / Pd</td><td>alkaan</td></tr><tr><td>benseen + Br₂ (asendus)</td><td><b>FeBr₃</b></td><td>bromobenseen + HBr</td></tr><tr><td>benseen + HNO₃ (nitreerimine)</td><td>H₂SO₄</td><td>nitrobenseen + H₂O</td></tr><tr><td>amiin + hape</td><td>–</td><td>ammooniumsool</td></tr></tbody></table><ul><li><b>Markovnikov</b>: H läheb sinna C-le, kus on rohkem H-sid; OH või halogeen sinna, kus vähem.</li><li>Kolmiksidemele liitub kuni <b>2</b> molekuli H₂ / Br₂.</li><li>Põlemine: C → CO₂, H/2 → H₂O, O kokku → O₂ ette pool sellest (murd → korruta 2-ga). 2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O</li></ul></div><div class="spk-box"><h4>Isomeerid</h4><ul><li>Sama brutovalem, erinev ehitus. C₄H₁₀: 2, C₅H₁₂: 3, C₆H₁₄: 5 isomeeri.</li><li>Lõks: tsüklopentaan (C₅H₁₀) ei ole pentaani (C₅H₁₂) isomeer.</li></ul></div></div>
 </section>
 <section role="tabpanel" id="ke-viited" aria-labelledby="t-ke-viited" hidden>
   <h2>Videod ja viited</h2>
@@ -3110,6 +3232,347 @@ H — C — C — C — H
     document.querySelector('#updlog .ul-date').textContent = h.textContent;
     document.querySelector('#updlog .ul-last').textContent = li.textContent.trim();
   })();
+  // --- tööriistad: proovitöö, ajajoone mäng, nimetamise treener, kuulamistest, spikri printimine ---
+  function shuffle(a){ a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+  function store(k, v){ try { if (v === undefined) return JSON.parse(localStorage.getItem(k) || 'null'); localStorage.setItem(k, JSON.stringify(v)); } catch (e) { return null; } }
+
+  // Proovitöö: juhuslikud küsimused, taimer, enda hindamine
+  document.querySelectorAll('.exam[data-quiz]').forEach(function(box){
+    var name = box.getAttribute('data-quiz'), N = +box.getAttribute('data-n') || 10, MIN = +box.getAttribute('data-min') || 15;
+    var ALL = QUIZ[name] || [], hasExtra = ALL.some(function(q){ return q[3] === 'lisa'; });
+    var KEY = 'ajukas-exam-' + name, qs = [], timer = 0, end = 0, grades = [];
+    box.className = 'exam tool';
+    function idle(){
+      clearInterval(timer);
+      var best = store(KEY);
+      box.innerHTML = '<p class="big">' + t('{n} küsimust · {m} minutit', { n: N, m: MIN }) + '</p>' +
+        (hasExtra ? '<p><label><input type="checkbox" class="ex-core" checked> ' + t('ainult olulisemad küsimused') + '</label></p>' : '') +
+        '<div class="row"><button type="button" class="btn ex-start">' + t('Alusta proovitööd') + '</button>' +
+        (best ? '<span class="muted">' + t('Parim tulemus: {p}%', { p: best }) + '</span>' : '') + '</div>';
+      box.querySelector('.ex-start').addEventListener('click', start);
+    }
+    function start(){
+      var core = box.querySelector('.ex-core'), pool = ALL.filter(function(q){ return !(core && core.checked && q[3] === 'lisa'); });
+      qs = shuffle(pool).slice(0, N); grades = qs.map(function(){ return null; });
+      end = Date.now() + MIN * 60000;
+      box.innerHTML = '<div class="exam-timer" aria-live="off">⏱ <span class="ex-left"></span></div>' +
+        qs.map(function(q, i){ return '<div class="exam-q"><div class="qh"><span class="qn">' + (i + 1) + '.</span><span>' + esc(q[1]) + '</span></div><textarea aria-label="' + esc(t('Vastus küsimusele {n}', { n: i + 1 })) + '"></textarea></div>'; }).join('') +
+        '<div class="row"><button type="button" class="btn ex-done">' + t('Lõpeta ja vaata vastuseid') + '</button><button type="button" class="btn sec ex-quit">' + t('Katkesta') + '</button></div>';
+      box.querySelector('.ex-done').addEventListener('click', function(){ review(false); });
+      box.querySelector('.ex-quit').addEventListener('click', function(){ if (confirm(t('Katkestada proovitöö?'))) idle(); });
+      tick(); timer = setInterval(tick, 1000);
+      box.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
+    function tick(){
+      var left = Math.max(0, end - Date.now()), el = box.querySelector('.ex-left'); if (!el) return;
+      var m = Math.floor(left / 60000), sec = Math.floor(left / 1000) % 60;
+      el.textContent = m + ':' + (sec < 10 ? '0' : '') + sec;
+      el.parentNode.classList.toggle('low', left < 60000);
+      if (!left) review(true);
+    }
+    function review(timeUp){
+      clearInterval(timer);
+      var mine = Array.from(box.querySelectorAll('.exam-q textarea')).map(function(x){ return x.value.trim(); });
+      box.innerHTML = (timeUp ? '<p class="exam-res">' + t('Aeg sai läbi!') + '</p>' : '') +
+        '<p class="muted">' + t('Võrdle oma vastust õigega ja märgi, kas see oli õige.') + '</p>' +
+        qs.map(function(q, i){
+          return '<div class="exam-q" data-i="' + i + '"><div class="qh"><span class="qn">' + (i + 1) + '.</span><span>' + esc(q[1]) + '</span></div>' +
+            (mine[i] ? '<p class="mine">' + t('Sinu vastus') + ': ' + esc(mine[i]) + '</p>' : '<p class="mine">' + t('(vastamata)') + '</p>') +
+            '<div class="right">' + esc(q[2]) + '</div>' +
+            '<div class="grade"><button type="button" data-g="1" aria-pressed="false">✓ ' + t('Õige') + '</button><button type="button" data-g="0.5" aria-pressed="false">½ ' + t('Osaliselt') + '</button><button type="button" data-g="0" aria-pressed="false">✗ ' + t('Vale') + '</button></div></div>';
+        }).join('') + '<div class="ex-sum"></div>';
+      box.querySelectorAll('.grade button').forEach(function(b){
+        b.addEventListener('click', function(){
+          var i = +b.closest('.exam-q').getAttribute('data-i');
+          grades[i] = +b.getAttribute('data-g');
+          b.parentNode.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+          sum();
+        });
+      });
+      sum();
+      box.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
+    function sum(){
+      var done = grades.filter(function(g){ return g !== null; }).length, pts = grades.reduce(function(a, g){ return a + (g || 0); }, 0);
+      var el = box.querySelector('.ex-sum');
+      if (done < qs.length) { el.innerHTML = '<p class="muted">' + t('Hinnatud {d} / {n}', { d: done, n: qs.length }) + '</p>'; return; }
+      var pct = Math.round(pts / qs.length * 100), best = store(KEY);
+      if (best === null || pct > best) store(KEY, pct);
+      el.innerHTML = '<p class="exam-res">' + t('Tulemus') + ': <b>' + pct + '%</b> (' + String(pts).replace('.', ',') + ' / ' + qs.length + ')</p>' +
+        '<div class="row"><button type="button" class="btn ex-again">' + t('Uus proovitöö') + '</button></div>';
+      el.querySelector('.ex-again').addEventListener('click', idle);
+    }
+    idle();
+  });
+
+  // Ajajoone mäng: sündmused õigesse järjekorda
+  document.querySelectorAll('.tlgame[data-src]').forEach(function(box){
+    var src = document.getElementById(box.getAttribute('data-src')); if (!src) return;
+    var EV = [];
+    src.querySelectorAll('.timeline li').forEach(function(li){
+      var w = li.querySelector('.when'); if (!w) return;
+      var m = w.textContent.match(/\d{4}/); if (!m) return;
+      var c = li.cloneNode(true); c.querySelector('.when').remove();
+      var txt = c.textContent.replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').replace(/\s+([,.;:])/g, '$1').trim();
+      var m2 = txt.match(/^(.*?[a-zõäöüšž”")])\.(\s|$)/i), first = (m2 ? m2[1] : txt).replace(/\.$/, '');
+      EV.push({ y: +m[0], when: w.textContent.trim(), txt: first });
+    });
+    var score = 0, rounds = 0, items = [], picked = [];
+    box.className = 'tlgame tool';
+    function round(){
+      var byYear = {}; shuffle(EV).forEach(function(e){ if (!byYear[e.y]) byYear[e.y] = e; });
+      items = shuffle(Object.keys(byYear).map(function(y){ return byYear[y]; })).slice(0, 5); picked = [];
+      paint(false);
+    }
+    function paint(checked){
+      var order = items.slice().sort(function(a, b){ return a.y - b.y; });
+      box.innerHTML = '<div class="tl-items">' + items.map(function(e, i){
+        var p = picked.indexOf(i), cls = p >= 0 ? ' on' : '';
+        if (checked) cls += order[p] === e ? ' ok' : ' no';
+        return '<button type="button" class="tl-item' + cls + '" data-i="' + i + '"' + (checked ? ' disabled' : '') + '><span class="ord">' + (p >= 0 ? p + 1 : '') + '</span><span>' + esc(e.txt) + '</span>' + (checked ? '<span class="yr">' + esc(e.when) + '</span>' : '') + '</button>';
+      }).join('') + '</div>' +
+      (checked ? '<p><b>' + t('Õige järjekord') + ':</b></p><ol class="tl-sol">' + order.map(function(e){ return '<li><span class="y">' + esc(e.when) + '</span> ' + esc(e.txt) + '</li>'; }).join('') + '</ol>' : '') +
+      '<div class="row">' + (checked ? '<button type="button" class="btn tl-next">' + t('Uus voor') + '</button>' : '<button type="button" class="btn tl-check"' + (picked.length < items.length ? ' disabled' : '') + '>' + t('Kontrolli') + '</button><button type="button" class="btn sec tl-reset">' + t('Alusta uuesti') + '</button>') +
+      '<span class="muted">' + t('Õigeid voore: {s} / {r}', { s: score, r: rounds }) + '</span></div>';
+      box.querySelectorAll('.tl-item').forEach(function(b){
+        b.addEventListener('click', function(){
+          var i = +b.getAttribute('data-i'), p = picked.indexOf(i);
+          if (p >= 0) picked.splice(p, 1); else picked.push(i);
+          paint(false);
+        });
+      });
+      var c = box.querySelector('.tl-check'); if (c) c.addEventListener('click', function(){
+        var order = items.slice().sort(function(a, b){ return a.y - b.y; });
+        var ok = picked.every(function(i, p){ return items[i] === order[p]; });
+        rounds++; if (ok) score++;
+        paint(true);
+      });
+      var r = box.querySelector('.tl-reset'); if (r) r.addEventListener('click', function(){ picked = []; paint(false); });
+      var n = box.querySelector('.tl-next'); if (n) n.addEventListener('click', round);
+    }
+    if (EV.length >= 5) round();
+  });
+
+  // Keemia: nimetamise treener (juhuslikud ühendid, nimi kontrollitakse automaatselt)
+  document.querySelectorAll('.namer').forEach(function(box){
+    var ROOT = ['', 'met', 'et', 'prop', 'but', 'pent', 'heks', 'hept', 'okt', 'non', 'dek'];
+    var MULT = ['', '', 'di', 'tri', 'tetra'];
+    var KINDS = [['alkaan', t('Alkaanid')], ['harg', t('Hargnenud alkaanid')], ['tsyklo', t('Tsükloalkaanid')], ['kordne', t('Alkeenid ja alküünid')], ['halo', t('Halogeeniühendid')], ['ool', t('Alkoholid')]];
+    var on = store('ajukas-namer') || { alkaan: true, harg: true, tsyklo: true, kordne: true, halo: true, ool: true };
+    var cur = null, streak = 0, ok = 0, tot = 0, answered = false;
+    function rnd(a, b){ return a + Math.floor(Math.random() * (b - a + 1)); }
+    function pick(a){ return a[Math.floor(Math.random() * a.length)]; }
+    function sub(x){ return esc(x).replace(/([A-Za-z)])(\d+)/g, '$1<sub>$2</sub>'); }
+    function cmp(a, b){ for (var i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; }
+    function locs(list){ return list.map(function(s){ return s.p; }).sort(function(a, b){ return a - b; }); }
+    // asendusrühmade nimeosa: väikseimad numbrid, viigi korral saab väiksema numbri tähestikus esimene rühm
+    function prefix(n, subs, noLoc){
+      var A = subs, B = subs.map(function(s){ return { p: n + 1 - s.p, g: s.g }; });
+      var c = cmp(locs(A), locs(B)), use = c <= 0 ? A : B;
+      if (c === 0) {
+        var gs = subs.map(function(s){ return s.g; }).filter(function(g, i, a){ return a.indexOf(g) === i; }).sort(function(a, b){ return a.localeCompare(b, 'et'); });
+        for (var k = 0; k < gs.length; k++) {
+          var la = locs(A.filter(function(s){ return s.g === gs[k]; })), lb = locs(B.filter(function(s){ return s.g === gs[k]; })), d = cmp(la, lb);
+          if (d) { use = d < 0 ? A : B; break; }
+        }
+      }
+      var by = {}; use.forEach(function(s){ (by[s.g] = by[s.g] || []).push(s.p); });
+      return { txt: Object.keys(by).sort(function(a, b){ return a.localeCompare(b, 'et'); }).map(function(g){
+        var l = by[g].sort(function(a, b){ return a - b; });
+        return (noLoc ? '' : l.join(',') + '-') + MULT[l.length] + g;
+      }).join('-'), dir: use === A ? 1 : -1 };
+    }
+    // lihtsustatud struktuurivalem sirgest ahelast
+    function formula(n, att, bonds){
+      var parts = [];
+      for (var i = 1; i <= n; i++) {
+        var a = att[i] || [], used = (i > 1 ? 1 : 0) + (i < n ? 1 : 0) + a.length + (bonds[i - 1] || 1) - 1 + (bonds[i] || 1) - 1;
+        var h = 4 - used, inner = i > 1 && i < n, cnt = {};
+        a.forEach(function(g){ cnt[g] = (cnt[g] || 0) + 1; });
+        var tx = 'C' + (h > 0 ? 'H' + (h > 1 ? h : '') : '');
+        Object.keys(cnt).forEach(function(g){
+          var multi = g.length > 2 || g === 'OH';
+          tx += (multi && (inner || cnt[g] > 1 || n === 1 && g !== 'OH') ? '(' + g + ')' : g) + (cnt[g] > 1 ? cnt[g] : '');
+        });
+        parts.push(tx);
+        if (i < n) parts.push(bonds[i] === 3 ? '≡' : bonds[i] === 2 ? '=' : '–');
+      }
+      return parts.join('');
+    }
+    function ring(n, g){
+      var R = 34, cx = 60, cy = 50, pts = [];
+      for (var i = 0; i < n; i++) { var an = -Math.PI / 2 + i * 2 * Math.PI / n; pts.push([cx + R * Math.cos(an), cy + R * Math.sin(an)]); }
+      var svg = '<svg viewBox="0 0 ' + (g ? 190 : 120) + ' 100" width="' + (g ? 190 : 120) + '" height="100" role="img" aria-label="tsükkel"><polygon points="' + pts.map(function(p){ return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' ') + '"/>';
+      if (g) { var p0 = pts[n > 4 ? 1 : 1]; svg += '<line x1="' + p0[0].toFixed(1) + '" y1="' + p0[1].toFixed(1) + '" x2="' + (p0[0] + 26).toFixed(1) + '" y2="' + (p0[1] - 12).toFixed(1) + '"/><text x="' + (p0[0] + 30).toFixed(1) + '" y="' + (p0[1] - 10).toFixed(1) + '">' + (g === 'metüül' ? 'CH₃' : 'CH₂CH₃') + '</text>'; }
+      return svg + '</svg>';
+    }
+    var GEN = {
+      alkaan: function(){
+        var n = rnd(1, 10), att = {};
+        return { kind: t('alkaan'), f: sub(formula(n, att, {})), name: ROOT[n] + 'aan', alt: [], hint: t('{n} süsinikku, ainult üksiksidemed.', { n: n }) };
+      },
+      harg: function(){
+        var n = rnd(4, 8), subs = [], tries = 0, k = rnd(1, n >= 6 ? 3 : 2);
+        while (subs.length < k && tries++ < 50) {
+          var g = n >= 5 && Math.random() < 0.3 ? 'etüül' : 'metüül', p = g === 'etüül' ? rnd(3, n - 2) : rnd(2, n - 1);
+          if (subs.filter(function(s){ return s.p === p; }).length >= 2) continue;
+          subs.push({ p: p, g: g });
+        }
+        var att = {}; subs.forEach(function(s){ (att[s.p] = att[s.p] || []).push(s.g === 'metüül' ? 'CH3' : 'CH2CH3'); });
+        var pr = prefix(n, subs);
+        return { kind: t('hargnenud alkaan'), f: sub(formula(n, att, {})), name: pr.txt + ROOT[n] + 'aan', alt: [], hint: t('Pikim ahel on {n} C: {r}aan. Nummerda nii, et rühmad saaksid väikseimad numbrid.', { n: n, r: ROOT[n] }) };
+      },
+      tsyklo: function(){
+        var n = rnd(3, 6), g = Math.random() < 0.5 ? pick(['metüül', 'etüül']) : '';
+        var nm = 'tsüklo' + ROOT[n] + 'aan';
+        return { kind: t('tsükloalkaan'), f: ring(n, g), name: g + nm, alt: g ? ['1-' + g + nm] : [], hint: t('Tsüklis on {n} süsinikku.', { n: n }) };
+      },
+      kordne: function(){
+        var n = rnd(2, 7), b = Math.random() < 0.6 ? 2 : 3, p = rnd(1, n - 1), bonds = {}; bonds[p] = b;
+        var lp = Math.min(p, n - p), suf = b === 2 ? 'een' : 'üün', nm, alt = [];
+        if (n === 2) nm = 'et' + suf; else if (n === 3) nm = 'prop' + suf;
+        else { nm = ROOT[n] + '-' + lp + '-' + suf; alt = [lp + '-' + ROOT[n] + suf]; }
+        return { kind: b === 2 ? t('alkeen') : t('alküün'), f: sub(formula(n, {}, bonds)), name: nm, alt: alt, hint: b === 2 ? t('Kaksikside → -een, number näitab, millise C juurest side algab.') : t('Kolmikside → -üün, number näitab, millise C juurest side algab.') };
+      },
+      halo: function(){
+        var n = rnd(1, 6), k = n === 1 ? rnd(1, 2) : rnd(1, 2), X = { F: 'fluoro', Cl: 'kloro', Br: 'bromo', I: 'jodo' }, subs = [], att = {};
+        for (var i = 0; i < k; i++) { var el = pick(Object.keys(X)), p = rnd(1, n); if ((att[p] || []).length >= 2) { i--; continue; } (att[p] = att[p] || []).push(el); subs.push({ p: p, g: X[el] }); }
+        var noLoc = n === 1 || (n === 2 && k === 1), pr = prefix(n, subs, noLoc);
+        var nm = pr.txt + ROOT[n] + 'aan', alt = [];
+        if (n === 2 && k === 1) alt.push('1-' + nm);
+        return { kind: t('halogeeniühend'), f: sub(formula(n, att, {})), name: nm, alt: alt, hint: t('Halogeen on eesliide: fluoro-, kloro-, bromo-, jodo-. Tähestiku järjekord: b, f, j, k.') };
+      },
+      ool: function(){
+        var n = rnd(1, 7), p = rnd(1, n), att = {}; att[p] = ['OH'];
+        var lp = Math.min(p, n + 1 - p), nm, alt = [];
+        if (n === 1) nm = 'metanool'; else if (n === 2) { nm = 'etanool'; alt = ['etaan-1-ool']; }
+        else { nm = ROOT[n] + 'aan-' + lp + '-ool'; alt = [lp + '-' + ROOT[n] + 'anool']; if (lp === 1) alt.push(ROOT[n] + 'anool'); }
+        return { kind: t('alkohol'), f: sub(formula(n, att, {})), name: nm, alt: alt, hint: t('Alkaani nimi + OH asukoht + -ool. OH saab võimalikult väikese numbri.') };
+      }
+    };
+    function norm(x){ return x.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[\s.]+/g, '').replace(/[‐‑‒–—―−]/g, '-'); }
+    box.className = 'namer tool';
+    box.innerHTML = '<div class="nm-filters" role="group" aria-label="' + esc(t('Aineklassid')) + '">' + KINDS.map(function(k){ return '<button type="button" data-k="' + k[0] + '" aria-pressed="' + (on[k[0]] ? 'true' : 'false') + '">' + esc(k[1]) + '</button>'; }).join('') + '</div>' +
+      '<div class="nm-kind"></div><div class="nm-formula"></div>' +
+      '<form class="row nm-form"><label class="vh" for="nm-in">' + t('Ühendi nimi') + '</label><input class="nm-in" id="nm-in" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="' + esc(t('kirjuta nimi')) + '"><button type="submit" class="btn">' + t('Kontrolli') + '</button><button type="button" class="btn sec nm-hint">' + t('Vihje') + '</button><button type="button" class="btn sec nm-skip">' + t('Näita vastust') + '</button></form>' +
+      '<p class="nm-fb" aria-live="polite"></p><div class="row"><button type="button" class="btn nm-next" hidden>' + t('Järgmine') + ' →</button></div><p class="nm-stats"></p>';
+    var input = box.querySelector('.nm-in'), fb = box.querySelector('.nm-fb'), next = box.querySelector('.nm-next');
+    function stats(){ box.querySelector('.nm-stats').textContent = t('Õigeid järjest: {s} · kokku {o} / {n}', { s: streak, o: ok, n: tot }); }
+    function newQ(){
+      var ks = KINDS.map(function(k){ return k[0]; }).filter(function(k){ return on[k]; }); if (!ks.length) ks = ['alkaan'];
+      var c; do { c = GEN[pick(ks)](); } while (cur && c.name === cur.name);
+      cur = c; answered = false;
+      box.querySelector('.nm-kind').textContent = '';
+      box.querySelector('.nm-formula').innerHTML = cur.f;
+      fb.className = 'nm-fb'; fb.textContent = ''; input.value = ''; next.hidden = true; stats();
+    }
+    function done(right, given){
+      answered = true; tot++;
+      if (right) { ok++; streak++; fb.className = 'nm-fb ok'; fb.innerHTML = '✓ ' + t('Õige!') + ' <span class="ans">' + esc(cur.name) + '</span>'; }
+      else { streak = 0; fb.className = 'nm-fb no'; fb.innerHTML = (given ? '✗ ' + t('Vale.') + ' ' : '') + t('Õige vastus') + ': <span class="ans">' + esc(cur.name) + '</span>' + (cur.alt.length ? ' <span class="muted">(' + t('ka') + ' ' + esc(cur.alt.join(', ')) + ')</span>' : ''); }
+      box.querySelector('.nm-kind').textContent = cur.kind;
+      next.hidden = false; next.focus(); stats();
+    }
+    box.querySelector('.nm-form').addEventListener('submit', function(e){
+      e.preventDefault(); if (answered) { newQ(); input.focus(); return; }
+      var v = norm(input.value); if (!v) { input.focus(); return; }
+      done([cur.name].concat(cur.alt).some(function(x){ return norm(x) === v; }), true);
+    });
+    box.querySelector('.nm-hint').addEventListener('click', function(){ if (!answered) { fb.className = 'nm-fb'; fb.textContent = cur.kind + ': ' + cur.hint; } });
+    box.querySelector('.nm-skip').addEventListener('click', function(){ if (!answered) done(false, false); });
+    next.addEventListener('click', function(){ newQ(); input.focus(); });
+    box.querySelectorAll('.nm-filters button').forEach(function(b){
+      b.addEventListener('click', function(){
+        var k = b.getAttribute('data-k'); on[k] = !on[k];
+        if (!KINDS.some(function(x){ return on[x[0]]; })) on[k] = true;
+        b.setAttribute('aria-pressed', on[k] ? 'true' : 'false'); store('ajukas-namer', on); newQ();
+      });
+    });
+    newQ();
+  });
+
+  // Muusika: kuulamistest (YouTube, video peidus kuni vastamiseni)
+  document.querySelectorAll('.listen').forEach(function(box){
+    var CLIPS = [
+      { v: 'bCxLAr_bwpA', s: 5, a: 'Scott Joplin – „Maple Leaf Rag”', st: 'ragtime' },
+      { v: 'ND2rMET4MVw', s: 5, a: 'Scott Joplin – „The Entertainer”', st: 'ragtime' },
+      { v: '4gXShOJVwaM', s: 5, a: 'Bessie Smith – „Back Water Blues”', st: 'bluus' },
+      { v: '5Bo3f_9hLkQ', s: 20, a: 'Bessie Smith – „St. Louis Blues”', st: 'bluus' },
+      { v: 'OIW4ARVbhrw', s: 10, a: 'B.B. King – „Nobody Loves Me But My Mother”', st: 'bluus' },
+      { v: 'PwpriGltf9g', s: 3, a: 'King Oliver’s Creole Jazz Band – „Dipper Mouth Blues” (1923)', st: 'New Orleansi jazz' },
+      { v: '89fZGnAdago', s: 3, a: 'Original Dixieland Jazz Band – „Tiger Rag” (1917)', st: 'dixieland' },
+      { v: 'VqhCQZaH4Vs', s: 5, a: 'Louis Armstrong – „What a Wonderful World”', st: 'Louis Armstrong, hilisem ballaad (1967)' },
+      { v: 'O9jHgGDKDkU', s: 10, a: 'Duke Ellington – „Mood Indigo”', st: 'Duke Ellington' },
+      { v: 'qDQpZT3GhDg', s: 10, a: 'Duke Ellington – „It Don’t Mean a Thing”', st: 'Duke Ellington' }
+    ];
+    var order = [], i = 0, score = 0, player = null, playing = false;
+    box.className = 'listen tool';
+    function loadYT(cb){
+      if (window.YT && window.YT.Player) return cb();
+      (window.__ytq = window.__ytq || []).push(cb);
+      if (window.__ytq.length > 1) return;
+      var prev = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = function(){ if (prev) prev(); (window.__ytq || []).forEach(function(f){ f(); }); window.__ytq = []; };
+      var sc = document.createElement('script'); sc.src = 'https://www.youtube.com/iframe_api';
+      sc.onerror = function(){ box.querySelector('.ls-info').textContent = t('YouTube ei laadinud. Kontrolli internetiühendust.'); };
+      document.head.appendChild(sc);
+    }
+    function intro(){
+      box.innerHTML = '<p class="big">' + t('{n} lõiku', { n: CLIPS.length }) + '</p><p class="ls-info">' + t('Iga lõigu juures 4 varianti. Kuula nii kaua, kui tahad.') + '</p><div class="row"><button type="button" class="btn ls-start">▶ ' + t('Alusta') + '</button></div>';
+      box.querySelector('.ls-start').addEventListener('click', function(){ order = shuffle(CLIPS); i = 0; score = 0; q(); });
+    }
+    function q(){
+      var c = order[i], opts = shuffle([c].concat(shuffle(CLIPS.filter(function(x){ return x !== c; })).slice(0, 3)));
+      box.innerHTML = '<p class="ls-info">' + t('Lõik {i} / {n} · õigeid {s}', { i: i + 1, n: order.length, s: score }) + '</p>' +
+        '<div class="ls-video"><div id="ls-player"></div><div class="ls-cover"><div><div class="note">♪</div>' + t('Kuula ja arva ära') + '</div></div></div>' +
+        '<div class="row"><button type="button" class="btn ls-play">▶ ' + t('Mängi') + '</button><button type="button" class="btn sec ls-back">⟲ ' + t('Algusesse') + '</button><button type="button" class="btn sec ls-fwd">+20 s</button></div>' +
+        '<div class="ls-opts">' + opts.map(function(o){ return '<button type="button" data-v="' + o.v + '">' + esc(o.a) + '</button>'; }).join('') + '</div><p class="ls-res"></p>';
+      playing = false;
+      loadYT(function(){
+        if (player && player.destroy) { try { player.destroy(); } catch (e) {} }
+        player = new YT.Player('ls-player', { videoId: c.v, playerVars: { start: c.s, rel: 0, playsinline: 1, controls: 0, disablekb: 1, modestbranding: 1 },
+          events: { onStateChange: function(e){ playing = e.data === 1; var b = box.querySelector('.ls-play'); if (b) b.textContent = playing ? '⏸ ' + t('Paus') : '▶ ' + t('Mängi'); } } });
+      });
+      box.querySelector('.ls-play').addEventListener('click', function(){ if (!player || !player.playVideo) return; if (playing) player.pauseVideo(); else player.playVideo(); });
+      box.querySelector('.ls-back').addEventListener('click', function(){ if (player && player.seekTo) { player.seekTo(c.s, true); player.playVideo(); } });
+      box.querySelector('.ls-fwd').addEventListener('click', function(){ if (player && player.getCurrentTime) { player.seekTo(player.getCurrentTime() + 20, true); player.playVideo(); } });
+      box.querySelectorAll('.ls-opts button').forEach(function(b){
+        b.addEventListener('click', function(){
+          var right = b.getAttribute('data-v') === c.v; if (right) score++;
+          box.querySelectorAll('.ls-opts button').forEach(function(x){ x.disabled = true; if (x.getAttribute('data-v') === c.v) x.classList.add('ok'); else if (x === b) x.classList.add('no'); });
+          box.querySelector('.ls-cover').classList.add('off');
+          box.querySelector('.ls-res').innerHTML = (right ? '✓ ' + t('Õige!') : '✗ ' + t('Vale.')) + ' ' + t('Stiil') + ': <b>' + esc(c.st) + '</b> · <a href="https://www.youtube.com/watch?v=' + c.v + '" target="_blank" rel="noopener">YouTube</a>' +
+            '<br><button type="button" class="btn ls-next" style="margin-top:10px">' + (i + 1 < order.length ? t('Järgmine') + ' →' : t('Vaata tulemust')) + '</button>';
+          box.querySelector('.ls-next').addEventListener('click', function(){
+            if (player && player.stopVideo) { try { player.stopVideo(); } catch (e) {} }
+            i++; if (i < order.length) q(); else finish();
+          });
+        });
+      });
+    }
+    function finish(){
+      if (player && player.destroy) { try { player.destroy(); } catch (e) {} player = null; }
+      box.innerHTML = '<p class="exam-res">' + t('Tulemus') + ': <b>' + score + ' / ' + order.length + '</b></p><div class="row"><button type="button" class="btn ls-again">' + t('Proovi uuesti') + '</button></div>';
+      box.querySelector('.ls-again').addEventListener('click', function(){ order = shuffle(CLIPS); i = 0; score = 0; q(); });
+    }
+    intro();
+  });
+
+  // Spikri printimine: avab puhta valge lehe, kust saab printida või PDF-ina salvestada
+  document.querySelectorAll('.spk-print').forEach(function(b){
+    b.addEventListener('click', function(){
+      var sp = b.closest('section').querySelector('.spikker'), w = window.open('', '_blank');
+      if (!w) { window.print(); return; }
+      w.document.write('<!doctype html><html lang="et"><head><meta charset="utf-8"><title>' + esc(sp.getAttribute('data-title')) + ' · spikker</title><style>' +
+        'body{font:12px/1.35 system-ui,Segoe UI,Arial,sans-serif;color:#000;margin:14mm}h1{font-size:17px;margin:0 0 8px}' +
+        '.g{columns:2;column-gap:14px}.b{break-inside:avoid;border:1px solid #bbb;border-radius:4px;padding:6px 8px;margin:0 0 8px}' +
+        'h4{margin:0 0 4px;font-size:13px}ul{margin:0;padding-left:15px}li{margin:0 0 2px}table{border-collapse:collapse;width:100%;font-size:11px}th,td{border-bottom:1px solid #ddd;text-align:left;padding:2px 4px 2px 0;vertical-align:top}' +
+        '@media print{body{margin:0}}</style></head><body><h1>' + esc(sp.getAttribute('data-title')) + '</h1><div class="g">' +
+        Array.from(sp.querySelectorAll('.spk-box')).map(function(x){ return '<div class="b">' + x.innerHTML + '</div>'; }).join('') + '</div></body></html>');
+      w.document.close(); w.focus(); setTimeout(function(){ w.print(); }, 300);
+    });
+  });
+
   // --- äpp telefoni (PWA) ---
   (function(){
     if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(function(){});
