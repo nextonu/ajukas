@@ -111,6 +111,30 @@ b,strong{font-weight:600;color:var(--bright);background:var(--hl);padding:0 3px;
 .timeline{list-style:none;padding:0;margin:8px 0;border-left:1px solid var(--line2)}
 .timeline li{position:relative;padding:0 0 18px 20px;margin:0}
 .timeline li::before{content:"";position:absolute;left:-6px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--muted)}
+.ovgo{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+.ovgo a.btn,a.ovcard,a.ovcard span{text-decoration:none!important}
+.ovgo .btn{font-size:14px;padding:9px 16px}
+.ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:10px 0 8px}
+.ovcard{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 15px 13px;transition:border-color .15s,transform .15s}
+.ovcard:hover{border-color:var(--brand);transform:translateY(-1px)}
+.ovcard:focus-visible{outline:2px solid var(--key);outline-offset:2px}
+.ovtop{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ovnum{font-family:var(--mono);font-size:12px;color:var(--brand);font-weight:600}
+.ovgrp{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ovtitle{font-size:17px;font-weight:700;color:var(--bright)}
+.ovhook{font-size:14px;color:var(--muted);line-height:1.45}
+.ovyrs{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:4px}
+.ovyrs span{font-family:var(--mono);font-size:12px;color:var(--num);border:1px solid var(--line2);border-radius:3px;padding:1px 6px}
+.ovlines{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:10px 0}
+.ovline{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.ovlh{margin:0 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.ovflow{list-style:none;margin:0;padding:0}
+.ovflow li{display:flex;flex-direction:column;font-size:14px;color:var(--bright);padding:0 0 0 14px;margin:0;border-left:2px solid var(--line2);position:relative}
+.ovflow li:not(:last-child){padding-bottom:9px}
+.ovflow li::before{content:"";position:absolute;left:-5px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--panel);border:2px solid var(--num)}
+.ovflow .y{font-family:var(--mono);font-size:12px;color:var(--num)}
+.ovsteps{padding-left:22px}
+.ovsteps li{margin-bottom:6px}
 .timeline .when{font-family:var(--mono);font-size:13px;color:var(--num);display:block}
 .tablewrap{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:4px}
 table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
@@ -601,7 +625,7 @@ sub{font-size:.72em;line-height:0}
   </section>
   <details class="box updlog" id="updlog">
     <summary><span class="ul-title">Uuendused</span><span class="ul-date">5. oktoober 2026</span><span class="ul-last">Uus aine: Keemia, kontrolltöö 1 (orgaanika).</span></summary>
-    <div class="ul-body"><h4>6. oktoober 2026</h4><ul><li>Muusika · Varajane jazz: enesetestis 19 lisaküsimust slaidide väiksematest detailidest. Testi kohal saab valida <b>Olulisemad</b> või <b>Koos lisaküsimustega</b>.</li><li>Avalehe nurgas on teade, kui lehte parasjagu uuendatakse.</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika) koos reaktsioonide tabeli, lahendatud harjutuste ja enesetestiga.</li><li>Avalehel nupp <b>Tunniplaan</b>: vali oma klass ja see avab edaspidi kohe sinu klassi uusima nädala tunniplaani.</li><li>Avalehel <b>Järgmised tööd</b> ja teema lehel kontrolltöö kuupäev. Enesetestis saab märkida „Teadsin” / „Ei teadnud” ja korrata ainult valesid.</li><li>Ajalugu · Ukraina: kirjutatud ümber tunnislaidide põhjal.</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev) koos ajajoone ja enesetestiga.</li><li>Märkmed: igal teemal omad märkmed ja lisaks oma märkmikud. Sisse logides salvestuvad kontole.</li><li>Suvevaheaja taimer (hammasratas → Suvevaheaeg).</li><li>Hele ja tume teema.</li><li>„Jaga lehte” nupp koos QR-koodiga.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> (varajane jazz, kontserdi arvustus) ja <b>UPT</b> juhend.</li><li>Kontod ja soovituste kast.</li><li>Otsing kõigist teemadest.</li></ul></div>
+    <div class="ul-body"><h4>6. oktoober 2026</h4><ul><li>Muusika · Varajane jazz: enesetestis 19 lisaküsimust slaidide väiksematest detailidest. Testi kohal saab valida <b>Olulisemad</b> või <b>Koos lisaküsimustega</b>.</li><li>Avalehe nurgas on teade, kui lehte parasjagu uuendatakse.</li><li>Ajalugu · Kontrolltöö 1: uus ülevaade teemakaartide, oluliste aastate ja teemade seostega.</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika) koos reaktsioonide tabeli, lahendatud harjutuste ja enesetestiga.</li><li>Avalehel nupp <b>Tunniplaan</b>: vali oma klass ja see avab edaspidi kohe sinu klassi uusima nädala tunniplaani.</li><li>Avalehel <b>Järgmised tööd</b> ja teema lehel kontrolltöö kuupäev. Enesetestis saab märkida „Teadsin” / „Ei teadnud” ja korrata ainult valesid.</li><li>Ajalugu · Ukraina: kirjutatud ümber tunnislaidide põhjal.</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev) koos ajajoone ja enesetestiga.</li><li>Märkmed: igal teemal omad märkmed ja lisaks oma märkmikud. Sisse logides salvestuvad kontole.</li><li>Suvevaheaja taimer (hammasratas → Suvevaheaeg).</li><li>Hele ja tume teema.</li><li>„Jaga lehte” nupp koos QR-koodiga.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> (varajane jazz, kontserdi arvustus) ja <b>UPT</b> juhend.</li><li>Kontod ja soovituste kast.</li><li>Otsing kõigist teemadest.</li></ul></div>
   </details>
   <aside class="suvi" id="suvi" aria-label="Suvevaheaja taimer" hidden>
   <div class="suvi-clock">
@@ -1329,19 +1353,26 @@ sub{font-size:.72em;line-height:0}
   </div>
   <main><section role="tabpanel" id="aj-ulevaade" aria-labelledby="t-aj-ulevaade" hidden>
   <h2>Kontrolltöö nr 1: tänapäev</h2>
-  <p class="lead">I trimestri esimene ajaloo kontrolltöö käsitleb tänapäeva teemasid.</p>
+  <p class="lead">Kuus teemat viimase 35 aasta ajaloost ja kaks oskust, mida ajaloolane vajab. Vali teema või alusta kordamist allpool.</p>
+  <div class="ovgo">
+    <a class="btn" href="#aj-fakt">Alusta esimesest teemast</a>
+    <a class="btn sec" href="#aj-ajajoon">Ajajoon</a>
+    <a class="btn sec" href="#aj-test">Testi ennast</a>
+  </div>
   <h3>Teemad</h3>
-  <ul>
-    <li><a href="#aj-fakt">Fakt ja faktipõhine mõtlemine</a></li>
-    <li><a href="#aj-perspektiiv">Mitmeperspektiivne ajalugu</a></li>
-    <li><a href="#aj-covid">COVID-19 pandeemia</a></li>
-    <li><a href="#aj-el-nato">Eesti tee Euroopa Liitu ja NATOsse</a></li>
-    <li><a href="#aj-araabia">Ida ja Lääne konfliktid: Araabia kevad ja Süüria</a></li>
-    <li><a href="#aj-venemaa">Venemaa 1990. aastatel ja Tšetšeenia sõjad</a></li>
-    <li><a href="#aj-gruusia">Gruusia: Abhaasia, Lõuna-Osseetia ja 2008. aasta sõda</a></li>
-    <li><a href="#aj-ukraina">Ukraina: oranž revolutsioon ja sõda</a></li>
-  </ul>
-  <p>Kiireks kordamiseks on vahekaart <a href="#aj-ajajoon">Ajajoon</a>, kus on kõik olulised aastad, ja <a href="#aj-test">Testi ennast</a>.</p>
+  <div class="ovgrid"><a class="ovcard" href="#aj-fakt"><span class="ovtop"><span class="ovnum">01</span><span class="ovgrp">Ajalooline mõtlemine</span></span><span class="ovtitle">Fakt ja arvamus</span><span class="ovhook">Mis on fakt, kuidas seda allikatega kontrollida ja arvamusest eristada.</span></a><a class="ovcard" href="#aj-perspektiiv"><span class="ovtop"><span class="ovnum">02</span><span class="ovgrp">Ajalooline mõtlemine</span></span><span class="ovtitle">Mitmeperspektiivsus</span><span class="ovhook">Sama sündmus eri inimeste, rühmade ja riikide silmade läbi.</span></a><a class="ovcard" href="#aj-covid"><span class="ovtop"><span class="ovnum">03</span><span class="ovgrp">Maailm</span></span><span class="ovtitle">COVID-19</span><span class="ovhook">21. sajandi suurim pandeemia: kulg, piirangud ja mõju Eestile.</span><span class="ovyrs"><span>2019</span><span>2020</span><span>2023</span></span></a><a class="ovcard" href="#aj-el-nato"><span class="ovtop"><span class="ovnum">04</span><span class="ovgrp">Eesti</span></span><span class="ovtitle">EL ja NATO</span><span class="ovhook">Kuidas Eesti jõudis 2004. aastal mõlemasse.</span><span class="ovyrs"><span>1994</span><span>2003</span><span>2004</span></span></a><a class="ovcard" href="#aj-araabia"><span class="ovtop"><span class="ovnum">05</span><span class="ovgrp">Ida ja Lääs</span></span><span class="ovtitle">Araabia kevad</span><span class="ovhook">Protestilaine, mis kukutas valitsusi, aga demokraatiat enamasti ei toonud. Süüria sõda.</span><span class="ovyrs"><span>2011</span><span>2024</span></span></a><a class="ovcard" href="#aj-venemaa"><span class="ovtop"><span class="ovnum">06</span><span class="ovgrp">Venemaa</span></span><span class="ovtitle">Venemaa 1990ndad</span><span class="ovhook">Oligarhid, rubla krahh ja Tšetšeenia sõjad: nii algas Putini võim.</span><span class="ovyrs"><span>1994–96</span><span>1998</span><span>1999</span></span></a><a class="ovcard" href="#aj-gruusia"><span class="ovtop"><span class="ovnum">07</span><span class="ovgrp">Venemaa naabrid</span></span><span class="ovtitle">Gruusia</span><span class="ovhook">Abhaasia, Lõuna-Osseetia, roosirevolutsioon ja 2008. aasta sõda.</span><span class="ovyrs"><span>1991</span><span>2003</span><span>2008</span></span></a><a class="ovcard" href="#aj-ukraina"><span class="ovtop"><span class="ovnum">08</span><span class="ovgrp">Venemaa naabrid</span></span><span class="ovtitle">Ukraina</span><span class="ovhook">Oranž revolutsioon, Euromaidan, Krimm, Donbass ja täiemahuline sõda.</span><span class="ovyrs"><span>2004</span><span>2014</span><span>2022</span></span></a></div>
+  <h3>Kuidas teemad seostuvad</h3>
+  <p class="muted">Suur osa tööst on üks lugu: Venemaa pärast NSV Liidu lagunemist ja see, kuidas naabrid valisid oma tee.</p>
+  <div class="ovlines">
+    <div class="ovline"><p class="ovlh">Venemaa ja naabrid</p><ol class="ovflow"><li><span class="y">1991</span>NSV Liit laguneb</li><li><span class="y">1994–96</span>I Tšetšeenia sõda</li><li><span class="y">1999–2000</span>Putin võimule</li><li><span class="y">2008</span>sõda Gruusiaga</li><li><span class="y">2014</span>Krimm ja Donbass</li><li><span class="y">2022</span>täiemahuline sõda Ukrainas</li></ol></div>
+    <div class="ovline"><p class="ovlh">Samal ajal Eesti</p><ol class="ovflow"><li><span class="y">1994</span>„Partnerlus rahu nimel”</li><li><span class="y">2003</span>EL-i rahvahääletus</li><li><span class="y">2004</span>NATO ja EL</li><li><span class="y">2007</span>Schengen</li><li><span class="y">2011</span>euro</li></ol></div>
+  </div>
+  <h3>Kuidas korrata</h3>
+  <ol class="ovsteps">
+    <li><b>Loe teemad läbi.</b> Igal vahekaardil on kõigepealt lühike sissejuhatus, siis põhjused, kulg ja tagajärjed.</li>
+    <li><b>Vaata ajajoont.</b> Seal on kõik aastad ühes kohas: kontrolli, kas tead, mis igal aastal juhtus.</li>
+    <li><b>Tee enesetest.</b> Märgi „Ei teadnud” ja korda lõpuks ainult neid küsimusi.</li>
+  </ol>
 </section>
 <section role="tabpanel" id="aj-fakt" aria-labelledby="t-aj-fakt" hidden>
   <h2>Fakt ja faktipõhine mõtlemine</h2>
