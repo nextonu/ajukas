@@ -540,6 +540,24 @@ body{padding-bottom:80px}
 .app-pro li::marker{content:"+ ";color:var(--ok);font-weight:700}
 .app-con li::marker{content:"− ";color:var(--err);font-weight:700}
 .app-done{color:var(--ok);font-weight:600}
+.pname{border-bottom:1px dotted var(--muted);cursor:pointer}
+.pname:hover,.pname:focus-visible{color:var(--bright);border-bottom-color:var(--bright);outline:none}
+.pfig{float:right;clear:right;width:112px;margin:4px 0 12px 18px;cursor:pointer}
+.pfig img{width:112px;height:140px;object-fit:cover;object-position:50% 18%;border-radius:4px;border:1px solid var(--line2);display:block;background:var(--panel)}
+.pfig figcaption{font-size:12.5px;color:var(--text);text-align:center;margin-top:5px;line-height:1.3;font-weight:600}
+.pfig:hover img{border-color:var(--bright)}
+section[role=tabpanel]{display:flow-root}
+section[role=tabpanel] h2,section[role=tabpanel] h3,section[role=tabpanel] .tablewrap,section[role=tabpanel] .timeline{clear:both}
+.pbox{position:relative;max-width:min(420px,calc(100vw - 32px));text-align:center}
+.pbox img{display:block;max-width:100%;max-height:60vh;margin:6px auto 12px;border-radius:6px;border:1px solid var(--line2)}
+.pbox h2{font-size:24px;margin:0 0 2px}
+.pbox .muted{margin:0 0 10px}
+.pbox .xbtn{position:absolute;top:8px;right:8px}
+.pcred{font-size:12px;color:var(--muted);margin:0}
+.pcred a{color:var(--muted)}
+.people .pfig{float:none;width:auto;margin:-12px -14px 10px}
+.people .pfig img{width:100%;height:190px;border:0;border-bottom:1px solid var(--line);border-radius:4px 4px 0 0}
+.people .pfig figcaption{display:none}
 .newver{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:45;display:flex;align-items:center;gap:12px;max-width:calc(100vw - 32px);background:var(--panel);border:1px solid var(--line2);border-left:3px solid var(--warn);border-radius:6px;padding:9px 10px 9px 14px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-size:14px;color:var(--bright)}
 .newver .btn{flex:0 0 auto;padding:6px 14px}
 @media (max-width:600px){.newver{left:12px;right:12px;transform:none;bottom:calc(env(safe-area-inset-bottom,0px) + 72px)}}
@@ -625,7 +643,7 @@ sub{font-size:.72em;line-height:0}
   </section>
   <details class="box updlog" id="updlog">
     <summary><span class="ul-title">Uuendused</span><span class="ul-date">5. oktoober 2026</span><span class="ul-last">Uus aine: Keemia, kontrolltöö 1 (orgaanika).</span></summary>
-    <div class="ul-body"><h4>6. oktoober 2026</h4><ul><li>Muusika · Varajane jazz: enesetestis 19 lisaküsimust slaidide väiksematest detailidest. Testi kohal saab valida <b>Olulisemad</b> või <b>Koos lisaküsimustega</b>.</li><li>Avalehe nurgas on teade, kui lehte parasjagu uuendatakse.</li><li>Ajalugu · Kontrolltöö 1: uus ülevaade teemakaartide, oluliste aastate ja teemade seostega.</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika) koos reaktsioonide tabeli, lahendatud harjutuste ja enesetestiga.</li><li>Avalehel nupp <b>Tunniplaan</b>: vali oma klass ja see avab edaspidi kohe sinu klassi uusima nädala tunniplaani.</li><li>Avalehel <b>Järgmised tööd</b> ja teema lehel kontrolltöö kuupäev. Enesetestis saab märkida „Teadsin” / „Ei teadnud” ja korrata ainult valesid.</li><li>Ajalugu · Ukraina: kirjutatud ümber tunnislaidide põhjal.</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev) koos ajajoone ja enesetestiga.</li><li>Märkmed: igal teemal omad märkmed ja lisaks oma märkmikud. Sisse logides salvestuvad kontole.</li><li>Suvevaheaja taimer (hammasratas → Suvevaheaeg).</li><li>Hele ja tume teema.</li><li>„Jaga lehte” nupp koos QR-koodiga.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> (varajane jazz, kontserdi arvustus) ja <b>UPT</b> juhend.</li><li>Kontod ja soovituste kast.</li><li>Otsing kõigist teemadest.</li></ul></div>
+    <div class="ul-body"><h4>6. oktoober 2026</h4><ul><li>Muusika · Varajane jazz: enesetestis 19 lisaküsimust slaidide väiksematest detailidest. Testi kohal saab valida <b>Olulisemad</b> või <b>Koos lisaküsimustega</b>.</li><li>Avalehe nurgas on teade, kui lehte parasjagu uuendatakse.</li><li>Ajalugu · Kontrolltöö 1: uus ülevaade teemakaartide, oluliste aastate ja teemade seostega.</li><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika) koos reaktsioonide tabeli, lahendatud harjutuste ja enesetestiga.</li><li>Avalehel nupp <b>Tunniplaan</b>: vali oma klass ja see avab edaspidi kohe sinu klassi uusima nädala tunniplaani.</li><li>Avalehel <b>Järgmised tööd</b> ja teema lehel kontrolltöö kuupäev. Enesetestis saab märkida „Teadsin” / „Ei teadnud” ja korrata ainult valesid.</li><li>Ajalugu · Ukraina: kirjutatud ümber tunnislaidide põhjal.</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev) koos ajajoone ja enesetestiga.</li><li>Märkmed: igal teemal omad märkmed ja lisaks oma märkmikud. Sisse logides salvestuvad kontole.</li><li>Suvevaheaja taimer (hammasratas → Suvevaheaeg).</li><li>Hele ja tume teema.</li><li>„Jaga lehte” nupp koos QR-koodiga.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> (varajane jazz, kontserdi arvustus) ja <b>UPT</b> juhend.</li><li>Kontod ja soovituste kast.</li><li>Otsing kõigist teemadest.</li></ul></div>
   </details>
   <aside class="suvi" id="suvi" aria-label="Suvevaheaja taimer" hidden>
   <div class="suvi-clock">
@@ -759,7 +777,7 @@ sub{font-size:.72em;line-height:0}
   <h2>Ajajoon</h2>
   <p class="lead">Kogu teema ühe pilguga. Kui need aastad on peas, loksub muu paika.</p>
   <ol class="timeline">
-    <li><span class="when">1890. aastad</span><b>Ragtime</b> on populaarne. Mustanahalised pianistid, peamiselt klaveril. Scott Joplin.</li>
+    <li><span class="when">1890. aastad</span><b>Ragtime</b> on populaarne. Mustanahalised pianistid, peamiselt klaveril. <span class="pname" data-p="joplin" role="button" tabindex="0">Scott Joplin</span>.</li>
     <li><span class="when">19. saj lõpp – 20. saj algus</span>Jazz sünnib USA-s, eelkõige <b>New Orleansis</b>.</li>
     <li><span class="when">1915</span>Sõna <b>„jazz"</b> ilmub Chicagos.</li>
     <li><span class="when">1917</span><b>Storyville suletakse</b>, New Orleansi jazzi õitseaeg lõpeb ja muusikud lähevad Chicagosse. Samal aastal teeb <b>Original Dixieland Jazz Band</b> esimese jazzisalvestuse.</li>
@@ -813,7 +831,7 @@ sub{font-size:.72em;line-height:0}
     <li>Elav ja tantsuline muusika, mis pani aluse jazzile.</li>
   </ul>
   <div class="people">
-    <div class="person"><span class="name">Scott Joplin <span class="yr">1868–1917</span></span><span class="role">USA pianist, ragtime'i looja</span><p>„Maple Leaf Rag", „The Entertainer", „Pleasant Moments". 44 lugu, üks ballett, kaks ooperit. Tema muusika avastati uuesti 1970. aastate alguses.</p></div>
+    <div class="person"><span class="name"><span class="pname" data-p="joplin" role="button" tabindex="0">Scott Joplin</span> <span class="yr">1868–1917</span></span><span class="role">USA pianist, ragtime'i looja</span><p>„Maple Leaf Rag", „The Entertainer", „Pleasant Moments". 44 lugu, üks ballett, kaks ooperit. Tema muusika avastati uuesti 1970. aastate alguses.</p></div>
   </div>
 
   <h3>Bluus</h3>
@@ -822,16 +840,16 @@ sub{font-size:.72em;line-height:0}
     <li>Põhines Aafrika ameeriklaste <b>töölauludel ja spirituaalidel</b>.</li>
     <li><b>12-taktiline struktuur</b>, soololaul, improvisatsioon.</li>
     <li>Laulis isiklikust valust, kaotusest ja rõõmust.</li>
-    <li>Esindajad: <b>Bessie Smith, Muddy Waters, B.B. King</b>.</li>
+    <li>Esindajad: <b><span class="pname" data-p="bsmith" role="button" tabindex="0">Bessie Smith</span>, <span class="pname" data-p="waters" role="button" tabindex="0">Muddy Waters</span>, <span class="pname" data-p="bbking" role="button" tabindex="0">B.B. King</span></b>.</li>
   </ul>
 
   <h3>Mõisted ja nimed</h3>
   <ul>
     <li><b>Kollektiivne improvisatsioon:</b> pillimehed mängivad samal ajal, aga igaüks improviseerib iseseisvalt.</li>
-    <li><b>Jelly Roll Morton</b> oli üks esimesi jazzi heliloojaid ja pianiste.</li>
-    <li><b>Louis Armstrong</b> oli 1920. aastate trompetist, kes on seotud svingiga.</li>
+    <li><b><span class="pname" data-p="morton" role="button" tabindex="0">Jelly Roll Morton</span></b> oli üks esimesi jazzi heliloojaid ja pianiste.</li>
+    <li><b><span class="pname" data-p="armstrong" role="button" tabindex="0">Louis Armstrong</span></b> oli 1920. aastate trompetist, kes on seotud svingiga.</li>
   </ul>
-  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://www.youtube.com/watch?v=hy-aYX5kMoM" target="_blank" rel="noopener">Ragtime</a><span class="src">ragtime</span></li><li><a href="https://www.youtube.com/watch?v=bCxLAr_bwpA" target="_blank" rel="noopener">Scott Joplin: „Maple Leaf Rag"</a><span class="src">Joplin</span></li><li><a href="https://www.youtube.com/watch?v=ND2rMET4MVw" target="_blank" rel="noopener">Scott Joplin: „The Entertainer"</a><span class="src">Joplin</span></li><li><a href="https://www.youtube.com/watch?v=5Bo3f_9hLkQ" target="_blank" rel="noopener">Bluus</a><span class="src">bluus</span></li><li><a href="https://www.youtube.com/watch?v=4gXShOJVwaM" target="_blank" rel="noopener">Bessie Smith</a><span class="src">bluus</span></li><li><a href="https://www.youtube.com/results?search_query=Muddy+Waters+Hoochie+Coochie+Man" target="_blank" rel="noopener">Muddy Waters</a><span class="src">YouTube'i otsing, slaidi link ei tööta</span></li><li><a href="https://www.youtube.com/watch?v=OIW4ARVbhrw" target="_blank" rel="noopener">B.B. King</a><span class="src">bluus</span></li></ul></div>
+  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://www.youtube.com/watch?v=hy-aYX5kMoM" target="_blank" rel="noopener">Ragtime</a><span class="src">ragtime</span></li><li><a href="https://www.youtube.com/watch?v=bCxLAr_bwpA" target="_blank" rel="noopener">Scott Joplin: „Maple Leaf Rag"</a><span class="src"><span class="pname" data-p="joplin" role="button" tabindex="0">Joplin</span></span></li><li><a href="https://www.youtube.com/watch?v=ND2rMET4MVw" target="_blank" rel="noopener">Scott Joplin: „The Entertainer"</a><span class="src"><span class="pname" data-p="joplin" role="button" tabindex="0">Joplin</span></span></li><li><a href="https://www.youtube.com/watch?v=5Bo3f_9hLkQ" target="_blank" rel="noopener">Bluus</a><span class="src">bluus</span></li><li><a href="https://www.youtube.com/watch?v=4gXShOJVwaM" target="_blank" rel="noopener">Bessie Smith</a><span class="src">bluus</span></li><li><a href="https://www.youtube.com/results?search_query=Muddy+Waters+Hoochie+Coochie+Man" target="_blank" rel="noopener">Muddy Waters</a><span class="src">YouTube'i otsing, slaidi link ei tööta</span></li><li><a href="https://www.youtube.com/watch?v=OIW4ARVbhrw" target="_blank" rel="noopener">B.B. King</a><span class="src">bluus</span></li></ul></div>
 </section>
 
 <!-- NEW ORLEANS -->
@@ -870,11 +888,11 @@ sub{font-size:.72em;line-height:0}
 
   <h3>Tuntumad muusikud</h3>
   <div class="people">
-    <div class="person"><span class="name">Joe „King" Oliver <span class="yr">1885–1938</span></span><span class="role">Kornetist-trompetist</span><p>Juhtis New Orleansi kõige mõjukamat ansamblit <b>King Oliver's Creole Jazz Band</b>.</p></div>
-    <div class="person"><span class="name">Jelly Roll Morton <span class="yr">1890–1941</span></span><span class="role">Ragtime'i pianist, helilooja, orkestrijuht</span><p>Pani aluse jazzi klassikale ansambli <b>Red Hot Peppers</b> salvestustega.</p></div>
+    <div class="person"><span class="name"><span class="pname" data-p="oliver" role="button" tabindex="0">Joe „King" Oliver</span> <span class="yr">1885–1938</span></span><span class="role">Kornetist-trompetist</span><p>Juhtis New Orleansi kõige mõjukamat ansamblit <b>King Oliver's Creole Jazz Band</b>.</p></div>
+    <div class="person"><span class="name"><span class="pname" data-p="morton" role="button" tabindex="0">Jelly Roll Morton</span> <span class="yr">1890–1941</span></span><span class="role">Ragtime'i pianist, helilooja, orkestrijuht</span><p>Pani aluse jazzi klassikale ansambli <b>Red Hot Peppers</b> salvestustega.</p></div>
   </div>
 
-  <h3>Louis Armstrong <span class="yr">1900–1971</span></h3>
+  <h3><span class="pname" data-p="armstrong" role="button" tabindex="0">Louis Armstrong</span> <span class="yr">1900–1971</span></h3>
   <ul>
     <li>New Orleansi jazzi säravaim muusik: kornetist, trompetist, pianist, arranžeerija ja helilooja.</li>
     <li>Temaga sai jazzist <b>solistide muusika</b>.</li>
@@ -884,11 +902,11 @@ sub{font-size:.72em;line-height:0}
     <li>Käre hääletämber ja <b>scat-laul</b> (sõnadeta, silpidega improviseeritud laul).</li>
     <li>Palad: „What a Wonderful World", „West End Blues", „Hotter Than Hot", „I'm in the Mood for Love".</li>
   </ul>
-  <blockquote class="quote">Ilma Armstrongita poleks jazz'i ja ilma jazz'ita poleks moodsat popmuusikat ega rock'i.<cite>Joachim-Ernst Berendt, „Das Jazzbuch"</cite></blockquote>
+  <blockquote class="quote">Ilma <span class="pname" data-p="armstrong" role="button" tabindex="0">Armstrongita</span> poleks jazz'i ja ilma jazz'ita poleks moodsat popmuusikat ega rock'i.<cite><span class="pname" data-p="berendt" role="button" tabindex="0">Joachim-Ernst Berendt</span>, „Das Jazzbuch"</cite></blockquote>
 
   <h3>Lõpp</h3>
   <p><span class="yr">1917</span> suleti lõbustusasutuste rajoon Storyville ja muusikud suundusid <b>Chicagosse</b>.</p>
-  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://youtu.be/BOY6NFP_KyQ?t=50" target="_blank" rel="noopener">Marsid</a><span class="src">juured</span></li><li><a href="https://www.youtube.com/watch?v=5SS9EnD_-_Y" target="_blank" rel="noopener">Hübriidmuusika</a><span class="src">juured</span></li><li><a href="https://youtu.be/EadpcjMB_2s?t=158" target="_blank" rel="noopener">Kuulmise järgi improviseerimine</a><span class="src">harrastusorkestrid</span></li><li><a href="https://www.youtube.com/watch?v=PwpriGltf9g" target="_blank" rel="noopener">Joe „King" Oliver</a><span class="src">muusikud</span></li><li><a href="https://youtu.be/8CorqfnI2MY?t=22" target="_blank" rel="noopener">Jelly Roll Morton</a><span class="src">muusikud</span></li><li><a href="https://youtu.be/UofL8pD69co?t=65" target="_blank" rel="noopener">Louis Armstrong: jazzist sai solistide muusika</a><span class="src">Armstrong</span></li><li><a href="https://www.youtube.com/watch?v=VqhCQZaH4Vs" target="_blank" rel="noopener">Louis Armstrong: „What a Wonderful World"</a><span class="src">Armstrong</span></li><li><a href="https://www.youtube.com/results?search_query=Louis+Armstrong+West+End+Blues+1928" target="_blank" rel="noopener">Louis Armstrong: „West End Blues"</a><span class="src">YouTube'i otsing, slaidi link ei tööta</span></li></ul></div>
+  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://youtu.be/BOY6NFP_KyQ?t=50" target="_blank" rel="noopener">Marsid</a><span class="src">juured</span></li><li><a href="https://www.youtube.com/watch?v=5SS9EnD_-_Y" target="_blank" rel="noopener">Hübriidmuusika</a><span class="src">juured</span></li><li><a href="https://youtu.be/EadpcjMB_2s?t=158" target="_blank" rel="noopener">Kuulmise järgi improviseerimine</a><span class="src">harrastusorkestrid</span></li><li><a href="https://www.youtube.com/watch?v=PwpriGltf9g" target="_blank" rel="noopener">Joe „King" Oliver</a><span class="src">muusikud</span></li><li><a href="https://youtu.be/8CorqfnI2MY?t=22" target="_blank" rel="noopener">Jelly Roll Morton</a><span class="src">muusikud</span></li><li><a href="https://youtu.be/UofL8pD69co?t=65" target="_blank" rel="noopener">Louis Armstrong: jazzist sai solistide muusika</a><span class="src"><span class="pname" data-p="armstrong" role="button" tabindex="0">Armstrong</span></span></li><li><a href="https://www.youtube.com/watch?v=VqhCQZaH4Vs" target="_blank" rel="noopener">Louis Armstrong: „What a Wonderful World"</a><span class="src"><span class="pname" data-p="armstrong" role="button" tabindex="0">Armstrong</span></span></li><li><a href="https://www.youtube.com/results?search_query=Louis+Armstrong+West+End+Blues+1928" target="_blank" rel="noopener">Louis Armstrong: „West End Blues"</a><span class="src">YouTube'i otsing, slaidi link ei tööta</span></li></ul></div>
 </section>
 
 <!-- DIXIELAND -->
@@ -898,7 +916,7 @@ sub{font-size:.72em;line-height:0}
 
   <div class="people">
     <div class="person"><span class="name">Papa Jack Laine</span><span class="role">Orkestrijuht ja trummar, dixielandi looja</span><p>Tema orkester võitis sageli orkestrite tänavalahingutes mustanahalisi pillimehi.</p></div>
-    <div class="person"><span class="name">Nick LaRocca</span><span class="role">Original Dixieland Jazz Bandi juht</span><p>Ansambel tegi <span class="yr">1917</span> esimesed jazzisalvestused.</p></div>
+    <div class="person"><span class="name"><span class="pname" data-p="larocca" role="button" tabindex="0">Nick LaRocca</span></span><span class="role">Original Dixieland Jazz Bandi juht</span><p>Ansambel tegi <span class="yr">1917</span> esimesed jazzisalvestused.</p></div>
   </div>
 
   <h3>Muutunud kõlakvaliteet</h3>
@@ -922,7 +940,7 @@ sub{font-size:.72em;line-height:0}
   <ul>
     <li>Original Dixieland Jazz Band</li>
     <li>New Orleans Rhythm Kings</li>
-    <li>Louis Armstrong &amp; All Stars Orchestra</li>
+    <li><span class="pname" data-p="armstrong" role="button" tabindex="0">Louis Armstrong</span> &amp; All Stars Orchestra</li>
   </ul>
 
   <h3>Kõrgaeg ja naasmine</h3>
@@ -963,23 +981,23 @@ sub{font-size:.72em;line-height:0}
   <h3>Saksofoni tulek</h3>
   <ul>
     <li>Saksofon tuli kasutusse Chicago stiilist alates ja sai hiljem jazzi sümboliks.</li>
-    <li>Esimene saksofonivirtuoos oli tenorsaksofonist <b>Bud Freeman</b>.</li>
+    <li>Esimene saksofonivirtuoos oli tenorsaksofonist <b><span class="pname" data-p="freeman" role="button" tabindex="0">Bud Freeman</span></b>.</li>
   </ul>
 
   <h3>Pilligruppide kahekõne</h3>
   <div class="people">
-    <div class="person"><span class="name">Fletcher Henderson <span class="yr">1897–1952</span></span><span class="role">Pianist, orkestrijuht</span><p>Jagas orkestri pilligruppideks ja lõi <b>tämbrilise vastandamisega</b> uue orkestristiili. Töötas välja suure koosseisu arranžeerimise põhimõtted.</p></div>
-    <div class="person"><span class="name">Coleman Hawkins <span class="yr">1904–1969</span></span><span class="role">Tenorsaksofonist</span><p>Mängis Hendersoni orkestris.</p></div>
+    <div class="person"><span class="name"><span class="pname" data-p="henderson" role="button" tabindex="0">Fletcher Henderson</span> <span class="yr">1897–1952</span></span><span class="role">Pianist, orkestrijuht</span><p>Jagas orkestri pilligruppideks ja lõi <b>tämbrilise vastandamisega</b> uue orkestristiili. Töötas välja suure koosseisu arranžeerimise põhimõtted.</p></div>
+    <div class="person"><span class="name"><span class="pname" data-p="hawkins" role="button" tabindex="0">Coleman Hawkins</span> <span class="yr">1904–1969</span></span><span class="role">Tenorsaksofonist</span><p>Mängis <span class="pname" data-p="henderson" role="button" tabindex="0">Hendersoni</span> orkestris.</p></div>
   </div>
 
   <h3>Tantsuorkestrite menu</h3>
   <ul>
     <li>Repertuaaris olid poplugude jazziseaded.</li>
-    <li>Kõige populaarsem tantsuorkestri juht oli <b>Paul Whiteman</b> <span class="yr">1890–1967</span>.</li>
-    <li>Tema orkestris mängisid kornetist <b>Bix Beiderbecke</b> ja kitarrist <b>Eddie Lang</b>.</li>
+    <li>Kõige populaarsem tantsuorkestri juht oli <b><span class="pname" data-p="whiteman" role="button" tabindex="0">Paul Whiteman</span></b> <span class="yr">1890–1967</span>.</li>
+    <li>Tema orkestris mängisid kornetist <b><span class="pname" data-p="beiderbecke" role="button" tabindex="0">Bix Beiderbecke</span></b> ja kitarrist <b>Eddie Lang</b>.</li>
   </ul>
 
-  <h3>Duke Ellington <span class="yr">1899–1974</span></h3>
+  <h3><span class="pname" data-p="ellington" role="button" tabindex="0">Duke Ellington</span> <span class="yr">1899–1974</span></h3>
   <ul>
     <li>Helilooja, pianist ja orkestrijuht.</li>
     <li>Tegutses peamiselt <b>New Yorgis, Harlemi Cotton Clubis</b>.</li>
@@ -987,7 +1005,7 @@ sub{font-size:.72em;line-height:0}
     <li><b>Džunglistiil:</b> trompeti ja trombooni väljendusrikkad helid.</li>
     <li>Palad: „Mood Indigo", „It Don't Mean a Thing".</li>
   </ul>
-  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://youtu.be/hcYBwRjMqjg?t=52" target="_blank" rel="noopener">Fletcher Henderson: tämbriline vastandamine</a><span class="src">pilligruppide kahekõne</span></li><li><a href="https://www.youtube.com/watch?v=psch9N4PmO4" target="_blank" rel="noopener">Poplugude jazziseaded</a><span class="src">tantsuorkestrid</span></li><li><a href="https://www.youtube.com/watch?v=cb2w2m1JmCY" target="_blank" rel="noopener">Duke Ellington: tuntumad palad</a><span class="src">Ellington</span></li><li><a href="https://www.youtube.com/watch?v=O9jHgGDKDkU" target="_blank" rel="noopener">Duke Ellington: „Mood Indigo"</a><span class="src">Ellington</span></li><li><a href="https://www.youtube.com/watch?v=qDQpZT3GhDg" target="_blank" rel="noopener">Duke Ellington: „It Don't Mean a Thing"</a><span class="src">Ellington</span></li></ul></div>
+  <div class="listen"><h3>Kuula slaididelt</h3><ul><li><a href="https://youtu.be/hcYBwRjMqjg?t=52" target="_blank" rel="noopener">Fletcher Henderson: tämbriline vastandamine</a><span class="src">pilligruppide kahekõne</span></li><li><a href="https://www.youtube.com/watch?v=psch9N4PmO4" target="_blank" rel="noopener">Poplugude jazziseaded</a><span class="src">tantsuorkestrid</span></li><li><a href="https://www.youtube.com/watch?v=cb2w2m1JmCY" target="_blank" rel="noopener">Duke Ellington: tuntumad palad</a><span class="src"><span class="pname" data-p="ellington" role="button" tabindex="0">Ellington</span></span></li><li><a href="https://www.youtube.com/watch?v=O9jHgGDKDkU" target="_blank" rel="noopener">Duke Ellington: „Mood Indigo"</a><span class="src"><span class="pname" data-p="ellington" role="button" tabindex="0">Ellington</span></span></li><li><a href="https://www.youtube.com/watch?v=qDQpZT3GhDg" target="_blank" rel="noopener">Duke Ellington: „It Don't Mean a Thing"</a><span class="src"><span class="pname" data-p="ellington" role="button" tabindex="0">Ellington</span></span></li></ul></div>
 </section>
 
 <!-- VÕRDLUS -->
@@ -1004,7 +1022,7 @@ sub{font-size:.72em;line-height:0}
       <tr><th>Rütm</th><td>Marsilik, rõhk 1. ja 3. löögil</td><td>Kiirem, meloodia sujuvam</td><td>Sujuv, bluusilik</td></tr>
       <tr><th>Kõla</th><td>Räme, intensiivne, emotsionaalne</td><td>Väiksem kõlajõud, parem tehnika</td><td>Viimistletud, arranžeeritud</td></tr>
       <tr><th>Uus pill</th><td>Tuuba ja bandžo, hiljem kontrabass, kitarr, klaver</td><td>Koosseis sama</td><td>Saksofon</td></tr>
-      <tr><th>Võtmenimed</th><td>King Oliver, Jelly Roll Morton, Louis Armstrong</td><td>Papa Jack Laine, Nick LaRocca</td><td>Bud Freeman, Fletcher Henderson, Coleman Hawkins, Paul Whiteman, Bix Beiderbecke</td></tr>
+      <tr><th>Võtmenimed</th><td><span class="pname" data-p="oliver" role="button" tabindex="0">King Oliver</span>, <span class="pname" data-p="morton" role="button" tabindex="0">Jelly Roll Morton</span>, <span class="pname" data-p="armstrong" role="button" tabindex="0">Louis Armstrong</span></td><td>Papa Jack Laine, <span class="pname" data-p="larocca" role="button" tabindex="0">Nick LaRocca</span></td><td><span class="pname" data-p="freeman" role="button" tabindex="0">Bud Freeman</span>, <span class="pname" data-p="henderson" role="button" tabindex="0">Fletcher Henderson</span>, <span class="pname" data-p="hawkins" role="button" tabindex="0">Coleman Hawkins</span>, <span class="pname" data-p="whiteman" role="button" tabindex="0">Paul Whiteman</span>, <span class="pname" data-p="beiderbecke" role="button" tabindex="0">Bix Beiderbecke</span></td></tr>
       <tr><th>Aeg</th><td>kuni 1917</td><td>1917 salvestus, lõpp 1930. aastate algul</td><td>tippaeg 1920. aastad</td></tr>
     </tbody>
   </table>
@@ -1024,15 +1042,15 @@ sub{font-size:.72em;line-height:0}
   <p>Kõik selle teema konspektid on tehtud muusikaõpetaja Eva Lisa Markuse tunnislaidide põhjal (Tallinna Pelgulinna Riigigümnaasium, Muusika G2, 2026/2027):</p>
   <ul>
     <li><b>Muusika G2: jazzmuusika</b> (sissejuhatus, jazzi tunnusjooned, päritolu)</li>
-    <li><b>Varajased stiilid</b> (ragtime, bluus, Scott Joplin)</li>
-    <li><b>New Orleans jazz</b> (New Orleans, Louis Armstrong, dixieland)</li>
-    <li><b>Chicago jazz</b> (Chicago stiil, saksofon, Henderson, Whiteman, Ellington)</li>
+    <li><b>Varajased stiilid</b> (ragtime, bluus, <span class="pname" data-p="joplin" role="button" tabindex="0">Scott Joplin</span>)</li>
+    <li><b>New Orleans jazz</b> (New Orleans, <span class="pname" data-p="armstrong" role="button" tabindex="0">Louis Armstrong</span>, dixieland)</li>
+    <li><b>Chicago jazz</b> (Chicago stiil, saksofon, <span class="pname" data-p="henderson" role="button" tabindex="0">Henderson</span>, <span class="pname" data-p="whiteman" role="button" tabindex="0">Whiteman</span>, <span class="pname" data-p="ellington" role="button" tabindex="0">Ellington</span>)</li>
   </ul>
   <p class="muted">Slaide endid siia üles ei pane, sest need on õpetaja materjal. Küsi neid õpetajalt või vaata kooli õppekeskkonnast.</p>
   <h3>Muu</h3>
   <ul>
     <li>Kuulamisnäited: iga teema lõpus olev „Kuula slaididelt” (lingid on võetud slaididelt).</li>
-    <li>Tsitaat: Joachim-Ernst Berendt, „Das Jazzbuch”.</li>
+    <li>Tsitaat: <span class="pname" data-p="berendt" role="button" tabindex="0">Joachim-Ernst Berendt</span>, „Das Jazzbuch”.</li>
   </ul>
   <div class="key"><span class="label">Midagi puudu?</span>Siin ei pruugi kõik olla. Kui tead veel mõnda materjali või allikat, <a href="#soovita">kirjuta soovitustesse</a>.</div>
 </section>
@@ -1364,7 +1382,7 @@ sub{font-size:.72em;line-height:0}
   <h3>Kuidas teemad seostuvad</h3>
   <p class="muted">Suur osa tööst on üks lugu: Venemaa pärast NSV Liidu lagunemist ja see, kuidas naabrid valisid oma tee.</p>
   <div class="ovlines">
-    <div class="ovline"><p class="ovlh">Venemaa ja naabrid</p><ol class="ovflow"><li><span class="y">1991</span>NSV Liit laguneb</li><li><span class="y">1994–96</span>I Tšetšeenia sõda</li><li><span class="y">1999–2000</span>Putin võimule</li><li><span class="y">2008</span>sõda Gruusiaga</li><li><span class="y">2014</span>Krimm ja Donbass</li><li><span class="y">2022</span>täiemahuline sõda Ukrainas</li></ol></div>
+    <div class="ovline"><p class="ovlh">Venemaa ja naabrid</p><ol class="ovflow"><li><span class="y">1991</span>NSV Liit laguneb</li><li><span class="y">1994–96</span>I Tšetšeenia sõda</li><li><span class="y">1999–2000</span><span class="pname" data-p="putin" role="button" tabindex="0">Putin</span> võimule</li><li><span class="y">2008</span>sõda Gruusiaga</li><li><span class="y">2014</span>Krimm ja Donbass</li><li><span class="y">2022</span>täiemahuline sõda Ukrainas</li></ol></div>
     <div class="ovline"><p class="ovlh">Samal ajal Eesti</p><ol class="ovflow"><li><span class="y">1994</span>„Partnerlus rahu nimel”</li><li><span class="y">2003</span>EL-i rahvahääletus</li><li><span class="y">2004</span>NATO ja EL</li><li><span class="y">2007</span>Schengen</li><li><span class="y">2011</span>euro</li></ol></div>
   </div>
   <h3>Kuidas korrata</h3>
@@ -1552,9 +1570,9 @@ sub{font-size:.72em;line-height:0}
   </ul>
   <h3>Süüria</h3>
   <ul>
-    <li>Protestidest kasvas <b>kodusõda</b> keskvõimu (<b>Bashar al-Assad</b>) vastu.</li>
+    <li>Protestidest kasvas <b>kodusõda</b> keskvõimu (<b><span class="pname" data-p="assad" role="button" tabindex="0">Bashar al-Assad</span></b>) vastu.</li>
     <li>Sekkusid mitmed islamirühmitused, <b>USA ja Venemaa</b>.</li>
-    <li>Assadi võim kukkus <b>8. detsembril 2024</b>.</li>
+    <li><span class="pname" data-p="assad" role="button" tabindex="0">Assadi</span> võim kukkus <b>8. detsembril 2024</b>.</li>
     <li><b>ISIS</b> hävitas 2015. aastal 2000-aastase Rooma-aegse <b>Palmyra</b> võidukaare ning lõhkus teisi kultuurimälestisi.</li>
   </ul>
   <h3>Kas Araabia kevad tõi oodatud tulemuse?</h3>
@@ -1570,20 +1588,20 @@ sub{font-size:.72em;line-height:0}
 </section>
 <section role="tabpanel" id="aj-venemaa" aria-labelledby="t-aj-venemaa" hidden>
   <h2>Venemaa 1990. aastatel ja Tšetšeenia sõjad</h2>
-  <p class="lead">Nõukogude Liidu lagunemise järel oli Venemaal korruptsioon, oligarhide võim ja kaks sõda Tšetšeenias. Nendest kasvas välja Putini võim.</p>
+  <p class="lead">Nõukogude Liidu lagunemise järel oli Venemaal korruptsioon, oligarhide võim ja kaks sõda Tšetšeenias. Nendest kasvas välja <span class="pname" data-p="putin" role="button" tabindex="0">Putini</span> võim.</p>
   <h3>Nõukogude Liidu lõpp</h3>
   <ul>
-    <li><b>1. detsember 1991:</b> Ukraina rahvahääletusel toetas iseseisvust 92% hääletanutest (ka Donbassis 84% ja Krimmis 54%). See oli Gorbatšovile šokk ja viimane löök NSV Liidule.</li>
-    <li><b>25. detsember 1991:</b> <b>Mihhail Gorbatšov</b> astus tagasi, Nõukogude Liit lakkas olemast. Järglane oli Vene Föderatsioon, presidendiks <b>Boris Jeltsin</b>.</li>
+    <li><b>1. detsember 1991:</b> Ukraina rahvahääletusel toetas iseseisvust 92% hääletanutest (ka Donbassis 84% ja Krimmis 54%). See oli <span class="pname" data-p="gorbatsov" role="button" tabindex="0">Gorbatšovile</span> šokk ja viimane löök NSV Liidule.</li>
+    <li><b>25. detsember 1991:</b> <b><span class="pname" data-p="gorbatsov" role="button" tabindex="0">Mihhail Gorbatšov</span></b> astus tagasi, Nõukogude Liit lakkas olemast. Järglane oli Vene Föderatsioon, presidendiks <b><span class="pname" data-p="jeltsin" role="button" tabindex="0">Boris Jeltsin</span></b>.</li>
     <li>Enamik inimesi oli elanud ainult riiklikus sotsialismis. Demokraatiat ja lääne kapitalismi tundsid nad vaid teooriast (Hans Asenbaumi tsitaat perestroika ajast).</li>
   </ul>
   <h3>Olukord 1990. aastatel</h3>
   <ul>
     <li>Lokkasid <b>korruptsioon ja oligarhide võim</b>.</li>
-    <li>Jeltsin ja tema ministrid ei suutnud reforme läbi viia. Jeltsin oli väga ebapopulaarne.</li>
+    <li><span class="pname" data-p="jeltsin" role="button" tabindex="0">Jeltsin</span> ja tema ministrid ei suutnud reforme läbi viia. <span class="pname" data-p="jeltsin" role="button" tabindex="0">Jeltsin</span> oli väga ebapopulaarne.</li>
     <li>I Tšetšeenia sõja kaotus halvendas olukorda.</li>
     <li><b>1998</b> kukkus rubla väärtus järsult.</li>
-    <li><b>1999</b> nimetas Jeltsin peaministriks <b>Vladimir Putini</b>.</li>
+    <li><b>1999</b> nimetas <span class="pname" data-p="jeltsin" role="button" tabindex="0">Jeltsin</span> peaministriks <b><span class="pname" data-p="putin" role="button" tabindex="0">Vladimir Putini</span></b>.</li>
   </ul>
   <h3>I Tšetšeenia sõda <span class="yr">1994–1996</span></h3>
   <ul>
@@ -1591,15 +1609,15 @@ sub{font-size:.72em;line-height:0}
     <li>Hukkus <b>30 000–50 000</b> inimest, <b>500 000</b> põgenes.</li>
     <li>Sõda oli ebapopulaarne nii armees kui ka rahva seas.</li>
     <li>Tšetšeenias on suur osa rahvast moslemid, kohale tuli palju vabatahtlikke araabia maadest.</li>
-    <li>Tšetšeenia esimene president <b>Džohhar Dudajev</b> hukkus raketilöögis aprillis 1996.</li>
+    <li>Tšetšeenia esimene president <b><span class="pname" data-p="dudajev" role="button" tabindex="0">Džohhar Dudajev</span></b> hukkus raketilöögis aprillis 1996.</li>
   </ul>
   <p class="muted">Ühel slaidil on sõja algus märgitud 1993, teisel 1994. Õige on 1994.</p>
-  <h3>II Tšetšeenia sõda ja Putini võimuletulek</h3>
+  <h3>II Tšetšeenia sõda ja <span class="pname" data-p="putin" role="button" tabindex="0">Putini</span> võimuletulek</h3>
   <ul>
     <li>Pärast 1996. aasta rahu ei stabiliseerunud olukord Tšetšeenias: välikomandörid ja islamistid kehtestasid oma seadusi, levisid bandiitlus ja inimröövid. Osa komandöre läks üle Venemaa poolele.</li>
     <li><b>1999</b> ründas Venemaa uuesti ja seekord edukalt. <b>2000</b> kuulutati operatsioon lõppenuks.</li>
-    <li>Putini populaarsus kasvas. <b>31. detsembril 1999</b> kuulutas Jeltsin ta oma järglaseks, <b>2000</b> võitis Putin valimised.</li>
-    <li>Putin turgutas majandust, kasvas tema isikukultus, opositsioon suruti maha ja massimeedia võeti üle.</li>
+    <li><span class="pname" data-p="putin" role="button" tabindex="0">Putini</span> populaarsus kasvas. <b>31. detsembril 1999</b> kuulutas <span class="pname" data-p="jeltsin" role="button" tabindex="0">Jeltsin</span> ta oma järglaseks, <b>2000</b> võitis <span class="pname" data-p="putin" role="button" tabindex="0">Putin</span> valimised.</li>
+    <li><span class="pname" data-p="putin" role="button" tabindex="0">Putin</span> turgutas majandust, kasvas tema isikukultus, opositsioon suruti maha ja massimeedia võeti üle.</li>
     <li>Riiklikus propagandas tugevnes sõnum, et <b>Lääs on Venemaa sisse piiranud</b> ja tahab seda kontrollida.</li>
   </ul>
 </section>
@@ -1615,10 +1633,10 @@ sub{font-size:.72em;line-height:0}
   </ul>
   <h3>Roosirevolutsioon <span class="yr">2003</span></h3>
   <ul>
-    <li>President <b>Eduard Ševardnadze</b> oli Venemaa ja kohalike oligarhide mõju all.</li>
+    <li>President <b><span class="pname" data-p="sevardnadze" role="button" tabindex="0">Eduard Ševardnadze</span></b> oli Venemaa ja kohalike oligarhide mõju all.</li>
     <li><b>2. novembri</b> valimised kukkusid läbi (valed valijanimekirjad jm), opositsioon tuli tänavale.</li>
-    <li><b>22. novembril</b> tungisid meeleavaldajad koos <b>Mihheil Saakašviliga</b> roosid käes parlamendihoonesse ja ajasid presidendi põgenema. Sõjavägi keeldus valitsust toetamast.</li>
-    <li><b>4. jaanuaril 2004</b> võitis Saakašvili presidendivalimised ülekaalukalt.</li>
+    <li><b>22. novembril</b> tungisid meeleavaldajad koos <b><span class="pname" data-p="saakasvili" role="button" tabindex="0">Mihheil Saakašviliga</span></b> roosid käes parlamendihoonesse ja ajasid presidendi põgenema. Sõjavägi keeldus valitsust toetamast.</li>
+    <li><b>4. jaanuaril 2004</b> võitis <span class="pname" data-p="saakasvili" role="button" tabindex="0">Saakašvili</span> presidendivalimised ülekaalukalt.</li>
   </ul>
   <h3>Sõda <span class="yr">7.–8. august 2008</span></h3>
   <ul>
@@ -1631,7 +1649,7 @@ sub{font-size:.72em;line-height:0}
   </ul>
   <h3>Miks Venemaa ründas?</h3>
   <ol>
-    <li>Slaidi järgi: Putinil seisid ees valimised ja ta vajas populaarsust, sest sõda liidab rahva võimul oleva liidri taha. <span class="muted">(Tegelikult olid presidendivalimised juba märtsis 2008 ja Putin oli sõja ajal peaminister.)</span></li>
+    <li>Slaidi järgi: <span class="pname" data-p="putin" role="button" tabindex="0">Putinil</span> seisid ees valimised ja ta vajas populaarsust, sest sõda liidab rahva võimul oleva liidri taha. <span class="muted">(Tegelikult olid presidendivalimised juba märtsis 2008 ja <span class="pname" data-p="putin" role="button" tabindex="0">Putin</span> oli sõja ajal peaminister.)</span></li>
     <li>Gruusia vaatas läände ja teatas, et tahab liituda EL-i ja NATO-ga.</li>
   </ol>
   <h3>Tagajärjed</h3>
@@ -1663,40 +1681,40 @@ sub{font-size:.72em;line-height:0}
   <div class="key"><span class="label">Korduv muster</span>1) Sõditakse <b>naaberriikidega</b>. 2) Ettekäändeks on sageli <b>venekeelsete vähemuste „kaitsmine”</b>. 3) Venemaa ei taha, et riigid liiguksid <b>Lääne mõjusfääri</b>.</div>
   <h3>Taust: Ukraina ja Venemaa lähevad eri teed</h3>
   <ul>
-    <li><b>1. detsember 1991:</b> Ukraina iseseisvusreferendum, iseseisvuse poolt 92%. <b>25. detsember 1991:</b> Gorbatšov astub tagasi.</li>
+    <li><b>1. detsember 1991:</b> Ukraina iseseisvusreferendum, iseseisvuse poolt 92%. <b>25. detsember 1991:</b> <span class="pname" data-p="gorbatsov" role="button" tabindex="0">Gorbatšov</span> astub tagasi.</li>
     <li>1990. aastatel: <b>Venemaal tõuseb autoritaarsus</b> (väga tugev presidendivõim, Tšetšeenia sõjad militariseerisid riigi), <b>Ukrainas säilib demokraatia</b> (piirkonniti mitmekesine riik, juhtidel vähe võimu opositsiooni maha suruda).</li>
     <li>Enamik Vene eliidist pidas NSV Liidu lagunemist <b>kaotuseks</b>, Ukraina poliitilised jõud <b>võiduks</b>.</li>
-    <li><b>2004:</b> Putini režiim tugevneb. Pärast <b>Beslani koolimaja rünnakut</b> (september 2004, hukkus 186 last) kaotati kubernerivalimised ja piirati erakondi.</li>
-    <li>Ukraina liigub vastassuunas: oranž revolutsioon. Venemaale oli see nagu „oma 11. september”. Juštšenko külastas veebruaris 2005 NATO tippkohtumist.</li>
-    <li><b>Gaasikriisid:</b> Juštšenko ajal hakkas Venemaa kasutama gaasi survevahendina, gaasi hind neljakordistus ja <b>1. jaanuaril 2006</b> keeras Venemaa gaasikraanid kinni.</li>
+    <li><b>2004:</b> <span class="pname" data-p="putin" role="button" tabindex="0">Putini</span> režiim tugevneb. Pärast <b>Beslani koolimaja rünnakut</b> (september 2004, hukkus 186 last) kaotati kubernerivalimised ja piirati erakondi.</li>
+    <li>Ukraina liigub vastassuunas: oranž revolutsioon. Venemaale oli see nagu „oma 11. september”. <span class="pname" data-p="jushtshenko" role="button" tabindex="0">Juštšenko</span> külastas veebruaris 2005 NATO tippkohtumist.</li>
+    <li><b>Gaasikriisid:</b> <span class="pname" data-p="jushtshenko" role="button" tabindex="0">Juštšenko</span> ajal hakkas Venemaa kasutama gaasi survevahendina, gaasi hind neljakordistus ja <b>1. jaanuaril 2006</b> keeras Venemaa gaasikraanid kinni.</li>
     <li>Gruusia roosirevolutsioon (2003) andis ukrainlastele usku, et Venemaa mõjust saab vabaneda.</li>
   </ul>
   <h3>Oranž revolutsioon <span class="yr">november 2004 – jaanuar 2005</span></h3>
   <ul>
-    <li>Presidendivalimistel olid vastamisi venemeelne peaminister <b>Viktor Janukovõtš</b> ja demokraatiat ning reforme lubanud <b>Viktor Juštšenko</b>.</li>
+    <li>Presidendivalimistel olid vastamisi venemeelne peaminister <b><span class="pname" data-p="janukovots" role="button" tabindex="0">Viktor Janukovõtš</span></b> ja demokraatiat ning reforme lubanud <b><span class="pname" data-p="jushtshenko" role="button" tabindex="0">Viktor Juštšenko</span></b>.</li>
     <li>Novembris avaldatud tulemusi peeti võltsituks, algasid massilised protestid ja valimised tühistati.</li>
-    <li>Uued valimised võitis <b>Juštšenko</b>. Oranž oli tema valimiskampaania värv.</li>
-    <li><b>Tulemused:</b> Juštšenko sai presidendiks, põhiseadust muudeti nii, et parlament sai rohkem võimu ja autoritaarsust piirati, ning Ukraina teatas soovist saada <b>EL-i ja NATO</b> liikmeks.</li>
+    <li>Uued valimised võitis <b><span class="pname" data-p="jushtshenko" role="button" tabindex="0">Juštšenko</span></b>. Oranž oli tema valimiskampaania värv.</li>
+    <li><b>Tulemused:</b> <span class="pname" data-p="jushtshenko" role="button" tabindex="0">Juštšenko</span> sai presidendiks, põhiseadust muudeti nii, et parlament sai rohkem võimu ja autoritaarsust piirati, ning Ukraina teatas soovist saada <b>EL-i ja NATO</b> liikmeks.</li>
   </ul>
   <h3>Euromaidan ja Krimm <span class="yr">2013–2014</span></h3>
   <ul>
-    <li>Janukovõtš sai presidendiks 2010, kaotas võimupiiranguid ja loobus NATO-püüdlustest.</li>
-    <li><b>November 2013:</b> EL pakkus <b>assotsiatsioonilepingut</b> (vastutasuks poliitvangide vabastamise eest), aga <b>Janukovõtš keeldus alla kirjutamast</b>. Venemaa ähvardas majandusblokaadiga ja pakkus 15 miljardit dollarit.</li>
-    <li>Kiievis <b>Maidani väljakul</b> algasid massimeeleavaldused (<b>Euromaidan</b>, ka „väärikuse revolutsioon”). <b>21.–22. veebruaril 2014</b> põgenes Janukovõtš.</li>
-    <li><b>27. veebruar 2014:</b> tundemärkideta relvastatud <b>„rohelised mehikesed”</b> hõivasid Krimmi parlamendi ja valitsushooned. Saadikud sunniti valima peaministriks <b>Sergei Aksjonovi</b>.</li>
+    <li><span class="pname" data-p="janukovots" role="button" tabindex="0">Janukovõtš</span> sai presidendiks 2010, kaotas võimupiiranguid ja loobus NATO-püüdlustest.</li>
+    <li><b>November 2013:</b> EL pakkus <b>assotsiatsioonilepingut</b> (vastutasuks poliitvangide vabastamise eest), aga <b><span class="pname" data-p="janukovots" role="button" tabindex="0">Janukovõtš</span> keeldus alla kirjutamast</b>. Venemaa ähvardas majandusblokaadiga ja pakkus 15 miljardit dollarit.</li>
+    <li>Kiievis <b>Maidani väljakul</b> algasid massimeeleavaldused (<b>Euromaidan</b>, ka „väärikuse revolutsioon”). <b>21.–22. veebruaril 2014</b> põgenes <span class="pname" data-p="janukovots" role="button" tabindex="0">Janukovõtš</span>.</li>
+    <li><b>27. veebruar 2014:</b> tundemärkideta relvastatud <b>„rohelised mehikesed”</b> hõivasid Krimmi parlamendi ja valitsushooned. Saadikud sunniti valima peaministriks <b><span class="pname" data-p="aksjonov" role="button" tabindex="0">Sergei Aksjonovi</span></b>.</li>
     <li><b>16. märts 2014:</b> „referendum” Krimmi ühinemiseks Venemaaga. Ametlikult osales 83% ja poolt oli 96,77%, tegelikult osales hinnanguliselt vaid 30–50%. Krimm oli ainus Ukraina piirkond, kus enamiku elanikest moodustasid etnilised venelased.</li>
   </ul>
   <h3>Sõda Donbassis <span class="yr">2014–2022</span></h3>
   <ul>
     <li><b>Aprill 2014:</b> relvastatud üksused hõivavad Donetski ja Luhanski. Seal korraldatakse „iseseisvusreferendumid”.</li>
-    <li><b>Mai–juuni 2014:</b> Mariupoli lahingud, Ukraina saab linna tagasi. <b>25. mail</b> valitakse presidendiks <b>Petro Porošenko</b>.</li>
+    <li><b>Mai–juuni 2014:</b> Mariupoli lahingud, Ukraina saab linna tagasi. <b>25. mail</b> valitakse presidendiks <b><span class="pname" data-p="porosenko" role="button" tabindex="0">Petro Porošenko</span></b>.</li>
     <li><b>17. juuli 2014:</b> Ida-Ukraina kohal tulistatakse alla Malaysia Airlinesi lend <b>MH17</b>, hukkub <b>298</b> inimest.</li>
     <li><b>Minski kokkulepped</b> (5. september 2014 ja <b>12. veebruar 2015</b>) külmutasid suurema sõjategevuse, aga olid Ukrainale ebasoodsad.</li>
   </ul>
   <h3>Ukraina <span class="yr">2015–2022</span></h3>
   <ul>
     <li>Ukraina rahvuslik identiteet tugevnes: kommunistlikud kujud (Lenin) võeti maha, ukraina keelt hakati rohkem kasutama, <b>2018</b> loodi iseseisev Ukraina õigeusu kirik.</li>
-    <li><b>2019</b> valiti presidendiks <b>Volodõmõr Zelenskõi</b> (73% häältest). Ta oli mänginud telesarjas „Rahva teener” ausat presidenti ja keskendus korruptsioonivastasele võitlusele.</li>
+    <li><b>2019</b> valiti presidendiks <b><span class="pname" data-p="zelenskoi" role="button" tabindex="0">Volodõmõr Zelenskõi</span></b> (73% häältest). Ta oli mänginud telesarjas „Rahva teener” ausat presidenti ja keskendus korruptsioonivastasele võitlusele.</li>
   </ul>
   <h3>Täiemahuline sõda <span class="yr">alates 24. veebruarist 2022</span></h3>
   <ul>
@@ -1705,7 +1723,7 @@ sub{font-size:.72em;line-height:0}
     <li>Peamine löök suunati <b>Kiievile</b> (läbi Tšornobõli). Mariupolis pommitati draamateatrit (16. märts) ja peeti lahinguid Azovstali tehase pärast.</li>
     <li><b>Butša massimõrv</b> (märts 2022): pärast Vene vägede lahkumist 1. aprillil leiti linnast 458 surnukeha.</li>
     <li>2022. aasta lõpuks stabiliseerus rinne Ida-Ukrainas. Venemaa sõjakuriteod ja tuumaterrorism (<b>Zaporižžja tuumajaam</b>).</li>
-    <li><b>23.–24. juuni 2023:</b> Wagneri juhi <b>Jevgeni Prigožini mäss</b> Vene armee vastu.</li>
+    <li><b>23.–24. juuni 2023:</b> Wagneri juhi <b><span class="pname" data-p="prigozin" role="button" tabindex="0">Jevgeni Prigožini</span> mäss</b> Vene armee vastu.</li>
     <li><b>2024:</b> Ukraina vasturünnak Venemaa <b>Kurski</b> oblastisse.<span class="muted"> Slaidil on „2024. aasta alguses”, tegelikult algas see augustis 2024.</span></li>
     <li><b>2025:</b> Venemaa õhurünnakud jätkuvad, Ukraina lööb Venemaa naftatöötlemistehaseid. Rahuläbirääkimised takerduvad (juunis Istanbulis, augustis USA-Venemaa tippkohtumine Alaskal).</li>
   </ul>
@@ -1726,7 +1744,7 @@ sub{font-size:.72em;line-height:0}
     <li><span class="when">1957</span>Euroopa Majandusühendus.</li>
     <li><span class="when">1961</span>Berliini müür ehitatakse.</li>
     <li><span class="when">1989</span>Berliini müüri piiripunktid avatakse 9. novembril. Külma sõja lõpp.</li>
-    <li><span class="when">1991</span>Gruusia iseseisvub. Ukraina rahvahääletus (1. dets). Gorbatšov astub tagasi, NSV Liit lakkab olemast (25. dets).</li>
+    <li><span class="when">1991</span>Gruusia iseseisvub. Ukraina rahvahääletus (1. dets). <span class="pname" data-p="gorbatsov" role="button" tabindex="0">Gorbatšov</span> astub tagasi, NSV Liit lakkab olemast (25. dets).</li>
     <li><span class="when">1991–1992</span>Gruusia ja Lõuna-Osseetia sõda.</li>
     <li><span class="when">1992</span>Euroopa Liit (7. veebr). Abhaasia eestlased evakueeritakse Eestisse.</li>
     <li><span class="when">1992–1993</span>Abhaasia sõda.</li>
@@ -1734,8 +1752,8 @@ sub{font-size:.72em;line-height:0}
     <li><span class="when">1994–1996</span>I Tšetšeenia sõda.</li>
     <li><span class="when">1995</span>Eesti liitumisavaldus EL-ile (28. nov).</li>
     <li><span class="when">1998</span>Rubla krahh Venemaal.</li>
-    <li><span class="when">1999</span>II Tšetšeenia sõda algab. Putin peaministriks, 31. detsembril Jeltsini järglaseks.</li>
-    <li><span class="when">2000</span>Putin võidab presidendivalimised.</li>
+    <li><span class="when">1999</span>II Tšetšeenia sõda algab. <span class="pname" data-p="putin" role="button" tabindex="0">Putin</span> peaministriks, 31. detsembril <span class="pname" data-p="jeltsin" role="button" tabindex="0">Jeltsini</span> järglaseks.</li>
+    <li><span class="when">2000</span><span class="pname" data-p="putin" role="button" tabindex="0">Putin</span> võidab presidendivalimised.</li>
     <li><span class="when">2001</span>11. september: NATO 5. artikkel esimest korda.</li>
     <li><span class="when">2003</span>Gruusia roosirevolutsioon. Eesti rahvahääletus EL-i üle (66,5% poolt slaidi järgi, ametlikult 66,83%).</li>
     <li><span class="when">2004</span>Eesti NATO-sse (29. märts) ja EL-i (1. mai). Beslani koolimaja rünnak. Ukraina oranž revolutsioon (nov 2004 – jaan 2005).</li>
@@ -1746,11 +1764,11 @@ sub{font-size:.72em;line-height:0}
     <li><span class="when">2013–2014</span>Euromaidan (nov 2013), „rohelised mehikesed” Krimmis (27.02.2014), Krimmi „referendum” (16.03.2014), sõda Donbassis, MH17 (17.07.2014), Minsk I (5.09.2014).</li>
     <li><span class="when">2015</span>Minsk II (12. veebr). ISIS hävitab Palmyra võidukaare.</li>
     <li><span class="when">2018</span>Iseseisev Ukraina õigeusu kirik.</li>
-        <li><span class="when">2019</span>Zelenskõi Ukraina presidendiks. Detsembris uus viirus Wuhanis.</li>
+        <li><span class="when">2019</span><span class="pname" data-p="zelenskoi" role="button" tabindex="0">Zelenskõi</span> Ukraina presidendiks. Detsembris uus viirus Wuhanis.</li>
     <li><span class="when">2020</span>COVID-19 pandeemia (WHO 11. märts), Eestis eriolukord (12. märts). Brexit.</li>
     <li><span class="when">2022</span>Venemaa täiemahuline sissetung Ukrainasse (24. veebr). Butša massimõrv (märts).</li>
-    <li><span class="when">2023</span>COVID-19 hädaolukord lõpeb (Eestis 2. mai, WHO 5. mai). Prigožini mäss (23.–24. juuni).</li>
-    <li><span class="when">2024</span>Ukraina rünnak Kurski oblastisse (aug). Gruusia olukord halveneb (oktoobrist). Assadi võim Süürias kukub (8. dets).</li>
+    <li><span class="when">2023</span>COVID-19 hädaolukord lõpeb (Eestis 2. mai, WHO 5. mai). <span class="pname" data-p="prigozin" role="button" tabindex="0">Prigožini</span> mäss (23.–24. juuni).</li>
+    <li><span class="when">2024</span>Ukraina rünnak Kurski oblastisse (aug). Gruusia olukord halveneb (oktoobrist). <span class="pname" data-p="assad" role="button" tabindex="0">Assadi</span> võim Süürias kukub (8. dets).</li>
     <li><span class="when">2025</span>Rahuläbirääkimised Istanbulis (juuni), USA-Venemaa tippkohtumine Alaskal (aug).</li>
   </ol>
 </section>
@@ -2158,6 +2176,15 @@ H — C — C — C — H
   </div>
 </div>
 <div class="newver" id="newver" role="status" hidden><span>Ajukasse on vahepeal midagi uut lisatud.</span><button type="button" class="btn" id="newver-go">Värskenda</button></div>
+<div class="modal pmodal" id="p-modal" role="dialog" aria-modal="true" aria-labelledby="p-name" hidden>
+  <div class="modal-box pbox">
+    <button type="button" class="xbtn" id="p-close" aria-label="Sulge">×</button>
+    <img id="p-img" alt="">
+    <h2 id="p-name"></h2>
+    <p class="muted" id="p-role"></p>
+    <p class="pcred" id="p-cred"></p>
+  </div>
+</div>
 <div class="modal" id="app-modal" role="dialog" aria-modal="true" aria-labelledby="app-h" hidden>
   <div class="modal-box appbox">
     <div class="modal-head"><h2 id="app-h">Ajukas telefoni avakuvale</h2><button type="button" class="xbtn" id="app-close" aria-label="Sulge">×</button></div>
@@ -2187,6 +2214,7 @@ H — C — C — C — H
     </ul>
   </div>
 </div>
+<script type="application/json" id="people-data">{"joplin": {"n": "Scott Joplin", "r": "ragtime’i helilooja ja pianist", "i": "pildid/joplin.jpg", "by": "autor teadmata", "lic": "Public domain", "src": "https://commons.wikimedia.org/wiki/File:Scott_Joplin_in_1912.jpg"}, "armstrong": {"n": "Louis Armstrong", "r": "trompetist ja laulja", "i": "pildid/armstrong.jpg", "by": "Harry Warnecke / Gus Schoenbaechler", "lic": "Public domain", "src": "https://commons.wikimedia.org/wiki/File:Louis_Armstrong_in_Color_(restored).jpg"}, "morton": {"n": "Jelly Roll Morton", "r": "pianist ja helilooja", "i": "pildid/morton.jpg", "by": "Bloom photograph studio, Chicago", "lic": "Public domain", "src": "https://commons.wikimedia.org/wiki/File:Jelly_Roll_Morton_(c._1927).jpg"}, "oliver": {"n": "Joe „King” Oliver", "r": "kornetist ja orkestrijuht", "i": "pildid/oliver.jpg", "by": "autor teadmata", "lic": "Public domain", "src": "https://commons.wikimedia.org/wiki/File:King_Oliver_(1915_portrait).jpg"}, "bsmith": {"n": "Bessie Smith", "r": "bluusilauljatar", "i": "pildid/bsmith.jpg", "by": "Carl Van Vechten, restored by Adam Cuerden", "lic": "Public domain", "src": "https://commons.wikimedia.org/wiki/File:Bessie_Smith_(1936)_by_Carl_Van_Vechten.jpg"}, "waters": {"n": "Muddy Waters", "r": "bluusimuusik", "i": "pildid/waters.jpg", "by": "Lionel Decoster", "lic": "CC BY-SA 4.0", "src": "https://commons.wikimedia.org/wiki/File:Muddy_Waters_november_1976.jpg"}, "bbking": {"n": "B. B. King", "r": "bluusikitarrist ja laulja", "i": "pildid/bbking.jpg", "by": "Marco Tambara / Lightversus", "lic": "CC BY-SA 3.0", "src": "https://commons.wikimedia.org/wiki/File:Bbking.jpg"}, "larocca": {"n": "Nick LaRocca", "r": "kornetist, Original Dixieland Jazz Bandi juht", "i": "pildid/larocca.jpg", "by": "autor teadmata", "lic": "Public domain", "src": "https://commons.wikimedia.org/wiki/File:Nick_larocca.jpg"}, "freeman": {"n": "Bud Freeman", "r": "tenorsaksofonist", "i": "pildid/freeman.jpg", "by": "Oleo", "lic": "CC0", "src": "https://commons.wikimedia.org/wiki/File:Bud_Freeman_(cropped).jpg"}, "hawkins": {"n": "Coleman Hawkins", "r": "tenorsaksofonist", "i": "pildid/hawkins.jpg", "by": "autor teadmata", "lic": "Public domain", "src": "https://commons.wikimedia.org/wiki/File:Coleman_Hawkins.jpg"}, "henderson": {"n": "Fletcher Henderson", "r": "pianist ja orkestrijuht", "i": "pildid/henderson.jpg", "by": "Maurice Seymour studio", "lic": "Public domain", "src": "https://commons.wikimedia.org/wiki/File:Fletcher_Henderson_(1943_publicity_photo).jpg"}, "whiteman": {"n": "Paul Whiteman", "r": "tantsuorkestri juht", "i": "pildid/whiteman.jpg", "by": "Artists Management Inc.", "lic": "Public domain", "src": "https://commons.wikimedia.org/wiki/File:Paul_Whiteman_1939.jpg"}, "beiderbecke": {"n": "Bix Beiderbecke", "r": "kornetist", "i": "pildid/beiderbecke.jpg", "by": "autor teadmata", "lic": "Public domain", "src": "https://commons.wikimedia.org/wiki/File:Bix_Beiderbecke_cropped.jpg"}, "ellington": {"n": "Duke Ellington", "r": "helilooja, pianist ja orkestrijuht", "i": "pildid/ellington.jpg", "by": "autor teadmata", "lic": "Public domain", "src": "https://commons.wikimedia.org/wiki/File:Duke_Ellington_-_publicity.JPG"}, "mcferrin": {"n": "Bobby McFerrin", "r": "laulja", "i": "pildid/mcferrin.jpg", "by": "autor teadmata", "lic": "CC BY 2.5", "src": "https://commons.wikimedia.org/wiki/File:Bobby_McFerrin_photo_by_Szaniszlo_Ivor_2.jpg"}, "berendt": {"n": "Joachim-Ernst Berendt", "r": "jazzikriitik, „Das Jazzbuch” autor", "i": "pildid/berendt.jpg", "by": "Willy Pragher", "lic": "CC BY 4.0", "src": "https://commons.wikimedia.org/wiki/File:Donaueschingen-_Donaueschinger_Musiktage;_Stadthalle;_Joachim_Ernst_Berendt_sagt_an_-_LABW_-_Staatsarchiv_Freiburg_W_134_Nr._050048_(cropped).jpeg"}, "gorbatsov": {"n": "Mihhail Gorbatšov", "r": "NSV Liidu viimane juht", "i": "pildid/gorbatsov.jpg", "by": "RIA Novosti", "lic": "CC BY-SA 3.0", "src": "https://commons.wikimedia.org/wiki/File:RIAN_archive_850809_General_Secretary_of_the_CPSU_CC_M._Gorbachev_(crop).jpg"}, "jeltsin": {"n": "Boris Jeltsin", "r": "Venemaa president 1991–1999", "i": "pildid/jeltsin.jpg", "by": "Presidential Press and Information Office", "lic": "CC BY 4.0", "src": "https://commons.wikimedia.org/wiki/File:Boris_Yeltsin_(3x4_cropped).jpg"}, "putin": {"n": "Vladimir Putin", "r": "Venemaa president", "i": "pildid/putin.jpg", "by": "Пресс-служба Президента РФ", "lic": "CC BY 4.0", "src": "https://commons.wikimedia.org/wiki/File:%D0%92%D0%BB%D0%B0%D0%B4%D0%B8%D0%BC%D0%B8%D1%80_%D0%9F%D1%83%D1%82%D0%B8%D0%BD_(08-03-2024)_(cropped)_(higher_res)_2.jpg"}, "dudajev": {"n": "Džohhar Dudajev", "r": "Tšetšeenia iseseisvuse juht", "i": "pildid/dudajev.jpg", "by": "Dmitry Borko", "lic": "CC BY-SA 4.0", "src": "https://commons.wikimedia.org/wiki/File:%D0%94%D0%B6%D0%BE%D1%85%D0%B0%D1%80_%D0%94%D1%83%D0%B4%D0%B0%D0%B5%D0%B2_(1991)_(cropped).png"}, "sevardnadze": {"n": "Eduard Ševardnadze", "r": "Gruusia president 1995–2003", "i": "pildid/sevardnadze.jpg", "by": "Robert D. Ward", "lic": "Public domain", "src": "https://commons.wikimedia.org/wiki/File:Eduard_shevardnadze_(cropped).jpg"}, "saakasvili": {"n": "Mihheil Saakašvili", "r": "Gruusia president 2004–2013", "i": "pildid/saakasvili.jpg", "by": "Виталий Носач / РБК-Украина", "lic": "CC BY 4.0", "src": "https://commons.wikimedia.org/wiki/File:%D0%9C%D0%B8%D1%85%D0%B0%D0%B8%D0%BB_%D0%A1%D0%B0%D0%B0%D0%BA%D0%B0%D1%88%D0%B2%D0%B8%D0%BB%D0%B8_(04-10-2021)_(cropped).jpg"}, "janukovots": {"n": "Viktor Janukovõtš", "r": "Ukraina president 2010–2014", "i": "pildid/janukovots.jpg", "by": "Administration of the President of Ukraine", "lic": "CC BY 4.0", "src": "https://commons.wikimedia.org/wiki/File:Viktor_Yanukovych_official_portrait.jpg"}, "jushtshenko": {"n": "Viktor Juštšenko", "r": "Ukraina president 2005–2010", "i": "pildid/jushtshenko.jpg", "by": "Secretariat of the President of Ukraine", "lic": "CC BY 4.0", "src": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82_3-%D0%B3%D0%BE_%D0%BF%D1%80%D0%B5%D0%B7%D0%B8%D0%B4%D0%B5%D0%BD%D1%82%D0%B0_%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B8_%D0%92%D1%96%D0%BA%D1%82%D0%BE%D1%80%D0%B0_%D0%AE%D1%89%D0%B5%D0%BD%D0%BA%D0%B0_(cropped)(2).jpeg"}, "aksjonov": {"n": "Sergei Aksjonov", "r": "Krimmi Venemaa-meelne juht", "i": "pildid/aksjonov.jpg", "by": "Пресс-служба Главы Республики Крым", "lic": "CC BY 4.0", "src": "https://commons.wikimedia.org/wiki/File:Sergey_Aksyonov_2024_official_portrait_02_(cropped).jpg"}, "porosenko": {"n": "Petro Porošenko", "r": "Ukraina president 2014–2019", "i": "pildid/porosenko.jpg", "by": "Ukraina presidendi kantselei", "lic": "CC BY 4.0", "src": "https://commons.wikimedia.org/wiki/File:Official_portrait_of_Petro_Poroshenko.jpg"}, "zelenskoi": {"n": "Volodõmõr Zelenskõi", "r": "Ukraina president alates 2019", "i": "pildid/zelenskoi.jpg", "by": "Press Service of the President of Ukraine", "lic": "CC BY 4.0", "src": "https://commons.wikimedia.org/wiki/File:Volodymyr_Zelensky_2022_official_portrait_(cropped).jpg"}, "prigozin": {"n": "Jevgeni Prigožin", "r": "Wagneri grupi juht", "i": "pildid/prigozin.jpg", "by": "Михаил Метцель / ТАСС", "lic": "CC BY 4.0", "src": "https://commons.wikimedia.org/wiki/File:%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D0%B9_%D0%9F%D1%80%D0%B8%D0%B3%D0%BE%D0%B6%D0%B8%D0%BD_(09-08-2016)_(cropped_2).jpg"}, "assad": {"n": "Bashar al-Assad", "r": "Süüria president 2000–2024", "i": "pildid/assad.jpg", "by": "khamenei.ir", "lic": "CC BY 4.0", "src": "https://commons.wikimedia.org/wiki/File:Bashar_al-Assad_in_May_2024.png"}}</script>
 <script type="application/json" id="quiz-data">{"jazz": [["Tunnused", "Millal ja kus jazz tekkis?", "19. sajandi lõpus ja 20. sajandi alguses USA-s, eelkõige New Orleansis."], ["Tunnused", "Millal ja kus tekkis sõna „jazz\"?", "1915. aastal Chicagos."], ["Tunnused", "Nimeta jazzi neli põhijoont.", "Improvisatsioon, kõlavärv ehk tämber, pillikoosseisud ning rütm, meloodia ja harmoonia."], ["Tunnused", "Mida andsid jazzile Aafrika, Euroopa ja Kariibi mere piirkond?", "Aafrika: kollektiivne muusika loomine, improvisatsioon, ees- ja järellaulja. Euroopa: harmoonia ja instrumendid. Kariibid: rütmipõhine tantsumuusika ja keerukamad rütmid."], ["Tunnused", "Mis oli Congo Square?", "New Orleansi väljak, kus nädalavahetustel mängiti muusikat, tantsiti ja hoiti alles kultuuripärandit."], ["Tunnused", "Milline orkestritüüp on üks jazzi alustalasid?", "Matuserongkäikude orkestrid."], ["Ragtime", "Mis pillil ragtime'i peamiselt mängiti ja millal oli see populaarne?", "Klaveril, 1890. aastatel."], ["Ragtime", "Kes oli ragtime'i looja? Nimeta kaks tema pala.", "Scott Joplin (1868–1917). Näiteks „Maple Leaf Rag\" ja „The Entertainer\"."], ["Bluus", "Mis on bluusi struktuur ja millel see põhines?", "12-taktiline. Põhines töölauludel ja spirituaalidel."], ["Bluus", "Nimeta kolm bluusiartisti.", "Bessie Smith, Muddy Waters, B.B. King."], ["Mõiste", "Mis on kollektiivne improvisatsioon?", "Pillimehed mängivad samal ajal, aga igaüks improviseerib iseseisvalt."], ["New Orleans", "Kus mängisid New Orleansi harrastusorkestrid?", "Storyville'i linnaosa lõbustusasutustes. Orkestreid oli ligi 30."], ["New Orleans", "Millistel löökidel on New Orleansi jazzis rõhk?", "1. ja 3. löögil (marsilik pulss). Off-beat ehk 2. ja 4. löögi rõhk puudub."], ["New Orleans", "Nimeta meloodiagrupi ja rütmigrupi pillid.", "Meloodia: kornet või trompet, tromboon, klarnet. Rütm: tuuba, bandžo, trummid."], ["New Orleans", "Mis asendas tuuba ja bandžo ning mis lisandus?", "Tuuba asendus kontrabassiga, bandžo kitarriga ja lisandus klaver."], ["New Orleans", "Mis oli improvisatsiooni aluseks?", "Marsi- või kirikumeloodia, ragtime'i pala või 12-taktiline bluus."], ["New Orleans", "Kes juhtis King Oliver's Creole Jazz Bandi?", "Joe „King\" Oliver, kornetist-trompetist."], ["New Orleans", "Millise ansambliga tegi Jelly Roll Morton salvestusi?", "Red Hot Peppers."], ["New Orleans", "Miks New Orleansi jazzi õitseaeg 1917. aastal lõppes?", "Storyville suleti ja muusikud läksid Chicagosse."], ["Armstrong", "Mida uut tõi jazzi Louis Armstrong?", "Jazzist sai solistide muusika. Ta võttis kasutusele akordid ja noodikirja, tõi sisse blue note'id ja scat-laulu."], ["Armstrong", "Mis on scat-laul?", "Sõnadeta, silpidega improviseeritud laul."], ["Armstrong", "Kelle tsitaat on „Ilma Armstrongita poleks jazz'i…\"?", "Joachim-Ernst Berendt, „Das Jazzbuch\"."], ["Dixieland", "Kes oli dixielandi looja?", "Orkestrijuht ja trummar Papa Jack Laine."], ["Dixieland", "Kes tegi esimese jazzisalvestuse ja millal?", "Original Dixieland Jazz Band Nick LaRocca juhatusel 1917. aastal. Plaati müüdi üle miljoni."], ["Dixieland", "Kuidas erines dixielandi kõla New Orleansi omast?", "Väiksem kõlajõud, parem tehnika, kiirem muusika, sujuvam meloodia, vähem intensiivsed kõlavärvid. Iseloomuliku kõla andis soolopill. Koosseis jäi samaks."], ["Dixieland", "Mis lõpetas dixielandi hiilgeaja?", "Sving ja bigbändid 1930. aastate algul. Dixieland tuli tagasi 1940. aastate lõpus."], ["Chicago", "Mis oli Chicago jazzi peamine muutus improvisatsioonis?", "Kollektiivne improvisatsioon asendus solistlikuga."], ["Chicago", "Mis on break?", "Hetk, kui orkester vaikib ja solist improviseerib."], ["Chicago", "Mis oli Austin High School Gang?", "Valgete keskkoolinoorte ansambel, noorte talentide ja Chicago stiili taimelava."], ["Chicago", "Kes oli esimene saksofonivirtuoos?", "Tenorsaksofonist Bud Freeman."], ["Chicago", "Mida uut tõi Fletcher Henderson?", "Jagas orkestri pilligruppideks, lõi tämbrilise vastandamisega uue orkestristiili ja arranžeerimise põhimõtted suurele koosseisule."], ["Chicago", "Kes juhtis kõige populaarsemat tantsuorkestrit ja kes seal mängis?", "Paul Whiteman. Seal mängisid kornetist Bix Beiderbecke ja kitarrist Eddie Lang."], ["Ellington", "Kus tegutses Duke Ellington ja mis on džunglistiil?", "New Yorgis, Harlemi Cotton Clubis. Džunglistiil tähendab trompeti ja trombooni väljendusrikkaid helisid."], ["Tunnused", "Milline oli jazzi sotsiaalne taust?", "Jazz sündis aafrika ameeriklaste kogukondades orjanduse ja rassilise segregatsiooni tingimustes. See oli vahend eneseväljenduseks ja vastupanuks ühiskondlikele piirangutele. Töölaulude ja spirituaalidega saadi üle raskest tööelust ja rõhumisest.", "lisa"], ["Tunnused", "Miks just New Orleans oli jazzi häll?", "Seal oli mitmekultuuriline rahvastik ja segunesid eri muusikastiilid ja traditsioonid. Linn oli sotsiaalsete ja rassiliste piirangute osas avatum ja vabam.", "lisa"], ["Ragtime", "Kes ragtime'i mängisid ja milline muusika see oli?", "Mustanahalised pianistid. Elav ja tantsuline muusika, mis pani aluse jazzmuusika arengule.", "lisa"], ["Ragtime", "Mida veel tead Scott Joplini kohta?", "USA pianist. Kirjutas 44 lugu, ühe balleti ja kaks ooperit (lisaks ka „Pleasant Moments”). Tema muusika taasavastati 1970. aastate alguses.", "lisa"], ["Bluus", "Mida bluusis väljendati ja kuidas seda esitati?", "Isiklikku valu, kaotust ja rõõmu. Bluus oli soololaul ja selles improviseeriti.", "lisa"], ["New Orleans", "Millised olid New Orleansi jazzi muusikalised juured?", "Afroameerika rütmid ja laulustiilid; töölaulud, spirituaalid ja bluus; euroopalikud marsid ja tantsumuusika, mis segati ragtime'i ja boogie-woogiega. Tulemus oli hübriidmuusika.", "lisa"], ["New Orleans", "Milline oli harrastusorkestrite muusika?", "Improviseeriti kuulmise järgi. Muusika meenutas marsi- ja tsirkuseorkestreid ning oli tahumatu, räme, intensiivne ja emotsionaalne.", "lisa"], ["New Orleans", "Kas New Orleansi muusikat kirjutati üles?", "Ei. Muusika sündis kohapeal, aga tugines kindlale teemale.", "lisa"], ["New Orleans", "Kes oli Jelly Roll Morton?", "Ragtime'i pianist, helilooja ja orkestrijuht (1890–1941), üks esimesi jazzi heliloojaid. Pani aluse jazzi klassikale salvestustega ansambliga Red Hot Peppers.", "lisa"], ["Armstrong", "Millised on Louis Armstrongi eluaastad ja tuntuimad palad?", "1900–1971. Palad: „What a Wonderful World”, „West End Blues”, „Hotter Than Hot”, „I'm in the Mood for Love”. Tal oli omapärane käre hääletämber.", "lisa"], ["Armstrong", "Milliseid mõjutusi tõi Armstrong jazzi?", "Mustanahaliste kirikumuusika, New Orleansi ja Aafrika rütmid. Ta oli ka kornetist-trompetist, pianist, arranžeerija ja helilooja.", "lisa"], ["Dixieland", "Miks öeldakse, et dixieland liitis rasse?", "Valge orkestrijuht Papa Jack Laine võitis oma orkestriga orkestrite nn tänavalahingutes sageli mustanahalisi pillimehi. Dixielandi mängisid peamiselt valged muusikud.", "lisa"], ["Dixieland", "Milline pill andis dixielandile iseloomuliku kõla?", "Soolopill: trompet või klarnet.", "lisa"], ["Dixieland", "Nimeta kolm dixielandi ansamblit.", "Original Dixieland Jazz Band, New Orleans Rhythm Kings, Louis Armstrong & All Stars Orchestra.", "lisa"], ["Chicago", "Kes mängisid Chicago jazzi ja mida nad lisasid?", "Valged muusikud. Nad lisasid tehnilise viimistletuse, harmoonilise keerukuse ja arranžeeringud. Soolo ja virtuoossus muutusid tähtsamaks.", "lisa"], ["Chicago", "Kuidas muutus rütm Chicago jazzis ja mis jäi kollektiivsest improvisatsioonist alles?", "Marsilik rütm asendus sujuvamaga (rohkem bluusi kui ragtime'i mõju). Kollektiivsed soolod säilisid pala alguses ja lõpus.", "lisa"], ["Chicago", "Millal oli bluusi ja jazzi põimumise tippaeg ja mida see väljendas?", "1920. aastatel. Väljendas rassilisest diskrimineerimisest tulenevaid probleeme ja meelitas jazzi mängima valgeid keskkooliealisi noori.", "lisa"], ["Chicago", "Mis pill tuli jazzi Chicago stiiliga ja kes olid selle tuntud mängijad?", "Saksofon, millest sai hiljem jazzi sümbol. Tenorsaksofonistid Bud Freeman (esimene saksofonivirtuoos) ja Coleman Hawkins.", "lisa"], ["Ellington", "Kuidas sündisid Duke Ellingtoni teosed ja millised on tema tuntuimad palad?", "Orkestri improvisatsioonilises koostöös: algasid klaverisoologa, millega ühinesid teised muusikud. Palad „Mood Indigo” ja „It Don't Mean a Thing”. Ellington (1899–1974) oli helilooja, pianist ja orkestrijuht.", "lisa"]], "ajalugu": [["Fakt", "Mis on fakt?", "Tõsiasi, mis annab infot toimunu kohta neutraalselt ja mida saab allikate põhjal kontrollida (kes, mis, kus, millal)."], ["Fakt", "Mis vahe on faktil, tõlgendusel ja hinnangul?", "Fakt on kontrollitav väide. Tõlgendus annab faktile tähenduse. Hinnang väljendab väärtust või emotsiooni ja on subjektiivne."], ["Fakt", "Kas „Kuu peale jõudmine oli 20. sajandi suurim saavutus” on fakt?", "Ei, see on arvamus ehk hinnang.", "lisa"], ["Fakt", "Mis on propaganda?", "Teadlikult kujundatud sõnum, mille eesmärk on mõjutada inimeste arvamusi, hoiakuid või käitumist. See võib kasutada fakte, emotsioone, liialdusi ja infot välja jätta."], ["Fakt", "Nimeta allika analüüsi viis sammu.", "Kirjelda, tõlgenda, loo seoseid, leia infoaugud, otsi lisaallikaid.", "lisa"], ["Fakt", "Kuidas teha väide „Berliini müüri langemine vabastas Ida-Saksamaa inimesed” faktipõhiseks?", "9. novembril 1989 avanesid Berliini müüri piiripunktid ja inimesed said liikuda Ida- ja Lääne-Berliini vahel.", "lisa"], ["Perspektiiv", "Mis on mitmeperspektiivne ajalugu?", "Sündmust vaadeldakse mitme inimese, rühma, riigi või ajastu silmade kaudu. Ei ole üht vaatenurka, mida kõik aktsepteeriksid."], ["Perspektiiv", "Millised on kolm vaatenurka ajaloole?", "Sündmuse kaasaegsete, ajaloolaste ja tänapäeva (meie enda) vaatenurk."], ["Perspektiiv", "Kas mitmeperspektiivsus tähendab, et kõik arvamused on võrdselt õiged?", "Ei. Väidet hinnatakse tõendite järgi ja teise vaatenurga mõistmine ei tähenda tema tegude õigustamist.", "lisa"], ["Perspektiiv", "Kas laul „Wind of Change” on faktiallikas?", "Pigem ajastu meeleolude ja tõlgenduste allikas: näitab lootusi ja tähendust, aga ei tõenda, mis konkreetsel päeval juhtus.", "lisa"], ["COVID-19", "Kus ja millal teatati esimest korda uuest viirusest?", "Detsembris 2019 Wuhanis, Hubei provintsis Hiinas."], ["COVID-19", "Millal kuulutas WHO COVID-19 pandeemiaks?", "11. märtsil 2020."], ["COVID-19", "Millal kuulutati Eestis välja eriolukord?", "12. märtsil 2020. Esimene nakatunu Eestis oli 27. veebruaril 2020.", "lisa"], ["COVID-19", "Nimeta neli põhjust, miks pandeemiaid tuleb juurde.", "Rahvastiku kasv ja kokkupuude loodusega, kliimamuutus, antibiootikumide väärkasutus, globaliseerumine.", "lisa"], ["COVID-19", "Nimeta viis COVID-19 mõju.", "Näiteks mõju füüsilisele ja vaimsele tervisele, igapäevaelule (piirangud), majandusele (langus), kultuurile, ebavõrdsusele, riikide koostööle, faktipõhisele mõtlemisele."], ["COVID-19", "Millal lõppes COVID-19 hädaolukord?", "Eestis 2. mail 2023, WHO lõpetas rahvusvahelise hädaolukorra 5. mail 2023.", "lisa"], ["EL ja NATO", "Millal sai Eesti EL-i ja NATO liikmeks?", "NATO liikmeks 29. märtsil 2004, EL-i liikmeks 1. mail 2004."], ["EL ja NATO", "Millal toimus EL-i rahvahääletus Eestis ja kui palju oli poolt?", "14. septembril 2003, poolt slaidi järgi 66,5% (ametlikult 66,83%)."], ["EL ja NATO", "Millal ühines Eesti Schengeni ja euroalaga?", "Schengeniga 2007, euroalaga 2011.", "lisa"], ["EL ja NATO", "Mitu liiget on EL-is, NATO-s, Schengenis ja euroalas (slaidide järgi)?", "EL 27, NATO 32, Schengen 29, euroala 21.", "lisa"], ["EL ja NATO", "Millal ja millega asutati NATO?", "4. aprillil 1949 Põhja-Atlandi ehk Washingtoni lepinguga.", "lisa"], ["EL ja NATO", "Mis on NATO artikkel 5 ja millal seda esimest korda rakendati?", "Kollektiivkaitse: rünnak ühe vastu on rünnak kõigi vastu. Esimest korda pärast 11. septembri 2001 terrorirünnakuid USA-s.", "lisa"], ["EL ja NATO", "Mis on „Partnerlus rahu nimel” ja millal Eesti sellega liitus?", "NATO programm (PfP). Eesti ühines 3. veebruaril 1994.", "lisa"], ["Araabia kevad", "Kust ja millal algas Araabia kevad?", "Tuneesiast 2011. aastal."], ["Araabia kevad", "Mille vastu protesteeriti ja kes olid algatajad?", "Ühiskondliku ebaõigluse ja majandusliku stagnatsiooni vastu. Algatajad olid noored ja ametiühingud.", "lisa"], ["Araabia kevad", "Millistes riikides kukutati valitsejad?", "Tuneesias, Liibüas, Egiptuses ja Jeemenis."], ["Araabia kevad", "Mis juhtus Süürias?", "Kodusõda Bashar al-Assadi vastu, sekkusid islamirühmitused, USA ja Venemaa. Assadi võim kukkus 8. detsembril 2024.", "lisa"], ["Venemaa", "Millal lagunes Nõukogude Liit?", "25. detsembril 1991, kui Gorbatšov tagasi astus. Venemaa president oli Boris Jeltsin.", "lisa"], ["Venemaa", "Iseloomusta Venemaad 1990. aastatel.", "Korruptsioon, oligarhide võim, ebaõnnestunud reformid, ebapopulaarne Jeltsin, kaotatud Tšetšeenia sõda, rubla krahh 1998."], ["Venemaa", "Millal oli I Tšetšeenia sõda ja kuidas see lõppes?", "1994–1996. Venemaa ei suutnud võita, hukkus 30 000–50 000 inimest.", "lisa"], ["Venemaa", "Kuidas tuli Putin võimule?", "1999 sai ta peaministriks, II Tšetšeenia sõda tõstis tema populaarsust, 31.12.1999 kuulutas Jeltsin ta järglaseks ja 2000 võitis ta valimised."], ["Gruusia", "Mis oli roosirevolutsioon?", "2003 Gruusias: pärast võltsitud valimisi tungisid meeleavaldajad koos Saakašviliga roosid käes parlamenti ja Ševardnadze põgenes. 2004 võitis Saakašvili valimised."], ["Gruusia", "Millised kaks piirkonda Gruusia kaotas?", "Abhaasia ja Lõuna-Osseetia.", "lisa"], ["Gruusia", "Millal oli Venemaa–Gruusia sõda ja kui kaua see kestis?", "August 2008. Slaidi järgi 16 päeva, tavaliselt nimetatakse seda viiepäevaseks sõjaks (7.–12. august)."], ["Gruusia", "Miks Venemaa 2008 Gruusiat ründas?", "Slaidi järgi: Putin vajas valimiste eel populaarsust ja Gruusia tahtis liituda EL-i ja NATO-ga.", "lisa"], ["Gruusia", "Mis seob Abhaasiat Eestiga?", "Seal olid 1880. aastatest eestlaste külad (Estonia, Linda, Sulevi, Salme). 1992 evakueeriti 170 inimest Eestisse. Film „Mandariinid”.", "lisa"], ["Ukraina", "Milline on Venemaa sõdade korduv muster?", "Sõditakse naaberriikidega, ettekäändeks on venekeelsete vähemuste „kaitsmine” ja Venemaa ei taha, et riigid liiguksid Lääne mõjusfääri."], ["Ukraina", "Mis oli oranž revolutsioon?", "Protestid novembrist 2004 jaanuarini 2005 võltsitud presidendivalimiste vastu (Janukovõtš vs Juštšenko). Valimised korrati ja võitis Juštšenko. Ukraina teatas soovist saada EL-i ja NATO liikmeks."], ["Ukraina", "Kuidas kasutas Venemaa gaasi survevahendina?", "Juštšenko ajal tõsteti gaasi hinda neljakordselt ja 1. jaanuaril 2006 keeras Venemaa gaasikraanid kinni.", "lisa"], ["Ukraina", "Mis vallandas Euromaidani?", "Novembris 2013 keeldus president Janukovõtš EL-iga assotsiatsioonilepingut allkirjastamast. Veebruaris 2014 ta põgenes."], ["Ukraina", "Kes olid „rohelised mehikesed”?", "Tundemärkideta relvastatud mehed, kes 27. veebruaril 2014 hõivasid Krimmi parlamendi ja valitsushooned.", "lisa"], ["Ukraina", "Millal toimus Krimmi „referendum”?", "16. märtsil 2014. Ametlikult oli poolt 96,77%, tegelikult osales hinnanguliselt vaid 30–50%.", "lisa"], ["Ukraina", "Mis juhtus lennuga MH17?", "17. juulil 2014 tulistati Ida-Ukraina kohal alla Malaysia Airlinesi lend MH17, hukkus 298 inimest.", "lisa"], ["Ukraina", "Mis olid Minski kokkulepped?", "5.09.2014 ja 12.02.2015 sõlmitud kokkulepped, mis külmutasid suurema sõjategevuse Donbassis, aga olid Ukrainale ebasoodsad.", "lisa"], ["Ukraina", "Kes sai 2019. aastal Ukraina presidendiks ja mitme protsendi häältega?", "Volodõmõr Zelenskõi 73% häältega. Ta oli mänginud telesarjas „Rahva teener” ausat presidenti.", "lisa"], ["Ukraina", "Millal algas täiemahuline sõda ja mis eelnes?", "24. veebruaril 2022. Eelnes vägede koondamine (nov 2021), ultimaatum NATO-le (dets 2021) ja Donbassi „vabariikide” tunnustamine 21.02.2022."], ["Ukraina", "Mis oli Butša massimõrv?", "Märtsis 2022 Butšas toime pandud tsiviilisikute tapmine. Pärast Vene vägede lahkumist 1. aprillil leiti 458 surnukeha.", "lisa"], ["Ukraina", "Mis oli Prigožini mäss?", "Wagneri juhi Jevgeni Prigožini mäss Vene armee vastu 23.–24. juunil 2023.", "lisa"]], "keemia": [["Sidemed", "Mitu sidet moodustavad C, N, O, H ja halogeenid?", "C 4, N 3, O 2, H 1, halogeenid 1."], ["Valemid", "Mis vahe on lihtsustatud struktuurivalemil ja brutovalemil?", "Lihtsustatud valem näitab rühmi ja nende järjekorda (CH₃–CH₂–OH), brutovalem ainult aatomite arvu (C₂H₆O)."], ["Valemid", "Mida tähendab graafilises (joon)valemis iga nurk ja ots?", "Süsinikuaatomit. Süsiniku küljes olevaid vesinikke ei kirjutata."], ["Alkaanid", "Mis on süsivesinikud ja mis on alkaanid?", "Süsivesinikud koosnevad ainult C- ja H-aatomitest. Alkaanid on süsivesinikud, kus on ainult üksiksidemed."], ["Alkaanid", "Mis on alkaanide ja tsükloalkaanide üldvalem?", "Alkaanid CnH2n+2, tsükloalkaanid CnH2n."], ["Alkaanid", "Nimeta alkaanid 1–10 süsinikuga.", "Metaan, etaan, propaan, butaan, pentaan, heksaan, heptaan, oktaan, nonaan, dekaan."], ["Alkaanid", "Millised on hargnenud alkaani nimetamise sammud?", "Leia pikim ahel, nummerda nii, et kõrvalrühmad saaksid väikseimad numbrid, nimeta kõrvalrühmad (-üül) tähestiku järjekorras koos asukohaga, lõppu põhiahela nimi."], ["Alkaanid", "Mis järjekorras kirjutatakse kõrvalrühmad nimetusse?", "Tähestiku järjekorras (eesliiteid di-, tri- ei arvestata), nt 3-etüül-2,6-dimetüülheptaan."], ["Asendatud", "Millised on halogeeniühendite, alkoholide ja amiinide funktsionaalrühmad?", "Halogeeniühendid –F, –Cl, –Br, –I; alkoholid –OH (hüdroksüülrühm); amiinid –NH₂ (aminorühm)."], ["Asendatud", "Millise järelliite saavad alkoholid ja amiinid?", "Alkoholid -ool (mitu OH: -diool, -triool), amiinid -amiin."], ["Asendatud", "Millised eesliited on halogeenidel?", "Fluoro-, kloro-, bromo-, jodo-."], ["Asendatud", "Mis on funktsionaalrühm?", "Asendusrühm, mis määrab ühendi iseloomulikud omadused ja kuuluvuse aineklassi."], ["Küllastumata", "Mis vahe on alkeenidel ja alküünidel?", "Alkeenidel on kaksikside (järelliide -een, CnH2n), alküünidel kolmikside (-üün, CnH2n−2)."], ["Küllastumata", "Kuidas nummerdatakse alkeeni põhiahelat?", "Nii, et kaksikside saaks võimalikult väikese numbri. Põhiahel peab kordset sidet sisaldama."], ["Küllastumata", "Mis reaktsioonid on alkeenidele iseloomulikud?", "Liitumisreaktsioonid (halogeenimine, hüdrogeenimine, hüdraatimine)."], ["Aromaatsed", "Mis on benseeni valem ja milline reaktsioonitüüp on aromaatsetele iseloomulik?", "C₆H₆. Asendusreaktsioonid (mitte liitumine)."], ["Isomeeria", "Mis on isomeerid?", "Sama brutovalemiga ühendid, mis erinevad struktuuri ja omaduste poolest."], ["Isomeeria", "Mis vahe on ahela- ja asendiisomeeridel?", "Ahelaisomeeridel on erinev süsinikahela kuju, asendiisomeeridel asendusrühma või kordse sideme erinev asukoht."], ["Isomeeria", "Mitu isomeeri on C₅H₁₂-l ja C₆H₁₄-l?", "C₅H₁₂: 3, C₆H₁₄: 5."], ["Isomeeria", "Kas tsüklopentaan on pentaani isomeer?", "Ei. Tsüklopentaan on C₅H₁₀, pentaan C₅H₁₂."], ["Omadused", "Kuidas mõjutab ahela pikkus keemistemperatuuri?", "Pikem ahel → suurem kokkupuutepind → tugevamad molekulidevahelised jõud → kõrgem keemistemperatuur."], ["Omadused", "Kuidas mõjutab ahela hargnemine keemistemperatuuri?", "Hargnenum ahel → väiksem kokkupuutepind → madalam keemistemperatuur (ja tihedus)."], ["Omadused", "Kuidas kasvab keemistemperatuur aineklasside kaupa (sarnase suurusega molekulid)?", "Alkaanid < halogeeniühendid < amiinid < alkoholid."], ["Omadused", "Miks lahustuvad alkoholid ja amiinid vees hästi?", "Nad moodustavad veega vesiniksidemeid (polaarsed). Mida pikem süsivesinikahel, seda halvemini lahustuvad."], ["Omadused", "Millised alkaanid on toatemperatuuril gaasid?", "Neli esimest: metaan, etaan, propaan, butaan."], ["Reaktsioonid", "Mis tekib alkaani täielikul põlemisel?", "Süsihappegaas CO₂ ja vesi H₂O."], ["Reaktsioonid", "Mis tingimusel reageerivad alkaanid halogeenidega ja mis tüüpi reaktsioon see on?", "Valguse (või kõrge temperatuuri) mõjul. Asendusreaktsioon: tekib halogeeniühend ja vesinikhalogeniid (nt CH₄ + Cl₂ → CH₃Cl + HCl)."], ["Reaktsioonid", "Mis on pürolüüs ehk krakkimine?", "Pika ahelaga alkaanide lõhustamine kõrgel temperatuuril (katalüsaatoriga) lühemateks alkaanideks ja alkeenideks."], ["Reaktsioonid", "Mis tekib alkeeni hüdraatimisel ja mis on tingimus?", "Alkohol. Katalüsaatoriks hape (H₂SO₄ või H₃PO₄)."], ["Reaktsioonid", "Mis tekib alkeeni hüdrogeenimisel ja mis on tingimus?", "Alkaan. Katalüsaator Ni, Pt või Pd."], ["Reaktsioonid", "Mis vahe on alkeeni ja benseeni halogeenimisel?", "Alkeen: liitumine, toimub iseenesest toatemperatuuril. Benseen: asendus, vajab katalüsaatorit (FeBr₃/FeCl₃/AlCl₃) ja tekib ka HBr/HCl."], ["Reaktsioonid", "Tasakaalusta propaani põlemine.", "C₃H₈ + 5O₂ → 3CO₂ + 4H₂O"], ["Asendatud alkaanid", "Millest sõltub halogeeniühendite tihedus?", "Raskem halogeen (väiksem elektronegatiivsus) → suurem tihedus (F < Cl < Br < I). Pikem süsinikahel → väiksem tihedus."], ["Asendatud alkaanid", "Võrdle metanooli ja etanooli.", "Metanool (puupiiritus) keeb 65 °C, väga mürgine (pimedus, surm), lahusti ja kütus. Etanool (piiritus) keeb 78 °C, joogid, desinfitseerimine. Metanoolimürgistuse vastumürk on etanool."], ["Asendatud alkaanid", "Mis tekib amiini reageerimisel happega?", "Ammooniumsool, nt CH₃NH₂ + HCl → CH₃NH₃⁺Cl⁻. Amiinid on nõrgad alused."], ["Aromaatsed", "Mida tähendab elektronide delokalisatsioon aromaatses tuumas?", "Elektronid ei kuulu kindlale aatomipaarile, vaid on jaotunud üle kogu tsükli. Kõik C–C sidemed on ühesugused ja tuum on püsiv."], ["Reaktsioonid", "Mis vahe on hüdraatimisel ja hüdreerimisel?", "Hüdraatimine: vee liitumine (happekatalüüs, tekib alkohol). Hüdreerimine ehk hüdrogeenimine: vesiniku liitumine (Pt/Ni/Pd, tekib alkaan)."], ["Reaktsioonid", "Mis vahe on metüülbenseeni broomimisel kiirguse ja FeBr₃ juuresolekul?", "Kiirguse toimel asendub H metüülrühmas, FeBr₃ juuresolekul benseenituumas."], ["Reaktsioonid", "Mitu H₂ molekuli liitub 3-metüülbut-1-üünile, kui tahame saada alkaani?", "Kaks, sest kolmikside võtab 2 H₂. Saadus on 2-metüülbutaan."]]}</script>
 <footer>Koostatud tunnimaterjalide ja kooli juhendite põhjal tehisaru abiga. Võib sisaldada üksikuid vigu.</footer>
 </div>
@@ -2997,6 +3025,61 @@ H — C — C — C — H
     fetch('tunniplaan.json', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
       if (d && d.classes) { info = d; paint(); }
     }).catch(function(){});
+  })();
+
+  // --- inimeste pildid: arvutis pilt esimese mainimise juures, telefonis nimele vajutades ---
+  (function(){
+    var el = document.getElementById('people-data'); if (!el) return;
+    var PEOPLE = {}; try { PEOPLE = JSON.parse(el.textContent); } catch (e) { return; }
+    var modal = document.getElementById('p-modal'), last = null;
+    function esc2(x){ return String(x).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function open(k){
+      var p = PEOPLE[k]; if (!p) return;
+      last = document.activeElement;
+      var img = document.getElementById('p-img'); img.src = p.i; img.alt = p.n;
+      document.getElementById('p-name').textContent = p.n;
+      document.getElementById('p-role').textContent = p.r;
+      document.getElementById('p-cred').innerHTML = t('Foto') + ': ' + esc2(p.by) + ' · ' + esc2(p.lic) + ' · <a href="' + esc2(p.src) + '" target="_blank" rel="noopener">Wikimedia Commons</a>';
+      modal.hidden = false; document.getElementById('p-close').focus();
+    }
+    function close(){ modal.hidden = true; if (last && last.focus) last.focus(); }
+    document.getElementById('p-close').addEventListener('click', close);
+    modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
+    modal.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+    document.addEventListener('click', function(e){
+      var x = e.target.closest('.pname, .pfig'); if (!x) return;
+      e.preventDefault(); open(x.getAttribute('data-p'));
+    });
+    document.addEventListener('keydown', function(e){
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('pname')) { e.preventDefault(); open(e.target.getAttribute('data-p')); }
+    });
+    var mq = window.matchMedia('(min-width: 900px) and (hover: hover)');
+    function figs(){
+      document.querySelectorAll('.pfig').forEach(function(f){ f.remove(); });
+      if (!mq.matches) return;
+      var done = new Map();
+      document.querySelectorAll('.pname').forEach(function(sp){
+        var k = sp.getAttribute('data-p'), p = PEOPLE[k]; if (!p) return;
+        var area = sp.closest('section[role=tabpanel]') || sp.closest('.view'); if (!area) return;
+        var seen = done.get(area); if (!seen) { seen = {}; done.set(area, seen); }
+        if (seen[k] || sp.closest('table, .tablewrap, details, .qres')) return;
+        var card = sp.closest('.people .person');
+        var block = card || sp.closest('p, li, h2, h3, h4, dd, blockquote, .key'); if (!block) return;
+        if ((block.getAttribute('data-figs') | 0) >= 2) return;
+        var f = document.createElement('figure');
+        f.className = 'pfig'; f.setAttribute('data-p', k); f.title = t('Foto') + ': ' + p.by + ' (' + p.lic + ', Wikimedia Commons)';
+        f.innerHTML = '<img loading="lazy" src="' + esc2(p.i) + '" alt="' + esc2(p.n) + '"><figcaption>' + esc2(p.n) + '</figcaption>';
+        if (card) { if (card.querySelector('.pfig')) return; card.insertBefore(f, card.firstChild); seen[k] = true; return; }
+        if (block.tagName === 'LI') block.insertBefore(f, block.firstChild);
+        else if (/^H[2-4]$/.test(block.tagName)) block.parentNode.insertBefore(f, block.nextSibling);
+        else block.parentNode.insertBefore(f, block);
+        block.setAttribute('data-figs', (block.getAttribute('data-figs') | 0) + 1);
+        seen[k] = true;
+      });
+      document.querySelectorAll('[data-figs]').forEach(function(b){ b.removeAttribute('data-figs'); });
+    }
+    figs();
+    if (mq.addEventListener) mq.addEventListener('change', figs);
   })();
 
   // --- äpp telefoni (PWA) ---
