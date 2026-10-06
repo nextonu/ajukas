@@ -504,6 +504,7 @@ body{padding-bottom:80px}
 .app-pro li::marker{content:"+ ";color:var(--ok);font-weight:700}
 .app-con li::marker{content:"− ";color:var(--err);font-weight:700}
 .app-done{color:var(--ok);font-weight:600}
+.app-msg{margin:10px 0 0;padding:10px 12px;border:1px solid var(--line2);border-left:3px solid var(--warn);border-radius:4px;background:var(--bg)}
 .app-how li.here{border-left:3px solid var(--brand);padding-left:8px;margin-left:-11px;list-style:none}
 
 .mol{font-family:var(--mono);font-size:12.5px;line-height:1.25;margin:0;color:var(--bright);white-space:pre;overflow-x:auto}
@@ -2115,7 +2116,7 @@ H — C — C — C — H
     <div class="modal-head"><h2 id="app-h">Ajukas telefoni avakuvale</h2><button type="button" class="xbtn" id="app-close" aria-label="Sulge">×</button></div>
     <p>Ajuka saab lisada telefoni (või arvuti) avakuvale nagu äpi. See <b>ei ole</b> App Store'i ega Google Play äpp, vaid veebileht, mis käitub nagu äpp (inglise keeles „PWA”).</p>
     <p class="app-done" id="app-done" hidden>✓ Ajukas on selles seadmes juba äpina avatud.</p>
-    <div class="app-install" id="app-install-box" hidden><button type="button" class="btn" id="app-install">Paigalda Ajukas</button></div>
+    <div class="app-install" id="app-install-box"><button type="button" class="btn" id="app-install">Paigalda Ajukas</button><p class="app-msg" id="app-msg" role="status" hidden></p></div>
     <h3>Kuidas lisada</h3>
     <ul class="app-how">
       <li id="how-ios"><b>iPhone / iPad (Safari):</b> vajuta all <b>Jaga</b>-nuppu (ruut noolega üles) → <b>„Lisa avakuvale”</b> → <b>Lisa</b>. Teistes brauserites iPhone'is see ei tööta.</li>
@@ -2959,11 +2960,20 @@ H — C — C — C — H
     var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1), android = /Android/.test(ua);
     var here = document.getElementById(ios ? 'how-ios' : android ? 'how-android' : 'how-pc'); if (here) here.classList.add('here');
     if (standalone) { openB.hidden = true; document.getElementById('app-done').hidden = false; }
-    window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferred = e; document.getElementById('app-install-box').hidden = false; });
+    if (standalone) document.getElementById('app-install-box').hidden = true;
+    window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferred = e; });
     window.addEventListener('appinstalled', function(){ deferred = null; document.getElementById('app-install-box').hidden = true; document.getElementById('app-done').hidden = false; });
     document.getElementById('app-install').addEventListener('click', function(){
-      if (!deferred) return;
-      deferred.prompt(); deferred.userChoice.finally(function(){ deferred = null; document.getElementById('app-install-box').hidden = true; });
+      var m = document.getElementById('app-msg');
+      if (deferred) { m.hidden = true; deferred.prompt(); deferred.userChoice.finally(function(){ deferred = null; }); return; }
+      // brauser ei pakkunud ise paigaldamist: ütle, mida teha
+      m.innerHTML = ios
+        ? t('iPhone’is ja iPadis ei saa nupuga paigaldada. Ava leht <b>Safaris</b>, vajuta all <b>Jaga</b>-nuppu (ruut noolega üles) ja vali <b>„Lisa avakuvale”</b>.')
+        : android
+          ? t('Sinu brauser ei pakkunud praegu paigaldamist. Ava <b>Chrome’is</b> menüü <b>⋮</b> (üleval paremal) ja vali <b>„Installi rakendus”</b> või <b>„Lisa avakuvale”</b>. Kui Ajukas on juba paigaldatud, otsi ikooni avakuvalt või rakenduste loendist.')
+          : t('Sinu brauser ei pakkunud praegu paigaldamist. Chrome’is või Edge’is vali menüüst <b>„Installi Ajukas”</b> või vajuta aadressiriba paremas otsas paigaldusikooni. Kui Ajukas on juba paigaldatud, on see arvuti rakenduste hulgas.');
+      m.hidden = false;
+      if (here) here.scrollIntoView({ block: 'nearest' });
     });
     function close(){ modal.hidden = true; openB.focus(); }
     openB.addEventListener('click', function(){ modal.hidden = false; document.getElementById('app-close').focus(); });
