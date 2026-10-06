@@ -557,6 +557,16 @@ body{padding-bottom:80px}
 .app-con li::marker{content:"− ";color:var(--err);font-weight:700}
 .app-done{color:var(--ok);font-weight:600}
 /* tööriistad: proovitöö, ajajoone mäng, nimetamise treener, kuulamistest, spikker */
+.tmodes{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin:6px 0 22px}
+.tmode-btn{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:10px;row-gap:3px;align-items:center;text-align:left;font:inherit;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;cursor:pointer}
+.tmode-btn:hover{border-color:var(--line2)}
+.tmode-btn .ti{grid-row:1/3;width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font-size:18px;font-weight:700;background:var(--raised);color:var(--muted)}
+.tmode-btn .tt{font-weight:700;color:var(--bright);font-size:15px}
+.tmode-btn .td{grid-column:2;font-size:12.5px;color:var(--muted);line-height:1.35}
+.tmode-btn[aria-pressed=true]{border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand)}
+.tmode-btn[aria-pressed=true] .ti{background:var(--brand);color:#111}
+.tmode>h3:first-child{margin-top:0}
+@media (max-width:600px){.tmodes{grid-template-columns:1fr 1fr}.tmode-btn{grid-template-columns:1fr;padding:10px 12px}.tmode-btn .ti{grid-row:auto;width:28px;height:28px;font-size:15px}.tmode-btn .td{grid-column:1}}
 .tool{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;margin:12px 0}
 .tool .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .tool .big{font-size:22px;font-weight:700;color:var(--bright)}
@@ -727,7 +737,7 @@ sub{font-size:.72em;line-height:0}
   </section>
   <details class="box updlog" id="updlog">
     <summary><span class="ul-title">Uuendused</span><span class="ul-date">6. oktoober 2026</span><span class="ul-last">Muusikas ja ajaloos on inimeste pildid.</span></summary>
-    <div class="ul-body"><h4>7. oktoober 2026</h4><ul><li>Igal kontrolltööl on nüüd <b>proovitöö</b> taimeriga ja <b>spikker</b>.</li><li>Keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
+    <div class="ul-body"><h4>7. oktoober 2026</h4><ul><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
   </details>
   <aside class="suvi" id="suvi" aria-label="Suvevaheaja taimer" hidden>
   <div class="suvi-clock">
@@ -850,7 +860,7 @@ sub{font-size:.72em;line-height:0}
     <button role="tab" id="t-chicago" aria-controls="chicago" aria-selected="false">Chicago</button>
     <button role="tab" id="t-vordlus" aria-controls="vordlus" aria-selected="false">Võrdlus</button>
     <button role="tab" id="t-test" aria-controls="test" aria-selected="false">Testi ennast</button>
-  <button role="tab" id="t-jazz-kuula" aria-controls="jazz-kuula" aria-selected="false">Kuulamistest</button><button role="tab" id="t-jazz-mang" aria-controls="jazz-mang" aria-selected="false">Ajajoone mäng</button><button role="tab" id="t-jazz-proov" aria-controls="jazz-proov" aria-selected="false">Proovitöö</button><button role="tab" id="t-jazz-spikker" aria-controls="jazz-spikker" aria-selected="false">Spikker</button><button role="tab" id="t-jazz-viited" aria-controls="jazz-viited" aria-selected="false">Viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
+  <button role="tab" id="t-jazz-spikker" aria-controls="jazz-spikker" aria-selected="false">Spikker</button><button role="tab" id="t-jazz-viited" aria-controls="jazz-viited" aria-selected="false">Viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#muusika"><span aria-hidden="true">←</span> Muusika</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#muusika">Muusika</a> / Varajane jazz</span>
@@ -1116,25 +1126,30 @@ sub{font-size:.72em;line-height:0}
 <!-- TEST -->
 <section role="tabpanel" id="test" aria-labelledby="t-test" hidden>
   <h2>Testi ennast</h2>
-  <p class="lead">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
+  <p class="lead">Vali, kuidas tahad end testida. Kõik variandid kasutavad sama teema sisu.</p>
+  <div class="tmodes" role="group" aria-label="Testi tüüp"><button type="button" class="tmode-btn" data-m="kys" aria-pressed="true"><span class="ti" aria-hidden="true">?</span><span class="tt">Küsimused</span><span class="td">Mõtle vastus läbi, ava see ja märgi, kas teadsid. Saad korrata ainult neid, mida ei teadnud.</span></button><button type="button" class="tmode-btn" data-m="proov" aria-pressed="false"><span class="ti" aria-hidden="true">⏱</span><span class="tt">Proovitöö</span><span class="td">10 juhuslikku küsimust ja taimer nagu päris töös. Lõpus hindad ennast ise ja näed tulemust.</span></button><button type="button" class="tmode-btn" data-m="kuula" aria-pressed="false"><span class="ti" aria-hidden="true">♪</span><span class="tt">Kuulamistest</span><span class="td">Kuula lõiku ja arva ära, kes esitab ja mis pala see on.</span></button><button type="button" class="tmode-btn" data-m="mang" aria-pressed="false"><span class="ti" aria-hidden="true">↕</span><span class="tt">Ajajoone mäng</span><span class="td">Pane 5 sündmust õigesse järjekorda. Hea aastate kordamiseks.</span></button></div>
+  <div class="tmode" data-m="kys">
+  <h3>Küsimused</h3>
+  <p class="muted">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
   <div class="quiz" data-quiz="jazz"></div>
-</section>
-<section role="tabpanel" id="jazz-kuula" aria-labelledby="t-jazz-kuula" hidden>
-  <h2>Kuulamistest</h2>
-  <p class="lead">Kuula lõiku ja vali, kes esitab ja mis pala see on. Video on peidus, et pilt vastust ette ei ütleks.</p>
-  <div class="listen"></div>
-  <p class="muted">Salvestised mängitakse YouTube'ist, seega on vaja internetti. Kui heli ei hakka nupust mängima, vajuta peidetud video keskele.</p>
-</section>
-<section role="tabpanel" id="jazz-mang" aria-labelledby="t-jazz-mang" hidden>
-  <h2>Ajajoone mäng</h2>
-  <p class="lead">Pane sündmused õigesse järjekorda: vajuta neid vanimast uusimani. Uuesti vajutades saad valiku tühistada.</p>
-  <div class="tlgame" data-src="ajajoon"></div>
-</section>
-<section role="tabpanel" id="jazz-proov" aria-labelledby="t-jazz-proov" hidden>
-  <h2>Proovitöö</h2>
+  </div>
+  <div class="tmode" data-m="proov" hidden>
+  <h3>Proovitöö</h3>
   <p class="lead">10 juhuslikku küsimust ja 15 minutit aega, nagu päris töös. Kirjuta vastused, siis võrdle õigetega ja hinda ennast ise.</p>
   <div class="exam" data-quiz="jazz" data-n="10" data-min="15"></div>
   <p class="muted">Pärast lõpetamist näed iga küsimuse juures õiget vastust ja märgid ise, kas sinu vastus oli õige.</p>
+</div>
+  <div class="tmode" data-m="kuula" hidden>
+  <h3>Kuulamistest</h3>
+  <p class="lead">Kuula lõiku ja vali, kes esitab ja mis pala see on. Video on peidus, et pilt vastust ette ei ütleks.</p>
+  <div class="listen"></div>
+  <p class="muted">Salvestised mängitakse YouTube'ist, seega on vaja internetti. Kui heli ei hakka nupust mängima, vajuta peidetud video keskele.</p>
+</div>
+  <div class="tmode" data-m="mang" hidden>
+  <h3>Ajajoone mäng</h3>
+  <p class="lead">Pane sündmused õigesse järjekorda: vajuta neid vanimast uusimani. Uuesti vajutades saad valiku tühistada.</p>
+  <div class="tlgame" data-src="ajajoon"></div>
+</div>
 </section>
 <section role="tabpanel" id="jazz-spikker" aria-labelledby="t-jazz-spikker" hidden>
   <div class="spk-head"><h2>Spikker</h2><button type="button" class="btn sec spk-print">Prindi / salvesta PDF</button></div>
@@ -1470,7 +1485,7 @@ sub{font-size:.72em;line-height:0}
   </div>
 </div>
 <div class="view" id="v-ajalugu-kt1" data-updated="2026-10-07" data-title="Kontrolltöö 1: tänapäev" data-parent="ajalugu" data-parent-title="Ajalugu" hidden>
-  <nav class="appbar sticky" aria-label="Kontrolltöö 1 teemad"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-aj-ulevaade" aria-controls="aj-ulevaade" aria-selected="false">Ülevaade</button><button role="tab" id="t-aj-fakt" aria-controls="aj-fakt" aria-selected="false">Fakt ja arvamus</button><button role="tab" id="t-aj-perspektiiv" aria-controls="aj-perspektiiv" aria-selected="false">Mitmeperspektiivsus</button><button role="tab" id="t-aj-covid" aria-controls="aj-covid" aria-selected="false">COVID-19</button><button role="tab" id="t-aj-el-nato" aria-controls="aj-el-nato" aria-selected="false">EL ja NATO</button><button role="tab" id="t-aj-araabia" aria-controls="aj-araabia" aria-selected="false">Araabia kevad</button><button role="tab" id="t-aj-venemaa" aria-controls="aj-venemaa" aria-selected="false">Venemaa 1990ndad</button><button role="tab" id="t-aj-gruusia" aria-controls="aj-gruusia" aria-selected="false">Gruusia</button><button role="tab" id="t-aj-ukraina" aria-controls="aj-ukraina" aria-selected="false">Ukraina</button><button role="tab" id="t-aj-ajajoon" aria-controls="aj-ajajoon" aria-selected="false">Ajajoon</button><button role="tab" id="t-aj-test" aria-controls="aj-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-aj-proov" aria-controls="aj-proov" aria-selected="false">Proovitöö</button><button role="tab" id="t-aj-mang" aria-controls="aj-mang" aria-selected="false">Ajajoone mäng</button><button role="tab" id="t-aj-spikker" aria-controls="aj-spikker" aria-selected="false">Spikker</button><button role="tab" id="t-aj-viited" aria-controls="aj-viited" aria-selected="false">Viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
+  <nav class="appbar sticky" aria-label="Kontrolltöö 1 teemad"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-aj-ulevaade" aria-controls="aj-ulevaade" aria-selected="false">Ülevaade</button><button role="tab" id="t-aj-fakt" aria-controls="aj-fakt" aria-selected="false">Fakt ja arvamus</button><button role="tab" id="t-aj-perspektiiv" aria-controls="aj-perspektiiv" aria-selected="false">Mitmeperspektiivsus</button><button role="tab" id="t-aj-covid" aria-controls="aj-covid" aria-selected="false">COVID-19</button><button role="tab" id="t-aj-el-nato" aria-controls="aj-el-nato" aria-selected="false">EL ja NATO</button><button role="tab" id="t-aj-araabia" aria-controls="aj-araabia" aria-selected="false">Araabia kevad</button><button role="tab" id="t-aj-venemaa" aria-controls="aj-venemaa" aria-selected="false">Venemaa 1990ndad</button><button role="tab" id="t-aj-gruusia" aria-controls="aj-gruusia" aria-selected="false">Gruusia</button><button role="tab" id="t-aj-ukraina" aria-controls="aj-ukraina" aria-selected="false">Ukraina</button><button role="tab" id="t-aj-ajajoon" aria-controls="aj-ajajoon" aria-selected="false">Ajajoon</button><button role="tab" id="t-aj-test" aria-controls="aj-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-aj-spikker" aria-controls="aj-spikker" aria-selected="false">Spikker</button><button role="tab" id="t-aj-viited" aria-controls="aj-viited" aria-selected="false">Viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#ajalugu"><span aria-hidden="true">←</span> Ajalugu</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#ajalugu">Ajalugu</a> / Kontrolltöö 1</span>
@@ -1880,19 +1895,24 @@ sub{font-size:.72em;line-height:0}
 </section>
 <section role="tabpanel" id="aj-test" aria-labelledby="t-aj-test" hidden>
   <h2>Testi ennast</h2>
-  <p class="lead">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
+  <p class="lead">Vali, kuidas tahad end testida. Kõik variandid kasutavad sama teema sisu.</p>
+  <div class="tmodes" role="group" aria-label="Testi tüüp"><button type="button" class="tmode-btn" data-m="kys" aria-pressed="true"><span class="ti" aria-hidden="true">?</span><span class="tt">Küsimused</span><span class="td">Mõtle vastus läbi, ava see ja märgi, kas teadsid. Saad korrata ainult neid, mida ei teadnud.</span></button><button type="button" class="tmode-btn" data-m="proov" aria-pressed="false"><span class="ti" aria-hidden="true">⏱</span><span class="tt">Proovitöö</span><span class="td">10 juhuslikku küsimust ja taimer nagu päris töös. Lõpus hindad ennast ise ja näed tulemust.</span></button><button type="button" class="tmode-btn" data-m="mang" aria-pressed="false"><span class="ti" aria-hidden="true">↕</span><span class="tt">Ajajoone mäng</span><span class="td">Pane 5 sündmust õigesse järjekorda. Hea aastate kordamiseks.</span></button></div>
+  <div class="tmode" data-m="kys">
+  <h3>Küsimused</h3>
+  <p class="muted">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
   <div class="quiz" data-quiz="ajalugu"></div>
-</section>
-<section role="tabpanel" id="aj-proov" aria-labelledby="t-aj-proov" hidden>
-  <h2>Proovitöö</h2>
+  </div>
+  <div class="tmode" data-m="proov" hidden>
+  <h3>Proovitöö</h3>
   <p class="lead">10 juhuslikku küsimust ja 15 minutit aega, nagu päris töös. Kirjuta vastused, siis võrdle õigetega ja hinda ennast ise.</p>
   <div class="exam" data-quiz="ajalugu" data-n="10" data-min="15"></div>
   <p class="muted">Vastuseid ei kontrolli arvuti: pärast lõpetamist näed iga küsimuse juures õiget vastust ja märgid ise, kas sinu vastus oli õige.</p>
-</section>
-<section role="tabpanel" id="aj-mang" aria-labelledby="t-aj-mang" hidden>
-  <h2>Ajajoone mäng</h2>
+</div>
+  <div class="tmode" data-m="mang" hidden>
+  <h3>Ajajoone mäng</h3>
   <p class="lead">Pane sündmused õigesse järjekorda: vajuta neid vanimast uusimani. Uuesti vajutades saad valiku tühistada.</p>
   <div class="tlgame" data-src="aj-ajajoon"></div>
+</div>
 </section>
 <section role="tabpanel" id="aj-spikker" aria-labelledby="t-aj-spikker" hidden>
   <div class="spk-head"><h2>Spikker</h2><button type="button" class="btn sec spk-print">Prindi / salvesta PDF</button></div>
@@ -1934,7 +1954,7 @@ sub{font-size:.72em;line-height:0}
   </div>
 </div>
 <div class="view" id="v-keemia-kt1" data-updated="2026-10-07" data-title="Kontrolltöö 1: orgaanika" data-parent="keemia" data-parent-title="Keemia" hidden>
-  <nav class="appbar sticky" aria-label="Keemia kontrolltöö 1 teemad"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-ke-ulevaade" aria-controls="ke-ulevaade" aria-selected="false">Ülevaade</button><button role="tab" id="t-ke-valemid" aria-controls="ke-valemid" aria-selected="false">Sidemed ja valemid</button><button role="tab" id="t-ke-alkaanid" aria-controls="ke-alkaanid" aria-selected="false">Alkaanid</button><button role="tab" id="t-ke-asendatud" aria-controls="ke-asendatud" aria-selected="false">Asendatud alkaanid</button><button role="tab" id="t-ke-kullastumata" aria-controls="ke-kullastumata" aria-selected="false">Alkeenid ja alküünid</button><button role="tab" id="t-ke-aromaatsed" aria-controls="ke-aromaatsed" aria-selected="false">Aromaatsed</button><button role="tab" id="t-ke-isomeeria" aria-controls="ke-isomeeria" aria-selected="false">Isomeeria</button><button role="tab" id="t-ke-omadused" aria-controls="ke-omadused" aria-selected="false">Keemistemp ja lahustuvus</button><button role="tab" id="t-ke-reaktsioonid" aria-controls="ke-reaktsioonid" aria-selected="false">Reaktsioonid</button><button role="tab" id="t-ke-harjutused" aria-controls="ke-harjutused" aria-selected="false">Harjutused</button><button role="tab" id="t-ke-test" aria-controls="ke-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-ke-treener" aria-controls="ke-treener" aria-selected="false">Nimetamise treener</button><button role="tab" id="t-ke-proov" aria-controls="ke-proov" aria-selected="false">Proovitöö</button><button role="tab" id="t-ke-spikker" aria-controls="ke-spikker" aria-selected="false">Spikker</button><button role="tab" id="t-ke-viited" aria-controls="ke-viited" aria-selected="false">Videod ja viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
+  <nav class="appbar sticky" aria-label="Keemia kontrolltöö 1 teemad"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-ke-ulevaade" aria-controls="ke-ulevaade" aria-selected="false">Ülevaade</button><button role="tab" id="t-ke-valemid" aria-controls="ke-valemid" aria-selected="false">Sidemed ja valemid</button><button role="tab" id="t-ke-alkaanid" aria-controls="ke-alkaanid" aria-selected="false">Alkaanid</button><button role="tab" id="t-ke-asendatud" aria-controls="ke-asendatud" aria-selected="false">Asendatud alkaanid</button><button role="tab" id="t-ke-kullastumata" aria-controls="ke-kullastumata" aria-selected="false">Alkeenid ja alküünid</button><button role="tab" id="t-ke-aromaatsed" aria-controls="ke-aromaatsed" aria-selected="false">Aromaatsed</button><button role="tab" id="t-ke-isomeeria" aria-controls="ke-isomeeria" aria-selected="false">Isomeeria</button><button role="tab" id="t-ke-omadused" aria-controls="ke-omadused" aria-selected="false">Keemistemp ja lahustuvus</button><button role="tab" id="t-ke-reaktsioonid" aria-controls="ke-reaktsioonid" aria-selected="false">Reaktsioonid</button><button role="tab" id="t-ke-harjutused" aria-controls="ke-harjutused" aria-selected="false">Harjutused</button><button role="tab" id="t-ke-test" aria-controls="ke-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-ke-spikker" aria-controls="ke-spikker" aria-selected="false">Spikker</button><button role="tab" id="t-ke-viited" aria-controls="ke-viited" aria-selected="false">Videod ja viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#keemia"><span aria-hidden="true">←</span> Keemia</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#keemia">Keemia</a> / Kontrolltöö 1</span>
@@ -2217,20 +2237,25 @@ H — C — C — C — H
 </section>
 <section role="tabpanel" id="ke-test" aria-labelledby="t-ke-test" hidden>
   <h2>Testi ennast</h2>
-  <p class="lead">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
+  <p class="lead">Vali, kuidas tahad end testida. Kõik variandid kasutavad sama teema sisu.</p>
+  <div class="tmodes" role="group" aria-label="Testi tüüp"><button type="button" class="tmode-btn" data-m="kys" aria-pressed="true"><span class="ti" aria-hidden="true">?</span><span class="tt">Küsimused</span><span class="td">Mõtle vastus läbi, ava see ja märgi, kas teadsid. Saad korrata ainult neid, mida ei teadnud.</span></button><button type="button" class="tmode-btn" data-m="proov" aria-pressed="false"><span class="ti" aria-hidden="true">⏱</span><span class="tt">Proovitöö</span><span class="td">10 juhuslikku küsimust ja taimer nagu päris töös. Lõpus hindad ennast ise ja näed tulemust.</span></button><button type="button" class="tmode-btn" data-m="treener" aria-pressed="false"><span class="ti" aria-hidden="true">⌬</span><span class="tt">Nimetamise treener</span><span class="td">Arvuti teeb juhusliku ühendi, sina kirjutad nime. Kontrollib kohe.</span></button></div>
+  <div class="tmode" data-m="kys">
+  <h3>Küsimused</h3>
+  <p class="muted">Mõtle vastus enne läbi ja vajuta siis küsimusele.</p>
   <div class="quiz" data-quiz="keemia"></div>
-</section>
-<section role="tabpanel" id="ke-treener" aria-labelledby="t-ke-treener" hidden>
-  <h2>Nimetamise treener</h2>
-  <p class="lead">Arvuti teeb juhusliku ühendi, sina kirjutad nime. Ülesandeid tuleb lõputult, nii et saad harjutada nii kaua, kui vaja.</p>
-  <div class="namer"></div>
-  <p class="muted">Täpitähtedeta (nt „metuul”) ja tühikutega kirjutatud vastuseid loetakse ka õigeks, aga õige kirjapilt näidatakse alati. Alkoholide ja alkeenide puhul sobivad nii uuem (pentaan-2-ool, pent-2-een) kui ka vanem kuju (2-pentanool, 2-penteen).</p>
-</section>
-<section role="tabpanel" id="ke-proov" aria-labelledby="t-ke-proov" hidden>
-  <h2>Proovitöö</h2>
+  </div>
+  <div class="tmode" data-m="proov" hidden>
+  <h3>Proovitöö</h3>
   <p class="lead">10 juhuslikku küsimust ja 20 minutit aega, nagu päris töös. Kirjuta vastused, siis võrdle õigetega ja hinda ennast ise.</p>
   <div class="exam" data-quiz="keemia" data-n="10" data-min="20"></div>
   <p class="muted">Pärast lõpetamist näed iga küsimuse juures õiget vastust ja märgid ise, kas sinu vastus oli õige.</p>
+</div>
+  <div class="tmode" data-m="treener" hidden>
+  <h3>Nimetamise treener</h3>
+  <p class="lead">Arvuti teeb juhusliku ühendi, sina kirjutad nime. Ülesandeid tuleb lõputult, nii et saad harjutada nii kaua, kui vaja.</p>
+  <div class="namer"></div>
+  <p class="muted">Täpitähtedeta (nt „metuul”) ja tühikutega kirjutatud vastuseid loetakse ka õigeks, aga õige kirjapilt näidatakse alati. Alkoholide ja alkeenide puhul sobivad nii uuem (pentaan-2-ool, pent-2-een) kui ka vanem kuju (2-pentanool, 2-penteen).</p>
+</div>
 </section>
 <section role="tabpanel" id="ke-spikker" aria-labelledby="t-ke-spikker" hidden>
   <div class="spk-head"><h2>Spikker</h2><button type="button" class="btn sec spk-print">Prindi / salvesta PDF</button></div>
@@ -3506,6 +3531,8 @@ H — C — C — C — H
       { v: 'qDQpZT3GhDg', s: 10, a: 'Duke Ellington – „It Don’t Mean a Thing”', st: 'Duke Ellington' }
     ];
     var order = [], i = 0, score = 0, player = null, playing = false;
+    window.__lsPause = function(){ if (player && player.pauseVideo) { try { player.pauseVideo(); } catch (e) {} } };
+    window.addEventListener('hashchange', window.__lsPause);
     box.className = 'listen tool';
     function loadYT(cb){
       if (window.YT && window.YT.Player) return cb();
@@ -3558,6 +3585,20 @@ H — C — C — C — H
     intro();
   });
 
+  // Testi ennast: testi tüübi valik (küsimused, proovitöö, ajajoone mäng, treener, kuulamistest)
+  document.querySelectorAll('.tmodes').forEach(function(g){
+    var sec = g.closest('section'), KEY = 'ajukas-tmode-' + sec.id;
+    function show(m){
+      var ok = false;
+      g.querySelectorAll('.tmode-btn').forEach(function(b){ var on = b.getAttribute('data-m') === m; if (on) ok = true; b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+      if (!ok) return;
+      sec.querySelectorAll('.tmode').forEach(function(d){ d.hidden = d.getAttribute('data-m') !== m; });
+      if (window.__lsPause) window.__lsPause();
+      store(KEY, m);
+    }
+    g.querySelectorAll('.tmode-btn').forEach(function(b){ b.addEventListener('click', function(){ show(b.getAttribute('data-m')); }); });
+    var saved = store(KEY); if (saved) show(saved);
+  });
   // Spikri printimine: avab puhta valge lehe, kust saab printida või PDF-ina salvestada
   document.querySelectorAll('.spk-print').forEach(function(b){
     b.addEventListener('click', function(){
