@@ -283,6 +283,10 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .flist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:4px;font-size:13px}
 .flist li{display:flex;justify-content:space-between;gap:8px;color:var(--text);font-family:var(--mono);font-size:12px}
 .flist li.bad{color:var(--err)}
+.flist li{align-items:center}
+.flist .fn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.flist .fx{flex:0 0 auto;background:none;border:1px solid var(--line2);color:var(--muted);border-radius:3px;width:24px;height:24px;line-height:1;font-size:15px;cursor:pointer;padding:0}
+.flist .fx:hover{color:var(--err);border-color:var(--err)}
 .box input[type=file]{font-size:13px;padding:6px}
 .sgrid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 .att{display:flex;flex-wrap:wrap;gap:6px}
@@ -727,7 +731,7 @@ sub{font-size:.72em;line-height:0}
     <form id="sugg-form" novalidate>
       <label for="sg-name">Nimi (võid jätta tühjaks)<input id="sg-name" maxlength="60" autocomplete="nickname"></label>
       <label for="sg-text">Soovitus<textarea id="sg-text" maxlength="2000" rows="4"></textarea></label>
-      <div class="filepick"><span class="flabel">Lisa pilte või faile, kui tahad (kuni 3)</span><label for="sg-files" class="btn sec pickbtn">Vali failid</label><input id="sg-files" class="vh" type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.ppt,.pptx,.xls,.xlsx"></div>
+      <div class="filepick"><span class="flabel">Lisa pilte või faile, kui tahad (kuni 3)</span><label for="sg-files" class="btn sec pickbtn" id="sg-pick">Vali failid</label><input id="sg-files" class="vh" type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.ppt,.pptx,.xls,.xlsx"></div>
       <p class="muted" style="font-size:12px;margin:-4px 0 0">Vabandust, et saata saab ainult väikeseid faile: suuremate jaoks peaksin failihoidla eest maksma. Pildid tehakse saatmisel automaatselt väiksemaks, muu fail võib olla kuni 700 kB.</p>
       <p class="muted" style="font-size:12px;margin:0"><b style="background:none;padding:0;color:var(--text)">Suurem fail?</b> Pane see Google Drive'i või OneDrive'i, vali „Jaga” → „Kõik, kellel on link” ja kleebi link soovituse teksti sisse.</p>
       <ul class="flist" id="sg-flist"></ul>
@@ -3253,30 +3257,41 @@ if (!FIREBASE_CONFIG) {
   function paintFiles() {
     const ul = $('sg-flist'); ul.textContent = '';
     let total = 0;
-    pending.forEach((p) => {
+    pending.forEach((p, i) => {
       total += p.andmed ? p.andmed.length : 0;
-      const li = document.createElement('li'); if (p.viga) li.className = 'bad';
-      const n = document.createElement('span'); n.textContent = p.nimi;
+      const li = document.createElement('li'); if (p.viga && !p.busy) li.className = 'bad';
+      const n = document.createElement('span'); n.className = 'fn'; n.textContent = p.nimi;
       const z = document.createElement('span'); z.textContent = p.viga || (Math.round(p.andmed.length * 0.75 / 1024) + ' kB');
-      li.append(n, z); ul.append(li);
+      const x = document.createElement('button'); x.type = 'button'; x.className = 'fx'; x.textContent = '×';
+      x.setAttribute('aria-label', t('Eemalda {n}', { n: p.nimi }));
+      x.addEventListener('click', () => { pending.splice(i, 1); paintFiles(); $('sg-send').disabled = pending.some((q) => q.busy); });
+      li.append(n, z, x); ul.append(li);
     });
+    $('sg-pick').textContent = pending.length ? t('Lisa veel') : t('Vali failid');
+    $('sg-pick').hidden = pending.length >= MAX_FILES;
     return total;
   }
   $('sg-files').addEventListener('change', async (e) => {
-    const files = Array.from(e.target.files || []).slice(0, MAX_FILES);
-    pending = files.map((f) => ({ nimi: f.name, viga: t('töötlen…') }));
+    // uued failid lisanduvad varem valitutele (kokku kuni 3), ei asenda neid
+    const all = Array.from(e.target.files || []); e.target.value = '';
+    const room = MAX_FILES - pending.length;
+    if (room <= 0) { msg($('sg-msg'), t('Lisada saab kuni 3 faili. Eemalda mõni, et uus lisada.'), 'err'); return; }
+    const files = all.slice(0, room);
+    const slots = files.map((f) => ({ nimi: f.name, viga: t('töötlen…'), busy: true }));
+    pending = pending.concat(slots);
     paintFiles();
     $('sg-send').disabled = true;
-    pending = await Promise.all(files.map(async (f) => {
+    const done = await Promise.all(files.map(async (f) => {
       try {
         if (f.type.startsWith('image/') && f.type !== 'image/gif' && f.type !== 'image/svg+xml') return await shrinkImage(f);
         if (f.size > 700 * 1024) return { nimi: f.name, viga: t('liiga suur (üle 700 kB)') };
         return { nimi: f.name, tyyp: f.type || 'application/octet-stream', andmed: await readAsDataURL(f) };
       } catch (err) { return { nimi: f.name, viga: t('ei saanud lugeda') }; }
     }));
-    if (e.target.files.length > MAX_FILES) msg($('sg-msg'), t('Lisada saab kuni 3 faili, ülejäänud jäeti välja.'), 'err');
+    slots.forEach((sl, i) => { const j = pending.indexOf(sl); if (j >= 0) pending[j] = done[i]; });
+    if (all.length > room) msg($('sg-msg'), t('Lisada saab kuni 3 faili, ülejäänud jäeti välja.'), 'err');
     paintFiles();
-    $('sg-send').disabled = false;
+    $('sg-send').disabled = pending.some((q) => q.busy);
   });
   // Turvalisus: pildina näidatakse ainult tavalisi rastervorminguid; kõik muu (ka HTML ja SVG)
   // antakse ainult allalaadimiseks tüübiga application/octet-stream, et see ei saaks lehe nimel käivituda.
