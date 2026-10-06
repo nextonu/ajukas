@@ -2527,9 +2527,12 @@ H — C — C — C — H
     function fname(x){ return ('Ajukas - ' + x).replace(/[\\/:*?"<>|]/g, '_').slice(0, 80) + '.txt'; }
     var stamp = function(){ var d = new Date(); return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear(); };
     document.getElementById('notes-dl').addEventListener('click', function(){
-      var k = key(); download(fname(label(k)), label(k) + '\n' + t('Ajuka märkmed') + ', ' + stamp() + '\n\n' + (NOTES[k] || ''));
+      var k = key();
+      if (!confirm(t('Kas laadida märkmik „{n}” alla tekstifailina (.txt)?', { n: label(k) }))) return;
+      download(fname(label(k)), label(k) + '\n' + t('Ajuka märkmed') + ', ' + stamp() + '\n\n' + (NOTES[k] || ''));
     });
     document.getElementById('notes-dl-all').addEventListener('click', function(){
+      if (!confirm(t('Kas laadida kõik märkmed alla ühe tekstifailina (.txt)?'))) return;
       var keys = Object.keys(NOTES).filter(function(k){ return k !== '__tabs' && NOTES[k]; });
       var out = t('Ajuka märkmed') + ', ' + stamp() + '\n';
       keys.forEach(function(k){ out += '\n==============================\n' + label(k) + '\n==============================\n' + NOTES[k] + '\n'; });
