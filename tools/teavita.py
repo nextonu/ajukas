@@ -1,6 +1,6 @@
 """Saadab Ajuka uued soovitused Discordi.
 
-Käivitab GitHub Actions (.github/workflows/teavita.yml) iga 5 minuti tagant.
+Käivitab GitHub Actions (.github/workflows/teavita.yml): cron-job.org iga 2 minuti tagant, GitHubi enda ajastus varuks.
 Vajab GitHubi salajasi väärtusi (Settings → Secrets and variables → Actions):
   DISCORD_WEBHOOK       – Discordi webhooki aadress
   AJUKAS_BOT_PASSWORD   – Firebase'i kasutaja teavitaja@kasutaja.ajukas.app parool
@@ -58,8 +58,11 @@ def main():
         return
     token = req(f'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={API_KEY}',
                 {'email': BOT_EMAIL, 'password': pw, 'returnSecureToken': True})['idToken']
+    # ainult viimase FRESH aja soovitused: nii kulub Firestore'i lugemisi vähe ka siis, kui töö käib iga paari minuti järel
+    since = (dt.datetime.now(dt.timezone.utc) - FRESH).strftime('%Y-%m-%dT%H:%M:%SZ')
     rows = req(f'{DOCS}:runQuery', {'structuredQuery': {
         'from': [{'collectionId': 'soovitused'}],
+        'where': {'fieldFilter': {'field': {'fieldPath': 'aeg'}, 'op': 'GREATER_THAN_OR_EQUAL', 'value': {'timestampValue': since}}},
         'orderBy': [{'field': {'fieldPath': 'aeg'}, 'direction': 'DESCENDING'}],
         'limit': 30}}, token=token)
     new = []
