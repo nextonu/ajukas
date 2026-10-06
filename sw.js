@@ -17,7 +17,8 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return; // Firebase, Edupage jm käivad otse
   e.respondWith(
-    fetch(req).then((res) => {
+    // no-cache: küsi serverilt alati üle, kas fail on muutunud (muidu võib brauser 10 min vana koopiat näidata)
+    fetch(req, { cache: 'no-cache' }).then((res) => {
       if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
       return res;
     }).catch(() => caches.match(req, { ignoreSearch: true }).then((hit) => hit || (req.mode === 'navigate' ? caches.match('./') : undefined)))
