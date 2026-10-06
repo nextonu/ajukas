@@ -19,7 +19,7 @@ BOT_EMAIL = 'teavitaja@kasutaja.ajukas.app'
 DOCS = f'https://firestore.googleapis.com/v1/projects/{PROJECT}/databases/(default)/documents'
 SITE = 'https://nextonu.github.io/ajukas/#soovitused'
 MAX_MESSAGES = 5          # rohkem korraga ei saadeta (rämpsu korral tuleb üks kokkuvõte)
-FRESH = dt.timedelta(hours=6)  # vanemaid soovitusi ei teavitata, ainult märgitakse teavitatuks
+FRESH = dt.timedelta(hours=24)  # vanemaid soovitusi ei teavitata, ainult märgitakse teavitatuks (GitHubi ajastus võib tunde hilineda)
 
 
 def req(url, data=None, method=None, token=None):
