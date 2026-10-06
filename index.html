@@ -313,6 +313,18 @@ header{padding-right:46px}
 .sharebtn{text-decoration:none}
 .ttchange{font-size:13px}
 .ttweek{flex-basis:100%;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin:-2px 0 0}
+.sharebtn .rec{display:none}
+@media (max-width:600px){
+  .sharerow{flex-direction:column;align-items:stretch;gap:8px}
+  .sharerow .sharebtn{justify-content:center;font-size:15px;padding:11px 14px}
+  #share-open{order:1} #tt-open{order:2} #tt-change,.ttweek{order:3;align-self:center;flex-basis:auto;margin:0}
+  #app-open{order:5;margin-top:4px;padding:15px 14px;font-size:17px;font-weight:600;background:var(--accent);color:#fff;border-color:var(--accent);flex-wrap:wrap;gap:6px 10px}
+  #app-open svg{width:20px;height:20px}
+  #app-open .rec{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;background:rgba(255,255,255,.2);border-radius:999px;padding:2px 9px}
+  .homemain{display:flex;flex-direction:column}
+  .homemain>.leftcol{order:2;margin-top:8px}
+  .homemain>.disclaimer{order:3}
+}
 .sharebtn{display:inline-flex;align-items:center;gap:8px;font-size:14px;padding:8px 14px}
 .sharebtn svg{width:16px;height:16px}
 .modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.55);display:grid;place-items:center;padding:16px}
@@ -579,7 +591,7 @@ sub{font-size:.72em;line-height:0}
 
   <p class="tagline">Kõigi ainete konspektid ühes kohas. Vali aine, siis teema.</p>
   <p class="muted" style="font-size:14px;margin-top:-4px">Alustasin seda lehte G2-s oktoobris 2026, seega varasemate kursuste ja tundide materjali siin enamasti pole.</p>
-  <div class="sharerow"><button type="button" class="btn sec sharebtn" id="share-open" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18 16a3 3 0 0 0-2.4 1.2l-6.7-3.4a3 3 0 0 0 0-1.6l6.7-3.4A3 3 0 1 0 15 7l-6.7 3.4a3 3 0 1 0 0 3.2L15 17a3 3 0 1 0 3-1Z"/></svg>Jaga lehte</button><a class="btn sec sharebtn" id="tt-open" href="https://perg.edupage.org/timetable/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2Zm-2 7h14v10H5Zm2 2v2h2v-2Zm4 0v2h2v-2Zm4 0v2h2v-2Zm-8 4v2h2v-2Zm4 0v2h2v-2Z"/></svg><span id="tt-label">PERG-i tunniplaan</span></a><button type="button" class="linkbtn ttchange" id="tt-change">Vali klass</button><button type="button" class="btn sec sharebtn" id="app-open" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 1h10a2 2 0 0 1 2 2v18a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2Zm0 3v15h10V4Zm5 16.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"/></svg>Lisa telefoni</button></div>
+  <div class="sharerow"><button type="button" class="btn sec sharebtn" id="share-open" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18 16a3 3 0 0 0-2.4 1.2l-6.7-3.4a3 3 0 0 0 0-1.6l6.7-3.4A3 3 0 1 0 15 7l-6.7 3.4a3 3 0 1 0 0 3.2L15 17a3 3 0 1 0 3-1Z"/></svg>Jaga lehte</button><a class="btn sec sharebtn" id="tt-open" href="https://perg.edupage.org/timetable/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2Zm-2 7h14v10H5Zm2 2v2h2v-2Zm4 0v2h2v-2Zm4 0v2h2v-2Zm-8 4v2h2v-2Zm4 0v2h2v-2Z"/></svg><span id="tt-label">PERG-i tunniplaan</span></a><button type="button" class="linkbtn ttchange" id="tt-change">Vali klass</button><button type="button" class="btn sec sharebtn" id="app-open" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 1h10a2 2 0 0 1 2 2v18a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2Zm0 3v15h10V4Zm5 16.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"/></svg>Lisa telefoni<span class="rec">Soovitatud</span></button></div>
 <div class="leftcol" id="leftcol">
   <section class="box tood" id="tood" aria-labelledby="tood-h">
     <h3 id="tood-h">Järgmised tööd</h3>
