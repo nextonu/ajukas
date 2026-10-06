@@ -1142,7 +1142,7 @@ sub{font-size:.72em;line-height:0}
   <div class="tmode" data-m="kuula" hidden>
   <h3>Kuulamistest</h3>
   <p class="lead">Kuula lõiku ja vali, kes esitab ja mis pala see on. Video on peidus, et pilt vastust ette ei ütleks.</p>
-  <div class="listen"></div>
+  <div class="lstest"></div>
   <p class="muted">Salvestised mängitakse YouTube'ist, seega on vaja internetti. Kui heli ei hakka nupust mängima, vajuta peidetud video keskele.</p>
 </div>
   <div class="tmode" data-m="mang" hidden>
@@ -3519,7 +3519,7 @@ H — C — C — C — H
   });
 
   // Muusika: kuulamistest (YouTube, video peidus kuni vastamiseni)
-  document.querySelectorAll('.listen').forEach(function(box){
+  document.querySelectorAll('.lstest').forEach(function(box){
     var CLIPS = [
       { v: 'bCxLAr_bwpA', s: 5, a: 'Scott Joplin – „Maple Leaf Rag”', st: 'ragtime' },
       { v: 'ND2rMET4MVw', s: 5, a: 'Scott Joplin – „The Entertainer”', st: 'ragtime' },
@@ -3535,7 +3535,7 @@ H — C — C — C — H
     var order = [], i = 0, score = 0, player = null, playing = false;
     window.__lsPause = function(){ if (player && player.pauseVideo) { try { player.pauseVideo(); } catch (e) {} } };
     window.addEventListener('hashchange', window.__lsPause);
-    box.className = 'listen tool';
+    box.className = 'lstest tool';
     function loadYT(cb){
       if (window.YT && window.YT.Player) return cb();
       (window.__ytq = window.__ytq || []).push(cb);
