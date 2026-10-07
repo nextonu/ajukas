@@ -335,6 +335,13 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .gear svg{width:20px;height:20px}
 .gear:hover,.gear[aria-expanded="true"]{color:var(--bright);border-color:var(--bright)}
 .gear:focus-visible{outline:1px solid var(--key);outline-offset:2px}
+.acct-fab{display:none;position:fixed;top:calc(env(safe-area-inset-top,0px) + 52px);right:10px;z-index:29}
+.acct-fab.in{color:var(--bright)}
+.acct-fab.in::after{content:"";position:absolute;right:1px;bottom:1px;width:9px;height:9px;border-radius:50%;background:var(--ok);border:2px solid var(--panel)}
+.acct-fab{position:fixed}
+@media (max-width:600px){.acct-fab{display:grid}}
+#acct-slot #acct{border:0;padding:0;margin:0;background:none}
+#acct-slot #acct>h3{display:none}
 .pop{position:absolute;right:0;top:46px;width:236px;background:var(--panel);border:1px solid var(--line2);border-radius:6px;padding:12px 14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .plabel{font-family:var(--mono);font-size:12px;color:var(--muted);margin:0 0 6px}
 .plabel + .seg{margin-bottom:12px}
@@ -776,6 +783,10 @@ sub{font-size:.72em;line-height:0}
     </div>
   </div>
 </div>
+<button type="button" class="gear acct-fab" id="acct-fab" aria-label="Konto" title="Konto" aria-haspopup="dialog">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5Z"/></svg>
+</button>
+
 
 <p class="worknote wn-d" id="worknote-d" role="status" tabindex="0" title="Lehte uuendatakse praegu. Mõni asi võib muutuda." hidden><span class="wdot" aria-hidden="true"></span><span class="wfull">Lehte uuendatakse praegu. Mõni asi võib muutuda.</span><span class="wshort">Lehte uuendatakse</span></p>
 <div class="view home" id="v-home" data-title="Ajukas">
@@ -2450,6 +2461,12 @@ H — C — C — C — H
     <p class="pcred" id="p-cred"></p>
   </div>
 </div>
+<div class="modal" id="acct-modal" role="dialog" aria-modal="true" aria-labelledby="acct-mh" hidden>
+  <div class="modal-box">
+    <div class="modal-head"><h2 id="acct-mh">Konto</h2><button type="button" class="xbtn" id="acct-close" aria-label="Sulge">×</button></div>
+    <div id="acct-slot"></div>
+  </div>
+</div>
 <div class="modal" id="app-modal" role="dialog" aria-modal="true" aria-labelledby="app-h" hidden>
   <div class="modal-box appbox">
     <div class="modal-head"><h2 id="app-h">Ajukas telefoni avakuvale</h2><button type="button" class="xbtn" id="app-close" aria-label="Sulge">×</button></div>
@@ -3715,6 +3732,21 @@ H — C — C — C — H
     });
   });
 
+  // telefonis: konto nupp hammasratta all, avab avalehe kontokasti aknas
+  (function(){
+    var fab = document.getElementById('acct-fab'), modal = document.getElementById('acct-modal'), slot = document.getElementById('acct-slot');
+    var box = document.getElementById('acct'), home = null, ain = document.getElementById('acct-in');
+    if (!fab || !box) return;
+    function open(){ home = document.createComment('acct'); box.parentNode.insertBefore(home, box); slot.appendChild(box); modal.hidden = false; var f = box.querySelector('input:not([hidden]), button'); document.getElementById('acct-close').focus(); }
+    function close(){ if (home) { home.parentNode.insertBefore(box, home); home.remove(); home = null; } modal.hidden = true; fab.focus(); }
+    fab.addEventListener('click', open);
+    document.getElementById('acct-close').addEventListener('click', close);
+    modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
+    modal.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+    function mark(){ var on = ain && !ain.hidden; fab.classList.toggle('in', on); fab.setAttribute('aria-label', on ? t('Konto (sisse logitud)') : t('Konto')); }
+    if (ain) new MutationObserver(mark).observe(ain, { attributes: true, attributeFilter: ['hidden'] });
+    mark();
+  })();
   // --- äpp telefoni (PWA) ---
   (function(){
     if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(function(){});
