@@ -588,7 +588,8 @@ body{padding-bottom:80px}
 .fo-new{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
 .fo-new label{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted)}
 .fo-new input:not([type=checkbox]),.fo-new textarea,.fo-rform textarea{font:inherit;font-size:15px;background:var(--bg);color:var(--bright);border:1px solid var(--line2);border-radius:4px;padding:8px 10px}
-.fo-anonl{flex-direction:row!important;align-items:center;gap:8px!important}
+.fo-anonl{display:inline-flex!important;flex-direction:row!important;align-items:center;justify-content:flex-start;gap:8px!important;width:fit-content;cursor:pointer;color:var(--text)!important}
+.fo-anonl input{width:18px!important;height:18px;min-width:0;margin:0;flex:0 0 auto;accent-color:var(--accent);cursor:pointer}
 .fo-list{display:flex;flex-direction:column;gap:8px}
 .fo-post{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;transition:border-color .3s}
 .fo-post.fo-hl{border-color:var(--warn)}
@@ -2364,7 +2365,7 @@ H — C — C — C — H
     <li>Anonüümselt postitades näevad teised „Anonüümne”, aga lehe tegija näeb, kes kirjutas.</li>
     <li>Postituste vahel peab olema vähemalt 20 sekundit.</li>
     <li>Kui midagi on valesti, vajuta ⚑ Teata. Reegleid rikkuvad postitused kustutatakse ja kirjutaja võidakse vaigistada või foorumist keelata.</li>
-  </ul></details>
+  </ul><p class="muted" style="font-size:12px;margin:8px 0 0">Äikeseheli: Richard Humphries, „Nosferatu thunderclap”, <a href="https://commons.wikimedia.org/wiki/File:Nosferatu_thunderclap_-_Richard_Humphries.wav" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY 4.0 (lõigatud).</p></details>
   <section class="box fo-adminbox" id="fo-admin" hidden>
     <h3>Admin: teated</h3><div id="fo-reports"></div>
     <h3>Vaigistatud ja keelatud</h3><div id="fo-blocks"></div>
@@ -2378,7 +2379,7 @@ H — C — C — C — H
     <label for="fo-teema">Teema<select id="fo-teema" class="ttselect"><option>Üldine</option><option>Ajalugu</option><option>Keemia</option><option>Muusika</option><option>Matemaatika</option><option>Kirjandus</option><option>Füüsika</option><option>Keeled</option><option>UPT</option></select></label>
     <label for="fo-title">Pealkiri<input id="fo-title" maxlength="120" autocomplete="off"></label>
     <label for="fo-text">Küsimus<textarea id="fo-text" maxlength="3000" rows="5"></textarea></label>
-    <label class="fo-anonl"><input type="checkbox" id="fo-anon"> Postita anonüümselt</label>
+    <label class="fo-anonl">Postita anonüümselt <input type="checkbox" id="fo-anon"></label>
     <div class="row"><button type="submit" class="btn" id="fo-send">Postita</button></div>
     <p class="msg" id="fo-msg" role="status"></p>
   </form>
@@ -4141,26 +4142,12 @@ if (!FIREBASE_CONFIG) {
       return '';
     }
     const BAD_EN = new Set(["asshole", "assholes", "bastard", "bastards", "bitch", "bitches", "bullshit", "cock", "cocks", "cunt", "cunts", "dick", "dickhead", "dicks", "dildo", "fag", "faggot", "faggots", "fags", "fck", "fuck", "fucked", "fucker", "fuckers", "fuckin", "fucking", "fucks", "fuk", "motherfucker", "motherfuckers", "nigga", "niggas", "nigger", "niggers", "porn", "pussies", "pussy", "retard", "retarded", "retards", "shit", "shits", "shitty", "slut", "sluts", "stfu", "twat", "wanker", "whore", "whores"]);
-    // „Watch your tone, buddy”: välk, pilt ja äikese heli (heli tehakse brauseris, faili pole vaja)
+    // „Watch your tone, buddy”: välk, pilt ja äikese heli (Richard Humphries, „Nosferatu thunderclap”, CC BY 4.0)
+    let snd = null;
     function thunder() {
-      try {
-        const C = window.AudioContext || window.webkitAudioContext; if (!C) return;
-        const ac = new C(), len = ac.sampleRate * 3, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
-        let last = 0;
-        for (let i = 0; i < len; i++) { const w = Math.random() * 2 - 1; last = (last + 0.04 * w) / 1.04; d[i] = last * 3.2; }
-        const src = ac.createBufferSource(); src.buffer = buf;
-        const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 700;
-        const g = ac.createGain(), t0 = ac.currentTime;
-        g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(1.6, t0 + 0.03); g.gain.exponentialRampToValueAtTime(0.5, t0 + 0.5);
-        g.gain.setValueAtTime(0.9, t0 + 0.7); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 3);
-        src.connect(lp).connect(g).connect(ac.destination); src.start();
-        // terav pragin alguses
-        const cr = ac.createBufferSource(), cb = ac.createBuffer(1, ac.sampleRate * 0.25, ac.sampleRate), cd = cb.getChannelData(0);
-        for (let i = 0; i < cd.length; i++) cd[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / cd.length, 3);
-        cr.buffer = cb; const cg = ac.createGain(); cg.gain.value = 0.7; cr.connect(cg).connect(ac.destination); cr.start(t0);
-        setTimeout(() => ac.close(), 3500);
-      } catch (e) {}
+      try { if (!snd) snd = new Audio('heli/aike.mp3'); snd.currentTime = 0; snd.volume = 0.9; snd.play().catch(() => {}); } catch (e) {}
     }
+    window.addEventListener('hashchange', () => { if (location.hash === '#foorum' && !snd) { snd = new Audio('heli/aike.mp3'); snd.preload = 'auto'; } });
     function zap(word) {
       const en = BAD_EN.has(word), old = document.getElementById('zap'); if (old) old.remove();
       const z = document.createElement('div'); z.id = 'zap'; z.setAttribute('role', 'alertdialog');
@@ -4269,7 +4256,7 @@ if (!FIREBASE_CONFIG) {
         box.innerHTML = rs.map((r) => '<div class="fo-reply"><div class="fo-meta">' + who(r) + ' · ' + ago(r.aeg) + '</div><p class="fo-text">' + esc(r.tekst) + '</p>' +
           '<div class="fo-acts"><button type="button" class="fo-flag" data-p="foorum/' + id + '/vastused/' + r.id + '">⚑ ' + t('Teata') + '</button>' + adminBtns('foorum/' + id + '/vastused/' + r.id) + '</div></div>').join('') +
           (me() ? '<form class="fo-rform"><label class="vh" for="fr-' + id + '">' + t('Vastus') + '</label><textarea id="fr-' + id + '" maxlength="2000" rows="3" placeholder="' + esc(t('Kirjuta vastus…')) + '"></textarea>' +
-            '<div class="row"><label class="fo-anonl"><input type="checkbox" class="fo-ranon"> ' + t('vasta anonüümselt') + '</label><button type="submit" class="btn">' + t('Vasta') + '</button></div><p class="msg"></p></form>'
+            '<div class="row"><label class="fo-anonl">' + t('Vasta anonüümselt') + ' <input type="checkbox" class="fo-ranon"></label><button type="submit" class="btn">' + t('Vasta') + '</button></div><p class="msg"></p></form>'
             : '<p class="muted">' + t('Vastamiseks logi avalehel sisse.') + '</p>');
         const p = F.posts.find((x) => x.id === id); if (p) { p.n = rs.length; art.querySelector('.fo-n').textContent = t('{n} vastust', { n: rs.length }); }
         const f = box.querySelector('.fo-rform'); if (f) f.addEventListener('submit', async (e) => {
