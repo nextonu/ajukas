@@ -570,6 +570,16 @@ body{padding-bottom:80px}
 .app-con li::marker{content:"− ";color:var(--err);font-weight:700}
 .app-done{color:var(--ok);font-weight:600}
 .fo-rules{margin:0 0 14px;font-size:14px;color:var(--muted)}
+#zap{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:rgba(5,5,15,.88);cursor:pointer;animation:zapIn .15s ease-out,zapShake .5s ease-in-out .1s 2}
+#zap img{max-width:min(78vw,420px);max-height:62vh;border-radius:10px;box-shadow:0 0 50px 8px rgba(150,170,255,.65);animation:zapGlow .4s ease-in-out 0s 4 alternate}
+#zap p{margin:0;font:800 clamp(26px,6vw,46px)/1.1 var(--ui);color:#fff;text-align:center;text-shadow:0 0 18px #8FA8FF,0 0 4px #fff;letter-spacing:.01em;padding:0 16px}
+#zap .zap-flash{position:absolute;inset:0;background:#fff;pointer-events:none;opacity:0;animation:zapFlash 1.4s steps(1,end) 1}
+#zap.out{opacity:0;transition:opacity .35s}
+@keyframes zapIn{from{opacity:0}to{opacity:1}}
+@keyframes zapFlash{0%{opacity:.9}12%{opacity:0}45%{opacity:.6}55%{opacity:0}100%{opacity:0}}
+@keyframes zapShake{0%,100%{transform:none}20%{transform:translate(-6px,3px)}40%{transform:translate(5px,-4px)}60%{transform:translate(-4px,-2px)}80%{transform:translate(3px,4px)}}
+@keyframes zapGlow{from{filter:brightness(1)}to{filter:brightness(1.35) contrast(1.1)}}
+@media (prefers-reduced-motion:reduce){#zap,#zap img{animation:none}#zap .zap-flash{display:none}}
 .fo-rules summary{cursor:pointer;color:var(--text)}
 .fo-rules ul{margin:8px 0 0;padding-left:20px}
 .fo-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 12px}
@@ -789,7 +799,7 @@ sub{font-size:.72em;line-height:0}
   </section>
   <details class="box updlog" id="updlog">
     <summary><span class="ul-title">Uuendused</span><span class="ul-date">6. oktoober 2026</span><span class="ul-last">Muusikas ja ajaloos on inimeste pildid.</span></summary>
-    <div class="ul-body"><h4>7. oktoober 2026</h4><ul><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
+    <div class="ul-body"><h4>7. oktoober 2026</h4><ul><li>Uus: <b>foorum</b>, kus saab küsida ja teisi aidata (avalehel „Foorum”).</li><li>Igal ainel on oma <b>värv</b>.</li><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
   </details>
   <aside class="suvi" id="suvi" aria-label="Suvevaheaja taimer" hidden>
   <div class="suvi-clock">
@@ -4130,6 +4140,35 @@ if (!FIREBASE_CONFIG) {
       for (const v of variants) { const m = v.match(BADRX); if (m) return m[1]; }
       return '';
     }
+    const BAD_EN = new Set(["asshole", "assholes", "bastard", "bastards", "bitch", "bitches", "bullshit", "cock", "cocks", "cunt", "cunts", "dick", "dickhead", "dicks", "dildo", "fag", "faggot", "faggots", "fags", "fck", "fuck", "fucked", "fucker", "fuckers", "fuckin", "fucking", "fucks", "fuk", "motherfucker", "motherfuckers", "nigga", "niggas", "nigger", "niggers", "porn", "pussies", "pussy", "retard", "retarded", "retards", "shit", "shits", "shitty", "slut", "sluts", "stfu", "twat", "wanker", "whore", "whores"]);
+    // „Watch your tone, buddy”: välk, pilt ja äikese heli (heli tehakse brauseris, faili pole vaja)
+    function thunder() {
+      try {
+        const C = window.AudioContext || window.webkitAudioContext; if (!C) return;
+        const ac = new C(), len = ac.sampleRate * 3, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
+        let last = 0;
+        for (let i = 0; i < len; i++) { const w = Math.random() * 2 - 1; last = (last + 0.04 * w) / 1.04; d[i] = last * 3.2; }
+        const src = ac.createBufferSource(); src.buffer = buf;
+        const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 700;
+        const g = ac.createGain(), t0 = ac.currentTime;
+        g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(1.6, t0 + 0.03); g.gain.exponentialRampToValueAtTime(0.5, t0 + 0.5);
+        g.gain.setValueAtTime(0.9, t0 + 0.7); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 3);
+        src.connect(lp).connect(g).connect(ac.destination); src.start();
+        // terav pragin alguses
+        const cr = ac.createBufferSource(), cb = ac.createBuffer(1, ac.sampleRate * 0.25, ac.sampleRate), cd = cb.getChannelData(0);
+        for (let i = 0; i < cd.length; i++) cd[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / cd.length, 3);
+        cr.buffer = cb; const cg = ac.createGain(); cg.gain.value = 0.7; cr.connect(cg).connect(ac.destination); cr.start(t0);
+        setTimeout(() => ac.close(), 3500);
+      } catch (e) {}
+    }
+    function zap(word) {
+      const en = BAD_EN.has(word), old = document.getElementById('zap'); if (old) old.remove();
+      const z = document.createElement('div'); z.id = 'zap'; z.setAttribute('role', 'alertdialog');
+      z.innerHTML = '<div class="zap-flash"></div><img src="pildid/zap.jpg" alt=""><p>' + (en ? 'Watch your tone, buddy' : t('Jälgi oma tooni, semu')) + '</p>';
+      document.body.appendChild(z); thunder();
+      const end = () => { z.classList.add('out'); setTimeout(() => z.remove(), 400); };
+      z.addEventListener('click', end); setTimeout(end, 3200);
+    }
     const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     function ago(ts) {
       if (!ts || !ts.toMillis) return t('just praegu');
@@ -4180,7 +4219,7 @@ if (!FIREBASE_CONFIG) {
       e.preventDefault();
       const out = $('fo-msg'), title = $('fo-title').value.trim(), text = $('fo-text').value.trim();
       if (!title || !text) { msg(out, t('Kirjuta pealkiri ja küsimus.'), 'err'); return; }
-      const bw = badWord(title + ' ' + text); if (bw) { msg(out, t('Postituses on keelatud sõna: „{w}”. Palun kirjuta viisakalt.', { w: bw }), 'err'); return; }
+      const bw = badWord(title + ' ' + text); if (bw) { zap(bw); msg(out, t('Postituses on keelatud sõna: „{w}”. Palun kirjuta viisakalt.', { w: bw }), 'err'); return; }
       const bm = await blockMsg(); if (bm) { msg(out, bm, 'err'); return; }
       $('fo-send').disabled = true; msg(out, t('Saadan…'));
       try {
@@ -4237,7 +4276,7 @@ if (!FIREBASE_CONFIG) {
           e.preventDefault();
           const out = f.querySelector('.msg'), text = f.querySelector('textarea').value.trim();
           if (!text) return;
-          const bw = badWord(text); if (bw) { msg(out, t('Vastuses on keelatud sõna: „{w}”. Palun kirjuta viisakalt.', { w: bw }), 'err'); return; }
+          const bw = badWord(text); if (bw) { zap(bw); msg(out, t('Vastuses on keelatud sõna: „{w}”. Palun kirjuta viisakalt.', { w: bw }), 'err'); return; }
           const bm = await blockMsg(); if (bm) { msg(out, bm, 'err'); return; }
           f.querySelector('button[type=submit]').disabled = true;
           try { await write(['foorum', id, 'vastused'], { anon: f.querySelector('.fo-ranon').checked, tekst: text.slice(0, 2000) }); await loadReplies(art); }
