@@ -87,7 +87,7 @@ service cloud.firestore {
         && okEntry(request.resource.data) && request.resource.data.tekst.size() <= 3000
         && request.resource.data.pealkiri is string && request.resource.data.pealkiri.size() > 0
         && request.resource.data.pealkiri.size() <= 120 && clean(request.resource.data.pealkiri)
-        && request.resource.data.teema in ['Üldine', 'Ajalugu', 'Keemia', 'Muusika', 'Matemaatika', 'Kirjandus', 'Füüsika', 'Keeled', 'UPT', 'Muu']
+        && request.resource.data.teema in ['Üldine', 'Ajalugu', 'Keemia', 'Muusika', 'Matemaatika', 'Kirjandus', 'Füüsika', 'Keeled', 'UPT']
         && getAfter(/databases/$(database)/documents/foorum/$(id)/priv/info).data.uid == request.auth.uid;
       allow delete: if isAdmin();
       allow update: if isBot()

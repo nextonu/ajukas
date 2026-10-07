@@ -2370,12 +2370,12 @@ H — C — C — C — H
     <h3>Vaigistatud ja keelatud</h3><div id="fo-blocks"></div>
   </section>
   <div class="fo-bar" id="fo-bar">
-    <label class="vh" for="fo-filter">Teema</label><select id="fo-filter" class="ttselect"><option value="kõik">Kõik teemad</option><option>Üldine</option><option>Ajalugu</option><option>Keemia</option><option>Muusika</option><option>Matemaatika</option><option>Kirjandus</option><option>Füüsika</option><option>Keeled</option><option>UPT</option><option>Muu</option></select>
+    <label class="vh" for="fo-filter">Teema</label><select id="fo-filter" class="ttselect"><option value="kõik">Kõik teemad</option><option>Üldine</option><option>Ajalugu</option><option>Keemia</option><option>Muusika</option><option>Matemaatika</option><option>Kirjandus</option><option>Füüsika</option><option>Keeled</option><option>UPT</option></select>
     <button type="button" class="btn" id="fo-newbtn" hidden>+ Uus küsimus</button>
   </div>
   <p class="muted" id="fo-login" hidden>Küsimiseks ja vastamiseks <a href="#">logi avalehel sisse</a>.</p>
   <form class="box fo-new" id="fo-new" hidden novalidate>
-    <label for="fo-teema">Teema<select id="fo-teema" class="ttselect"><option>Üldine</option><option>Ajalugu</option><option>Keemia</option><option>Muusika</option><option>Matemaatika</option><option>Kirjandus</option><option>Füüsika</option><option>Keeled</option><option>UPT</option><option>Muu</option></select></label>
+    <label for="fo-teema">Teema<select id="fo-teema" class="ttselect"><option>Üldine</option><option>Ajalugu</option><option>Keemia</option><option>Muusika</option><option>Matemaatika</option><option>Kirjandus</option><option>Füüsika</option><option>Keeled</option><option>UPT</option></select></label>
     <label for="fo-title">Pealkiri<input id="fo-title" maxlength="120" autocomplete="off"></label>
     <label for="fo-text">Küsimus<textarea id="fo-text" maxlength="3000" rows="5"></textarea></label>
     <label class="fo-anonl"><input type="checkbox" id="fo-anon"> Postita anonüümselt</label>
@@ -4129,7 +4129,7 @@ if (!FIREBASE_CONFIG) {
       posts: [], filt: 'kõik', loaded: false,
     };
     if (!F.list) return;
-    const TEEMAD = ['Üldine', 'Ajalugu', 'Keemia', 'Muusika', 'Matemaatika', 'Kirjandus', 'Füüsika', 'Keeled', 'UPT', 'Muu'];
+    const TEEMAD = ['Üldine', 'Ajalugu', 'Keemia', 'Muusika', 'Matemaatika', 'Kirjandus', 'Füüsika', 'Keeled', 'UPT'];
     const BAD = ["motherfuckers", "motherfucker", "debiilikud", "pederastid", "assholes", "bastards", "bullshit", "debiilik", "dickhead", "idioodid", "pederast", "persesse", "retarded", "asshole", "bastard", "bitches", "faggots", "fuckers", "fucking", "hooraks", "keppima", "kuradid", "litsiks", "munniga", "munnist", "neegrid", "niggers", "nussima", "persest", "pussies", "retards", "sitapea", "situpea", "värdjad", "värdjas", "faggot", "fucked", "fucker", "fuckin", "hoorad", "idioot", "keppis", "kuradi", "litsid", "munnid", "neeger", "neegri", "niggas", "nigger", "nussib", "nussis", "pasane", "persed", "perses", "perset", "persse", "retard", "shitty", "sitane", "sitase", "sitast", "tussid", "türaga", "türale", "türast", "värdja", "wanker", "whores", "bitch", "cocks", "cunts", "dicks", "dildo", "fucks", "hoora", "kepib", "kurat", "litsi", "munni", "nigga", "peded", "perse", "pussy", "shits", "sitta", "sluts", "tussi", "tussu", "türad", "whore", "cock", "cunt", "dick", "fags", "fuck", "hoor", "lits", "munn", "pasa", "pask", "pede", "pers", "porn", "shit", "sita", "sitt", "situ", "slut", "stfu", "tuss", "twat", "türa", "fag", "fck", "fuk"];
     const BADRX = new RegExp('(?:^|[^a-zõäöüšž0-9])(' + BAD.join('|') + ')(?=$|[^a-zõäöüšž0-9])', 'i');
     const LEET = { '0': 'o', '1': 'i', '3': 'e', '4': 'a', '5': 's', '7': 't', '@': 'a', '$': 's', '!': 'i' };
