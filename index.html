@@ -4176,14 +4176,15 @@ if (!FIREBASE_CONFIG) {
           src.connect(an); an.connect(g); g.connect(ac.destination);
           const data = new Float32Array(an.fftSize);
           src.onended = () => setTimeout(end, 150);
-          src.start();
+          src.start(); const t0 = performance.now();
           setTimeout(end, b.duration * 1000 + 700); // kaitse: sulge ka siis, kui heli ei mängi
           const frame = () => {
             if (done) return;
             an.getFloatTimeDomainData(data);
             let sum = 0; for (let i = 0; i < data.length; i++) sum += data[i] * data[i];
-            const amp = Math.max(0, Math.min(1, (Math.sqrt(sum / data.length) - 0.04) * 4));
-            if (!still) box.style.transform = amp > 0.01 ? 'translate(' + ((Math.random() * 2 - 1) * amp * 16).toFixed(1) + 'px,' + ((Math.random() * 2 - 1) * amp * 11).toFixed(1) + 'px)' : '';
+            // ainult löögi ajal (esimesed ~0,5 s) ja vähe; pärast seda on pilt paigal
+            const amp = performance.now() - t0 > 500 ? 0 : Math.max(0, Math.min(1, (Math.sqrt(sum / data.length) - 0.15) * 3));
+            if (!still) box.style.transform = amp > 0.01 ? 'translate(' + ((Math.random() * 2 - 1) * amp * 8).toFixed(1) + 'px,' + ((Math.random() * 2 - 1) * amp * 5).toFixed(1) + 'px)' : '';
             requestAnimationFrame(frame);
           };
           frame();
