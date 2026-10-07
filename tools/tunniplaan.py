@@ -7,6 +7,9 @@ Käsitsi: python tools/tunniplaan.py
 import datetime as dt
 import json
 import os
+import sys
+import time
+import urllib.error
 import urllib.request
 
 BASE = 'https://perg.edupage.org/timetable/server/'
@@ -18,8 +21,16 @@ def call(func, args):
         f'{BASE}{func.split(".")[0]}.js?__func={func.split(".")[1]}',
         data=json.dumps({'__args': args, '__gsh': '00000000'}).encode(),
         headers={'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Ajukas tunniplaani kontroll)'})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.load(r)['r']
+    # Edupage vastab GitHubi serveritele vahel aeglaselt või veaga: proovi kuni 3 korda
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return json.load(r)['r']
+        except (urllib.error.URLError, TimeoutError, ConnectionError, ValueError, KeyError) as e:
+            if attempt == 2:
+                raise
+            print(f'Edupage ei vastanud ({e}), proovin uuesti…')
+            time.sleep(15 * (attempt + 1))
 
 
 def main():
@@ -57,4 +68,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception as e:  # Edupage maas: jäta vana tunniplaan alles, ära märgi tööd ebaõnnestunuks
+        print(f'::warning::Tunniplaani ei õnnestunud kontrollida ({e}). Vana tunniplaan jääb alles.')
+        sys.exit(0)
