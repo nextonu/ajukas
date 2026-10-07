@@ -570,14 +570,14 @@ body{padding-bottom:80px}
 .app-con li::marker{content:"− ";color:var(--err);font-weight:700}
 .app-done{color:var(--ok);font-weight:600}
 .fo-rules{margin:0 0 14px;font-size:14px;color:var(--muted)}
-#zap{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:rgba(5,5,15,.88);cursor:pointer;animation:zapIn .15s ease-out,zapShake .5s ease-in-out .1s 2}
+#zap{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:rgba(5,5,15,.88);cursor:pointer;animation:zapIn .15s ease-out}
+#zap .zap-in{display:flex;flex-direction:column;align-items:center;gap:16px;will-change:transform}
 #zap img{max-width:min(78vw,420px);max-height:62vh;border-radius:10px;box-shadow:0 0 50px 8px rgba(150,170,255,.65)}
 #zap p{margin:0;font:800 clamp(26px,6vw,46px)/1.1 var(--ui);color:#fff;text-align:center;text-shadow:0 0 18px #8FA8FF,0 0 4px #fff;letter-spacing:.01em;padding:0 16px}
 #zap .zap-flash{position:absolute;inset:0;background:#fff;pointer-events:none;opacity:0;animation:zapFlash .35s ease-out 1}
 #zap.out{opacity:0;transition:opacity .35s}
 @keyframes zapIn{from{opacity:0}to{opacity:1}}
 @keyframes zapFlash{0%{opacity:.95}100%{opacity:0}}
-@keyframes zapShake{0%,100%{transform:none}20%{transform:translate(-6px,3px)}40%{transform:translate(5px,-4px)}60%{transform:translate(-4px,-2px)}80%{transform:translate(3px,4px)}}
 @media (prefers-reduced-motion:reduce){#zap,#zap img{animation:none}#zap .zap-flash{display:none}}
 .fo-rules summary{cursor:pointer;color:var(--text)}
 .fo-rules ul{margin:8px 0 0;padding-left:20px}
@@ -4147,18 +4147,48 @@ if (!FIREBASE_CONFIG) {
     const ROOTRX_ALT = ROOTS.map((w) => new RegExp(w.split('').map((c) => c + '+').join(''), 'i'));
     const BAD_EN = new Set(ROOTS.concat(["asshole", "assholes", "bastard", "bastards", "bitch", "bitches", "bullshit", "cock", "cocks", "cunt", "cunts", "dick", "dickhead", "dicks", "dildo", "fag", "faggot", "faggots", "fags", "fck", "fuck", "fucked", "fucker", "fuckers", "fuckin", "fucking", "fucks", "fuk", "motherfucker", "motherfuckers", "nigga", "niggas", "nigger", "niggers", "porn", "pussies", "pussy", "retard", "retarded", "retards", "shit", "shits", "shitty", "slut", "sluts", "stfu", "twat", "wanker", "whore", "whores"]));
     // „Watch your tone, buddy”: välk, pilt ja äikese heli (Richard Humphries, „Nosferatu thunderclap”, CC BY 4.0)
-    let snd = null;
-    function thunder() {
-      try { if (!snd) snd = new Audio('heli/aike.mp3'); snd.currentTime = 0; snd.volume = 0.9; snd.play().catch(() => {}); } catch (e) {}
+    // heli mängitakse Web Audio kaudu, et pildi raputus järgiks heli valjust (vaikne heli = pilt paigal)
+    let ac = null, buf = null;
+    async function getBuf() {
+      const C = window.AudioContext || window.webkitAudioContext; if (!C) throw new Error('no audio');
+      if (!ac) ac = new C();
+      if (!buf) { const r = await fetch('heli/aike.mp3'); buf = await ac.decodeAudioData(await r.arrayBuffer()); }
+      return buf;
     }
-    window.addEventListener('hashchange', () => { if (location.hash === '#foorum' && !snd) { snd = new Audio('heli/aike.mp3'); snd.preload = 'auto'; } });
+    window.addEventListener('hashchange', () => { if (location.hash === '#foorum') getBuf().catch(() => {}); });
+    if (location.hash === '#foorum') getBuf().catch(() => {});
     function zap(word) {
       const en = BAD_EN.has(word), old = document.getElementById('zap'); if (old) old.remove();
       const z = document.createElement('div'); z.id = 'zap'; z.setAttribute('role', 'alertdialog');
-      z.innerHTML = '<div class="zap-flash"></div><img src="pildid/zap.jpg" alt=""><p>' + (en ? 'Watch your tone, buddy' : t('Jälgi oma tooni, vennike')) + '</p>';
-      document.body.appendChild(z); thunder();
-      const end = () => { z.classList.add('out'); setTimeout(() => z.remove(), 400); };
-      z.addEventListener('click', end); setTimeout(end, 3200);
+      z.innerHTML = '<div class="zap-flash"></div><div class="zap-in"><img src="pildid/zap.jpg" alt=""><p>' + (en ? 'Watch your tone, buddy' : t('Jälgi oma tooni, vennike')) + '</p></div>';
+      document.body.appendChild(z);
+      const box = z.querySelector('.zap-in'), still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let done = false;
+      const end = () => { if (done) return; done = true; box.style.transform = ''; z.classList.add('out'); setTimeout(() => z.remove(), 400); };
+      z.addEventListener('click', end);
+      setTimeout(end, 4500); // igal juhul kinni hiljemalt 4,5 s pärast
+      (async () => {
+        try {
+          if (ac && ac.state === 'suspended') await ac.resume();
+          const b = await getBuf(); if (ac.state === 'suspended') await ac.resume();
+          const src = ac.createBufferSource(), an = ac.createAnalyser(), g = ac.createGain();
+          src.buffer = b; an.fftSize = 1024; g.gain.value = 0.9;
+          src.connect(an); an.connect(g); g.connect(ac.destination);
+          const data = new Float32Array(an.fftSize);
+          src.onended = () => setTimeout(end, 150);
+          src.start();
+          setTimeout(end, b.duration * 1000 + 700); // kaitse: sulge ka siis, kui heli ei mängi
+          const frame = () => {
+            if (done) return;
+            an.getFloatTimeDomainData(data);
+            let sum = 0; for (let i = 0; i < data.length; i++) sum += data[i] * data[i];
+            const amp = Math.max(0, Math.min(1, (Math.sqrt(sum / data.length) - 0.04) * 4));
+            if (!still) box.style.transform = amp > 0.01 ? 'translate(' + ((Math.random() * 2 - 1) * amp * 16).toFixed(1) + 'px,' + ((Math.random() * 2 - 1) * amp * 11).toFixed(1) + 'px)' : '';
+            requestAnimationFrame(frame);
+          };
+          frame();
+        } catch (e) { setTimeout(end, 2500); }
+      })();
     }
     const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     function ago(ts) {
