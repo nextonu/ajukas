@@ -4164,7 +4164,7 @@ if (!FIREBASE_CONFIG) {
     function zap(word) {
       const en = BAD_EN.has(word), old = document.getElementById('zap'); if (old) old.remove();
       const z = document.createElement('div'); z.id = 'zap'; z.setAttribute('role', 'alertdialog');
-      z.innerHTML = '<div class="zap-flash"></div><img src="pildid/zap.jpg" alt=""><p>' + (en ? 'Watch your tone, buddy' : t('Jälgi oma tooni, semu')) + '</p>';
+      z.innerHTML = '<div class="zap-flash"></div><img src="pildid/zap.jpg" alt=""><p>' + (en ? 'Watch your tone, buddy' : t('Jälgi oma tooni, vennike')) + '</p>';
       document.body.appendChild(z); thunder();
       const end = () => { z.classList.add('out'); setTimeout(() => z.remove(), 400); };
       z.addEventListener('click', end); setTimeout(end, 3200);
