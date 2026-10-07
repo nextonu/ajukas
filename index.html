@@ -4130,7 +4130,7 @@ if (!FIREBASE_CONFIG) {
     };
     if (!F.list) return;
     const TEEMAD = ['Üldine', 'Ajalugu', 'Keemia', 'Muusika', 'Matemaatika', 'Kirjandus', 'Füüsika', 'Keeled', 'UPT'];
-    const BAD = ["motherfuckers", "motherfucker", "debiilikud", "pederastid", "assholes", "bastards", "bullshit", "debiilik", "dickhead", "idioodid", "pederast", "persesse", "retarded", "asshole", "bastard", "bitches", "faggots", "fuckers", "fucking", "hooraks", "keppima", "kuradid", "litsiks", "munniga", "munnist", "neegrid", "niggers", "nussima", "persest", "pussies", "retards", "sitapea", "situpea", "värdjad", "värdjas", "faggot", "fucked", "fucker", "fuckin", "hoorad", "idioot", "keppis", "kuradi", "litsid", "munnid", "neeger", "neegri", "niggas", "nigger", "nussib", "nussis", "pasane", "persed", "perses", "perset", "persse", "retard", "shitty", "sitane", "sitase", "sitast", "tussid", "türaga", "türale", "türast", "värdja", "wanker", "whores", "bitch", "cocks", "cunts", "dicks", "dildo", "fucks", "hoora", "kepib", "kurat", "litsi", "munni", "nigga", "peded", "perse", "pussy", "shits", "sitta", "sluts", "tussi", "tussu", "türad", "whore", "cock", "cunt", "dick", "fags", "fuck", "hoor", "lits", "munn", "pasa", "pask", "pede", "pers", "porn", "shit", "sita", "sitt", "situ", "slut", "stfu", "tuss", "twat", "türa", "fag", "fck", "fuk"];
+    const BAD = ["motherfuckers", "motherfucker", "debiilikud", "pederastid", "assholes", "bastards", "bullshit", "debiilik", "dickhead", "idioodid", "kurrradi", "pederast", "persesse", "retarded", "asshole", "bastard", "bitches", "faggots", "fuckers", "fucking", "hooraks", "keppima", "kuradid", "kurradi", "litsiks", "munniga", "munnist", "neegrid", "niggers", "nussima", "persest", "pussies", "retards", "sitapea", "situpea", "värdjad", "värdjas", "faggot", "fucked", "fucker", "fuckin", "hoorad", "idioot", "keppis", "kuradi", "kurrat", "litsid", "munnid", "neeger", "neegri", "niggas", "nigger", "nussib", "nussis", "pasane", "persed", "perses", "perset", "persse", "retard", "shitty", "sitane", "sitase", "sitast", "tussid", "türaga", "türale", "türast", "värdja", "wanker", "whores", "bitch", "cocks", "cunts", "dicks", "dildo", "fucks", "hoora", "kepib", "kurat", "litsi", "munni", "nigga", "peded", "perse", "pussy", "shits", "sitta", "sluts", "tussi", "tussu", "türad", "whore", "cock", "cunt", "dick", "fags", "fuck", "hoor", "lits", "munn", "pasa", "pask", "pede", "pers", "porn", "shit", "sita", "sitt", "situ", "slut", "stfu", "tuss", "twat", "türa", "fag", "fck", "fuk"];
     const BADRX = new RegExp('(?:^|[^a-zõäöüšž0-9])(' + BAD.join('|') + ')(?=$|[^a-zõäöüšž0-9])', 'i');
     const LEET = { '0': 'o', '1': 'i', '3': 'e', '4': 'a', '5': 's', '7': 't', '@': 'a', '$': 's', '!': 'i' };
     function badWord(txt) {
@@ -4138,9 +4138,14 @@ if (!FIREBASE_CONFIG) {
       const variants = [low, low.replace(/[013457@$!]/g, (c) => LEET[c]), low.replace(/(.)\1{2,}/g, '$1'), low.replace(/[013457@$!]/g, (c) => LEET[c]).replace(/(.)\1{2,}/g, '$1'),
         low.replace(/\b(\w)[\s.*_-]+(?=\w\b)/g, '$1')];
       for (const v of variants) { const m = v.match(BADRX); if (m) return m[1]; }
+      // inglise tüved ka sõna sees ja korduvate tähtedega (fuckk, shithead)
+      for (const v of variants) { const m = v.replace(/[.*_-]+/g, '').match(ROOTRX); if (m) return ROOTS[ROOTRX_ALT.findIndex((r) => r.test(m[0]))] || 'fuck'; }
       return '';
     }
-    const BAD_EN = new Set(["asshole", "assholes", "bastard", "bastards", "bitch", "bitches", "bullshit", "cock", "cocks", "cunt", "cunts", "dick", "dickhead", "dicks", "dildo", "fag", "faggot", "faggots", "fags", "fck", "fuck", "fucked", "fucker", "fuckers", "fuckin", "fucking", "fucks", "fuk", "motherfucker", "motherfuckers", "nigga", "niggas", "nigger", "niggers", "porn", "pussies", "pussy", "retard", "retarded", "retards", "shit", "shits", "shitty", "slut", "sluts", "stfu", "twat", "wanker", "whore", "whores"]);
+    const ROOTS = ["fuck", "shit", "bitch", "cunt", "nigg", "whore", "faggot", "pussy", "asshole", "dickhead", "motherf"];
+    const ROOTRX = new RegExp('(' + ROOTS.map((w) => w.split('').map((c) => c + '+').join('')).join('|') + ')', 'i');
+    const ROOTRX_ALT = ROOTS.map((w) => new RegExp(w.split('').map((c) => c + '+').join(''), 'i'));
+    const BAD_EN = new Set(ROOTS.concat(["asshole", "assholes", "bastard", "bastards", "bitch", "bitches", "bullshit", "cock", "cocks", "cunt", "cunts", "dick", "dickhead", "dicks", "dildo", "fag", "faggot", "faggots", "fags", "fck", "fuck", "fucked", "fucker", "fuckers", "fuckin", "fucking", "fucks", "fuk", "motherfucker", "motherfuckers", "nigga", "niggas", "nigger", "niggers", "porn", "pussies", "pussy", "retard", "retarded", "retards", "shit", "shits", "shitty", "slut", "sluts", "stfu", "twat", "wanker", "whore", "whores"]));
     // „Watch your tone, buddy”: välk, pilt ja äikese heli (Richard Humphries, „Nosferatu thunderclap”, CC BY 4.0)
     let snd = null;
     function thunder() {
