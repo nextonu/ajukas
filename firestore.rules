@@ -56,6 +56,88 @@ service cloud.firestore {
             && request.resource.data.teavitatud == true);
     }
 
+    // ===== FOORUM =====
+    function userName() { return request.auth.token.email.split('@')[0]; }
+    // keelatud sõnad (terve sõna, suurtähed ei loe); sama nimekiri on ka lehe koodis
+    function clean(t) { return !t.lower().matches('(?s).*\\b(motherfuckers|motherfucker|debiilikud|pederastid|assholes|bastards|bullshit|debiilik|dickhead|idioodid|pederast|persesse|retarded|asshole|bastard|bitches|faggots|fuckers|fucking|hooraks|keppima|kuradid|litsiks|munniga|munnist|neegrid|niggers|nussima|persest|pussies|retards|sitapea|situpea|värdjad|värdjas|faggot|fucked|fucker|fuckin|hoorad|idioot|keppis|kuradi|litsid|munnid|neeger|neegri|niggas|nigger|nussib|nussis|pasane|persed|perses|perset|persse|retard|shitty|sitane|sitase|sitast|tussid|türaga|türale|türast|värdja|wanker|whores|bitch|cocks|cunts|dicks|dildo|fucks|hoora|kepib|kurat|litsi|munni|nigga|peded|perse|pussy|shits|sitta|sluts|tussi|tussu|türad|whore|cock|cunt|dick|fags|fuck|hoor|lits|munn|pasa|pask|pede|pers|porn|shit|sita|sitt|situ|slut|stfu|tuss|twat|türa|fag|fck|fuk)\\b.*'); }
+    function notBlocked() {
+      let k = /databases/$(database)/documents/foorumikeelud/$(request.auth.uid);
+      return !exists(k) || (get(k).data.tyyp == 'vaigistus' && get(k).data.kuni < request.time);
+    }
+    // postitus peab olema samas partiis, kus uuendatakse foorumikasutajad/{uid}.viimane (see lubab uut kirjet alles 20 s pärast)
+    function rateOk() {
+      return getAfter(/databases/$(database)/documents/foorumikasutajad/$(request.auth.uid)).data.viimane == request.time;
+    }
+    function okEntry(d) {
+      return d.anon is bool
+        && ((d.anon == true && d.kasutaja == '') || (d.anon == false && d.kasutaja == userName()))
+        && d.tekst is string && d.tekst.size() > 0 && clean(d.tekst)
+        && d.aeg == request.time;
+    }
+    function okPriv(mainPath) {
+      return request.resource.data.keys().hasOnly(['uid', 'kasutaja'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.kasutaja == userName()
+        && !exists(mainPath) && getAfter(mainPath).data.aeg == request.time;
+    }
+    match /foorum/{id} {
+      allow read: if true;
+      allow create: if request.auth != null && notBlocked() && rateOk()
+        && request.resource.data.keys().hasOnly(['kasutaja', 'anon', 'teema', 'pealkiri', 'tekst', 'aeg'])
+        && okEntry(request.resource.data) && request.resource.data.tekst.size() <= 3000
+        && request.resource.data.pealkiri is string && request.resource.data.pealkiri.size() > 0
+        && request.resource.data.pealkiri.size() <= 120 && clean(request.resource.data.pealkiri)
+        && request.resource.data.teema in ['Üldine', 'Ajalugu', 'Keemia', 'Muusika', 'Matemaatika', 'Kirjandus', 'Füüsika', 'Keeled', 'UPT', 'Muu']
+        && getAfter(/databases/$(database)/documents/foorum/$(id)/priv/info).data.uid == request.auth.uid;
+      allow delete: if isAdmin();
+      allow update: if isBot()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['teavitatud'])
+        && request.resource.data.teavitatud == true;
+      match /priv/{p} {
+        allow read, delete: if isAdmin();
+        allow create: if request.auth != null && p == 'info' && okPriv(/databases/$(database)/documents/foorum/$(id));
+      }
+      match /vastused/{vid} {
+        allow read: if true;
+        allow create: if request.auth != null && notBlocked() && rateOk()
+          && exists(/databases/$(database)/documents/foorum/$(id))
+          && request.resource.data.keys().hasOnly(['kasutaja', 'anon', 'tekst', 'aeg'])
+          && okEntry(request.resource.data) && request.resource.data.tekst.size() <= 2000
+          && getAfter(/databases/$(database)/documents/foorum/$(id)/vastused/$(vid)/priv/info).data.uid == request.auth.uid;
+        allow delete: if isAdmin();
+        match /priv/{p} {
+          allow read, delete: if isAdmin();
+          allow create: if request.auth != null && p == 'info' && okPriv(/databases/$(database)/documents/foorum/$(id)/vastused/$(vid));
+        }
+      }
+    }
+    match /foorumikasutajad/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['viimane']) && request.resource.data.viimane == request.time;
+      allow update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['viimane']) && request.resource.data.viimane == request.time
+        && resource.data.viimane < request.time - duration.value(20, 's');
+    }
+    match /foorumikeelud/{uid} {
+      allow read: if isAdmin() || (request.auth != null && request.auth.uid == uid);
+      allow write: if isAdmin();
+    }
+    match /foorumiteated/{id} {
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(['tee', 'pohjus', 'uid', 'aeg'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.tee is string && request.resource.data.tee.size() <= 200
+        && request.resource.data.tee.matches('foorum/[A-Za-z0-9]+(/vastused/[A-Za-z0-9]+)?')
+        && request.resource.data.pohjus is string && request.resource.data.pohjus.size() <= 300
+        && request.resource.data.aeg == request.time;
+      allow read: if isAdmin() || isBot();
+      allow delete: if isAdmin();
+      allow update: if isBot()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['teavitatud'])
+        && request.resource.data.teavitatud == true;
+    }
+
     // Iga kasutaja näeb ja muudab ainult enda edusamme.
     match /kasutajad/{uid} {
       allow read, write: if request.auth != null && request.auth.uid == uid;

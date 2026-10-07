@@ -101,6 +101,43 @@ def main():
         req(f'https://firestore.googleapis.com/v1/{name}?updateMask.fieldPaths=teavitatud',
             {'fields': {'teavitatud': {'booleanValue': True}}}, method='PATCH', token=token)
     print(f'teavitatud: {min(len(fresh), MAX_MESSAGES)}, märgitud: {len(new)}')
+    foorum(hook, token, since)
+
+
+FOORUM = 'https://nextonu.github.io/ajukas/#foorum'
+
+
+def foorum(hook, token, since):
+    """Foorumi uued küsimused ja teated Discordi (et rikkumised jõuaksid kohe lehe tegijani)."""
+    for col, kind in (('foorum', 'post'), ('foorumiteated', 'teade')):
+        try:
+            rows = req(f'{DOCS}:runQuery', {'structuredQuery': {
+                'from': [{'collectionId': col}],
+                'where': {'fieldFilter': {'field': {'fieldPath': 'aeg'}, 'op': 'GREATER_THAN_OR_EQUAL', 'value': {'timestampValue': since}}},
+                'orderBy': [{'field': {'fieldPath': 'aeg'}, 'direction': 'ASCENDING'}],
+                'limit': 20}}, token=token)
+        except urllib.error.HTTPError as e:
+            print('foorum: lugemine ei õnnestunud', col, e.code)
+            continue
+        sent = 0
+        for row in rows:
+            d = row.get('document')
+            if not d or val(d.get('fields', {}), 'teavitatud', False) is True:
+                continue
+            f = d['fields']
+            if sent < MAX_MESSAGES:
+                if kind == 'post':
+                    autor = 'Anonüümne' if val(f, 'anon', False) is True else val(f, 'kasutaja')
+                    embed = {'title': 'Foorumis uus küsimus: ' + val(f, 'pealkiri')[:200], 'url': FOORUM, 'description': val(f, 'tekst')[:1500],
+                             'color': 0x6CB6FF, 'fields': [{'name': 'Teema', 'value': val(f, 'teema') or '-', 'inline': True}, {'name': 'Autor', 'value': autor or '-', 'inline': True}]}
+                else:
+                    embed = {'title': '⚑ Teade foorumis', 'url': FOORUM, 'description': val(f, 'pohjus')[:1500] or '-', 'color': 0xF48771,
+                             'fields': [{'name': 'Kus', 'value': val(f, 'tee')[:200], 'inline': False}]}
+                discord(hook, {'username': 'Ajukas', 'embeds': [embed]})
+                sent += 1
+            req(f'https://firestore.googleapis.com/v1/{d["name"]}?updateMask.fieldPaths=teavitatud',
+                {'fields': {'teavitatud': {'booleanValue': True}}}, method='PATCH', token=token)
+        print(f'foorum {col}: saadetud {sent}')
 
 
 if __name__ == '__main__':
