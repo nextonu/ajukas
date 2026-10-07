@@ -43,6 +43,7 @@ function t(k, p) {
   --bg:#181818; --panel:#1F1F1F; --raised:#252526; --line:#2B2B2B; --line2:#3C3C3C;
   --text:#CCCCCC; --bright:#FFFFFF; --muted:#9D9D9D;
   --key:#4FC1FF; --hl:rgba(234,179,8,.24); --num:#CE9178; --accent:#0078D4;
+  --c-ajalugu:#E8838B; --c-keemia:#8FD18A; --c-muusika:#C99BF0; --c-upt:#6CB6FF; --sub-ink:#111;
   --accent-hover:#026EC1; --hover:#2D2D2D; --brand:#EAB308; --warn:#EAB308; --ok:#89D185; --err:#F48771;
   --ui:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
   --mono:"Cascadia Code","Cascadia Mono",Consolas,"Courier New",monospace;
@@ -52,6 +53,7 @@ function t(k, p) {
   --bg:#F7F7F8; --panel:#FFFFFF; --raised:#F0F0F2; --line:#E3E3E6; --line2:#C9C9CE;
   --text:#2E2E33; --bright:#111114; --muted:#64646C;
   --key:#0063B1; --hl:rgba(234,179,8,.38); --num:#A1260D; --accent:#005FB8;
+  --c-ajalugu:#B8323F; --c-keemia:#23803A; --c-muusika:#7C3AAE; --c-upt:#1E64B4; --sub-ink:#fff;
   --accent-hover:#004E98; --hover:#E6E6EA; --brand:#EAB308; --warn:#946200; --ok:#1A7F37; --err:#C42B1C;
   color-scheme:light;
 }
@@ -74,7 +76,7 @@ h1 .dot{color:var(--brand)}
 .tabs{display:flex;flex-wrap:wrap;gap:6px;padding:8px 0 8px 10px}
 .tabs button{flex:0 0 auto;font-family:var(--ui);font-size:15px;font-weight:500;border:1px solid var(--line2);border-radius:6px;background:var(--panel);color:var(--text);padding:7px 14px;cursor:pointer;white-space:nowrap}
 .tabs button:hover{background:var(--hover);color:var(--bright);border-color:var(--muted)}
-.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.tabs button[aria-selected="true"]{background:var(--sub,var(--accent));border-color:var(--sub,var(--accent));color:var(--sub-c,#fff);font-weight:700}
 .tabs button:focus-visible,.card summary:focus-visible,.btn:focus-visible{outline:1px solid var(--key);outline-offset:-1px}
 section[role="tabpanel"]{max-width:70ch}
 h2{font-size:clamp(26px,4.5vw,34px);font-weight:700;color:var(--bright);line-height:1.15;margin:0 0 8px;text-wrap:balance}
@@ -167,7 +169,18 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
 .subjcard .stopic{font-family:var(--mono);font-size:12px}
 .subjcard.ready{border:1px solid var(--line2);background:var(--panel);color:var(--bright)}
 .subjcard.ready .stopic{color:var(--muted)}
-.subjcard.ready:hover{border-color:var(--bright)}
+.subjcard.ready:hover{border-color:var(--sub,var(--bright))}
+/* ainete värvid: iga aine oma toon (kaardid, aktiivne vahekaart, ülariba joon, ajajoone täpid) */
+#v-ajalugu,.view[data-parent="ajalugu"],.subjcard[href="#ajalugu"]{--sub:var(--c-ajalugu);--sub-c:var(--sub-ink)}
+#v-keemia,.view[data-parent="keemia"],.subjcard[href="#keemia"]{--sub:var(--c-keemia);--sub-c:var(--sub-ink)}
+#v-muusika,.view[data-parent="muusika"],.subjcard[href="#muusika"]{--sub:var(--c-muusika);--sub-c:var(--sub-ink)}
+#v-upt,.view[data-parent="upt"],.subjcard[href="#upt"]{--sub:var(--c-upt);--sub-c:var(--sub-ink)}
+.subjcard.ready{border-left:3px solid var(--sub,var(--line2))}
+.subjcard.ready .sname::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sub,var(--muted));margin-right:8px;vertical-align:2px}
+.view[data-parent] .appbar,#v-ajalugu .appbar,#v-keemia .appbar,#v-muusika .appbar,#v-upt .appbar{border-bottom:2px solid var(--sub,var(--line))}
+.view[data-parent] .timeline li::before{border-color:var(--sub,var(--muted))}
+.view[data-parent] .tmode-btn[aria-pressed=true]{border-color:var(--sub);box-shadow:inset 0 0 0 1px var(--sub)}
+.view[data-parent] .tmode-btn[aria-pressed=true] .ti{background:var(--sub);color:var(--sub-c)}
 .subjcard.ready .sname::after{content:" →";color:var(--muted)}
 .subjcard:focus-visible{outline:1px solid var(--key);outline-offset:1px}
 .disclaimer{max-width:70ch;border:1px solid var(--line);border-radius:4px;padding:12px 14px;color:var(--muted);font-size:14px;background:var(--panel)}
@@ -223,7 +236,7 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .linkbtn{background:none;border:0;color:var(--muted);font:inherit;font-size:12px;cursor:pointer;text-decoration:underline;padding:0}
 .linkbtn:hover{color:var(--err)}
 .tabs button.seen::after{content:" ✓";color:var(--ok)}
-.tabs button[aria-selected="true"].seen::after{color:#fff}
+.tabs button[aria-selected="true"].seen::after{color:var(--sub-c,#fff)}
 .prog{display:block;margin-top:6px;font-family:var(--mono);font-size:12px;color:var(--ok)}
 .prog:empty{display:none}
 
