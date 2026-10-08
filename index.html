@@ -43,7 +43,7 @@ function t(k, p) {
   --bg:#181818; --panel:#1F1F1F; --raised:#252526; --line:#2B2B2B; --line2:#3C3C3C;
   --text:#CCCCCC; --bright:#FFFFFF; --muted:#9D9D9D;
   --key:#4FC1FF; --hl:rgba(234,179,8,.24); --num:#CE9178; --accent:#0078D4;
-  --c-ajalugu:#E8838B; --c-keemia:#8FD18A; --c-muusika:#C99BF0; --c-upt:#6CB6FF; --c-fyysika:#F2A65A; --sub-ink:#111;
+  --c-ajalugu:#E8838B; --c-keemia:#8FD18A; --c-muusika:#C99BF0; --c-upt:#6CB6FF; --c-fyysika:#F2A65A; --c-kirjandus:#E0C36C; --sub-ink:#111;
   --accent-hover:#026EC1; --hover:#2D2D2D; --brand:#EAB308; --warn:#EAB308; --ok:#89D185; --err:#F48771;
   --ui:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
   --mono:"Cascadia Code","Cascadia Mono",Consolas,"Courier New",monospace;
@@ -53,7 +53,7 @@ function t(k, p) {
   --bg:#F7F7F8; --panel:#FFFFFF; --raised:#F0F0F2; --line:#E3E3E6; --line2:#C9C9CE;
   --text:#2E2E33; --bright:#111114; --muted:#64646C;
   --key:#0063B1; --hl:rgba(234,179,8,.38); --num:#A1260D; --accent:#005FB8;
-  --c-ajalugu:#B8323F; --c-keemia:#23803A; --c-muusika:#7C3AAE; --c-upt:#1E64B4; --c-fyysika:#A85400; --sub-ink:#fff;
+  --c-ajalugu:#B8323F; --c-keemia:#23803A; --c-muusika:#7C3AAE; --c-upt:#1E64B4; --c-fyysika:#A85400; --c-kirjandus:#8A6B00; --sub-ink:#fff;
   --accent-hover:#004E98; --hover:#E6E6EA; --brand:#EAB308; --warn:#946200; --ok:#1A7F37; --err:#C42B1C;
   color-scheme:light;
 }
@@ -176,9 +176,10 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
 #v-muusika,.view[data-parent="muusika"],.subjcard[href="#muusika"]{--sub:var(--c-muusika);--sub-c:var(--sub-ink)}
 #v-upt,.view[data-parent="upt"],.subjcard[href="#upt"]{--sub:var(--c-upt);--sub-c:var(--sub-ink)}
 #v-fyysika,.view[data-parent="fyysika"],.subjcard[href="#fyysika"]{--sub:var(--c-fyysika);--sub-c:var(--sub-ink)}
+#v-kirjandus,.view[data-parent="kirjandus"],.subjcard[href="#kirjandus"]{--sub:var(--c-kirjandus);--sub-c:var(--sub-ink)}
 .subjcard.ready{border-left:3px solid var(--sub,var(--line2))}
 .subjcard.ready .sname::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sub,var(--muted));margin-right:8px;vertical-align:2px}
-.view[data-parent] .appbar,#v-ajalugu .appbar,#v-keemia .appbar,#v-muusika .appbar,#v-upt .appbar,#v-fyysika .appbar{border-bottom:2px solid var(--sub,var(--line))}
+.view[data-parent] .appbar,#v-ajalugu .appbar,#v-keemia .appbar,#v-muusika .appbar,#v-upt .appbar,#v-fyysika .appbar,#v-kirjandus .appbar{border-bottom:2px solid var(--sub,var(--line))}
 .view[data-parent] .timeline li::before{border-color:var(--sub,var(--muted))}
 .view[data-parent] .tmode-btn[aria-pressed=true]{border-color:var(--sub);box-shadow:inset 0 0 0 1px var(--sub)}
 .view[data-parent] .tmode-btn[aria-pressed=true] .ti{background:var(--sub);color:var(--sub-c)}
@@ -838,7 +839,7 @@ sub{font-size:.72em;line-height:0}
   </section>
   <details class="box updlog" id="updlog">
     <summary><span class="ul-title">Uuendused</span><span class="ul-date">6. oktoober 2026</span><span class="ul-last">Muusikas ja ajaloos on inimeste pildid.</span></summary>
-    <div class="ul-body"><h4>8. oktoober 2026</h4><ul><li>Uus aine: <b>Füüsika</b>, kontrolltöö: ringliikumine (koos arvutustreeneriga).</li><li>Keemias on ainete <b>3D-mudelid</b>: arvutis teksti kõrval, telefonis vajuta aine nimele.</li></ul><h4>7. oktoober 2026</h4><ul><li>Uus: <b>foorum</b>, kus saab küsida ja teisi aidata (avalehel „Foorum”).</li><li>Igal ainel on oma <b>värv</b>.</li><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
+    <div class="ul-body"><h4>8. oktoober 2026</h4><ul><li>Uus aine: <b>Füüsika</b>, kontrolltöö: ringliikumine (koos arvutustreeneriga).</li><li>Kirjandus: „Dorian Gray portree” tasuta lugeda ja kuulata.</li><li>Keemias on ainete <b>3D-mudelid</b>: arvutis teksti kõrval, telefonis vajuta aine nimele.</li></ul><h4>7. oktoober 2026</h4><ul><li>Uus: <b>foorum</b>, kus saab küsida ja teisi aidata (avalehel „Foorum”).</li><li>Igal ainel on oma <b>värv</b>.</li><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
   </details>
   <aside class="suvi" id="suvi" aria-label="Suvevaheaja taimer" hidden>
   <div class="suvi-clock">
@@ -879,7 +880,7 @@ sub{font-size:.72em;line-height:0}
     <div class="subjcard"><span class="sname">Eesti keel</span><span class="stopic">Materjal tulekul</span></div>
     <div class="subjcard"><span class="sname">Ennastjuhtiv õppija</span><span class="stopic">Materjal tulekul</span></div>
     <div class="subjcard"><span class="sname">Inglise keel</span><span class="stopic">Materjal tulekul</span></div>
-    <div class="subjcard"><span class="sname">Kirjandus</span><span class="stopic">Materjal tulekul</span></div>
+    <a class="subjcard ready" href="#kirjandus"><span class="sname">Kirjandus</span><span class="stopic">Dorian Gray portree</span></a>
     <div class="subjcard"><span class="sname">Lai matemaatika</span><span class="stopic">Materjal tulekul</span></div>
     <a class="subjcard ready" href="#fyysika"><span class="sname">Füüsika</span><span class="stopic">Kontrolltöö: ringliikumine</span></a>
     <a class="subjcard ready" href="#keemia"><span class="sname">Keemia</span><span class="stopic">Kontrolltöö 1: orgaanika</span></a>
@@ -2512,6 +2513,51 @@ H — C — C — C — H
 </section>
 </main>
 </div>
+<div class="view" id="v-kirjandus" data-title="Kirjandus" hidden>
+  <div class="appbar"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
+  <div class="pagehead">
+    <a class="back" href="#"><span aria-hidden="true">←</span> Kõik ained</a>
+  </div>
+  <h2 class="pagetitle">Kirjandus</h2>
+  <p class="tagline">Vali teema.</p>
+  <div class="grid">
+    <a class="subjcard ready" href="#dorian"><span class="sname">Dorian Gray portree</span><span class="stopic">Kohustuslik lugemine: raamat ja audioraamat tasuta.</span><span class="prog" data-topic="dorian"></span></a>
+  </div>
+</div>
+<div class="view" id="v-dorian" data-updated="2026-10-08" data-title="Dorian Gray portree" data-parent="kirjandus" data-parent-title="Kirjandus" hidden>
+  <nav class="appbar sticky" aria-label="Dorian Gray portree"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-dg-loe" aria-controls="dg-loe" aria-selected="false">Loe ja kuula</button><button role="tab" id="t-dg-raamat" aria-controls="dg-raamat" aria-selected="false">Raamatust lühidalt</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
+  <div class="pagehead">
+    <a class="back" href="#kirjandus"><span aria-hidden="true">←</span> Kirjandus</a>
+    <span class="path"><a href="#">Avaleht</a> / <a href="#kirjandus">Kirjandus</a> / Dorian Gray portree</span>
+  </div>
+  <main><section role="tabpanel" id="dg-loe" aria-labelledby="t-dg-loe" hidden>
+  <h2>Loe ja kuula tasuta</h2>
+  <p class="lead">Kohustuslik lugemine: Oscar Wilde „Dorian Gray portree”. Raamat peab olema loetud 2. novembriks.</p>
+  <h3>Eesti keeles</h3>
+  <ul>
+    <li><a href="https://www.digar.ee/arhiiv/et/raamatud/190161" target="_blank" rel="noopener"><b>Raamat DIGAR-is</b></a>: Eesti Raamat 1972, tõlkinud <b>A. H. Tammsaare</b>. Tasuta ja seaduslik: tõlge on avalik omand ning Rahvusraamatukogu digiarhiiv lubab seda kõigil lugeda.</li>
+  </ul>
+  <p class="muted">Eestikeelset tasuta audioraamatut ei leidnud. Tasulisena võib see olla Storytelis või BookBeatis.</p>
+  <h3>Inglise keeles (originaal)</h3>
+  <ul>
+    <li><a href="https://www.gutenberg.org/ebooks/174" target="_blank" rel="noopener"><b>Raamat Project Gutenbergis</b></a>: loe brauseris või laadi alla (EPUB, Kindle).</li>
+    <li><a href="https://librivox.org/the-picture-of-dorian-gray-by-oscar-wilde/" target="_blank" rel="noopener"><b>Audioraamat LibriVoxis</b></a>: tasuta, peatükkide kaupa MP3-d. Sama salvestus ka <a href="https://archive.org/details/dorian_gray_librivox" target="_blank" rel="noopener">Internet Archive’is</a>.</li>
+  </ul>
+  <div class="key"><span class="label">Nipp</span>Ingliskeelset audioraamatut võib kuulata ka eestikeelse raamatu kõrvale, näiteks bussis. Tõlge ei ühti originaaliga lause haaval ning romaanil on kaks versiooni (1890 ja 1891), mistõttu peatükkide jaotus võib erineda.</div>
+</section>
+<section role="tabpanel" id="dg-raamat" aria-labelledby="t-dg-raamat" hidden>
+  <h2>Raamatust lühidalt</h2>
+  <p class="lead">Ilma sisu ära rääkimata: mida enne lugemist teada.</p>
+  <ul>
+    <li><b>Autor:</b> Oscar Wilde (1854–1900), iiri kirjanik ja näitekirjanik, tuntud teravmeelsuse poolest.</li>
+    <li><b>Ilmumine:</b> 1890 ajakirjas <i>Lippincott’s Monthly Magazine</i>, 1891 laiendatud raamatuna. Wilde’i ainus romaan.</li>
+    <li><b>Põhiidee:</b> noor ja ilus Dorian Gray soovib, et vananeks tema portree, mitte tema ise.</li>
+    <li><b>Peategelased:</b> <b>Dorian Gray</b>; kunstnik <b>Basil Hallward</b>, kes maalib portree; <b>lord Henry Wotton</b>, kelle mõtted Doriani mõjutavad.</li>
+    <li><b>Teemad, mida lugedes jälgida:</b> ilu ja noorus, kunst ja moraal, mõjutamine, süü ja südametunnistus.</li>
+  </ul>
+</section>
+</main>
+</div>
 <div class="view" id="v-foorum" data-title="Foorum" hidden>
   <div class="appbar"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
   <div class="pagehead">
@@ -3349,7 +3395,7 @@ H — C — C — C — H
 
   // --- järgmised tööd (kuupäevad eKoolist) ---
   (function(){
-    var TOOD = [{"d": "2026-10-06", "aine": "Muusika", "mis": "Kontrolltöö: varajane jazz", "link": "#jazz", "topic": "jazz"}, {"d": "2026-10-07", "aine": "Ajalugu", "mis": "Kontrolltöö nr 1: tänapäev", "link": "#ajalugu-kt1", "topic": "ajalugu-kt1"}, {"d": "2026-10-09", "aine": "Keemia", "mis": "Kontrolltöö nr 1: orgaanika", "note": "algselt oli 7.10", "link": "#keemia-kt1", "topic": "keemia-kt1"}, {"d": "2026-10-14", "aine": "Füüsika", "mis": "Kontrolltöö: ringliikumine", "link": "#fyysika-kt1", "topic": "fyysika-kt1"}, {"d": "2026-11-02", "aine": "Kirjandus", "mis": "Kohustuslik lugemine: Oscar Wilde „Dorian Gray portree”"}, {"d": "2026-11-04", "aine": "Lai matemaatika", "mis": "Kontrolltöö 2: funktsioonid"}, {"d": "2026-11-09", "aine": "Keemia", "mis": "Kontrolltöö nr 2", "week": true}, {"d": "2026-11-16", "aine": "Muusika", "mis": "Kontserdi arvustus (hindeline)", "link": "#kontsert", "topic": "kontsert"}];
+    var TOOD = [{"d": "2026-10-06", "aine": "Muusika", "mis": "Kontrolltöö: varajane jazz", "link": "#jazz", "topic": "jazz"}, {"d": "2026-10-07", "aine": "Ajalugu", "mis": "Kontrolltöö nr 1: tänapäev", "link": "#ajalugu-kt1", "topic": "ajalugu-kt1"}, {"d": "2026-10-09", "aine": "Keemia", "mis": "Kontrolltöö nr 1: orgaanika", "note": "algselt oli 7.10", "link": "#keemia-kt1", "topic": "keemia-kt1"}, {"d": "2026-10-14", "aine": "Füüsika", "mis": "Kontrolltöö: ringliikumine", "link": "#fyysika-kt1", "topic": "fyysika-kt1"}, {"d": "2026-11-02", "aine": "Kirjandus", "mis": "Kohustuslik lugemine: Oscar Wilde „Dorian Gray portree”", "link": "#dorian", "topic": "dorian"}, {"d": "2026-11-04", "aine": "Lai matemaatika", "mis": "Kontrolltöö 2: funktsioonid"}, {"d": "2026-11-09", "aine": "Keemia", "mis": "Kontrolltöö nr 2", "week": true}, {"d": "2026-11-16", "aine": "Muusika", "mis": "Kontserdi arvustus (hindeline)", "link": "#kontsert", "topic": "kontsert"}];
     var WD = ['P', 'E', 'T', 'K', 'N', 'R', 'L'];
     function day(iso){ var a = iso.split('-'); return new Date(+a[0], a[1] - 1, +a[2]); }
     function today(){ var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
