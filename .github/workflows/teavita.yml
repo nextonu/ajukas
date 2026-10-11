@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  actions: write   # tunniplaani kontrolli käivitamiseks
 
 concurrency:
   group: teavita
@@ -25,3 +26,12 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           AJUKAS_BOT_PASSWORD: ${{ secrets.AJUKAS_BOT_PASSWORD }}
         run: python tools/teavita.py
+      - name: Käivita tunniplaani kontroll (umbes iga 20 minuti tagant)
+        # cron-job.org käivitab seda tööd iga 2 minuti tagant; GitHubi enda ajastus hilineb tunde
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ $(( 10#$(date -u +%M) % 20 )) -lt 2 ]; then
+            gh workflow run tunniplaan.yml --ref main --repo "$GITHUB_REPOSITORY" && echo "tunniplaani kontroll käivitatud"
+          fi

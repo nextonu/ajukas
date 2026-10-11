@@ -2,11 +2,15 @@ name: Tunniplaani kontroll
 
 on:
   schedule:
-    - cron: '17 */2 * * *'   # iga 2 tunni tagant
+    - cron: '17 */2 * * *'   # varuks; päriselt käivitab teavita.yml umbes iga 20 min tagant
   workflow_dispatch: {}
 
 permissions:
   contents: write
+
+concurrency:
+  group: tunniplaan
+  cancel-in-progress: false
 
 jobs:
   check:
