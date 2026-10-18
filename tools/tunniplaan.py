@@ -7,6 +7,7 @@ Käsitsi: python tools/tunniplaan.py
 import datetime as dt
 import json
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -39,9 +40,21 @@ def main():
     viewer = call('ttviewer.getTTViewerData', [None, year])
     reg = viewer['regular']
     tts = [t for t in reg['timetables'] if not t.get('hidden')]
+
+    def start(t):
+        # Kool unustab vahel Edupage'is alguskuupäeva õigeks panna (nt "19.10-23.10" datefrom 2026-08-01),
+        # seega usalda esmalt nime alguses olevat kuupäeva
+        m = re.match(r'\s*(\d{1,2})\.\s*(\d{1,2})', t.get('text') or '')
+        if m:
+            d, mo = int(m.group(1)), int(m.group(2))
+            try:
+                return dt.date(year if mo >= 8 else year + 1, mo, d)
+            except ValueError:
+                pass
+        return dt.date.fromisoformat(t['datefrom'])
     # uusim nädal, mis on juba alanud või algab 2 päeva jooksul (nädalavahetusel järgmine nädal)
-    cands = [t for t in tts if dt.date.fromisoformat(t['datefrom']) <= today + dt.timedelta(days=2)]
-    best = max(cands, key=lambda t: t['datefrom']) if cands else None
+    cands = [t for t in tts if start(t) <= today + dt.timedelta(days=2)]
+    best = max(cands, key=start) if cands else None
     num = best['tt_num'] if best else reg.get('default_num')
     text = best['text'] if best else ''
     data = call('regulartt.regularttGetData', [None, num])
@@ -50,7 +63,7 @@ def main():
         'num': num,
         'default_num': reg.get('default_num'),
         'text': text,
-        'datefrom': best['datefrom'] if best else None,
+        'datefrom': start(best).isoformat() if best else None,
         'classes': {c['name']: c['id'] for c in classes},
     }
     old = None
