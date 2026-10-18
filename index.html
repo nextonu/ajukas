@@ -43,7 +43,7 @@ function t(k, p) {
   --bg:#181818; --panel:#1F1F1F; --raised:#252526; --line:#2B2B2B; --line2:#3C3C3C;
   --text:#CCCCCC; --bright:#FFFFFF; --muted:#9D9D9D;
   --key:#4FC1FF; --hl:rgba(234,179,8,.24); --num:#CE9178; --accent:#0078D4;
-  --c-ajalugu:#E8838B; --c-keemia:#8FD18A; --c-muusika:#C99BF0; --c-upt:#6CB6FF; --c-fyysika:#F2A65A; --c-kirjandus:#E0C36C; --c-inglise:#7FD1C7; --c-eesti:#9FB4FF; --card-k:22%; --card-base:#1b1b1f; --c-vene:#F49AB8; --sub-ink:#111;
+  --c-ajalugu:#E8838B; --c-keemia:#8FD18A; --c-muusika:#C99BF0; --c-upt:#6CB6FF; --c-fyysika:#F2A65A; --c-kirjandus:#E0C36C; --c-inglise:#7FD1C7; --c-eesti:#9FB4FF; --card-k:22%; --card-base:#1b1b1f; --c-vene:#F49AB8; --c-ejo:#B5E07A; --sub-ink:#111;
   --accent-hover:#026EC1; --hover:#2D2D2D; --brand:#EAB308; --warn:#EAB308; --ok:#89D185; --err:#F48771;
   --ui:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
   --mono:"Cascadia Code","Cascadia Mono",Consolas,"Courier New",monospace;
@@ -53,7 +53,7 @@ function t(k, p) {
   --bg:#F7F7F8; --panel:#FFFFFF; --raised:#F0F0F2; --line:#E3E3E6; --line2:#C9C9CE;
   --text:#2E2E33; --bright:#111114; --muted:#64646C;
   --key:#0063B1; --hl:rgba(234,179,8,.38); --num:#A1260D; --accent:#005FB8;
-  --c-ajalugu:#B8323F; --c-keemia:#23803A; --c-muusika:#7C3AAE; --c-upt:#1E64B4; --c-fyysika:#A85400; --c-kirjandus:#8A6B00; --c-inglise:#0E7368; --c-eesti:#3A55C2; --card-k:12%; --card-base:#fff; --c-vene:#B3325F; --sub-ink:#fff;
+  --c-ajalugu:#B8323F; --c-keemia:#23803A; --c-muusika:#7C3AAE; --c-upt:#1E64B4; --c-fyysika:#A85400; --c-kirjandus:#8A6B00; --c-inglise:#0E7368; --c-eesti:#3A55C2; --card-k:12%; --card-base:#fff; --c-vene:#B3325F; --c-ejo:#4D7C0F; --sub-ink:#fff;
   --accent-hover:#004E98; --hover:#E6E6EA; --brand:#EAB308; --warn:#946200; --ok:#1A7F37; --err:#C42B1C;
   color-scheme:light;
 }
@@ -180,14 +180,15 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
 #v-inglise,.view[data-parent="inglise"],.subjcard[href="#inglise"]{--sub:var(--c-inglise);--sub-c:var(--sub-ink)}
 #v-eesti,.view[data-parent="eesti"],.subjcard[href="#eesti"]{--sub:var(--c-eesti);--sub-c:var(--sub-ink)}
 #v-vene,.view[data-parent="vene"],.subjcard[href="#vene"]{--sub:var(--c-vene);--sub-c:var(--sub-ink)}
+#v-ejo,.view[data-parent="ejo"],.subjcard[href="#ejo"]{--sub:var(--c-ejo);--sub-c:var(--sub-ink)}
 .subjcard.ready{border-left:3px solid var(--sub,var(--line2))}
 .subjcard.ready .sname::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sub,var(--muted));margin-right:8px;vertical-align:2px}
-.view[data-parent] .appbar,#v-ajalugu .appbar,#v-keemia .appbar,#v-muusika .appbar,#v-upt .appbar,#v-fyysika .appbar,#v-kirjandus .appbar,#v-inglise .appbar,#v-eesti .appbar,#v-vene .appbar{border-bottom:2px solid var(--sub,var(--line))}
+.view[data-parent] .appbar,#v-ajalugu .appbar,#v-keemia .appbar,#v-muusika .appbar,#v-upt .appbar,#v-fyysika .appbar,#v-kirjandus .appbar,#v-inglise .appbar,#v-eesti .appbar,#v-vene .appbar,#v-ejo .appbar{border-bottom:2px solid var(--sub,var(--line))}
 .view[data-parent] .timeline li::before{border-color:var(--sub,var(--muted))}
 .view[data-parent] .tmode-btn[aria-pressed=true]{border-color:var(--sub);box-shadow:inset 0 0 0 1px var(--sub)}
 .view[data-parent] .tmode-btn[aria-pressed=true] .ti{background:var(--sub);color:var(--sub-c)}
 .subjcard.ready .sname::after{content:" →";color:var(--muted)}
-#v-home .subjcard[href="#ajalugu"]{--k:#DC2626}#v-home .subjcard[href="#eesti"]{--k:#4F46E5}#v-home .subjcard[href="#inglise"]{--k:#0D9488}#v-home .subjcard[href="#kirjandus"]{--k:#CA8A04}#v-home .subjcard[href="#fyysika"]{--k:#EA580C}#v-home .subjcard[href="#keemia"]{--k:#16A34A}#v-home .subjcard[href="#muusika"]{--k:#9333EA}#v-home .subjcard[href="#vene"]{--k:#DB2777}#v-home .subjcard[href="#upt"]{--k:#2563EB}
+#v-home .subjcard[href="#ajalugu"]{--k:#DC2626}#v-home .subjcard[href="#eesti"]{--k:#4F46E5}#v-home .subjcard[href="#inglise"]{--k:#0D9488}#v-home .subjcard[href="#kirjandus"]{--k:#CA8A04}#v-home .subjcard[href="#fyysika"]{--k:#EA580C}#v-home .subjcard[href="#keemia"]{--k:#16A34A}#v-home .subjcard[href="#muusika"]{--k:#9333EA}#v-home .subjcard[href="#vene"]{--k:#DB2777}#v-home .subjcard[href="#ejo"]{--k:#65A30D}#v-home .subjcard[href="#upt"]{--k:#2563EB}
 #v-home .subjcard.ready{background:linear-gradient(90deg,var(--k) 0 6px,color-mix(in srgb,var(--k) var(--card-k),var(--card-base)) 6px);border:0;color:var(--bright)}
 #v-home .subjcard.ready>:not(.sname),#v-home .subjcard.ready>:not(.sname) *,#v-home .subjcard.ready .sname::after{color:var(--bright);opacity:.8}
 #v-home .subjcard.ready .sname::before{display:none}
@@ -714,6 +715,18 @@ body{padding-bottom:80px}
 .lg-chip{font:inherit;font-size:14px;padding:5px 11px;border:1px solid var(--line2);border-radius:999px;background:var(--raised);color:var(--bright);cursor:grab}
 .lg-chip.sel{border-color:var(--sub);box-shadow:0 0 0 2px var(--sub)}
 .lg-res{font-weight:600;color:var(--bright)}
+.cklist{list-style:none;padding:0;margin:8px 0}
+.cklist li{padding:7px 10px;border:1px solid var(--line);border-radius:4px;margin:5px 0;background:var(--panel)}
+.cklist label{display:flex;gap:10px;align-items:center;cursor:pointer}
+.cklist input{width:18px;height:18px;accent-color:var(--sub);flex:0 0 auto}
+.cklist li.done{opacity:.6}
+.eis{display:grid;grid-template-columns:auto 1fr 1fr;gap:6px;margin:10px 0;max-width:640px}
+.eis-h{font-size:13px;color:var(--muted);font-weight:600;align-self:end;text-align:center}
+.eis-v{writing-mode:vertical-rl;transform:rotate(180deg);align-self:center}
+.eis-c{border-radius:6px;padding:10px;border:1px solid var(--line2);display:flex;flex-direction:column;gap:4px;font-size:14px}
+.eis-c span{color:var(--muted);font-size:13px}
+.eis-c b{background:none;padding:0;color:var(--bright)}
+.eis-c.q1{border-color:#DC2626}.eis-c.q2{border-color:#2563EB}.eis-c.q3{border-color:#CA8A04}.eis-c.q4{border-color:var(--line2)}
 .gap.wide{width:9.5em}
 .end{color:var(--sub);font-weight:700}
 .gn{font-family:var(--mono);font-size:10px;color:var(--muted);margin-right:2px}
@@ -912,7 +925,7 @@ sub{font-size:.72em;line-height:0}
   </section>
   <details class="box updlog" id="updlog">
     <summary><span class="ul-title">Uuendused</span><span class="ul-date">6. oktoober 2026</span><span class="ul-last">Muusikas ja ajaloos on inimeste pildid.</span></summary>
-    <div class="ul-body"><h4>15. oktoober 2026</h4><ul><li>Vene keeles pildiharjutus (nägu, keha ja riided) ning selgemad tabelid, mis mahuvad ka telefoni ekraanile.</li></ul><h4>13. oktoober 2026</h4><ul><li>Vene keeles винительный падеж mitmuses, uus harjutus ja õpetaja harjutuslingid (hindeline töö 16.10).</li></ul><h4>12. oktoober 2026</h4><ul><li>Füüsikas uued kordamisülesanded: arvutused, valemi valik ja mõtlemisülesanded (Testi ennast all).</li><li>Kõik harjutused ja ülesanded on nüüd „Testi ennast” all.</li></ul><h4>11. oktoober 2026</h4><ul><li>Uued ained: <b>Eesti keel</b> (indoeuroopa ja uurali keeled), <b>Inglise keel</b> (CEPT combo test) ja <b>Vene keel</b> (tasemetest A2).</li></ul><h4>8. oktoober 2026</h4><ul><li>Uus aine: <b>Füüsika</b>, kontrolltöö: ringliikumine (koos arvutustreeneriga).</li><li>Kirjandus: „Dorian Gray portree”: tasuta raamat ja audioraamat, kokkuvõte peatükkide kaupa, tegelased, teemad ja enesetest.</li><li>Keemias on ainete <b>3D-mudelid</b>: arvutis teksti kõrval, telefonis vajuta aine nimele.</li></ul><h4>7. oktoober 2026</h4><ul><li>Uus: <b>foorum</b>, kus saab küsida ja teisi aidata (avalehel „Foorum”).</li><li>Igal ainel on oma <b>värv</b>.</li><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
+    <div class="ul-body"><h4>18. oktoober 2026</h4><ul><li>Uus aine: <b>Ennastjuhtiv õppija</b>, portfoolio töölehtede kontrollnimekiri (esitamine 23.10).</li></ul><h4>15. oktoober 2026</h4><ul><li>Vene keeles pildiharjutus (nägu, keha ja riided) ning selgemad tabelid, mis mahuvad ka telefoni ekraanile.</li></ul><h4>13. oktoober 2026</h4><ul><li>Vene keeles винительный падеж mitmuses, uus harjutus ja õpetaja harjutuslingid (hindeline töö 16.10).</li></ul><h4>12. oktoober 2026</h4><ul><li>Füüsikas uued kordamisülesanded: arvutused, valemi valik ja mõtlemisülesanded (Testi ennast all).</li><li>Kõik harjutused ja ülesanded on nüüd „Testi ennast” all.</li></ul><h4>11. oktoober 2026</h4><ul><li>Uued ained: <b>Eesti keel</b> (indoeuroopa ja uurali keeled), <b>Inglise keel</b> (CEPT combo test) ja <b>Vene keel</b> (tasemetest A2).</li></ul><h4>8. oktoober 2026</h4><ul><li>Uus aine: <b>Füüsika</b>, kontrolltöö: ringliikumine (koos arvutustreeneriga).</li><li>Kirjandus: „Dorian Gray portree”: tasuta raamat ja audioraamat, kokkuvõte peatükkide kaupa, tegelased, teemad ja enesetest.</li><li>Keemias on ainete <b>3D-mudelid</b>: arvutis teksti kõrval, telefonis vajuta aine nimele.</li></ul><h4>7. oktoober 2026</h4><ul><li>Uus: <b>foorum</b>, kus saab küsida ja teisi aidata (avalehel „Foorum”).</li><li>Igal ainel on oma <b>värv</b>.</li><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
   </details>
   <aside class="suvi" id="suvi" aria-label="Suvevaheaja taimer" hidden>
   <div class="suvi-clock">
@@ -951,7 +964,7 @@ sub{font-size:.72em;line-height:0}
   <div class="grid">
     <a class="subjcard ready" href="#ajalugu"><span class="sname">Ajalugu</span><span class="stopic">Kontrolltöö 1: tänapäev</span></a>
     <a class="subjcard ready" href="#eesti"><span class="sname">Eesti keel</span><span class="stopic">Indoeuroopa ja uurali keeled</span></a>
-    <div class="subjcard"><span class="sname">Ennastjuhtiv õppija</span><span class="stopic">Materjal tulekul</span></div>
+    <a class="subjcard ready" href="#ejo"><span class="sname">Ennastjuhtiv õppija</span><span class="stopic">Portfoolio</span></a>
     <a class="subjcard ready" href="#inglise"><span class="sname">Inglise keel</span><span class="stopic">CEPT combo test</span></a>
     <a class="subjcard ready" href="#kirjandus"><span class="sname">Kirjandus</span><span class="stopic">Dorian Gray portree</span></a>
     <div class="subjcard"><span class="sname">Lai matemaatika</span><span class="stopic">Materjal tulekul</span></div>
@@ -3073,6 +3086,130 @@ H — C — C — C — H
 </section>
 </main>
 </div>
+<div class="view" id="v-ejo" data-title="Ennastjuhtiv õppija" hidden>
+  <div class="appbar"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
+  <div class="pagehead">
+    <a class="back" href="#"><span aria-hidden="true">←</span> Kõik ained</a>
+  </div>
+  <h2 class="pagetitle">Ennastjuhtiv õppija</h2>
+  <p class="tagline">Vali teema.</p>
+  <div class="grid">
+    <a class="subjcard ready" href="#portfoolio"><span class="sname">Portfoolio</span><span class="stopic">Töölehtede nimekiri, ajajuhtimine, autonoomia, grupitöö.</span><span class="prog" data-topic="portfoolio"></span></a>
+  </div>
+</div>
+<div class="view" id="v-portfoolio" data-updated="2026-10-18" data-title="Portfoolio" data-parent="ejo" data-parent-title="Ennastjuhtiv õppija" hidden>
+  <nav class="appbar sticky" aria-label="Portfoolio"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-ej-ulevaade" aria-controls="ej-ulevaade" aria-selected="false">Portfoolio</button><button role="tab" id="t-ej-aeg" aria-controls="ej-aeg" aria-selected="false">Ajajuhtimine</button><button role="tab" id="t-ej-autonoomia" aria-controls="ej-autonoomia" aria-selected="false">Autonoomia</button><button role="tab" id="t-ej-grupitoo" aria-controls="ej-grupitoo" aria-selected="false">Grupitöö</button><button role="tab" id="t-ej-viited" aria-controls="ej-viited" aria-selected="false">Viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
+  <div class="pagehead">
+    <a class="back" href="#ejo"><span aria-hidden="true">←</span> Ennastjuhtiv õppija</a>
+    <span class="path"><a href="#">Avaleht</a> / <a href="#ejo">Ennastjuhtiv õppija</a> / Portfoolio</span>
+  </div>
+  <main><section role="tabpanel" id="ej-ulevaade" aria-labelledby="t-ej-ulevaade" hidden>
+  <h2>Portfoolio</h2>
+  <p class="lead">Reedel <b>23.10</b> on portfoolio ülevaatamine ja esitamine. Vaata üle, et kõik töölehed oleksid portfoolio vahel, ja täienda puuduvad.</p>
+  <h3>Töölehed, mis peavad portfoolios olema</h3>
+  <p class="muted">Õpetaja 5. tunni slaidi järgi. Märgi linnuke, kui tööleht on täidetud ja kaustas. Märked jäävad sinu brauserisse.</p>
+<ul class="cklist" data-key="ejo-portfoolio"><li><label><input type="checkbox" data-i="0"> Tagasivaade G1-le ja koostööoskuste ankeet</label></li><li><label><input type="checkbox" data-i="1"> Grupitöö enesehinnanguküsimustik (Alex Crabtree mõrvamüsteerium)</label></li><li><label><input type="checkbox" data-i="2"> Üks probleem, mis koolielus häirib</label></li><li><label><input type="checkbox" data-i="3"> Minu aeg ja minu vajadused</label></li><li><label><input type="checkbox" data-i="4"> Kiire ja oluline</label></li><li><label><input type="checkbox" data-i="5"> Minu seitsme päeva katse</label></li><li><label><input type="checkbox" data-i="6"> Eisenhoweri maatriks koolielus</label></li><li><label><input type="checkbox" data-i="7"> Kuhu läheb minu aeg tegelikult</label></li></ul>
+  <p class="muted">Vaata ka, kas aasta alguse küsimustik (QR-kood õpetaja slaidil) on täidetud.</p>
+  <h3>Hindamine</h3>
+  <ul>
+    <li>Hinne on <b>A / MA</b> (arvestatud / mittearvestatud).</li>
+    <li>Arvestuseks peavad olema tehtud <b>kõik koolis ja kodus tehtavad ülesanded</b>. Kohalkäimine on väga oluline.</li>
+    <li>Ennastjuhtiva õppija portfoolio on oluline ka <b>küpsuseksami</b> jaoks.</li>
+  </ul>
+  <div class="key"><span class="label">NB</span>Töölehtedel ei ole „õigeid” vastuseid. Oluline on, et need oleksid ausalt ja konkreetselt täidetud.</div>
+</section>
+<section role="tabpanel" id="ej-aeg" aria-labelledby="t-ej-aeg" hidden>
+  <h2>Ajajuhtimine</h2>
+  <p class="lead">Ajaotsused põhinevad meie väärtustel. Tähtaeg üksi ei tee tegevust oluliseks.</p>
+  <ul>
+    <li><b>Kiire</b>: viivitamine toob peagi tagajärje.</li>
+    <li><b>Oluline</b>: tegevus toetab sinu eesmärki, vajadust või kokkulepet.</li>
+  </ul>
+  <h3>Eisenhoweri maatriks</h3>
+  <div class="eis">
+    <div class="eis-h"></div><div class="eis-h">Kiire</div><div class="eis-h">Ei ole kiire</div>
+    <div class="eis-h eis-v">Oluline</div>
+    <div class="eis-c q1"><b>I Teen esimesel võimalusel</b><span>homne kontrolltöö, milleks tahan valmistuda</span></div>
+    <div class="eis-c q2"><b>II Planeerin aja</b><span>järgmise nädala ettekande kava</span></div>
+    <div class="eis-h eis-v">Vähem oluline</div>
+    <div class="eis-c q3"><b>III Piiran või lepin kokku</b><span>valikuline kutse ootab vastust kohe</span></div>
+    <div class="eis-c q4"><b>IV Vähendan või jätan ära</b><span>sihitu sirvimine</span></div>
+  </div>
+  <p class="muted">Sama tegevuse koht maatriksis võib olukorra muutudes muutuda.</p>
+  <h3>Minu seitsme päeva katse</h3>
+  <p>Vali üks oluline tegevus, mida järgmise seitsme päeva jooksul proovid:</p>
+  <ul>
+    <li>Milline <b>konkreetne tulemus</b> valmib?</li>
+    <li><b>Millal ja kus</b> alustan?</li>
+    <li>Mis on <b>esimene väike samm</b>?</li>
+    <li><b>Kui</b> tekib takistus, <b>siis</b> mida teen?</li>
+  </ul>
+  <h3>Kuhu läheb minu aeg tegelikult?</h3>
+  <p>Jälgi oma tegevusi seitsme päeva jooksul ja kirjuta vähemalt <b>viie päeva</b> tegevused maatriksi lahtritesse (vähemalt üks päev peab olema nädalavahetusel).</p>
+  <h3>Tunnis tehtud katsed</h3>
+  <ul>
+    <li><b>Kui pikk on üks minut?</b> Ilma kellata tunnetada, millal minut möödub.</li>
+    <li><b>Aja hindamise katse</b>: hinda enne, kui kaua ülesanne võtab, ja võrdle tegeliku ajaga. Tavaliselt hindame aega valesti.</li>
+    <li><b>Tähelepanu labor</b>: ABC ja 123 eraldi on kiirem kui vaheldumisi A1 B2 C3. Ülesannete vahel hüppamine võtab aega ja toob vigu.</li>
+  </ul>
+</section>
+<section role="tabpanel" id="ej-autonoomia" aria-labelledby="t-ej-autonoomia" hidden>
+  <h2>Autonoomia ja vastutus</h2>
+  <div class="key"><span class="label">Kõige olulisem</span>Autonoomia ≠ „teen, mida tahan”. Autonoomia = „tajun, et mul on valikud ja otsused on minu vastutada”.</div>
+  <h3>Kolm psühholoogilist vajadust</h3>
+  <p class="muted">Enesemääratlusteooria (Ryan &amp; Deci, 2000).</p>
+  <ul>
+    <li><b>Autonoomia</b>: „Tunnen, et see on minu tegevus.” Valik, tahe, omaksvõtt.</li>
+    <li><b>Kompetentsus</b>: „Tunnen, et saan hakkama ja arenen.” Väljakutse, oskus, edenemine.</li>
+    <li><b>Seotus</b>: „Tunnen, et kuulun ja teised on minu jaoks olemas.” Kontakt, kuuluvus, tugi.</li>
+  </ul>
+  <h3>Autonoomia + struktuur</h3>
+  <p>Väga palju vabadust ilma struktuurita ei ole alati hea. Lihtsam on ennastjuhtiv olla, kui <b>raam on selge</b> (tulemus ja tähtaeg) ja <b>valikud on tähenduslikud</b> (teema, tööviis, üksi või paaris).</p>
+  <h3>Kontrollin / mõjutan / ei kontrolli</h3>
+  <ul>
+    <li><b>Kontrollin</b>: sõltub otseselt minu tegevusest (nt mis kell õppimist alustan).</li>
+    <li><b>Mõjutan</b>: ma ei otsusta üksi, aga saan midagi teha.</li>
+    <li><b>Ei kontrolli</b>: ei ole minu otsustada (nt kontrolltöö kuupäev).</li>
+  </ul>
+  <h3>Eesmärgid ja alustamine</h3>
+  <ul>
+    <li>Hea eesmärk ütleb, <b>mida</b> teed, <b>millal või kui sageli</b> ja <b>mille järgi</b> saab aru, kas tegutsesid. Õppimiskäitumine on sinu kontrolli all, hinne mitte.</li>
+    <li>Edasilükkamise vastu: <b>alla 2-minutiline esimene samm</b>, üks <b>KUI–SIIS plaan</b> ja üks keskkonnamuutus, mis teeb alustamise lihtsamaks.</li>
+    <li>Õppimiseks: loe kord ja proovi siis <b>ilma materjalita meenutada</b>; jaga õppimine mitmeks lühikeseks korraks.</li>
+  </ul>
+</section>
+<section role="tabpanel" id="ej-grupitoo" aria-labelledby="t-ej-grupitoo" hidden>
+  <h2>Grupitöö</h2>
+  <h3>Edukas grupitöö</h3>
+  <ul>
+    <li>Kõigil on ühine eesmärk ja kõik osalevad. Kaasake vaiksemaid liikmeid.</li>
+    <li>Enne kui ideele vastu seisad, kuula. Põhjenda oma ettepanekuid.</li>
+    <li>Tehke otsuseid ja vastutage ühiselt.</li>
+    <li>Kontrollige, kas plaan päriselt töötab. Hoidke aega ja ressursse.</li>
+  </ul>
+  <h3>Rollid väikeses grupis</h3>
+  <ul>
+    <li><b>Ajahoidja</b> hoiab tempot, <b>kirjutaja</b> paneb vastuse kirja, <b>küsija</b> küsib „miks?”, <b>skeptik</b> otsib nõrka kohta, <b>jagaja</b> teeb 30-sekundilise kokkuvõtte.</li>
+  </ul>
+  <h3>Alex Crabtree mõrvamüsteerium</h3>
+  <p>Grupis lahendati müsteerium, kus igal liikmel oli osa infost. Pärast analüüsiti: kes võttis liidrirolli, kas kõik osalesid võrdselt ja kas kriitiline info jõudis õigel ajal teisteni. <b>Koostöö on edu võti</b>; mida suurem grupp, seda keerulisem on koostöö.</p>
+  <p class="muted">Pärast täideti grupitöö enesehinnanguküsimustik: mida teen järgmisel korral teistmoodi?</p>
+  <h3>Probleemilahenduskäik</h3>
+  <p><b>Märkan → analüüsin → valin → arenen.</b> Töölehel „Üks probleem, mis koolielus häirib” alusta faktist: mis päriselt toimub, ilma hinnanguta.</p>
+  <h3>UPT jaoks</h3>
+  <ul><li>Kus ma täna olen? Kus ma peaksin olema? Mis mind takistab? Mis on minu järgmised sammud?</li></ul>
+</section>
+<section role="tabpanel" id="ej-viited" aria-labelledby="t-ej-viited" hidden>
+  <h2>Viited</h2>
+  <h3>Õpetaja materjalid</h3>
+  <ul>
+    <li>Elisabeth Vardja-Kanguri slaidid: 16.09 (sissejuhatus), 21.09 (autonoomia ja vastutus), 29.09 (grupitöö), ajajuhtimine ja 5. tund (portfoolio). Siia neid üles ei panda.</li>
+    <li>Portfoolio töölehed (8 tk) jagas õpetaja tunnis.</li>
+  </ul>
+  <div class="key"><span class="label">Midagi puudu?</span>Kui tead veel mõnda materjali, <a href="#soovita">kirjuta soovitustesse</a>.</div>
+</section>
+</main>
+</div>
 <div class="view" id="v-eesti" data-title="Eesti keel" hidden>
   <div class="appbar"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a></div>
   <div class="pagehead">
@@ -4014,7 +4151,7 @@ H — C — C — C — H
 
   // --- järgmised tööd (kuupäevad eKoolist) ---
   (function(){
-    var TOOD = [{"d": "2026-10-06", "aine": "Muusika", "mis": "Kontrolltöö: varajane jazz", "link": "#jazz", "topic": "jazz"}, {"d": "2026-10-07", "aine": "Ajalugu", "mis": "Kontrolltöö nr 1: tänapäev", "link": "#ajalugu-kt1", "topic": "ajalugu-kt1"}, {"d": "2026-10-09", "aine": "Keemia", "mis": "Kontrolltöö nr 1: orgaanika", "note": "algselt oli 7.10", "link": "#keemia-kt1", "topic": "keemia-kt1"}, {"d": "2026-10-13", "aine": "Eesti keel", "mis": "Indoeuroopa ja uurali keelte teadmiste kontroll", "link": "#keelkonnad", "topic": "keelkonnad"}, {"d": "2026-10-14", "aine": "Füüsika", "mis": "Kontrolltöö: ringliikumine", "link": "#fyysika-kt1", "topic": "fyysika-kt1"}, {"d": "2026-11-02", "aine": "Kirjandus", "mis": "Kohustuslik lugemine: Oscar Wilde „Dorian Gray portree”", "link": "#dorian", "topic": "dorian"}, {"d": "2026-11-04", "aine": "Lai matemaatika", "mis": "Kontrolltöö 2: funktsioonid"}, {"d": "2026-11-09", "aine": "Keemia", "mis": "Kontrolltöö nr 2", "week": true}, {"d": "2026-11-16", "aine": "Muusika", "mis": "Kontserdi arvustus (hindeline)", "link": "#kontsert", "topic": "kontsert"}];
+    var TOOD = [{"d": "2026-10-06", "aine": "Muusika", "mis": "Kontrolltöö: varajane jazz", "link": "#jazz", "topic": "jazz"}, {"d": "2026-10-07", "aine": "Ajalugu", "mis": "Kontrolltöö nr 1: tänapäev", "link": "#ajalugu-kt1", "topic": "ajalugu-kt1"}, {"d": "2026-10-09", "aine": "Keemia", "mis": "Kontrolltöö nr 1: orgaanika", "note": "algselt oli 7.10", "link": "#keemia-kt1", "topic": "keemia-kt1"}, {"d": "2026-10-13", "aine": "Eesti keel", "mis": "Indoeuroopa ja uurali keelte teadmiste kontroll", "link": "#keelkonnad", "topic": "keelkonnad"}, {"d": "2026-10-14", "aine": "Füüsika", "mis": "Kontrolltöö: ringliikumine", "link": "#fyysika-kt1", "topic": "fyysika-kt1"}, {"d": "2026-10-23", "aine": "Ennastjuhtiv õppija", "mis": "Portfoolio ülevaatamine ja esitamine", "link": "#portfoolio", "topic": "portfoolio"}, {"d": "2026-11-02", "aine": "Kirjandus", "mis": "Kohustuslik lugemine: Oscar Wilde „Dorian Gray portree”", "link": "#dorian", "topic": "dorian"}, {"d": "2026-11-04", "aine": "Lai matemaatika", "mis": "Kontrolltöö 2: funktsioonid"}, {"d": "2026-11-09", "aine": "Keemia", "mis": "Kontrolltöö nr 2", "week": true}, {"d": "2026-11-16", "aine": "Muusika", "mis": "Kontserdi arvustus (hindeline)", "link": "#kontsert", "topic": "kontsert"}];
     var WD = ['P', 'E', 'T', 'K', 'N', 'R', 'L'];
     function day(iso){ var a = iso.split('-'); return new Date(+a[0], a[1] - 1, +a[2]); }
     function today(){ var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
@@ -4696,6 +4833,15 @@ H — C — C — C — H
     });
     box.querySelector('.lg-reset').addEventListener('click', fill);
     fill();
+  });
+  // Kontrollnimekiri (linnukesed jäävad brauserisse)
+  document.querySelectorAll('.cklist').forEach(function(ul){
+    var key = 'ajukas-ck-' + ul.getAttribute('data-key'), st = {};
+    try { st = JSON.parse(localStorage.getItem(key) || '{}') || {}; } catch(e) {}
+    ul.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+      var i = cb.getAttribute('data-i'); cb.checked = !!st[i]; cb.closest('li').classList.toggle('done', cb.checked);
+      cb.addEventListener('change', function(){ st[i] = cb.checked; cb.closest('li').classList.toggle('done', cb.checked); try { localStorage.setItem(key, JSON.stringify(st)); } catch(e) {} });
+    });
   });
   // Spikri printimine: avab puhta valge lehe, kust saab printida või PDF-ina salvestada
   document.querySelectorAll('.spk-print').forEach(function(b){
