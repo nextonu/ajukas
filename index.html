@@ -902,12 +902,14 @@ sub{font-size:.72em;line-height:0}
       <button type="button" data-suvi-set="0">Väljas</button>
       <button type="button" data-suvi-set="1">Sees</button>
     </div>
-    <p class="plabel">Uute ainete test</p>
+    <div id="uustest-box" hidden>
+    <p class="plabel">Uute ainete test (ainult admin)</p>
     <div class="seg" role="group" aria-label="Uute ainete testirežiim">
       <button type="button" data-uustest-set="0">Väljas</button>
       <button type="button" data-uustest-set="1">Sees</button>
     </div>
     <button type="button" class="linkbtn" id="uus-reset" style="margin-top:8px;font-size:12.5px">Näita uusi uuesti (unusta, mida olen vaadanud)</button>
+    </div>
   </div>
 </div>
 <button type="button" class="gear acct-fab" id="acct-fab" aria-label="Konto" title="Konto" aria-haspopup="dialog">
@@ -4050,7 +4052,7 @@ H — C — C — C — H
     });
     if (best) SUBJ_LATEST[id] = best;
   });
-  function uusTest(){ if (/[?&]uustest(&|=|$)/.test(location.search)) return true; try { return localStorage.getItem('ajukas-uustest') === '1'; } catch (e) { return false; } }
+  function uusTest(){ if (!Ajukas.isAdmin) return false; if (/[?&]uustest(&|=|$)/.test(location.search)) return true; try { return localStorage.getItem('ajukas-uustest') === '1'; } catch (e) { return false; } }
   function paintFresh(){
     if (!SUBJ_LATEST) return;
     var test = uusTest();
@@ -4080,6 +4082,7 @@ H — C — C — C — H
     document.getElementById('uus-reset').addEventListener('click', function(){ P.visit = {}; saveProgress(); paintFresh(); });
     paintT();
   })();
+  Ajukas.adminChanged = function(){ var b = document.getElementById('uustest-box'); if (b) b.hidden = !Ajukas.isAdmin; paintFresh(); };
   Ajukas.getProgress = function(){ return P; };
   Ajukas.route = function(){ route(); };
   Ajukas.setProgress = function(p){ P = { seen: (p && p.seen) || {}, last: (p && p.last) || null, visit: (p && p.visit) || {} }; try { localStorage.setItem('ajukas-progress', JSON.stringify(P)); } catch(e) {} paintProgress(); };
@@ -5293,7 +5296,7 @@ if (!FIREBASE_CONFIG) {
     $('acct-in').hidden = !u;
     $('inbox').hidden = true;
     $('sv-app').hidden = true;
-    if (A.isAdmin) { A.isAdmin = false; A.route && A.route(); }
+    if (A.isAdmin) { A.isAdmin = false; A.route && A.route(); if (A.adminChanged) A.adminChanged(); }
     if (!u) {
       A.onProgress = null;
       A.onNotes = null; A.onTest = null;
@@ -5329,7 +5332,7 @@ if (!FIREBASE_CONFIG) {
       A.onTest = pushTest;
       pushTest(mt);
     } catch (e) { A.onProgress = pushProgress; A.onNotes = pushNotes; A.onTest = pushTest; }
-    if (name === ADMIN_USER) { A.isAdmin = true; $('inbox').hidden = false; $('sv-app').hidden = false; A.route && A.route(); loadInbox(); if (A.foorumAdmin) A.foorumAdmin(); }
+    if (name === ADMIN_USER) { A.isAdmin = true; if (A.adminChanged) A.adminChanged(); $('inbox').hidden = false; $('sv-app').hidden = false; A.route && A.route(); loadInbox(); if (A.foorumAdmin) A.foorumAdmin(); }
   });
 
 
