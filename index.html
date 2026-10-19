@@ -193,6 +193,10 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
 #v-home .subjcard.ready>:not(.sname),#v-home .subjcard.ready>:not(.sname) *,#v-home .subjcard.ready .sname::after{color:var(--bright);opacity:.8}
 #v-home .subjcard.ready .sname::before{display:none}
 #v-home .subjcard.ready:hover{background:linear-gradient(90deg,var(--k) 0 6px,color-mix(in srgb,var(--k) calc(var(--card-k) + 10%),var(--card-base)) 6px)}
+#v-home .subjcard.ready.fresh{background:var(--k);color:#fff;position:relative}
+#v-home .subjcard.ready.fresh:hover{background:var(--k);filter:brightness(1.1)}
+#v-home .subjcard.ready.fresh>:not(.sname),#v-home .subjcard.ready.fresh>:not(.sname) *,#v-home .subjcard.ready.fresh .sname::after{color:#fff;opacity:.92}
+#v-home .subjcard .cnew{position:absolute;top:8px;right:10px;font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:rgba(255,255,255,.22);border-radius:999px;padding:1px 8px;opacity:1!important}
 .subjcard:focus-visible{outline:1px solid var(--key);outline-offset:1px}
 .disclaimer{max-width:70ch;border:1px solid var(--line);border-radius:4px;padding:12px 14px;color:var(--muted);font-size:14px;background:var(--panel)}
 .disclaimer strong{background:none;color:var(--text);padding:0}
@@ -925,7 +929,7 @@ sub{font-size:.72em;line-height:0}
   </section>
   <details class="box updlog" id="updlog">
     <summary><span class="ul-title">Uuendused</span><span class="ul-date">6. oktoober 2026</span><span class="ul-last">Muusikas ja ajaloos on inimeste pildid.</span></summary>
-    <div class="ul-body"><h4>18. oktoober 2026</h4><ul><li>Uus aine: <b>Ennastjuhtiv õppija</b>, portfoolio töölehtede kontrollnimekiri (esitamine 23.10).</li></ul><h4>15. oktoober 2026</h4><ul><li>Vene keeles pildiharjutus (nägu, keha ja riided) ning selgemad tabelid, mis mahuvad ka telefoni ekraanile.</li></ul><h4>13. oktoober 2026</h4><ul><li>Vene keeles винительный падеж mitmuses, uus harjutus ja õpetaja harjutuslingid (hindeline töö 16.10).</li></ul><h4>12. oktoober 2026</h4><ul><li>Füüsikas uued kordamisülesanded: arvutused, valemi valik ja mõtlemisülesanded (Testi ennast all).</li><li>Kõik harjutused ja ülesanded on nüüd „Testi ennast” all.</li></ul><h4>11. oktoober 2026</h4><ul><li>Uued ained: <b>Eesti keel</b> (indoeuroopa ja uurali keeled), <b>Inglise keel</b> (CEPT combo test) ja <b>Vene keel</b> (tasemetest A2).</li></ul><h4>8. oktoober 2026</h4><ul><li>Uus aine: <b>Füüsika</b>, kontrolltöö: ringliikumine (koos arvutustreeneriga).</li><li>Kirjandus: „Dorian Gray portree”: tasuta raamat ja audioraamat, kokkuvõte peatükkide kaupa, tegelased, teemad ja enesetest.</li><li>Keemias on ainete <b>3D-mudelid</b>: arvutis teksti kõrval, telefonis vajuta aine nimele.</li></ul><h4>7. oktoober 2026</h4><ul><li>Uus: <b>foorum</b>, kus saab küsida ja teisi aidata (avalehel „Foorum”).</li><li>Igal ainel on oma <b>värv</b>.</li><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
+    <div class="ul-body"><h4>19. oktoober 2026</h4><ul><li>Aine, kuhu on tulnud midagi uut, on avalehel ere ja märgiga „uus”, kuni selle avad.</li></ul><h4>18. oktoober 2026</h4><ul><li>Uus aine: <b>Ennastjuhtiv õppija</b>, portfoolio töölehtede kontrollnimekiri (esitamine 23.10).</li></ul><h4>15. oktoober 2026</h4><ul><li>Vene keeles pildiharjutus (nägu, keha ja riided) ning selgemad tabelid, mis mahuvad ka telefoni ekraanile.</li></ul><h4>13. oktoober 2026</h4><ul><li>Vene keeles винительный падеж mitmuses, uus harjutus ja õpetaja harjutuslingid (hindeline töö 16.10).</li></ul><h4>12. oktoober 2026</h4><ul><li>Füüsikas uued kordamisülesanded: arvutused, valemi valik ja mõtlemisülesanded (Testi ennast all).</li><li>Kõik harjutused ja ülesanded on nüüd „Testi ennast” all.</li></ul><h4>11. oktoober 2026</h4><ul><li>Uued ained: <b>Eesti keel</b> (indoeuroopa ja uurali keeled), <b>Inglise keel</b> (CEPT combo test) ja <b>Vene keel</b> (tasemetest A2).</li></ul><h4>8. oktoober 2026</h4><ul><li>Uus aine: <b>Füüsika</b>, kontrolltöö: ringliikumine (koos arvutustreeneriga).</li><li>Kirjandus: „Dorian Gray portree”: tasuta raamat ja audioraamat, kokkuvõte peatükkide kaupa, tegelased, teemad ja enesetest.</li><li>Keemias on ainete <b>3D-mudelid</b>: arvutis teksti kõrval, telefonis vajuta aine nimele.</li></ul><h4>7. oktoober 2026</h4><ul><li>Uus: <b>foorum</b>, kus saab küsida ja teisi aidata (avalehel „Foorum”).</li><li>Igal ainel on oma <b>värv</b>.</li><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
   </details>
   <aside class="suvi" id="suvi" aria-label="Suvevaheaja taimer" hidden>
   <div class="suvi-clock">
@@ -3975,6 +3979,7 @@ H — C — C — C — H
   var P = { seen: {}, last: null };
   try { var raw = localStorage.getItem('ajukas-progress'); if (raw) P = JSON.parse(raw) || P; } catch(e) {}
   if (!P.seen) P.seen = {};
+  if (!P.visit) P.visit = {};
   var Ajukas = window.Ajukas = window.Ajukas || {};
   function saveProgress(){
     try { localStorage.setItem('ajukas-progress', JSON.stringify(P)); } catch(e) {}
@@ -3993,6 +3998,7 @@ H — C — C — C — H
     document.querySelectorAll('[role="tab"]').forEach(function(t){
       t.classList.toggle('seen', !!P.seen[t.getAttribute('aria-controls')]);
     });
+    paintFresh();
     document.querySelectorAll('.prog[data-topic]').forEach(function(el){
       var v = document.getElementById('v-' + el.getAttribute('data-topic'));
       var tabs = v ? v.querySelectorAll('[role="tab"]') : [];
@@ -4027,9 +4033,37 @@ H — C — C — C — H
     });
     foot.appendChild(b); sec.appendChild(foot);
   });
+  // Uus sisu: aine kast avalehel on ere, kuni ainet pärast viimast uuendust avad (meeles brauseris ja kontol)
+  var SUBJ_LATEST = {};
+  document.querySelectorAll('#v-home a.subjcard[href^="#"]').forEach(function(c){
+    var id = c.getAttribute('href').slice(1), best = '';
+    document.querySelectorAll('#v-' + id + '[data-updated], .view[data-parent="' + id + '"][data-updated]').forEach(function(v){
+      var d = v.getAttribute('data-updated'); if (d > best) best = d;
+    });
+    if (best) SUBJ_LATEST[id] = best;
+  });
+  function paintFresh(){
+    if (!SUBJ_LATEST) return;
+    document.querySelectorAll('#v-home a.subjcard[href^="#"]').forEach(function(c){
+      var id = c.getAttribute('href').slice(1), d = SUBJ_LATEST[id];
+      var on = !!d && !((P.visit || {})[id] >= d);
+      c.classList.toggle('fresh', on);
+      var tag = c.querySelector('.cnew');
+      if (on && !tag) { tag = document.createElement('span'); tag.className = 'cnew'; tag.textContent = t('uus'); c.appendChild(tag); }
+      if (!on && tag) tag.remove();
+    });
+  }
+  function markVisit(view){
+    if (!view || view === homeView) return;
+    var id = view.getAttribute('data-parent') || view.id.slice(2), d = SUBJ_LATEST[id];
+    if (!d) return;
+    if (!P.visit) P.visit = {};
+    if (P.visit[id] >= d) return;
+    P.visit[id] = d; saveProgress(); paintFresh();
+  }
   Ajukas.getProgress = function(){ return P; };
   Ajukas.route = function(){ route(); };
-  Ajukas.setProgress = function(p){ P = { seen: (p && p.seen) || {}, last: (p && p.last) || null }; try { localStorage.setItem('ajukas-progress', JSON.stringify(P)); } catch(e) {} paintProgress(); };
+  Ajukas.setProgress = function(p){ P = { seen: (p && p.seen) || {}, last: (p && p.last) || null, visit: (p && p.visit) || {} }; try { localStorage.setItem('ajukas-progress', JSON.stringify(P)); } catch(e) {} paintProgress(); };
 
   var homeView = document.getElementById('v-home');
   function store(k,v){ try { localStorage.setItem(k,v); } catch(e) {} }
@@ -4064,6 +4098,7 @@ H — C — C — C — H
     if (!view) view = homeView;
     views.forEach(function(v){ v.hidden = v !== view; });
     showTab(view, pid || load('ajukas-tab-' + view.id));
+    markVisit(view);
     if (Ajukas.notesScope) Ajukas.notesScope(view === homeView ? null : view);
     var title = view.getAttribute('data-title');
     document.title = view === homeView ? 'Ajukas' : title + ' · Ajukas';
@@ -5018,7 +5053,7 @@ if (!FIREBASE_CONFIG) {
     const u = auth.currentUser; if (!u) return;
     clearTimeout(saveTimer);
     saveTimer = setTimeout(() => {
-      setDoc(doc(db, 'kasutajad', u.uid), { seen: p.seen || {}, last: p.last || null, muudetud: serverTimestamp() }, { merge: true }).catch(() => {});
+      setDoc(doc(db, 'kasutajad', u.uid), { seen: p.seen || {}, last: p.last || null, visit: p.visit || {}, muudetud: serverTimestamp() }, { merge: true }).catch(() => {});
     }, 1200);
   }
 
@@ -5256,7 +5291,8 @@ if (!FIREBASE_CONFIG) {
       const snap = await getDoc(doc(db, 'kasutajad', u.uid));
       const local = A.getProgress();
       const remote = snap.exists() ? snap.data() : {};
-      const merged = { seen: Object.assign({}, remote.seen || {}, local.seen || {}), last: local.last || remote.last || null };
+      const visit = Object.assign({}, remote.visit || {}); Object.keys(local.visit || {}).forEach((k) => { if (!(visit[k] >= local.visit[k])) visit[k] = local.visit[k]; });
+      const merged = { seen: Object.assign({}, remote.seen || {}, local.seen || {}), last: local.last || remote.last || null, visit };
       A.setProgress(merged);
       A.onProgress = pushProgress;
       pushProgress(merged);
