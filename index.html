@@ -43,7 +43,7 @@ function t(k, p) {
   --bg:#181818; --panel:#1F1F1F; --raised:#252526; --line:#2B2B2B; --line2:#3C3C3C;
   --text:#CCCCCC; --bright:#FFFFFF; --muted:#9D9D9D;
   --key:#4FC1FF; --hl:rgba(234,179,8,.24); --num:#CE9178; --accent:#0078D4;
-  --c-ajalugu:#E8838B; --c-keemia:#8FD18A; --c-muusika:#C99BF0; --c-upt:#6CB6FF; --c-fyysika:#F2A65A; --c-kirjandus:#E0C36C; --c-inglise:#7FD1C7; --c-eesti:#9FB4FF; --card-k:22%; --card-base:#1b1b1f; --c-vene:#F49AB8; --c-ejo:#B5E07A; --sub-ink:#111;
+  --c-ajalugu:#E8838B; --c-keemia:#8FD18A; --c-muusika:#C99BF0; --c-upt:#6CB6FF; --c-fyysika:#F2A65A; --c-kirjandus:#E0C36C; --c-inglise:#7FD1C7; --c-eesti:#9FB4FF; --card-k:22%; --fade-k:45%; --card-base:#1b1b1f; --c-vene:#F49AB8; --c-ejo:#B5E07A; --sub-ink:#111;
   --accent-hover:#026EC1; --hover:#2D2D2D; --brand:#EAB308; --warn:#EAB308; --ok:#89D185; --err:#F48771;
   --ui:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
   --mono:"Cascadia Code","Cascadia Mono",Consolas,"Courier New",monospace;
@@ -53,7 +53,7 @@ function t(k, p) {
   --bg:#F7F7F8; --panel:#FFFFFF; --raised:#F0F0F2; --line:#E3E3E6; --line2:#C9C9CE;
   --text:#2E2E33; --bright:#111114; --muted:#64646C;
   --key:#0063B1; --hl:rgba(234,179,8,.38); --num:#A1260D; --accent:#005FB8;
-  --c-ajalugu:#B8323F; --c-keemia:#23803A; --c-muusika:#7C3AAE; --c-upt:#1E64B4; --c-fyysika:#A85400; --c-kirjandus:#8A6B00; --c-inglise:#0E7368; --c-eesti:#3A55C2; --card-k:12%; --card-base:#fff; --c-vene:#B3325F; --c-ejo:#4D7C0F; --sub-ink:#fff;
+  --c-ajalugu:#B8323F; --c-keemia:#23803A; --c-muusika:#7C3AAE; --c-upt:#1E64B4; --c-fyysika:#A85400; --c-kirjandus:#8A6B00; --c-inglise:#0E7368; --c-eesti:#3A55C2; --card-k:12%; --fade-k:72%; --card-base:#fff; --c-vene:#B3325F; --c-ejo:#4D7C0F; --sub-ink:#fff;
   --accent-hover:#004E98; --hover:#E6E6EA; --brand:#EAB308; --warn:#946200; --ok:#1A7F37; --err:#C42B1C;
   color-scheme:light;
 }
@@ -193,8 +193,8 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
 #v-home .subjcard.ready>:not(.sname),#v-home .subjcard.ready>:not(.sname) *,#v-home .subjcard.ready .sname::after{color:var(--bright);opacity:.8}
 #v-home .subjcard.ready .sname::before{display:none}
 #v-home .subjcard.ready:hover{background:linear-gradient(90deg,var(--k) 0 6px,color-mix(in srgb,var(--k) calc(var(--card-k) + 10%),var(--card-base)) 6px)}
-#v-home .subjcard.ready.fresh{background:var(--k);color:#fff;position:relative}
-#v-home .subjcard.ready.fresh:hover{background:var(--k);filter:brightness(1.1)}
+#v-home .subjcard.ready.fresh{--fade:linear-gradient(135deg,var(--k) 0%,var(--k) 30%,color-mix(in srgb,var(--k) var(--fade-k),var(--bg)) 100%);background:var(--k);background:var(--fade);color:#fff;position:relative;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--k) 60%,#fff),0 0 14px -2px color-mix(in srgb,var(--k) 70%,transparent)}
+#v-home .subjcard.ready.fresh:hover{background:var(--fade);filter:brightness(1.1);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--k) 60%,#fff),0 0 20px 0 color-mix(in srgb,var(--k) 75%,transparent)}
 #v-home .subjcard.ready.fresh>:not(.sname),#v-home .subjcard.ready.fresh>:not(.sname) *,#v-home .subjcard.ready.fresh .sname::after{color:#fff;opacity:.92}
 #v-home .subjcard .cnew{position:absolute;top:8px;right:10px;font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:rgba(255,255,255,.35);color:#111!important;border-radius:999px;padding:1px 8px;opacity:1!important}
 .subjcard:focus-visible{outline:1px solid var(--key);outline-offset:1px}
