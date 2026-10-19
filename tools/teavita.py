@@ -144,5 +144,13 @@ if __name__ == '__main__':
     try:
         main()
     except urllib.error.HTTPError as e:
-        print('HTTP viga', e.code, e.read()[:300])
+        body = e.read()[:300]
+        if e.code >= 500 or e.code == 429:
+            # Firebase'i või Discordi ajutine tõrge: teavitamata asjad jäävad alles ja saadetakse järgmisel korral (~2 min)
+            print(f'::warning::Ajutine HTTP viga {e.code}, proovin järgmisel käivitusel uuesti. {body}')
+            sys.exit(0)
+        print('HTTP viga', e.code, body)
         sys.exit(1)
+    except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+        print(f'::warning::Ühendus ei õnnestunud ({e}), proovin järgmisel käivitusel uuesti.')
+        sys.exit(0)
