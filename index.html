@@ -902,6 +902,12 @@ sub{font-size:.72em;line-height:0}
       <button type="button" data-suvi-set="0">Väljas</button>
       <button type="button" data-suvi-set="1">Sees</button>
     </div>
+    <p class="plabel">Uute ainete test</p>
+    <div class="seg" role="group" aria-label="Uute ainete testirežiim">
+      <button type="button" data-uustest-set="0">Väljas</button>
+      <button type="button" data-uustest-set="1">Sees</button>
+    </div>
+    <button type="button" class="linkbtn" id="uus-reset" style="margin-top:8px;font-size:12.5px">Näita uusi uuesti (unusta, mida olen vaadanud)</button>
   </div>
 </div>
 <button type="button" class="gear acct-fab" id="acct-fab" aria-label="Konto" title="Konto" aria-haspopup="dialog">
@@ -4044,11 +4050,13 @@ H — C — C — C — H
     });
     if (best) SUBJ_LATEST[id] = best;
   });
+  function uusTest(){ if (/[?&]uustest(&|=|$)/.test(location.search)) return true; try { return localStorage.getItem('ajukas-uustest') === '1'; } catch (e) { return false; } }
   function paintFresh(){
     if (!SUBJ_LATEST) return;
+    var test = uusTest();
     document.querySelectorAll('#v-home a.subjcard[href^="#"]').forEach(function(c){
       var id = c.getAttribute('href').slice(1), d = SUBJ_LATEST[id];
-      var on = !!d && !((P.visit || {})[id] >= d);
+      var on = !!d && (test || !((P.visit || {})[id] >= d));
       c.classList.toggle('fresh', on);
       var tag = c.querySelector('.cnew');
       if (on && !tag) { tag = document.createElement('span'); tag.className = 'cnew'; tag.textContent = t('uus'); c.appendChild(tag); }
@@ -4056,13 +4064,22 @@ H — C — C — C — H
     });
   }
   function markVisit(view){
-    if (!view || view === homeView) return;
+    if (!view || view === homeView || uusTest()) return;
     var id = view.getAttribute('data-parent') || view.id.slice(2), d = SUBJ_LATEST[id];
     if (!d) return;
     if (!P.visit) P.visit = {};
     if (P.visit[id] >= d) return;
     P.visit[id] = d; saveProgress(); paintFresh();
   }
+  (function(){
+    var pop = document.getElementById('settings-pop');
+    function paintT(){ var on = uusTest(); pop.querySelectorAll('[data-uustest-set]').forEach(function(b){ b.setAttribute('aria-pressed', (b.getAttribute('data-uustest-set') === '1') === on ? 'true' : 'false'); }); }
+    pop.querySelectorAll('[data-uustest-set]').forEach(function(b){
+      b.addEventListener('click', function(){ try { localStorage.setItem('ajukas-uustest', b.getAttribute('data-uustest-set')); } catch (e) {} paintT(); paintFresh(); });
+    });
+    document.getElementById('uus-reset').addEventListener('click', function(){ P.visit = {}; saveProgress(); paintFresh(); });
+    paintT();
+  })();
   Ajukas.getProgress = function(){ return P; };
   Ajukas.route = function(){ route(); };
   Ajukas.setProgress = function(p){ P = { seen: (p && p.seen) || {}, last: (p && p.last) || null, visit: (p && p.visit) || {} }; try { localStorage.setItem('ajukas-progress', JSON.stringify(P)); } catch(e) {} paintProgress(); };
