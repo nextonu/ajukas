@@ -261,6 +261,13 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
 #v-home .leftcol .updlog .ul-body{max-height:420px}
 #v-home .bx-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 #v-home .bx-head h3{margin:0}
+#v-home #acct,#v-home #sugg{padding:18px 18px 16px;transition:transform .25s,box-shadow .25s,border-color .25s}
+#v-home #acct .bx-head h3,#v-home #sugg .bx-head h3{font-size:19px}
+#v-home #acct .bx-ic,#v-home #sugg .bx-ic{width:40px;height:40px;border-radius:10px}
+#v-home #acct .bx-ic svg,#v-home #sugg .bx-ic svg{width:24px;height:24px}
+#v-home #acct:hover{transform:translateY(-2px);box-shadow:0 12px 26px -14px var(--ok);border-color:color-mix(in srgb,var(--ok) 60%,var(--line))}
+#v-home #sugg:hover{transform:translateY(-2px);box-shadow:0 12px 26px -14px var(--brand);border-color:color-mix(in srgb,var(--brand) 60%,var(--line))}
+@media (prefers-reduced-motion:reduce){#v-home #acct:hover,#v-home #sugg:hover{transform:none}}
 #v-home .bx-ic{display:grid;place-items:center;width:32px;height:32px;border-radius:8px;flex:0 0 auto}
 #v-home .bx-ic svg{width:19px;height:19px}
 #v-home #acct{background:linear-gradient(135deg,color-mix(in srgb,var(--ok) 14%,var(--panel)),var(--panel) 70%);border-color:color-mix(in srgb,var(--ok) 30%,var(--line))}
