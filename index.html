@@ -272,10 +272,6 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
 .who{display:flex;align-items:center;gap:10px;margin:2px 0 10px}
 .who b{display:block;background:none;padding:0;font-size:16px;color:var(--bright)}
 .avatar{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--ok);color:#000;font-weight:800;font-size:18px;text-transform:uppercase}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 12px}
-.stats div{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 4px;text-align:center}
-.stats b{display:block;font-size:18px;background:none;padding:0;color:var(--bright)}
-.stats span{font-size:11px;color:var(--muted)}
 .acct-resume{display:flex;align-items:baseline;gap:8px;margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:13.5px;min-width:0}
 .acct-resume[hidden]{display:none}
 .acct-resume>span{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);flex:0 0 auto}
@@ -1157,7 +1153,6 @@ sub{font-size:.72em;line-height:0}
     </div>
     <div id="acct-in" hidden>
       <div class="who"><span class="avatar" id="acct-av" aria-hidden="true"></span><div><span class="muted" style="font-size:12px">Sisse logitud</span><b id="acct-who"></b></div></div>
-      <div class="stats" id="acct-stats"></div>
       <button class="btn sec" type="button" id="lg-out">Logi välja</button>
     </div>
     <p class="acct-resume" id="resume-box" hidden><span>Jätka</span><a class="resume" id="resume-link" href="#"></a></p>
@@ -5490,14 +5485,9 @@ H — C — C — C — H
   })();
   // Konto: avatar ja statistika
   window.__acctStats = function(){
-    var who = document.getElementById('acct-who'), av = document.getElementById('acct-av'), st = document.getElementById('acct-stats');
-    if (!who || !st) return;
+    var who = document.getElementById('acct-who'), av = document.getElementById('acct-av');
+    if (!who || !av) return;
     var nm = who.textContent.trim(); av.textContent = nm ? nm.charAt(0) : '';
-    var p = (window.Ajukas && Ajukas.getProgress) ? Ajukas.getProgress() : {};
-    var seen = Object.keys(p.seen || {}).length, subj = Object.keys(p.visit || {}).length;
-    var tst = (window.Ajukas && Ajukas.getTest) ? Ajukas.getTest() : {}, known = 0;
-    Object.keys(tst || {}).forEach(function(k){ var o = tst[k]; if (o && typeof o === 'object') Object.keys(o).forEach(function(q){ if (o[q] === 1) known++; }); });
-    st.innerHTML = '<div><b>' + seen + '</b><span>' + t('vahekaarti') + '</span></div><div><b>' + subj + '</b><span>' + t('ainet') + '</span></div><div><b>' + known + '</b><span>' + t('teadsin') + '</span></div>';
   };
   (function(){
     var who = document.getElementById('acct-who');
