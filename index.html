@@ -5429,6 +5429,17 @@ H — C — C — C — H
     var key = box.getAttribute('data-key'), base = box.getAttribute('data-base'), files = box.getAttribute('data-files').split(' ');
     var au = box.querySelector('.ab-audio'), ch = box.querySelector('.ab-ch'), rate = box.querySelector('.ab-rate'), info = box.querySelector('.ab-info');
     var LS = 'ajukas-audio-' + key, cur = -1, seekTo = 0, lastLocal = 0;
+    // archive.org suunab iga faili ümber; otseaadress leitakse ette, et peatüki vahetus oleks kiire
+    var direct = {}, warm = null, warmI = -1, guard = 0, want = false;
+    function url(i){ return direct[i] || base + files[i]; }
+    function resolve(i){
+      if (i < 0 || i >= files.length || direct[i] || !window.fetch) return;
+      fetch(base + files[i], { method: 'HEAD' }).then(function(r){ if (r.ok && r.url) direct[i] = r.url; }).catch(function(){});
+    }
+    function prewarm(i){
+      if (i >= files.length || warmI === i) return;
+      warmI = i; try { warm = new Audio(); warm.preload = 'auto'; warm.muted = true; warm.src = url(i); } catch(e) {}
+    }
     function fmt(t){ t = Math.max(0, Math.floor(t || 0)); var h = Math.floor(t / 3600), m = Math.floor(t / 60) % 60, s = t % 60; return (h ? h + ':' + (m < 10 ? '0' : '') : '') + m + ':' + (s < 10 ? '0' : '') + s; }
     function label(i){ return ch.options[i].textContent.replace(/\s*\(.*\)$/, ''); }
     function readState(){
@@ -5447,10 +5458,20 @@ H — C — C — C — H
     }
     function load(i, t, play){
       cur = i; ch.value = i; seekTo = t || 0;
-      au.src = base + files[i]; au.preload = 'metadata'; au.load();
+      au.preload = play ? 'auto' : 'metadata'; au.src = url(i);
       au.playbackRate = +rate.value;
-      if (play) { var p = au.play(); if (p && p.catch) p.catch(function(){}); }
+      want = !!play; clearTimeout(guard);
+      if (play) {
+        tryPlay();
+        // kui peatükk ei hakka 12 s jooksul mängima, proovi uuesti otse archive.org kaudu
+        guard = setTimeout(function(){ if (want && (au.paused || au.readyState < 3)) { au.src = base + files[i]; tryPlay(); } }, 12000);
+      }
+      if (play) { resolve(i); resolve(i + 1); }
       media();
+    }
+    function tryPlay(){
+      var p = au.play();
+      if (p && p.catch) p.catch(function(e){ if (e && e.name === 'NotAllowedError') { want = false; info.textContent = t('Vajuta ▶, et järgmist peatükki kuulata.'); } });
     }
     function media(){
       if (!('mediaSession' in navigator)) return;
@@ -5467,13 +5488,22 @@ H — C — C — C — H
       } catch(e) {}
     }
     au.addEventListener('loadedmetadata', function(){ if (seekTo) { try { au.currentTime = Math.max(0, seekTo - 3); } catch(e) {} seekTo = 0; } au.playbackRate = +rate.value; });
-    au.addEventListener('play', function(){ if (cur < 0) load(+ch.value, 0, true); media(); });
+    au.addEventListener('play', function(){ if (cur < 0) load(+ch.value, 0, true); media(); resolve(cur); resolve(cur + 1); });
+    au.addEventListener('playing', function(){ want = false; clearTimeout(guard); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; });
+    au.addEventListener('error', function(){ if (cur >= 0 && au.src !== base + files[cur]) { delete direct[cur]; au.src = base + files[cur]; if (want) tryPlay(); } });
     au.addEventListener('timeupdate', function(){
       var now = Date.now(); if (now - lastLocal > 3000) { lastLocal = now; saveLocal(); }
+      if (au.duration && au.duration - au.currentTime < 60 && !au.paused) prewarm(cur + 1);
       if ('mediaSession' in navigator && navigator.mediaSession.setPositionState && au.duration) { try { navigator.mediaSession.setPositionState({ duration: au.duration, playbackRate: au.playbackRate, position: Math.min(au.currentTime, au.duration) }); } catch(e) {} }
     });
-    au.addEventListener('pause', function(){ saveAll(); showInfo(); });
-    au.addEventListener('ended', function(){ if (cur < files.length - 1) load(cur + 1, 0, true); else { saveAll(); } });
+    au.addEventListener('pause', function(){ if (au.ended) return; saveAll(); showInfo(); });
+    au.addEventListener('ended', function(){
+      if (cur < files.length - 1) {
+        if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+        load(cur + 1, 0, true); saveAll(); showInfo();
+        if (warm) { try { warm.removeAttribute('src'); warm.load(); } catch(e) {} warm = null; }
+      } else { saveAll(); showInfo(); }
+    });
     ch.addEventListener('change', function(){ load(+ch.value, 0, !au.paused); saveAll(); showInfo(); });
     rate.addEventListener('change', function(){ au.playbackRate = +rate.value; saveLocal(); });
     box.querySelector('.ab-back').addEventListener('click', function(){ if (cur < 0) return; au.currentTime = Math.max(0, au.currentTime - 15); });
