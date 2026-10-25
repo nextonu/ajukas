@@ -877,6 +877,15 @@ body{padding-bottom:80px}
 .cmp{list-style:none;padding:0;margin:10px 0;display:grid;gap:8px}
 .cmp li{display:grid;grid-template-columns:150px 1fr 1fr;gap:4px 14px;padding:8px 0;border-bottom:1px solid var(--line)}
 @media (max-width:600px){.cmp li{grid-template-columns:1fr}}
+.sitecard{display:flex;align-items:center;gap:14px;margin:14px 0 18px;padding:14px 16px;border-radius:12px;text-decoration:none!important;color:var(--bright)!important;background:linear-gradient(135deg,color-mix(in srgb,var(--sub,var(--accent)) 30%,var(--panel)),color-mix(in srgb,var(--sub,var(--accent)) 8%,var(--panel)) 80%);border:1px solid color-mix(in srgb,var(--sub,var(--accent)) 55%,var(--line));transition:transform .2s,box-shadow .2s}
+.sitecard:hover{transform:translateY(-2px);box-shadow:0 12px 26px -14px var(--sub,var(--accent))}
+.sitecard .sc-ic{display:grid;place-items:center;flex:0 0 auto;width:44px;height:44px;border-radius:10px;background:var(--sub,var(--accent));color:#fff}
+.sitecard .sc-ic svg{width:24px;height:24px}
+.sitecard .sc-t{flex:1;min-width:0}
+.sitecard .sc-t b{display:block;background:none;padding:0;font-size:17px;color:var(--bright)}
+.sitecard .sc-t span{display:block;font-size:13.5px;color:var(--text)}
+.sitecard .sc-go{font-size:22px;color:var(--bright);flex:0 0 auto}
+@media (prefers-reduced-motion:reduce){.sitecard:hover{transform:none}}
 .gap.wide{width:9.5em}
 .end{color:var(--sub);font-weight:700}
 .gn{font-family:var(--mono);font-size:10px;color:var(--muted);margin-right:2px}
@@ -1836,6 +1845,7 @@ sub{font-size:.72em;line-height:0}
   <main><section role="tabpanel" id="us-ulevaade" aria-labelledby="t-us-ulevaade" hidden>
   <h2>I seminar (2.11)</h2>
   <p class="lead">I seminaril tutvustad oma UPT teemat oma seminarigrupile. Selleks täidad enne seminari ühises PowerPointi failis oma slaidid.</p>
+  <a class="sitecard" href="https://pelgulinna.sharepoint.com/sites/UPT" target="_blank" rel="noopener"><span class="sc-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4zM4 9h16M8 13h5M8 16h8"/></svg></span><span class="sc-t"><b>UPT siseveeb</b><span>Avalduse seis, seminari töökorraldus ja juhendid. Avaneb PERGi kontoga.</span></span><span class="sc-go" aria-hidden="true">↗</span></a>
   <h3>Esitluse number</h3>
   <p>Igal tööl on esitluse number, näiteks <b>3-5</b>:</p>
   <ul>
@@ -1854,7 +1864,6 @@ sub{font-size:.72em;line-height:0}
     <li>I seminari hindamise eeldus on <b>kinnitatud UPT avaldus</b>. Seminaril võid osaleda ka siis, kui avaldus on veel esitamata või vajab täiendamist, aga tegele sellega esimesel võimalusel.</li>
     <li>Kui avaldus on alles kinnitamisel, jälgi, millal see kinnitatakse. Kinnitatud tööde esitluse numbrid lisatakse tabelisse jooksvalt.</li>
   </ul>
-  <p><a class="btn" href="https://pelgulinna.sharepoint.com/sites/PERGlased" target="_blank" rel="noopener">Ava PERGlased siseveeb ↗</a></p>
 </section>
 <section role="tabpanel" id="us-kontroll" aria-labelledby="t-us-kontroll" hidden>
   <h2>Kontrollnimekiri</h2>
@@ -1868,8 +1877,9 @@ sub{font-size:.72em;line-height:0}
 </section>
 <section role="tabpanel" id="us-viited" aria-labelledby="t-us-viited" hidden>
   <h2>Viited</h2>
+  <a class="sitecard" href="https://pelgulinna.sharepoint.com/sites/UPT" target="_blank" rel="noopener"><span class="sc-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4zM4 9h16M8 13h5M8 16h8"/></svg></span><span class="sc-t"><b>UPT siseveeb</b><span>Avalduse seis, seminari töökorraldus ja juhendid. Avaneb PERGi kontoga.</span></span><span class="sc-go" aria-hidden="true">↗</span></a>
   <ul>
-    <li><a href="https://pelgulinna.sharepoint.com/sites/PERGlased" target="_blank" rel="noopener">PERGlased siseveeb</a> (avaneb PERGi kontoga). Sealt leiad UPT lehe: avalduse seisu ja seminari töökorralduse.</li>
+    
     <li>Seminarigruppide tabel ja gruppide esitluste kaust: lingid on UPT koordinaatori sõnumis eKoolis (avanevad PERGi kontoga).</li>
     <li><a href="#upt-juhend">UPT juhend</a> siin lehel: ajakava, ülesehitus ja vormistus.</li>
   </ul>
