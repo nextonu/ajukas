@@ -1510,7 +1510,7 @@ sub{font-size:.72em;line-height:0}
 </main>
 </div>
 <div class="view" id="v-kuulamistest" data-added="2026-10-26" data-updated="2026-10-26" data-title="Kuulamistest" data-parent="muusika" data-parent-title="Muusika" hidden>
-  <nav class="appbar sticky" aria-label="Kuulamistest"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-kt-test" aria-controls="kt-test" aria-selected="false">Kuulamistest</button><button role="tab" id="t-kt-kava" aria-controls="kt-kava" aria-selected="false">Kuulamiskava</button><button role="tab" id="t-kt-oppimine" aria-controls="kt-oppimine" aria-selected="false">Kuidas õppida</button><button role="tab" id="t-kt-spikker" aria-controls="kt-spikker" aria-selected="false">Spikker</button><button role="tab" id="t-kt-viited" aria-controls="kt-viited" aria-selected="false">Viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
+  <nav class="appbar sticky" aria-label="Kuulamistest"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-kt-test" aria-controls="kt-test" aria-selected="false">Kuulamistest</button><button role="tab" id="t-kt-kava" aria-controls="kt-kava" aria-selected="false">Kuulamiskava</button><button role="tab" id="t-kt-oppimine" aria-controls="kt-oppimine" aria-selected="false">Kuidas õppida</button><button role="tab" id="t-kt-viited" aria-controls="kt-viited" aria-selected="false">Viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#muusika"><span aria-hidden="true">←</span> Muusika</a>
     <span class="path"><a href="#">Avaleht</a> / <a href="#muusika">Muusika</a> / Kuulamistest</span>
@@ -1539,11 +1539,6 @@ sub{font-size:.72em;line-height:0}
     <li>Jaga mitmele päevale: 1. päev tutvu, 2. päev proovi nimetada, 3. päev juhuslik järjekord, enne testi proovitest.</li>
   </ul>
   <div class="key"><span class="label">Proovi</span>Kui lood on tuttavad, tee vahekaardil <a href="#kt-test">Kuulamistest</a> test „Juhuslikust kohast”, sest testis ei pruugi kõlada loo algus.</div>
-</section>
-<section role="tabpanel" id="kt-spikker" aria-labelledby="t-kt-spikker" hidden>
-  <div class="spk-head"><h2>Spikker</h2><button type="button" class="btn sec spk-print">Prindi / salvesta PDF</button></div>
-  <p class="lead">Kõik 23 lugu, esitaja ja stiil.</p>
-  <div class="spikker" data-title="Muusika · Kuulamistest 9.11"><div class="spk-box"><h4>Kuulamiskava</h4><ol class="spk-cols"><li><b>„Maple Leaf Rag”</b> – Scott Joplin (ragtime)</li><li><b>„St. Louis Blues”</b> – Bessie Smith (bluus)</li><li><b>„Backwater Blues”</b> – Bessie Smith (bluus)</li><li><b>„Nobody Loves Me but My Mother”</b> – B. B. King (bluus)</li><li><b>„Summertime”</b> – Ella Fitzgerald (bluus)</li><li><b>„West End Blues”</b> – Louis Armstrong (New Orleans jazz)</li><li><b>„Hotter Than That”</b> – Louis Armstrong (New Orleans jazz)</li><li><b>„Dippermouth Blues”</b> – King Oliver (New Orleans jazz)</li><li><b>„When the Saints Go Marching In”</b> – Louis Armstrong (dixieland)</li><li><b>„Tiger Rag”</b> – Original Dixieland Jazz Band (dixieland)</li><li><b>„Take the ’A’ Train”</b> – Duke Ellington (Chicago jazz)</li><li><b>„It Don’t Mean a Thing”</b> – Duke Ellington (Chicago jazz)</li><li><b>„I Got Rhythm”</b> – George Gershwin (Chicago jazz)</li><li><b>„Rhapsody in Blue”</b> – George Gershwin (sümfooniline jazz)</li><li><b>„Unforgettable”</b> – Nat King Cole (sving)</li><li><b>„A-Tisket, A-Tasket”</b> – Ella Fitzgerald (sving)</li><li><b>„In the Mood”</b> – Glenn Miller (sving)</li><li><b>„Mack the Knife”</b> – Bobby Darin (sving)</li><li><b>„I’ve Got You Under My Skin”</b> – Frank Sinatra (sving)</li><li><b>„Fly Me to the Moon”</b> – Frank Sinatra (sving / jazzballaad)</li><li><b>„My Funny Valentine”</b> – Frank Sinatra (jazzballaad)</li><li><b>„My Way”</b> – Frank Sinatra (jazzballaad)</li><li><b>„New York, New York”</b> – Frank Sinatra</li></ol></div></div>
 </section>
 <section role="tabpanel" id="kt-viited" aria-labelledby="t-kt-viited" hidden>
   <h2>Viited</h2>
@@ -5190,7 +5185,7 @@ H — C — C — C — H
       { v: "qQzdAsjWGPg", s: 3, d: 276, a: "Frank Sinatra – „My Way”", st: "jazzballaad" },
       { v: "le1QF3uoQNg", s: 3, d: 205, a: "Frank Sinatra – „New York, New York”", st: "jazz" }
     ];
-    var order = [], i = 0, score = 0, player = null, playing = false, mid = false, gen = 0;
+    var order = [], i = 0, score = 0, player = null, playing = false, mid = false, gen = 0, auto = false;
     function startAt(c){ return mid && c.d > 60 ? Math.floor(15 + Math.random() * (c.d * 0.8 - 15)) : c.s; }
     window.__lsPause = function(){ if (player && player.pauseVideo) { try { player.pauseVideo(); } catch (e) {} } };
     window.addEventListener('hashchange', window.__lsPause);
@@ -5207,7 +5202,7 @@ H — C — C — C — H
     }
     function intro(){
       box.innerHTML = '<p class="big">' + t('{n} lõiku', { n: CLIPS.length }) + '</p><p class="ls-info">' + t('Iga lõigu juures 4 varianti. Kuula nii kaua, kui tahad.') + '</p><div class="row"><button type="button" class="btn ls-start">▶ ' + t('Algusest') + '</button><button type="button" class="btn sec ls-start" data-mid>▶ ' + t('Juhuslikust kohast') + '</button></div>';
-      box.querySelectorAll('.ls-start').forEach(function(b){ b.addEventListener('click', function(){ mid = b.hasAttribute('data-mid'); order = shuffle(CLIPS); i = 0; score = 0; q(); }); });
+      box.querySelectorAll('.ls-start').forEach(function(b){ b.addEventListener('click', function(){ mid = b.hasAttribute('data-mid'); auto = true; order = shuffle(CLIPS); i = 0; score = 0; q(); }); });
     }
     function q(){
       var c = order[i], st0 = startAt(c), opts = shuffle([c].concat(shuffle(CLIPS.filter(function(x){ return x !== c; })).slice(0, 3)));
@@ -5221,7 +5216,7 @@ H — C — C — C — H
         if (my !== gen || !document.getElementById('ls-player')) return;
         if (player && player.destroy) { try { player.destroy(); } catch (e) {} }
         player = new YT.Player('ls-player', { videoId: c.v, playerVars: { start: st0, rel: 0, playsinline: 1, controls: 0, disablekb: 1, modestbranding: 1 },
-          events: { onStateChange: function(e){ playing = e.data === 1; var b = box.querySelector('.ls-play'); if (b) b.textContent = playing ? '⏸ ' + t('Paus') : '▶ ' + t('Mängi'); } } });
+          events: { onReady: function(e){ if (auto) { try { e.target.playVideo(); } catch (x) {} } }, onStateChange: function(e){ playing = e.data === 1; var b = box.querySelector('.ls-play'); if (b) b.textContent = playing ? '⏸ ' + t('Paus') : '▶ ' + t('Mängi'); } } });
       });
       box.querySelector('.ls-play').addEventListener('click', function(){ if (!player || !player.playVideo) return; if (playing) player.pauseVideo(); else player.playVideo(); });
       box.querySelector('.ls-back').addEventListener('click', function(){ if (player && player.seekTo) { player.seekTo(st0, true); player.playVideo(); } });
@@ -5234,6 +5229,7 @@ H — C — C — C — H
           box.querySelector('.ls-res').innerHTML = (right ? '✓ ' + t('Õige!') : '✗ ' + t('Vale.')) + ' ' + t('Stiil') + ': <b>' + esc(c.st) + '</b> · <a href="https://www.youtube.com/watch?v=' + c.v + '" target="_blank" rel="noopener">YouTube</a>' +
             '<br><button type="button" class="btn ls-next" style="margin-top:10px">' + (i + 1 < order.length ? t('Järgmine') + ' →' : t('Vaata tulemust')) + '</button>';
           box.querySelector('.ls-next').addEventListener('click', function(){
+            auto = true;
             if (player && player.stopVideo) { try { player.stopVideo(); } catch (e) {} }
             i++; if (i < order.length) q(); else finish();
           });
