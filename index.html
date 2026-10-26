@@ -5241,8 +5241,8 @@ H — C — C — C — H
     try { ym = android && localStorage.getItem('ajukas-ls-ymusic') === '1'; } catch (e) {}
     // avab lõigu YMusicus (Android intent); kui YMusicut pole, avaneb YouTube
     function ymUrl(c, st){
-      var w = 'https://www.youtube.com/watch?v=' + c.v + '&t=' + st;
-      return 'intent://www.youtube.com/watch?v=' + c.v + '&t=' + st + '#Intent;scheme=https;package=com.kapp.youtube.final;S.browser_fallback_url=' + encodeURIComponent(w) + ';end';
+      var w = 'https://youtu.be/' + c.v + '?t=' + st;
+      return 'intent://youtu.be/' + c.v + '?t=' + st + '#Intent;scheme=https;package=com.kapp.youtube.final;S.browser_fallback_url=' + encodeURIComponent(w) + ';end';
     }
     // avaliku omandi salvestis mängib lehe enda failist (reklaamideta); liides nagu YouTube'i mängijal
     function audioPlayer(c, st){
