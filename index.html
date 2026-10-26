@@ -5257,7 +5257,7 @@ H — C — C — C — H
       loadYT(function(){
         if (my !== gen || !document.getElementById('ls-player')) return;
         if (player && player.destroy) { try { player.destroy(); } catch (e) {} }
-        player = new YT.Player('ls-player', { videoId: c.v, playerVars: { start: st0, rel: 0, playsinline: 1, controls: 0, disablekb: 1, modestbranding: 1 },
+        player = new YT.Player('ls-player', { videoId: c.v, playerVars: { start: st0, rel: 0, playsinline: 1, controls: 0, disablekb: 1, modestbranding: 1, iv_load_policy: 3, cc_load_policy: 0, enablejsapi: 1, origin: location.origin },
           events: { onReady: function(e){ if (auto) { try { e.target.playVideo(); } catch (x) {} } }, onStateChange: function(e){ playing = e.data === 1; var b = box.querySelector('.ls-play'); if (b) b.textContent = playing ? '⏸ ' + t('Paus') : '▶ ' + t('Mängi'); } } });
       });
       box.querySelector('.ls-play').addEventListener('click', function(){ if (!player || !player.playVideo) return; if (playing) player.pauseVideo(); else player.playVideo(); });
