@@ -898,6 +898,7 @@ section#kt-kava>p,section#kt-kava>h2{max-width:70ch}
 .kv-wrap.list .kv-plain{display:block;margin-top:16px}
 .ls-ym{display:flex;gap:8px;align-items:flex-start;margin-top:12px;font-size:14px;cursor:pointer}
 .ls-ym input{margin-top:3px}
+.ls-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .gap.wide{width:9.5em}
 .end{color:var(--sub);font-weight:700}
 .gn{font-family:var(--mono);font-size:10px;color:var(--muted);margin-right:2px}
@@ -5247,6 +5248,8 @@ H — C — C — C — H
     // avaliku omandi salvestis mängib lehe enda failist (reklaamideta); liides nagu YouTube'i mängijal
     function audioPlayer(c, st){
       var a = new Audio(c.f); a.preload = 'auto';
+      var ph = document.getElementById('ls-player');
+      if (ph) ph.innerHTML = '<img class="ls-thumb" alt="" src="https://i.ytimg.com/vi/' + c.v + '/hqdefault.jpg">';
       function upd(){ playing = !a.paused; var b = box.querySelector('.ls-play'); if (b) b.textContent = playing ? '⏸ ' + t('Paus') : '▶ ' + t('Mängi'); }
       a.addEventListener('play', upd); a.addEventListener('pause', upd);
       a.addEventListener('loadedmetadata', function(){ try { a.currentTime = Math.min(st, Math.max(0, a.duration - 20)); } catch (e) {} });
