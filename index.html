@@ -287,34 +287,7 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
 .sg-type{display:flex;flex-wrap:wrap;gap:6px}
 .sg-type button{font:inherit;font-size:13px;color:var(--text);background:var(--bg);border:1px solid var(--line2);border-radius:999px;padding:4px 11px;cursor:pointer}
 .sg-type button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#000;font-weight:600}
-.sg-tip{font-size:12px!important;margin:0}
-.sg-tip b{background:none;padding:0;color:var(--text)}
-.mn-list .flabel{display:block;font-size:13px;color:var(--muted)}
 #v-home .homemain>.disclaimer{margin-top:16px}
-.mn-list ul{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-direction:column;gap:6px}
-.mn-list li{position:relative;background:var(--bg);border:1px solid var(--line2);border-left:3px solid var(--brand);border-radius:6px;padding:6px 30px 6px 9px;font-size:12.5px}
-.mn-list li b{display:block;background:none;padding:0;color:var(--bright);font-size:12px}
-.mn-list li q{color:var(--text)}
-.mn-list li button{position:absolute;right:4px;top:4px;font:inherit;background:none;border:0;color:var(--muted);cursor:pointer;padding:2px 6px}
-.mn-list li button:hover{color:var(--bright)}
-.mn-bar{position:fixed;z-index:70;display:flex;align-items:center;gap:2px;padding:4px;background:var(--bright);color:var(--bg);border-radius:10px;box-shadow:0 10px 26px rgba(0,0,0,.35);max-width:calc(100vw - 16px);flex-wrap:wrap}
-.mn-bar[hidden]{display:none}
-.mn-bar button{font:inherit;font-size:13px;font-weight:600;color:inherit;background:none;border:0;border-radius:7px;padding:7px 10px;cursor:pointer;white-space:nowrap}
-.mn-bar button:hover,.mn-bar button:focus-visible{background:color-mix(in srgb,var(--bg) 16%,transparent);outline:none}
-.mn-bar button[hidden]{display:none}
-.mn-bar .mn-x{padding:7px 9px;opacity:.7}
-.mn-bar .mn-hint{font-size:12.5px;padding:0 8px;opacity:.75}
-.mn-bar .mn-hint:empty{display:none}
-.mn-bar.dock{width:max-content;flex-wrap:nowrap;left:50%!important;top:auto!important;bottom:calc(env(safe-area-inset-bottom,0px) + 70px);transform:translateX(-50%)}
-.mn-fab{position:fixed;left:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:35;display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:14px;font-weight:600;padding:10px 16px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);color:var(--bright);cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.3)}
-.mn-fab[hidden]{display:none}
-.mn-fab:hover{border-color:var(--bright)}
-.mn-fab[aria-pressed="true"]{background:var(--brand);color:#000;border-color:var(--brand)}
-body.mn-on .view main section[role="tabpanel"]{outline:2px dashed color-mix(in srgb,var(--brand) 60%,transparent);outline-offset:6px;border-radius:4px}
-.mn-toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 128px);transform:translateX(-50%);z-index:71;background:var(--panel);color:var(--bright);border:1px solid var(--line2);border-left:3px solid var(--ok);border-radius:8px;padding:8px 14px;font-size:13.5px;box-shadow:0 8px 22px rgba(0,0,0,.3);max-width:calc(100vw - 24px)}
-.mn-toast[hidden]{display:none}
-.mn-toast a{color:var(--bright);font-weight:600;margin-left:8px}
-@media print{.mn-fab,.mn-bar,.mn-toast{display:none!important}}
 .subjcard:focus-visible{outline:1px solid var(--key);outline-offset:1px}
 .disclaimer{max-width:70ch;border:1px solid var(--line);border-radius:4px;padding:12px 14px;color:var(--muted);font-size:14px;background:var(--panel)}
 .disclaimer strong{background:none;color:var(--text);padding:0}
@@ -886,26 +859,6 @@ body{padding-bottom:80px}
 .sitecard .sc-t span{display:block;font-size:13.5px;color:var(--text)}
 .sitecard .sc-go{font-size:22px;color:var(--bright);flex:0 0 auto}
 @media (prefers-reduced-motion:reduce){.sitecard:hover{transform:none}}
-.plan{margin:-8px 0 20px;border:1px solid color-mix(in srgb,var(--sub,var(--brand)) 45%,var(--line));border-radius:10px;background:linear-gradient(135deg,color-mix(in srgb,var(--sub,var(--brand)) 12%,var(--panel)),var(--panel) 70%)}
-.plan[hidden]{display:none}
-.plan .pl-sum{cursor:pointer;list-style:none;padding:11px 14px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
-.plan .pl-sum::-webkit-details-marker{display:none}
-.plan .pl-sum::before{content:"📅";margin-right:2px}
-.plan .pl-sum::after{content:"▾";margin-left:auto;color:var(--muted);transition:transform .15s}
-.plan[open] .pl-sum::after{transform:rotate(180deg)}
-.plan .pl-sum b{background:none;padding:0;color:var(--bright)}
-.plan .pl-meta{font-size:13px;color:var(--muted)}
-.plan .pl-body{padding:0 14px 12px;border-top:1px solid var(--line)}
-.pl-days{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-direction:column;gap:6px}
-.pl-days li{display:grid;grid-template-columns:76px 1fr;gap:8px;align-items:baseline;padding:6px 8px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
-.pl-days li.today{border-color:var(--sub,var(--brand))}
-.pl-day{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
-.pl-days li.today .pl-day{color:var(--bright);font-weight:700}
-.pl-items{display:flex;flex-direction:column;gap:3px;font-size:14px}
-.pl-items label{display:flex;gap:8px;align-items:baseline;cursor:pointer}
-.pl-items a{color:var(--bright)}
-.pl-msg{margin:10px 0 0;font-size:14px}
-.pl-foot{margin:10px 0 0;font-size:12px;color:var(--muted)}
 .homecols>*{min-width:0}
 @media (max-width:600px){.spk-box table{font-size:12px}.spk-box th,.spk-box td{overflow-wrap:anywhere;padding-left:3px;padding-right:3px}}
 .gap.wide{width:9.5em}
@@ -1093,9 +1046,6 @@ sub{font-size:.72em;line-height:0}
 
 
 <p class="worknote wn-d" id="worknote-d" role="status" tabindex="0" title="Lehte uuendatakse praegu. Mõni asi võib muutuda." hidden><span class="wdot" aria-hidden="true"></span><span class="wfull">Lehte uuendatakse praegu. Mõni asi võib muutuda.</span><span class="wshort">Lehte uuendatakse</span></p>
-<button type="button" class="mn-fab" id="mn-fab" aria-pressed="false" hidden><span aria-hidden="true">❝</span> <span class="mn-fab-t">Viita</span></button>
-<div class="mn-bar" id="mn-bar" role="toolbar" aria-label="Valitud tekst" hidden><span class="mn-hint"></span><button type="button" data-a="copy">Kopeeri</button><button type="button" data-a="add">Lisa soovitusse</button><button type="button" data-a="tab">Terve vahekaart</button><button type="button" data-a="off" class="mn-x" aria-label="Sulge">✕</button></div>
-<div class="mn-toast" id="mn-toast" role="status" hidden></div>
 <div class="view home" id="v-home" data-title="Ajukas">
   <p class="worknote" id="worknote" role="status" hidden><span class="wdot" aria-hidden="true"></span>Lehte uuendatakse praegu. Mõni asi võib muutuda.</p>
   <header>
@@ -1136,7 +1086,7 @@ sub{font-size:.72em;line-height:0}
   </section>
   <details class="box updlog" id="updlog">
     <summary><span class="ul-title">Uuendused</span><span class="ul-date">6. oktoober 2026</span><span class="ul-last">Muusikas ja ajaloos on inimeste pildid.</span></summary>
-    <div class="ul-body"><h4>26. oktoober 2026</h4><ul><li>Uus: <b>kordamisplaan</b>. Kui teemal on töö tulemas, jagab plaan vahekaardid päevade peale kuni tööni.</li><li>Teema jätab nüüd meelde vahekaardi, kus viimati olid. Parandatud ka mitu viga sünkroonimises, foorumis ja kuulamistestis ning mõni faktiviga (nt Euroopa Liidu sünd 1993).</li></ul><h4>25. oktoober 2026</h4><ul><li>UPT all on uus teema „I seminar”: mida enne 2.11 seminari teha, kontrollnimekiri ja link PERGlased siseveebile.</li></ul><h4>22. oktoober 2026</h4><ul><li>Avaleht on uuenenud: ainekaardid liiguvad hiire all, järgmised tööd ja uuendused on ainete all ning foorum on paremini näha. Teema lehel saab valitud teksti kopeerida või soovitusse lisada (telefonis nupuga „Viita”).</li><li>Muusikas on uus teema „New York ja sving” (töö 2.11), õpetaja slaidide põhjal. Vene keeles on uus vahekaart „Välimus” (4.11 tööks) ning harjutused ja lugemisküsimused.</li><li>Muusikas on uus vahekaart „Kuulamiskava”: kõik 9.11 kuulamistesti lood YouTube’i ja Spotify linkidega. Kuulamistest on nüüd tehtud nende lugudega.</li><li>Inglise keeles on uus leht „Commonly misspelled words”: kõik 101 sõna ja segased sõnad koos tõlke, tähenduse, nipi ja harjutustega.</li><li>Kirjanduses saab „Dorian Gray portree” audioraamatut kuulata otse lehel. Koht jääb meelde ja kuulata saab ka lukus telefoniga.</li></ul><h4>19. oktoober 2026</h4><ul><li>Aine, kuhu on tulnud midagi uut, on avalehel ere ja märgiga „uus”, kuni selle avad.</li></ul><h4>18. oktoober 2026</h4><ul><li>Uus aine: <b>Ennastjuhtiv õppija</b>, portfoolio töölehtede kontrollnimekiri (esitamine 23.10).</li></ul><h4>15. oktoober 2026</h4><ul><li>Vene keeles pildiharjutus (nägu, keha ja riided) ning selgemad tabelid, mis mahuvad ka telefoni ekraanile.</li></ul><h4>13. oktoober 2026</h4><ul><li>Vene keeles винительный падеж mitmuses, uus harjutus ja õpetaja harjutuslingid (hindeline töö 16.10).</li></ul><h4>12. oktoober 2026</h4><ul><li>Füüsikas uued kordamisülesanded: arvutused, valemi valik ja mõtlemisülesanded (Testi ennast all).</li><li>Kõik harjutused ja ülesanded on nüüd „Testi ennast” all.</li></ul><h4>11. oktoober 2026</h4><ul><li>Uued ained: <b>Eesti keel</b> (indoeuroopa ja uurali keeled), <b>Inglise keel</b> (CEPT combo test) ja <b>Vene keel</b> (tasemetest A2).</li></ul><h4>8. oktoober 2026</h4><ul><li>Uus aine: <b>Füüsika</b>, kontrolltöö: ringliikumine (koos arvutustreeneriga).</li><li>Kirjandus: „Dorian Gray portree”: tasuta raamat ja audioraamat, kokkuvõte peatükkide kaupa, tegelased, teemad ja enesetest.</li><li>Keemias on ainete <b>3D-mudelid</b>: arvutis teksti kõrval, telefonis vajuta aine nimele.</li></ul><h4>7. oktoober 2026</h4><ul><li>Uus: <b>foorum</b>, kus saab küsida ja teisi aidata (avalehel „Foorum”).</li><li>Igal ainel on oma <b>värv</b>.</li><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
+    <div class="ul-body"><h4>26. oktoober 2026</h4><ul><li>Teema jätab nüüd meelde vahekaardi, kus viimati olid. Parandatud ka mitu viga sünkroonimises, foorumis ja kuulamistestis ning mõni faktiviga (nt Euroopa Liidu sünd 1993).</li></ul><h4>25. oktoober 2026</h4><ul><li>UPT all on uus teema „I seminar”: mida enne 2.11 seminari teha, kontrollnimekiri ja link PERGlased siseveebile.</li></ul><h4>22. oktoober 2026</h4><ul><li>Avaleht on uuenenud: ainekaardid liiguvad hiire all, järgmised tööd ja uuendused on ainete all ning foorum on paremini näha.</li><li>Muusikas on uus teema „New York ja sving” (töö 2.11), õpetaja slaidide põhjal. Vene keeles on uus vahekaart „Välimus” (4.11 tööks) ning harjutused ja lugemisküsimused.</li><li>Muusikas on uus vahekaart „Kuulamiskava”: kõik 9.11 kuulamistesti lood YouTube’i ja Spotify linkidega. Kuulamistest on nüüd tehtud nende lugudega.</li><li>Inglise keeles on uus leht „Commonly misspelled words”: kõik 101 sõna ja segased sõnad koos tõlke, tähenduse, nipi ja harjutustega.</li><li>Kirjanduses saab „Dorian Gray portree” audioraamatut kuulata otse lehel. Koht jääb meelde ja kuulata saab ka lukus telefoniga.</li></ul><h4>19. oktoober 2026</h4><ul><li>Aine, kuhu on tulnud midagi uut, on avalehel ere ja märgiga „uus”, kuni selle avad.</li></ul><h4>18. oktoober 2026</h4><ul><li>Uus aine: <b>Ennastjuhtiv õppija</b>, portfoolio töölehtede kontrollnimekiri (esitamine 23.10).</li></ul><h4>15. oktoober 2026</h4><ul><li>Vene keeles pildiharjutus (nägu, keha ja riided) ning selgemad tabelid, mis mahuvad ka telefoni ekraanile.</li></ul><h4>13. oktoober 2026</h4><ul><li>Vene keeles винительный падеж mitmuses, uus harjutus ja õpetaja harjutuslingid (hindeline töö 16.10).</li></ul><h4>12. oktoober 2026</h4><ul><li>Füüsikas uued kordamisülesanded: arvutused, valemi valik ja mõtlemisülesanded (Testi ennast all).</li><li>Kõik harjutused ja ülesanded on nüüd „Testi ennast” all.</li></ul><h4>11. oktoober 2026</h4><ul><li>Uued ained: <b>Eesti keel</b> (indoeuroopa ja uurali keeled), <b>Inglise keel</b> (CEPT combo test) ja <b>Vene keel</b> (tasemetest A2).</li></ul><h4>8. oktoober 2026</h4><ul><li>Uus aine: <b>Füüsika</b>, kontrolltöö: ringliikumine (koos arvutustreeneriga).</li><li>Kirjandus: „Dorian Gray portree”: tasuta raamat ja audioraamat, kokkuvõte peatükkide kaupa, tegelased, teemad ja enesetest.</li><li>Keemias on ainete <b>3D-mudelid</b>: arvutis teksti kõrval, telefonis vajuta aine nimele.</li></ul><h4>7. oktoober 2026</h4><ul><li>Uus: <b>foorum</b>, kus saab küsida ja teisi aidata (avalehel „Foorum”).</li><li>Igal ainel on oma <b>värv</b>.</li><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
   </details>
   <aside class="suvi" id="suvi" aria-label="Suvevaheaja taimer" hidden>
   <div class="suvi-clock">
@@ -1205,13 +1155,11 @@ sub{font-size:.72em;line-height:0}
     <form id="sugg-form" novalidate>
       <label for="sg-name">Nimi (võid jätta tühjaks)<input id="sg-name" maxlength="60" autocomplete="nickname"></label>
       <div class="sg-type" id="sg-type" role="group" aria-label="Soovituse liik"><button type="button" aria-pressed="false">Viga</button><button type="button" aria-pressed="false">Idee</button><button type="button" aria-pressed="false">Uus materjal</button><button type="button" aria-pressed="false">Muu</button></div>
-      <div class="mn-list" id="sg-mn" hidden><span class="flabel">Viited lehelt</span><ul></ul></div>
       <label for="sg-text">Soovitus<textarea id="sg-text" maxlength="2000" rows="4"></textarea></label>
       <div class="filepick"><span class="flabel">Lisa pilte või faile, kui tahad (kuni 3)</span><label for="sg-files" class="btn sec pickbtn" id="sg-pick">Vali failid</label><input id="sg-files" class="vh" type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.ppt,.pptx,.xls,.xlsx"></div>
       <p class="muted" style="font-size:12px;margin:-4px 0 0">Vabandust, et saata saab ainult väikeseid faile: suuremate jaoks peaksin failihoidla eest maksma. Pildid tehakse saatmisel automaatselt väiksemaks, muu fail võib olla kuni 700 kB.</p>
       <p class="muted" style="font-size:12px;margin:0"><b style="background:none;padding:0;color:var(--text)">Suurem fail?</b> Pane see Google Drive'i või OneDrive'i, vali „Jaga” → „Kõik, kellel on link” ja kleebi link soovituse teksti sisse.</p>
       <ul class="flist" id="sg-flist"></ul>
-      <p class="muted sg-tip"><b>Vihje:</b> vali teema lehel tekst ja vajuta „Lisa soovitusse”, siis tuleb see siia viitena. Telefonis vajuta enne all vasakul nuppu „Viita”.</p>
       <div class="row"><button class="btn" type="submit" id="sg-send">Saada</button></div>
       <p class="msg" id="sg-msg" role="status"></p>
     </form>
@@ -1515,7 +1463,9 @@ sub{font-size:.72em;line-height:0}
 <!-- TEST -->
 <section role="tabpanel" id="jazz-kava" aria-labelledby="t-jazz-kava" hidden>
   <h2>Kuulamiskava</h2>
-  <p class="lead">Kuulamistest on <b>esmaspäeval 9.11</b>. Need on õpetaja kuulamiskava lood. Testis tuleb teos kuulmise järgi ära tunda.</p>
+  <p class="lead">Kuulamistest on <b>esmaspäeval 9.11</b>. Need on õpetaja kuulamiskava lood.</p>
+  <p><a class="btn ls-go" href="#test" data-m="kuula">▶ Harjuta kuulamistestiga</a></p>
+  <p> Testis tuleb teos kuulmise järgi ära tunda.</p>
   <p>Terve kava ühes loendis: <a href="https://open.spotify.com/playlist/6ETSVpqzfD5MXDhmftPyIP" target="_blank" rel="noopener">Spotify</a> · <a href="https://www.youtube.com/watch?v=BmkosFNCwE0&amp;list=PLplS6ttXXSdz_B6TQYx4QijjaMzvohiyu" target="_blank" rel="noopener">YouTube</a></p>
   <ol class="kava"><li><span class="kv-t"><b>Scott Joplin</b> – „Maple Leaf Rag”</span><span class="kv-st">ragtime</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=BmkosFNCwE0" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/4AE032Y0x1WPOi5CsmggnU" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Bessie Smith</b> – „St. Louis Blues”</span><span class="kv-st">bluus</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=cwRbsULaQIo" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/1AGGz6HSz0ewxcrlRE6scM" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Bessie Smith</b> – „Backwater Blues”</span><span class="kv-st">bluus</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=Zu4m0SArw7c" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/2gyqc4p3WoxKsc6zaXF4hM" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>B. B. King</b> – „Nobody Loves Me but My Mother”</span><span class="kv-st">bluus</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=OIW4ARVbhrw" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/3xCmfM8lQw07wKP0FvdAkJ" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Ella Fitzgerald</b> – „Summertime”</span><span class="kv-st">bluus</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=VZRgiuAXRAs" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/2gNjmvuQiEd2z9SqyYi8HH" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Louis Armstrong</b> – „West End Blues”</span><span class="kv-st">New Orleans jazz</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=4WPCBieSESI" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/7dOz8RrPWP9UgJ8X8p1vU7" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Louis Armstrong</b> – „Hotter Than That”</span><span class="kv-st">New Orleans jazz</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=UofL8pD69co" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/7ui11djxhp7WL4NCHlET8O" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>King Oliver</b> – „Dippermouth Blues”</span><span class="kv-st">New Orleans jazz</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=PwpriGltf9g" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/1ellvuD5W8qe7qXUCr5wsV" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Louis Armstrong</b> – „When the Saints Go Marching In”</span><span class="kv-st">dixieland</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=wyLjbMBpGDA" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/0chV6pTcexGO464Pw46ClW" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Original Dixieland Jazz Band</b> – „Tiger Rag”</span><span class="kv-st">dixieland</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=k7-sMpj3LWo" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/30HXa8gLoBNWoAXE5qigcN" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Duke Ellington</b> – „Take the ’A’ Train”</span><span class="kv-st">Chicago jazz</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=r2G1fKYFgVU" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/2BuIAKijtji4xpab2QCTBv" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Duke Ellington</b> – „It Don’t Mean a Thing”</span><span class="kv-st">Chicago jazz</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=qDQpZT3GhDg" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/6gxOrbNQimUwPqDExVf8s6" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>George Gershwin</b> – „I Got Rhythm”</span><span class="kv-st">Chicago jazz</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=gVsnqOfifqU" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/3IRtQCeoNglPzE1MHtdwqd" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>George Gershwin</b> – „Rhapsody in Blue”</span><span class="kv-st">sümfooniline jazz</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=_08mkeWXVSQ" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/5bqwObyJk2MgNOuNoaAHnR" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Nat King Cole</b> – „Unforgettable”</span><span class="kv-st">sving</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=vDN5rG3wLa4" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/648TTtYB0bH0P8Hfy0FmkL" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Ella Fitzgerald</b> – „A-Tisket, A-Tasket”</span><span class="kv-st">sving</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=ETbyLdCoJPw" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/5935p4F2K5crvwdc6mBLPg" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Glenn Miller</b> – „In the Mood”</span><span class="kv-st">sving</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=3q1IDFmE1Qk" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/5sj197xVLlMuwxgSCXYEkU" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Bobby Darin</b> – „Mack the Knife”</span><span class="kv-st">sving</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=ygVgxGSQIsw" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/3E5ndyOfO6vFDEIE42HA8o" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Frank Sinatra</b> – „I’ve Got You Under My Skin”</span><span class="kv-st">sving</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=zEWjHSvNnI0" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/3aEJMh1cXKEjgh52claxQp" target="_blank" rel="noopener">Spotify</a></span></li><li class="kv-sep" aria-hidden="true"></li><li><span class="kv-t"><b>Frank Sinatra</b> – „Fly Me to the Moon”</span><span class="kv-st">sving / jazzballaad</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=ZEcqHA7dbwM" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/7FXj7Qg3YorUxdrzvrcY25" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Frank Sinatra</b> – „My Funny Valentine”</span><span class="kv-st">jazzballaad</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=unf2AbrdXh0" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/7ulJgOg5Aw1S6WLdmqvNmp" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Frank Sinatra</b> – „My Way”</span><span class="kv-st">jazzballaad</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=qQzdAsjWGPg" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/2YkIDPL5lGhRhomCq4S2RO" target="_blank" rel="noopener">Spotify</a></span></li><li><span class="kv-t"><b>Frank Sinatra</b> – „New York, New York”</span><span class="kv-l"><a href="https://www.youtube.com/watch?v=le1QF3uoQNg" target="_blank" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/track/0K2WjMLZYr09LKwurGRYRE" target="_blank" rel="noopener">Spotify</a></span></li></ol>
   <p class="muted">Kavas on 19. loo järel joon. Kui pole kindel, kas lood 20–23 on testis, küsi õpetajalt. Õpetaja esitusloendites on lisaks Sinatra „The Way You Look Tonight”, aga kavas seda ei ole. Kavas on 7. lugu kirjas kui „Hotter Than Hot”, salvestise nimi on „Hotter Than That”.</p>
@@ -1527,7 +1477,8 @@ sub{font-size:.72em;line-height:0}
     <li>Harjuta juhuslikus järjekorras ja lühikeste lõikudega ka loo keskelt, sest testis ei pruugi kõlada algus.</li>
     <li>Jaga mitmele päevale: 1. päev tutvu, 2. päev proovi nimetada, 3. päev juhuslik järjekord, enne testi proovitest.</li>
   </ul>
-  <div class="key"><span class="label">Harjuta</span>„Testi ennast” all on kuulamistest täpselt nende lugudega. Seal saad valida, kas lõik algab loo algusest või juhuslikust kohast.</div>
+  <p><a class="btn ls-go" href="#test" data-m="kuula">▶ Alusta kuulamistesti</a></p>
+  <p class="muted">Kuulamistest on „Testi ennast” all ja kasutab täpselt neid lugusid. Saad valida, kas lõik algab loo algusest või juhuslikust kohast.</p>
 </section>
 <section role="tabpanel" id="test" aria-labelledby="t-test" hidden>
   <h2>Testi ennast</h2>
@@ -4534,7 +4485,6 @@ H — C — C — C — H
     if (changed) { saveProgress(); paintProgress(); }
   }
   function paintProgress(){
-    if (window.__paintPlans) window.__paintPlans();
     if (window.__acctStats) window.__acctStats();
     paintSeenButtons();
     document.querySelectorAll('[role="tab"]').forEach(function(t){
@@ -4744,7 +4694,6 @@ H — C — C — C — H
   (function(){
     var TOOD = [{"d": "2026-10-06", "aine": "Muusika", "mis": "Kontrolltöö: varajane jazz", "link": "#jazz", "topic": "jazz"}, {"d": "2026-10-07", "aine": "Ajalugu", "mis": "Kontrolltöö nr 1: tänapäev", "link": "#ajalugu-kt1", "topic": "ajalugu-kt1"}, {"d": "2026-10-09", "aine": "Keemia", "mis": "Kontrolltöö nr 1: orgaanika", "note": "algselt oli 7.10", "link": "#keemia-kt1", "topic": "keemia-kt1"}, {"d": "2026-10-13", "aine": "Eesti keel", "mis": "Indoeuroopa ja uurali keelte teadmiste kontroll", "link": "#keelkonnad", "topic": "keelkonnad"}, {"d": "2026-10-14", "aine": "Füüsika", "mis": "Kontrolltöö: ringliikumine", "link": "#fyysika-kt1", "topic": "fyysika-kt1"}, {"d": "2026-10-23", "aine": "Ennastjuhtiv õppija", "mis": "Portfoolio ülevaatamine ja esitamine", "link": "#portfoolio", "topic": "portfoolio"}, {"d": "2026-11-02", "aine": "Kirjandus", "mis": "Kohustuslik lugemine: Oscar Wilde „Dorian Gray portree”", "link": "#dorian", "topic": "dorian"}, {"d": "2026-11-02", "aine": "Muusika", "mis": "Sving: tuleb töö", "link": "#sving", "topic": "sving"}, {"d": "2026-11-02", "aine": "UPT", "mis": "I seminar: täida oma slaidid", "link": "#upt-seminar", "topic": "upt-seminar"}, {"d": "2026-11-04", "aine": "Lai matemaatika", "mis": "Kontrolltöö 2: funktsioonid"}, {"d": "2026-11-09", "aine": "Keemia", "mis": "Kontrolltöö nr 2", "week": true}, {"d": "2026-11-09", "aine": "Muusika", "mis": "Kontrolltöö: kuulamistest (jazz)", "link": "#jazz-kava", "topic": "jazz"}, {"d": "2026-11-16", "aine": "Muusika", "mis": "Kontserdi arvustus (hindeline)", "link": "#kontsert", "topic": "kontsert"}];
     var WD = ['P', 'E', 'T', 'K', 'N', 'R', 'L'];
-    window.__TOOD = TOOD;
     function day(iso){ var a = iso.split('-'); return new Date(+a[0], a[1] - 1, +a[2]); }
     function today(){ var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
     function rel(d, week){
@@ -5629,199 +5578,12 @@ H — C — C — C — H
     });
   })();
 
-  // Viited: vali teema lehel tekst ja lisa see soovitusse (telefonis ainult „Viita” režiimis)
-  (function(){
-    var KEY = 'ajukas-viited', MAX = 5;
-    var bar = document.getElementById('mn-bar'), fab = document.getElementById('mn-fab'), toastEl = document.getElementById('mn-toast');
-    var listBox = document.getElementById('sg-mn'), list = listBox && listBox.querySelector('ul');
-    var touch = window.matchMedia && matchMedia('(hover: none), (pointer: coarse)').matches;
-    var mode = false, cur = null, tTimer = 0;
-    function load(){ try { var a = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
-    function save(a){ try { localStorage.setItem(KEY, JSON.stringify(a)); } catch (e) {} paintList(); }
-    var A = window.Ajukas = window.Ajukas || {};
-    A.mentions = {
-      get: load,
-      clear: function(){ save([]); },
-      text: function(){ return load().map(function(m){ return '📌 ' + m.where + ' (#' + m.id + ')' + (m.q ? '\n„' + m.q + '”' : ' – ' + t('terve vahekaart')); }).join('\n\n'); }
-    };
-    function paintList(){
-      if (!list) return;
-      var a = load(); listBox.hidden = !a.length; list.innerHTML = '';
-      a.forEach(function(m, i){
-        var li = document.createElement('li'), b = document.createElement('b'), x = document.createElement('button');
-        b.textContent = m.where; li.appendChild(b);
-        if (m.q) { var q = document.createElement('q'); q.textContent = m.q; li.appendChild(q); } else li.appendChild(document.createTextNode(t('Terve vahekaart')));
-        x.type = 'button'; x.textContent = '✕'; x.setAttribute('aria-label', t('Eemalda viide'));
-        x.addEventListener('click', function(){ var z = load(); z.splice(i, 1); save(z); });
-        li.appendChild(x); list.appendChild(li);
-      });
-    }
-    function toast(msg, link){
-      toastEl.innerHTML = ''; toastEl.appendChild(document.createTextNode(msg));
-      if (link) { var a = document.createElement('a'); a.href = '#soovita'; a.textContent = t('Ava soovitus') + ' →'; toastEl.appendChild(a); }
-      toastEl.hidden = false; clearTimeout(tTimer); tTimer = setTimeout(function(){ toastEl.hidden = true; }, 3200);
-    }
-    // ainult teema lehe vahekaardi sisu: mitte menüüd, nupud, vormid ega avaleht
-    function panelOf(node){
-      var el = node && (node.nodeType === 1 ? node : node.parentElement);
-      if (!el || el.closest('input,textarea,select,button,.tmodes,.tabs,nav,form,.spk-head,.mn-bar,.row')) return null;
-      var p = el.closest('section[role="tabpanel"]'); if (!p) return null;
-      var v = p.closest('.view');
-      if (!v || v.id === 'v-home' || v.id === 'v-foorum' || v.id === 'v-soovitused') return null;
-      return p;
-    }
-    function activePanel(){
-      var v = document.querySelector('.view:not([hidden])'); if (!v || v.id === 'v-home' || v.id === 'v-foorum' || v.id === 'v-soovitused') return null;
-      return v.querySelector('section[role="tabpanel"]:not([hidden])');
-    }
-    function whereOf(p){
-      var v = p.closest('.view'), tb = document.getElementById('t-' + p.id), pt = v.getAttribute('data-parent-title');
-      return (pt ? pt + ' › ' : '') + (v.getAttribute('data-title') || '') + (tb ? ' › ' + tb.textContent.trim() : '');
-    }
-    function add(p, q){
-      var a = load();
-      q = (q || '').replace(/\s+/g, ' ').trim(); if (q.length > 300) q = q.slice(0, 297) + '…';
-      if (a.some(function(m){ return m.id === p.id && m.q === q; })) { toast(t('See on juba soovituses.'), true); return; }
-      if (a.length >= MAX) { toast(t('Soovitusse saab lisada kuni {n} viidet.', { n: MAX }), true); return; }
-      a.push({ id: p.id, where: whereOf(p), q: q }); save(a);
-      toast(q ? t('Tekst on soovitusse lisatud.') : t('Vahekaart on soovitusse lisatud.'), true);
-    }
-    function selInfo(){
-      var s = window.getSelection && getSelection(); if (!s || s.isCollapsed || !s.rangeCount) return null;
-      var txt = s.toString().trim(); if (txt.length < 2) return null;
-      var p1 = panelOf(s.anchorNode), p2 = panelOf(s.focusNode);
-      if (!p1 || p1 !== p2) return null;
-      return { p: p1, q: txt, r: s.getRangeAt(0).getBoundingClientRect() };
-    }
-    function show(info){
-      cur = info;
-      bar.querySelector('[data-a="copy"]').hidden = !info;
-      bar.querySelector('[data-a="add"]').hidden = !info;
-      bar.querySelector('[data-a="tab"]').hidden = !(info || mode);
-      bar.querySelector('.mn-hint').textContent = !info && mode ? t('Vali tekst') : '';
-      bar.hidden = false;
-      if (touch || !info) { bar.classList.add('dock'); bar.style.left = ''; bar.style.top = ''; return; }
-      bar.classList.remove('dock');
-      var w = bar.offsetWidth, h = bar.offsetHeight, x = info.r.left + info.r.width / 2 - w / 2, y = info.r.top - h - 8;
-      if (y < 8) y = info.r.bottom + 8;
-      bar.style.left = Math.max(8, Math.min(x, innerWidth - w - 8)) + 'px'; bar.style.top = y + 'px';
-    }
-    function hide(){ cur = null; if (mode) show(null); else bar.hidden = true; }
-    function check(){ var i = selInfo(); if (i && (!touch || mode)) show(i); else hide(); }
-    function setMode(on){
-      mode = on; fab.setAttribute('aria-pressed', on ? 'true' : 'false');
-      document.body.classList.toggle('mn-on', on);
-      if (on) { show(selInfo()); toast(t('Vali tekst, mida soovitusse lisada, või vajuta „Terve vahekaart”.')); } else { bar.hidden = true; cur = null; }
-    }
-    document.addEventListener('mouseup', function(e){ if (bar.contains(e.target)) return; setTimeout(check, 10); });
-    document.addEventListener('keyup', function(e){ if (e.shiftKey || e.key === 'Shift') setTimeout(check, 10); if (e.key === 'Escape') { if (mode) setMode(false); else hide(); } });
-    var scT = 0;
-    document.addEventListener('selectionchange', function(){ clearTimeout(scT); scT = setTimeout(function(){ if (touch) { if (mode) check(); } else if (!selInfo() && !bar.matches(':hover')) hide(); }, 250); });
-    window.addEventListener('scroll', function(){ if (!touch && cur && !mode) hide(); }, { passive: true });
-    bar.addEventListener('mousedown', function(e){ e.preventDefault(); });
-    bar.addEventListener('click', function(e){
-      var b = e.target.closest('button'); if (!b) return;
-      var a = b.getAttribute('data-a');
-      if (a === 'off') { if (mode) setMode(false); else hide(); return; }
-      if (a === 'tab') { var p = (cur && cur.p) || activePanel(); if (p) add(p, ''); return; }
-      if (!cur) return;
-      if (a === 'copy') {
-        var txt = cur.q, ok = function(){ toast(t('Kopeeritud.')); };
-        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, function(){ try { document.execCommand('copy'); ok(); } catch (e2) {} });
-        else { try { document.execCommand('copy'); ok(); } catch (e3) {} }
-      } else if (a === 'add') { add(cur.p, cur.q); try { getSelection().removeAllRanges(); } catch (e4) {} hide(); }
-    });
-    fab.addEventListener('click', function(){ setMode(!mode); });
-    function onRoute(){ var p = activePanel(); fab.hidden = !p; if (!p && mode) setMode(false); else if (mode) show(null); hide(); }
-    window.addEventListener('hashchange', function(){ setTimeout(onRoute, 30); });
-    setTimeout(onRoute, 30);
-    window.addEventListener('storage', function(e){ if (e.key === KEY) paintList(); });
-    paintList();
-  })();
-  // Aine lehel: uusim teema ette (lisamise kuupäev, siis viimane uuendus); valmimata teemad lõppu
-  document.querySelectorAll('.view:not(#v-home)').forEach(function(v){
-    if (v.getAttribute('data-parent')) return;
-    var g = v.querySelector('.grid'); if (!g) return;
-    var cards = [].slice.call(g.children);
-    function key(c){
-      var h = c.getAttribute('href'), t = h && document.getElementById('v-' + h.slice(1));
-      return t ? (t.getAttribute('data-added') || '') + '|' + (t.getAttribute('data-updated') || '') : '';
-    }
-    cards.map(function(c, i){ return { c: c, k: key(c), i: i }; })
-      .sort(function(a, b){ return a.k === b.k ? a.i - b.i : (a.k < b.k ? 1 : -1); })
-      .forEach(function(x){ g.appendChild(x.c); });
+  // Nupp, mis avab „Testi ennast” kindla režiimiga (nt kuulamistest)
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a.ls-go[data-m]'); if (!a) return;
+    var id = a.getAttribute('href').slice(1), m = a.getAttribute('data-m');
+    setTimeout(function(){ var b = document.querySelector('#' + id + ' .tmode-btn[data-m="' + m + '"]'); if (b) b.click(); }, 60);
   });
-  // Kordamisplaan: teema lehel jagab vahekaardid päevade peale kuni tööni (tehtud = vahekaart vaadatud või linnuke)
-  (function(){
-    var WD = ['P', 'E', 'T', 'K', 'N', 'R', 'L'];
-    function day(iso){ var a = iso.split('-'); return new Date(+a[0], a[1] - 1, +a[2]); }
-    function today(){ var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
-    function fmt(d){ return WD[d.getDay()] + ' ' + d.getDate() + '.' + (d.getMonth() + 1); }
-    function esc(x){ return String(x).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-    function load(k){ try { return JSON.parse(localStorage.getItem('ajukas-plan-' + k) || '{}') || {}; } catch (e) { return {}; } }
-    function save(k, o){ try { localStorage.setItem('ajukas-plan-' + k, JSON.stringify(o)); } catch (e) {} }
-    var boxes = {};
-    function items(v){
-      var out = [], test = null, spk = null;
-      v.querySelectorAll('[role="tab"]').forEach(function(b){
-        var id = b.getAttribute('aria-controls'), name = b.textContent.trim();
-        if (/^Testi ennast$/i.test(name)) test = id;
-        else if (/^Spikker$/i.test(name)) spk = id;
-        else if (!/^Viited$/i.test(name)) out.push({ id: id, label: name, tab: true });
-      });
-      if (test) out.push({ id: test, label: t('Testi ennast: küsimused'), key: 'q' });
-      if (test || spk) out.push({ id: test || spk, label: test && spk ? t('Proovitöö ja spikker') : test ? t('Proovitöö') : t('Spikker üle'), key: 'p', link: spk && !test ? spk : (test || spk) });
-      return out;
-    }
-    function paint(topic){
-      var b = boxes[topic]; if (!b) return;
-      var x = b.x, v = b.v, n = Math.round((day(x.d) - today()) / 864e5);
-      if (n < 0) { b.el.hidden = true; return; }
-      var P = (window.Ajukas && Ajukas.getProgress) ? Ajukas.getProgress() : { seen: {} }, done = load(topic);
-      var all = items(v);
-      function isDone(it){ var k = it.key ? it.id + ':' + it.key : it.id; return !!done[k] || (it.tab && !!(P.seen || {})[it.id]); }
-      var rest = all.filter(function(it){ return !isDone(it); }), fin = all.length - rest.length;
-      var html = '', t0 = today();
-      if (n === 0) html = '<p class="pl-msg">' + t('Töö on täna. Vaata spikker veel kord üle. Edu!') + '</p>';
-      else if (!rest.length) html = '<p class="pl-msg">' + t('Kõik on tehtud! Enne tööd vaata veel spikrit.') + '</p>';
-      else {
-        var days = [], last = rest[rest.length - 1].key === 'p' ? rest.pop() : null, k;
-        for (k = 0; k < n; k++) days.push([]);
-        var span = last && n > 1 ? n - 1 : n;
-        rest.forEach(function(it, i){ days[Math.min(span - 1, Math.floor(i * span / rest.length))].push(it); });
-        if (last) days[n - 1].push(last);
-        days.forEach(function(list, i){
-          if (!list.length) return;
-          var d = new Date(t0.getTime() + i * 864e5);
-          html += '<li class="' + (i === 0 ? 'today' : '') + '"><span class="pl-day">' + (i === 0 ? t('Täna') : i === 1 ? t('Homme') : fmt(d)) + '</span><span class="pl-items">' +
-            list.map(function(it){ var key = it.key ? it.id + ':' + it.key : it.id; return '<label><input type="checkbox" data-k="' + esc(key) + '"> <a href="#' + esc(it.link || it.id) + '">' + esc(it.label) + '</a></label>'; }).join('') + '</span></li>';
-        });
-        html = '<ol class="pl-days">' + html + '</ol>';
-      }
-      var first = rest[0];
-      b.el.querySelector('.pl-sum').innerHTML = '<b>' + t('Kordamisplaan') + '</b><span class="pl-meta">' + (n === 0 ? t('töö on täna') : n === 1 ? t('töö on homme') : t('{n} päeva tööni', { n: n })) + ' · ' + fin + '/' + all.length + (first && n > 0 ? ' · ' + t('täna') + ': ' + esc(first.label) : '') + '</span>';
-      b.el.querySelector('.pl-body').innerHTML = html + '<p class="pl-foot">' + t('Linnuke läheb ise, kui märgid vahekaardi vaadatuks. Kui päev jääb vahele, jagab plaan ülejäänu uuesti ära.') + (fin ? ' <button type="button" class="linkbtn pl-reset">' + t('Alusta otsast') + '</button>' : '') + '</p>';
-      b.el.querySelectorAll('input[data-k]').forEach(function(cb){
-        cb.addEventListener('change', function(){ var o = load(topic); if (cb.checked) o[cb.getAttribute('data-k')] = 1; else delete o[cb.getAttribute('data-k')]; save(topic, o); setTimeout(function(){ paint(topic); }, 250); });
-      });
-      var rs = b.el.querySelector('.pl-reset');
-      if (rs) rs.addEventListener('click', function(){ save(topic, {}); paint(topic); });
-      b.el.hidden = false;
-    }
-    (window.__TOOD || []).forEach(function(x){
-      if (!x.topic || x.week || boxes[x.topic]) return;
-      var v = document.getElementById('v-' + x.topic), head = v && v.querySelector('.pagehead');
-      if (!head || day(x.d) < today()) return;
-      var el = document.createElement('details'); el.className = 'plan'; el.hidden = true;
-      el.innerHTML = '<summary class="pl-sum"></summary><div class="pl-body"></div>';
-      try { if (localStorage.getItem('ajukas-plan-open-' + x.topic) === '1') el.open = true; } catch (e) {}
-      el.addEventListener('toggle', function(){ try { localStorage.setItem('ajukas-plan-open-' + x.topic, el.open ? '1' : '0'); } catch (e) {} });
-      head.parentNode.insertBefore(el, head.nextSibling);
-      boxes[x.topic] = { el: el, v: v, x: x };
-    });
-    window.__paintPlans = function(){ Object.keys(boxes).forEach(paint); };
-    window.__paintPlans();
-  })();
   // Spikri printimine: avab puhta valge lehe, kust saab printida või PDF-ina salvestada
   document.querySelectorAll('.spk-print').forEach(function(b){
     b.addEventListener('click', function(){
@@ -6560,10 +6322,9 @@ if (!FIREBASE_CONFIG) {
     e.preventDefault();
     const oma = $('sg-text').value.trim();
     const liik = document.querySelector('#sg-type [aria-pressed="true"]');
-    const viited = A.mentions ? A.mentions.text() : '';
-    const tekst = [liik ? '[' + liik.textContent + ']' : '', oma, viited].filter(Boolean).join('\n\n');
+    const tekst = [liik ? '[' + liik.textContent + ']' : '', oma].filter(Boolean).join('\n\n');
     const nimi = $('sg-name').value.trim().slice(0, 60);
-    if (!oma && !viited) { msg($('sg-msg'), t('Kirjuta enne saatmist soovitus.'), 'err'); return; }
+    if (!oma) { msg($('sg-msg'), t('Kirjuta enne saatmist soovitus.'), 'err'); return; }
     $('sg-send').disabled = true; $('sg-files').disabled = true;
     msg($('sg-msg'), t('Saadan…'));
     try {
@@ -6579,7 +6340,6 @@ if (!FIREBASE_CONFIG) {
       ok.forEach((p, i) => batch.set(doc(db, 'soovitused', ref.id, 'manused', String(i)), { nimi: p.nimi.slice(0, 100), tyyp: p.tyyp.slice(0, 100), andmed: p.andmed }));
       await batch.commit();
       $('sg-text').value = ''; $('sg-files').value = ''; pending = []; paintFiles();
-      if (A.mentions) A.mentions.clear();
       document.querySelectorAll('#sg-type button').forEach((b) => b.setAttribute('aria-pressed', 'false'));
       msg($('sg-msg'), t('Aitäh! Soovitus on saadetud.'), 'ok');
       if (userOf(auth.currentUser) === ADMIN_USER) loadInbox();
