@@ -5580,7 +5580,7 @@ H — C — C — C — H
         navigator.mediaSession.metadata = new MediaMetadata({ title: box.getAttribute('data-title') + ' · ' + label(cur), artist: box.getAttribute('data-artist'), album: box.getAttribute('data-title') });
         var ms = navigator.mediaSession;
         ms.setActionHandler('play', function(){ var p = au.play(); if (p && p.catch) p.catch(function(){}); ms.playbackState = 'playing'; });
-        ms.setActionHandler('pause', function(){ au.pause(); ms.playbackState = 'paused'; });
+        ms.setActionHandler('pause', function(){ keep = false; au.pause(); ms.playbackState = 'paused'; });
         ms.setActionHandler('seekbackward', function(){ au.currentTime = Math.max(0, au.currentTime - 15); });
         ms.setActionHandler('seekforward', function(){ au.currentTime = au.currentTime + 30; });
         ms.setActionHandler('previoustrack', function(){ if (au.currentTime > 5 || cur === 0) au.currentTime = 0; else load(cur - 1, 0, true); });
@@ -5590,8 +5590,24 @@ H — C — C — C — H
     }
     au.addEventListener('loadedmetadata', function(){ if (seekTo) { try { au.currentTime = Math.max(0, seekTo - 3); } catch(e) {} seekTo = 0; } au.playbackRate = +rate.value; });
     au.addEventListener('play', function(){ if (cur < 0) load(+ch.value, 0, true); media(); resolve(cur); resolve(cur + 1); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; });
-    au.addEventListener('playing', function(){ want = false; clearTimeout(guard); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; });
-    au.addEventListener('error', function(){ if (cur >= 0 && au.src !== base + files[cur]) { delete direct[cur]; au.src = base + files[cur]; if (want) tryPlay(); } });
+    au.addEventListener('playing', function(){ want = false; keep = true; clearTimeout(guard); setTimeout(function(){ if (!au.paused) fails = 0; }, 20000); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; });
+    // võrguviga keset peatükki (nt taustal): jätka samast kohast, kui kuulaja ise pausi ei pannud
+    var keep = false, fails = 0;
+    au.addEventListener('pause', function(){ if (!au.ended && !au.error && document.visibilityState === 'visible') keep = false; });
+    au.addEventListener('error', function(){
+      if (cur < 0 || (!want && !keep) || fails >= 4) return;
+      fails++; delete direct[cur]; seekTo = Math.floor(au.currentTime || seekTo || 0); want = true;
+      setTimeout(function(){ au.src = base + files[cur]; tryPlay(); }, fails * 1500);
+    });
+    // kui heli jääb 20 s andmeid ootama, laadi peatükk samast kohast uuesti
+    var stall = 0;
+    au.addEventListener('waiting', function(){
+      clearTimeout(stall); var c = cur, t0 = au.currentTime;
+      stall = setTimeout(function(){
+        if (c !== cur || !keep || au.readyState >= 3 || Math.abs(au.currentTime - t0) > 1 || fails >= 4) return;
+        fails++; delete direct[cur]; seekTo = Math.floor(t0); want = true; au.src = base + files[cur]; tryPlay();
+      }, 20000);
+    });
     au.addEventListener('timeupdate', function(){
       var now = Date.now(); if (now - lastLocal > 3000) { lastLocal = now; saveLocal(); }
       if (au.duration && au.duration - au.currentTime < 60 && !au.paused) prewarm(cur + 1);
@@ -5601,8 +5617,9 @@ H — C — C — C — H
     au.addEventListener('ended', function(){
       if (cur < files.length - 1) {
         if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
-        load(cur + 1, 0, true); saveAll(); showInfo();
+        // eellaadija lahti enne uue peatüki laadimist: hiljem katkestamine võis katkestada ka peamise heli allalaadimise
         if (warm) { try { warm.removeAttribute('src'); warm.load(); } catch(e) {} warm = null; }
+        load(cur + 1, 0, true); saveAll(); showInfo();
       } else { saveAll(); showInfo(); }
     });
     ch.addEventListener('change', function(){ load(+ch.value, 0, !au.paused); saveAll(); showInfo(); });
@@ -5618,7 +5635,7 @@ H — C — C — C — H
       else if (cur < 0) { cur = 0; au.src = base + files[0]; }
       showInfo();
     }
-    Ajukas.onAudioSync = function(){ if (au.paused) { var st = readState(); if (st && (st.ch !== cur || Math.abs(st.t - Math.floor(au.currentTime || seekTo || 0)) > 5)) restore(); } };
+    Ajukas.onAudioSync = function(){ if (au.paused && !want && !keep) { var st = readState(); if (st && (st.ch !== cur || Math.abs(st.t - Math.floor(au.currentTime || seekTo || 0)) > 5)) restore(); } };
     restore();
   });
   // Avaleht: kaartide kallutus ja sümbolid, tervitus, järgmise töö märk, tööde värvid, otsingu kiirklahv
