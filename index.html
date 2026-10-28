@@ -5554,8 +5554,8 @@ H — C — C — C — H
       try {
         navigator.mediaSession.metadata = new MediaMetadata({ title: box.getAttribute('data-title') + ' · ' + label(cur), artist: box.getAttribute('data-artist'), album: box.getAttribute('data-title') });
         var ms = navigator.mediaSession;
-        ms.setActionHandler('play', function(){ au.play(); });
-        ms.setActionHandler('pause', function(){ au.pause(); });
+        ms.setActionHandler('play', function(){ var p = au.play(); if (p && p.catch) p.catch(function(){}); ms.playbackState = 'playing'; });
+        ms.setActionHandler('pause', function(){ au.pause(); ms.playbackState = 'paused'; });
         ms.setActionHandler('seekbackward', function(){ au.currentTime = Math.max(0, au.currentTime - 15); });
         ms.setActionHandler('seekforward', function(){ au.currentTime = au.currentTime + 30; });
         ms.setActionHandler('previoustrack', function(){ if (au.currentTime > 5 || cur === 0) au.currentTime = 0; else load(cur - 1, 0, true); });
@@ -5564,7 +5564,7 @@ H — C — C — C — H
       } catch(e) {}
     }
     au.addEventListener('loadedmetadata', function(){ if (seekTo) { try { au.currentTime = Math.max(0, seekTo - 3); } catch(e) {} seekTo = 0; } au.playbackRate = +rate.value; });
-    au.addEventListener('play', function(){ if (cur < 0) load(+ch.value, 0, true); media(); resolve(cur); resolve(cur + 1); });
+    au.addEventListener('play', function(){ if (cur < 0) load(+ch.value, 0, true); media(); resolve(cur); resolve(cur + 1); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; });
     au.addEventListener('playing', function(){ want = false; clearTimeout(guard); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; });
     au.addEventListener('error', function(){ if (cur >= 0 && au.src !== base + files[cur]) { delete direct[cur]; au.src = base + files[cur]; if (want) tryPlay(); } });
     au.addEventListener('timeupdate', function(){
@@ -5572,7 +5572,7 @@ H — C — C — C — H
       if (au.duration && au.duration - au.currentTime < 60 && !au.paused) prewarm(cur + 1);
       if ('mediaSession' in navigator && navigator.mediaSession.setPositionState && au.duration) { try { navigator.mediaSession.setPositionState({ duration: au.duration, playbackRate: au.playbackRate, position: Math.min(au.currentTime, au.duration) }); } catch(e) {} }
     });
-    au.addEventListener('pause', function(){ if (au.ended) return; saveAll(); showInfo(); });
+    au.addEventListener('pause', function(){ if ('mediaSession' in navigator && !au.ended) navigator.mediaSession.playbackState = 'paused'; if (au.ended) return; saveAll(); showInfo(); });
     au.addEventListener('ended', function(){
       if (cur < files.length - 1) {
         if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
@@ -5737,13 +5737,23 @@ H — C — C — C — H
   (function(){
     if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(function(){});
     // uus versioon: kui serveris on leht uuem kui see, mis praegu lahti on, paku värskendamist
-    var mine = Date.parse(document.lastModified), lastCheck = 0, nv = document.getElementById('newver');
+    // GitHub avaldab kogu lehe uuesti ka siis, kui muutub ainult tunniplaan, seega kuupäev üksi ei loe: võrdle sisu
+    var mine = Date.parse(document.lastModified), lastCheck = 0, nv = document.getElementById('newver'), base = null;
+    function hash(x){ var h = 2166136261; for (var k = 0; k < x.length; k++) { h ^= x.charCodeAt(k); h = Math.imul(h, 16777619); } return h >>> 0; }
+    function page(){ return fetch(location.pathname, { cache: 'no-store' }).then(function(r){ return r.ok ? r.text() : null; }); }
+    if (navigator.onLine) page().then(function(x){ if (x && base === null) base = hash(x); }).catch(function(){});
     function checkUpdate(force){
       if (!nv.hidden || !navigator.onLine || isNaN(mine) || (!force && Date.now() - lastCheck < 60000)) return;
       lastCheck = Date.now();
       fetch(location.pathname, { method: 'HEAD', cache: 'no-store' }).then(function(r){
         var srv = Date.parse(r.headers.get('Last-Modified') || '');
-        if (r.ok && srv > mine) nv.hidden = false;
+        if (!r.ok || !(srv > mine)) return;
+        return page().then(function(x){
+          if (!x) return;
+          var h = hash(x);
+          if (base === null) { base = h; mine = srv; return; }
+          if (h !== base) nv.hidden = false; else mine = srv;
+        });
       }).catch(function(){});
     }
     document.getElementById('newver-go').addEventListener('click', function(){ location.reload(); });
