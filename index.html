@@ -899,6 +899,11 @@ section#kt-kava>p,section#kt-kava>h2{max-width:70ch}
 .ls-ym{display:flex;gap:8px;align-items:flex-start;margin-top:12px;font-size:14px;cursor:pointer}
 .ls-ym input{margin-top:3px}
 .ls-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.gfix.gfix-ok{color:var(--ok);font-weight:700}
+.ls-opts button.ok::before,.lg-opts button.ok::before{content:"✓ "}
+.ls-opts button.no::before,.lg-opts button.no::before{content:"✗ "}
+.lg-slot.ok::after{content:" ✓"}
+.lg-slot.no::after{content:" ✗"}
 .gap.wide{width:9.5em}
 .end{color:var(--sub);font-weight:700}
 .gn{font-family:var(--mono);font-size:10px;color:var(--muted);margin-right:2px}
@@ -4959,7 +4964,9 @@ H — C — C — C — H
   document.querySelectorAll('.exam[data-quiz]').forEach(function(box){
     var name = box.getAttribute('data-quiz'), N = +box.getAttribute('data-n') || 10, MIN = +box.getAttribute('data-min') || 15;
     var ALL = QUIZ[name] || [], hasExtra = ALL.some(function(q){ return q[3] === 'lisa'; });
-    var KEY = 'ajukas-exam-' + name, qs = [], timer = 0, end = 0, grades = [];
+    var KEY = 'ajukas-exam-' + name, RUN = 'ajukas-exam-run-' + name, qs = [], timer = 0, end = 0, grades = [];
+    function saveRun(){ var a = Array.from(box.querySelectorAll('.exam-q textarea')).map(function(x){ return x.value; }); store(RUN, { q: qs.map(function(q){ return q[1]; }), a: a, end: end }); }
+    function clearRun(){ try { localStorage.removeItem(RUN); } catch (e) {} }
     box.className = 'exam tool';
     function idle(){
       clearInterval(timer);
@@ -4968,17 +4975,33 @@ H — C — C — C — H
         (hasExtra ? '<p><label><input type="checkbox" class="ex-core" checked> ' + t('ainult olulisemad küsimused') + '</label></p>' : '') +
         '<div class="row"><button type="button" class="btn ex-start">' + t('Alusta proovitööd') + '</button>' +
         (best ? '<span class="muted">' + t('Parim tulemus: {p}%', { p: best }) + '</span>' : '') + '</div>';
-      box.querySelector('.ex-start').addEventListener('click', start);
+      box.querySelector('.ex-start').addEventListener('click', function(){ start(); });
+      var run = store(RUN);
+      if (run && run.q && run.q.length) {
+        var left = Math.max(0, Math.round((run.end - Date.now()) / 60000));
+        var p = document.createElement('div'); p.className = 'row ex-resume';
+        p.innerHTML = '<button type="button" class="btn">' + t('Jätka pooleli proovitööd') + '</button><span class="muted">' + (left ? t('aega jäänud {m} min', { m: left }) : t('aeg on läbi, näed vastuseid')) + '</span>';
+        box.insertBefore(p, box.firstChild.nextSibling);
+        p.querySelector('button').addEventListener('click', function(){ start(run); });
+      }
     }
-    function start(){
-      var core = box.querySelector('.ex-core'), pool = ALL.filter(function(q){ return !(core && core.checked && q[3] === 'lisa'); });
-      qs = shuffle(pool).slice(0, N); grades = qs.map(function(){ return null; });
-      end = Date.now() + MIN * 60000;
+    function start(run){
+      if (run) {
+        qs = run.q.map(function(x){ return ALL.filter(function(q){ return q[1] === x; })[0]; }).filter(Boolean);
+        end = run.end;
+      } else {
+        var core = box.querySelector('.ex-core'), pool = ALL.filter(function(q){ return !(core && core.checked && q[3] === 'lisa'); });
+        qs = shuffle(pool).slice(0, N); end = Date.now() + MIN * 60000;
+      }
+      grades = qs.map(function(){ return null; });
       box.innerHTML = '<div class="exam-timer" aria-live="off">⏱ <span class="ex-left"></span></div>' +
         qs.map(function(q, i){ return '<div class="exam-q"><div class="qh"><span class="qn">' + (i + 1) + '.</span><span>' + esc(q[1]) + '</span></div><textarea aria-label="' + esc(t('Vastus küsimusele {n}', { n: i + 1 })) + '"></textarea></div>'; }).join('') +
         '<div class="row"><button type="button" class="btn ex-done">' + t('Lõpeta ja vaata vastuseid') + '</button><button type="button" class="btn sec ex-quit">' + t('Katkesta') + '</button></div>';
+      if (run) box.querySelectorAll('.exam-q textarea').forEach(function(x, k){ x.value = (run.a || [])[k] || ''; });
+      var st = 0; box.oninput = function(){ clearTimeout(st); st = setTimeout(saveRun, 400); };
+      saveRun();
       box.querySelector('.ex-done').addEventListener('click', function(){ review(false); });
-      box.querySelector('.ex-quit').addEventListener('click', function(){ if (confirm(t('Katkestada proovitöö?'))) idle(); });
+      box.querySelector('.ex-quit').addEventListener('click', function(){ if (confirm(t('Katkestada proovitöö?'))) { clearRun(); idle(); } });
       tick(); timer = setInterval(tick, 1000);
       box.scrollIntoView({ block: 'start', behavior: 'smooth' });
     }
@@ -4992,6 +5015,7 @@ H — C — C — C — H
     function review(timeUp){
       clearInterval(timer);
       var mine = Array.from(box.querySelectorAll('.exam-q textarea')).map(function(x){ return x.value.trim(); });
+      clearRun();
       box.innerHTML = (timeUp ? '<p class="exam-res">' + t('Aeg sai läbi!') + '</p>' : '') +
         '<p class="muted">' + t('Võrdle oma vastust õigega ja märgi, kas see oli õige.') + '</p>' +
         qs.map(function(q, i){
@@ -5437,15 +5461,16 @@ H — C — C — C — H
       var ok = 0;
       gaps.forEach(function(g){
         var raw = g.getAttribute('data-a').split('|'), good = raw.map(norm), v = norm(g.value), right = good.indexOf(v) >= 0;
-        g.classList.toggle('ok', right); g.classList.toggle('no', !right);
+        g.classList.toggle('ok', right); g.classList.toggle('no', !right); g.setAttribute('aria-invalid', right ? 'false' : 'true');
         var fx = g.nextElementSibling && g.nextElementSibling.classList.contains('gfix') ? g.nextElementSibling : null;
-        if (!right) { if (!fx) { fx = document.createElement('span'); fx.className = 'gfix'; g.parentNode.insertBefore(fx, g.nextSibling); } fx.textContent = '→ ' + raw.join(' / '); }
-        else if (fx) fx.remove();
+        if (!fx) { fx = document.createElement('span'); fx.className = 'gfix'; g.parentNode.insertBefore(fx, g.nextSibling); }
+        fx.classList.toggle('gfix-ok', right);
+        fx.textContent = right ? '✓' : '✗ → ' + raw.join(' / ');
         if (right) ok++;
       });
       res.textContent = t('Õigeid: {o} / {n}', { o: ok, n: gaps.length }) + (ok === gaps.length ? ' 🎉' : '');
     });
-    box.querySelector('.gf-reset').addEventListener('click', function(){ gaps.forEach(function(g){ g.value = ''; g.classList.remove('ok', 'no'); }); box.querySelectorAll('.gfix').forEach(function(x){ x.remove(); }); res.textContent = ''; gaps[0].focus(); });
+    box.querySelector('.gf-reset').addEventListener('click', function(){ gaps.forEach(function(g){ g.value = ''; g.classList.remove('ok', 'no'); g.removeAttribute('aria-invalid'); }); box.querySelectorAll('.gfix').forEach(function(x){ x.remove(); }); res.textContent = ''; gaps[0].focus(); });
     gaps.forEach(function(g, i){ g.addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); if (gaps[i + 1]) gaps[i + 1].focus(); else box.querySelector('.gf-check').click(); } }); });
   });
   // Pildiharjutus: sõna pannakse noolega näidatud kasti (vajuta või lohista)
