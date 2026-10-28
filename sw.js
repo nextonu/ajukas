@@ -1,6 +1,7 @@
 // Ajukase service worker: leht töötab ka ilma internetita.
 // Alati proovitakse enne võrku (nii tulevad uuendused kohe), võrgu puudumisel antakse viimane salvestatud versioon.
 const CACHE = 'ajukas-v1';
+// 'ajukas-audio': audioraamatu allalaaditud peatükid (leht haldab ise), seda ei kustutata
 const CORE = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'og.png', 'qr.svg', 'tunniplaan.json'];
 
 self.addEventListener('install', (e) => {
@@ -8,7 +9,7 @@ self.addEventListener('install', (e) => {
 });
 
 self.addEventListener('activate', (e) => {
-  e.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
+  e.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE && k !== 'ajukas-audio').map((k) => caches.delete(k)))).then(() => self.clients.claim()));
 });
 
 self.addEventListener('fetch', (e) => {
