@@ -1,6 +1,6 @@
 {
  "num": "135",
- "default_num": "135",
+ "default_num": "137",
  "text": "19.10-23.10 / 8. nädal (I trim) (19. 10. - 25. 10. 2026)",
  "datefrom": "2026-10-19",
  "classes": {
@@ -39,5 +39,5 @@
   "Külalised": "*33",
   "Koostöö": "*34"
  },
- "checked": "2026-10-19"
+ "checked": "2026-10-29"
 }
