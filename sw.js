@@ -25,3 +25,31 @@ self.addEventListener('fetch', (e) => {
     }).catch(() => caches.match(req, { ignoreSearch: true }).then((hit) => hit || (req.mode === 'navigate' ? caches.match('./') : undefined)))
   );
 });
+
+// Audioraamatu taustal allalaadimine (Background Fetch): valmis peatükid vahemällu 'ajukas-audio'
+async function keepAudio(e) {
+  const c = await caches.open('ajukas-audio');
+  let n = 0;
+  for (const r of await e.registration.matchAll()) {
+    try {
+      const res = await r.responseReady;
+      if (res && res.status === 200) {
+        await c.put(r.request.url, new Response(res.body, { headers: res.headers.get('Content-Length') ? { 'Content-Type': 'audio/mpeg', 'Content-Length': res.headers.get('Content-Length') } : { 'Content-Type': 'audio/mpeg' } }));
+        n++;
+      }
+    } catch (x) {}
+  }
+  for (const cl of await self.clients.matchAll({ includeUncontrolled: true })) cl.postMessage({ type: 'ajukas-audio' });
+  return n;
+}
+self.addEventListener('backgroundfetchsuccess', (e) => {
+  e.waitUntil(keepAudio(e).then(() => e.updateUI({ title: 'Audioraamat on alla laaditud ✓' })));
+});
+self.addEventListener('backgroundfetchfail', (e) => {
+  e.waitUntil(keepAudio(e).then((n) => e.updateUI({ title: n ? 'Osa peatükke laaditi alla (' + n + ')' : 'Allalaadimine ebaõnnestus' })));
+});
+// peatatud: juba valmis peatükid jäävad alles
+self.addEventListener('backgroundfetchabort', (e) => { e.waitUntil(keepAudio(e)); });
+self.addEventListener('backgroundfetchclick', (e) => {
+  e.waitUntil(self.clients.matchAll({ type: 'window' }).then((l) => (l.length ? l[0].focus() : self.clients.openWindow('./#dorian'))));
+});
