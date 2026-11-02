@@ -848,6 +848,17 @@ body{padding-bottom:80px}
 .wl-tip::before{content:"Nipp: ";color:var(--muted)}
 .spk-cols{columns:2;column-gap:18px}
 @media (max-width:600px){.spk-cols{columns:1}}
+.cmpt{margin:12px 0 18px;border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:var(--panel)}
+.cmpt-r{display:grid;grid-template-columns:minmax(80px,.8fr) 1fr 1fr;border-top:1px solid var(--line)}
+.cmpt-r:first-child{border-top:0}
+.cmpt-r>span{padding:10px 14px;font-size:15px;line-height:1.45;min-width:0;overflow-wrap:break-word;hyphens:auto}
+.cmpt-r>span+span{border-left:1px solid var(--line)}
+.cmpt-l{font-size:13.5px!important;font-weight:600;color:var(--muted)}
+.cmpt-h>span{font-weight:700;color:var(--bright);font-size:15px}
+.cmpt-h .cmpt-a{background:color-mix(in srgb,#DC2626 16%,var(--panel));box-shadow:inset 0 3px 0 #DC2626}
+.cmpt-h .cmpt-b{background:color-mix(in srgb,#9333EA 16%,var(--panel));box-shadow:inset 0 3px 0 #9333EA}
+.cmpt strong{color:var(--bright)}
+@media (max-width:600px){.cmpt-r{grid-template-columns:94px 1fr 1fr}.cmpt-r>span{padding:8px 9px;font-size:13.5px}.cmpt-l{font-size:12px!important}}
 .cmp{list-style:none;padding:0;margin:10px 0;display:grid;gap:8px}
 .cmp li{display:grid;grid-template-columns:150px 1fr 1fr;gap:4px 14px;padding:8px 0;border-bottom:1px solid var(--line)}
 @media (max-width:600px){.cmp li{grid-template-columns:1fr}}
@@ -1752,12 +1763,13 @@ sub{font-size:.72em;line-height:0}
   </ul>
   <div class="key"><span class="label">Meelespea</span>Svingi kohta öeldakse <b>„nelja löögi jazz”</b>: takti rõhud paigutuvad kõigile neljale löögile. <b>Lisaaktsent 2. ja 4. löögil</b> annab svingile kiikuva ja õõtsuva rütmi.</div>
   <h3>Võrdlus varajase jazziga</h3>
-  <ul class="cmp">
-    <li><b>Koosseis</b><span>New Orleans: väike ansambel</span><span>Sving: <b>bigbänd</b> (12–17)</span></li>
-    <li><b>Kuidas mängitakse</b><span>New Orleans: kõik improviseerivad koos</span><span>Sving: noodist, head nooditundjad, eraldi soolod</span></li>
-    <li><b>Rütm</b><span>New Orleans: 2/4, marsilik</span><span>Sving: „nelja löögi jazz”, rõhk 2. ja 4. löögil</span></li>
-    <li><b>Keskus</b><span>New Orleans, siis Chicago</span><span>New York</span></li>
-  </ul>
+  <div class="cmpt" role="table" aria-label="New Orleansi jazz ja sving">
+    <div class="cmpt-r cmpt-h" role="row"><span role="columnheader"></span><span class="cmpt-a" role="columnheader">New Orleansi jazz</span><span class="cmpt-b" role="columnheader">Sving</span></div>
+    <div class="cmpt-r" role="row"><span class="cmpt-l" role="rowheader">Koosseis</span><span role="cell">väike ansambel <span style="white-space:nowrap">(5–7)</span></span><span role="cell"><strong>bigbänd</strong> (12–17)</span></div>
+    <div class="cmpt-r" role="row"><span class="cmpt-l" role="rowheader">Mängimine</span><span role="cell">kõik improviseerivad koos</span><span role="cell">noodist, head nooditundjad, soolod eraldi</span></div>
+    <div class="cmpt-r" role="row"><span class="cmpt-l" role="rowheader">Rütm</span><span role="cell">2/4, marsilik</span><span role="cell">„nelja löögi jazz”, rõhk 2. ja 4. löögil</span></div>
+    <div class="cmpt-r" role="row"><span class="cmpt-l" role="rowheader">Keskus</span><span role="cell">New Orleans, siis Chicago</span><span role="cell">New York</span></div>
+  </div>
 </section>
 <section role="tabpanel" id="sv-bigband" aria-labelledby="t-sv-bigband" hidden>
   <h2>Bigbänd</h2>
