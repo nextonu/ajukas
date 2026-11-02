@@ -848,6 +848,8 @@ body{padding-bottom:80px}
 .wl-tip::before{content:"Nipp: ";color:var(--muted)}
 .spk-cols{columns:2;column-gap:18px}
 @media (max-width:600px){.spk-cols{columns:1}}
+@keyframes qflash{0%,60%{background:color-mix(in srgb,var(--sub,var(--accent)) 30%,transparent);box-shadow:0 0 0 4px color-mix(in srgb,var(--sub,var(--accent)) 30%,transparent)}100%{background:transparent;box-shadow:0 0 0 4px transparent}}
+.qflash{animation:qflash 2.6s ease-out;border-radius:4px}
 .cmpt{margin:12px 0 18px;border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:var(--panel)}
 .cmpt-r{display:grid;grid-template-columns:minmax(80px,.8fr) 1fr 1fr;border-top:1px solid var(--line)}
 .cmpt-r:first-child{border-top:0}
@@ -4561,7 +4563,7 @@ H — C — C — C — H
         var c = el.cloneNode(true); c.querySelectorAll('.src, .yr + .yr').forEach(function(x){ x.remove(); });
         var txt = c.textContent.replace(/\s+/g, ' ').trim();
         if (txt.length < 3) return;
-        index.push({ pid: sec.id, where: where, text: txt, n: norm(txt) });
+        index.push({ pid: sec.id, where: where, text: txt, n: norm(txt), el: el });
       });
     });
     function snippet(e, terms){
@@ -4586,11 +4588,25 @@ H — C — C — C — H
       if (!list.length) { out.innerHTML = '<p class="muted">' + esc(t('Midagi ei leitud. Proovi teist sõna.')) + '</p>'; return; }
       out.innerHTML = '<p class="qcount">' + esc(t('Tulemusi: {n}', { n: list.length })) + '</p>' +
         list.slice(0, 15).map(function(e){
-          return '<a class="qhit" href="#' + e.pid + '"><span class="qwhere">' + esc(e.where) + '</span><span class="qtext">' + snippet(e, terms) + '</span></a>';
+          return '<a class="qhit" href="#' + e.pid + '" data-i="' + index.indexOf(e) + '"><span class="qwhere">' + esc(e.where) + '</span><span class="qtext">' + snippet(e, terms) + '</span></a>';
         }).join('') + (list.length > 15 ? '<p class="muted" style="font-size:13px">' + esc(t('Näitan 15 esimest tulemust. Täpsusta otsingut.')) + '</p>' : '');
     }
     var timer; input.addEventListener('input', function(){ clearTimeout(timer); timer = setTimeout(run, 120); });
     input.addEventListener('keydown', function(e){ if (e.key === 'Escape') { input.value = ''; run(); } });
+    // tulemusele vajutades: ava vahekaart ja keri leitud lõiguni, mis korraks helendab
+    out.addEventListener('click', function(e){
+      var a = e.target.closest('a.qhit'); if (!a) return;
+      var hit = index[+a.getAttribute('data-i')]; if (!hit) return;
+      var el = hit.el, tries = 0;
+      (function go(){
+        if (el.offsetParent === null && tries++ < 20) { setTimeout(go, 50); return; }
+        for (var d = el.parentElement; d; d = d.parentElement) if (d.tagName === 'DETAILS') d.open = true;
+        el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        el.classList.remove('qflash'); void el.offsetWidth; el.classList.add('qflash');
+        setTimeout(function(){ el.classList.remove('qflash'); }, 2600);
+      })();
+      setTimeout(function(){ if (el.offsetParent !== null) el.scrollIntoView({ block: 'center' }); }, 400);
+    });
   })();
 
 
