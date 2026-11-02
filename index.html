@@ -6589,6 +6589,7 @@ H — C — C — C — H
       '5-16': 'Mõlemad on Ella. „Summertime” on väga aeglane ja unine hällilaul. „A-Tisket, A-Tasket” on rõõmus ja mänguline lastelaul.',
       '3-4': 'Mõlemad on aeglane bluus klaveriga. „Backwater Blues” on naishääl ja vana krabisev salvestis. „Nobody Loves Me but My Mother” on meeshääl, selge salvestis ja väga lühike.',
       '15-21': 'Mõlemad on aeglased keelpillidega armastuslaulud. „Unforgettable”: Nat King Cole’i pehme sametine hääl. „My Funny Valentine”: Sinatra, veel aeglasem ja vaiksem.',
+      '18-19': 'Mõlemad on meeshääl, aga esitajad on erinevad. „Mack the Knife” (Bobby Darin): kerge sving, iga salm läheb kõrgemaks. „I’ve Got You Under My Skin” (Sinatra): keskel kasvab suureks ja tuleb valju tromboonisoolo.',
       '17-18': '„In the Mood” on ilma lauluta, saksofonide riff. „Mack the Knife” on meeshääl ja iga salm läheb kõrgemaks.'
     };
     var SIN = {
@@ -6618,11 +6619,12 @@ H — C — C — C — H
       pos.textContent = ix >= 0 ? t('paar {i}/{n}', { i: ix + 1, n: pairs.length }) : '';
       if (x.k === y.k) { out.innerHTML = '<p class="muted">' + t('Vali kaks erinevat lugu.') + '</p>'; return; }
       var ax = A[x.k], ay = A[y.k], first = -1;
+      function nrm(v){ return String(v).replace(/\s*\([^)]*\)/g, '').trim().toLowerCase(); }
       var rows = '<li class="kvc-h"><b></b><span>' + esc(x.t) + '</span><span>' + esc(y.t) + '</span></li>' +
         '<li class="' + (x.a === y.a ? 'same' : 'diff') + '"><b>' + t('Esitaja') + '</b><span>' + esc(x.a) + '</span><span>' + esc(y.a) + '</span></li>' +
         '<li class="' + (x.st === y.st ? 'same' : 'diff') + '"><b>' + t('Stiil') + '</b><span>' + esc(x.st) + '</span><span>' + esc(y.st) + '</span></li>';
       ROWS.forEach(function(r, i){
-        var d = ax[i] !== ay[i]; if (d && first < 0 && i > 0) first = i;
+        var d = nrm(ax[i]) !== nrm(ay[i]); if (d && first < 0 && i > 0) first = i;
         rows += '<li class="' + (d ? 'diff' : 'same') + '"><b>' + t(r) + '</b><span>' + esc(ax[i]) + '</span><span>' + esc(ay[i]) + '</span></li>';
       });
       var key = PAIR[x.k + '-' + y.k], txt = '';
