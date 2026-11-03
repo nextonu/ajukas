@@ -975,6 +975,11 @@ section#kt-kava>p,section#kt-kava>h2{max-width:70ch}
 .ux-t{fill:var(--text);font-size:12px;font-family:inherit}.ux-m{fill:var(--muted);font-size:11px}.ux-b{font-weight:700}
 .ux-z{fill:#F97316;font-weight:600;font-size:11px}.ux-pt,.ux-nt,.ux-up,.ux-dn{paint-order:stroke;stroke:var(--panel);stroke-width:4px;stroke-linejoin:round;font-weight:700}.ux-pt{fill:#22C55E;font-size:16px}.ux-nt{fill:#EF4444;font-size:16px}.ux-up{fill:#C084FC;font-size:14px}.ux-dn{fill:#F472B6;font-size:14px}
 .uur-fig{cursor:pointer}.uur-fig:hover{border-color:var(--sub)}.uur-fig figcaption::after{content:" ⤢";color:var(--muted);font-weight:400}
+.zm{cursor:pointer}.fgraph.zm:hover .fg-svg,.fy-diag.zm:hover svg{border-color:var(--bright)}.zm:focus-visible{outline:2px solid var(--brand);outline-offset:3px}
+.zm-box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 22px;width:min(94vw,900px);max-height:94vh;overflow:auto}
+.zm-box>*{margin:0 auto!important;max-width:none!important}.zm-box svg{display:block;width:100%!important;height:auto!important;max-height:80vh;max-width:none!important;margin:0 auto}
+.zm-box .fg-leg{font-size:18px;justify-content:center;margin-top:12px}.zm-box figcaption{font-size:17px;text-align:center}
+@media (max-width:600px){.uz-ov.zm-ov{padding:6px}.zm-box{width:100%;padding:10px 6px}}.zm-box>.skel{width:min(100%,460px)!important;height:auto!important;overflow:visible;margin:36px auto 16px!important}.zm-box .skel text{font-size:12px}
 .uz-ov{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.78);display:flex;align-items:center;justify-content:center;padding:20px;cursor:pointer}
 .uz-box{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 22px;width:min(94vw,1100px);max-height:94vh;overflow:auto;display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:24px;align-items:center}
 .uz-box .uur-svg{max-height:84vh}.uz-box .uur-leg{font-size:18px;line-height:1.9}.uz-box figcaption{grid-column:1/-1;font-size:18px;font-weight:700}
@@ -3242,9 +3247,20 @@ H — C — C — C — H
   <h3>Absoluutväärtus: y = |x|</h3>
   <p>|x| = x, kui x ≥ 0, ja |x| = −x, kui x &lt; 0. Graafik koosneb kahest poolsirgest y = x ja y = −x.</p>
   <div class="fg-row"><div class="fgraph" data-g='{"x":[-5,5],"y":[-1,5],"fns":[["abs(x)","y = |x|"]]}'></div><div class="fgraph" data-g='{"x":[-2,6],"y":[-1,6],"fns":[["abs(-x+2)","y = |−x + 2|"],["abs(2*x-4)","y = |2x − 4|"]],"pts":[[2,0,"(2; 0)"]]}'></div></div>
+  <p class="fg-cap"><b>y = |x|</b></p>
   <ul class="mf-res">
-    <li><b>y = |x|</b>: X = R,&emsp;Y = [0; ∞[,&emsp;X<sub>0</sub> = {0},&emsp;X<sub>+</sub> = R \ {0},&emsp;X<sub>−</sub> = ∅,&emsp;X<sub>↓</sub> = ]−∞; 0[,&emsp;X<sub>↑</sub> = ]0; ∞[,&emsp;E<sub>min</sub>(0; 0),&emsp;paarisfunktsioon.</li>
-    <li><b>y = |−x + 2|</b> ja <b>y = |2x − 4|</b> (TV lk 57,&emsp;ül 4): mõlemal X<sub>↓</sub> = ]−∞; 2[,&emsp;X<sub>↑</sub> = ]2; ∞[,&emsp;x<sub>min</sub> = 2,&emsp;E<sub>min</sub>(2; 0). Nullkoht leitakse avaldisest absoluutväärtuse sees: −x + 2 = 0.</li>
+    <li>X = R,&emsp;Y = [0; ∞[</li>
+    <li>X<sub>0</sub> = {0}</li>
+    <li>X<sub>+</sub> = R \ {0},&emsp;X<sub>−</sub> = ∅</li>
+    <li>X<sub>↓</sub> = ]−∞; 0[,&emsp;X<sub>↑</sub> = ]0; ∞[</li>
+    <li>E<sub>min</sub>(0; 0)</li>
+    <li>paarisfunktsioon</li>
+  </ul>
+  <p class="fg-cap"><b>y = |−x + 2|</b> ja <b>y = |2x − 4|</b> (TV lk 57, ül 4)</p>
+  <ul class="mf-res">
+    <li>mõlemal X<sub>↓</sub> = ]−∞; 2[,&emsp;X<sub>↑</sub> = ]2; ∞[</li>
+    <li>x<sub>min</sub> = 2,&emsp;E<sub>min</sub>(2; 0)</li>
+    <li>Nullkoht leitakse avaldisest absoluutväärtuse sees: −x + 2 = 0.</li>
   </ul>
   <div class="key"><span class="label">Kas sobib graafikuks?</span>Vaata kolme asja: <b>paarsust</b> (sümmeetria), <b>märki</b> (kas y saab olla negatiivne) ja <b>haru suunda</b>. Näiteks y = x³ graafik ei saa olla U-kujuline, sest paaritu astme puhul on vasak haru all. y = −2x² ei saa avaneda üles, sest a &lt; 0.</div>
 </section>
@@ -6319,6 +6335,30 @@ H — C — C — C — H
       }
       box.querySelector('.gq-next').addEventListener('click', next);
       next();
+    });
+  })();
+  // Joonised (graafikud, skeemid, joonvalemid) avanevad vajutades suurelt
+  (function(){
+    var SEL = '.fgraph, .fy-diag, .skel';
+    function ok(f){ return f && !f.closest('button, label, a, .uz-ov'); }
+    document.querySelectorAll(SEL).forEach(function(f){
+      if (!ok(f)) return;
+      f.classList.add('zm'); f.tabIndex = 0; f.setAttribute('role', 'button');
+      f.setAttribute('aria-label', t('Ava joonis suuremalt'));
+    });
+    function open(f){
+      var ov = document.createElement('div'); ov.className = 'uz-ov zm-ov';
+      var box = document.createElement('div'); box.className = 'zm-box'; box.setAttribute('role', 'dialog'); box.tabIndex = -1;
+      var c = f.cloneNode(true); c.classList.remove('zm'); c.removeAttribute('tabindex'); c.removeAttribute('role'); c.removeAttribute('aria-label'); c.removeAttribute('style');
+      box.appendChild(c); ov.appendChild(box); document.body.appendChild(ov);
+      function close(){ ov.remove(); document.removeEventListener('keydown', key); f.focus(); }
+      function key(e){ if (e.key === 'Escape') close(); }
+      ov.addEventListener('click', close); document.addEventListener('keydown', key);
+      box.focus();
+    }
+    document.addEventListener('click', function(e){ var f = e.target.closest && e.target.closest('.zm'); if (f) open(f); });
+    document.addEventListener('keydown', function(e){
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('zm')) { e.preventDefault(); open(e.target); }
     });
   })();
   // Matemaatika: GeoGebra graafikukalkulaator (laaditakse alles nupuvajutusel)
