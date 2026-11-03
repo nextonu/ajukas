@@ -963,6 +963,18 @@ section#kt-kava>p,section#kt-kava>h2{max-width:70ch}
 .fgraph{margin:14px 0}
 .fg-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .fg-row .fgraph{margin:6px 0}
+.ekstr-row{display:grid;gap:8px 20px}
+@media (min-width:900px){.ekstr-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center}}
+#v-mata-kt2 .ekstr-row .mf-tbl td:first-child{white-space:normal}@media (max-width:899px){#v-mata-kt2 .ekstr-row .mf-tbl td:last-child{white-space:nowrap}}#v-mata-kt2 .ekstr-row .mf-tbl td:first-child .muted{font-weight:400}
+.ekstr-fig{margin:6px 0;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px}
+.ekstr-fig figcaption{text-align:center;font-size:13px;color:var(--muted)}
+.ekstr-svg{display:block;width:100%;height:auto;max-width:440px;margin:0 auto}
+.ek-ax{stroke:var(--muted);stroke-width:1.2}.ek-d{stroke:var(--muted);stroke-width:1.2;stroke-dasharray:4 4}
+.ek-c{fill:none;stroke:#0EA5E9;stroke-width:2.6}
+.ek-t{fill:var(--text);font-size:12px;font-family:inherit}.ek-m{fill:var(--muted);font-size:11px}
+.ekstr-svg .ek-k{fill:#F97316}.ekstr-svg .ek-e{fill:#22C55E}.ekstr-svg .ek-p{fill:#EAB308;stroke:var(--panel);stroke-width:2}
+.ek-kt{fill:#F97316;font-weight:600}.ek-et{fill:#22C55E;font-weight:600}.ek-pt{font-weight:700}
+.ek-sw{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:0}.ek-sw.ek-k{background:#F97316}.ek-sw.ek-e{background:#22C55E}.ek-sw.ek-p{background:#EAB308}
 .fg-svg{display:block;width:100%;max-width:420px;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px}
 .fg-grid line{stroke:var(--line);stroke-width:1}
 .fg-axis line{stroke:var(--muted);stroke-width:1.5}
@@ -3098,16 +3110,18 @@ H — C — C — C — H
   <tr><td>X<sub>−</sub></td><td><b>Negatiivsuspiirkond</b>: kus y &lt; 0, graafik on x-teljest madalamal</td></tr>
   <tr><td>X<sub>↑</sub></td><td><b>Kasvamisvahemik</b>: vasakult paremale liikudes graafik tõuseb</td></tr>
   <tr><td>X<sub>↓</sub></td><td><b>Kahanemisvahemik</b>: vasakult paremale liikudes graafik langeb</td></tr>
-  <tr><td>E<sub>max</sub>, E<sub>min</sub></td><td><b>Ekstreemumpunktid</b>: kõrgeim või madalaim koht ümbruses. Ekstreemumkoht on x, ekstreemum on y.</td></tr>
+  <tr><td>E<sub>max</sub>, E<sub>min</sub></td><td><b>Ekstreemumpunktid</b>: kohad, kus graafik pöörab. Seal läheb tõusmine üle langemiseks (<b>maksimum</b>) või langemine tõusmiseks (<b>miinimum</b>). NB! <b>Ekstreemumkoht</b> on ainult x, <b>ekstreemumpunkt</b> on (x; y). Vaata joonist allpool.</td></tr>
   <tr><td>Paarsus</td><td><b>Paarisfunktsioon</b>: f(−x) = f(x), graafik on sümmeetriline y-telje suhtes. <b>Paaritu</b>: f(−x) = −f(x), sümmeetriline nullpunkti suhtes.</td></tr>
   </tbody></table></div>
   <h3>Ekstreemumkoht, ekstreemumpunkt ja ekstreemum</h3>
-  <p>Need kolm sõna on erinevad asjad. Vaata näidet, kus parabooli haripunkt on (1; 3):</p>
-  <div class="tablewrap"><table class="mf-tbl"><thead><tr><th>Mõiste</th><th>Mis see on</th><th>Näide</th></tr></thead><tbody>
-  <tr><td><b>Ekstreemumkoht</b></td><td>ainult <b>x</b></td><td>x = 1</td></tr>
-  <tr><td><b>Ekstreemum</b></td><td>ainult <b>y</b> ehk funktsiooni väärtus selles kohas</td><td>y = 3</td></tr>
-  <tr><td><b>Ekstreemumpunkt</b></td><td>punkt mõlema koordinaadiga</td><td>E<sub>max</sub>(1; 3)</td></tr>
+  <div class="ekstr-row"><div>
+  <p><b>Ekstreemumpunkt</b> on koht, kus graafik pöörab: tõusmine läheb üle langemiseks või langemine tõusmiseks. Selle juures on kolm erinevat sõna. Näide: y = x³ − 3x (joonisel).</p>
+  <div class="tablewrap"><table class="mf-tbl"><thead><tr><th>Mõiste</th><th>Näide joonisel</th></tr></thead><tbody>
+  <tr><td><b>Ekstreemumkoht</b><br><span class="muted">ainult x</span></td><td><span class="ek-sw ek-k"></span>x = −1 ja x = 1</td></tr>
+  <tr><td><b>Ekstreemum</b><br><span class="muted">ainult y (funktsiooni väärtus)</span></td><td><span class="ek-sw ek-e"></span>y = 2 ja y = −2</td></tr>
+  <tr><td><b>Ekstreemumpunkt</b><br><span class="muted">punkt (x; y)</span></td><td><span class="ek-sw ek-p"></span>E<sub>max</sub>(−1; 2)<br><span class="ek-sw" style="visibility:hidden"></span>E<sub>min</sub>(1; −2)</td></tr>
   </tbody></table></div>
+  </div><figure class="ekstr-fig"><svg class="ekstr-svg" viewBox="0 0 380 290" role="img" aria-label="Graafik y = x³ − 3x: maksimumpunkt (−1; 2) ja miinimumpunkt (1; −2)"><line x1="30" y1="140" x2="370" y2="140" class="ek-ax"/><line x1="190.0" y1="12" x2="190.0" y2="280" class="ek-ax"/><text x="364" y="134" class="ek-t">x</text><text x="196.0" y="20" class="ek-t">y</text><line x1="134.0" y1="60" x2="134.0" y2="140" class="ek-d"/><line x1="134.0" y1="60" x2="190.0" y2="60" class="ek-d"/><line x1="246.0" y1="220" x2="246.0" y2="140" class="ek-d"/><line x1="246.0" y1="220" x2="190.0" y2="220" class="ek-d"/><path d="M72.4,258.4 L75.2,238.6 L78.0,220.0 L80.8,202.6 L83.6,186.4 L86.4,171.3 L89.2,157.3 L92.0,144.4 L94.8,132.5 L97.6,121.7 L100.4,111.8 L103.2,103.0 L106.0,95.0 L108.8,87.9 L111.6,81.8 L114.4,76.4 L117.2,71.9 L120.0,68.1 L122.8,65.1 L125.6,62.8 L128.4,61.2 L131.2,60.3 L134.0,60.0 L136.8,60.3 L139.6,61.2 L142.4,62.6 L145.2,64.5 L148.0,66.9 L150.8,69.7 L153.6,73.0 L156.4,76.6 L159.2,80.7 L162.0,85.0 L164.8,89.6 L167.6,94.6 L170.4,99.7 L173.2,105.1 L176.0,110.6 L178.8,116.3 L181.6,122.1 L184.4,128.0 L187.2,134.0 L190.0,140.0 L192.8,146.0 L195.6,152.0 L198.4,157.9 L201.2,163.7 L204.0,169.4 L206.8,174.9 L209.6,180.3 L212.4,185.4 L215.2,190.4 L218.0,195.0 L220.8,199.3 L223.6,203.4 L226.4,207.0 L229.2,210.3 L232.0,213.1 L234.8,215.5 L237.6,217.4 L240.4,218.8 L243.2,219.7 L246.0,220.0 L248.8,219.7 L251.6,218.8 L254.4,217.2 L257.2,214.9 L260.0,211.9 L262.8,208.1 L265.6,203.6 L268.4,198.2 L271.2,192.1 L274.0,185.0 L276.8,177.0 L279.6,168.2 L282.4,158.3 L285.2,147.5 L288.0,135.6 L290.8,122.7 L293.6,108.7 L296.4,93.6 L299.2,77.4 L302.0,60.0 L304.8,41.4 L307.6,21.6" class="ek-c"/><circle cx="134.0" cy="140" r="4" class="ek-k"/><circle cx="246.0" cy="140" r="4" class="ek-k"/><circle cx="190.0" cy="60" r="4" class="ek-e"/><circle cx="190.0" cy="220" r="4" class="ek-e"/><circle cx="134.0" cy="60" r="5.5" class="ek-p"/><circle cx="246.0" cy="220" r="5.5" class="ek-p"/><text x="134.0" y="46" text-anchor="middle" class="ek-t ek-pt">E<tspan dy="3" font-size="9">max</tspan><tspan dy="-3">(−1; 2)</tspan></text><text x="246.0" y="242" text-anchor="middle" class="ek-t ek-pt">E<tspan dy="3" font-size="9">min</tspan><tspan dy="-3">(1; −2)</tspan></text><text x="134.0" y="158" text-anchor="middle" class="ek-t ek-kt">x = −1</text><text x="246.0" y="130" text-anchor="middle" class="ek-t ek-kt">x = 1</text><text x="198.0" y="64" class="ek-t ek-et">y = 2</text><text x="182.0" y="224" text-anchor="end" class="ek-t ek-et">y = −2</text><text x="80.8" y="248.0" class="ek-t ek-m">tõuseb ↗</text><text x="198.4" y="104.0" class="ek-t ek-m">langeb ↘</text><text x="299.2" y="176.0" class="ek-t ek-m">tõuseb ↗</text></svg><figcaption>y = x³ − 3x</figcaption></figure></div>
   <ul>
     <li><b>Liigi määramine</b> tähendab, et ütled, kas see on <b>maksimum</b> (graafik tõuseb ja siis langeb) või <b>miinimum</b> (graafik langeb ja siis tõuseb).</li>
     <li>Ekstreemum on <b>lokaalne</b>: see on suurim või vähim väärtus ainult <b>selle koha ümbruses</b>, mitte tingimata kogu graafikul. Funktsioonil võib olla mitu maksimumi ja mõni miinimum võib olla suurem kui mõni maksimum.</li>
