@@ -1008,6 +1008,9 @@ section#kt-kava>p,section#kt-kava>h2{max-width:70ch}
 #v-mata-kt2 .exq .sol li::before{content:counter(st);position:absolute;left:10px;top:8px;width:24px;height:24px;border-radius:50%;background:var(--sub);color:#111;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
 #v-mata-kt2 .mf-res{list-style:none;padding-left:0}
 #v-mata-kt2 .mf-res li{margin:6px 0;padding:7px 12px;border-left:4px solid var(--sub);background:var(--raised);border-radius:0 6px 6px 0;color:var(--bright);font-size:17px;line-height:1.55}
+#v-mata-kt2 .mf-res li.steps .st{display:block;padding-left:14px;margin-top:2px}
+#v-mata-kt2 .mf-res li.steps .st i{font-style:normal;font-size:14.5px;color:var(--text);margin-left:14px;opacity:.85}
+#v-mata-kt2 .mf-res li.steps .st i::before{content:"("}#v-mata-kt2 .mf-res li.steps .st i::after{content:")"}
 #v-mata-kt2 .ar{color:var(--sub);font-weight:700;padding:0 3px}
 .par-ex{display:grid;gap:10px;margin:12px 0 16px}
 .pe-r{--pc:#64748B;display:grid;grid-template-columns:130px 1fr auto;align-items:center;gap:8px 16px;padding:12px 16px;border:1px solid var(--line);border-left:5px solid var(--pc);border-radius:8px;background:var(--panel);font-size:18px}
@@ -3167,13 +3170,13 @@ H — C — C — C — H
   <h3>Näide: y = −3x² + 6x (TV lk 58, ül 11)</h3>
   <div class="fgraph" data-g='{"x":[-3,5],"y":[-6,5],"fns":[["-3*x*x+6*x","y = −3x² + 6x"]],"pts":[[1,3,"(1; 3)"],[0,0,""],[2,0,""]]}'></div>
   <ul class="mf-res">
-    <li>Haripunkt: <span class="hf"><span>x<sub>h</sub> =</span><span class="frac"><span>−b</span><span>2a</span></span></span> = <span class="frac"><span>−6</span><span>−6</span></span> = 1,&emsp;y = −3 + 6 = 3. Parabool avaneb alla (a &lt; 0).</li>
+    <li class="steps"><b>Haripunkt</b><span class="st"><span class="hf"><span>x<sub>h</sub> =</span><span class="frac"><span>−b</span><span>2a</span></span></span> = <span class="frac"><span>−6</span><span>−6</span></span> = 1</span><span class="st">y = −3 · 1² + 6 · 1 = 3</span><span class="st">a &lt; 0, seega parabool avaneb alla</span></li>
     <li>X = R,&emsp;Y = ]−∞; 3]</li>
-    <li>Nullkohad: võta y = 0 <span class="ar">→</span> −3x² + 6x = 0 <span class="ar">→</span> tõsta −3x sulgude ette: −3x(x − 2) = 0 <span class="ar">→</span> korrutis on 0, kui üks tegur on 0: x = 0 või x − 2 = 0 <span class="ar">→</span> X<sub>0</sub> = {0; 2}</li>
+    <li class="steps"><b>Nullkohad</b> (võta y = 0)<span class="st"><span class="ar">→</span> −3x² + 6x = 0</span><span class="st"><span class="ar">→</span> −3x(x − 2) = 0<i>tõsta −3x sulgude ette</i></span><span class="st"><span class="ar">→</span> x = 0 või x − 2 = 0<i>korrutis on 0, kui üks tegur on 0</i></span><span class="st"><span class="ar">→</span> X<sub>0</sub> = {0; 2}</span></li>
     <li>X<sub>+</sub> = ]0; 2[,&emsp;X<sub>−</sub> = ]−∞; 0[ ∪ ]2; ∞[</li>
     <li>X<sub>↑</sub> = ]−∞; 1[,&emsp;X<sub>↓</sub> = ]1; ∞[</li>
     <li>E<sub>max</sub>(1; 3)</li>
-    <li>Paarsus: f(−x) = −3(−x)² + 6(−x) = <b>−3x² − 6x</b>.&emsp;f(x) = −3x² <b>+</b> 6x (erineb x-liikme märk),&emsp;−f(x) = <b>+</b>3x² − 6x (erineb x²-liikme märk) <span class="ar">→</span> ei paaris ega paaritu</li>
+    <li class="steps"><b>Paarsus</b><span class="st">f(−x) = −3(−x)² + 6(−x) = −3x² − 6x</span><span class="st">f(x) = −3x² + 6x<i>erineb x-liikme märk</i></span><span class="st">−f(x) = 3x² − 6x<i>erineb x²-liikme märk</i></span><span class="st"><span class="ar">→</span> ei paaris ega paaritu</span></li>
   </ul>
   <h3>Määramispiirkond valemist</h3>
   <ul>
