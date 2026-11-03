@@ -963,6 +963,7 @@ section#kt-kava>p,section#kt-kava>h2{max-width:70ch}
 .fgraph{margin:14px 0}
 .fg-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .fg-row .fgraph{margin:6px 0}
+.fg-cap{font-size:15px;margin:10px 0 0;color:var(--bright)}.fg-cap b{background:none;padding:0;box-shadow:none;color:var(--sub)}
 .uur-fig{display:none}
 @media (min-width:1200px){.uur-wrap{position:relative}.uur-fig{display:block;position:absolute;left:calc(100% + 28px);top:0;width:380px;margin:0;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px}}
 .uur-fig figcaption{font-weight:600;font-size:14px;margin-bottom:4px}
@@ -3193,7 +3194,8 @@ H — C — C — C — H
   <h2>Astme- ja juurfunktsioon</h2>
   <p class="lead">Astmefunktsioon on y = x<sup>n</sup>, kus n ≠ 0 ja n on täisarv. Kuju sõltub sellest, kas n on paaris või paaritu, positiivne või negatiivne.</p>
   <h3>Positiivne astendaja: y = x², x⁴ … ja y = x³, x⁵ …</h3>
-  <div class="fg-row"><div class="fgraph" data-g='{"x":[-3,3],"y":[-1,5],"fns":[["x*x","y = x²"],["pow(x,4)","y = x⁴"]]}'></div><div class="fgraph" data-g='{"x":[-3,3],"y":[-3,3],"fns":[["pow(x,3)","y = x³"],["pow(x,5)","y = x⁵"]]}'></div></div>
+  <div class="fg-row"><div><div class="fg-cap"><b>Paaris</b> astendaja (2, 4, 6 …): U-kuju</div><div class="fgraph" data-g='{"x":[-3,3],"y":[-1,5],"fns":[["x*x","y = x²"],["pow(x,4)","y = x⁴"]]}'></div></div><div><div class="fg-cap"><b>Paaritu</b> astendaja (3, 5, 7 …): S-kuju</div><div class="fgraph" data-g='{"x":[-3,3],"y":[-3,3],"fns":[["pow(x,3)","y = x³"],["pow(x,5)","y = x⁵"]]}'></div></div></div>
+  <div class="key"><span class="label">Kas astendaja suurus loeb?</span>Kuju jääb samaks: paarisastendajaga alati U, paaritu astendajaga alati S. Kõik läbivad punkte (0; 0) ja (1; 1). Mida suurem astendaja, seda <b>lamedam</b> on graafik −1 ja 1 vahel ja seda <b>järsemalt</b> tõuseb see väljaspool seda vahemikku. Graafikud lõikuvad kohtades x = −1 ja x = 1, sest 1 on igas astmes 1.</div>
   <div class="tablewrap"><table class="mf-tbl"><thead><tr><th></th><th>n paaris (x², x⁴)</th><th>n paaritu (x³, x⁵)</th></tr></thead><tbody>
   <tr><td>X</td><td>R</td><td>R</td></tr>
   <tr><td>Y</td><td>[0; ∞[</td><td>R</td></tr>
