@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ajukas-ver" content="2026-11-03T18:00">
 <title>Ajukas</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23EAB308'/%3E%3Cpath fill='%23181818' fill-rule='evenodd' d='M9 24 15.2 8h1.6L23 24h-3.3l-1.4-3.9h-4.6L12.3 24Zm5.3-6.6h3.4L16 12.6Z'/%3E%3Ccircle cx='25' cy='23' r='2' fill='%23181818'/%3E%3C/svg%3E">
 <meta name="description" content="Kontrolltööde kordamismaterjalid aine ja teema kaupa: konspektid, enesetestid ja viited.">
@@ -1209,8 +1210,9 @@ sub{font-size:.72em;line-height:0}
       <button type="button" data-suvi-set="1">Sees</button>
     </div>
     <div id="uustest-box" hidden>
-    <p class="plabel">Uute ainete test (ainult admin)</p>
-    <div class="seg" role="group" aria-label="Uute ainete testirežiim">
+    <p class="plabel">Arendusrežiim (ainult admin)</p>
+    <p class="muted" style="font-size:12.5px;margin:0 0 6px">Kõik ained on märgitud uueks ja iga väikse muudatuse kohta tuleb teade „Värskenda”.</p>
+    <div class="seg" role="group" aria-label="Arendusrežiim">
       <button type="button" data-uustest-set="0">Väljas</button>
       <button type="button" data-uustest-set="1">Sees</button>
     </div>
@@ -5229,6 +5231,7 @@ H — C — C — C — H
     document.getElementById('uus-reset').addEventListener('click', function(){ P.visit = {}; saveProgress(); paintFresh(); });
     paintT();
   })();
+  Ajukas.devMode = uusTest;
   Ajukas.adminChanged = function(){ var b = document.getElementById('uustest-box'); if (b) b.hidden = !Ajukas.isAdmin; paintFresh(); };
   Ajukas.getProgress = function(){ return P; };
   Ajukas.route = function(){ route(); };
@@ -6838,6 +6841,10 @@ H — C — C — C — H
     if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(function(){});
     // uus versioon: kui serveris on leht uuem kui see, mis praegu lahti on, paku värskendamist
     // GitHub avaldab kogu lehe uuesti ka siis, kui muutub ainult tunniplaan, seega kuupäev üksi ei loe: võrdle sisu
+    // Tavalisele kasutajale ainult siis, kui ajukas-ver on muutunud (tools/teade.py valjas); arendusrežiimis iga muudatuse peale
+    var VER = (document.querySelector('meta[name="ajukas-ver"]') || {}).content || '';
+    function ver(x){ var m = /<meta name="ajukas-ver" content="([^"]*)"/.exec(x); return m ? m[1] : ''; }
+    function dev(){ try { return !!(window.Ajukas && Ajukas.devMode && Ajukas.devMode()); } catch (e) { return false; } }
     var mine = Date.parse(document.lastModified), lastCheck = 0, nv = document.getElementById('newver'), base = null;
     function hash(x){ var h = 2166136261; for (var k = 0; k < x.length; k++) { h ^= x.charCodeAt(k); h = Math.imul(h, 16777619); } return h >>> 0; }
     function page(){ return fetch(location.pathname, { cache: 'no-store' }).then(function(r){ return r.ok ? r.text() : null; }); }
@@ -6852,7 +6859,10 @@ H — C — C — C — H
           if (!x) return;
           var h = hash(x);
           if (base === null) { base = h; mine = srv; return; }
-          if (h !== base) nv.hidden = false; else mine = srv;
+          if (h === base) { mine = srv; return; }
+          if (dev()) { nv.querySelector('span').textContent = t('Uus muudatus (arendusrežiim).'); nv.hidden = false; }
+          else if (ver(x) !== VER) nv.hidden = false;
+          else mine = srv;
         });
       }).catch(function(){});
     }
