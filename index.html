@@ -4819,10 +4819,17 @@ H — C — C — C — H
       if (sec.querySelector('.quiz')) return;
       var view = sec.closest('.view'); var tab = document.getElementById('t-' + sec.id);
       var where = view.getAttribute('data-parent-title') + ' › ' + view.getAttribute('data-title') + ' › ' + (tab ? tab.textContent.replace(' ✓','') : '');
-      sec.querySelectorAll('h2, h3, p, li, td, .person, .when').forEach(function(el){
+      sec.querySelectorAll('h2, h3, p, li, td, .person, .when, .exq .task').forEach(function(el){
         if (el.closest('.seenfoot') || el.closest('.person') && !el.classList.contains('person') || el.querySelector('li')) return;
         var c = el.cloneNode(true); c.querySelectorAll('.src, .yr + .yr').forEach(function(x){ x.remove(); });
-        var txt = c.textContent.replace(/\s+/g, ' ').trim();
+        // murd (.frac) otsingusse kujul a/b, et „1/2” leiaks ka murrud
+        Array.prototype.slice.call(c.querySelectorAll('.frac')).reverse().forEach(function(f){
+          var k = f.children; if (k.length < 2) return;
+          var u = k[0].textContent.trim(), d = k[1].textContent.trim();
+          function br(x){ return /[\s+−·:-]/.test(x) ? '(' + x + ')' : x; }
+          f.replaceWith(document.createTextNode(br(u) + '/' + br(d)));
+        });
+        var txt = c.textContent.replace(/\s+/g, ' ').trim().replace(/(\d?)([½⅓⅔¼¾])/g, function(m, d, f){ return (d ? d + ' ' : '') + { '½': '1/2', '⅓': '1/3', '⅔': '2/3', '¼': '1/4', '¾': '3/4' }[f]; });
         if (txt.length < 3) return;
         index.push({ pid: sec.id, where: where, text: txt, n: norm(txt), el: el });
       });
