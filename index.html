@@ -1230,6 +1230,10 @@ sub{font-size:.72em;line-height:0}
       <button type="button" data-uustest-set="1">Sees</button>
     </div>
     <button type="button" class="linkbtn" id="uus-reset" style="margin-top:8px;font-size:12.5px">Näita uusi uuesti (unusta, mida olen vaadanud)</button>
+    <p class="plabel" style="margin-top:16px">Värskendamise teade kõigile (ainult admin)</p>
+    <p style="font-size:12.5px;margin:0 0 8px;color:var(--err);line-height:1.45">Kõik, kellel on Ajukas lahti, saavad mõne minuti jooksul teate „Ajukasse on vahepeal midagi uut lisatud. Värskenda”. Vajuta alles siis, kui oled muudatustega valmis, mitte iga väikse asja järel. Kui sa ei vajuta, tuleb teade ise 30 minutit pärast viimast muudatust.</p>
+    <button type="button" class="btn" id="push-ver" style="background:#B91C1C;border-color:#B91C1C;color:#fff">Saada kõigile värskendamise teade</button>
+    <p class="muted" id="push-ver-msg" style="font-size:12.5px;margin:6px 0 0" aria-live="polite"></p>
     </div>
   </div>
 </div>
@@ -5341,6 +5345,15 @@ H — C — C — C — H
       b.addEventListener('click', function(){ try { localStorage.setItem('ajukas-uustest', b.getAttribute('data-uustest-set')); } catch (e) {} paintT(); paintFresh(); });
     });
     document.getElementById('uus-reset').addEventListener('click', function(){ P.visit = {}; saveProgress(); paintFresh(); });
+    document.getElementById('push-ver').addEventListener('click', function(){
+      var m = document.getElementById('push-ver-msg'), b = this;
+      if (!Ajukas.isAdmin || !Ajukas.pushVer) { m.textContent = t('Logi enne admini kontoga sisse.'); return; }
+      if (!confirm(t('Saata kõigile teade „Värskenda”?'))) return;
+      b.disabled = true; m.textContent = t('Saadan…');
+      Ajukas.pushVer().then(function(){ m.textContent = t('Saadetud kell {k}. Lahtised lehed näevad teadet mõne minuti jooksul.', { k: new Date().toLocaleTimeString('et-EE', { hour: '2-digit', minute: '2-digit' }) }); })
+        .catch(function(e){ m.textContent = t('Ei õnnestunud') + ': ' + ((e && e.code) || e); })
+        .then(function(){ b.disabled = false; });
+    });
     paintT();
   })();
   Ajukas.devMode = uusTest;
@@ -7016,9 +7029,16 @@ H — C — C — C — H
     function hash(x){ var h = 2166136261; for (var k = 0; k < x.length; k++) { h ^= x.charCodeAt(k); h = Math.imul(h, 16777619); } return h >>> 0; }
     function page(){ return fetch(location.pathname, { cache: 'no-store' }).then(function(r){ return r.ok ? r.text() : null; }); }
     if (navigator.onLine) page().then(function(x){ if (x && base === null) base = hash(x); }).catch(function(){});
+    // admin saab seadetest saata teate kõigile kohe (Firestore seaded/uuendus); näidatakse ainult siis, kui leht on vahepeal muutunud
+    var FV = 'https://firestore.googleapis.com/v1/projects/ajukas-7be66/databases/(default)/documents/seaded/uuendus?key=AIzaSyD4tAFZAiOhCyqvJ9XYNTlRZurorvdLfVw';
+    var push0 = null, pend = false;
+    function pushed(){ return fetch(FV, { cache: 'no-store' }).then(function(r){ return r.status === 404 ? {} : r.ok ? r.json() : null; }).then(function(d){ return d ? ((d.fields && d.fields.aeg && d.fields.aeg.timestampValue) || '') : null; }).catch(function(){ return null; }); }
+    function checkPush(){ return pushed().then(function(v){ if (v && push0 !== null && v !== push0 && nv.hidden) nv.hidden = false; }); }
+    if (navigator.onLine) pushed().then(function(v){ if (push0 === null && v !== null) push0 = v; });
     function checkUpdate(force){
       if (!nv.hidden || !navigator.onLine || isNaN(mine) || (!force && Date.now() - lastCheck < 60000)) return;
       lastCheck = Date.now();
+      if (pend) checkPush();
       fetch(location.pathname, { method: 'HEAD', cache: 'no-store' }).then(function(r){
         var srv = Date.parse(r.headers.get('Last-Modified') || '');
         if (!r.ok || !(srv > mine)) return;
@@ -7029,7 +7049,7 @@ H — C — C — C — H
           if (h === base) { mine = srv; return; }
           if (dev()) { nv.querySelector('span').textContent = t('Uus muudatus (arendusrežiim).'); nv.hidden = false; }
           else if (ver(x) !== VER) nv.hidden = false;
-          else mine = srv;
+          else { mine = srv; pend = true; checkPush(); }
         });
       }).catch(function(){});
     }
@@ -7104,6 +7124,8 @@ if (!FIREBASE_CONFIG) {
   const app = initializeApp(FIREBASE_CONFIG);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  // admin: saada kõigile värskendamise teade (lehed loevad seaded/uuendus aega)
+  A.pushVer = () => setDoc(doc(db, 'seaded', 'uuendus'), { aeg: serverTimestamp() });
 
   const userOf = (u) => (u && u.email ? u.email.split('@')[0] : '');
   const msg = (el, text, kind) => { el.textContent = text; el.className = 'msg' + (kind ? ' ' + kind : ''); };

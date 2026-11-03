@@ -56,6 +56,14 @@ service cloud.firestore {
             && request.resource.data.teavitatud == true);
     }
 
+    // Värskendamise teade kõigile: admin vajutab seadetes nuppu, lehed loevad seda aega.
+    match /seaded/uuendus {
+      allow read: if true;
+      allow write: if isAdmin()
+        && request.resource.data.keys().hasOnly(['aeg'])
+        && request.resource.data.aeg == request.time;
+    }
+
     // ===== FOORUM =====
     function userName() { return request.auth.token.email.split('@')[0]; }
     // keelatud sõnad (terve sõna, suurtähed ei loe); sama nimekiri on ka lehe koodis
