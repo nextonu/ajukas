@@ -35,3 +35,11 @@ jobs:
           if [ $(( 10#$(date -u +%M) % 20 )) -lt 2 ]; then
             gh workflow run tunniplaan.yml --ref main --repo "$GITHUB_REPOSITORY" && echo "tunniplaani kontroll käivitatud"
           fi
+      - name: Käivita uuendusteate kontroll (umbes iga 10 minuti tagant)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ $(( 10#$(date -u +%M) % 10 )) -lt 2 ]; then
+            gh workflow run versioon.yml --ref main --repo "$GITHUB_REPOSITORY" && echo "uuendusteate kontroll käivitatud"
+          fi

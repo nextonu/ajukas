@@ -1,0 +1,38 @@
+name: Uuendusteade õpilastele
+
+on:
+  schedule:
+    - cron: '47 * * * *'    # varuks; päriselt käivitab teavita.yml umbes iga 10 min tagant
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: versioon
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Tõsta ajukas-ver, kui viimasest muudatusest on üle 30 min
+        run: |
+          # viimane commit, mis muutis ajukas-ver rida; kas pärast seda on index.html veel muutunud?
+          ver=$(git log -1 --format=%H -G'name="ajukas-ver"' -- index.html)
+          last=$(git log -1 --format=%ct "$ver"..HEAD -- index.html)
+          if [ -z "$last" ]; then echo "uusi muudatusi pole"; exit 0; fi
+          age=$(( $(date +%s) - last ))
+          echo "viimasest muudatusest $((age / 60)) min"
+          if [ "$age" -lt 1800 ]; then exit 0; fi
+          python tools/teade.py versioon
+          git config user.name "github-actions[bot]"
+          git config user.email "41898828+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Uuendusteade õpilastele (30 min ilma muudatusteta)"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
