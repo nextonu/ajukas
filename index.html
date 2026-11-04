@@ -6542,6 +6542,9 @@ H — C — C — C — H
     var key = box.getAttribute('data-key'), base = box.getAttribute('data-base'), files = box.getAttribute('data-files').split(' ');
     var au = box.querySelector('.ab-audio'), ch = box.querySelector('.ab-ch'), rate = box.querySelector('.ab-rate'), info = box.querySelector('.ab-info');
     var LS = 'ajukas-audio-' + key, cur = -1, seekTo = 0, lastLocal = 0;
+    // act = millal selles aknas viimati kuulati või midagi muudeti; vana lahtine aken (nt 3. peatükil) ei tohi uuemat kohta üle kirjutada
+    var act = 0, autoSeek = false;
+    function touch(){ act = Date.now(); }
     // archive.org suunab iga faili ümber; otseaadress leitakse ette, et peatüki vahetus oleks kiire
     var direct = {}, warm = null, warmI = -1, guard = 0, want = false;
     function url(i){ return direct[i] || base + files[i]; }
@@ -6668,9 +6671,10 @@ H — C — C — C — H
       if (a && b) return a.u >= b.u ? a : b;
       return a || b;
     }
-    function state(){ return { ch: cur < 0 ? +ch.value : cur, t: Math.floor(au.currentTime || seekTo || 0), r: +rate.value, v: +vol.value, u: Date.now() }; }
-    function saveLocal(){ try { localStorage.setItem(LS, JSON.stringify(state())); } catch(e) {} }
-    function saveAll(){ saveLocal(); if (Ajukas.saveAudio) Ajukas.saveAudio(key, state()); }
+    function state(){ return { ch: cur < 0 ? +ch.value : cur, t: Math.floor(au.currentTime || seekTo || 0), r: +rate.value, v: +vol.value, u: act }; }
+    function mineNewest(){ var st = readState(); return act && !(st && st.u > act); }
+    function saveLocal(){ if (!mineNewest()) return; try { localStorage.setItem(LS, JSON.stringify(state())); } catch(e) {} }
+    function saveAll(){ if (!mineNewest()) return; saveLocal(); if (Ajukas.saveAudio) Ajukas.saveAudio(key, state()); }
     function showInfo(){
       var st = readState();
       info.textContent = st && (st.t > 5 || st.ch > 0) ? t('Pooleli: {c}, {t}', { c: label(st.ch), t: fmt(st.t) }) : '';
@@ -6702,16 +6706,18 @@ H — C — C — C — H
       try {
         if (!actx) {
           var AC2 = window.AudioContext || window.webkitAudioContext; if (!AC2) return;
-          actx = new AC2(); gain = actx.createGain();
-          var lim = actx.createDynamicsCompressor();
-          lim.threshold.value = -6; lim.knee.value = 6; lim.ratio.value = 12; lim.attack.value = 0.003; lim.release.value = 0.25;
-          actx.createMediaElementSource(au).connect(gain); gain.connect(lim); lim.connect(actx.destination);
+          try { actx = new AC2({ latencyHint: 'playback' }); } catch(e) { actx = new AC2(); }
+          gain = actx.createGain();
+          var lim = actx.createDynamicsCompressor(), out = actx.createGain();
+          lim.threshold.value = -12; lim.knee.value = 0; lim.ratio.value = 20; lim.attack.value = 0.002; lim.release.value = 0.25;
+          out.gain.value = 0.7;
+          actx.createMediaElementSource(au).connect(gain); gain.connect(lim); lim.connect(out); out.connect(actx.destination);
         }
         gain.gain.value = v;
         if (actx.state !== 'running') actx.resume().catch(function(){});
       } catch(e) {}
     }
-    vol.addEventListener('change', function(){ boost(); saveLocal(); });
+    vol.addEventListener('change', function(){ touch(); boost(); saveLocal(); });
     function media(){
       if (!('mediaSession' in navigator)) return;
       try {
@@ -6721,13 +6727,14 @@ H — C — C — C — H
         ms.setActionHandler('pause', function(){ keep = false; au.pause(); ms.playbackState = 'paused'; });
         ms.setActionHandler('seekbackward', function(){ au.currentTime = Math.max(0, au.currentTime - 15); });
         ms.setActionHandler('seekforward', function(){ au.currentTime = au.currentTime + 30; });
-        ms.setActionHandler('previoustrack', function(){ if (au.currentTime > 5 || cur === 0) au.currentTime = 0; else load(cur - 1, 0, true); });
-        ms.setActionHandler('nexttrack', function(){ if (cur < files.length - 1) load(cur + 1, 0, true); });
+        ms.setActionHandler('previoustrack', function(){ if (au.currentTime > 5 || cur === 0) au.currentTime = 0; else { touch(); load(cur - 1, 0, true); } });
+        ms.setActionHandler('nexttrack', function(){ if (cur < files.length - 1) { touch(); load(cur + 1, 0, true); } });
         try { ms.setActionHandler('seekto', function(e){ au.currentTime = e.seekTime; }); } catch(e) {}
       } catch(e) {}
     }
-    au.addEventListener('loadedmetadata', function(){ if (seekTo) { try { au.currentTime = Math.max(0, seekTo - 3); } catch(e) {} seekTo = 0; } au.playbackRate = +rate.value; });
-    au.addEventListener('play', function(){ if (cur < 0) load(+ch.value, 0, true); media(); boost(); resolve(cur); resolve(cur + 1); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; });
+    au.addEventListener('loadedmetadata', function(){ if (seekTo) { try { autoSeek = true; au.currentTime = Math.max(0, seekTo - 3); } catch(e) {} seekTo = 0; } au.playbackRate = +rate.value; });
+    au.addEventListener('seeked', function(){ if (autoSeek) { autoSeek = false; return; } if (cur >= 0) touch(); });
+    au.addEventListener('play', function(){ touch(); if (cur < 0) load(+ch.value, 0, true); media(); boost(); resolve(cur); resolve(cur + 1); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; });
     au.addEventListener('playing', function(){ want = false; keep = true; blocked = false; clearTimeout(guard); setTimeout(function(){ if (!au.paused) fails = 0; }, 20000); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; });
     // võrguviga keset peatükki (nt taustal): jätka samast kohast, kui kuulaja ise pausi ei pannud
     var keep = false, fails = 0;
@@ -6747,7 +6754,7 @@ H — C — C — C — H
       }, 20000);
     });
     au.addEventListener('timeupdate', function(){
-      var now = Date.now(); if (now - lastLocal > 3000) { lastLocal = now; saveLocal(); }
+      var now = Date.now(); if (!au.paused) act = now; if (now - lastLocal > 3000) { lastLocal = now; saveLocal(); }
       if (au.duration && au.duration - au.currentTime < 60 && !au.paused) prewarm(cur + 1);
       if ('mediaSession' in navigator && navigator.mediaSession.setPositionState && au.duration) { try { navigator.mediaSession.setPositionState({ duration: au.duration, playbackRate: au.playbackRate, position: Math.min(au.currentTime, au.duration) }); } catch(e) {} }
     });
@@ -6755,18 +6762,19 @@ H — C — C — C — H
     au.addEventListener('ended', function(){
       if (cur < files.length - 1) {
         if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
-        load(cur + 1, 0, true); saveAll(); showInfo();
-      } else { saveAll(); showInfo(); }
+        touch(); load(cur + 1, 0, true); saveAll(); showInfo();
+      } else { touch(); saveAll(); showInfo(); }
     });
-    ch.addEventListener('change', function(){ load(+ch.value, 0, !au.paused); saveAll(); showInfo(); });
-    rate.addEventListener('change', function(){ au.playbackRate = +rate.value; saveLocal(); });
+    ch.addEventListener('change', function(){ touch(); load(+ch.value, 0, !au.paused); saveAll(); showInfo(); });
+    rate.addEventListener('change', function(){ touch(); au.playbackRate = +rate.value; saveLocal(); });
     box.querySelector('.ab-back').addEventListener('click', function(){ if (cur < 0) return; au.currentTime = Math.max(0, au.currentTime - 15); });
     box.querySelector('.ab-fwd').addEventListener('click', function(){ if (cur < 0) return; au.currentTime = au.currentTime + 30; });
-    box.querySelector('.ab-next').addEventListener('click', function(){ var i = (cur < 0 ? +ch.value : cur) + 1; if (i < files.length) { load(i, 0, !au.paused); saveAll(); showInfo(); } });
+    box.querySelector('.ab-next').addEventListener('click', function(){ var i = (cur < 0 ? +ch.value : cur) + 1; if (i < files.length) { touch(); load(i, 0, !au.paused); saveAll(); showInfo(); } });
     window.addEventListener('pagehide', function(){ if (cur >= 0) saveAll(); });
     document.addEventListener('visibilitychange', function(){
       if (document.visibilityState === 'hidden' && cur >= 0) saveLocal();
       if (document.visibilityState === 'visible' && blocked && au.paused && cur >= 0) { blocked = false; tryPlay(); }
+      if (document.visibilityState === 'visible' && Ajukas.onAudioSync) Ajukas.onAudioSync();
       if (document.visibilityState === 'visible' && actx && actx.state !== 'running' && !au.paused) actx.resume().catch(function(){});
     });
     function restore(){
