@@ -646,6 +646,8 @@ body{padding-bottom:80px}
 .testbadge{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--bright);border:1px solid var(--warn);border-radius:999px;padding:4px 10px;background:var(--panel)}
 .testbadge .rel{color:var(--warn)}
 .subjcard .cnext{display:block;margin-top:4px;font-family:var(--mono);font-size:11px;color:var(--warn)}
+.subjcard.ready.nexttest{border-color:var(--warn);border-left-color:var(--sub,var(--warn));box-shadow:0 0 0 1px var(--warn),0 0 18px -6px var(--warn)}
+.subjcard.nexttest .cnext{font-weight:700}
 @media (min-width:1560px){.leftcol .tood{margin:0}}
 
 .qscore{margin:4px 0 14px}
@@ -5581,6 +5583,17 @@ H — C — C — C — H
           p = added(a); q = added(b); if (p !== q) return p < q ? 1 : -1;
           return a.dataset.ord - b.dataset.ord;
         }).forEach(function(c){ g.appendChild(c); });
+        // tulevate tööde teemadel kuupäev; lähim töö on esile tõstetud
+        var first = true;
+        cards.forEach(function(c){
+          c.classList.remove('nexttest');
+          var h = c.getAttribute('href'), x = h && up.filter(function(y){ return y.link === h || '#' + y.topic === h; })[0];
+          if (!x) return;
+          var d = day(x.d), sp = document.createElement('span'); sp.className = 'cnext';
+          sp.textContent = (first ? t('Järgmine töö') + ': ' : '') + (x.week ? t('nädal alates') + ' ' : WD[d.getDay()] + ' ') + d.getDate() + '.' + (d.getMonth() + 1) + ' · ' + rel(d, x.week);
+          c.appendChild(sp);
+          if (first) { c.classList.add('nexttest'); first = false; }
+        });
       });
     }
     more.addEventListener('click', function(){ all = !all; render(); });
