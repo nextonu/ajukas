@@ -837,6 +837,27 @@ body{padding-bottom:80px}
 .ab-ch{flex:1 1 220px;min-width:0}
 .ab-rate-l{font-size:13px;color:var(--muted);display:flex;gap:6px;align-items:center}
 .ab-info{margin:6px 0 0;font-size:13px}
+.ab-undo{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px;padding:8px 10px;border:1px solid var(--warn);border-radius:6px;font-size:14px;color:var(--bright)}
+.ab-undo[hidden],.ab-tnow[hidden],.ab-pop[hidden],.ab-text[hidden]{display:none}
+.ab-tbtn[aria-pressed=true]{border-color:var(--sub);color:var(--bright)}
+.ab-tw{position:relative}
+.ab-text{margin:10px 0 4px;max-height:55vh;overflow-y:auto;overscroll-behavior:contain;padding:6px 12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:1.75;color:var(--muted)}
+.ab-text p{margin:0 0 14px;transition:color .3s}
+.ab-text p.ab-th{font-weight:700;letter-spacing:.04em}
+.ab-text p.cp{color:var(--bright)}
+.ab-text span{cursor:pointer;border-radius:3px}
+.ab-text span.on{-webkit-text-stroke:.7px currentColor;color:var(--bright);background:color-mix(in srgb,var(--sub) 30%,transparent);box-shadow:0 0 0 2px color-mix(in srgb,var(--sub) 30%,transparent)}
+.ab-text span.pick{outline:2px solid var(--warn);outline-offset:1px}
+.ab-text span:hover{text-decoration:underline;text-decoration-color:var(--muted)}
+.ab-tnow{position:absolute;right:12px;bottom:14px;font:inherit;font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--sub);background:var(--panel);color:var(--bright);cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.ab-thint{font-size:12.5px;margin:2px 0 0}
+.ab-pop{position:fixed;left:12px;right:12px;bottom:12px;max-width:520px;margin:0 auto;z-index:70;background:var(--panel);border:1px solid var(--line2);border-left:4px solid var(--sub);border-radius:8px;padding:12px 14px;box-shadow:0 10px 30px rgba(0,0,0,.45);max-height:60vh;overflow-y:auto}
+.ab-ph{display:flex;align-items:baseline;gap:10px;justify-content:space-between}
+.ab-ph b{font-size:19px;color:var(--bright);font-family:Georgia,"Times New Roman",serif}
+.ab-ph .ab-pc{font:inherit;font-size:13px;background:none;border:0;color:var(--muted);cursor:pointer;text-decoration:underline;padding:4px}
+.ab-pd{margin:8px 0;font-size:14.5px;line-height:1.5;color:var(--text)}
+.ab-pd ol{margin:4px 0 0;padding-left:20px}.ab-pd li{margin:3px 0}
+.ab-pd .pos{font-size:12px;color:var(--muted);font-style:italic}
 .kava{list-style:none;padding:0;margin:12px 0;counter-reset:kv}
 .kava li{counter-increment:kv;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:8px 0 8px 34px;border-bottom:1px solid var(--line);position:relative}
 .kava li::before{content:counter(kv) ".";position:absolute;left:0;top:9px;color:var(--muted);font-family:var(--mono);font-size:13px}
@@ -1285,7 +1306,7 @@ sub{font-size:.72em;line-height:0}
   </section>
   <details class="box updlog" id="updlog">
     <summary><span class="ul-title">Uuendused</span><span class="ul-date">6. oktoober 2026</span><span class="ul-last">Muusikas ja ajaloos on inimeste pildid.</span></summary>
-    <div class="ul-body"><h4>5. november 2026</h4><ul><li>Laia matemaatika kontrolltöö 2 lükkus <b>reedele 6.11</b>.</li><li>Vene keele „Testi ennast” lünkharjutuses on 3.11 tunni harjutused: винительный omadussõnaga, в/на + винительный (kuhu?) ja творительный eessõnadega под, над, за, перед, с.</li></ul><h4>3. november 2026</h4><ul><li>Laia matemaatika „Testi ennast” all saab valida ühe teema. Siis näed küsimusi, proovitööd ja ülesandeid ainult sellest teemast.</li><li>Laias matemaatikas on pöördfunktsiooni juures selgitus, kuidas ära tunda rangelt kasvav või kahanev funktsioon (horisontaalse sirge kontroll). Valemid on tekstis heledamad ja jagamised murdudena.</li><li>Laia matemaatika funktsiooni uurimises on uus osa „Kui vastust pole”: mida tähendab negatiivne diskriminant ja millal on X<sub>+</sub> või X<sub>−</sub> terve R. Juures on levinud vead.</li><li>Laias matemaatikas on õpetaja kordamislehe ülesanded koos lahendustega (Testi ennast → Kordamisleht). Juurde tulid logaritmfunktsioon, lihtintress ja liitintress ning ekstreemumkoha ja ekstreemumi vahe.</li></ul><h4>2. november 2026</h4><ul><li>Kuulamiskavas saab stiili nimele vajutades lugeda, mis stiil see on, ja kahte lugu kõrvuti võrrelda.</li><li>Kuulamiskava vaates „Read” on iga loo juures lühike kokkuvõte ja tunnused, mille järgi lugu ära tunda.</li><li>Audioraamatul saab heli valjemaks teha kuni 300%. Järgmine peatükk hakkab lukus telefonis kindlamalt mängima.</li><li>Aine lehel on esimesena teema, mille töö on kõige varem.</li></ul><h4>1. november 2026</h4><ul><li>Uus aine: <b>Lai matemaatika</b>, kontrolltöö 2 (funktsioonid, 4.11). Teooria töövihiku järgi, graafikud, teisenduste mängija ja graafikutreener.</li><li>Tööde kuupäevad on kontrollitud tunniplaani järgi (nt kuulamistest on 10.11).</li></ul><h4>28. oktoober 2026</h4><ul><li>„Dorian Gray portree” audioraamatu peatükke saab alla laadida ja kuulata ilma internetita. Androidis jätkub allalaadimine ka teises äpis. Peatüki vahetus lukus telefonis ei jää enam pausile.</li></ul><h4>26. oktoober 2026</h4><ul><li>Kuulamistestis mängivad viis vanemat lugu nüüd ilma YouTube'i reklaamideta. Kuulamiskaval on kolm vaadet (kaardid, read, nimekiri) ja Android-telefonis saab kuulamistesti lõike mängida YMusicus.</li><li>Muusikas on <b>Kuulamistest</b> nüüd eraldi teema: test, kuulamiskava, õppimise juhend ja spikker.</li><li>Teema jätab nüüd meelde vahekaardi, kus viimati olid. Parandatud ka mitu viga sünkroonimises, foorumis ja kuulamistestis ning mõni faktiviga (nt Euroopa Liidu sünd 1993).</li></ul><h4>25. oktoober 2026</h4><ul><li>UPT all on uus teema „I seminar”: mida enne 2.11 seminari teha, kontrollnimekiri ja link PERGlased siseveebile.</li></ul><h4>22. oktoober 2026</h4><ul><li>Avaleht on uuenenud: ainekaardid liiguvad hiire all, järgmised tööd ja uuendused on ainete all ning foorum on paremini näha.</li><li>Muusikas on uus teema „New York ja sving” (töö 2.11), õpetaja slaidide põhjal. Vene keeles on uus vahekaart „Välimus” (4.11 tööks) ning harjutused ja lugemisküsimused.</li><li>Muusikas on uus vahekaart „Kuulamiskava”: kõik 9.11 kuulamistesti lood YouTube’i ja Spotify linkidega. Kuulamistest on nüüd tehtud nende lugudega.</li><li>Inglise keeles on uus leht „Commonly misspelled words”: kõik 101 sõna ja segased sõnad koos tõlke, tähenduse, nipi ja harjutustega.</li><li>Kirjanduses saab „Dorian Gray portree” audioraamatut kuulata otse lehel. Koht jääb meelde ja kuulata saab ka lukus telefoniga.</li></ul><h4>19. oktoober 2026</h4><ul><li>Aine, kuhu on tulnud midagi uut, on avalehel ere ja märgiga „uus”, kuni selle avad.</li></ul><h4>18. oktoober 2026</h4><ul><li>Uus aine: <b>Ennastjuhtiv õppija</b>, portfoolio töölehtede kontrollnimekiri (esitamine 23.10).</li></ul><h4>15. oktoober 2026</h4><ul><li>Vene keeles pildiharjutus (nägu, keha ja riided) ning selgemad tabelid, mis mahuvad ka telefoni ekraanile.</li></ul><h4>13. oktoober 2026</h4><ul><li>Vene keeles винительный падеж mitmuses, uus harjutus ja õpetaja harjutuslingid (hindeline töö 16.10).</li></ul><h4>12. oktoober 2026</h4><ul><li>Füüsikas uued kordamisülesanded: arvutused, valemi valik ja mõtlemisülesanded (Testi ennast all).</li><li>Kõik harjutused ja ülesanded on nüüd „Testi ennast” all.</li></ul><h4>11. oktoober 2026</h4><ul><li>Uued ained: <b>Eesti keel</b> (indoeuroopa ja uurali keeled), <b>Inglise keel</b> (CEPT combo test) ja <b>Vene keel</b> (tasemetest A2).</li></ul><h4>8. oktoober 2026</h4><ul><li>Uus aine: <b>Füüsika</b>, kontrolltöö: ringliikumine (koos arvutustreeneriga).</li><li>Kirjandus: „Dorian Gray portree”: tasuta raamat ja audioraamat, kokkuvõte peatükkide kaupa, tegelased, teemad ja enesetest.</li><li>Keemias on ainete <b>3D-mudelid</b>: arvutis teksti kõrval, telefonis vajuta aine nimele.</li></ul><h4>7. oktoober 2026</h4><ul><li>Uus: <b>foorum</b>, kus saab küsida ja teisi aidata (avalehel „Foorum”).</li><li>Igal ainel on oma <b>värv</b>.</li><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
+    <div class="ul-body"><h4>5. november 2026</h4><ul><li>Dorian Gray audioraamatut kuulates saab ekraanil näha raamatu teksti. Loetav sõna läheb esile ja tekst kerib ise kaasa. Sõnale vajutades näed selle tähendust ja saad sealt kuulama hakata. Kui ajaribal kogemata kaugele hüppad, saad ühe nupuga tagasi.</li><li>Laia matemaatika kontrolltöö 2 lükkus <b>reedele 6.11</b>.</li><li>Vene keele „Testi ennast” lünkharjutuses on 3.11 tunni harjutused: винительный omadussõnaga, в/на + винительный (kuhu?) ja творительный eessõnadega под, над, за, перед, с.</li></ul><h4>3. november 2026</h4><ul><li>Laia matemaatika „Testi ennast” all saab valida ühe teema. Siis näed küsimusi, proovitööd ja ülesandeid ainult sellest teemast.</li><li>Laias matemaatikas on pöördfunktsiooni juures selgitus, kuidas ära tunda rangelt kasvav või kahanev funktsioon (horisontaalse sirge kontroll). Valemid on tekstis heledamad ja jagamised murdudena.</li><li>Laia matemaatika funktsiooni uurimises on uus osa „Kui vastust pole”: mida tähendab negatiivne diskriminant ja millal on X<sub>+</sub> või X<sub>−</sub> terve R. Juures on levinud vead.</li><li>Laias matemaatikas on õpetaja kordamislehe ülesanded koos lahendustega (Testi ennast → Kordamisleht). Juurde tulid logaritmfunktsioon, lihtintress ja liitintress ning ekstreemumkoha ja ekstreemumi vahe.</li></ul><h4>2. november 2026</h4><ul><li>Kuulamiskavas saab stiili nimele vajutades lugeda, mis stiil see on, ja kahte lugu kõrvuti võrrelda.</li><li>Kuulamiskava vaates „Read” on iga loo juures lühike kokkuvõte ja tunnused, mille järgi lugu ära tunda.</li><li>Audioraamatul saab heli valjemaks teha kuni 300%. Järgmine peatükk hakkab lukus telefonis kindlamalt mängima.</li><li>Aine lehel on esimesena teema, mille töö on kõige varem.</li></ul><h4>1. november 2026</h4><ul><li>Uus aine: <b>Lai matemaatika</b>, kontrolltöö 2 (funktsioonid, 4.11). Teooria töövihiku järgi, graafikud, teisenduste mängija ja graafikutreener.</li><li>Tööde kuupäevad on kontrollitud tunniplaani järgi (nt kuulamistest on 10.11).</li></ul><h4>28. oktoober 2026</h4><ul><li>„Dorian Gray portree” audioraamatu peatükke saab alla laadida ja kuulata ilma internetita. Androidis jätkub allalaadimine ka teises äpis. Peatüki vahetus lukus telefonis ei jää enam pausile.</li></ul><h4>26. oktoober 2026</h4><ul><li>Kuulamistestis mängivad viis vanemat lugu nüüd ilma YouTube'i reklaamideta. Kuulamiskaval on kolm vaadet (kaardid, read, nimekiri) ja Android-telefonis saab kuulamistesti lõike mängida YMusicus.</li><li>Muusikas on <b>Kuulamistest</b> nüüd eraldi teema: test, kuulamiskava, õppimise juhend ja spikker.</li><li>Teema jätab nüüd meelde vahekaardi, kus viimati olid. Parandatud ka mitu viga sünkroonimises, foorumis ja kuulamistestis ning mõni faktiviga (nt Euroopa Liidu sünd 1993).</li></ul><h4>25. oktoober 2026</h4><ul><li>UPT all on uus teema „I seminar”: mida enne 2.11 seminari teha, kontrollnimekiri ja link PERGlased siseveebile.</li></ul><h4>22. oktoober 2026</h4><ul><li>Avaleht on uuenenud: ainekaardid liiguvad hiire all, järgmised tööd ja uuendused on ainete all ning foorum on paremini näha.</li><li>Muusikas on uus teema „New York ja sving” (töö 2.11), õpetaja slaidide põhjal. Vene keeles on uus vahekaart „Välimus” (4.11 tööks) ning harjutused ja lugemisküsimused.</li><li>Muusikas on uus vahekaart „Kuulamiskava”: kõik 9.11 kuulamistesti lood YouTube’i ja Spotify linkidega. Kuulamistest on nüüd tehtud nende lugudega.</li><li>Inglise keeles on uus leht „Commonly misspelled words”: kõik 101 sõna ja segased sõnad koos tõlke, tähenduse, nipi ja harjutustega.</li><li>Kirjanduses saab „Dorian Gray portree” audioraamatut kuulata otse lehel. Koht jääb meelde ja kuulata saab ka lukus telefoniga.</li></ul><h4>19. oktoober 2026</h4><ul><li>Aine, kuhu on tulnud midagi uut, on avalehel ere ja märgiga „uus”, kuni selle avad.</li></ul><h4>18. oktoober 2026</h4><ul><li>Uus aine: <b>Ennastjuhtiv õppija</b>, portfoolio töölehtede kontrollnimekiri (esitamine 23.10).</li></ul><h4>15. oktoober 2026</h4><ul><li>Vene keeles pildiharjutus (nägu, keha ja riided) ning selgemad tabelid, mis mahuvad ka telefoni ekraanile.</li></ul><h4>13. oktoober 2026</h4><ul><li>Vene keeles винительный падеж mitmuses, uus harjutus ja õpetaja harjutuslingid (hindeline töö 16.10).</li></ul><h4>12. oktoober 2026</h4><ul><li>Füüsikas uued kordamisülesanded: arvutused, valemi valik ja mõtlemisülesanded (Testi ennast all).</li><li>Kõik harjutused ja ülesanded on nüüd „Testi ennast” all.</li></ul><h4>11. oktoober 2026</h4><ul><li>Uued ained: <b>Eesti keel</b> (indoeuroopa ja uurali keeled), <b>Inglise keel</b> (CEPT combo test) ja <b>Vene keel</b> (tasemetest A2).</li></ul><h4>8. oktoober 2026</h4><ul><li>Uus aine: <b>Füüsika</b>, kontrolltöö: ringliikumine (koos arvutustreeneriga).</li><li>Kirjandus: „Dorian Gray portree”: tasuta raamat ja audioraamat, kokkuvõte peatükkide kaupa, tegelased, teemad ja enesetest.</li><li>Keemias on ainete <b>3D-mudelid</b>: arvutis teksti kõrval, telefonis vajuta aine nimele.</li></ul><h4>7. oktoober 2026</h4><ul><li>Uus: <b>foorum</b>, kus saab küsida ja teisi aidata (avalehel „Foorum”).</li><li>Igal ainel on oma <b>värv</b>.</li><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
   </details>
   <aside class="suvi" id="suvi" aria-label="Suvevaheaja taimer" hidden>
   <div class="suvi-clock">
@@ -3794,12 +3815,16 @@ H — C — C — C — H
     <li><a href="https://librivox.org/the-picture-of-dorian-gray-1891-version-by-oscar-wilde/" target="_blank" rel="noopener"><b>Audioraamat LibriVoxis</b></a>: tasuta, peatükkide kaupa MP3-d. Sama salvestus ka <a href="https://archive.org/details/picture_dorian_gray_1204_librivox" target="_blank" rel="noopener">Internet Archive’is</a>.</li>
   </ul>
   <h3>Kuula siin</h3>
-  <div class="abook" data-key="dorian" data-base="https://archive.org/download/picture_dorian_gray_1204_librivox/" data-files="pictureofdoriangray_00_wilde_64kb.mp3 pictureofdoriangray_01_wilde_64kb.mp3 pictureofdoriangray_02_wilde_64kb.mp3 pictureofdoriangray_03_wilde_64kb.mp3 pictureofdoriangray_04_wilde_64kb.mp3 pictureofdoriangray_05_wilde_64kb.mp3 pictureofdoriangray_06_wilde_64kb.mp3 pictureofdoriangray_07_wilde_64kb.mp3 pictureofdoriangray_08_wilde_64kb.mp3 pictureofdoriangray_09_wilde_64kb.mp3 pictureofdoriangray_10_wilde_64kb.mp3 pictureofdoriangray_11_wilde_64kb.mp3 pictureofdoriangray_12_wilde_64kb.mp3 pictureofdoriangray_13_wilde_64kb.mp3 pictureofdoriangray_14_wilde_64kb.mp3 pictureofdoriangray_15_wilde_64kb.mp3 pictureofdoriangray_16_wilde_64kb.mp3 pictureofdoriangray_17_wilde_64kb.mp3 pictureofdoriangray_18_wilde_64kb.mp3 pictureofdoriangray_19_wilde_64kb.mp3 pictureofdoriangray_20_wilde_64kb.mp3" data-title="Dorian Gray portree" data-artist="Oscar Wilde · LibriVox (Bob Neufeld)">
+  <div class="abook" data-key="dorian" data-text="dorian/" data-base="https://archive.org/download/picture_dorian_gray_1204_librivox/" data-files="pictureofdoriangray_00_wilde_64kb.mp3 pictureofdoriangray_01_wilde_64kb.mp3 pictureofdoriangray_02_wilde_64kb.mp3 pictureofdoriangray_03_wilde_64kb.mp3 pictureofdoriangray_04_wilde_64kb.mp3 pictureofdoriangray_05_wilde_64kb.mp3 pictureofdoriangray_06_wilde_64kb.mp3 pictureofdoriangray_07_wilde_64kb.mp3 pictureofdoriangray_08_wilde_64kb.mp3 pictureofdoriangray_09_wilde_64kb.mp3 pictureofdoriangray_10_wilde_64kb.mp3 pictureofdoriangray_11_wilde_64kb.mp3 pictureofdoriangray_12_wilde_64kb.mp3 pictureofdoriangray_13_wilde_64kb.mp3 pictureofdoriangray_14_wilde_64kb.mp3 pictureofdoriangray_15_wilde_64kb.mp3 pictureofdoriangray_16_wilde_64kb.mp3 pictureofdoriangray_17_wilde_64kb.mp3 pictureofdoriangray_18_wilde_64kb.mp3 pictureofdoriangray_19_wilde_64kb.mp3 pictureofdoriangray_20_wilde_64kb.mp3" data-title="Dorian Gray portree" data-artist="Oscar Wilde · LibriVox (Bob Neufeld)">
     <div class="ab-row"><label class="vh" for="ab-dorian">Peatükk</label><select id="ab-dorian" class="ab-ch"><option value="0">Eessõna (3:16)</option><option value="1">1. peatükk (35:36)</option><option value="2">2. peatükk (40:43)</option><option value="3">3. peatükk (32:32)</option><option value="4">4. peatükk (39:44)</option><option value="5">5. peatükk (31:49)</option><option value="6">6. peatükk (20:52)</option><option value="7">7. peatükk (32:02)</option><option value="8">8. peatükk (38:21)</option><option value="9">9. peatükk (27:51)</option><option value="10">10. peatükk (21:37)</option><option value="11">11. peatükk (50:28)</option><option value="12">12. peatükk (18:53)</option><option value="13">13. peatükk (18:24)</option><option value="14">14. peatükk (34:28)</option><option value="15">15. peatükk (22:30)</option><option value="16">16. peatükk (22:41)</option><option value="17">17. peatükk (14:07)</option><option value="18">18. peatükk (23:48)</option><option value="19">19. peatükk (26:24)</option><option value="20">20. peatükk (14:09)</option></select>
       <label class="ab-rate-l">Kiirus <select class="ab-rate"><option value="0.75">0,75×</option><option value="1" selected>1×</option><option value="1.25">1,25×</option><option value="1.5">1,5×</option><option value="1.75">1,75×</option><option value="2">2×</option></select></label>
       <label class="ab-rate-l">Valjus <select class="ab-vol"><option value="1" selected>100%</option><option value="1.5">150%</option><option value="2">200%</option><option value="2.5">250%</option><option value="3">300%</option></select></label></div>
     <audio class="ab-audio" controls preload="none" crossorigin="anonymous"></audio>
-    <div class="ab-row"><button type="button" class="btn sec ab-back">↺ 15 s</button><button type="button" class="btn sec ab-fwd">30 s ↻</button><button type="button" class="btn sec ab-next">Järgmine peatükk →</button></div>
+    <div class="ab-undo" hidden role="status"><span class="ab-ut"></span><button type="button" class="btn sec ab-ub">↩ Mine tagasi</button></div>
+    <div class="ab-row"><button type="button" class="btn sec ab-back">↺ 15 s</button><button type="button" class="btn sec ab-fwd">30 s ↻</button><button type="button" class="btn sec ab-next">Järgmine peatükk →</button><button type="button" class="btn sec ab-tbtn" aria-pressed="false">Näita raamatu teksti</button></div>
+    <div class="ab-tw"><div class="ab-text" hidden lang="en" tabindex="0" aria-label="Raamatu tekst"></div><button type="button" class="ab-tnow" hidden>↓ Praegune koht</button></div>
+    <p class="ab-thint muted" hidden>Sõnale vajutades näed selle tähendust. Tekst: Project Gutenberg (avalik omand).</p>
+    <div class="ab-pop" hidden role="dialog" aria-label="Sõna tähendus"></div>
     <p class="ab-info muted"></p>
     <div class="ab-off" hidden><p class="ab-oh">Kuula ilma internetita</p><p class="muted">Allalaaditud peatükid on selles brauseris ja mängivad ka siis, kui internetti pole. Valikus on need märgitud ✓-ga. Androidi Chrome'is jätkub allalaadimine ka siis, kui lähed teise äppi või paned Ajuka kinni.</p><div class="ab-row"><button type="button" class="btn sec ab-dl1">⬇ Laadi see peatükk alla</button><button type="button" class="btn sec ab-dlall">⬇ Laadi kõik alla (umbes 260 MB)</button><button type="button" class="btn sec ab-stop" hidden>Peata</button><button type="button" class="btn sec ab-del" hidden>Kustuta allalaaditud</button></div><p class="ab-ost muted" aria-live="polite"></p></div>
   </div>
@@ -6593,7 +6618,7 @@ H — C — C — C — H
       off.hidden = false;
       caches.open(AC).then(function(c){ return c.keys(); }).then(function(ks){
         have = {}; ks.forEach(function(r){ if (r.url.indexOf(base) === 0) { var k = files.indexOf(r.url.slice(base.length)); if (k >= 0) have[k] = true; } });
-        paintOff();
+        paintOff(); preText();
       }).catch(function(){ off.hidden = true; });
     }
     // Androidi Chrome'is laeb brauser ise taustal (Background Fetch): jätkub ka teises äpis ja kinnise lehega, edenemine on teavitusribal
@@ -6656,7 +6681,7 @@ H — C — C — C — H
           }); })();
         }).then(function(b){
           return caches.open(AC).then(function(c){ return c.put(base + files[i], new Response(b, { headers: { 'Content-Type': 'audio/mpeg', 'Content-Length': String(b.size) } })); });
-        }).then(function(){ have[i] = true; done++; paintOff(); next(); }).catch(function(e){
+        }).then(function(){ have[i] = true; done++; paintOff(); preText(); next(); }).catch(function(e){
           var stopped = e && e.name === 'AbortError'; dl = null; paintOff();
           ost.textContent = stopped ? t('Allalaadimine peatatud.') : (e && e.name === 'QuotaExceededError' ? t('Seadmes pole piisavalt ruumi.') : t('Allalaadimine ebaõnnestus. Kas internet on olemas?'));
         });
@@ -6708,7 +6733,7 @@ H — C — C — C — H
       info.textContent = st && (st.t > 5 || st.ch > 0) ? t('Pooleli: {c}, {t}', { c: label(st.ch), t: fmt(st.t) }) : '';
     }
     function load(i, t, play){
-      cur = i; ch.value = i; seekTo = t || 0;
+      cur = i; ch.value = i; seekTo = t || 0; lastT = 0; hideUndo();
       au.preload = play ? 'auto' : 'metadata';
       want = !!play; clearTimeout(guard);
       setSrc(i, play);
@@ -6720,6 +6745,7 @@ H — C — C — C — H
       if (play && !have[i + 1]) resolve(i + 1);
       if (!dl) paintOff();
       media();
+      if (textOn()) loadText(i);
     }
     function tryPlay(){
       var p = au.play();
@@ -6753,8 +6779,8 @@ H — C — C — C — H
         var ms = navigator.mediaSession;
         ms.setActionHandler('play', function(){ var p = au.play(); if (p && p.catch) p.catch(function(){}); ms.playbackState = 'playing'; });
         ms.setActionHandler('pause', function(){ keep = false; au.pause(); ms.playbackState = 'paused'; });
-        ms.setActionHandler('seekbackward', function(){ au.currentTime = Math.max(0, au.currentTime - 15); });
-        ms.setActionHandler('seekforward', function(){ au.currentTime = au.currentTime + 30; });
+        ms.setActionHandler('seekbackward', function(){ mySeek = Date.now(); au.currentTime = Math.max(0, au.currentTime - 15); });
+        ms.setActionHandler('seekforward', function(){ mySeek = Date.now(); au.currentTime = au.currentTime + 30; });
         ms.setActionHandler('previoustrack', function(){ if (au.currentTime > 5 || cur === 0) au.currentTime = 0; else { touch(); load(cur - 1, 0, true); } });
         ms.setActionHandler('nexttrack', function(){ if (cur < files.length - 1) { touch(); load(cur + 1, 0, true); } });
         try { ms.setActionHandler('seekto', function(e){ au.currentTime = e.seekTime; }); } catch(e) {}
@@ -6795,8 +6821,8 @@ H — C — C — C — H
     });
     ch.addEventListener('change', function(){ touch(); load(+ch.value, 0, !au.paused); saveAll(); showInfo(); });
     rate.addEventListener('change', function(){ touch(); au.playbackRate = +rate.value; saveLocal(); });
-    box.querySelector('.ab-back').addEventListener('click', function(){ if (cur < 0) return; au.currentTime = Math.max(0, au.currentTime - 15); });
-    box.querySelector('.ab-fwd').addEventListener('click', function(){ if (cur < 0) return; au.currentTime = au.currentTime + 30; });
+    box.querySelector('.ab-back').addEventListener('click', function(){ if (cur < 0) return; mySeek = Date.now(); au.currentTime = Math.max(0, au.currentTime - 15); });
+    box.querySelector('.ab-fwd').addEventListener('click', function(){ if (cur < 0) return; mySeek = Date.now(); au.currentTime = au.currentTime + 30; });
     box.querySelector('.ab-next').addEventListener('click', function(){ var i = (cur < 0 ? +ch.value : cur) + 1; if (i < files.length) { touch(); load(i, 0, !au.paused); saveAll(); showInfo(); } });
     window.addEventListener('pagehide', function(){ if (cur >= 0) saveAll(); });
     document.addEventListener('visibilitychange', function(){
@@ -6818,9 +6844,142 @@ H — C — C — C — H
       if (!confirm(t('Kustutada allalaaditud peatükid sellest seadmest?'))) return;
       caches.open(AC).then(function(c){ return Promise.all(files.map(function(f){ return c.delete(base + f); })); }).then(function(){ have = {}; paintOff(); });
     });
+
+    // kogemata hüpe ajaribal: suure hüppe järel saab ühe vajutusega tagasi
+    var lastT = 0, mySeek = 0, undo = box.querySelector('.ab-undo'), undoTo = 0, undoTm = 0;
+    function hideUndo(){ if (undo) undo.hidden = true; clearTimeout(undoTm); }
+    au.addEventListener('timeupdate', function(){ if (!au.seeking) lastT = au.currentTime; });
+    au.addEventListener('seeking', function(){
+      if (autoSeek || Date.now() - mySeek < 1500 || lastT < 1 || Math.abs(au.currentTime - lastT) < 20) return;
+      undoTo = lastT;
+      undo.querySelector('.ab-ut').textContent = t('Hüppasid {a} → {b}.', { a: fmt(lastT), b: fmt(au.currentTime) });
+      undo.hidden = false; clearTimeout(undoTm); undoTm = setTimeout(hideUndo, 15000);
+    });
+    undo.querySelector('.ab-ub').addEventListener('click', function(){ mySeek = Date.now(); au.currentTime = undoTo; touch(); hideUndo(); });
+
+    // raamatu tekst: kuulamise ajal läheb loetav sõna esile (nagu Spotify laulusõnad); sõnale vajutades tuleb tähendus
+    var TX = box.getAttribute('data-text'), tbox = box.querySelector('.ab-text'), tbtn = box.querySelector('.ab-tbtn'), tnow = box.querySelector('.ab-tnow'), thint = box.querySelector('.ab-thint');
+    var tch = -1, tload = -1, tw = [], tt = [], ton = -1, userScroll = 0, raf = 0, pickS = null;
+    function pad(i){ return (i < 10 ? '0' : '') + i; }
+    function textOn(){ return !!tbox && !tbox.hidden; }
+    function loadText(i){
+      if (!TX || !tbox || tch === i || tload === i) return;
+      tload = i; tw = []; tt = []; ton = -1; tbox.innerHTML = '<p>' + t('Laadin teksti…') + '</p>';
+      fetch(TX + pad(i) + '.json').then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); }).then(function(d){
+        if (tload !== i) return;
+        tch = i; tload = -1; tt = d.t;
+        var f = document.createDocumentFragment(), k = 0;
+        d.p.forEach(function(p, pi){
+          var el = document.createElement('p'); if (pi === 0) el.className = 'ab-th';
+          p.split(' ').forEach(function(w, j){
+            if (j) el.appendChild(document.createTextNode(' '));
+            var sp = document.createElement('span'); sp.textContent = w; sp.setAttribute('data-k', k++); el.appendChild(sp); tw.push(sp);
+          });
+          f.appendChild(el);
+        });
+        tbox.innerHTML = ''; tbox.appendChild(f); tbox.scrollTop = 0; userScroll = 0; sync(true);
+      }).catch(function(){ if (tload === i) { tload = -1; tbox.innerHTML = '<p>' + t('Teksti ei õnnestunud laadida. Kas internet on olemas?') + '</p>'; } });
+    }
+    function idx(x){ var lo = 0, hi = tt.length - 1, r = -1; while (lo <= hi) { var m = (lo + hi) >> 1; if (tt[m] <= x) { r = m; lo = m + 1; } else hi = m - 1; } return r; }
+    function follow(sp, jump){
+      var r = sp.getBoundingClientRect(), b = tbox.getBoundingClientRect();
+      if (jump || r.top < b.top + 10 || r.bottom > b.top + b.height * 0.65) tbox.scrollTo({ top: tbox.scrollTop + r.top - b.top - b.height * 0.3, behavior: jump ? 'auto' : 'smooth' });
+    }
+    function sync(jump){
+      if (!textOn() || tch !== cur || !tw.length) return;
+      var k = idx(Math.round((au.currentTime || seekTo || 0) * 10));
+      if (k < 0) k = 0;
+      var free = Date.now() - userScroll > 8000;
+      if (free && !tnow.hidden) { tnow.hidden = true; jump = true; }
+      if (k === ton && !jump) return;
+      if (ton >= 0 && tw[ton]) { tw[ton].classList.remove('on'); tw[ton].parentNode.classList.remove('cp'); }
+      ton = k; var sp = tw[k]; sp.classList.add('on'); sp.parentNode.classList.add('cp');
+      if (free || jump) follow(sp, jump);
+    }
+    function tick(){ raf = 0; if (!au.paused && textOn() && document.visibilityState === 'visible') { sync(); raf = requestAnimationFrame(tick); } }
+    function kick(){ if (!raf && textOn()) raf = requestAnimationFrame(tick); }
+    au.addEventListener('playing', kick);
+    au.addEventListener('timeupdate', function(){ sync(); kick(); });
+    au.addEventListener('seeked', function(){ userScroll = 0; tnow.hidden = true; sync(true); });
+    document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'visible') { sync(true); kick(); } });
+    function scrolled(){ userScroll = Date.now(); if (textOn() && !au.paused) tnow.hidden = false; }
+    ['wheel', 'touchmove'].forEach(function(ev){ tbox.addEventListener(ev, scrolled, { passive: true }); });
+    tbox.addEventListener('keydown', function(e){ if (/^(Arrow|Page|Home|End| )/.test(e.key)) scrolled(); });
+    tnow.addEventListener('click', function(){ userScroll = 0; tnow.hidden = true; sync(true); });
+    function showText(on){
+      tbox.hidden = !on; thint.hidden = !on; tbtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      tbtn.textContent = on ? t('Peida tekst') : t('Näita raamatu teksti');
+      if (on) { loadText(cur < 0 ? +ch.value : cur); sync(true); kick(); } else { tnow.hidden = true; closePop(); }
+    }
+    tbtn.addEventListener('click', function(){ var on = tbox.hidden; showText(on); try { localStorage.setItem('ajukas-abtext', on ? '1' : '0'); } catch(e) {} });
+
+    // sõna tähendus (dictionaryapi.dev, ingliskeelne seletus) + tõlke link
+    var pop = box.querySelector('.ab-pop'), dict = {};
+    var POS = { noun: 'nimisõna', verb: 'tegusõna', adjective: 'omadussõna', adverb: 'määrsõna', pronoun: 'asesõna', preposition: 'eessõna', conjunction: 'sidesõna', interjection: 'hüüdsõna' };
+    function forms(w){
+      var a = [w], add = function(x){ if (x.length > 2 && a.indexOf(x) < 0) a.push(x); };
+      if (/ies$/.test(w)) add(w.slice(0, -3) + 'y');
+      if (/(ss|sh|ch|x)es$/.test(w)) add(w.slice(0, -2));
+      if (/s$/.test(w) && !/ss$/.test(w)) add(w.slice(0, -1));
+      if (/ied$/.test(w)) add(w.slice(0, -3) + 'y');
+      if (/ed$/.test(w)) { add(w.slice(0, -1)); add(w.slice(0, -2)); if (/(.)\1ed$/.test(w)) add(w.slice(0, -3)); }
+      if (/ing$/.test(w)) { add(w.slice(0, -3)); add(w.slice(0, -3) + 'e'); if (/(.)\1ing$/.test(w)) add(w.slice(0, -4)); }
+      if (/ily$/.test(w)) add(w.slice(0, -3) + 'y');
+      if (/ly$/.test(w)) add(w.slice(0, -2));
+      if (/(er|est)$/.test(w)) { add(w.replace(/(er|est)$/, '')); add(w.replace(/(r|st)$/, '')); }
+      return a;
+    }
+    function lookup(w){
+      var a = forms(w.toLowerCase());
+      return (function next(i){
+        if (i >= a.length) return Promise.resolve(null);
+        var q = a[i];
+        if (q in dict) return dict[q] ? Promise.resolve(dict[q]) : next(i + 1);
+        return fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(q))
+          .then(function(r){ if (r.status === 404) return null; if (!r.ok) throw new Error(r.status); return r.json(); })
+          .then(function(d){ dict[q] = d && d[0] ? d : null; return dict[q] || next(i + 1); });
+      })(0);
+    }
+    function closePop(){ pop.hidden = true; if (pickS) { pickS.classList.remove('pick'); pickS = null; } }
+    function openPop(w, k, sp){
+      if (pickS) pickS.classList.remove('pick');
+      pickS = sp; sp.classList.add('pick');
+      var tr = 'https://translate.google.com/?sl=en&tl=et&op=translate&text=' + encodeURIComponent(w);
+      pop.innerHTML = '<div class="ab-ph"><b lang="en">' + esc(w) + '</b><button type="button" class="ab-pc">' + t('Sulge') + '</button></div>' +
+        '<div class="ab-pd">' + t('Otsin tähendust…') + '</div>' +
+        '<div class="ab-row"><a class="btn sec" href="' + tr + '" target="_blank" rel="noopener">' + t('Tõlgi eesti keelde') + ' ↗</a><button type="button" class="btn sec ab-from">▶ ' + t('Kuula siit') + '</button></div>';
+      pop.hidden = false;
+      pop.querySelector('.ab-pc').addEventListener('click', closePop);
+      pop.querySelector('.ab-from').addEventListener('click', function(){
+        closePop(); if (cur < 0 || tt[k] == null) return;
+        mySeek = Date.now(); au.currentTime = Math.max(0, tt[k] / 10 - 0.3); touch(); userScroll = 0;
+        if (au.paused) tryPlay();
+      });
+      var pd = pop.querySelector('.ab-pd');
+      lookup(w).then(function(d){
+        if (pop.hidden || pickS !== sp) return;
+        if (!d) { pd.textContent = t('Sõnaraamatust seda sõna ei leitud. Proovi tõlke linki.'); return; }
+        var head = d[0].word, items = [];
+        d.forEach(function(e){ (e.meanings || []).forEach(function(m){ (m.definitions || []).slice(0, 2).forEach(function(x){ if (items.length < 4) items.push('<li><span class="pos">' + esc(t(POS[m.partOfSpeech] || m.partOfSpeech || '')) + '</span> <span lang="en">' + esc(x.definition) + '</span></li>'); }); }); });
+        pd.innerHTML = (head.toLowerCase() !== w.toLowerCase() ? '<p class="muted" style="margin:0">' + t('Algvorm') + ': <b lang="en">' + esc(head) + '</b></p>' : '') + '<ol>' + items.join('') + '</ol>';
+      }).catch(function(){ if (pickS === sp) pd.textContent = t('Tähenduse otsimine ei õnnestunud. Kas internet on olemas?'); });
+    }
+    tbox.addEventListener('click', function(e){
+      var sp = e.target.closest('span[data-k]'); if (!sp) return;
+      var sel = window.getSelection ? String(window.getSelection()) : '';
+      if (sel.trim().indexOf(' ') > 0) return;
+      var w = sp.textContent.replace(/[’‘]/g, "'").replace(/^[^A-Za-z]+|[^A-Za-z]+$/g, '').replace(/'s$/i, '');
+      if (w) openPop(w, +sp.getAttribute('data-k'), sp);
+    });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !pop.hidden) closePop(); });
+    document.addEventListener('click', function(e){ if (!pop.hidden && !pop.contains(e.target) && !e.target.closest('.ab-text span[data-k]')) closePop(); });
+    // allalaaditud peatükkidel ka tekst ilma internetita (service worker jätab selle meelde)
+    var txDone = {};
+    function preText(){ if (!TX) return; Object.keys(have).forEach(function(k){ if (!txDone[k]) { txDone[k] = 1; fetch(TX + pad(+k) + '.json').catch(function(){ delete txDone[k]; }); } }); }
     scan();
     Ajukas.onAudioSync = function(){ if (au.paused && !want && !keep) { var st = readState(); if (st && (st.ch !== cur || Math.abs(st.t - Math.floor(au.currentTime || seekTo || 0)) > 5)) restore(); } };
     restore();
+    try { if (localStorage.getItem('ajukas-abtext') === '1') showText(true); } catch(e) {}
   });
   // Avaleht: kaartide kallutus ja sümbolid, tervitus, järgmise töö märk, tööde värvid, otsingu kiirklahv
   (function(){
