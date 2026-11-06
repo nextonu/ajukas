@@ -4814,7 +4814,10 @@ H — C — C — C — H
           '<div class="ans">' + esc(q[2]) + '<div class="judge"><button type="button" class="jok" data-v="1"' + (v === 1 ? ' aria-pressed="true"' : '') + '>✓ ' + t('Teadsin') + '</button><button type="button" class="jno" data-v="0"' + (v === 0 ? ' aria-pressed="true"' : '') + '>✗ ' + t('Ei teadnud') + '</button></div></div></details>';
       }).join('') : '<p class="muted">' + t('Pole ühtegi küsimust, mida sa ei teadnud. Tubli!') + '</p>';
       stats();
-      box.querySelectorAll('.qset [data-set]').forEach(function(x){ var on = x.getAttribute('data-set') === qset; x.className = on ? 'btn' : 'btn sec'; x.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+      // arvud näitavad valitud teema küsimusi; kui teemal lisaküsimusi pole, pole valikut vaja
+      var inT = ALL.filter(function(q){ return !topic || q[0] === topic; }), nC = inT.filter(function(q){ return q[3] !== 'lisa'; }).length, qs = box.querySelector('.qset');
+      if (qs) qs.hidden = !!topic && nC === inT.length;
+      box.querySelectorAll('.qset [data-set]').forEach(function(x){ var on = x.getAttribute('data-set') === qset, all = x.getAttribute('data-set') === 'koik'; x.className = on ? 'btn' : 'btn sec'; x.setAttribute('aria-pressed', on ? 'true' : 'false'); x.textContent = all ? t('Koos lisaküsimustega ({n})', { n: inT.length }) : t('Olulisemad ({n})', { n: nC }); });
     }
     box.addEventListener('click', function(e){
       var b = e.target.closest('.qset [data-set]'); if (!b || b.getAttribute('data-set') === qset) return;
