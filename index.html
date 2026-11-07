@@ -851,6 +851,9 @@ body{padding-bottom:80px}
 .ab-text span:hover{text-decoration:underline;text-decoration-color:var(--muted)}
 .ab-tnow{position:absolute;right:12px;bottom:14px;font:inherit;font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--sub);background:var(--panel);color:var(--bright);cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .ab-thint{font-size:12.5px;margin:2px 0 0}
+.ab-rsz{display:none}
+/* arvutis saab teksti akna alumisest paremast nurgast suuremaks tõmmata */
+@media (min-width:700px) and (not (pointer:coarse)){.ab-text{resize:both;height:55vh;max-height:none;min-height:140px;min-width:200px;max-width:none}.ab-tnow{right:28px}.ab-rsz{display:inline}}
 .ab-pop{position:fixed;left:12px;right:12px;bottom:12px;max-width:520px;margin:0 auto;z-index:70;background:var(--panel);border:1px solid var(--line2);border-left:4px solid var(--sub);border-radius:8px;padding:12px 14px;box-shadow:0 10px 30px rgba(0,0,0,.45);max-height:60vh;overflow-y:auto}
 .ab-ph{display:flex;align-items:baseline;gap:10px;justify-content:space-between}
 .ab-ph b{font-size:19px;color:var(--bright);font-family:Georgia,"Times New Roman",serif}
@@ -3823,7 +3826,7 @@ H — C — C — C — H
     <div class="ab-undo" hidden role="status"><span class="ab-ut"></span><button type="button" class="btn sec ab-ub">↩ Mine tagasi</button></div>
     <div class="ab-row"><button type="button" class="btn sec ab-back">↺ 15 s</button><button type="button" class="btn sec ab-fwd">30 s ↻</button><button type="button" class="btn sec ab-next">Järgmine peatükk →</button><button type="button" class="btn sec ab-tbtn" aria-pressed="false">Näita raamatu teksti</button></div>
     <div class="ab-tw"><div class="ab-text" hidden lang="en" tabindex="0" aria-label="Raamatu tekst"></div><button type="button" class="ab-tnow" hidden>↓ Praegune koht</button></div>
-    <p class="ab-thint muted" hidden>Sõnale vajutades näed selle tähendust. Tekst: Project Gutenberg (avalik omand).</p>
+    <p class="ab-thint muted" hidden>Sõnale vajutades näed selle tähendust.<span class="ab-rsz"> Akent saad suuremaks ja laiemaks teha, kui lohistad selle alumist paremat nurka.</span> Tekst: Project Gutenberg (avalik omand).</p>
     <div class="ab-pop" hidden role="dialog" aria-label="Sõna tähendus"></div>
     <p class="ab-info muted"></p>
     <div class="ab-off" hidden><p class="ab-oh">Kuula ilma internetita</p><p class="muted">Allalaaditud peatükid on selles brauseris ja mängivad ka siis, kui internetti pole. Valikus on need märgitud ✓-ga. Androidi Chrome'is jätkub allalaadimine ka siis, kui lähed teise äppi või paned Ajuka kinni.</p><div class="ab-row"><button type="button" class="btn sec ab-dl1">⬇ Laadi see peatükk alla</button><button type="button" class="btn sec ab-dlall">⬇ Laadi kõik alla (umbes 260 MB)</button><button type="button" class="btn sec ab-stop" hidden>Peata</button><button type="button" class="btn sec ab-del" hidden>Kustuta allalaaditud</button></div><p class="ab-ost muted" aria-live="polite"></p></div>
@@ -6983,6 +6986,23 @@ H — C — C — C — H
     Ajukas.onAudioSync = function(){ if (au.paused && !want && !keep) { var st = readState(); if (st && (st.ch !== cur || Math.abs(st.t - Math.floor(au.currentTime || seekTo || 0)) > 5)) restore(); } };
     restore();
     try { if (localStorage.getItem('ajukas-abtext') === '1') showText(true); } catch(e) {}
+    // arvutis saab tekstiakna nurgast suuremaks tõmmata (ka laiemaks kui muu tekst, kuni lehe paremasse serva); suurus jääb meelde
+    if (tbox && window.ResizeObserver && matchMedia('(min-width:700px) and (not (pointer:coarse))').matches) {
+      var thT = 0, mainEl = box.closest('main') || document.body;
+      function fitW(){
+        if (!tbox.style.width) { box.style.width = ''; return; }
+        var extra = box.offsetWidth - box.clientWidth + 28, max = mainEl.clientWidth - extra;
+        if (tbox.offsetWidth > max) tbox.style.width = max + 'px';
+        var base = box.parentElement.clientWidth;
+        box.style.width = tbox.offsetWidth + extra > base ? (tbox.offsetWidth + extra) + 'px' : '';
+      }
+      try { var sz = JSON.parse(localStorage.getItem('ajukas-absz') || 'null'); if (sz && sz.h >= 140) tbox.style.height = sz.h + 'px'; if (sz && sz.w >= 200) tbox.style.width = sz.w + 'px'; } catch(e) {}
+      new ResizeObserver(function(){
+        var h = tbox.offsetHeight; if (!h) return; requestAnimationFrame(fitW);
+        clearTimeout(thT); thT = setTimeout(function(){ try { localStorage.setItem('ajukas-absz', JSON.stringify({ h: tbox.offsetHeight, w: tbox.style.width ? tbox.offsetWidth : 0 })); } catch(e) {} }, 400);
+      }).observe(tbox);
+      window.addEventListener('resize', function(){ if (!tbox.hidden) fitW(); });
+    }
   });
   // Avaleht: kaartide kallutus ja sümbolid, tervitus, järgmise töö märk, tööde värvid, otsingu kiirklahv
   (function(){
