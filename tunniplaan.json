@@ -1,7 +1,7 @@
 {
  "num": "139",
- "default_num": "137",
- "text": "9.11-13.11 / 10. nädal (I trim)",
+ "default_num": "139",
+ "text": "9.11-13.11 / 10. nädal (I trim) (09. 11. - 15. 11. 2026)",
  "datefrom": "2026-11-09",
  "classes": {
   "10-A": "*1",
@@ -39,5 +39,5 @@
   "Külalised": "*33",
   "Koostöö": "*34"
  },
- "checked": "2026-11-07"
+ "checked": "2026-11-08"
 }
