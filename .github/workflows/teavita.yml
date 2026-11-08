@@ -33,7 +33,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ $(( 10#$(date -u +%M) % 20 )) -lt 2 ]; then
-            gh workflow run tunniplaan.yml --ref main --repo "$GITHUB_REPOSITORY" && echo "tunniplaani kontroll käivitatud"
+            # GitHubi API ütleb vahel ajutiselt ära: proovi 3 korda, siis ainult hoiatus (teavitus ise on juba tehtud)
+            for i in 1 2 3; do
+              gh workflow run tunniplaan.yml --ref main --repo "$GITHUB_REPOSITORY" && { echo "tunniplaani kontroll käivitatud"; exit 0; }
+              sleep 10
+            done
+            echo "::warning::tunniplaani kontroll jäi seekord käivitamata"
           fi
       - name: Käivita uuendusteate kontroll (umbes iga 10 minuti tagant)
         if: github.event_name == 'workflow_dispatch'
@@ -41,5 +46,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ $(( 10#$(date -u +%M) % 10 )) -lt 2 ]; then
-            gh workflow run versioon.yml --ref main --repo "$GITHUB_REPOSITORY" && echo "uuendusteate kontroll käivitatud"
+            # GitHubi API ütleb vahel ajutiselt ära: proovi 3 korda, siis ainult hoiatus (teavitus ise on juba tehtud)
+            for i in 1 2 3; do
+              gh workflow run versioon.yml --ref main --repo "$GITHUB_REPOSITORY" && { echo "uuendusteate kontroll käivitatud"; exit 0; }
+              sleep 10
+            done
+            echo "::warning::uuendusteate kontroll jäi seekord käivitamata"
           fi
