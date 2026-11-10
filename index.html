@@ -393,6 +393,9 @@ ol{margin:0 0 12px;padding-left:1.4em}
 .scard .chip{font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid currentColor}
 .chip.uus{color:var(--warn)}.chip.vaadatud{color:var(--muted)}.chip.tehtud{color:var(--ok)}.chip.prygi{color:var(--err)}
 .scard .txt{white-space:pre-wrap;margin:0;color:var(--bright);font-size:15px;overflow-wrap:anywhere}
+.scard .sbody{display:flex;flex-direction:column;gap:6px}.scard .skind{margin:0;font-size:13px;color:var(--muted)}.scard .skind span{display:inline-block;color:var(--bright);font-weight:600;border:1px solid var(--line2);border-radius:999px;padding:1px 9px;margin-left:4px}
+.scard .slink{color:var(--brand);text-decoration:underline}.scard .slink small{color:var(--muted);text-decoration:none;font-size:12px}.scard .snote{margin:0;font-size:13px;color:var(--muted)}
+.scard .smedia img,.scard .smedia video{display:block;max-width:100%;max-height:420px;border-radius:6px;background:var(--bg)}.scard .smedia.frame iframe{display:block;width:100%;height:460px;border:0;border-radius:6px;background:var(--bg)}
 .scard .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
 .sbtn{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line2);background:var(--raised);color:var(--text);padding:5px 10px;border-radius:3px}
 .sbtn:hover{border-color:var(--bright);color:var(--bright)}
@@ -8038,16 +8041,68 @@ if (!FIREBASE_CONFIG) {
     shown.forEach((x) => list.append(card(x)));
   }
 
+  // Ainult need saidid on lubatud. Pilt laetakse <img>-ina (skripti ei käivitu), Imguri album turvalises iframe'is.
+  function mediaEl(u) {
+    let url; try { url = new URL(u); } catch (e) { return null; }
+    if (url.protocol !== 'https:') return null;
+    const host = url.hostname.toLowerCase(), path = url.pathname;
+    const box = document.createElement('div'); box.className = 'smedia';
+    const img = (src) => { const i = document.createElement('img'); i.src = src; i.alt = t('Pilt soovitusest'); i.loading = 'lazy'; i.referrerPolicy = 'no-referrer';
+      i.addEventListener('error', () => { box.textContent = t('Pilti ei õnnestunud näidata. Ava link.'); box.className = 'snote'; }); box.append(i); return box; };
+    const vid = (src) => { const v = document.createElement('video'); v.src = src; v.autoplay = true; v.loop = true; v.muted = true; v.playsInline = true; v.setAttribute('playsinline', ''); box.append(v); return box; };
+    const ok = /^(i\.imgur\.com|media\d*\.giphy\.com|i\.giphy\.com|media\.tenor\.com|c\.tenor\.com|media\.discordapp\.net|cdn\.discordapp\.com|upload\.wikimedia\.org|i\.redd\.it)$/;
+    if (ok.test(host)) {
+      if (/\.(mp4|webm)$/i.test(path)) return vid(url.href);
+      if (/\.gifv$/i.test(path) && host === 'i.imgur.com') return vid('https://i.imgur.com' + path.replace(/\.gifv$/i, '.mp4'));
+      if (/\.(gif|png|jpe?g|webp|avif)$/i.test(path) || /^media\d*\.giphy\.com$|^i\.giphy\.com$/.test(host)) return img(url.href);
+      return null;
+    }
+    if (host === 'imgur.com' || host === 'www.imgur.com' || host === 'm.imgur.com') {
+      const a = path.match(/^\/(?:a|gallery)\/(?:[^/]*-)?([A-Za-z0-9]{5,10})\/?$/);
+      if (a) { const f = document.createElement('iframe'); f.src = 'https://imgur.com/a/' + a[1] + '/embed?pub=true&context=false';
+        f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups'); f.referrerPolicy = 'no-referrer'; f.loading = 'lazy'; f.title = t('Imguri album'); box.classList.add('frame'); box.append(f); return box; }
+      const one = path.match(/^\/([A-Za-z0-9]{5,10})$/);
+      if (one) return img('https://i.imgur.com/' + one[1] + '.gif');
+      return null;
+    }
+    if (host === 'giphy.com' || host === 'www.giphy.com') {
+      const g = path.match(/^\/gifs\/(?:.*-)?([A-Za-z0-9]{8,})\/?$/);
+      if (g) return img('https://i.giphy.com/' + g[1] + '.gif');
+    }
+    return null;
+  }
+
   function card(x) {
     const st = stateOf(x);
     const el = document.createElement('article'); el.className = 'scard is-' + st;
     const meta = document.createElement('div'); meta.className = 'meta';
     const who = document.createElement('span');
     const when = x.aeg && x.aeg.toDate ? x.aeg.toDate().toLocaleString(t('et-EE'), { dateStyle: 'short', timeStyle: 'short' }) : '';
-    who.textContent = (x.nimi || t('Anonüümne')) + (when ? ' · ' + when : '');
+    who.textContent = t('Saatja') + ': ' + (x.nimi || t('Anonüümne')) + (when ? ' · ' + when : '');
     const chip = document.createElement('span'); chip.className = 'chip ' + st; chip.textContent = LABEL[st];
     meta.append(who, chip);
-    const body = document.createElement('p'); body.className = 'txt'; body.textContent = x.tekst || '';
+    // Liik ("[Muu]" teksti alguses) eraldi sildiks, lingid klikitavaks.
+    let raw = x.tekst || '', kind = '';
+    const km = raw.match(/^\[(Viga|Idee|Uus materjal|Muu)\]\s*/);
+    if (km) { kind = km[1]; raw = raw.slice(km[0].length); }
+    const body = document.createElement('div'); body.className = 'sbody';
+    if (kind) { const k = document.createElement('p'); k.className = 'skind'; k.innerHTML = '<span></span>'; k.prepend(t('Liik') + ': '); k.querySelector('span').textContent = t(kind); body.append(k); }
+    const txt = document.createElement('p'); txt.className = 'txt';
+    const urlRe = /https?:\/\/[^\s<>"']+/g;
+    let last = 0, m, links = 0;
+    while ((m = urlRe.exec(raw))) {
+      txt.append(raw.slice(last, m.index));
+      const u = m[0].replace(/[.,;:!?)]+$/, ''); urlRe.lastIndex = m.index + u.length;
+      let host = ''; try { host = new URL(u).hostname.replace(/^www\./, ''); } catch (e) {}
+      const a = document.createElement('a'); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer nofollow'; a.className = 'slink';
+      a.textContent = u; if (host) { const h = document.createElement('small'); h.textContent = ' (' + t('link, avaneb lehel') + ' ' + host + ')'; a.append(h); }
+      txt.append(a); last = urlRe.lastIndex; links++;
+    }
+    txt.append(raw.slice(last));
+    body.append(txt);
+    // Turvalised pildid/GIF-id näitame kohe: ainult https ja ainult tuntud pildisaidid.
+    (raw.match(urlRe) || []).slice(0, 4).forEach((u0) => { const e = mediaEl(u0.replace(/[.,;:!?)]+$/, '')); if (e) body.append(e); });
+    if (links && !raw.replace(urlRe, '').trim()) { const n = document.createElement('p'); n.className = 'snote'; n.textContent = t('Saatja ei kirjutanud teksti, ainult lingi. Vajuta lingile, et näha, mis seal on.'); body.append(n); }
     const acts = document.createElement('div'); acts.className = 'acts';
     const btn = (label, fn, danger) => {
       const b = document.createElement('button'); b.type = 'button'; b.className = 'sbtn' + (danger ? ' danger' : ''); b.textContent = label;
