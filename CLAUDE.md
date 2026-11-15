@@ -7,7 +7,7 @@ Ajukas on klassi õppeleht (GitHub Pages, https://nextonu.github.io/ajukas/). Ko
 ## Iga muudatuse järel
 
 1. `python -X utf8 tools/teade.py sees` (näitab lehel „Lehte uuendatakse praegu”), lisa `teade.json` commit'i.
-2. `git pull --rebase` enne push'i: bot teeb main'i ka ise commit'e.
+2. `git pull --rebase` enne push'i: bot teeb main'i ka ise commit'e. **Leht uueneb ainult `main` harust.** Kui töötad pilves eraldi harus, ütle kasutajale selgelt, et muudatus jõuab lehele alles pärast PR-i ühendamist (merge) main'i, või küsi, kas võib otse main'i panna.
 3. Commit'i sõnum eesti keeles, lõpus `Co-Authored-By: Claude <noreply@anthropic.com>`.
 4. Kui kasutaja ütleb, et on valmis: `python tools/teade.py valjas`.
 5. Kontrolli, et leht töötab: JS-vigu ei ole, vahekaardid avanevad, telefonis (≈360 px) ei keri tabel külgsuunas.
