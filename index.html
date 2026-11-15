@@ -3171,7 +3171,7 @@ H — C — C — C — H
 </section>
 </main>
 </div>
-<div class="view" id="v-keemia-kt2" data-added="2026-11-08" data-title="Kontrolltöö 2: happed, estrid, polümeerid" data-parent="keemia" data-parent-title="Keemia" hidden>
+<div class="view" id="v-keemia-kt2" data-added="2026-11-08" data-updated="2026-11-08" data-title="Kontrolltöö 2: happed, estrid, polümeerid" data-parent="keemia" data-parent-title="Keemia" hidden>
   <nav class="appbar sticky" aria-label="Keemia kontrolltöö 2 teemad"><a class="logo" translate="no" href="#" aria-label="Ajuka avaleht"><svg class="mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Ajukas<span class="dot">.</span></span></a><div class="tabwrap"><button type="button" class="tabarrow" data-dir="-1" aria-label="Eelmised vahekaardid">‹</button><div class="tabs" role="tablist"><button role="tab" id="t-k2-ulevaade" aria-controls="k2-ulevaade" aria-selected="false">Ülevaade</button><button role="tab" id="t-k2-aldehuudid" aria-controls="k2-aldehuudid" aria-selected="false">Aldehüüdid</button><button role="tab" id="t-k2-happed" aria-controls="k2-happed" aria-selected="false">Karboksüülhapped</button><button role="tab" id="t-k2-reakts" aria-controls="k2-reakts" aria-selected="false">Hapete reaktsioonid</button><button role="tab" id="t-k2-estrid" aria-controls="k2-estrid" aria-selected="false">Estrid ja amiidid</button><button role="tab" id="t-k2-liitumis" aria-controls="k2-liitumis" aria-selected="false">Liitumispolümeerid</button><button role="tab" id="t-k2-polyk" aria-controls="k2-polyk" aria-selected="false">Polükondensatsioon</button><button role="tab" id="t-k2-klassid" aria-controls="k2-klassid" aria-selected="false">Aineklassid</button><button role="tab" id="t-k2-test" aria-controls="k2-test" aria-selected="false">Testi ennast</button><button role="tab" id="t-k2-spikker" aria-controls="k2-spikker" aria-selected="false">Spikker</button><button role="tab" id="t-k2-viited" aria-controls="k2-viited" aria-selected="false">Videod ja viited</button></div><button type="button" class="tabarrow" data-dir="1" aria-label="Järgmised vahekaardid">›</button></div></nav>
   <div class="pagehead">
     <a class="back" href="#keemia"><span aria-hidden="true">←</span> Keemia</a>
@@ -5949,13 +5949,16 @@ H — C — C — C — H
     });
     if (best) SUBJ_LATEST[id] = best;
   });
+  var FRESH_FROM = (function(){ var x = new Date(Date.now() - 14 * 864e5); return x.getFullYear() + '-' + ('0' + (x.getMonth() + 1)).slice(-2) + '-' + ('0' + x.getDate()).slice(-2); })();
   function uusTest(){ if (!Ajukas.isAdmin) return false; if (/[?&]uustest(&|=|$)/.test(location.search)) return true; try { return localStorage.getItem('ajukas-uustest') === '1'; } catch (e) { return false; } }
   function paintFresh(){
     if (!SUBJ_LATEST) return;
     var test = uusTest();
     document.querySelectorAll('#v-home a.subjcard[href^="#"]').forEach(function(c){
       var id = c.getAttribute('href').slice(1), d = SUBJ_LATEST[id];
-      var on = !!d && (test || !((P.visit || {})[id] >= d));
+      // "uus" ainult viimase 14 päeva uuendustel, mida pole veel avatud (muidu näeks uus või arendusrežiimist tulnud kasutaja kõike uuena)
+      var recent = !!d && d >= FRESH_FROM;
+      var on = !!d && (test || (recent && !((P.visit || {})[id] >= d)));
       c.classList.toggle('fresh', on);
       var tag = c.querySelector('.cnew');
       if (on && !tag) { tag = document.createElement('span'); tag.className = 'cnew'; tag.textContent = t('uus'); c.appendChild(tag); }
