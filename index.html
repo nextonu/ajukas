@@ -5994,7 +5994,10 @@ H — C — C — C — H
     var pop = document.getElementById('settings-pop');
     function paintT(){ var on = uusTest(); pop.querySelectorAll('[data-uustest-set]').forEach(function(b){ b.setAttribute('aria-pressed', (b.getAttribute('data-uustest-set') === '1') === on ? 'true' : 'false'); }); }
     pop.querySelectorAll('[data-uustest-set]').forEach(function(b){
-      b.addEventListener('click', function(){ try { localStorage.setItem('ajukas-uustest', b.getAttribute('data-uustest-set')); } catch (e) {} paintT(); paintFresh(); });
+      b.addEventListener('click', function(){ var v = b.getAttribute('data-uustest-set'); try { localStorage.setItem('ajukas-uustest', v); } catch (e) {}
+        // arendusrežiimist välja: sina oled kõike juba näinud, seega märgi kõik ained nähtuks
+        if (v !== '1') { if (!P.visit) P.visit = {}; Object.keys(SUBJ_LATEST).forEach(function(k){ if (!(P.visit[k] >= SUBJ_LATEST[k])) P.visit[k] = SUBJ_LATEST[k]; }); saveProgress(); }
+        paintT(); paintFresh(); });
     });
     document.getElementById('uus-reset').addEventListener('click', function(){ P.visit = {}; saveProgress(); paintFresh(); });
     document.getElementById('push-ver').addEventListener('click', function(){
