@@ -643,7 +643,7 @@ body{padding-bottom:80px}
 .tsitaat blockquote{margin:0;font-size:17px;line-height:1.45;color:var(--bright);font-weight:600;letter-spacing:-.01em}
 .tsitaat blockquote::before{content:"\201C";display:block;font-family:Georgia,"Times New Roman",serif;font-size:44px;line-height:.6;color:var(--brand);opacity:.7;margin-bottom:6px}
 .tsitaat figcaption{margin-top:10px;font-size:13px;color:var(--muted)}
-.tsitaat figcaption::before{content:"\2014 "}
+.tsitaat figcaption::before{content:"\2014\00a0"}
 #tsitaat-m{margin:20px 0 0}
 @media (max-width:860px){#tsitaat-d{display:none}}
 @media (min-width:861px){#tsitaat-m{display:none}#tsitaat-d{margin:0 0 14px}}
@@ -6064,7 +6064,7 @@ H — C — C — C — H
       var show = on(), q = pick();
       els.forEach(function(el){
         el.hidden = !show;
-        el.querySelector('blockquote').textContent = '„' + q[0] + '”';
+        el.querySelector('blockquote').textContent = q[0];
         el.querySelector('figcaption').textContent = q[1];
       });
       pop.querySelectorAll('[data-tsitaat-set]').forEach(function(b){ b.setAttribute('aria-pressed', (b.getAttribute('data-tsitaat-set') === '1') === show ? 'true' : 'false'); });
