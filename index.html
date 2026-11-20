@@ -638,15 +638,17 @@ body{padding-bottom:80px}
 .updlog summary:focus-visible{outline:1px solid var(--key);outline-offset:-2px}
 
 .tood{margin:6px 0 12px}
-.tsitaat{margin:6px 0 12px;padding:14px 16px;border-radius:10px;background:linear-gradient(180deg,color-mix(in srgb,var(--brand) 8%,var(--panel)),var(--panel) 70%);border-color:color-mix(in srgb,var(--brand) 28%,var(--line))}
-.tsitaat .ts-h{margin:0 0 8px;font-family:var(--mono);font-size:11.5px;color:var(--brand);font-weight:500}
-.tsitaat blockquote{margin:0;font-size:15.5px;line-height:1.5;color:var(--bright);font-style:italic}
-.tsitaat figcaption{margin-top:7px;font-size:12.5px;color:var(--muted)}
+.tsitaat{margin:6px 0 12px;padding:16px 18px;border-radius:10px;background:linear-gradient(180deg,color-mix(in srgb,var(--brand) 10%,var(--panel)),var(--panel) 75%);border-color:color-mix(in srgb,var(--brand) 30%,var(--line))}
+.tsitaat .ts-h{margin:0 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--brand);font-weight:500}
+.tsitaat blockquote{margin:0;font-size:17px;line-height:1.45;color:var(--bright);font-weight:600;letter-spacing:-.01em}
+.tsitaat blockquote::before{content:"\201C";display:block;font-family:Georgia,"Times New Roman",serif;font-size:44px;line-height:.6;color:var(--brand);opacity:.7;margin-bottom:6px}
+.tsitaat figcaption{margin-top:10px;font-size:13px;color:var(--muted)}
+.tsitaat figcaption::before{content:"\2014 "}
 #tsitaat-m{margin:20px 0 0}
 @media (max-width:860px){#tsitaat-d{display:none}}
-@media (min-width:861px){#tsitaat-m{display:none}}
-@media (min-width:1000px){#v-home .leftcol .lc2{display:flex;flex-direction:column;gap:12px}#v-home .leftcol .tsitaat{margin:0}}
-@media (min-width:1560px){.leftcol .tsitaat{margin:0}}
+@media (min-width:861px){#tsitaat-m{display:none}#tsitaat-d{margin:0 0 14px}}
+@media (min-width:1000px){.cardsrow{display:grid;grid-template-columns:230px minmax(0,1fr);gap:16px;align-items:start}#tsitaat-d{margin:0;position:sticky;top:70px}#tsitaat-d blockquote{font-size:21px;line-height:1.35}}
+@media (min-width:1640px){.cardsrow{display:block;position:relative}#tsitaat-d{position:absolute;top:0;right:calc(100% + 28px);width:clamp(200px,calc(50vw - 615px),330px);padding:20px 22px}#tsitaat-d blockquote{font-size:24px;line-height:1.3}}
 .tood h3{margin:0 0 8px}
 .tood-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
 .tood-list li{display:grid;grid-template-columns:52px 1fr;gap:2px 10px;padding:7px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
@@ -1341,6 +1343,8 @@ sub{font-size:.72em;line-height:0}
     <input id="q" type="search" placeholder="Otsi kõigist teemadest, nt Armstrong või veerised" autocomplete="off" spellcheck="false"><kbd class="qk" aria-hidden="true" title="Kiirklahv">/</kbd>
     <div id="q-res" class="qres" hidden></div>
   </div>
+  <div class="cardsrow">
+  <figure class="box tsitaat" id="tsitaat-d" hidden><p class="ts-h">Päeva tsitaat</p><blockquote></blockquote><figcaption></figcaption></figure>
   <div class="grid">
     <a class="subjcard ready" href="#ajalugu"><span class="sname">Ajalugu</span><span class="stopic">Kontrolltöö 1: tänapäev</span></a>
     <a class="subjcard ready" href="#eesti"><span class="sname">Eesti keel</span><span class="stopic">Indoeuroopa ja uurali keeled</span></a>
@@ -1354,6 +1358,7 @@ sub{font-size:.72em;line-height:0}
     <a class="subjcard ready" href="#vene"><span class="sname">Vene keel</span><span class="stopic">Tasemetest A2</span></a>
     <a class="subjcard ready" href="#upt"><span class="sname">UPT</span><span class="stopic">I seminar, UPT juhend</span></a>
   </div>
+  </div>
 <div class="leftcol" id="leftcol">
   <section class="box tood" id="tood" aria-labelledby="tood-h">
     <h3 id="tood-h">Järgmised tööd</h3>
@@ -1361,13 +1366,10 @@ sub{font-size:.72em;line-height:0}
     <button type="button" class="linkbtn" id="tood-more" hidden>Näita kõiki</button>
     <p class="tood-note">Kuupäevad on lehe tegija eKoolist. Kontrolli oma eKoolist: rühmad ja valikained võivad erineda.</p>
   </section>
-  <div class="lc2">
   <details class="box updlog" id="updlog">
     <summary><span class="ul-title">Uuendused</span><span class="ul-date">6. oktoober 2026</span><span class="ul-last">Muusikas ja ajaloos on inimeste pildid.</span></summary>
     <div class="ul-body"><h4>20. november 2026</h4><ul><li>Avalehel on <b>päeva tsitaat</b>, mis vahetub iga päev (arvutis uuenduste all, telefonis kõige all). Seadetest saab välja lülitada.</li></ul><h4>19. november 2026</h4><ul><li>Kirjanduses on uus teema <b>Faust</b> (I osa loetud 7.12, tund K 9.12): sisu kokkuvõte, kõik stseenid, tegelased, teemad ja sümbolid, tsitaadid Sanga tõlkes, küsimused, proovitöö ja spikker. Saksakeelset originaali saab kuulata otse lehel.</li></ul><h4>15. november 2026</h4><ul><li>Füüsikas on uus teema <b>Tunnikontroll: tähtede areng</b> (E 16.11): molekulaarpilv, peajadatäht, punane hiid, planetaarudu, supernoova jäänuk ja termotuumareaktsioon. Juures on küsimused, proovitöö, kollase töövihiku ülesannete 27.1–27.8 vastused ja spikker.</li><li>Aine lehtedel on kirjas, mida peab tegema ja ära andma (näiteks eesti keele ja kirjanduse konspekt, keemia Moodle'i testid).</li></ul><h4>8. november 2026</h4><ul><li>Keemias on uus teema <b>Kontrolltöö 2</b> (K 11.11): aldehüüdid, karboksüülhapped ja nende reaktsioonid, estrid, amiidid ja polümeerid. Olemas on küsimused, proovitöö, 19 harjutust lahendustega ja spikker.</li></ul><h4>5. november 2026</h4><ul><li>Dorian Gray audioraamatut kuulates saab ekraanil näha raamatu teksti. Loetav sõna läheb esile ja tekst kerib ise kaasa. Sõnale vajutades näed selle tähendust ja saad sealt kuulama hakata. Kui ajaribal kogemata kaugele hüppad, saad ühe nupuga tagasi.</li><li>Laia matemaatika kontrolltöö 2 lükkus <b>reedele 6.11</b>.</li><li>Vene keele „Testi ennast” lünkharjutuses on 3.11 tunni harjutused: винительный omadussõnaga, в/на + винительный (kuhu?) ja творительный eessõnadega под, над, за, перед, с.</li></ul><h4>3. november 2026</h4><ul><li>Laia matemaatika „Testi ennast” all saab valida ühe teema. Siis näed küsimusi, proovitööd ja ülesandeid ainult sellest teemast.</li><li>Laias matemaatikas on pöördfunktsiooni juures selgitus, kuidas ära tunda rangelt kasvav või kahanev funktsioon (horisontaalse sirge kontroll). Valemid on tekstis heledamad ja jagamised murdudena.</li><li>Laia matemaatika funktsiooni uurimises on uus osa „Kui vastust pole”: mida tähendab negatiivne diskriminant ja millal on X<sub>+</sub> või X<sub>−</sub> terve R. Juures on levinud vead.</li><li>Laias matemaatikas on õpetaja kordamislehe ülesanded koos lahendustega (Testi ennast → Kordamisleht). Juurde tulid logaritmfunktsioon, lihtintress ja liitintress ning ekstreemumkoha ja ekstreemumi vahe.</li></ul><h4>2. november 2026</h4><ul><li>Kuulamiskavas saab stiili nimele vajutades lugeda, mis stiil see on, ja kahte lugu kõrvuti võrrelda.</li><li>Kuulamiskava vaates „Read” on iga loo juures lühike kokkuvõte ja tunnused, mille järgi lugu ära tunda.</li><li>Audioraamatul saab heli valjemaks teha kuni 300%. Järgmine peatükk hakkab lukus telefonis kindlamalt mängima.</li><li>Aine lehel on esimesena teema, mille töö on kõige varem.</li></ul><h4>1. november 2026</h4><ul><li>Uus aine: <b>Lai matemaatika</b>, kontrolltöö 2 (funktsioonid, 4.11). Teooria töövihiku järgi, graafikud, teisenduste mängija ja graafikutreener.</li><li>Tööde kuupäevad on kontrollitud tunniplaani järgi (nt kuulamistest on 10.11).</li></ul><h4>28. oktoober 2026</h4><ul><li>„Dorian Gray portree” audioraamatu peatükke saab alla laadida ja kuulata ilma internetita. Androidis jätkub allalaadimine ka teises äpis. Peatüki vahetus lukus telefonis ei jää enam pausile.</li></ul><h4>26. oktoober 2026</h4><ul><li>Kuulamistestis mängivad viis vanemat lugu nüüd ilma YouTube'i reklaamideta. Kuulamiskaval on kolm vaadet (kaardid, read, nimekiri) ja Android-telefonis saab kuulamistesti lõike mängida YMusicus.</li><li>Muusikas on <b>Kuulamistest</b> nüüd eraldi teema: test, kuulamiskava, õppimise juhend ja spikker.</li><li>Teema jätab nüüd meelde vahekaardi, kus viimati olid. Parandatud ka mitu viga sünkroonimises, foorumis ja kuulamistestis ning mõni faktiviga (nt Euroopa Liidu sünd 1993).</li></ul><h4>25. oktoober 2026</h4><ul><li>UPT all on uus teema „I seminar”: mida enne 2.11 seminari teha, kontrollnimekiri ja link PERGlased siseveebile.</li></ul><h4>22. oktoober 2026</h4><ul><li>Avaleht on uuenenud: ainekaardid liiguvad hiire all, järgmised tööd ja uuendused on ainete all ning foorum on paremini näha.</li><li>Muusikas on uus teema „New York ja sving” (töö 2.11), õpetaja slaidide põhjal. Vene keeles on uus vahekaart „Välimus” (4.11 tööks) ning harjutused ja lugemisküsimused.</li><li>Muusikas on uus vahekaart „Kuulamiskava”: kõik 9.11 kuulamistesti lood YouTube’i ja Spotify linkidega. Kuulamistest on nüüd tehtud nende lugudega.</li><li>Inglise keeles on uus leht „Commonly misspelled words”: kõik 101 sõna ja segased sõnad koos tõlke, tähenduse, nipi ja harjutustega.</li><li>Kirjanduses saab „Dorian Gray portree” audioraamatut kuulata otse lehel. Koht jääb meelde ja kuulata saab ka lukus telefoniga.</li></ul><h4>19. oktoober 2026</h4><ul><li>Aine, kuhu on tulnud midagi uut, on avalehel ere ja märgiga „uus”, kuni selle avad.</li></ul><h4>18. oktoober 2026</h4><ul><li>Uus aine: <b>Ennastjuhtiv õppija</b>, portfoolio töölehtede kontrollnimekiri (esitamine 23.10).</li></ul><h4>15. oktoober 2026</h4><ul><li>Vene keeles pildiharjutus (nägu, keha ja riided) ning selgemad tabelid, mis mahuvad ka telefoni ekraanile.</li></ul><h4>13. oktoober 2026</h4><ul><li>Vene keeles винительный падеж mitmuses, uus harjutus ja õpetaja harjutuslingid (hindeline töö 16.10).</li></ul><h4>12. oktoober 2026</h4><ul><li>Füüsikas uued kordamisülesanded: arvutused, valemi valik ja mõtlemisülesanded (Testi ennast all).</li><li>Kõik harjutused ja ülesanded on nüüd „Testi ennast” all.</li></ul><h4>11. oktoober 2026</h4><ul><li>Uued ained: <b>Eesti keel</b> (indoeuroopa ja uurali keeled), <b>Inglise keel</b> (CEPT combo test) ja <b>Vene keel</b> (tasemetest A2).</li></ul><h4>8. oktoober 2026</h4><ul><li>Uus aine: <b>Füüsika</b>, kontrolltöö: ringliikumine (koos arvutustreeneriga).</li><li>Kirjandus: „Dorian Gray portree”: tasuta raamat ja audioraamat, kokkuvõte peatükkide kaupa, tegelased, teemad ja enesetest.</li><li>Keemias on ainete <b>3D-mudelid</b>: arvutis teksti kõrval, telefonis vajuta aine nimele.</li></ul><h4>7. oktoober 2026</h4><ul><li>Uus: <b>foorum</b>, kus saab küsida ja teisi aidata (avalehel „Foorum”).</li><li>Igal ainel on oma <b>värv</b>.</li><li>„Testi ennast” all saab valida testi tüübi: <b>proovitöö</b> taimeriga, keemias <b>nimetamise treener</b>, muusikas <b>kuulamistest</b>, ajaloos ja muusikas <b>ajajoone mäng</b>.</li><li>Igal kontrolltööl on <b>spikker</b>.</li></ul><h4>6. oktoober 2026</h4><ul><li>Muusikas ja ajaloos on inimeste <b>pildid</b>: arvutis nime juures, telefonis vajuta nimele.</li><li>Ajaloo kontrolltöö 1: uus ülevaade teemakaartidega.</li><li>Enesetestis saab valida ainult <b>olulisemad</b> küsimused (ajalugu, muusika).</li></ul><h4>5. oktoober 2026</h4><ul><li>Uus aine: <b>Keemia</b>, kontrolltöö 1 (orgaanika).</li><li>Uus aine: <b>Ajalugu</b>, kontrolltöö 1 (tänapäev).</li><li>Avalehel <b>Järgmised tööd</b> ja <b>Tunniplaan</b>.</li><li>Igal teemal oma <b>märkmed</b>.</li></ul><h4>4. oktoober 2026</h4><ul><li>Ajukas avati: <b>Muusika</b> ja <b>UPT</b> juhend.</li><li>Kontod, soovitused ja otsing.</li></ul></div>
   </details>
-  <figure class="box tsitaat" id="tsitaat-d" hidden><p class="ts-h">Päeva tsitaat</p><blockquote></blockquote><figcaption></figcaption></figure>
-  </div>
   <aside class="suvi" id="suvi" aria-label="Suvevaheaja taimer" hidden>
   <div class="suvi-clock">
     <svg viewBox="0 0 100 100" class="analog" aria-hidden="true">
@@ -6002,44 +6004,54 @@ H — C — C — C — H
     window.Ajukas.chainsPreview = function(L){ last = -1; draw(L); };
   })();
 
-  // --- päeva tsitaat (eesti keeles; muutub iga päev; seadetest saab välja lülitada) ---
+  // --- päeva tsitaat (tuntud inimeste mõtted eesti keeles; muutub iga päev; seadetest saab välja lülitada) ---
   (function(){
     var Q = [
-      ['Tee tööd ja näe vaeva, siis tuleb ka armastus.', 'A. H. Tammsaare, „Tõde ja õigus”'],
-      ['Julge pealehakkamine on pool võitu.', 'Eesti vanasõna'],
-      ['Kes otsib, ikka eksib teel.', 'J. W. Goethe, „Faust” (tõlkinud August Sang)'],
-      ['Kordamine on tarkuse ema.', 'Ladina vanasõna'],
-      ['Kus viga näed laita, seal tule ja aita.', 'Fr. R. Kreutzwald, „Kalevipoeg”'],
-      ['Tasa sõuad, kaugele jõuad.', 'Eesti vanasõna'],
-      ['Teekond tuhande miili pikkune algab esimesest sammust.', 'Laozi'],
+      ['Ainus viis teha suurepärast tööd on armastada seda, mida sa teed.', 'Steve Jobs'],
+      ['Tee tööd ja näe vaeva, siis tuleb ka armastus.', 'A. H. Tammsaare'],
+      ['Alusta sealt, kus oled. Kasuta seda, mis sul on. Tee seda, mida suudad.', 'Arthur Ashe'],
+      ['Ma ei ole läbi kukkunud. Ma olen leidnud 10 000 viisi, mis ei tööta.', 'Thomas Edison'],
+      ['Kõik tundub võimatu, kuni see on tehtud.', 'Nelson Mandela'],
+      ['Sa jätad kasutamata 100% löökidest, mida sa ei tee.', 'Wayne Gretzky'],
+      ['Usu, et suudad, ja oled juba poolel teel.', 'Theodore Roosevelt'],
+      ['Parim viis tulevikku ennustada on see ise luua.', 'Peter Drucker'],
+      ['Pole tähtis, kui aeglaselt sa lähed, kui sa ei peatu.', 'Konfutsius'],
+      ['Edu ei ole lõplik ja läbikukkumine ei ole saatuslik. Loeb julgus jätkata.', 'Winston Churchill'],
+      ['Haridus on kõige võimsam relv, millega maailma muuta.', 'Nelson Mandela'],
+      ['Kui sa lähed läbi põrgu, mine edasi.', 'Winston Churchill'],
+      ['Ära loe päevi. Pane päevad lugema.', 'Muhammad Ali'],
+      ['Raske töö võidab talendi, kui talent ei tee rasket tööd.', 'Tim Notke'],
+      ['Iga meister oli kunagi algaja.', 'Anonüümne'],
+      ['Distsipliin on sild eesmärkide ja saavutuste vahel.', 'Jim Rohn'],
+      ['Motivatsioon paneb sind alustama. Harjumus paneb sind jätkama.', 'Jim Ryun'],
+      ['Ära karda aeglaselt edasi minna. Karda paigal seista.', 'Hiina vanasõna'],
+      ['Tuhande miili pikkune teekond algab ühest sammust.', 'Laozi'],
+      ['Me oleme see, mida me korduvalt teeme. Täiuslikkus ei ole tegu, vaid harjumus.', 'Will Durant'],
+      ['Teadmine on jõud.', 'Francis Bacon'],
+      ['Kui tahad minna kiiresti, mine üksi. Kui tahad minna kaugele, mine koos teistega.', 'Aafrika vanasõna'],
+      ['Suurim au ei ole see, et sa kunagi ei kuku, vaid see, et sa iga kord uuesti tõused.', 'Konfutsius'],
+      ['Investeering teadmistesse maksab parimat intressi.', 'Benjamin Franklin'],
+      ['Sa ei pea olema suurepärane, et alustada. Aga sa pead alustama, et saada suurepäraseks.', 'Zig Ziglar'],
+      ['Kui sa väsid, õpi puhkama, mitte alla andma.', 'Anonüümne'],
+      ['Unistused ei tööta, kui sina ei tööta.', 'John C. Maxwell'],
+      ['Kui plaan ei tööta, muuda plaani, mitte eesmärki.', 'Anonüümne'],
+      ['Tähtis ei ole see, mis sinuga juhtub, vaid see, kuidas sa sellele reageerid.', 'Epiktetos'],
+      ['Elus pole midagi karta, on vaid asju, mida mõista.', 'Marie Curie'],
+      ['Loogika viib sind punktist A punkti B. Kujutlusvõime viib sind kõikjale.', 'Albert Einstein'],
+      ['Mõtle suurelt, alusta väikselt, tegutse kohe.', 'Anonüümne'],
+      ['Ainus inimene, kellest pead parem olema, on see, kes sa eile olid.', 'Anonüümne'],
+      ['Ära lase eilsel päeval võtta liiga palju tänasest.', 'Will Rogers'],
       ['Kui me ei saa suureks rahvaarvult, peame saama suureks vaimult.', 'Jakob Hurt'],
-      ['Harjutamine teeb meistriks.', 'Eesti vanasõna'],
-      ['Asjad ei ole rasked sellepärast, et me ei julge; me ei julge sellepärast, et need tunduvad rasked.', 'Seneca'],
-      ['Hommik on õhtust targem.', 'Eesti vanasõna'],
-      ['Traditsioon ei ole tuha säilitamine, vaid tule hoidmine.', 'Ingrid Rüütel'],
-      ['Kes küsib, see ei eksi.', 'Eesti vanasõna'],
-      ['Kukud seitse korda, tõuse kaheksa.', 'Jaapani vanasõna'],
-      ['Töö kiidab tegijat.', 'Eesti vanasõna'],
-      ['Kes minevikku ei mäleta, elab tulevikuta.', 'Juhan Liiv'],
-      ['Õnn soosib julgeid.', 'Vergilius'],
-      ['Mida Juku ei õpi, seda Juhan ei tea.', 'Eesti vanasõna'],
-      ['Hall, sõbrake, on kõik teooria, kuid haljas elu kuldne puu.', 'J. W. Goethe, „Faust” (tõlkinud August Sang)'],
-      ['Igal asjal on oma aeg.', 'Koguja raamat'],
-      ['Kujutlusvõime on tähtsam kui teadmised.', 'Albert Einstein'],
-      ['Kes otsib, see leiab.', 'Eesti vanasõna'],
-      ['Takistus teel saab ise teeks.', 'Marcus Aurelius'],
-      ['Enne mõtle, siis ütle.', 'Eesti vanasõna'],
-      ['Piisab, kui üks noot on ilusasti mängitud.', 'Arvo Pärt'],
-      ['Parem hilja kui mitte kunagi.', 'Eesti vanasõna'],
-      ['Ole ise see muutus, mida tahad maailmas näha.', 'omistatud Mahatma Gandhile'],
-      ['Kus on tahtmist, seal on ka teed.', 'Vanasõna'],
-      ['Pole halba ilma heata.', 'Eesti vanasõna'],
-      ['Ma usun kõike, kuni seda pole ümber lükatud.', 'John Lennon'],
-      ['Tark ei torma.', 'Eesti vanasõna'],
-      ['Mis sind ei tapa, teeb sind tugevamaks.', 'Friedrich Nietzsche'],
-      ['Kelle jalg tatsub, selle suu matsub.', 'Eesti vanasõna'],
-      ['Alguses oli Tegu.', 'J. W. Goethe, „Faust” (Fausti tõlge Johannese evangeeliumist)'],
-      ['Kes kannatab, see kaua elab.', 'Eesti vanasõna']
+      ['Tee täna seda, mida teised ei taha, siis saad homme teha seda, mida teised ei suuda.', 'Jerry Rice'],
+      ['Vaid need, kes julgevad suurelt kaotada, saavad suurelt võita.', 'Robert F. Kennedy'],
+      ['Edu on väikesed pingutused, mida korratakse päevast päeva.', 'Robert Collier'],
+      ['Ära oota. Aeg ei ole kunagi päris õige.', 'Napoleon Hill'],
+      ['Kui sa ei saa teha suuri asju, tee väikseid asju suurelt.', 'Napoleon Hill'],
+      ['See, mida me täna teeme, loeb kõige rohkem.', 'Buddha'],
+      ['Keskendu sellele, mida saad muuta, mitte sellele, mida ei saa.', 'Anonüümne'],
+      ['Ükski meister pole taevast kukkunud.', 'Saksa vanasõna'],
+      ['Tulevik kuulub neile, kes usuvad oma unistuste ilusse.', 'Eleanor Roosevelt'],
+      ['Kukkumine ei ole läbikukkumine. Läbikukkumine on jääda sinna, kuhu kukkusid.', 'Sokrates']
     ];
     var els = [document.getElementById('tsitaat-d'), document.getElementById('tsitaat-m')].filter(Boolean);
     var pop = document.getElementById('settings-pop');
