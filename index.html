@@ -6341,14 +6341,14 @@ H — C — C — C — H
     });
     if (best) SUBJ_LATEST[id] = best;
   });
-  var FRESH_FROM = (function(){ var x = new Date(Date.now() - 14 * 864e5); return x.getFullYear() + '-' + ('0' + (x.getMonth() + 1)).slice(-2) + '-' + ('0' + x.getDate()).slice(-2); })();
+  var FRESH_FROM = (function(){ var x = new Date(Date.now() - 7 * 864e5); return x.getFullYear() + '-' + ('0' + (x.getMonth() + 1)).slice(-2) + '-' + ('0' + x.getDate()).slice(-2); })();
   function uusTest(){ if (!Ajukas.isAdmin) return false; if (/[?&]uustest(&|=|$)/.test(location.search)) return true; try { return localStorage.getItem('ajukas-uustest') === '1'; } catch (e) { return false; } }
   function paintFresh(){
     if (!SUBJ_LATEST) return;
     var test = uusTest();
     document.querySelectorAll('#v-home a.subjcard[href^="#"]').forEach(function(c){
       var id = c.getAttribute('href').slice(1), d = SUBJ_LATEST[id];
-      // "uus" ainult viimase 14 päeva uuendustel, mida pole veel avatud (muidu näeks uus või arendusrežiimist tulnud kasutaja kõike uuena)
+      // "uus" ainult viimase 7 päeva uuendustel, mida pole veel avatud (muidu näeks uus või arendusrežiimist tulnud kasutaja kõike uuena)
       var recent = !!d && d >= FRESH_FROM;
       var on = !!d && (test || (recent && !((P.visit || {})[id] >= d)));
       c.classList.toggle('fresh', on);
