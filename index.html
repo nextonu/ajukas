@@ -143,7 +143,7 @@ b,strong{font-weight:600;color:var(--bright);background:var(--hl);padding:0 3px;
 .person p{font-size:15px;margin:0}
 .quote{border-left:2px solid var(--brand);padding:4px 0 4px 16px;margin:20px 0;font-style:italic;font-size:18px;color:var(--bright)}
 .quote cite{display:block;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:6px}
-.devnames [data-dn]{outline:1px dashed rgba(234,179,8,.45);outline-offset:2px}.dn-layer{position:fixed;inset:0;z-index:9990;pointer-events:none;overflow:hidden}.dn-tag{position:absolute;pointer-events:none;font:700 10.5px/1.25 var(--mono);letter-spacing:.02em;color:#1A1400;background:#FACC15;border-radius:4px;padding:1px 5px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.dn-box{position:fixed;z-index:9990;pointer-events:none;outline:2px dashed #FACC15;outline-offset:2px;border-radius:4px;background:rgba(250,204,21,.08)}.dn-tip{position:fixed;z-index:9991;pointer-events:none;max-width:min(320px,calc(100vw - 16px));padding:6px 10px;border-radius:8px;background:#FACC15;color:#1A1400;box-shadow:0 6px 18px rgba(0,0,0,.4);font:600 13px/1.35 var(--ui)}.dn-tip b{display:block;font-size:14.5px;font-weight:800;color:#1A1400;background:none;padding:0;text-shadow:none}.dn-tip span{display:block;font-size:12px;font-weight:600;opacity:.8}
 .lisainfo{margin:14px 0 8px}.lisainfo>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:7px;color:var(--text);font-size:14.5px;font-weight:600;padding:5px 13px;border:1px solid var(--line2);border-radius:999px;background:var(--panel)}.lisainfo>summary::-webkit-details-marker{display:none}.lisainfo>summary::before{content:"▸";transition:transform .15s}.lisainfo[open]>summary::before{transform:rotate(90deg)}.lisainfo>summary:hover{color:var(--bright);border-color:var(--brand)}.lisainfo>summary::before{color:var(--brand)}.lisainfo[open]>summary{margin-bottom:8px}
 .hind b{white-space:normal;background:none;padding:0;color:var(--bright)}.hind{overflow-wrap:anywhere;border:1px solid var(--warn);border-left-width:4px;border-radius:6px;background:var(--panel);padding:10px 14px;margin:6px 0 18px}.hind-h{margin:0 0 4px;font-weight:700;color:var(--warn)}.hind ul{margin:0;padding-left:20px}.hind li{margin:3px 0}.hind-f{margin:6px 0 0;font-size:13px;color:var(--muted)}
 .key{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin:16px 0}
@@ -1380,7 +1380,7 @@ sub{font-size:.72em;line-height:0}
     </div>
     <div id="uustest-box" hidden>
     <p class="plabel">Arendusrežiim (ainult admin)</p>
-    <p class="muted" style="font-size:12.5px;margin:0 0 6px">Kõik ained on märgitud uueks ja iga väikse muudatuse kohta tuleb teade „Värskenda”. Iga lehe osa juures on kollane silt selle nimega, et saaksid Claude'ile öelda, mida muuta.</p>
+    <p class="muted" style="font-size:12.5px;margin:0 0 6px">Kõik ained on märgitud uueks ja iga väikse muudatuse kohta tuleb teade „Värskenda”. <b>Paremklõps</b> mõne lehe osa peal (telefonis hoia sõrme peal) näitab selle nime, nt Ainekaart, Teemakaart või Infokast. Nii saad Claude'ile öelda, mida muuta.</p>
     <div class="seg" role="group" aria-label="Arendusrežiim">
       <button type="button" data-uustest-set="0">Väljas</button>
       <button type="button" data-uustest-set="1">Sees</button>
@@ -6597,53 +6597,33 @@ H — C — C — C — H
       ['.abook', 'Audiomängija'], ['.dg-ch', 'Stseenide / peatükkide loend'], ['.dg-q', 'Tsitaat'], ['.pnav', 'Eelmine / järgmine'],
       ['.notes-fab', 'Märkmete nupp'], ['.notes', 'Märkmete aken'], ['footer', 'Jalus']
     ];
-    var NOTAG = { INPUT: 1, SELECT: 1, TEXTAREA: 1, IMG: 1, SVG: 1, AUDIO: 1 };
-    var busy = false, tm = 0, layer = null, items = [], raf = 0;
-    function clear(){
-      if (layer) { layer.remove(); layer = null; }
-      items = [];
-      document.querySelectorAll('[data-dn]').forEach(function(el){ el.removeAttribute('data-dn'); });
-    }
-    // sildid on eraldi kihil elemendi ülemise serva kohal, nii et need ei kata teksti
-    function place(){
-      raf = 0; if (!layer) return;
-      var H = innerHeight, W = document.documentElement.clientWidth;
-      items.forEach(function(it){
-        var r = it.el.getBoundingClientRect(), tg = it.tg;
-        if (!r.width || !r.height || r.bottom < 0 || r.top > H) { tg.style.display = 'none'; return; }
-        tg.style.display = '';
-        var top = r.top - 13; if (top < 2) top = Math.max(2, r.top + 2);
-        tg.style.top = top + 'px'; tg.style.right = Math.max(2, W - r.right) + 'px';
-      });
-    }
-    function sched(){ if (!raf) raf = requestAnimationFrame(place); }
-    function paint(){
-      var on = !!(Ajukas.devMode && Ajukas.devMode());
-      busy = true;
-      document.documentElement.classList.toggle('devnames', on);
-      clear();
-      if (!on) { busy = false; return; }
-      layer = document.createElement('div'); layer.className = 'dn-layer'; layer.setAttribute('aria-hidden', 'true');
-      DN.forEach(function(d){
-        document.querySelectorAll(d[0]).forEach(function(el){
-          if (el.hasAttribute('data-dn') || (el.tagName === 'FOOTER' && el.closest('blockquote')) || NOTAG[el.tagName.toUpperCase()]) return;
-          el.setAttribute('data-dn', d[1]);
-          var tg = document.createElement('span'); tg.className = 'dn-tag'; tg.textContent = d[1];
-          layer.appendChild(tg); items.push({ el: el, tg: tg });
-        });
-      });
-      document.body.appendChild(layer);
-      place();
-      setTimeout(function(){ busy = false; }, 0);
-    }
-    new MutationObserver(function(m){
-      if (busy || !document.documentElement.classList.contains('devnames')) return;
-      if (m.every(function(x){ return layer && (x.target === layer || layer.contains(x.target)); })) return;
-      clearTimeout(tm); tm = setTimeout(paint, 250);
-    }).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['hidden', 'open'] });
-    window.addEventListener('scroll', function(){ if (layer) sched(); }, { passive: true });
-    window.addEventListener('resize', function(){ if (layer) sched(); });
-    window.addEventListener('hashchange', function(){ setTimeout(paint, 50); });
+    // paremklõps (telefonis pikk vajutus) näitab selle osa nime ja ümbritsevate osade nimesid
+    var tip = null, box = null, hideT = 0;
+    function on(){ return !!(Ajukas.devMode && Ajukas.devMode()); }
+    function hide(){ if (tip) { tip.remove(); tip = null; } if (box) { box.remove(); box = null; } clearTimeout(hideT); }
+    function nameOf(el){ for (var i = 0; i < DN.length; i++) { try { if (el.matches(DN[i][0]) && !(el.tagName === 'FOOTER' && el.closest('blockquote'))) return DN[i][1]; } catch (e) {} } return ''; }
+    document.addEventListener('contextmenu', function(e){
+      if (!on()) return;
+      var chain = [], first = null;
+      for (var el = e.target; el && el !== document.body; el = el.parentElement) { var n = nameOf(el); if (n && chain.indexOf(n) < 0) { chain.push(n); if (!first) first = el; } }
+      if (!chain.length) return;
+      e.preventDefault(); hide();
+      var r = first.getBoundingClientRect();
+      box = document.createElement('div'); box.className = 'dn-box';
+      box.style.left = r.left + 'px'; box.style.top = r.top + 'px'; box.style.width = r.width + 'px'; box.style.height = r.height + 'px';
+      tip = document.createElement('div'); tip.className = 'dn-tip'; tip.setAttribute('role', 'status');
+      tip.innerHTML = '<b></b>' + (chain.length > 1 ? '<span></span>' : '');
+      tip.firstChild.textContent = chain[0];
+      if (chain.length > 1) tip.lastChild.textContent = 'asub: ' + chain.slice(1).reverse().join(' › ');
+      document.body.appendChild(box); document.body.appendChild(tip);
+      var x = Math.min(e.clientX + 12, innerWidth - tip.offsetWidth - 8), y = e.clientY + 14;
+      if (y + tip.offsetHeight > innerHeight - 8) y = e.clientY - tip.offsetHeight - 10;
+      tip.style.left = Math.max(8, x) + 'px'; tip.style.top = Math.max(8, y) + 'px';
+      hideT = setTimeout(hide, 6000);
+    });
+    ['click', 'scroll', 'hashchange'].forEach(function(ev){ window.addEventListener(ev, hide, { passive: true }); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') hide(); });
+    function paint(){ document.documentElement.classList.toggle('devnames', on()); if (!on()) hide(); }
     var oldA = Ajukas.adminChanged; Ajukas.adminChanged = function(){ if (oldA) oldA.apply(this, arguments); paint(); };
     document.querySelectorAll('[data-uustest-set]').forEach(function(b){ b.addEventListener('click', function(){ setTimeout(paint, 0); }); });
     Ajukas.paintDevNames = paint;
