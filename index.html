@@ -103,7 +103,8 @@ b,strong{font-weight:600;color:var(--bright);background:var(--hl);padding:0 3px;
 .person p{font-size:15px;margin:0}
 .quote{border-left:2px solid var(--brand);padding:4px 0 4px 16px;margin:20px 0;font-style:italic;font-size:18px;color:var(--bright)}
 .quote cite{display:block;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:6px}
-.lisainfo{margin:14px 0 8px}.lisainfo>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14.5px;font-weight:600;padding:4px 0}.lisainfo>summary::-webkit-details-marker{display:none}.lisainfo>summary::before{content:"▸";transition:transform .15s}.lisainfo[open]>summary::before{transform:rotate(90deg)}.lisainfo>summary:hover{color:var(--bright)}.lisainfo[open]>summary{margin-bottom:8px}
+.devnames [data-dn]{outline:1px dashed rgba(234,179,8,.6);outline-offset:2px}.devnames .dn-rel{position:relative}.dn-tag{position:absolute;top:-9px;right:4px;z-index:60;pointer-events:none;font:700 10.5px/1.25 var(--mono);letter-spacing:.02em;color:#1A1400;background:#FACC15;border-radius:4px;padding:1px 5px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.35)}.dn-tag.in{top:3px;right:3px}
+.lisainfo{margin:14px 0 8px}.lisainfo>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:7px;color:var(--text);font-size:14.5px;font-weight:600;padding:5px 13px;border:1px solid var(--line2);border-radius:999px;background:var(--panel)}.lisainfo>summary::-webkit-details-marker{display:none}.lisainfo>summary::before{content:"▸";transition:transform .15s}.lisainfo[open]>summary::before{transform:rotate(90deg)}.lisainfo>summary:hover{color:var(--bright);border-color:var(--brand)}.lisainfo>summary::before{color:var(--brand)}.lisainfo[open]>summary{margin-bottom:8px}
 .hind b{white-space:normal;background:none;padding:0;color:var(--bright)}.hind{overflow-wrap:anywhere;border:1px solid var(--warn);border-left-width:4px;border-radius:6px;background:var(--panel);padding:10px 14px;margin:6px 0 18px}.hind-h{margin:0 0 4px;font-weight:700;color:var(--warn)}.hind ul{margin:0;padding-left:20px}.hind li{margin:3px 0}.hind-f{margin:6px 0 0;font-size:13px;color:var(--muted)}
 .key{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin:16px 0}
 .key .label{font-family:var(--mono);font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
@@ -639,20 +640,21 @@ body{padding-bottom:80px}
 .updlog summary:focus-visible{outline:1px solid var(--key);outline-offset:-2px}
 
 .tood{margin:6px 0 12px}
-.tsitaat{--ts:var(--brand);position:relative;overflow:hidden;margin:6px 0 12px;padding:20px 20px 18px;border:0;border-radius:16px;color:var(--text);background:radial-gradient(130% 100% at 0% 0%,color-mix(in srgb,var(--ts) 30%,transparent),transparent 62%),linear-gradient(165deg,color-mix(in srgb,var(--ts) 14%,var(--panel)),var(--panel) 70%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ts) 38%,transparent),0 14px 34px -20px color-mix(in srgb,var(--ts) 70%,transparent);animation:ts-in .7s cubic-bezier(.2,.8,.2,1) both}
+.tsitaat{position:relative;overflow:hidden;isolation:isolate;margin:6px 0 12px;padding:20px 20px 18px;border:0;border-radius:16px;color:#3A2A00;background:linear-gradient(135deg,#7A5A0C 0%,#C9A227 12%,#F7E08A 28%,#D4AF37 42%,#FFF1B5 52%,#B8860B 66%,#E6C65C 80%,#8A6510 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.65),inset 0 -2px 0 rgba(60,40,0,.3),inset 0 0 0 1px rgba(255,236,160,.55),0 0 0 1px #6B4E0A,0 16px 36px -18px rgba(180,130,10,.85);animation:ts-in .7s cubic-bezier(.2,.8,.2,1) both}
 @keyframes ts-in{from{opacity:0;transform:translateY(12px) scale(.98)}}
-.tsitaat::before{content:"\201C";position:absolute;right:-4px;top:-34px;font-family:Georgia,"Times New Roman",serif;font-size:170px;line-height:1;font-weight:700;color:var(--ts);opacity:.13;pointer-events:none}
-.tsitaat::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--ts),transparent 85%);opacity:.9}
-.tsitaat .ts-h{display:inline-block;margin:0 0 14px;font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1A1400;border:0;border-radius:999px;padding:4px 11px;background:linear-gradient(135deg,#FFD866,#EAB308)}
-.tsitaat blockquote{position:relative;margin:0;font-size:19px;line-height:1.3;font-weight:800;color:var(--bright);letter-spacing:-.018em;text-wrap:balance}
-.tsitaat figcaption{position:relative;margin-top:14px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--text)}
-.tsitaat figcaption::before{content:"";flex:0 0 auto;width:22px;height:2px;border-radius:2px;background:var(--ts)}
+.tsitaat::before{content:"\201C";position:absolute;z-index:-1;right:-4px;top:-34px;font-family:Georgia,"Times New Roman",serif;font-size:170px;line-height:1;font-weight:700;color:#5A4000;opacity:.16;text-shadow:0 1px 0 rgba(255,245,200,.6);pointer-events:none}
+.tsitaat::after{content:"";position:absolute;z-index:1;top:-20%;bottom:-20%;left:0;width:38%;pointer-events:none;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5) 50%,transparent);transform:translateX(-160%) skewX(-18deg);animation:ts-shine 7s ease-in-out 1.2s infinite}
+@keyframes ts-shine{0%{transform:translateX(-160%) skewX(-18deg)}22%,100%{transform:translateX(360%) skewX(-18deg)}}
+.tsitaat .ts-h{position:relative;display:inline-block;margin:0 0 14px;font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FFE08A;border:1px solid rgba(255,230,150,.45);border-radius:999px;padding:4px 11px;background:linear-gradient(180deg,#3A2A00,#1F1600);box-shadow:0 1px 0 rgba(255,245,200,.5)}
+.tsitaat blockquote{position:relative;margin:0;font-size:19px;line-height:1.3;font-weight:800;color:#2A1C00;letter-spacing:-.018em;text-wrap:balance;text-shadow:0 1px 0 rgba(255,245,200,.6)}
+.tsitaat figcaption{position:relative;margin-top:14px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:#4A3500;text-shadow:0 1px 0 rgba(255,245,200,.5)}
+.tsitaat figcaption::before{content:"";flex:0 0 auto;width:22px;height:2px;border-radius:2px;background:#5A4000;box-shadow:0 1px 0 rgba(255,245,200,.6)}
 #tsitaat-m{margin:22px 0 0}
 @media (max-width:860px){#tsitaat-d{display:none}#tsitaat-m blockquote{font-size:21px}}
 @media (min-width:861px){#tsitaat-m{display:none}#tsitaat-d{margin:0 0 14px}}
 @media (min-width:1000px){.cardsrow{display:grid;grid-template-columns:240px minmax(0,1fr);gap:16px;align-items:start}#tsitaat-d{margin:0;position:sticky;top:70px}#tsitaat-d blockquote{font-size:22px}}
 @media (min-width:1640px){.cardsrow{display:block;position:relative}#tsitaat-d{position:absolute;top:0;right:calc(100% + 28px);width:clamp(210px,calc(50vw - 615px),340px);padding:26px 24px 22px}#tsitaat-d blockquote{font-size:27px;line-height:1.22}#tsitaat-d::before{font-size:210px;top:-44px}}
-@media (prefers-reduced-motion:reduce){.tsitaat{animation:none}}
+@media (prefers-reduced-motion:reduce){.tsitaat,.tsitaat::after{animation:none}.tsitaat::after{display:none}}
 .tood h3{margin:0 0 8px}
 .tood-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
 .tood-list li{display:grid;grid-template-columns:52px 1fr;gap:2px 10px;padding:7px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
@@ -1318,7 +1320,7 @@ sub{font-size:.72em;line-height:0}
     </div>
     <div id="uustest-box" hidden>
     <p class="plabel">Arendusrežiim (ainult admin)</p>
-    <p class="muted" style="font-size:12.5px;margin:0 0 6px">Kõik ained on märgitud uueks ja iga väikse muudatuse kohta tuleb teade „Värskenda”.</p>
+    <p class="muted" style="font-size:12.5px;margin:0 0 6px">Kõik ained on märgitud uueks ja iga väikse muudatuse kohta tuleb teade „Värskenda”. Iga lehe osa juures on kollane silt selle nimega, et saaksid Claude'ile öelda, mida muuta.</p>
     <div class="seg" role="group" aria-label="Arendusrežiim">
       <button type="button" data-uustest-set="0">Väljas</button>
       <button type="button" data-uustest-set="1">Sees</button>
@@ -6421,6 +6423,52 @@ H — C — C — C — H
   })();
   Ajukas.devMode = uusTest;
   Ajukas.adminChanged = function(){ var b = document.getElementById('uustest-box'); if (b) b.hidden = !Ajukas.isAdmin; if (Ajukas.paintUusTest) Ajukas.paintUusTest(); paintFresh(); };
+  // Arendusrežiimis: kollased nimesildid lehe osadel (et oleks lihtne öelda, mida muuta)
+  (function(){
+    var DN = [
+      ['.appbar', 'Ülariba'], ['.logo', 'Logo'], ['.tabwrap', 'Vahekaardid'], ['.gear:not(.acct-fab)', 'Seadete nupp'], ['.acct-fab', 'Konto nupp'], ['#settings-pop', 'Seadete aken'],
+      ['.pagehead', 'Lehe päis'], ['.back', 'Tagasi-nupp'], ['.testbadge', 'Tähtaja märk'], ['.pagetitle', 'Lehe pealkiri'], ['.tagline', 'Alapealkiri'],
+      ['#v-home .subjcard', 'Ainekaart'], ['.view:not(#v-home) .grid .subjcard', 'Teemakaart'], ['.cnext', 'Järgmise töö rida'],
+      ['.tood', 'Järgmised tööd'], ['.updlog', 'Uuendused'], ['.tsitaat', 'Päeva tsitaat'], ['.suvi', 'Suvevaheaja taimer'],
+      ['.lisainfo > summary', 'Lisainfo rida'], ['.hind', 'Hindamise kast'],
+      ['section[role="tabpanel"] > h2', 'Vahekaardi pealkiri'], ['.lead', 'Sissejuhatus'], ['.key', 'Infokast'], ['.ktn', 'Kontrolli märge'], ['.mvig', 'Vigade loend'],
+      ['.tablewrap', 'Tabel'], ['.fgraph', 'Graafik'], ['.gtrans', 'Teisenduste mängija'], ['.gquiz', 'Graafikutreener'], ['.calc', 'Arvutustreener'], ['.langgame', 'Keelemäng'],
+      ['.exq', 'Ülesanne'], ['.exam', 'Proovitöö'], ['.quiz', 'Küsimused'], ['.tmode-btn', 'Testi režiimi nupp'], ['.ttopic', 'Teemavalik'], ['.spikker', 'Spikker'],
+      ['.abook', 'Audiomängija'], ['.dg-ch', 'Stseenide / peatükkide loend'], ['.dg-q', 'Tsitaat'], ['.pnav', 'Eelmine / järgmine'],
+      ['.notes-fab', 'Märkmete nupp'], ['.notes', 'Märkmete aken'], ['footer', 'Jalus']
+    ];
+    var NOTAG = { INPUT: 1, SELECT: 1, TEXTAREA: 1, IMG: 1, SVG: 1, AUDIO: 1, BUTTON: 0 };
+    var busy = false, tm = 0;
+    function clear(){
+      document.querySelectorAll('.dn-tag').forEach(function(x){ x.remove(); });
+      document.querySelectorAll('[data-dn]').forEach(function(el){ el.removeAttribute('data-dn'); el.classList.remove('dn-rel'); });
+    }
+    function paint(){
+      var on = !!(Ajukas.devMode && Ajukas.devMode());
+      busy = true;
+      document.documentElement.classList.toggle('devnames', on);
+      if (!on) { clear(); busy = false; return; }
+      DN.forEach(function(d){
+        document.querySelectorAll(d[0]).forEach(function(el){
+          if (el.hasAttribute('data-dn') || el.closest('blockquote') && el.tagName === 'FOOTER' || NOTAG[el.tagName.toUpperCase()]) return;
+          el.setAttribute('data-dn', d[1]);
+          if (getComputedStyle(el).position === 'static') el.classList.add('dn-rel');
+          var tg = document.createElement('span'); tg.className = 'dn-tag'; tg.setAttribute('aria-hidden', 'true'); tg.textContent = d[1];
+          var cs = getComputedStyle(el); if (cs.overflow !== 'visible' || cs.overflowY !== 'visible' || el.getBoundingClientRect().top + window.scrollY < 14) tg.classList.add('in');
+          var host = el.tagName === 'DETAILS' ? (el.querySelector(':scope > summary') || el) : el;
+          host.appendChild(tg);
+        });
+      });
+      setTimeout(function(){ busy = false; }, 0);
+    }
+    new MutationObserver(function(){ if (busy || !document.documentElement.classList.contains('devnames')) return; clearTimeout(tm); tm = setTimeout(paint, 250); })
+      .observe(document.body, { childList: true, subtree: true });
+    window.addEventListener('hashchange', function(){ setTimeout(paint, 50); });
+    var oldA = Ajukas.adminChanged; Ajukas.adminChanged = function(){ if (oldA) oldA.apply(this, arguments); paint(); };
+    document.querySelectorAll('[data-uustest-set]').forEach(function(b){ b.addEventListener('click', function(){ setTimeout(paint, 0); }); });
+    Ajukas.paintDevNames = paint;
+    paint();
+  })();
   Ajukas.getProgress = function(){ return P; };
   Ajukas.route = function(){ route(); };
   Ajukas.setProgress = function(p){ P = { seen: (p && p.seen) || {}, last: (p && p.last) || null, visit: (p && p.visit) || {}, audio: (p && p.audio) || {} }; try { localStorage.setItem('ajukas-progress', JSON.stringify(P)); } catch(e) {} paintProgress(); if (Ajukas.onAudioSync) Ajukas.onAudioSync(); };
