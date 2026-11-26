@@ -109,6 +109,7 @@ function t(k, p) {
 .oma-row{display:flex;flex-wrap:wrap;gap:8px}
 .oma-msg{font-size:13.5px;color:var(--muted);min-height:1.2em}
 :root[data-style] .appbar{background:color-mix(in srgb,var(--bg) 38%,transparent);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+::view-transition{pointer-events:none}
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
 ::view-transition-new(root){z-index:2}
 ::view-transition-group(ajukas-fx),::view-transition-new(ajukas-fx){animation:none;z-index:9}::view-transition-old(ajukas-fx){display:none}
@@ -6573,15 +6574,19 @@ H — C — C — C — H
       }
       return 'polygon(' + pts.join(',') + ')';
     }
-    function setTheme(v, force){
+    var curVT = null;
+    function setTheme(v, force, remote){
       if (v === cur() && !force) return;
-      try { localStorage.setItem('ajukas-theme', v); } catch (e) {}
+      try { localStorage.setItem('ajukas-theme', v); if (!remote) localStorage.setItem('ajukas-theme-aeg', String(Date.now())); } catch (e) {}
+      if (!remote && window.Ajukas && window.Ajukas.onTheme) window.Ajukas.onTheme();
+      if (curVT) { try { curVT.skipTransition(); } catch (e) {} curVT = null; }
       var st = v.indexOf('style:') === 0 ? v.slice(6) : '';
       var kind = st === 'oma' ? (omaLight() ? 'gold' : 'star') : st ? FX[st] : (v === 'light' ? 'gold' : 'star');
       var done = function(){ apply(v); paintTheme(); if (window.AjukasSuviSync) window.AjukasSuviSync(); };
       var DUR = 1300;
       if (reduce || !document.startViewTransition) { done(); burst(kind, DUR); return; }
-      var vt = document.startViewTransition(function(){ done(); burst(kind, DUR); });
+      var vt = curVT = document.startViewTransition(function(){ done(); burst(kind, DUR); });
+      vt.finished.then(function(){ if (curVT === vt) curVT = null; }, function(){});
       vt.ready.then(function(){
         var R = Math.hypot(innerWidth, innerHeight) * 1.12, fr = [], F = 26;
         for (var i = 0; i <= F; i++) { var x = i / F, e = x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; fr.push({ clipPath: wavePoly(i === F ? R * 1.2 : e * R, i) }); }
@@ -6600,8 +6605,23 @@ H — C — C — C — H
       b.addEventListener('click', function(e){ e.stopPropagation(); var id = b.getAttribute('data-style'); if (id === 'oma') { if (window.Ajukas && window.Ajukas.openOma) window.Ajukas.openOma(); return; } setTheme('style:' + id); });
     });
     window.Ajukas = window.Ajukas || {};
-    window.Ajukas.applyOma = function(){ var h = document.documentElement, img = omaImg(); if (!img) return; h.style.setProperty('--oma-img', 'url("' + img + '")'); h.style.setProperty('--oma-scrim', omaLight() ? 'rgba(247,247,248,.55)' : 'rgba(12,12,16,.55)'); setTheme('style:oma', true); };
-    window.Ajukas.clearOma = function(){ try { localStorage.removeItem('ajukas-oma-bg'); localStorage.removeItem('ajukas-oma-light'); } catch (e) {} if (document.documentElement.getAttribute('data-style') === 'oma') setTheme('dark', true); else paintTheme(); };
+    window.Ajukas.applyOma = function(){ var h = document.documentElement, img = omaImg(); if (!img) return; try { localStorage.setItem('ajukas-oma-aeg', String(Date.now())); } catch (e) {} h.style.setProperty('--oma-img', 'url("' + img + '")'); h.style.setProperty('--oma-scrim', omaLight() ? 'rgba(247,247,248,.55)' : 'rgba(12,12,16,.55)'); setTheme('style:oma', true); };
+    function lsNum(k){ try { return +(localStorage.getItem(k) || 0); } catch (e) { return 0; } }
+    window.Ajukas.getThemeState = function(){ var img = omaImg(); return { teema: cur(), aeg: lsNum('ajukas-theme-aeg'), oma: img ? { img: img, light: omaLight() } : null, omaAeg: lsNum('ajukas-oma-aeg') }; };
+    // kontolt tulnud teema (ja oma taust) — ei saada tagasi
+    window.Ajukas.setThemeRemote = function(teema, aeg, oma, omaAeg){
+      try {
+        if (oma !== undefined) {
+          if (oma && oma.img) { localStorage.setItem('ajukas-oma-bg', oma.img); localStorage.setItem('ajukas-oma-light', oma.light ? '1' : '0'); }
+          else if (oma === null) { localStorage.removeItem('ajukas-oma-bg'); localStorage.removeItem('ajukas-oma-light'); }
+          localStorage.setItem('ajukas-oma-aeg', String(omaAeg || 0));
+          var h = document.documentElement, im = omaImg();
+          if (im) { h.style.setProperty('--oma-img', 'url("' + im + '")'); h.style.setProperty('--oma-scrim', omaLight() ? 'rgba(247,247,248,.55)' : 'rgba(12,12,16,.55)'); }
+        }
+        if (teema) { localStorage.setItem('ajukas-theme-aeg', String(aeg || 0)); setTheme(teema, true, true); }
+      } catch (e) {}
+    };
+    window.Ajukas.clearOma = function(){ try { localStorage.removeItem('ajukas-oma-bg'); localStorage.removeItem('ajukas-oma-light'); localStorage.setItem('ajukas-oma-aeg', String(Date.now())); } catch (e) {} if (window.Ajukas.onTheme) window.Ajukas.onTheme(); if (document.documentElement.getAttribute('data-style') === 'oma') setTheme('dark', true); else paintTheme(); };
     if (cur().indexOf('style:') === 0) showPick(true);
     paintTheme();
   })();
@@ -9166,6 +9186,32 @@ if (!FIREBASE_CONFIG) {
     signOut(auth);
   });
 
+  // teema ja oma taust kontole (pilt väiksemaks, et dokument jääks alla 1 MB)
+  let themeTimer = null;
+  async function shrinkBg(url, maxLen) {
+    if (url.length <= maxLen) return url;
+    const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = url; });
+    for (const [w, q] of [[1440, .75], [1200, .7], [960, .65], [720, .6]]) {
+      const k = Math.min(1, w / img.naturalWidth), cv = document.createElement('canvas');
+      cv.width = Math.round(img.naturalWidth * k); cv.height = Math.round(img.naturalHeight * k);
+      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+      const out = cv.toDataURL('image/jpeg', q); if (out.length <= maxLen) return out;
+    }
+    return null;
+  }
+  function pushTheme(withImg) {
+    const u = auth.currentUser; if (!u || !A.getThemeState) return;
+    clearTimeout(themeTimer);
+    themeTimer = setTimeout(async () => {
+      const st = A.getThemeState(), data = { teema: st.teema, teemaAeg: st.aeg, muudetud: serverTimestamp() }, fields = ['teema', 'teemaAeg', 'muudetud'];
+      let synced = 0; try { synced = +(localStorage.getItem('ajukas-oma-synced') || 0); } catch (e) {}
+      if (withImg || st.omaAeg !== synced) {
+        let img = null; if (st.oma) { try { img = await shrinkBg(st.oma.img, 650000); } catch (e) { img = null; } }
+        data.omaTaust = st.oma && img ? { img, light: !!st.oma.light } : null; data.omaAeg = st.omaAeg; fields.push('omaTaust', 'omaAeg');
+      }
+      setDoc(doc(db, 'kasutajad', u.uid), data, { mergeFields: fields }).then(() => { if (fields.includes('omaAeg')) { try { localStorage.setItem('ajukas-oma-synced', String(st.omaAeg)); } catch (e) {} } }).catch(() => {});
+    }, 800);
+  }
   // edusammude sünkroniseerimine
   function pushNotes(n) {
     const u = auth.currentUser; if (!u) return;
@@ -9461,7 +9507,7 @@ if (!FIREBASE_CONFIG) {
     if (A.isAdmin) { A.isAdmin = false; A.route && A.route(); if (A.adminChanged) A.adminChanged(); }
     if (!u) {
       A.onProgress = null;
-      A.onNotes = null; A.onTest = null;
+      A.onNotes = null; A.onTest = null; A.onTheme = null;
       if (A._wasIn) { try { Object.keys(localStorage).filter((k) => /^ajukas-(audio-|notes-synced)/.test(k)).forEach((k) => localStorage.removeItem(k)); } catch (e) {} A.setProgress({ seen: {}, last: null }); if (A.setNotes) A.setNotes({}); if (A.setTest) A.setTest({}); } // jagatud arvutis ei jää eelmise kasutaja andmed näha
       A._wasIn = false;
       return;
@@ -9496,7 +9542,14 @@ if (!FIREBASE_CONFIG) {
       if (A.setTest) A.setTest(mt);
       A.onTest = pushTest;
       pushTest(mt);
-    } catch (e) { A.onProgress = pushProgress; A.onNotes = pushNotes; A.onTest = pushTest; }
+      // teema: uuem valik võidab (kohalik või kontolt)
+      if (A.getThemeState && A.setThemeRemote) {
+        const ts = A.getThemeState(), rOmaNewer = (remote.omaAeg || 0) > ts.omaAeg, rTeemaNewer = remote.teema && (remote.teemaAeg || 0) > ts.aeg;
+        if (rOmaNewer || rTeemaNewer) { A.setThemeRemote(rTeemaNewer ? remote.teema : null, remote.teemaAeg, rOmaNewer ? (remote.omaTaust || null) : undefined, remote.omaAeg); if (rOmaNewer) { try { localStorage.setItem('ajukas-oma-synced', String(remote.omaAeg || 0)); } catch (e) {} } }
+        A.onTheme = () => pushTheme(false);
+        if (!rTeemaNewer || !rOmaNewer) pushTheme(!rOmaNewer && ts.omaAeg > (remote.omaAeg || 0));
+      }
+    } catch (e) { A.onProgress = pushProgress; A.onNotes = pushNotes; A.onTest = pushTest; A.onTheme = () => pushTheme(false); }
     if (name === ADMIN_USER) { A.isAdmin = true; if (A.adminChanged) A.adminChanged(); $('inbox').hidden = false; $('sv-app').hidden = false; A.route && A.route(); loadInbox(); if (A.foorumAdmin) A.foorumAdmin(); }
   });
 
