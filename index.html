@@ -7001,7 +7001,11 @@ H — C — C — C — H
         var prev = lastC ? lastC.gy : VH * .45, maxJ = 85 + 125 * d;          // kõrguse hüpe kahe samba vahel: 85 -> 210
         var gy = Math.max(lo, Math.min(hi, prev + (Math.random() * 2 - 1) * maxJ));
         if (Math.abs(gy - prev) < 25 && Math.random() < .6) gy = Math.max(lo, Math.min(hi, prev + (gy < prev ? -1 : 1) * (30 + Math.random() * maxJ * .5)));
-        cols.push({ x: VW + 40, gy: gy, gap: gap, sp: 305 - 70 * d + (Math.random() - .5) * 70, done: false });   // vahe: ~305 -> ~235 (+-35)
+        var sp = 305 - 70 * d + (Math.random() - .5) * 70;   // vahe: ~305 -> ~235 (+-35)
+        // vahel suur hüpe: ava kohe teises servas (all -> üleval või vastupidi), siis veidi rohkem ruumi
+        var extra = 0;
+        if (lastC && Math.random() < .16 + .1 * d) { var mid2 = (lo + hi) / 2; gy = prev > mid2 ? lo + Math.random() * 30 : hi - Math.random() * 30; extra = 100; }
+        cols.push({ x: VW + 40 + extra, gy: gy, gap: gap, sp: sp, done: false });
       }
       for (var i = cols.length - 1; i >= 0; i--) {
         var col = cols[i]; col.x -= SPEED * dt;
