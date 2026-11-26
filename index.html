@@ -6969,7 +6969,7 @@ H — C — C — C — H
     }
     function reset(){
       book = { x: Math.min(VW * .3, 230), y: VH * .42, vy: 0, rot: 0, flapT: 9 };
-      cols = []; score = 0; newBest = false; st = 'ready';
+      cols = []; score = 0; newBest = false; st = 'ready'; SPEED = 165;
     }
     function flap(){
       if (st === 'over') { if (performance.now() - tOver < 550) return; reset(); }
@@ -6991,9 +6991,16 @@ H — C — C — C — H
       if (book.y < 14) { book.y = 14; book.vy = 0; }
       if (book.y > VH - GROUND - 14) { book.y = VH - GROUND - 14; if (st === 'play') die(); book.vy = 0; }
       if (st !== 'play') return;
-      if (!cols.length || cols[cols.length - 1].x < VW - SPACING) {
-        var lo = 105, hi = VH - GROUND - 105;
-        cols.push({ x: VW + 40, gy: lo + Math.random() * (hi - lo), done: false });
+      // raskus kasvab punktidega 0 -> 1 (täis 30 punkti juures), edasi enam ei lähe raskemaks
+      var d = Math.min(1, score / 30), lastC = cols[cols.length - 1];
+      SPEED = 165 + 40 * d;
+      if (!lastC || lastC.x < VW - lastC.sp) {
+        var gap = 205 - 50 * d + (Math.random() - .5) * 26;                 // ava kõrgus: 205 -> 155 (+-13)
+        var lo = gap / 2 + 38, hi = VH - GROUND - gap / 2 - 38;
+        var prev = lastC ? lastC.gy : VH * .45, maxJ = 85 + 125 * d;          // kõrguse hüpe kahe samba vahel: 85 -> 210
+        var gy = Math.max(lo, Math.min(hi, prev + (Math.random() * 2 - 1) * maxJ));
+        if (Math.abs(gy - prev) < 25 && Math.random() < .6) gy = Math.max(lo, Math.min(hi, prev + (gy < prev ? -1 : 1) * (30 + Math.random() * maxJ * .5)));
+        cols.push({ x: VW + 40, gy: gy, gap: gap, sp: 305 - 70 * d + (Math.random() - .5) * 70, done: false });   // vahe: ~305 -> ~235 (+-35)
       }
       for (var i = cols.length - 1; i >= 0; i--) {
         var col = cols[i]; col.x -= SPEED * dt;
@@ -7001,7 +7008,7 @@ H — C — C — C — H
         if (!col.done && col.x + COLW < book.x - 14) { col.done = true; score++; sfx.point(); }
         // kokkupõrge: raamat on ringina, sammas ristkülikuna
         var r = 15, cx = Math.max(col.x, Math.min(book.x, col.x + COLW));
-        var topB = col.gy - GAP / 2, botT = col.gy + GAP / 2;
+        var topB = col.gy - col.gap / 2, botT = col.gy + col.gap / 2;
         var cyT = Math.min(book.y, topB), cyB = Math.max(book.y, botT);
         if ((book.y - r < topB && Math.hypot(book.x - cx, book.y - cyT) < r) || (book.y + r > botT && Math.hypot(book.x - cx, book.y - cyB) < r)) die();
       }
@@ -7113,7 +7120,7 @@ H — C — C — C — H
       for (var k = tx; k < VW + tw; k += period) temple(k, VH - GROUND - 62, tw, 'rgba(60,40,80,.55)');
       clouds();
       hills(mid * .6, VH - GROUND - 18, 16, 'rgba(110,80,95,.7)', 3);
-      cols.forEach(function(col){ column(col.x, -20, col.gy - GAP / 2, true); column(col.x, col.gy + GAP / 2, VH - GROUND, false); });
+      cols.forEach(function(col){ column(col.x, -20, col.gy - col.gap / 2, true); column(col.x, col.gy + col.gap / 2, VH - GROUND, false); });
       ground();
       drawBook();
       if (st === 'play' || st === 'over') txt(String(score), VW / 2, 70, 54, '#FFFFFF');
