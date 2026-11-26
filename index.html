@@ -29,7 +29,11 @@
 (function(){
   try {
     var th = localStorage.getItem('ajukas-theme') || '';
-    if (th.indexOf('style:') === 0) { var st = th.slice(6); if (!/^(suvi|talv|sugis|kevad|loojang|virmalised|kosmos|vihm|neoon|mets|komm)$/.test(st)) localStorage.removeItem('ajukas-theme'); else { document.documentElement.setAttribute('data-style', st); if (/^(suvi|kevad|komm)$/.test(st)) document.documentElement.setAttribute('data-theme', 'light'); } }
+    if (th.indexOf('style:') === 0) { var st = th.slice(6); var omaImg = st === 'oma' ? localStorage.getItem('ajukas-oma-bg') : null;
+      if (!/^(suvi|talv|sugis|kevad|loojang|virmalised|kosmos|vihm|neoon|mets|komm|meri|kool|oma)$/.test(st) || (st === 'oma' && !omaImg)) localStorage.removeItem('ajukas-theme');
+      else { document.documentElement.setAttribute('data-style', st); var omaL = localStorage.getItem('ajukas-oma-light') === '1';
+        if (/^(suvi|kevad|komm|meri)$/.test(st) || (st === 'oma' && omaL)) document.documentElement.setAttribute('data-theme', 'light');
+        if (st === 'oma') { document.documentElement.style.setProperty('--oma-img', 'url("' + omaImg + '")'); document.documentElement.style.setProperty('--oma-scrim', omaL ? 'rgba(247,247,248,.55)' : 'rgba(12,12,16,.55)'); } } }
     else if (th === 'light') document.documentElement.setAttribute('data-theme', 'light');
     localStorage.removeItem('ajukas-lang'); // keelevalik on eemaldatud (vt git tag keeled-arhiiv)
   } catch (e) {}
@@ -82,6 +86,28 @@ function t(k, p) {
 :root[data-style="mets"] body{background:radial-gradient(3px 3px at 12% 30%,rgba(230,245,120,.35),transparent),radial-gradient(3px 3px at 78% 62%,rgba(230,245,120,.3),transparent),radial-gradient(900px 520px at 50% -15%,rgba(150,170,70,.16),transparent 60%),linear-gradient(180deg,#1B1A10 0%,#14130C 55%,#0E0D08 100%);background-attachment:fixed}
 :root[data-style="komm"]{--bg:#F7F2FF;--panel:#FFFFFF;--raised:#EFE6FF;--line:#E2D5FA;--line2:#CBB8F0;--text:#2E2342;--bright:#170F26;--muted:#75688F;--accent:#7C3AED;--accent-hover:#6526D0;--hover:#E9DFFC}
 :root[data-style="komm"] body{background:radial-gradient(900px 500px at 92% -10%,rgba(244,114,182,.18),transparent 60%),radial-gradient(800px 500px at 0% 108%,rgba(52,211,153,.16),transparent 60%),#F7F2FF;background-attachment:fixed}
+:root[data-style="meri"]{--bg:#EAF6FB;--panel:#FFFFFF;--raised:#DDF0F8;--line:#C6E4F1;--line2:#9FD0E6;--text:#0F2A3A;--bright:#06141D;--muted:#4F7385;--accent:#0284C7;--accent-hover:#0369A1;--hover:#D3ECF6}
+:root[data-style="meri"] body{background:radial-gradient(1000px 500px at 90% -10%,rgba(125,211,252,.35),transparent 60%),radial-gradient(900px 520px at 0% 110%,rgba(14,165,233,.18),transparent 60%),linear-gradient(180deg,#E6F7FF 0%,#EAF6FB 45%,#D6EFF8 100%);background-attachment:fixed}
+:root[data-style="kool"]{--bg:#1E3329;--panel:#233B30;--raised:#2A4538;--line:#34503F;--line2:#456652;--text:#E8EFE6;--bright:#FFFFFF;--muted:#A7BBA9;--accent:#2E86AB;--accent-hover:#256F8F;--hover:#2E4A3C}
+:root[data-style="kool"] body{background:radial-gradient(600px 300px at 20% 20%,rgba(255,255,255,.045),transparent 70%),radial-gradient(700px 320px at 80% 60%,rgba(255,255,255,.035),transparent 70%),repeating-linear-gradient(-8deg,rgba(255,255,255,.012) 0 2px,transparent 2px 9px),linear-gradient(180deg,#22392E 0%,#1E3329 55%,#19291F 100%);background-attachment:fixed}
+:root[data-style="oma"] body{background:linear-gradient(var(--oma-scrim,rgba(0,0,0,.5)),var(--oma-scrim,rgba(0,0,0,.5))),var(--oma-img,none) center/cover no-repeat,var(--bg);background-attachment:fixed}
+.sw[data-style="meri"] .sw-p{border-radius:50%;background:none;border:1.5px solid #E0F7FF;width:7px;height:7px;top:auto;bottom:-8px}.sw[data-style="meri"]:hover .sw-p{animation-name:sw-rise}
+.sw[data-style="kool"] .sw-p{width:auto;height:auto;background:none;border-radius:0;font:700 10px/1 "Comic Sans MS","Segoe Print",cursive;color:#F3F6EE}
+.sw[data-style="kool"] .sw-p:nth-child(2)::before{content:"π"}.sw[data-style="kool"] .sw-p:nth-child(3)::before{content:"A"}.sw[data-style="kool"] .sw-p:nth-child(4)::before{content:"x²"}
+.sw-oma .sw-prev{display:grid;place-items:center;background:repeating-linear-gradient(45deg,#4A4A52 0 6px,#55555E 6px 12px)}
+.sw-oma .sw-plus{font:300 30px/1 var(--ui);color:#E5E5EA}
+.oma-box{max-width:720px}
+.oma-stage{position:relative;height:min(52vh,380px);border-radius:8px;overflow:hidden;background:repeating-conic-gradient(#2A2A30 0 25%,#34343B 0 50%) 0 0/22px 22px;touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none}
+.oma-stage.drag{cursor:grabbing}
+.oma-stage img{position:absolute;left:50%;top:50%;max-width:none;transform-origin:50% 50%;pointer-events:none;will-change:transform}
+.oma-frame{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:2px solid #FACC15;border-radius:4px;box-shadow:0 0 0 9999px rgba(0,0,0,.55);pointer-events:none}
+.oma-frame span{position:absolute;left:6px;top:4px;font:600 11px/1.2 var(--mono);color:#FACC15;text-shadow:0 1px 2px #000}
+.oma-empty{position:absolute;inset:0;display:grid;place-items:center;color:#C9C9D1;font-size:15px;text-align:center;padding:20px}
+.oma-ctl{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;align-items:center;font-size:14px}
+.oma-ctl input[type=range]{width:100%;accent-color:#EAB308}
+.oma-ctl output{font-family:var(--mono);font-size:12.5px;color:var(--muted);min-width:46px;text-align:right}
+.oma-row{display:flex;flex-wrap:wrap;gap:8px}
+.oma-msg{font-size:13.5px;color:var(--muted);min-height:1.2em}
 :root[data-style] .appbar{background:color-mix(in srgb,var(--bg) 38%,transparent);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
 ::view-transition-new(root){z-index:2}
@@ -258,8 +284,6 @@ footer{max-width:70ch;margin-top:40px;font-size:13px;color:var(--muted);font-fam
 /* --- avaleht: elavam kujundus --- */
 #v-home header{position:relative;isolation:isolate}
 #v-home header::before{content:"";position:absolute;left:-60px;top:-20px;width:380px;height:220px;background:radial-gradient(closest-side,color-mix(in srgb,var(--brand) 16%,transparent),transparent);z-index:-1;pointer-events:none}
-.brandline .mark{transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
-.brandline:hover .mark{transform:rotate(-10deg) scale(1.08)}
 #v-home .hello{margin:2px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:17px;color:var(--bright)}
 .hello-next{font:inherit;font-size:13px;font-weight:600;color:var(--bright);background:color-mix(in srgb,var(--k,var(--brand)) 20%,var(--panel));border:1px solid color-mix(in srgb,var(--k,var(--brand)) 55%,transparent);border-radius:999px;padding:4px 12px;cursor:pointer}
 .hello-next:hover{background:color-mix(in srgb,var(--k,var(--brand)) 32%,var(--panel))}
@@ -406,7 +430,9 @@ ol{margin:0 0 12px;padding-left:1.4em}
 
 .mark{width:22px;height:22px;flex:0 0 auto;display:block}
 .appbar .logo{gap:8px}
-.brandline{display:flex;align-items:center;gap:14px}
+.brandline{display:flex;align-items:center;gap:14px;width:fit-content;max-width:100%}
+.brandline .mark{transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.brandline:hover .mark{transform:rotate(-10deg) scale(1.08)}
 .brandline .mark{width:clamp(36px,6vw,50px);height:clamp(36px,6vw,50px)}
 .seenfoot{margin-top:32px;padding-top:16px;border-top:1px solid var(--line)}
 .seenbtn{font:inherit;font-size:14px;font-weight:600;cursor:pointer;border-radius:4px;padding:9px 16px;border:1px solid var(--line2);background:var(--raised);color:var(--bright)}
@@ -1393,7 +1419,7 @@ sub{font-size:.72em;line-height:0}
       <button type="button" data-theme-set="light">Hele</button>
       <button type="button" data-theme-set="muu" aria-expanded="false" aria-controls="stylepick">Muu</button>
     </div>
-    <div class="stylepick" id="stylepick" role="group" aria-label="Stiilid" hidden><button type="button" class="sw" data-style="suvi" aria-pressed="false" style="--sb:linear-gradient(180deg,#8FD3F4 0%,#FFF1D0 55%,#EBCB8B 100%);--sp:#FFFDF7;--st:#3A2E1A;--sa:#0E7490;--pc:#D9B26F"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Suvi</span></button><button type="button" class="sw" data-style="talv" aria-pressed="false" style="--sb:linear-gradient(170deg,#3A5F8F 0%,#142033 60%,#0E1726 100%);--sp:#142033;--st:#D6E4F5;--sa:#3B8EEA;--pc:#FFFFFF"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Talv</span></button><button type="button" class="sw" data-style="sugis" aria-pressed="false" style="--sb:linear-gradient(160deg,#D9622B 0%,#7A3415 45%,#1C130C 100%);--sp:#241911;--st:#EAD9C6;--sa:#C9541F;--pc:#E8A33D"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Sügis</span></button><button type="button" class="sw" data-style="kevad" aria-pressed="false" style="--sb:linear-gradient(160deg,#FBCFE8 0%,#F4FAF2 55%,#BBE3A8 100%);--sp:#FFFFFF;--st:#23331F;--sa:#C2367A;--pc:#F9A8D4"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Kevad</span></button><button type="button" class="sw" data-style="loojang" aria-pressed="false" style="--sb:linear-gradient(180deg,#3B1C5A 0%,#B8436B 55%,#FF9A4D 100%);--sp:#221532;--st:#F1DCE8;--sa:#E8603A;--pc:#FFB347"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Loojang</span></button><button type="button" class="sw" data-style="virmalised" aria-pressed="false" style="--sb:linear-gradient(170deg,#3DDC97 0%,#1B6E8F 40%,#07141A 100%);--sp:#0C1D25;--st:#D4F1EE;--sa:#1FAF77;--pc:#3DDC97"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Virmalised</span></button><button type="button" class="sw" data-style="kosmos" aria-pressed="false" style="--sb:radial-gradient(1.5px 1.5px at 18% 28%,#fff,transparent),radial-gradient(1px 1px at 72% 18%,#fff,transparent),radial-gradient(1px 1px at 44% 58%,#fff,transparent),radial-gradient(1.2px 1.2px at 88% 52%,#fff,transparent),linear-gradient(160deg,#2A1B6B 0%,#0B0E20 55%,#05060F 100%);--sp:#0B0E20;--st:#DCDDF5;--sa:#7C5CFF;--pc:#FFFFFF"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Kosmos</span></button><button type="button" class="sw" data-style="vihm" aria-pressed="false" style="--sb:repeating-linear-gradient(105deg,rgba(255,255,255,.18) 0 1px,transparent 1px 7px),linear-gradient(180deg,#56657A 0%,#1A2029 75%);--sp:#1A2029;--st:#D3DAE3;--sa:#4F8FD6;--pc:#B9CCE4"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Vihm</span></button><button type="button" class="sw" data-style="neoon" aria-pressed="false" style="--sb:linear-gradient(rgba(255,43,214,.35) 1px,transparent 1px) 0 0/10px 10px,linear-gradient(90deg,rgba(34,211,238,.3) 1px,transparent 1px) 0 0/10px 10px,linear-gradient(135deg,#5B0E63 0%,#0A0A0F 55%,#0E4A57 100%);--sp:#12111A;--st:#E7E3F5;--sa:#D81BB0;--pc:#FF2BD6"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Neoon</span></button><button type="button" class="sw" data-style="mets" aria-pressed="false" style="--sb:radial-gradient(2px 2px at 30% 40%,#EFFF7A,transparent),radial-gradient(2px 2px at 70% 25%,#EFFF7A,transparent),linear-gradient(180deg,#3C4A1E 0%,#1C1B12 60%,#0E0D08 100%);--sp:#1C1B12;--st:#E4E0CC;--sa:#6E9632;--pc:#E5F55A"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Mets</span></button><button type="button" class="sw" data-style="komm" aria-pressed="false" style="--sb:linear-gradient(135deg,#FBCFE8 0%,#F7F2FF 45%,#C7F9E5 100%);--sp:#FFFFFF;--st:#2E2342;--sa:#7C3AED;--pc:#F472B6"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Komm</span></button></div>
+    <div class="stylepick" id="stylepick" role="group" aria-label="Stiilid" hidden><button type="button" class="sw" data-style="suvi" aria-pressed="false" style="--sb:linear-gradient(180deg,#8FD3F4 0%,#FFF1D0 55%,#EBCB8B 100%);--sp:#FFFDF7;--st:#3A2E1A;--sa:#0E7490;--pc:#D9B26F"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Suvi</span></button><button type="button" class="sw" data-style="talv" aria-pressed="false" style="--sb:linear-gradient(170deg,#3A5F8F 0%,#142033 60%,#0E1726 100%);--sp:#142033;--st:#D6E4F5;--sa:#3B8EEA;--pc:#FFFFFF"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Talv</span></button><button type="button" class="sw" data-style="sugis" aria-pressed="false" style="--sb:linear-gradient(160deg,#D9622B 0%,#7A3415 45%,#1C130C 100%);--sp:#241911;--st:#EAD9C6;--sa:#C9541F;--pc:#E8A33D"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Sügis</span></button><button type="button" class="sw" data-style="kevad" aria-pressed="false" style="--sb:linear-gradient(160deg,#FBCFE8 0%,#F4FAF2 55%,#BBE3A8 100%);--sp:#FFFFFF;--st:#23331F;--sa:#C2367A;--pc:#F9A8D4"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Kevad</span></button><button type="button" class="sw" data-style="loojang" aria-pressed="false" style="--sb:linear-gradient(180deg,#3B1C5A 0%,#B8436B 55%,#FF9A4D 100%);--sp:#221532;--st:#F1DCE8;--sa:#E8603A;--pc:#FFB347"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Loojang</span></button><button type="button" class="sw" data-style="virmalised" aria-pressed="false" style="--sb:linear-gradient(170deg,#3DDC97 0%,#1B6E8F 40%,#07141A 100%);--sp:#0C1D25;--st:#D4F1EE;--sa:#1FAF77;--pc:#3DDC97"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Virmalised</span></button><button type="button" class="sw" data-style="kosmos" aria-pressed="false" style="--sb:radial-gradient(1.5px 1.5px at 18% 28%,#fff,transparent),radial-gradient(1px 1px at 72% 18%,#fff,transparent),radial-gradient(1px 1px at 44% 58%,#fff,transparent),radial-gradient(1.2px 1.2px at 88% 52%,#fff,transparent),linear-gradient(160deg,#2A1B6B 0%,#0B0E20 55%,#05060F 100%);--sp:#0B0E20;--st:#DCDDF5;--sa:#7C5CFF;--pc:#FFFFFF"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Kosmos</span></button><button type="button" class="sw" data-style="vihm" aria-pressed="false" style="--sb:repeating-linear-gradient(105deg,rgba(255,255,255,.18) 0 1px,transparent 1px 7px),linear-gradient(180deg,#56657A 0%,#1A2029 75%);--sp:#1A2029;--st:#D3DAE3;--sa:#4F8FD6;--pc:#B9CCE4"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Vihm</span></button><button type="button" class="sw" data-style="neoon" aria-pressed="false" style="--sb:linear-gradient(rgba(255,43,214,.35) 1px,transparent 1px) 0 0/10px 10px,linear-gradient(90deg,rgba(34,211,238,.3) 1px,transparent 1px) 0 0/10px 10px,linear-gradient(135deg,#5B0E63 0%,#0A0A0F 55%,#0E4A57 100%);--sp:#12111A;--st:#E7E3F5;--sa:#D81BB0;--pc:#FF2BD6"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Neoon</span></button><button type="button" class="sw" data-style="mets" aria-pressed="false" style="--sb:radial-gradient(2px 2px at 30% 40%,#EFFF7A,transparent),radial-gradient(2px 2px at 70% 25%,#EFFF7A,transparent),linear-gradient(180deg,#3C4A1E 0%,#1C1B12 60%,#0E0D08 100%);--sp:#1C1B12;--st:#E4E0CC;--sa:#6E9632;--pc:#E5F55A"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Mets</span></button><button type="button" class="sw" data-style="komm" aria-pressed="false" style="--sb:linear-gradient(135deg,#FBCFE8 0%,#F7F2FF 45%,#C7F9E5 100%);--sp:#FFFFFF;--st:#2E2342;--sa:#7C3AED;--pc:#F472B6"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Komm</span></button><button type="button" class="sw" data-style="meri" aria-pressed="false" style="--sb:radial-gradient(6px 3px at 30% 62%,rgba(255,255,255,.9),transparent),radial-gradient(8px 3px at 70% 56%,rgba(255,255,255,.8),transparent),linear-gradient(180deg,#BDE7FA 0%,#7CCBEB 52%,#2FA4D6 100%);--sp:#FFFFFF;--st:#0F2A3A;--sa:#0284C7;--pc:#E0F7FF"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Meri</span></button><button type="button" class="sw" data-style="kool" aria-pressed="false" style="--sb:repeating-linear-gradient(-8deg,rgba(255,255,255,.05) 0 2px,transparent 2px 7px),linear-gradient(160deg,#2B4A3B 0%,#1E3329 100%);--sp:#233B30;--st:#E8EFE6;--sa:#2E86AB;--pc:#F3F6EE"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Kool</span></button><button type="button" class="sw sw-oma" data-style="oma" aria-pressed="false" aria-haspopup="dialog"><span class="sw-prev"><span class="sw-plus" aria-hidden="true">+</span></span><span class="sw-n">Loo ise</span></button></div>
     <p class="plabel">Päeva tsitaat</p>
     <div class="seg" role="group" aria-label="Päeva tsitaat avalehel">
       <button type="button" data-tsitaat-set="0">Väljas</button>
@@ -5608,6 +5634,17 @@ H — C — C — C — H
   <canvas id="li-cv"></canvas>
   <div class="li-btns"><button type="button" class="li-b" id="li-snd" aria-pressed="true">Heli: sees</button><button type="button" class="li-b" id="li-close">Sulge</button></div>
 </div>
+<div class="modal" id="oma-modal" role="dialog" aria-modal="true" aria-labelledby="oma-h" hidden>
+  <div class="modal-box oma-box">
+    <div class="modal-head"><h2 id="oma-h">Loo ise</h2><button type="button" class="xbtn" id="oma-close" aria-label="Sulge">×</button></div>
+    <p>Laadi üles pilt ja see pannakse lehe taustaks. Lohista pilti, et seda liigutada, ning muuda suurust ja pööret liuguritega. Telefonis saad kasutada kahte sõrme. <b>Kollane raam</b> näitab, mis jääb ekraanile.</p>
+    <div class="oma-row"><button type="button" class="btn" id="oma-pick">Vali pilt</button><input type="file" id="oma-file" accept="image/*" hidden><button type="button" class="btn sec" id="oma-reset" disabled>Lähtesta</button></div>
+    <div class="oma-stage" id="oma-stage"><img id="oma-img" alt="" hidden><div class="oma-frame" id="oma-frame" hidden><span>ekraan</span></div><div class="oma-empty" id="oma-empty">Vali pilt, et alustada.</div></div>
+    <div class="oma-ctl"><label for="oma-scale">Suurus</label><input type="range" id="oma-scale" min="5" max="400" value="100" disabled><output id="oma-scale-o">100%</output><label for="oma-rot">Pööre</label><input type="range" id="oma-rot" min="-180" max="180" value="0" disabled><output id="oma-rot-o">0°</output></div>
+    <p class="oma-msg" id="oma-msg" aria-live="polite"></p>
+    <div class="oma-row"><button type="button" class="btn" id="oma-save" disabled>Pane taustaks</button><button type="button" class="btn sec" id="oma-del" hidden>Eemalda oma taust</button></div>
+  </div>
+</div>
 <div class="modal" id="vh-modal" role="dialog" aria-modal="true" aria-labelledby="vh-h" hidden>
   <div class="modal-box vh-box">
     <div class="modal-head"><h2 id="vh-h">Vaheajad 2026/27</h2><button type="button" class="xbtn" id="vh-close" aria-label="Sulge">×</button></div>
@@ -6384,12 +6421,14 @@ H — C — C — C — H
     document.addEventListener('click', function(e){ if (!pop.hidden && !pop.contains(e.target)) open(false); });
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !pop.hidden) { open(false); gear.focus(); } });
     var meta = document.querySelector('meta[name="theme-color"]');
-    var BG = {"suvi": "#FFF6E5", "talv": "#0E1726", "sugis": "#1C130C", "kevad": "#F4FAF2", "loojang": "#1A1024", "virmalised": "#07141A", "kosmos": "#05060F", "vihm": "#12161C", "neoon": "#0A0A0F", "mets": "#14130C", "komm": "#F7F2FF"}, LIGHTS = ["suvi", "kevad", "komm"], FX = {"suvi": "sand", "talv": "snow", "sugis": "leaf", "kevad": "petal", "loojang": "ember", "virmalised": "aurora", "kosmos": "meteor", "vihm": "rain", "neoon": "neon", "mets": "firefly", "komm": "sprinkle"};
+    var BG = {"suvi": "#FFF6E5", "talv": "#0E1726", "sugis": "#1C130C", "kevad": "#F4FAF2", "loojang": "#1A1024", "virmalised": "#07141A", "kosmos": "#05060F", "meri": "#EAF6FB", "kool": "#1E3329", "oma": "#181818", "vihm": "#12161C", "neoon": "#0A0A0F", "mets": "#14130C", "komm": "#F7F2FF"}, LIGHTS = ["suvi", "kevad", "komm", "meri"], FX = {"suvi": "sand", "talv": "snow", "sugis": "leaf", "kevad": "petal", "loojang": "ember", "virmalised": "aurora", "kosmos": "meteor", "meri": "foam", "kool": "chalk", "vihm": "rain", "neoon": "neon", "mets": "firefly", "komm": "sprinkle"};
     var pick = document.getElementById('stylepick');
-    function cur(){ var v = 'dark'; try { v = localStorage.getItem('ajukas-theme') || 'dark'; } catch (e) {} if (v.indexOf('style:') === 0 && !BG[v.slice(6)]) v = 'dark'; return v; }
+    function omaLight(){ try { return localStorage.getItem('ajukas-oma-light') === '1'; } catch (e) { return false; } }
+    function omaImg(){ try { return localStorage.getItem('ajukas-oma-bg'); } catch (e) { return null; } }
+    function cur(){ var v = 'dark'; try { v = localStorage.getItem('ajukas-theme') || 'dark'; } catch (e) {} if (v.indexOf('style:') === 0 && (!BG[v.slice(6)] || (v === 'style:oma' && !omaImg()))) v = 'dark'; return v; }
     function apply(v){
       var h = document.documentElement, st = v.indexOf('style:') === 0 ? v.slice(6) : '';
-      var light = st ? LIGHTS.indexOf(st) >= 0 : v === 'light';
+      var light = st === 'oma' ? omaLight() : st ? LIGHTS.indexOf(st) >= 0 : v === 'light';
       if (light) h.setAttribute('data-theme', 'light'); else h.removeAttribute('data-theme');
       if (st) h.setAttribute('data-style', st); else h.removeAttribute('data-style');
     }
@@ -6398,7 +6437,7 @@ H — C — C — C — H
       var key = st ? 'muu' : (v === 'light' ? 'light' : 'dark');
       pop.querySelectorAll('[data-theme-set]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-theme-set') === key ? 'true' : 'false'); });
       pick.querySelectorAll('.sw').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-style') === st ? 'true' : 'false'); });
-      if (meta) meta.setAttribute('content', st ? BG[st] : (v === 'light' ? '#F7F7F8' : '#181818'));
+      if (meta) meta.setAttribute('content', st === 'oma' ? (omaLight() ? '#F7F7F8' : '#181818') : st ? BG[st] : (v === 'light' ? '#F7F7F8' : '#181818'));
     }
     function showPick(on){ pick.hidden = !on; pop.classList.toggle('wide', on); var m = pop.querySelector('[data-theme-set="muu"]'); if (m) m.setAttribute('aria-expanded', on ? 'true' : 'false'); }
     var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -6408,8 +6447,8 @@ H — C — C — C — H
     function sprite(kind, col, size, dpr){
       var key = kind + '|' + col + '|' + size + '|' + dpr;
       if (SPR[key]) return SPR[key];
-      var glow = kind === 'snow' || kind === 'ember' || kind === 'firefly' || kind === 'neon' || kind === 'meteor' ? 10 : 0;
-      var half = size + glow + 2, cvs = document.createElement('canvas');
+      var glow = kind === 'bubble' ? 4 : kind === 'snow' || kind === 'ember' || kind === 'firefly' || kind === 'neon' || kind === 'meteor' ? 10 : 0;
+      var half = (kind.indexOf('chalk:') === 0 ? size * 2.2 : size) + glow + 2, cvs = document.createElement('canvas');
       cvs.width = cvs.height = Math.ceil(half * 2 * dpr); var g = cvs.getContext('2d');
       g.scale(dpr, dpr); g.translate(half, half); g.fillStyle = col; g.strokeStyle = col; var s = size;
       if (kind === 'leaf') { g.beginPath(); g.moveTo(-s, 0); g.quadraticCurveTo(0, -s * .8, s, 0); g.quadraticCurveTo(0, s * .8, -s, 0); g.fill(); g.globalAlpha = .5; g.beginPath(); g.moveTo(-s, 0); g.lineTo(s, 0); g.lineWidth = .9; g.strokeStyle = '#5A2A0A'; g.stroke(); }
@@ -6417,6 +6456,9 @@ H — C — C — C — H
       else if (kind === 'snow') { g.lineWidth = Math.max(1.1, s / 5); g.lineCap = 'round'; g.shadowColor = 'rgba(200,230,255,.95)'; g.shadowBlur = 5; for (var k = 0; k < 6; k++) { g.rotate(1.0472); g.beginPath(); g.moveTo(0, 0); g.lineTo(0, -s); g.moveTo(0, -s * .55); g.lineTo(-s * .3, -s * .82); g.moveTo(0, -s * .55); g.lineTo(s * .3, -s * .82); g.stroke(); } }
       else if (kind === 'spark' || kind === 'star' || kind === 'gold') { var q = s * .8; g.beginPath(); g.moveTo(0, -q); g.lineTo(q * .25, -q * .25); g.lineTo(q, 0); g.lineTo(q * .25, q * .25); g.lineTo(0, q); g.lineTo(-q * .25, q * .25); g.lineTo(-q, 0); g.lineTo(-q * .25, -q * .25); g.closePath(); g.fill(); }
       else if (kind === 'ember' || kind === 'firefly' || kind === 'meteor') { g.shadowColor = col; g.shadowBlur = glow; g.beginPath(); g.arc(0, 0, kind === 'ember' ? s * .4 : kind === 'meteor' ? 2 : s, 0, 6.29); g.fill(); }
+      else if (kind === 'bubble') { g.lineWidth = 1.4; g.globalAlpha = .9; g.beginPath(); g.arc(0, 0, s, 0, 6.29); g.stroke(); g.globalAlpha = .55; g.beginPath(); g.arc(-s * .35, -s * .35, s * .25, 0, 6.29); g.fill(); }
+      else if (kind === 'drop') { g.beginPath(); g.moveTo(0, -s); g.quadraticCurveTo(s * .75, s * .1, 0, s * .6); g.quadraticCurveTo(-s * .75, s * .1, 0, -s); g.fill(); }
+      else if (kind.indexOf('chalk:') === 0) { g.font = '700 ' + (s * 2) + 'px "Comic Sans MS","Segoe Print","Bradley Hand",cursive'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.globalAlpha = .92; g.fillText(kind.slice(6), 0, 0); g.globalAlpha = .35; g.fillText(kind.slice(6), .8, .6); }
       else if (kind === 'neon') { g.shadowColor = col; g.shadowBlur = glow; g.fillRect(-s / 2, -s / 2, s, s); }
       else if (kind === 'sprinkle') { var w = s * .34; g.beginPath(); if (g.roundRect) g.roundRect(-w / 2, -s / 2, w, s, w / 2); else g.rect(-w / 2, -s / 2, w, s); g.fill(); }
       else if (kind === 'aurora') { var gr = g.createLinearGradient(0, -s * 4, 0, s * 4); gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(.5, col); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(-s * .3, -s * 4, s * .6, s * 8); }
@@ -6433,10 +6475,10 @@ H — C — C — C — H
       var COL = { leaf: ['#D9622B','#E8A33D','#B83A1E','#F2C14E','#8C3B12'], petal: ['#F9A8D4','#FBCFE8','#FFFFFF','#F472B6'], snow: ['#FFFFFF','#E6F2FF','#CFE6FF'],
         sand: ['#E9C98B','#D9B26F','#F3DDA8','#C8A060'], ember: ['#FF7A45','#FFB347','#FF4D6D','#FFD166'], spark: ['#FFD166','#FFE29A','#FFB088','#FFFFFF'],
         aurora: ['#3DDC97','#5EEAD4','#7DD3FC','#A78BFA'], rain: ['#B9CCE4','#9DB4D0','#DCE7F5'], neon: ['#FF2BD6','#22D3EE','#A3FF12','#FFE600'], firefly: ['#EFFF7A','#D9F99D','#FDE68A'],
-        sprinkle: ['#F472B6','#60A5FA','#34D399','#FBBF24','#A78BFA'], star: ['#FFFFFF','#FDE68A'], gold: ['#EAB308','#FACC15','#F59E0B'], meteor: ['#FFFFFF','#E0E7FF','#C4B5FD'] }[kind];
+        sprinkle: ['#F472B6','#60A5FA','#34D399','#FBBF24','#A78BFA'], foam: ['#FFFFFF','#E0F7FF','#BAE6FD','#7DD3FC'], chalk: ['#F3F6EE','#F3F6EE','#FDE68A','#FBCFE8','#BAE6FD'], star: ['#FFFFFF','#FDE68A'], gold: ['#EAB308','#FACC15','#F59E0B'], meteor: ['#FFFFFF','#E0E7FF','#C4B5FD'] }[kind];
       var UP = kind === 'ember' || kind === 'spark' || kind === 'aurora' || kind === 'firefly';
       // osakesi lainejoone iga piksli kohta (kokku umbes sama palju igal pool ekraanil)
-      var DENS = { sand: 0.9, snow: 0.42, leaf: 0.45, petal: 0.4, ember: 0.5, spark: 0.45, aurora: 0.3, star: 0.4, gold: 0.4, meteor: 0.07, rain: 0.9, neon: 0.45, firefly: 0.35, sprinkle: 0.6 }[kind] || 0.4;
+      var DENS = { sand: 0.9, snow: 0.42, leaf: 0.45, petal: 0.4, ember: 0.5, spark: 0.45, aurora: 0.3, star: 0.4, gold: 0.4, meteor: 0.07, rain: 0.9, neon: 0.45, firefly: 0.35, sprinkle: 0.6, foam: 0.7, chalk: 0.32 }[kind] || 0.4;
       var MAXP = kind === 'rain' || kind === 'sand' ? 420 : 300;
       function ease(x){ return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
       function rAt(t){ return ease(Math.min(1, Math.max(0, t / dur))) * R; }
@@ -6460,8 +6502,10 @@ H — C — C — C — H
           else if (kind === 'ember') { p.s = Math.round(rnd(6, 10)); p.vy = rnd(-45, -15); }
           else if (kind === 'spark' || kind === 'star' || kind === 'gold') { p.s = Math.round(rnd(4, 8)); p.vy = rnd(-25, 10); p.vx *= .5; }
           else if (kind === 'sprinkle') { p.s = Math.round(rnd(6, 10)); p.vy = rnd(20, 50); p.va = rnd(-4, 4); }
+          else if (kind === 'foam') { if (Math.random() < .55) { p.k = 'bubble'; p.s = Math.round(rnd(3, 8)); p.vy = rnd(-40, -12); p.va = 0; } else { p.k = 'drop'; p.s = Math.round(rnd(3, 6)); p.vx += rnd(-60, 20); p.vy = rnd(-160, -60); p.va = 0; p.a = 0; } }
+          else if (kind === 'chalk') { var GL = ['A','B','C','π','x²','+','=','√','∑','Ω','5','7','a²','%','?','!','∞','÷']; p.k = Math.random() < .3 ? 'sand' : 'chalk:' + GL[(Math.random() * GL.length) | 0]; p.s = p.k === 'sand' ? Math.round(rnd(1, 2)) : Math.round(rnd(7, 11)); p.vy = rnd(15, 40); p.va = rnd(-.9, .9); if (p.k === 'sand') p.c = '#F3F6EE'; }
           else { p.s = Math.round(rnd(6, 11)); p.vy = rnd(15, 40); }   // leht, õis
-          p.img = kind === 'rain' ? null : sprite(kind, p.c, p.s, dpr);
+          p.img = kind === 'rain' ? null : sprite(p.k || kind, p.c, p.s, dpr);
           P.push(p); return;
         }
       }
@@ -6470,6 +6514,16 @@ H — C — C — C — H
         var t = now - t0, dt = Math.min(.05, (now - last) / 1000); last = now;
         c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, cv.width, cv.height);
         if (t < dur) { acc += visLen(rAt(t)) * DENS * dt; while (acc >= 1) { acc -= 1; if (P.length < MAXP) spawn(rAt(t) - 6); } }
+        if (kind === 'foam' && t < dur * 1.05) {
+          var rw = rAt(t), Aw = Math.min(46, rw * .14), kk = t / dur * 26;
+          c.setTransform(dpr, 0, 0, dpr, 0, 0); c.lineCap = 'round'; c.lineJoin = 'round';
+          [[26, 'rgba(125,211,252,.28)'], [12, 'rgba(224,247,255,.75)'], [4, 'rgba(255,255,255,.95)']].forEach(function(L){
+            c.strokeStyle = L[1]; c.lineWidth = L[0]; c.beginPath();
+            for (var q = 0; q <= 60; q++) { var th = Math.PI - (Math.PI / 2) * (q / 60), rr = rw + Aw * Math.sin(th * 9 + kk * 1.1); var X = W + rr * Math.cos(th), Y = rr * Math.sin(th); if (q) c.lineTo(X, Y); else c.moveTo(X, Y); }
+            c.stroke();
+          });
+          c.setTransform(1, 0, 0, 1, 0, 0);
+        }
         if (kind === 'rain') { c.lineWidth = 1.3 * dpr; c.lineCap = 'round'; }
         for (var j = P.length - 1; j >= 0; j--) {
           var p = P[j]; p.life += dt;
@@ -6480,6 +6534,8 @@ H — C — C — C — H
           p.vx *= Math.pow(.6, dt);   // lükkest jääb alles vaid hõljumine
           if (kind === 'leaf' || kind === 'petal' || kind === 'sprinkle') p.vy = Math.min(p.vy + 30 * dt, kind === 'sprinkle' ? 140 : 90);
           else if (kind === 'snow') p.vy = Math.min(p.vy + 12 * dt, 55);
+          else if (kind === 'foam') p.vy = p.k === 'drop' ? Math.min(p.vy + 260 * dt, 160) : Math.max(p.vy - 10 * dt, -60);
+          else if (kind === 'chalk') p.vy = Math.min(p.vy + 20 * dt, 70);
           else if (UP) p.vy = Math.max(p.vy - 12 * dt, -70);
           p.a += p.va * dt;
           var al = Math.min(1, p.life * 4) * Math.min(1, (p.max - p.life) / .7);
@@ -6517,11 +6573,11 @@ H — C — C — C — H
       }
       return 'polygon(' + pts.join(',') + ')';
     }
-    function setTheme(v){
-      if (v === cur()) return;
+    function setTheme(v, force){
+      if (v === cur() && !force) return;
       try { localStorage.setItem('ajukas-theme', v); } catch (e) {}
       var st = v.indexOf('style:') === 0 ? v.slice(6) : '';
-      var kind = st ? FX[st] : (v === 'light' ? 'gold' : 'star');
+      var kind = st === 'oma' ? (omaLight() ? 'gold' : 'star') : st ? FX[st] : (v === 'light' ? 'gold' : 'star');
       var done = function(){ apply(v); paintTheme(); if (window.AjukasSuviSync) window.AjukasSuviSync(); };
       var DUR = 1300;
       if (reduce || !document.startViewTransition) { done(); burst(kind, DUR); return; }
@@ -6541,8 +6597,11 @@ H — C — C — C — H
       });
     });
     pick.querySelectorAll('.sw').forEach(function(b){
-      b.addEventListener('click', function(e){ e.stopPropagation(); setTheme('style:' + b.getAttribute('data-style')); });
+      b.addEventListener('click', function(e){ e.stopPropagation(); var id = b.getAttribute('data-style'); if (id === 'oma') { if (window.Ajukas && window.Ajukas.openOma) window.Ajukas.openOma(); return; } setTheme('style:' + id); });
     });
+    window.Ajukas = window.Ajukas || {};
+    window.Ajukas.applyOma = function(){ var h = document.documentElement, img = omaImg(); if (!img) return; h.style.setProperty('--oma-img', 'url("' + img + '")'); h.style.setProperty('--oma-scrim', omaLight() ? 'rgba(247,247,248,.55)' : 'rgba(12,12,16,.55)'); setTheme('style:oma', true); };
+    window.Ajukas.clearOma = function(){ try { localStorage.removeItem('ajukas-oma-bg'); localStorage.removeItem('ajukas-oma-light'); } catch (e) {} if (document.documentElement.getAttribute('data-style') === 'oma') setTheme('dark', true); else paintTheme(); };
     if (cur().indexOf('style:') === 0) showPick(true);
     paintTheme();
   })();
@@ -7185,6 +7244,91 @@ H — C — C — C — H
     });
     window.addEventListener('resize', function(){ if (!G.hidden) { resize(); if (st === 'ready') reset(); } });
     document.addEventListener('visibilitychange', function(){ last = performance.now(); });
+  })();
+  // --- "Loo ise": oma taustapilt (liiguta, suurenda, pööra; hall/kollane raam = ekraan) ---
+  (function(){
+    var m = document.getElementById('oma-modal'); if (!m) return;
+    var stage = document.getElementById('oma-stage'), img = document.getElementById('oma-img'), frame = document.getElementById('oma-frame'), empty = document.getElementById('oma-empty');
+    var fileIn = document.getElementById('oma-file'), sc = document.getElementById('oma-scale'), ro = document.getElementById('oma-rot'), msg = document.getElementById('oma-msg');
+    var scO = document.getElementById('oma-scale-o'), roO = document.getElementById('oma-rot-o'), saveB = document.getElementById('oma-save'), resetB = document.getElementById('oma-reset'), delB = document.getElementById('oma-del');
+    var T = { x: 0, y: 0, s: 1, r: 0 }, base = 1, fw = 0, fh = 0, iw = 0, ih = 0, has = false, ptrs = {}, g0 = null;
+    function layout(){
+      var Ws = stage.clientWidth, Hs = stage.clientHeight, a = innerWidth / innerHeight;
+      fw = Math.min(Ws * .8, Hs * .8 * a); fh = fw / a;
+      frame.style.width = fw + 'px'; frame.style.height = fh + 'px';
+    }
+    function draw(){
+      img.style.width = iw + 'px'; img.style.height = ih + 'px';
+      img.style.transform = 'translate(-50%,-50%) translate(' + T.x + 'px,' + T.y + 'px) rotate(' + T.r + 'deg) scale(' + T.s + ')';
+      var pct = Math.round(T.s / base * 100); sc.value = Math.max(5, Math.min(400, pct)); scO.textContent = pct + '%';
+      ro.value = Math.round(T.r); roO.textContent = Math.round(T.r) + '°';
+    }
+    function reset(){ if (!has) return; base = Math.max(fw / iw, fh / ih); T = { x: 0, y: 0, s: base, r: 0 }; draw(); }
+    function load(src){
+      var im = new Image();
+      im.onload = function(){
+        // suured pildid väiksemaks (mälu ja salvestus)
+        var k = Math.min(1, 2400 / Math.max(im.naturalWidth, im.naturalHeight));
+        if (k < 1) { var cv = document.createElement('canvas'); cv.width = Math.round(im.naturalWidth * k); cv.height = Math.round(im.naturalHeight * k); cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height); src = cv.toDataURL('image/jpeg', .9); }
+        img.onload = function(){ iw = img.naturalWidth; ih = img.naturalHeight; has = true; img.hidden = false; frame.hidden = false; empty.hidden = true; [sc, ro, saveB, resetB].forEach(function(x){ x.disabled = false; }); layout(); reset(); msg.textContent = ''; };
+        img.src = src;
+      };
+      im.onerror = function(){ msg.textContent = t('Seda faili ei saanud pildina avada.'); };
+      im.src = src;
+    }
+    function open(){
+      m.hidden = false; layout(); msg.textContent = '';
+      var old = null; try { old = localStorage.getItem('ajukas-oma-bg'); } catch (e) {}
+      delB.hidden = !old;
+      if (old && !has) load(old); else if (has) { layout(); draw(); }
+    }
+    function close(){ m.hidden = true; }
+    Ajukas.openOma = open;
+    document.getElementById('oma-close').addEventListener('click', close);
+    m.addEventListener('click', function(e){ if (e.target === m) close(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !m.hidden) close(); });
+    document.getElementById('oma-pick').addEventListener('click', function(){ fileIn.click(); });
+    fileIn.addEventListener('change', function(){ var f = fileIn.files && fileIn.files[0]; if (!f) return; var fr = new FileReader(); fr.onload = function(){ load(fr.result); }; fr.readAsDataURL(f); fileIn.value = ''; });
+    resetB.addEventListener('click', reset);
+    sc.addEventListener('input', function(){ T.s = base * sc.value / 100; draw(); });
+    ro.addEventListener('input', function(){ T.r = +ro.value; draw(); });
+    // lohistamine ja kahe sõrmega suurendamine/pööramine
+    stage.addEventListener('pointerdown', function(e){ if (!has) return; stage.setPointerCapture(e.pointerId); ptrs[e.pointerId] = { x: e.clientX, y: e.clientY }; g0 = null; stage.classList.add('drag'); });
+    stage.addEventListener('pointermove', function(e){
+      if (!ptrs[e.pointerId]) return;
+      var prev = ptrs[e.pointerId], ids = Object.keys(ptrs);
+      if (ids.length === 1) { T.x += e.clientX - prev.x; T.y += e.clientY - prev.y; ptrs[e.pointerId] = { x: e.clientX, y: e.clientY }; draw(); return; }
+      ptrs[e.pointerId] = { x: e.clientX, y: e.clientY };
+      var a = ptrs[ids[0]], b = ptrs[ids[1]], d = Math.hypot(b.x - a.x, b.y - a.y), an = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI, mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+      if (g0) { T.s = Math.max(base * .05, Math.min(base * 4, T.s * d / g0.d)); var dr = an - g0.an; if (dr > 180) dr -= 360; if (dr < -180) dr += 360; T.r = Math.max(-180, Math.min(180, T.r + dr)); T.x += mx - g0.mx; T.y += my - g0.my; draw(); }
+      g0 = { d: d, an: an, mx: mx, my: my };
+    });
+    function up(e){ delete ptrs[e.pointerId]; g0 = null; if (!Object.keys(ptrs).length) stage.classList.remove('drag'); }
+    stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up);
+    stage.addEventListener('wheel', function(e){ if (!has) return; e.preventDefault(); T.s = Math.max(base * .05, Math.min(base * 4, T.s * Math.exp(-e.deltaY * .0015))); draw(); }, { passive: false });
+    window.addEventListener('resize', function(){ if (!m.hidden && has) { var ow = fw; layout(); var k = fw / ow; T.x *= k; T.y *= k; T.s *= k; base *= k; draw(); } });
+    // salvestamine: renderda raami sisu ekraani suuruses, mõõda heledus -> hele või tume põhi
+    function render(maxW, q){
+      var OW = Math.min(maxW, Math.round(innerWidth * Math.min(window.devicePixelRatio || 1, 1.5))), OH = Math.round(OW * fh / fw), k = OW / fw;
+      var cv = document.createElement('canvas'); cv.width = OW; cv.height = OH; var c = cv.getContext('2d');
+      c.fillStyle = '#202024'; c.fillRect(0, 0, OW, OH);
+      c.translate(OW / 2 + T.x * k, OH / 2 + T.y * k); c.rotate(T.r * Math.PI / 180); c.scale(T.s * k, T.s * k); c.drawImage(img, -iw / 2, -ih / 2);
+      var sm = document.createElement('canvas'); sm.width = 48; sm.height = Math.max(1, Math.round(48 * OH / OW)); var sc2 = sm.getContext('2d'); sc2.drawImage(cv, 0, 0, sm.width, sm.height);
+      var d = sc2.getImageData(0, 0, sm.width, sm.height).data, L = 0, n = 0;
+      for (var i = 0; i < d.length; i += 4) { L += (.2126 * d[i] + .7152 * d[i + 1] + .0722 * d[i + 2]) / 255; n++; }
+      return { url: cv.toDataURL('image/jpeg', q), light: L / n > .56 };
+    }
+    saveB.addEventListener('click', function(){
+      if (!has) return;
+      var tries = [[1920, .85], [1440, .78], [1100, .7], [800, .65]], ok = false, res;
+      for (var i = 0; i < tries.length && !ok; i++) {
+        res = render(tries[i][0], tries[i][1]);
+        try { localStorage.setItem('ajukas-oma-bg', res.url); localStorage.setItem('ajukas-oma-light', res.light ? '1' : '0'); ok = true; } catch (e) {}
+      }
+      if (!ok) { msg.textContent = t('Pilt on liiga suur, et brauserisse salvestada. Proovi väiksemat pilti.'); return; }
+      close(); if (Ajukas.applyOma) Ajukas.applyOma();
+    });
+    delB.addEventListener('click', function(){ if (Ajukas.clearOma) Ajukas.clearOma(); has = false; img.hidden = true; frame.hidden = true; empty.hidden = false; [sc, ro, saveB, resetB].forEach(function(x){ x.disabled = true; }); delB.hidden = true; close(); });
   })();
   // --- vaheajad 2026/27 (Riigi Teataja akt 119032025005 §3) ---
   (function(){
