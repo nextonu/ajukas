@@ -6941,7 +6941,7 @@ H — C — C — C — H
 
     var VH = 640, VW = 360, K = 1, dpr = 1, GROUND = 74;
     var GRAV = 1500, FLAP = -440, SPEED = 175, GAP = 172, COLW = 72, SPACING = 270;
-    var st = 'ready', book, cols, score, best = 0, newBest = false, tOver = 0, shake = 0, time = 0, far = 0, mid = 0, near = 0, raf = 0, last = 0;
+    var introT = 0, helloUntil = 0, st = 'ready', book, cols, score, best = 0, newBest = false, tOver = 0, shake = 0, time = 0, far = 0, mid = 0, near = 0, raf = 0, last = 0;
     var LS = { get: function(k){ try { return localStorage.getItem(k); } catch (e) { return null; } }, set: function(k, v){ try { localStorage.setItem(k, v); } catch (e) {} } };
     best = +(LS.get('ajukas-lisainfo-best') || 0);
     var sound = LS.get('ajukas-lisainfo-heli') !== '0', ac = null;
@@ -6972,6 +6972,7 @@ H — C — C — C — H
       cols = []; score = 0; newBest = false; st = 'ready'; SPEED = 165;
     }
     function flap(){
+      if (st === 'intro') { if (performance.now() - introT < 3000) return; LS.set('ajukas-lisainfo-intro', '1'); st = 'ready'; }
       if (st === 'over') { if (performance.now() - tOver < 550) return; reset(); }
       if (st === 'ready') st = 'play';
       book.vy = FLAP; book.flapT = 0; sfx.flap();
@@ -6985,7 +6986,7 @@ H — C — C — C — H
       time += dt; book.flapT += dt;
       if (st !== 'over') { far += SPEED * .12 * dt; mid += SPEED * .35 * dt; near += SPEED * dt; }
       if (shake > 0) shake -= dt;
-      if (st === 'ready') { book.y = VH * .42 + Math.sin(time * 3) * 9; book.rot = Math.sin(time * 3) * .08; return; }
+      if (st === 'ready' || st === 'intro') { book.y = VH * .42 + Math.sin(time * 3) * 9; book.rot = Math.sin(time * 3) * .08; return; }
       book.vy += GRAV * dt; book.y += book.vy * dt;
       book.rot += (Math.max(-.45, Math.min(1.2, book.vy / 620)) - book.rot) * Math.min(1, dt * 10);
       if (book.y < 14) { book.y = 14; book.vy = 0; }
@@ -7125,6 +7126,7 @@ H — C — C — C — H
       drawBook();
       if (st === 'play' || st === 'over') txt(String(score), VW / 2, 70, 54, '#FFFFFF');
       if (st === 'ready') {
+        if (time < helloUntil) { c.globalAlpha = Math.min(1, (helloUntil - time) / .5, (time - helloUntil + 2.4) / .3); txt('Tere taas!', book.x, book.y + 54, 22, '#FFFFFF'); c.globalAlpha = 1; }
         txt('Lisainfo', VW / 2, VH * .2, Math.min(64, VW / 6), '#FACC15');
         txt('Vajuta või puuduta, et lennata', VW / 2, VH * .2 + 52, Math.min(20, VW / 18), '#FFFFFF');
         if (best) txt('Parim: ' + best, VW / 2, VH * .2 + 84, 20, '#FDE68A');
@@ -7139,6 +7141,22 @@ H — C — C — C — H
         if (newBest) txt('Uus rekord!', VW / 2, by + 144, 20 + Math.sin(time * 8) * 2, '#FACC15');
         if (performance.now() - tOver > 550) txt('Vajuta, et uuesti proovida', VW / 2, by + 220, 17, '#FFFFFF');
       }
+      if (st === 'intro') {
+        var el = performance.now() - introT;
+        c.fillStyle = 'rgba(10,8,25,' + Math.min(.6, el / 500) + ')'; c.fillRect(-20, -20, VW + 40, VH + 40);
+        var iw = Math.min(420, VW - 36), fs = VW < 420 ? 19 : 22, lh = fs * 1.35;
+        c.font = '700 ' + fs + 'px "Segoe UI", system-ui, sans-serif';
+        var words = 'Kui sul on tõesti nii igav, et suvalisi asju klõpsid, siis võta väike paus.'.split(' '), lines = [], ln = '';
+        words.forEach(function(w){ var t2 = ln ? ln + ' ' + w : w; if (c.measureText(t2).width > iw - 40 && ln) { lines.push(ln); ln = w; } else ln = t2; }); lines.push(ln);
+        var ih = lines.length * lh + 44, ix = VW / 2 - iw / 2, iy = VH * .4 - ih / 2, sc = Math.min(1, .9 + el / 2500);
+        c.save(); c.globalAlpha = Math.min(1, el / 350); c.translate(VW / 2, iy + ih / 2); c.scale(sc, sc); c.translate(-VW / 2, -(iy + ih / 2));
+        c.fillStyle = 'rgba(25,20,50,.94)'; c.strokeStyle = 'rgba(250,204,21,.85)'; c.lineWidth = 2;
+        c.beginPath(); if (c.roundRect) c.roundRect(ix, iy, iw, ih, 16); else c.rect(ix, iy, iw, ih); c.fill(); c.stroke();
+        c.fillStyle = '#FFFFFF'; c.textAlign = 'center'; c.textBaseline = 'middle';
+        lines.forEach(function(l2, k){ c.fillText(l2, VW / 2, iy + 22 + lh / 2 + k * lh); });
+        c.restore();
+        if (el > 3000) { c.globalAlpha = Math.min(1, (el - 3000) / 400) * (.65 + .35 * Math.sin(time * 4)); txt('Klõpsa ükskõik kuhu, et jätkata', VW / 2, iy + ih + 34, VW < 420 ? 16 : 18, '#FDE68A'); c.globalAlpha = 1; }
+      }
     }
     function loop(now){
       var dt = Math.min(.033, (now - last) / 1000 || 0); last = now;
@@ -7149,6 +7167,7 @@ H — C — C — C — H
       try { if (!ac) { var A = window.AudioContext || window.webkitAudioContext; if (A) ac = new A(); } if (ac && ac.state === 'suspended') ac.resume(); } catch (e) {}
       G.hidden = false; document.body.style.overflow = 'hidden';
       resize(); reset(); paintSnd(); last = performance.now();
+      if (LS.get('ajukas-lisainfo-intro') !== '1') { st = 'intro'; introT = performance.now(); } else helloUntil = time + 2.4;
       cancelAnimationFrame(raf); raf = requestAnimationFrame(loop);
     }
     function close(){ G.hidden = true; document.body.style.overflow = ''; cancelAnimationFrame(raf); raf = 0; }
