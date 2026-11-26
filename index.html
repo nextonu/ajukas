@@ -568,7 +568,11 @@ header{padding-right:46px}
 .vh-ev{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
 .vh-ev li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;font-size:13.5px;line-height:1.4;padding:5px 0;border-bottom:1px dashed var(--line)}
 .vh-ev li:last-child{border-bottom:0}.vh-ev .ev-d{font-family:var(--mono);font-size:12.5px;color:var(--brand);white-space:nowrap}.vh-ev .ev-t{color:var(--text)}
-.logo,.brandline{touch-action:manipulation}
+.logo,.brandline{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.logo .mark,.brandline .mark{transform-origin:50% 60%}
+.mark.pop{animation:logo-pop .42s cubic-bezier(.3,1.6,.5,1)}
+@keyframes logo-pop{0%{transform:scale(1) rotate(0)}30%{transform:scale(.82) rotate(-8deg)}65%{transform:scale(1.16) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+@media (prefers-reduced-motion:reduce){.mark.pop{animation:none}}
 .li-game{position:fixed;inset:0;z-index:10000;background:#1B2340;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 .li-game canvas{position:absolute;inset:0;display:block;width:100%;height:100%;cursor:pointer}
 .li-btns{position:absolute;top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));display:flex;gap:8px;z-index:2}
@@ -6929,8 +6933,11 @@ H — C — C — C — H
       var l = e.target.closest && e.target.closest('.logo, .brandline');
       if (!l) { cnt = 0; return; }
       var n = Date.now(); cnt = n - lastClick < 1500 ? cnt + 1 : 1; lastClick = n;
+      var mk = l.querySelector('.mark'); if (mk) { mk.classList.remove('pop'); void mk.getBoundingClientRect(); mk.classList.add('pop'); }
+      var sel = window.getSelection && window.getSelection(); if (sel && sel.removeAllRanges) sel.removeAllRanges();
       if (cnt >= 10) { cnt = 0; e.preventDefault(); open(); }
     }, true);
+    document.addEventListener('animationend', function(e){ if (e.animationName === 'logo-pop') e.target.classList.remove('pop'); });
 
     var VH = 640, VW = 360, K = 1, dpr = 1, GROUND = 74;
     var GRAV = 1500, FLAP = -440, SPEED = 175, GAP = 172, COLW = 72, SPACING = 270;
