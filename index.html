@@ -553,6 +553,10 @@ header{padding-right:46px}
 .vh-list li.now{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--raised))}
 .vh-list li.next{border-color:var(--brand)}
 .vh-src{font-size:12.5px!important}
+.vh-h3{margin:6px 0 0;font-size:15px;color:var(--bright)}
+.vh-ev{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.vh-ev li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;font-size:13.5px;line-height:1.4;padding:5px 0;border-bottom:1px dashed var(--line)}
+.vh-ev li:last-child{border-bottom:0}.vh-ev .ev-d{font-family:var(--mono);font-size:12.5px;color:var(--brand);white-space:nowrap}.vh-ev .ev-t{color:var(--text)}
 .modal-box h2{font-size:20px;margin:0}
 .modal-box p{margin:0;font-size:14.5px}
 .xbtn{font:inherit;font-size:24px;line-height:1;width:36px;height:36px;border-radius:50%;border:1px solid var(--line2);background:transparent;color:var(--muted);cursor:pointer}
@@ -5584,7 +5588,9 @@ H — C — C — C — H
     <div class="modal-head"><h2 id="vh-h">Vaheajad 2026/27</h2><button type="button" class="xbtn" id="vh-close" aria-label="Sulge">×</button></div>
     <div class="vh-next" id="vh-next" aria-live="polite"></div>
     <ol class="vh-list" id="vh-list"></ol>
-    <p class="muted vh-src">Riikliku määruse järgi (Riigi Teataja, koolivaheajad 2024/25–2026/27). PERG võib oma vaheaegu natuke muuta: kooli enda kuupäevad leiad eKoolist.</p>
+    <h3 class="vh-h3">Erilised päevad</h3>
+    <ul class="vh-ev" id="vh-ev"></ul>
+    <p class="muted vh-src">PERG-i eKooli teadete ja riikliku määruse järgi. PERG-i jõuluvaheaeg on riiklikust pikem: <b>21.12 – 6.01</b> (riiklik oleks 3.01-ni).</p>
   </div>
 </div>
 <div class="modal" id="tt-modal" role="dialog" aria-modal="true" aria-labelledby="tt-h" hidden>
@@ -6859,13 +6865,27 @@ H — C — C — C — H
   (function(){
     var VH = [
       ['I vaheaeg (sügis)', [2026, 9, 26], [2026, 10, 1]],
-      ['II vaheaeg (jõulud)', [2026, 11, 21], [2027, 0, 3]],
+      ['II vaheaeg (jõulud)', [2026, 11, 21], [2027, 0, 6]],   // PERG: riiklikust pikem (eKool), riiklik oleks 3.01
       ['III vaheaeg (talv)', [2027, 1, 22], [2027, 1, 28]],
       ['IV vaheaeg (kevad)', [2027, 3, 12], [2027, 3, 18]],
       ['Suvevaheaeg', [2027, 5, 9], [2027, 7, 31]]
     ];
     var m = document.getElementById('vh-modal'), openBtn = document.getElementById('vh-open'), list = document.getElementById('vh-list'), nx = document.getElementById('vh-next');
     if (!m || !openBtn) return;
+    var EV = [
+      [[2026, 11, 7], 'E', 'Mentorpäev (info mentoritelt). Mentortund erandina teisipäeval. Esmaspäeva tunnid liiguvad 15.02 nädalale.'],
+      [[2026, 11, 17], 'N', 'G2: UPT kirjutamislaager.'],
+      [[2026, 11, 18], 'R', 'Jõulupäev ja ÕF laat. Reede tunnid toimuvad 8.01.'],
+      [[2027, 0, 7], 'N', 'Moodulite ja valikainete päev.'],
+      [[2027, 0, 8], 'R', 'Tunnid nagu reedel 18.12.'],
+      [[2027, 1, 2], 'T', 'G2: UPT II seminar ja töötoad. Teisipäeva tunnid liiguvad 15.02 nädalale.'],
+      [[2027, 1, 15], 'E', 'E ja T: toimuvad 7.12 ja 2.02 ära jäänud tunnid.'],
+      [[2027, 1, 17], 'K', 'G2: UPT kirjutamislaager ja kohtumine juhendajatega.'],
+      [[2027, 1, 18], 'N', 'Viimane II trimestri moodulite ja valikainete päev.'],
+      [[2027, 1, 19], 'R', 'Eesti Vabariigi aastapäeva aktus ja mentortund.'],
+      [[2027, 2, 4], 'N', 'Eriprogramm: maailmahariduse päevak, liikumisteadlikkus ja karjääripäev. Valikaineid ega mooduleid ei toimu.']
+    ];
+    var ev = document.getElementById('vh-ev');
     var MON = ['jaanuar','veebruar','märts','aprill','mai','juuni','juuli','august','september','oktoober','november','detsember'];
     function d(a){ return new Date(a[0], a[1], a[2]); }
     function fmt(a){ return a[2] + '. ' + MON[a[1]]; }
@@ -6882,6 +6902,7 @@ H — C — C — C — H
         html += '<li class="' + cls + '"><span class="vh-n">' + v[0] + '</span><span class="vh-d">' + fmt(v[1]) + ' – ' + fmt(v[2]) + (v[2][0] !== v[1][0] ? ' ' + v[2][0] : '') + ' · ' + len + ' päeva</span><span class="vh-c">' + c + '</span></li>';
       });
       list.innerHTML = html;
+      if (ev) { var eh = ''; EV.forEach(function(e){ if (d(e[0]) < t0) return; eh += '<li><span class="ev-d">' + e[1] + ' ' + e[0][2] + '.' + (e[0][1] + 1) + '</span><span class="ev-t">' + e[2] + '</span></li>'; }); ev.innerHTML = eh || '<li><span></span><span class="ev-t muted">Rohkem erilisi päevi pole teada.</span></li>'; }
       var cur = VH.filter(function(v){ return t0 >= d(v[1]) && t0 <= d(v[2]); })[0];
       if (cur) { nx.innerHTML = '<p class="vn-l">PRAEGU</p><p class="vn-n">' + cur[0] + ' käib! Head puhkust.</p>'; }
       else if (nextI >= 0) {
