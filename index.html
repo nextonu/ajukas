@@ -570,8 +570,8 @@ header{padding-right:46px}
 .vh-ev li:last-child{border-bottom:0}.vh-ev .ev-d{font-family:var(--mono);font-size:12.5px;color:var(--brand);white-space:nowrap}.vh-ev .ev-t{color:var(--text)}
 .logo,.brandline{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 .logo .mark,.brandline .mark{transform-origin:50% 60%}
-.mark.bump{animation:logo-pop .42s cubic-bezier(.3,1.6,.5,1)}
-@keyframes logo-pop{0%{transform:scale(1) rotate(0)}30%{transform:scale(.82) rotate(-8deg)}65%{transform:scale(1.16) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+.mark.bump{--mark-ink:#FFFFFF;animation:logo-pop .5s ease-out}
+@keyframes logo-pop{0%{transform:scale(1)}30%{transform:scale(1.16)}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.mark.bump{animation:none}}
 .li-game{position:fixed;inset:0;z-index:10000;background:#1B2340;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 .li-game canvas{position:absolute;inset:0;display:block;width:100%;height:100%;cursor:pointer}
@@ -1377,8 +1377,8 @@ sub{font-size:.72em;line-height:0}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="logo-mark" viewBox="0 0 32 32">
     <rect width="32" height="32" rx="7" fill="#EAB308"/>
-    <path fill="#181818" fill-rule="evenodd" d="M9 24 15.2 8h1.6L23 24h-3.3l-1.4-3.9h-4.6L12.3 24Zm5.3-6.6h3.4L16 12.6Z"/>
-    <circle cx="25" cy="23" r="2" fill="#181818"/>
+    <path style="fill:var(--mark-ink,#181818);transition:fill .15s" fill-rule="evenodd" d="M9 24 15.2 8h1.6L23 24h-3.3l-1.4-3.9h-4.6L12.3 24Zm5.3-6.6h3.4L16 12.6Z"/>
+    <circle cx="25" cy="23" r="2" style="fill:var(--mark-ink,#181818);transition:fill .15s"/>
   </symbol>
 </svg>
 <div class="wrap">
@@ -6933,9 +6933,9 @@ H — C — C — C — H
       var l = e.target.closest && e.target.closest('.logo, .brandline');
       if (!l) { cnt = 0; return; }
       var n = Date.now(); cnt = n - lastClick < 1500 ? cnt + 1 : 1; lastClick = n;
-      var mk = l.querySelector('.mark'); if (mk) { mk.classList.remove('bump'); void mk.getBoundingClientRect(); mk.classList.add('bump'); }
+      var mk = l.querySelector('.mark'); if (mk) { mk.classList.remove('bump'); void mk.getBoundingClientRect(); mk.classList.add('bump'); clearTimeout(mk._bt); mk._bt = setTimeout(function(){ mk.classList.remove('bump'); }, 560); }
       var sel = window.getSelection && window.getSelection(); if (sel && sel.removeAllRanges) sel.removeAllRanges();
-      if (cnt >= 10) { cnt = 0; e.preventDefault(); open(); }
+      if (cnt >= 25) { cnt = 0; e.preventDefault(); open(); }
     }, true);
     document.addEventListener('animationend', function(e){ if (e.animationName === 'logo-pop') e.target.classList.remove('bump'); });
 
