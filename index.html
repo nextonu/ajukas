@@ -74,6 +74,9 @@ function t(k, p) {
 :root[data-style="tous"] body{background:radial-gradient(1000px 520px at 0% -10%,rgba(255,190,120,.35),transparent 60%),linear-gradient(180deg,#FFE6D6 0%,#FFF3EC 40%,#FFF9F5 100%);background-attachment:fixed}
 :root[data-style="virmalised"]{--bg:#07141A;--panel:#0C1D25;--raised:#112833;--line:#18343F;--line2:#224655;--text:#D4F1EE;--bright:#FFFFFF;--muted:#84B5B0;--accent:#1FAF77;--accent-hover:#178F61;--hover:#143341}
 :root[data-style="virmalised"] body{background:radial-gradient(900px 400px at 70% -5%,rgba(61,220,151,.22),transparent 60%),radial-gradient(700px 420px at 15% 0%,rgba(80,140,255,.16),transparent 60%),#07141A;background-attachment:fixed}
+:root[data-style="kosmos"]{--bg:#05060F;--panel:#0B0E20;--raised:#111533;--line:#1A1F45;--line2:#262C5E;--text:#DCDDF5;--bright:#FFFFFF;--muted:#9094C4;--accent:#7C5CFF;--accent-hover:#6346E0;--hover:#161A3D}
+:root[data-style="kosmos"] body{background:radial-gradient(1px 1px at 20px 30px,#fff,transparent),radial-gradient(1px 1px at 140px 90px,rgba(255,255,255,.75),transparent),radial-gradient(1.6px 1.6px at 230px 170px,#fff,transparent),radial-gradient(1px 1px at 330px 50px,rgba(255,255,255,.6),transparent),radial-gradient(1.2px 1.2px at 390px 240px,#E0E7FF,transparent),radial-gradient(1px 1px at 80px 210px,rgba(255,255,255,.55),transparent),radial-gradient(900px 520px at 85% -10%,rgba(124,92,255,.26),transparent 60%),radial-gradient(800px 520px at 0% 105%,rgba(56,189,248,.13),transparent 60%),#05060F;background-size:420px 300px,420px 300px,420px 300px,420px 300px,420px 300px,420px 300px,auto,auto,auto;background-attachment:fixed}
+:root[data-style] .appbar{background:color-mix(in srgb,var(--bg) 38%,transparent);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
 ::view-transition-new(root){z-index:2}
 body:has(#v-home:not([hidden])) #site-foot{display:none}
@@ -94,7 +97,8 @@ body:has(#v-home:not([hidden])) #site-foot{display:none}
 .sw[data-style="loojang"] .sw-p,.sw[data-style="tous"] .sw-p,.sw[data-style="virmalised"] .sw-p{top:auto;bottom:-8px}
 .sw[data-style="loojang"]:hover .sw-p,.sw[data-style="tous"]:hover .sw-p,.sw[data-style="virmalised"]:hover .sw-p{animation-name:sw-rise}
 @keyframes sw-rise{0%{opacity:0;transform:translate(0,0)}15%{opacity:1}100%{opacity:0;transform:translate(6px,-64px)}}
-.sw[data-style="talv"] .sw-p{border-radius:50%}.sw[data-style="sugis"] .sw-p,.sw[data-style="kevad"] .sw-p{border-radius:0 70% 0 70%;width:7px;height:7px}
+.sw[data-style="talv"] .sw-p{border-radius:50%}.sw[data-style="kosmos"] .sw-p{width:14px;height:2px;border-radius:2px;background:linear-gradient(90deg,#fff,transparent)}.sw[data-style="kosmos"]:hover .sw-p{animation-name:sw-meteor;animation-duration:.9s}
+@keyframes sw-meteor{0%{opacity:0;transform:translate(30px,-6px) rotate(-35deg)}20%{opacity:1}100%{opacity:0;transform:translate(-40px,52px) rotate(-35deg)}}.sw[data-style="sugis"] .sw-p,.sw[data-style="kevad"] .sw-p{border-radius:0 70% 0 70%;width:7px;height:7px}
 .sw-n{display:block;padding:4px 8px 5px;font-size:12.5px;font-weight:600;background:var(--panel)}
 @media (prefers-reduced-motion:reduce){.sw,.sw:hover{transform:none}.sw-p{display:none}}
 
@@ -1372,7 +1376,7 @@ sub{font-size:.72em;line-height:0}
       <button type="button" data-theme-set="light">Hele</button>
       <button type="button" data-theme-set="muu" aria-expanded="false" aria-controls="stylepick">Muu</button>
     </div>
-    <div class="stylepick" id="stylepick" role="group" aria-label="Stiilid" hidden><button type="button" class="sw" data-style="suvi" aria-pressed="false" style="--sb:linear-gradient(180deg,#8FD3F4 0%,#FFF1D0 55%,#EBCB8B 100%);--sp:#FFFDF7;--st:#3A2E1A;--sa:#0E7490;--pc:#D9B26F"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Suvi</span></button><button type="button" class="sw" data-style="talv" aria-pressed="false" style="--sb:linear-gradient(170deg,#3A5F8F 0%,#142033 60%,#0E1726 100%);--sp:#142033;--st:#D6E4F5;--sa:#3B8EEA;--pc:#FFFFFF"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Talv</span></button><button type="button" class="sw" data-style="sugis" aria-pressed="false" style="--sb:linear-gradient(160deg,#D9622B 0%,#7A3415 45%,#1C130C 100%);--sp:#241911;--st:#EAD9C6;--sa:#C9541F;--pc:#E8A33D"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Sügis</span></button><button type="button" class="sw" data-style="kevad" aria-pressed="false" style="--sb:linear-gradient(160deg,#FBCFE8 0%,#F4FAF2 55%,#BBE3A8 100%);--sp:#FFFFFF;--st:#23331F;--sa:#C2367A;--pc:#F9A8D4"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Kevad</span></button><button type="button" class="sw" data-style="loojang" aria-pressed="false" style="--sb:linear-gradient(180deg,#3B1C5A 0%,#B8436B 55%,#FF9A4D 100%);--sp:#221532;--st:#F1DCE8;--sa:#E8603A;--pc:#FFB347"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Päikeseloojang</span></button><button type="button" class="sw" data-style="tous" aria-pressed="false" style="--sb:linear-gradient(0deg,#FFB27A 0%,#FFD9B8 45%,#BFD9F2 100%);--sp:#FFFFFF;--st:#3B2A2A;--sa:#D2572A;--pc:#FFD166"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Päikesetõus</span></button><button type="button" class="sw" data-style="virmalised" aria-pressed="false" style="--sb:linear-gradient(170deg,#3DDC97 0%,#1B6E8F 40%,#07141A 100%);--sp:#0C1D25;--st:#D4F1EE;--sa:#1FAF77;--pc:#3DDC97"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Virmalised</span></button></div>
+    <div class="stylepick" id="stylepick" role="group" aria-label="Stiilid" hidden><button type="button" class="sw" data-style="suvi" aria-pressed="false" style="--sb:linear-gradient(180deg,#8FD3F4 0%,#FFF1D0 55%,#EBCB8B 100%);--sp:#FFFDF7;--st:#3A2E1A;--sa:#0E7490;--pc:#D9B26F"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Suvi</span></button><button type="button" class="sw" data-style="talv" aria-pressed="false" style="--sb:linear-gradient(170deg,#3A5F8F 0%,#142033 60%,#0E1726 100%);--sp:#142033;--st:#D6E4F5;--sa:#3B8EEA;--pc:#FFFFFF"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Talv</span></button><button type="button" class="sw" data-style="sugis" aria-pressed="false" style="--sb:linear-gradient(160deg,#D9622B 0%,#7A3415 45%,#1C130C 100%);--sp:#241911;--st:#EAD9C6;--sa:#C9541F;--pc:#E8A33D"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Sügis</span></button><button type="button" class="sw" data-style="kevad" aria-pressed="false" style="--sb:linear-gradient(160deg,#FBCFE8 0%,#F4FAF2 55%,#BBE3A8 100%);--sp:#FFFFFF;--st:#23331F;--sa:#C2367A;--pc:#F9A8D4"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Kevad</span></button><button type="button" class="sw" data-style="loojang" aria-pressed="false" style="--sb:linear-gradient(180deg,#3B1C5A 0%,#B8436B 55%,#FF9A4D 100%);--sp:#221532;--st:#F1DCE8;--sa:#E8603A;--pc:#FFB347"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Päikeseloojang</span></button><button type="button" class="sw" data-style="tous" aria-pressed="false" style="--sb:linear-gradient(0deg,#FFB27A 0%,#FFD9B8 45%,#BFD9F2 100%);--sp:#FFFFFF;--st:#3B2A2A;--sa:#D2572A;--pc:#FFD166"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Päikesetõus</span></button><button type="button" class="sw" data-style="virmalised" aria-pressed="false" style="--sb:linear-gradient(170deg,#3DDC97 0%,#1B6E8F 40%,#07141A 100%);--sp:#0C1D25;--st:#D4F1EE;--sa:#1FAF77;--pc:#3DDC97"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Virmalised</span></button><button type="button" class="sw" data-style="kosmos" aria-pressed="false" style="--sb:radial-gradient(1.5px 1.5px at 18% 28%,#fff,transparent),radial-gradient(1px 1px at 72% 18%,#fff,transparent),radial-gradient(1px 1px at 44% 58%,#fff,transparent),radial-gradient(1.2px 1.2px at 88% 52%,#fff,transparent),linear-gradient(160deg,#2A1B6B 0%,#0B0E20 55%,#05060F 100%);--sp:#0B0E20;--st:#DCDDF5;--sa:#7C5CFF;--pc:#FFFFFF"><span class="sw-prev"><span class="sw-card"></span><span class="sw-p"></span><span class="sw-p"></span><span class="sw-p"></span></span><span class="sw-n">Kosmos</span></button></div>
     <p class="plabel">Päeva tsitaat</p>
     <div class="seg" role="group" aria-label="Päeva tsitaat avalehel">
       <button type="button" data-tsitaat-set="0">Väljas</button>
@@ -6359,7 +6363,7 @@ H — C — C — C — H
     document.addEventListener('click', function(e){ if (!pop.hidden && !pop.contains(e.target)) open(false); });
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !pop.hidden) { open(false); gear.focus(); } });
     var meta = document.querySelector('meta[name="theme-color"]');
-    var BG = {"suvi": "#FFF6E5", "talv": "#0E1726", "sugis": "#1C130C", "kevad": "#F4FAF2", "loojang": "#1A1024", "tous": "#FFF3EC", "virmalised": "#07141A"}, LIGHTS = ["suvi", "kevad", "tous"], FX = {"suvi": "sand", "talv": "snow", "sugis": "leaf", "kevad": "petal", "loojang": "ember", "tous": "spark", "virmalised": "aurora"};
+    var BG = {"suvi": "#FFF6E5", "talv": "#0E1726", "sugis": "#1C130C", "kevad": "#F4FAF2", "loojang": "#1A1024", "tous": "#FFF3EC", "virmalised": "#07141A", "kosmos": "#05060F"}, LIGHTS = ["suvi", "kevad", "tous"], FX = {"suvi": "sand", "talv": "snow", "sugis": "leaf", "kevad": "petal", "loojang": "ember", "tous": "spark", "virmalised": "aurora", "kosmos": "meteor"};
     var pick = document.getElementById('stylepick');
     function cur(){ try { return localStorage.getItem('ajukas-theme') || 'dark'; } catch (e) { return 'dark'; } }
     function apply(v){
@@ -6384,46 +6388,74 @@ H — C — C — C — H
       var cv = document.createElement('canvas'); cv.className = 'fx-layer'; document.body.appendChild(cv);
       var dpr = Math.min(window.devicePixelRatio || 1, 2), W = innerWidth, H = innerHeight;
       cv.width = W * dpr; cv.height = H * dpr; var c = cv.getContext('2d'); c.scale(dpr, dpr);
-      var R = Math.hypot(W, H) * 1.08, P = [], t0 = performance.now(), END = dur + 2600, last = t0;
+      var R = Math.hypot(W, H) * 1.12, P = [], t0 = performance.now(), last = t0, acc = 0;
       var COL = { leaf: ['#D9622B','#E8A33D','#B83A1E','#F2C14E','#8C3B12'], petal: ['#F9A8D4','#FBCFE8','#FFFFFF','#F472B6'], snow: ['#FFFFFF','#E6F2FF','#CFE6FF'],
         sand: ['#E9C98B','#D9B26F','#F3DDA8','#C8A060'], ember: ['#FF7A45','#FFB347','#FF4D6D','#FFD166'], spark: ['#FFD166','#FFE29A','#FFB088','#FFFFFF'],
-        aurora: ['#3DDC97','#5EEAD4','#7DD3FC','#A78BFA'], star: ['#FFFFFF','#FDE68A'], gold: ['#EAB308','#FACC15','#F59E0B'] }[kind];
+        aurora: ['#3DDC97','#5EEAD4','#7DD3FC','#A78BFA'], star: ['#FFFFFF','#FDE68A'], gold: ['#EAB308','#FACC15','#F59E0B'], meteor: ['#FFFFFF','#E0E7FF','#C4B5FD'] }[kind];
+      var UP = kind === 'ember' || kind === 'spark' || kind === 'aurora';
+      // tihedus: osakesi lainejoone iga piksli kohta sekundis (nii on igal pool ühtlaselt)
+      var DENS = { sand: 1.4, snow: 1.1, leaf: 0.55, petal: 0.65, ember: 0.6, spark: 0.6, aurora: 0.35, star: 0.5, gold: 0.5, meteor: 0.18 }[kind] || 0.1;
+      var SPD = R / dur * 1000;   // laine kiirus px/s
       function ease(x){ return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+      function rAt(t){ return ease(Math.min(1, Math.max(0, t / dur))) * R; }
+      function inside(x, y){ return x >= -10 && x <= W + 10 && y >= -10 && y <= H + 10; }
+      function visLen(r){ var k = 0; for (var i = 0; i < 16; i++) { var th = Math.PI / 2 + (i + .5) / 16 * Math.PI / 2; if (inside(W + r * Math.cos(th), r * Math.sin(th))) k++; } return r * Math.PI / 2 * k / 16; }
       function spawn(r){
-        var th = Math.PI / 2 + Math.random() * Math.PI / 2, x = W + r * Math.cos(th), y = r * Math.sin(th);
-        if (x < -20 || y > H + 20) return;
-        var up = kind === 'ember' || kind === 'spark' || kind === 'aurora';
-        P.push({ x: x, y: y, vx: (Math.random() - .5) * 40 - (kind === 'sand' ? 160 : 20), vy: up ? -(30 + Math.random() * 60) : (kind === 'sand' ? 40 : 30 + Math.random() * 50),
-          s: kind === 'sand' ? 1.2 + Math.random() * 1.8 : kind === 'snow' ? 1.5 + Math.random() * 3 : kind === 'aurora' ? 2 + Math.random() * 2 : 4 + Math.random() * 6,
-          a: Math.random() * 6.28, va: (Math.random() - .5) * 6, ph: Math.random() * 6.28, c: COL[(Math.random() * COL.length) | 0], life: 0, max: 1.6 + Math.random() * 1.6 });
+        for (var tries = 0; tries < 8; tries++) {
+          var th = Math.PI / 2 + Math.random() * Math.PI / 2, x = W + r * Math.cos(th), y = r * Math.sin(th);
+          if (!inside(x, y)) continue;
+          P.push({ th: th, off: -Math.random() * 26, x: x, y: y, vx: 0, vy: 0, rel: false, ride: .25 + Math.random() * .7,
+            s: kind === 'sand' ? 1.2 + Math.random() * 1.8 : kind === 'snow' ? 1.5 + Math.random() * 3 : kind === 'aurora' ? 2 + Math.random() * 2 : kind === 'meteor' ? 30 + Math.random() * 50 : 4 + Math.random() * 6,
+            a: Math.random() * 6.28, va: (Math.random() - .5) * 6, ph: Math.random() * 6.28, c: COL[(Math.random() * COL.length) | 0], life: 0, max: 0 });
+          var p = P[P.length - 1]; p.max = p.ride + (kind === 'meteor' ? .5 + Math.random() * .4 : 1 + Math.random() * 1.1);
+          return;
+        }
       }
       function draw(p, al){
         c.globalAlpha = al; c.fillStyle = p.c; c.strokeStyle = p.c;
+        if (kind === 'meteor') {
+          var dx = p.rel ? p.vx : Math.cos(p.th), dy = p.rel ? p.vy : Math.sin(p.th), L = Math.hypot(dx, dy) || 1; dx /= L; dy /= L;
+          var g = c.createLinearGradient(p.x, p.y, p.x - dx * p.s, p.y - dy * p.s); g.addColorStop(0, p.c); g.addColorStop(1, 'rgba(255,255,255,0)');
+          c.strokeStyle = g; c.lineWidth = 1.6; c.lineCap = 'round'; c.beginPath(); c.moveTo(p.x, p.y); c.lineTo(p.x - dx * p.s, p.y - dy * p.s); c.stroke();
+          c.shadowColor = '#fff'; c.shadowBlur = 6; c.beginPath(); c.arc(p.x, p.y, 1.4, 0, 6.29); c.fillStyle = '#fff'; c.fill(); c.shadowBlur = 0; return;
+        }
         c.save(); c.translate(p.x, p.y); c.rotate(p.a);
         if (kind === 'leaf') { c.beginPath(); c.moveTo(-p.s, 0); c.quadraticCurveTo(0, -p.s * .8, p.s, 0); c.quadraticCurveTo(0, p.s * .8, -p.s, 0); c.fill(); c.globalAlpha = al * .5; c.beginPath(); c.moveTo(-p.s, 0); c.lineTo(p.s, 0); c.lineWidth = .8; c.strokeStyle = '#5A2A0A'; c.stroke(); }
         else if (kind === 'petal') { c.beginPath(); c.ellipse(0, 0, p.s * .9, p.s * .5, 0, 0, 6.29); c.fill(); }
         else if (kind === 'spark' || kind === 'star' || kind === 'gold') { var q = p.s * .7; c.beginPath(); c.moveTo(0, -q); c.lineTo(q * .25, -q * .25); c.lineTo(q, 0); c.lineTo(q * .25, q * .25); c.lineTo(0, q); c.lineTo(-q * .25, q * .25); c.lineTo(-q, 0); c.lineTo(-q * .25, -q * .25); c.closePath(); c.fill(); }
-        else if (kind === 'aurora') { c.rotate(-p.a); var g = c.createLinearGradient(0, -p.s * 7, 0, p.s * 7); g.addColorStop(0, 'transparent'); g.addColorStop(.5, p.c); g.addColorStop(1, 'transparent'); c.fillStyle = g; c.fillRect(-p.s / 2, -p.s * 7, p.s, p.s * 14); }
+        else if (kind === 'aurora') { c.rotate(-p.a); var g2 = c.createLinearGradient(0, -p.s * 7, 0, p.s * 7); g2.addColorStop(0, 'transparent'); g2.addColorStop(.5, p.c); g2.addColorStop(1, 'transparent'); c.fillStyle = g2; c.fillRect(-p.s / 2, -p.s * 7, p.s, p.s * 14); }
         else { if (kind === 'ember') { c.shadowColor = p.c; c.shadowBlur = 8; } c.beginPath(); c.arc(0, 0, kind === 'ember' ? p.s * .35 : p.s, 0, 6.29); c.fill(); }
         c.restore();
       }
       (function frame(now){
         var t = now - t0, dt = Math.min(.05, (now - last) / 1000); last = now;
         c.clearRect(0, 0, W, H);
-        if (t < dur) { var r = ease(t / dur) * R, n = kind === 'sand' || kind === 'snow' ? 9 : 5; for (var i = 0; i < n; i++) spawn(r); }
+        if (t < dur) { var r = rAt(t); acc += visLen(r) * DENS * dt; while (acc >= 1 && P.length < 600) { spawn(r - 4); acc -= 1; } }
+        var r2 = rAt(t);
         for (var j = P.length - 1; j >= 0; j--) {
           var p = P[j]; p.life += dt; if (p.life > p.max) { P.splice(j, 1); continue; }
-          p.ph += dt * 3; p.x += (p.vx + Math.sin(p.ph) * (kind === 'sand' ? 10 : 35)) * dt; p.y += p.vy * dt;
-          if (kind === 'leaf' || kind === 'petal' || kind === 'snow') p.vy += 30 * dt;
+          p.ph += dt * 3;
+          if (!p.rel) {
+            // sõidab laine esiserval kaasa
+            var rr = r2 + p.off; p.x = W + rr * Math.cos(p.th) + Math.sin(p.ph) * 6; p.y = rr * Math.sin(p.th);
+            if (p.life > p.ride || t >= dur) {
+              p.rel = true; var k = kind === 'meteor' ? .9 : kind === 'sand' ? .5 : .28;
+              p.vx = Math.cos(p.th) * SPD * k; p.vy = Math.sin(p.th) * SPD * k + (UP ? -40 : 15);
+            }
+          } else {
+            // laine läks edasi: kukub natuke alla või tõuseb üles
+            p.x += (p.vx + (kind === 'meteor' ? 0 : Math.sin(p.ph) * 22)) * dt; p.y += p.vy * dt;
+            var damp = kind === 'meteor' ? 1 : Math.pow(.35, dt); p.vx *= damp;
+            if (kind !== 'meteor') p.vy = p.vy * damp + (UP ? -55 : kind === 'snow' ? 30 : 70) * dt;
+          }
           p.a += p.va * dt;
-          var al = Math.min(1, p.life * 4) * Math.min(1, (p.max - p.life) * 1.5);
-          if (kind === 'spark' || kind === 'star' || kind === 'gold') al *= .55 + .45 * Math.sin(p.ph * 2.5);
+          var al = Math.min(1, p.life * 5) * Math.min(1, (p.max - p.life) * 2);
+          if (kind === 'spark' || kind === 'star' || kind === 'gold') al *= .6 + .4 * Math.sin(p.ph * 2.5);
           draw(p, Math.max(0, al));
         }
-        if (t < END && (t < dur || P.length)) requestAnimationFrame(frame); else cv.remove();
+        if (t < dur || P.length) requestAnimationFrame(frame); else cv.remove();
       })(t0);
     }
-
     // laine paremalt ülevalt vasakule alla (View Transitions; vanemas brauseris kohe)
     function wavePoly(r, k){
       var W = innerWidth, pts = [W + 'px 0px'], A = Math.min(46, r * .14), N = 44;
