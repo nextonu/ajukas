@@ -5638,10 +5638,10 @@ H — C — C — C — H
 <div class="modal" id="oma-modal" role="dialog" aria-modal="true" aria-labelledby="oma-h" hidden>
   <div class="modal-box oma-box">
     <div class="modal-head"><h2 id="oma-h">Loo ise</h2><button type="button" class="xbtn" id="oma-close" aria-label="Sulge">×</button></div>
-    <p>Laadi üles pilt ja see pannakse lehe taustaks. Lohista pilti, et seda liigutada, ning muuda suurust ja pööret liuguritega. Telefonis saad kasutada kahte sõrme. <b>Kollane raam</b> näitab, mis jääb ekraanile.</p>
+    <p>Laadi üles pilt ja see pannakse lehe taustaks. Lohista pilti, et seda liigutada, ja muuda suurust liuguriga. Telefonis saad suurendada kahe sõrmega. Pöörata saab 90 kraadi kaupa. <b>Kollane raam</b> näitab, mis jääb ekraanile.</p>
     <div class="oma-row"><button type="button" class="btn" id="oma-pick">Vali pilt</button><input type="file" id="oma-file" accept="image/*" hidden><button type="button" class="btn sec" id="oma-reset" disabled>Lähtesta</button></div>
     <div class="oma-stage" id="oma-stage"><img id="oma-img" alt="" hidden><div class="oma-frame" id="oma-frame" hidden><span>ekraan</span></div><div class="oma-empty" id="oma-empty">Vali pilt, et alustada.</div></div>
-    <div class="oma-ctl"><label for="oma-scale">Suurus</label><input type="range" id="oma-scale" min="5" max="400" value="100" disabled><output id="oma-scale-o">100%</output><label for="oma-rot">Pööre</label><input type="range" id="oma-rot" min="-180" max="180" value="0" disabled><output id="oma-rot-o">0°</output></div>
+    <div class="oma-ctl"><label for="oma-scale">Suurus</label><input type="range" id="oma-scale" min="5" max="400" value="100" disabled><output id="oma-scale-o">100%</output><span>Pööre</span><span><button type="button" class="btn sec" id="oma-rot" disabled>Pööra 90°</button></span><output id="oma-rot-o">0°</output></div>
     <p class="oma-msg" id="oma-msg" aria-live="polite"></p>
     <div class="oma-row"><button type="button" class="btn" id="oma-save" disabled>Pane taustaks</button><button type="button" class="btn sec" id="oma-del" hidden>Eemalda oma taust</button></div>
   </div>
@@ -7281,7 +7281,7 @@ H — C — C — C — H
       img.style.width = iw + 'px'; img.style.height = ih + 'px';
       img.style.transform = 'translate(-50%,-50%) translate(' + T.x + 'px,' + T.y + 'px) rotate(' + T.r + 'deg) scale(' + T.s + ')';
       var pct = Math.round(T.s / base * 100); sc.value = Math.max(5, Math.min(400, pct)); scO.textContent = pct + '%';
-      ro.value = Math.round(T.r); roO.textContent = Math.round(T.r) + '°';
+      roO.textContent = Math.round(T.r) + '°';
     }
     function reset(){ if (!has) return; base = Math.max(fw / iw, fh / ih); T = { x: 0, y: 0, s: base, r: 0 }; draw(); }
     function load(src){
@@ -7311,7 +7311,7 @@ H — C — C — C — H
     fileIn.addEventListener('change', function(){ var f = fileIn.files && fileIn.files[0]; if (!f) return; var fr = new FileReader(); fr.onload = function(){ load(fr.result); }; fr.readAsDataURL(f); fileIn.value = ''; });
     resetB.addEventListener('click', reset);
     sc.addEventListener('input', function(){ T.s = base * sc.value / 100; draw(); });
-    ro.addEventListener('input', function(){ T.r = +ro.value; draw(); });
+    ro.addEventListener('click', function(){ T.r = (T.r + 90) % 360; var odd = T.r % 180 !== 0, nb = Math.max(fw / (odd ? ih : iw), fh / (odd ? iw : ih)); T.s = T.s / base * nb; base = nb; var tx = T.x; T.x = -T.y; T.y = tx; draw(); });
     // lohistamine ja kahe sõrmega suurendamine/pööramine
     stage.addEventListener('pointerdown', function(e){ if (!has) return; stage.setPointerCapture(e.pointerId); ptrs[e.pointerId] = { x: e.clientX, y: e.clientY }; g0 = null; stage.classList.add('drag'); });
     stage.addEventListener('pointermove', function(e){
@@ -7320,7 +7320,7 @@ H — C — C — C — H
       if (ids.length === 1) { T.x += e.clientX - prev.x; T.y += e.clientY - prev.y; ptrs[e.pointerId] = { x: e.clientX, y: e.clientY }; draw(); return; }
       ptrs[e.pointerId] = { x: e.clientX, y: e.clientY };
       var a = ptrs[ids[0]], b = ptrs[ids[1]], d = Math.hypot(b.x - a.x, b.y - a.y), an = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI, mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-      if (g0) { T.s = Math.max(base * .05, Math.min(base * 4, T.s * d / g0.d)); var dr = an - g0.an; if (dr > 180) dr -= 360; if (dr < -180) dr += 360; T.r = Math.max(-180, Math.min(180, T.r + dr)); T.x += mx - g0.mx; T.y += my - g0.my; draw(); }
+      if (g0) { T.s = Math.max(base * .05, Math.min(base * 4, T.s * d / g0.d)); T.x += mx - g0.mx; T.y += my - g0.my; draw(); }
       g0 = { d: d, an: an, mx: mx, my: my };
     });
     function up(e){ delete ptrs[e.pointerId]; g0 = null; if (!Object.keys(ptrs).length) stage.classList.remove('drag'); }
