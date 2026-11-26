@@ -6296,7 +6296,7 @@ H — C — C — C — H
     var box = document.getElementById('suvi'), pop = document.getElementById('settings-pop');
     var TARGET = Date.UTC(2027, 5, 8, 21, 0, 0); // 9. juuni 2027 kell 00:00 Eesti suveaja järgi (UTC+3)
     var timer = null, lastSec = -1, secTurns = 0;
-    function on(){ try { return localStorage.getItem('ajukas-theme') === 'style:suvi'; } catch (e) { return false; } }
+    function on(){ return false; } // taimer on välja lülitatud (kasutaja soov 26.11): seadetes nuppu pole ja Suvi stiil seda ei näita
     function pad(n){ return (n < 10 ? '0' : '') + n; }
     var sh = document.getElementById('clk-s'), mh = document.getElementById('clk-m'), hh = document.getElementById('clk-h');
     function tick(){
