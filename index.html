@@ -87,7 +87,7 @@ function t(k, p) {
 ::view-transition-new(root){z-index:2}
 ::view-transition-group(ajukas-fx),::view-transition-new(ajukas-fx){animation:none;z-index:9}::view-transition-old(ajukas-fx){display:none}
 body:has(#v-home:not([hidden])) #site-foot{display:none}
-.fx-layer{position:fixed;inset:0;z-index:9998;pointer-events:none}
+.fx-layer{position:fixed;inset:0;width:100vw;height:100vh;z-index:9998;pointer-events:none}
 .pop.wide{width:min(330px,calc(100vw - 20px))}
 .stylepick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:2px 0 12px}
 .sw{position:relative;display:block;padding:0;border:1px solid var(--line2);border-radius:8px;background:none;cursor:pointer;overflow:hidden;text-align:left;font:inherit;color:var(--text);transition:transform .18s ease,border-color .18s,box-shadow .18s}
@@ -6428,7 +6428,7 @@ H — C — C — C — H
       document.querySelectorAll('.fx-layer').forEach(function(o){ o.style.viewTransitionName = 'none'; });
       var cv = document.createElement('canvas'); cv.className = 'fx-layer'; cv.style.viewTransitionName = 'ajukas-fx'; document.body.appendChild(cv);
       var dpr = Math.min(window.devicePixelRatio || 1, 1.5), W = innerWidth, H = innerHeight;
-      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); var c = cv.getContext('2d');
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.width = W + 'px'; cv.style.height = H + 'px'; var c = cv.getContext('2d');
       var R = Math.hypot(W, H) * 1.12, P = [], t0 = 0, last = 0, acc = 0;
       var COL = { leaf: ['#D9622B','#E8A33D','#B83A1E','#F2C14E','#8C3B12'], petal: ['#F9A8D4','#FBCFE8','#FFFFFF','#F472B6'], snow: ['#FFFFFF','#E6F2FF','#CFE6FF'],
         sand: ['#E9C98B','#D9B26F','#F3DDA8','#C8A060'], ember: ['#FF7A45','#FFB347','#FF4D6D','#FFD166'], spark: ['#FFD166','#FFE29A','#FFB088','#FFFFFF'],
